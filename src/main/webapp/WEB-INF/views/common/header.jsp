@@ -32,7 +32,13 @@
 						</li>
 					</c:if>
 					<c:if test="${empty member}">
-						<li><a href="#">로그인</a></li>
+						<li class="dropdown">
+							<a href="#" class="dropdown-toggle " data-toggle="dropdown" data-hover="dropdown" data-delay="0" data-close-others="false">회원<b class=" icon-angle-down"></b></a>
+							<ul class="dropdown-menu">
+								<li><a href="/member/loginPage.go">로그인</a></li>
+								<li><a href="#">회원가입</a></li>
+							</ul>
+						</li>
 					</c:if>
 				</ul>
 			</div>
