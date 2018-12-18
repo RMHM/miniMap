@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE log4j:configuration PUBLIC "-//APACHE//DTD LOG4J 1.2//EN" "log4j.dtd">
+<log4j:configuration xmlns:log4j="http://jakarta.apache.org/log4j/">
+	
+		<!--
+		log4j 구조
+		
+		Appender : 작성할 로그를 어디로 출력할지 혹은 어떤 방식으로 저장할 지를 설정하는 객체
+			- param : Appender의 설정들을 지정하는 태그
+			- layout : 로그를 어떤 방식으로 기록할지 지정하는 태그
+			
+		Loger / root : 로그를 실제로 남기는 객체, 특정 시점에 동작하여 발생한 기록을 Appender에게 전달한다.
+			name : 로그를 실행할 주체(패키지 경로)
+			level : 로그가 동작할 레벨
+				[TRACE] < DEBUG < INFO < WARN < ERROR < FATAL
+			additivity : 로그가 상위 레벨에서도 인식되게 할 것인지 설정하는 속성
+			appender-ref : 사용할 appender를 설정할 때 사용하는 속성
+			
+		Appender Layout
+			ConversionPattern : 기록될 문자열의 포맷을 지정하는 태그 속성
+			(해당 포맷 내용은 일반적으로 java.text.Format의 내용을 기본으로 한다)
+	 -->
+ 
+	<!--
+		Layout의 종류
+		* DateLayout
+		* HTMLLayout
+		* PatternLayout(가장 디버깅에 적합)
+		* SimpleLayout
+		* XMLLayout
+		
+		패턴 레이아웃 설명
+		[PatternLayout API](https://logging.apache.org/log4j/1.2/apidocs/org/apache/log4j/PatternLayout.html)
+		
+		
+		* %c : 카테고리명(logger이름)을 표시
+		   * 카테고리명이 a.b.c일때, %c{2}는 b.c를 출력
+		* %C : 클래스명을 표시함.   
+		   * 풀 클래스 명이 com.kh.logger일때, %C{2}는 kh.logger를 출력
+		* %d : 로그 시간을 출력한다. java.text.SimpleDateFormat에서 적절한 출력 포맷을 지정할 수 있다. 
+		   * %d{HH:mm:ss, SSS}
+		   * %d{yyyy MMM dd HH:mm:ss, SSS}
+		   * %d{ABSOLUTE} 
+		   * %d{DATE} 
+		   * %d{ISO8601}
+		* %F : 파일명을 출력. 로그시 수행한 메소드, 라인번호가 함께 출력된다.
+		* %l : 로깅이 발생한 caller의 위치정보. 자바파일명:라인번호(링크제공) 
+		* %L : 라인 번호만 출력한다(링크없음)
+		* %m : 로그로 전달된 메시지를 출력한다.
+		* %M : 로그를 수행한 메소드명을 출력한다. 
+		* %n : 플랫폼 종속적인 개행문자가 출력. rn 또는 n
+		* %p : 로그 이벤트명등의 priority 가 출력(debug, info, warn, error, fatal )
+		* %r : 로그 처리시간 (milliseconds)
+		* %t : 로그이벤트가 발생된 쓰레드의 이름을 출력
+		* %% : % 표시를 출력. escaping
+		* %r : 어플리케이션 시작 이후 부터 로깅이 발생한 시점의 시간(milliseconds)
+		* %X : 로깅이 발생한 thread와 관련된 MDC(mapped diagnostic context)를 출력합니다. %X{key} 형태.
+		
+		로그 레벨에 대한 설명
+		TRACE < DEBUG < INFO < WARN < ERROR < FATAL
+		만약 INFO 레벨로 logger level을 설정할 경우 그 하위인 DEBUG, TRACE는 출력되지 않는다.
+		
+		로그 레벨
+			FATAL : 시스템을 동작시킬 수 없을 정도의 아주 심각한 에러가 발생
+			ERROR : 시스템 업무 수행 중(시스템 운영 중) 심각한 에러가 발생했을 경우
+			WARN  : 프로그램 실행에는 문제가 없으나 향후 에러가 발생할 수 있는 요소
+			INFO  : 서버에서 운영하는 객체의 상태 정보가 변경되는 등의 개발자, 운영 담당자가 알아야 하는 사항
+			DEBUG : 개발자가 개발시에 참고할 내용의 메세지
+			TRACE : DEBUG 내용을 좀 더 상세하게 구분하기 위해 설정하는 레벨로, 개발자가 확인하기 위해 작성하는 메세지
+	-->
+	
+	<!-- Appenders -->
+	<appender name="console" class="org.apache.log4j.ConsoleAppender">
+		<param name="Target" value="System.out" />
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="%-5p: %c - %m%n" />
+		</layout>
+	</appender>
+	
+	
+	<!-- log4jdbc-remix Appender -->
+	<appender name="sqlLogger" class="org.apache.log4j.ConsoleAppender">
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="%-5p: %m%n"/>
+		</layout>
+	</appender>
+	
+	<!-- 로그내역 외부 파일로 출력 -->
+	<!-- <appender name="fileAppender" class="org.apache.log4j.DailyRollingFileAppender">
+		<param name="file" value="C:/springWorkspace/04_springProject/src/main/resources/logs/system/system.log"/>
+		<param name="Append" value="true"/>
+		<param name="datePattern" value=".yyyy-MM-dd"/>
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="%-5p:[%d{yyyy-MM-dd HH:mm:ss}] %F:%L - %m%n"/>
+		</layout>
+	</appender> -->
+	
+	 <!--  log4jdbc-remix 관련 logger 시작  -->
+	 <!--  Query Loggers   -->
+	<logger name="jdbc.sqlonly" additivity="false">
+		<level value="INFO"/>
+		<appender-ref ref="sqlLogger"/>
+	</logger>
+	<logger name="jdbc.resultsettable" additivity="false">
+		<level value="INFO"/>
+		<appender-ref ref="sqlLogger"/>
+	</logger>
+	
+	<!-- Application Loggers -->
+	<logger name="com.kh.mhm">
+		<level value="info" />
+	</logger>
+	
+	<!-- 3rdparty Loggers -->
+	<logger name="org.springframework.core">
+		<level value="info" />
+	</logger>
+	
+	<logger name="org.springframework.beans">
+		<level value="info" />
+	</logger>
+	
+	<logger name="org.springframework.context">
+		<level value="info" />
+	</logger>
+
+	<logger name="org.springframework.web">
+		<level value="info" />
+	</logger>
+
+	<!-- Root Logger -->
+	<root>
+		<priority value="warn" />
+		<appender-ref ref="console" />
+		<!-- <appender-ref ref="fileAppender"/> -->
+	</root>
+	
+</log4j:configuration>
