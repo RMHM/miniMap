@@ -6,6 +6,7 @@
 	<!-- vo 객체를 위한 별점 선언부 -->
 	<typeAliases>
 		<!-- <typeAlias type="클래스경로" alias="별칭"/> -->
+		<typeAlias type="com.kh.mhm.member.model.vo.Member" alias="Member"/>
 	</typeAliases>
 	
 </configuration>

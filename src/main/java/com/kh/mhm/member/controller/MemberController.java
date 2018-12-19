@@ -14,16 +14,12 @@ import com.kh.mhm.member.model.vo.Member;
 
 @Controller
 public class MemberController {
+  
+  @Autowired
+	private BCryptPasswordEncoder bcpe;
 	
-	// 비밀번호 암호화 객체
 	@Autowired
-	private BCryptPasswordEncoder bcryptPasswordEncoder;
-	
-	@Autowired
-	private MemberService memberService;
-	
-	/*@Autowired
-	private BCryptPasswordEncoder bcpe;*/
+	private MemberService ms;
 	
 	private String loc = "/";
 	private String msg = "";
@@ -36,17 +32,16 @@ public class MemberController {
 	public ModelAndView memberLogin(@RequestParam String mid, @RequestParam String mpw, Model model) {
 		ModelAndView mv = new ModelAndView();
 
-		// Member m = ms.selectOne(uid);
-		Member m = null;
+		 Member m = ms.selectOne(mid);
 
 		if(m == null) {
 			msg = "회원정보가 존재하지 않습니다.";
 			loc = "/member/loginPage.go";
 		} else {
-			/*if(bcpe.matches(mpw, m.getMpw())) {
+			if(bcpe.matches(mpw, m.getMpw())) {
 				msg = "로그인되었습니다!";
 				mv.addObject("member", m);
-			} else msg = "비밀번호가 일치하지 않습니다.";*/
+			} else msg = "비밀번호가 일치하지 않습니다.";
 		}
 		
 		mv.addObject("loc", loc).addObject("msg", msg);
