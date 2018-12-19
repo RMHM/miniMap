@@ -4,7 +4,7 @@ import com.kh.mhm.member.model.vo.Member;
 
 public interface MemberService {
   
-  int insertMember(Member member);
-  Member selectOne(String mid);
-  
+	Member selectOne(String mid);
+	
+	int insertMember(Member member);
 }

@@ -39,6 +39,13 @@
       				</div>
       				
       				<div class="from-group">
+      					<label for="InputName">이름</label>
+      					<input type="text" class="form-control" id="inputName" placeholder="이름을 입력하세요." />
+      				</div> 
+      				
+      				 <br>
+      				 
+      				<div class="from-group">
       					<label for="InputnickName">닉네임</label>
       					<input type="text" class="form-control" id="inputnickName" placeholder="닉네임을 입력하세요." />
       				</div> 
