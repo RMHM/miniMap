@@ -22,8 +22,7 @@ public class MemberController {
 	public String loginGo() {
 		return "member/loginPage";
 	}
-
-	@RequestMapping(value="/member/memberLogin.do", method = RequestMethod.POST)
+  @RequestMapping(value="/member/memberLogin.do", method = RequestMethod.POST)
 	public ModelAndView memberLogin(@RequestParam String mid, @RequestParam String mpw, Model model) {
 		ModelAndView mv = new ModelAndView();
 
@@ -45,5 +44,9 @@ public class MemberController {
 		
 		return mv;
 	}
-
+  
+  @RequestMapping("/member/memberEnroll.go")
+	public String memberEnroll() {
+		return "member/memberEnroll";
+	}
 }
