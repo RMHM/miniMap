@@ -1,5 +1,7 @@
 package com.kh.mhm.member.controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -7,10 +9,18 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.kh.mhm.member.model.service.MemberService;
 import com.kh.mhm.member.model.vo.Member;
 
 @Controller
 public class MemberController {
+	
+	// 비밀번호 암호화 객체
+	@Autowired
+	private BCryptPasswordEncoder bcryptPasswordEncoder;
+	
+	@Autowired
+	private MemberService memberService;
 	
 	/*@Autowired
 	private BCryptPasswordEncoder bcpe;*/
@@ -49,4 +59,30 @@ public class MemberController {
 	public String memberEnroll() {
 		return "member/memberEnroll";
 	}
+  
+  @RequestMapping("/member/memberEnrollEnd.go")
+  public String memberEnrollEnd(Member member, Model model) {
+	  
+	  // 기존 비밀번호
+	  String rawPassword = member.getMpw();
+	  System.out.println("비밀번호 암호화 전 : " +rawPassword);
+	  
+	  // 암호화 코드
+	  member.setMpw(bcryptPasswordEncoder.encode(rawPassword));
+	  
+	  System.out.println("비밀번호 암호화 후 : " +member.getMpw());
+	  
+	  int result = memberService.insertMember(member);
+	  
+	  String loc = "/";
+	  String msg = "";
+	  
+	  if(result > 0) msg = "회원 가입이 정상적으로 되었습니다.";
+	  else msg = "회원 가입이 실패 하였습니다.";
+	  
+	  model.addAttribute("loc", loc);
+	  model.addAttribute("msg", msg);
+	  
+	  return "common/msg";
+  }
 }
