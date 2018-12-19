@@ -36,7 +36,7 @@
 							<a href="#" class="dropdown-toggle " data-toggle="dropdown" data-hover="dropdown" data-delay="0" data-close-others="false">회원<b class=" icon-angle-down"></b></a>
 							<ul class="dropdown-menu">
 								<li><a href="/member/loginPage.go">로그인</a></li>
-								<li><a href="#">회원가입</a></li>
+								<li><a href="/member/memberEnroll.go">회원가입</a></li>
 							</ul>
 						</li>
 					</c:if>

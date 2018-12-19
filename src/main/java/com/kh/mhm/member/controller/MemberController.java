@@ -11,4 +11,9 @@ public class MemberController {
 		return "member/loginPage";
 	}
 	
+	@RequestMapping("/member/memberEnroll.go")
+	public String memberEnroll() {
+		return "member/memberEnroll";
+	}
+	
 }
