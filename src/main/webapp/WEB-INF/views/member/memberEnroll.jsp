@@ -22,45 +22,46 @@
                 </div>
       	
       	<div class="col-sm-6 col-md-offset-3">
-                <form action="/member/memberEnrollEnd.go" method="post">
+                <form action="/member/memberEnrollEnd.do" method="post">
+                    <table>
                     <div class="form-group">
-                        <label for="inputId">아이디</label>
-                        <input type="text" class="form-control" id="inputId" placeholder="사용하실 아이디를 입력하세요.">
+                        <label for="mid">아이디</label>
+                        <input type="text" class="form-control"  name="mid" id="mid_" placeholder="사용하실 아이디를 입력하세요.">
       				</div>
       				
       				<div class="form-group">
-      					<label for="InputPw">비밀번호</label>
-      					<input type="text" class="form-control" id="inputPw" placeholder="비밀번호를 입력하세요." />
+      					<label for="mpw">비밀번호</label>
+      					<input type="text" class="form-control" name="mpw" id="mpw_" placeholder="비밀번호를 입력하세요." />
       				</div>
       				
       				<div class="form-group">
-      					<label for="InputPw">비밀번호 확인</label>
-      					<input type="text" class="form-control" id="inputPwCheck" placeholder="비밀번호를 확인을 위해 다시한번 입력하세요." />
+      					<label for="mpw">비밀번호 확인</label>
+      					<input type="text" class="form-control" id="mpw2" placeholder="비밀번호를 확인을 위해 다시한번 입력하세요." />
       				</div>
       				
       				<div class="from-group">
-      					<label for="InputName">이름</label>
-      					<input type="text" class="form-control" id="inputName" placeholder="이름을 입력하세요." />
+      					<label for="mname">이름</label>
+      					<input type="text" class="form-control" id="mname" placeholder="이름을 입력하세요." />
       				</div> 
       				
       				 <br>
       				 
       				<div class="from-group">
-      					<label for="InputnickName">닉네임</label>
-      					<input type="text" class="form-control" id="inputnickName" placeholder="닉네임을 입력하세요." />
+      					<label for="mnick">닉네임</label>
+      					<input type="text" class="form-control" id="mnick" placeholder="닉네임을 입력하세요." />
       				</div> 
       				
       				<br>
       				
       				<div class="from-group">
-      					<label for="InputEmail">이메일</label>
-      					<input type="text" class="form-control" id="inputEmail" placeholder="이메일 주소를 입력하세요." />
+      					<label for="email">이메일</label>
+      					<input type="text" class="form-control" id="email" placeholder="이메일 주소를 입력하세요." />
       				</div>
       				
       				<br>
       				
       				<div class="from-group">
-      					<label for="Inputmember">회원유형</label> <br>
+      					<label for="mtype">회원유형</label> <br>
       					<input type="radio" name="member" value="일반" />일반회원
       					<input type="radio" name="member" value="기업" />기업회원
       				</div>
@@ -68,7 +69,7 @@
       				<br>
       				
       				<div class="from-group">
-      					<label for="InputGender">성별</label> <br>
+      					<label for="gender">성별</label> <br>
       					<input type="radio" name="gender" value="M" />남성
       					<input type="radio" name="gender" value="F" />여성
       				</div>
@@ -76,7 +77,7 @@
       				<br>
       				
       				<div class=from-group">
-      					<label for="InputAge">연령대</label> <br>
+      					<label for="age">연령대</label> <br>
       					<input type="radio" name="age" value="10" />10대
       					<input type="radio" name="age" value="20" />20대
       					<input type="radio" name="age" value="30" />30대
@@ -84,20 +85,21 @@
       				</div>
       				
       				<div class="from-group"> <br>
-      					<label fro="inputFile">이미지경로</label>
+      					<label for="profilePath">이미지경로</label>
       					<input type="file" />
       				
       				</div>
       				
       				<br /><br />
-      				<input class="btn btn-success" type="submit" value="회원가입" /> 
-      				<input class="btn btn-danger" type="reset" value="이전으로" />
+      				</table>
+      				<input type="submit" class="btn btn-success" value="회원가입" /> 
+      				<input type="reset" class="btn btn-danger" value="이전으로" />
       	</form>
       	</div>
       	</div>
       	
-      	<br />
-      	
+      	<br>
+
       <c:import url="/WEB-INF/views/common/footer.jsp"/>
    </div>
 

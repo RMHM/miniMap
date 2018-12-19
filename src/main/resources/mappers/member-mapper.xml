@@ -7,7 +7,8 @@
 
 <insert id="insertMember" parameterType="Member">
 		insert into member values(
-		seq_mno.nextval, #{mid}, #{mpw}, #{mname}, #{mnick}, #{mtype}, #{email}, #{gender}, #{age}, DEFAULT, DEFAULT, DEFAULT)
+		seq_mno.nextval, #{mid}, #{mpw}, #{mname}, #{mnick}, 
+		#{mtype}, #{email}, #{gender}, #{age}, DEFAULT, DEFAULT, DEFAULT)
 	</insert>
 
 	<select id="selectOne" parameterType="string" resultType="Member">
