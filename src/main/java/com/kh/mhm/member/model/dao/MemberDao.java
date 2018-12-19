@@ -7,5 +7,6 @@ public interface MemberDao {
 	Member selectOne(String mid);
 	
 	int insertMember(Member member);
-
+	
+	Member selectFindID(String email);
 }

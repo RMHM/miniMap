@@ -23,4 +23,9 @@ public class MemberDaoImpl implements MemberDao {
 		return sst.insert("member.insertMember", member);
 	}
 
+	@Override
+	public Member selectFindID(String email) {
+		return sst.selectOne("member.selectFindID", email);
+	}
+
 }
