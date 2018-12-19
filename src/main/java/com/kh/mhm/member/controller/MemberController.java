@@ -63,11 +63,11 @@ public class MemberController {
 	  System.out.println("비밀번호 암호화 전 : " +rawPassword);
 	  
 	  // 암호화 코드
-	  member.setMpw(bcryptPasswordEncoder.encode(rawPassword));
+	  member.setMpw(bcpe.encode(rawPassword));
 	  
 	  System.out.println("비밀번호 암호화 후 : " +member.getMpw());
 	  
-	  int result = memberService.insertMember(member);
+	  int result = ms.insertMember(member);
 	  
 	  String loc = "/";
 	  String msg = "";

@@ -6,11 +6,8 @@
 <mapper namespace="member">
 
 	<insert id="insertMember" parameterType="Member">
-		INSERT INTO MEMBER VALUES(
-			#{mno} #{mid}, #{mpw}, #{mnickname},
-			#{mtype}, #{email}, #{gender}, #{age},
-			#{address}, #{hobby, typeHandler=strArrTypeHandler}, DEFAULT
-		)
+		insert into member values(
+		seq_mno.nextval, #{mid}, #{mpw}, #{mname}, #{mnick}, #{mtype}, #{email}, #{gender}, #{age}, DEFAULT, DEFAULT, DEFAULT)
 	</insert>
 
 	<select id="selectOne" parameterType="string" resultType="Member">
