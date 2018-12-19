@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE mapper PUBLIC
+"-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="myPage">
+
+	<resultMap type="map" id="scheduleMap">
+	 	
+		<result column="sId" property="SID" />
+		<result column="mNo" property="MNO" />
+		<result column="start_Date" property="START_DATE" javaType="java.sql.Date" jdbcType="DATE" /> 
+		<result column="end_Date" property="END_DATE" javaType="java.sql.Date" jdbcType="DATE" />
+		<result column="sTitle" property="STITLE" />
+		<result column="sContent" property="SCONTENT" />
+		<result column="sColor" property="SCOLOR" />
+		<result column="delflag" property="DELFLAG" /> 
+	</resultMap>
+	
+
+	
+	<insert id="insertSchedule" parameterType="Schedule">
+		INSERT INTO SCHEDULE VALUES(SEQ_SID.NEXTVAL,#{mNo},#{startDate},#{endDate},#{sTitle},#{sContent},#{sColor},DEFAULT)
+		
+	</insert>
+	<!-- <select id="selectSchedule" parameterType="_int" resultMap="scheduleMap"> -->
+	<select id="selectSchedule" resultMap="scheduleMap">
+		SELECT * FROM SCHEDULE WHERE MNO=10
+	</select>
+	
+	</mapper>
+
+
+
+
+
+
+

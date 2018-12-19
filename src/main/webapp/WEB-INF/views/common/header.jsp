@@ -19,6 +19,7 @@
 			<div class="navbar-collapse collapse ">
 				<ul class="nav navbar-nav">
 					<li class="active"><a href="/">Home</a></li>
+					<li><a href="/myPage/myPageMain.do">마이페이지</a></li>
 					<li><a href="#">필요에 따라 추가하세요</a></li>
 					<li><a href="/test/testMap.do">지도테스트</a></li>
 					<!-- 로그인여부에 따른 분기점 -->

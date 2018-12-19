@@ -1,4 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
+<%@
+	page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
@@ -6,8 +7,11 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<link
+	<meta charset="UTF-8">
+	<title>miniMap에 오신걸 환영합니다.</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<meta name="description" content="" />
+	<link
 	href="${pageContext.request.contextPath}/resources/css/fullcalendar.min.css"
 	rel="stylesheet" />
 <link
@@ -19,35 +23,126 @@
 	src="${pageContext.request.contextPath}/resources/js/jquery.min.js"></script>
 <script
 	src="${pageContext.request.contextPath}/resources/js/fullcalendar.min.js"></script>
-<script>
+	<script>
+	
+	 
 	$(document).ready(function() {
-
+		var event =[];
+		 $.ajax({
+				url : "${pageContext.request.contextPath}/myPage/selectSchedult.do", 
+				data : {mNo:10},
+				async: false,
+				  dataType: "json",
+				  success : function(data){
+		              console.log(data.list);
+		              /* console.log(data.list[0].START_DATE); */	              
+		            var a =  data.list[0].START_DATE;
+					
+		              var date = new Date();
+		              date.setTime(Date.parse(a));
+	
+		              console.log(a);
+		              console.log(a.getDate());
+		              console.log(a.getTime());
+		              
+		              
+		              scheduleList(data.list);
+		          }, error : function(jqxhr, textStatus, errorThrown){
+		              console.log("ajax 처리 실패");
+		              //에러로그
+		              console.log(jqxhr);
+		              console.log(textStatus);
+		              console.log(errorThrown);
+		          }
+			});// ajax-end
+			
+			function scheduleList(list){
+				
+			}
 		$('#calendar').fullCalendar({
-			customButtons : {
-
-				myCustomButton : {
-
-					text : '일정입력',
-
-					click : function(event) {
-
-						onSelectEvent(event);
-
-					}
-
-				}
-
-			},
 			header : {
 				left : 'prev,next today',
 				center : 'title',
-				right : 'month,agendaWeek,agendaDay,listMonth,myCustomButton'
+				right : 'month,agendaWeek,agendaDay,listMonth'
 			},
-			defaultDate : '2018-03-12',
+			eventLimit : true, // for all non-agenda views
+			defaultDate : '2018-03-12', // today;
+			selectable : true,
+			selectHelper : true,
+			views : {
+				month : { // name of view
+					titleFormat : 'MMMM YYYY'
+				// other view-specific options here
+				},
+				week : {
+					titleFormat : " MMMM D YYYY"
+				},
+				day : {
+					titleFormat : 'D MMM, YYYY'
+				}
+			},
+			dayClick : function(date) {
+
+				$("#insertC").attr("style", "display:inline-block");
+				/* 	    $('#datepicker_startdate').val(date.format); */
+				$(document).ready(function() {
+					$("#datepicker_startdate").val('date.format');
+
+				});
+			},
+
+			/* select : function(start, end) {
+				/* alert("일정 추가하기"); */
+			/* 	console.log(start);
+				$("#insertC").attr("style", "display:inline-block");
+				console.log("---------");
+				console.log(start); */
+
+			/* console.log(start._d);
+			console.log(start); */
+			/* $('#datepicker_startdate').val(start); */
+			/*   <input type="date" id="test"> */
+
+			/* $(document).ready(
+			        function(){
+			           $("#test").val('2018-01-01');
+			        console.log($("#test").val())
+			        });
+			 */
+			/* console.log($('#datepicker_startdate').val); */
+
+			/*}, */
 			navLinks : true, // can click day/week names to navigate views
 			businessHours : true, // display business hours
-			editable : true,
+			editable : false, // mouse 이동
 			events : [ {
+				title : "test",
+				start : "2018-03-14"
+			}, {
+				title : 'Business Lunch',
+				start : '2018-03-03T13:00:00',
+				constraint : 'businessHours'
+			}, {
+				title : 'Business Lunch',
+				start : '2018-03-03T13:00:00',
+				constraint : 'businessHours'
+			}, {
+				title : 'Business Lunch',
+				start : '2018-03-03T13:00:00',
+				constraint : 'businessHours'
+			}, {
+				title : 'Business Lunch',
+				start : '2018-03-03T13:00:00',
+				constraint : 'businessHours'
+			}, {
+				title : 'Business Lunch',
+				start : '2018-03-03T13:00:00',
+				constraint : 'businessHours'
+			}, {
+				title : 'Business Lunch',
+				start : '2018-03-03T13:00:00',
+				constraint : 'businessHours'
+			}, {
 				title : 'Business Lunch',
 				start : '2018-03-03T13:00:00',
 				constraint : 'businessHours'
@@ -97,134 +192,162 @@
 	});
 </script>
 
+
 <style>
-body {
-	margin: 40px 10px;
-	padding: 0;
-	font-family: "Lucida Grande", Helvetica, Arial, Verdana, sans-serif;
-	font-size: 14px;
-}
 
-nav, section, aside {
+
+/* nav, section, aside {
 	float: left;
-}
+}  */
 
-nav {
+/* nav {
 	width: 100px;
 }
-
+ */
 #calendar {
 	max-width: 900px;
 	margin: 0 auto;
 }
 </style>
-<title>Insert title here</title>
 
 </head>
+
 <body>
-	<header> </header>
-	<nav>
-		<a href="#">쪽지</a><br/> <a href="#">정보수정</a><br/> <a href="#">일정관리</a><br/><a
-			href="#">지도</a><br/> <a href="#">작성한글</a> <br/><a href="#">권한요청(기업)</a>
+	<!-- 외부파일 선언 -->
 
-	</nav>
-	<section>
+	<c:import url="../common/exFile.jsp" />
+	<div id="wrapper">
+		<!-- header 선언 -->
+		<c:import url="../common/header.jsp" />
+		
+	 <nav style="float: left; width: 100px;height:auto;">
+		<a href="#">쪽지</a><br /> <a href="#">정보수정</a><br /> <a href="#">일정관리</a><br />
+		<a href="#">지도</a><br /> <a href="#">작성한글</a> <br /> <a href="#">권한요청(기업)</a>
 
-		<div id='calendar'></div>
+	</nav> 
+	
+		<section class="callaction">
+		
+		
+		
+			<div id='calendar' ></div>
 
-		<div
-			class="ui-dialog ui-widget ui-widget-content ui-corner-all ui-front ui-dialog-buttons ui-draggable ui-resizable"
-			tabindex="-1" role="dialog"
-			style="position: absolute; height: auto; width: 350px; top: 137px; left: 202px; display: block; z-index: 101;"
+		<div id="insertC" class="" tabindex="-1" role="dialog"
+			style="position: absolute; height: auto; width: 350px; top: 137px; left: 202px; display: none; z-index: 101;"
 			aria-describedby="dialog-message" aria-labelledby="ui-id-1">
+			
+			<form
+			action="insertSchedule.do"
+					action="${pageContext.request.contextPath}/myPage/schaduleSave.do"
+					method="post">
 			<div
 				class="ui-dialog-titlebar ui-widget-header ui-corner-all ui-helper-clearfix ui-draggable-handle">
 				<span id="ui-id-1" class="ui-dialog-title"> 일정등록</span>
-				<button type="button"
-					class="ui-button ui-widget ui-state-default ui-corner-all ui-button-icon-only ui-dialog-titlebar-close"
-					role="button" title="Close">
-					<span class="ui-button-icon-primary ui-icon ui-icon-closethick"></span>
-					<span class="ui-button-text">Close</span>
-				</button>
+
 			</div>
 			<div id="dialog-message"
-				style="width: auto; min-height: 0px; max-height: none; height: 351px;"
+				style="width: auto; min-height: 0px; max-height: none; height: auto;"
 				class="ui-dialog-content ui-widget-content">
-				<form>
-					<div style="text-align: right;">
-
-						<textarea cols="30" rows="5" id="edited_title" style="width: 98%;"
-							maxlength="100"></textarea>
+				
+					<div style="text-align: left;">
+						<div>
+							<label>제목</label><input type="text" name="sTitle"></input>
+						</div>
+						<div>
+							<div style="display: inline;">
+								<label>메모</label>
+								<div style="display: inline;">
+									<textarea cols="30" rows="5" id="edited_title" name="sContent"
+										name="scontent" style="width: 98%;" maxlength="100"></textarea>
+								</div>
+							</div>
+						</div>
 						<div style="margin-bottom: 5px;">
 
-							<span style="float: right;"> 날짜 <input type="text"
-								id="datepicker_startdate" style="width: 90px;"
-								class="ed hasDatepicker" readonly="readonly">~<input
-								type="text" id="datepicker_enddate"
+							<span style="float: right;"> 날짜 <input type="date" 
+								id="datepicker_startdate" name="startDateT" style="width: 90px;"
+								class="ed hasDatepicker">~<input type="date"
+								id="datepicker_enddate" name="endDateT"
 								style="width: 90px; margin-bottom: 4px;"
-								class="ed hasDatepicker" readonly="readonly">
+								class="ed hasDatepicker">
 							</span>
 						</div>
 						<div style="margin-bottom: 5px;">
 							<span style="float: right;"> </span>
 						</div>
 						<div style="clear: both;"></div>
-						<div style="clear: both; margin: 10px 0 0 0;">
-							<span class="dialog_formfield" id="ColorPicker1"><span
-								class="ColorBlotch" color="#3DA4B7"
-								style="background-color: rgb(61, 164, 183);">&nbsp;</span><span
-								class="ColorBlotch" color="#B2CBD1"
-								style="background-color: rgb(178, 203, 209);">&nbsp;</span><span
-								class="ColorBlotch" color="#517ACC"
-								style="background-color: rgb(81, 122, 204);">&nbsp;</span><span
-								class="ColorBlotch" color="#D95B44"
-								style="background-color: rgb(217, 91, 68);">&nbsp;</span><span
-								class="ColorBlotch" color="#FF4E90"
-								style="background-color: rgb(255, 78, 144);">&nbsp;</span><span
-								class="ColorBlotch" color="#FF0000"
-								style="background-color: rgb(255, 0, 0);">&nbsp;</span><span
-								class="ColorBlotch" color="#ffbb00"
-								style="background-color: rgb(255, 187, 0);">&nbsp;</span><span
-								class="ColorBlotch" color="#A0A43E"
-								style="background-color: rgb(160, 164, 62);">&nbsp;</span><span
-								class="ColorBlotch" color="#C3CB0F"
-								style="background-color: rgb(195, 203, 15);">&nbsp;</span></span> <span
-								id="ColorSelectionTarget1"
-								style="background-color: rgb(61, 164, 183);">&nbsp;</span>
+						<div>
+							<label> 색상 선택 </label><input type="color" name="sColor">
 						</div>
-						<div style="margin: 15px 0 10px 0;"></div>
+				
 					</div>
+					<div
+						class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix">
+						<input type="submit" value="등록"> <input type="reset"
+							value="취소">
+			
+				</div> -->
+					</div>
+					<script>
+						$("#close").click(function() {
+							console.log(this.val);
+							
+							$('#insertC').attr("style", "display:none");
+						});
+					</script>
 				</form>
 			</div>
-			<div class="ui-resizable-handle ui-resizable-n" style="z-index: 90;"></div>
-			<div class="ui-resizable-handle ui-resizable-e" style="z-index: 90;"></div>
-			<div class="ui-resizable-handle ui-resizable-s" style="z-index: 90;"></div>
-			<div class="ui-resizable-handle ui-resizable-w" style="z-index: 90;">
-			</div>
-			<div
-				class="ui-resizable-handle ui-resizable-se ui-icon ui-icon-gripsmall-diagonal-se"
-				style="z-index: 90;"></div>
-			<div class="ui-resizable-handle ui-resizable-sw" style="z-index: 90;"></div>
-			<div class="ui-resizable-handle ui-resizable-ne" style="z-index: 90;">
-			</div>
-			<div class="ui-resizable-handle ui-resizable-nw" style="z-index: 90;"></div>
-			<div
-				class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix">
-				<div class="ui-dialog-buttonset">
-					<button type="button"
-						class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only"
-						role="button">
-						<span class="ui-button-text">저장</span>
-					</button>
-					<button type="button"
-						class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only"
-						role="button">
-						<span class="ui-button-text">닫기</span>
-					</button>
-				</div>
-			</div>
+
 		</div>
+			
+		</section>
+		<section id="content">
+			<div class="container">
+	
+				<!-- divider -->
+				<div class="row">
+					<div class="col-lg-12">
+						<div class="solidline"></div>
+					</div>
+				</div>
+				<!-- end divider -->
+		
+
+			</div>
+		</section>
+	</div>
+	<!-- footer 선언 -->
+<%-- 	<c:import url="../common/footer.jsp"/>
+ --%>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<%-- 
+
+<title>Insert title here</title>
+
+</head>
+<body>
+	 <c:import url="../common/header.jsp" />
+	
+	<section>
+
+		
 	</section>
 	<aside></aside>
 </body>
-</html>
+</html> --%>
