@@ -13,11 +13,8 @@
 		)
 	</insert>
 
+	<select id="selectOne" parameterType="string" resultType="Member">
+		select * from member where mid = #{mid}
+	</select>
+
 </mapper>
-
-
-
-
-
-
-
