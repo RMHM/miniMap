@@ -1,5 +1,7 @@
 package com.kh.mhm.member.controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -12,8 +14,8 @@ import com.kh.mhm.member.model.vo.Member;
 @Controller
 public class MemberController {
 	
-	/*@Autowired
-	private BCryptPasswordEncoder bcpe;*/
+	@Autowired
+	private BCryptPasswordEncoder bcpe;
 	
 	private String loc = "/";
 	private String msg = "";
@@ -33,10 +35,10 @@ public class MemberController {
 			msg = "회원정보가 존재하지 않습니다.";
 			loc = "/member/loginPage.go";
 		} else {
-			/*if(bcpe.matches(mpw, m.getMpw())) {
+			if(bcpe.matches(mpw, m.getMpw())) {
 				msg = "로그인되었습니다!";
 				mv.addObject("member", m);
-			} else msg = "비밀번호가 일치하지 않습니다.";*/
+			} else msg = "비밀번호가 일치하지 않습니다.";
 		}
 		
 		mv.addObject("loc", loc).addObject("msg", msg);
