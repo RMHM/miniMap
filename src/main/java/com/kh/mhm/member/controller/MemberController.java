@@ -14,7 +14,6 @@ import com.kh.mhm.member.model.vo.Member;
 
 @Controller
 public class MemberController {
-	
 	@Autowired
 	private BCryptPasswordEncoder bcpe;
 	
