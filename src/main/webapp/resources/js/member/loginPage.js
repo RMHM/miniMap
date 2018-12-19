@@ -11,4 +11,8 @@ $(function(){
 			e.preventDefault();
 		}
 	})
+	
+	$('#btFind').click(function(){
+		location.href = "/member/infoFindPage.go";
+	})
 })

@@ -16,22 +16,28 @@ import com.kh.mhm.member.model.vo.Member;
 public class MemberController {
 	@Autowired
 	private BCryptPasswordEncoder bcpe;
-	
+
 	@Autowired
 	private MemberService ms;
-	
+
 	private String loc = "/";
 	private String msg = "";
-	
+
 	@RequestMapping("/member/loginPage.go")
 	public String loginGo() {
 		return "member/loginPage";
 	}
-  @RequestMapping(value="/member/memberLogin.do", method = RequestMethod.POST)
+	
+	@RequestMapping("/member/infoFindPage.go")
+	public String infoFindGo() {
+		return "member/infoFindPage";
+	}
+	
+	@RequestMapping(value="/member/memberLogin.do", method = RequestMethod.POST)
 	public ModelAndView memberLogin(@RequestParam String mid, @RequestParam String mpw, Model model) {
 		ModelAndView mv = new ModelAndView();
 
-		 Member m = ms.selectOne(mid);
+		Member m = ms.selectOne(mid);
 
 		if(m == null) {
 			msg = "회원정보가 존재하지 않습니다.";
@@ -42,41 +48,41 @@ public class MemberController {
 				mv.addObject("member", m);
 			} else msg = "비밀번호가 일치하지 않습니다.";
 		}
-		
+
 		mv.addObject("loc", loc).addObject("msg", msg);
 		mv.setViewName("/common/msg");
-		
+
 		return mv;
 	}
-  
-  @RequestMapping("/member/memberEnroll.go")
+
+	@RequestMapping("/member/memberEnroll.go")
 	public String memberEnroll() {
 		return "member/memberEnroll";
 	}
-  
-  @RequestMapping("/member/memberEnrollEnd.go")
-  public String memberEnrollEnd(Member member, Model model) {
-	  
-	  // 기존 비밀번호
-	  String rawPassword = member.getMpw();
-	  System.out.println("비밀번호 암호화 전 : " +rawPassword);
-	  
-	  // 암호화 코드
-	  member.setMpw(bcpe.encode(rawPassword));
-	  
-	  System.out.println("비밀번호 암호화 후 : " +member.getMpw());
-	  
-	  int result = ms.insertMember(member);
-	  
-	  String loc = "/";
-	  String msg = "";
-	  
-	  if(result > 0) msg = "회원 가입이 정상적으로 되었습니다.";
-	  else msg = "회원 가입이 실패 하였습니다.";
-	  
-	  model.addAttribute("loc", loc);
-	  model.addAttribute("msg", msg);
-	  
-	  return "common/msg";
-  }
+
+	@RequestMapping("/member/memberEnrollEnd.go")
+	public String memberEnrollEnd(Member member, Model model) {
+
+		// 기존 비밀번호
+		String rawPassword = member.getMpw();
+		System.out.println("비밀번호 암호화 전 : " +rawPassword);
+
+		// 암호화 코드
+		member.setMpw(bcpe.encode(rawPassword));
+
+		System.out.println("비밀번호 암호화 후 : " +member.getMpw());
+
+		int result = ms.insertMember(member);
+
+		String loc = "/";
+		String msg = "";
+
+		if(result > 0) msg = "회원 가입이 정상적으로 되었습니다.";
+		else msg = "회원 가입이 실패 하였습니다.";
+
+		model.addAttribute("loc", loc);
+		model.addAttribute("msg", msg);
+
+		return "common/msg";
+	}
 }
