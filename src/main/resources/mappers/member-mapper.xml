@@ -4,9 +4,17 @@
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="member">
-	
-	<select id="selectOne" parameterType="string" resultType="Member">
+  
+  <insert id="insertMember" parameterType="Member">
+		INSERT INTO MEMBER VALUES(
+			#{mno} #{mid}, #{mpw}, #{mnickname},
+			#{mtype}, #{email}, #{gender}, #{age},
+			#{address}, #{hobby, typeHandler=strArrTypeHandler}, DEFAULT
+		)
+	</insert>
+
+  <select id="selectOne" parameterType="string" resultType="Member">
 		select * from member where mid = #{mid}
 	</select>
-	
+
 </mapper>
