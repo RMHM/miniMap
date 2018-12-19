@@ -5,6 +5,7 @@ public class Member implements java.io.Serializable{
 	private static final long serialVersionUID = 1L;
 	
 	private int mno;
+	private String mname;
 	private String mid;
 	private String mpw;
 	private String mnick;
@@ -20,10 +21,11 @@ public class Member implements java.io.Serializable{
 		super();
 	}
 
-	public Member(int mno, String mid, String mpw, String mnick, String mtype, String email, String gender, int age,
+	public Member(int mno, String mname, String mid, String mpw, String mnick, String mtype, String email, String gender, int age,
 			String profilePath, String joinDate, String dropDate) {
 		super();
 		this.mno = mno;
+		this.mname = mname;
 		this.mid = mid;
 		this.mpw = mpw;
 		this.mnick = mnick;
@@ -40,13 +42,21 @@ public class Member implements java.io.Serializable{
 		this.mid = mid;
 		this.mpw = mpw;
 	}
-
+	
 	public int getMno() {
 		return mno;
 	}
-
+	
 	public void setMno(int mno) {
 		this.mno = mno;
+	}
+	
+	public String getMname() {
+		return mname;
+	}
+	
+	public void setMname(String mname) {
+		this.mname = mname;
 	}
 
 	public String getMid() {
@@ -131,9 +141,11 @@ public class Member implements java.io.Serializable{
 
 	@Override
 	public String toString() {
-		return "Member [mno=" + mno + ", mid=" + mid + ", mpw=" + mpw + ", mnick=" + mnick + ", mtype=" + mtype
-				+ ", email=" + email + ", gender=" + gender + ", age=" + age + ", profilePath=" + profilePath
-				+ ", joinDate=" + joinDate + ", dropDate=" + dropDate + "]";
+		return "Member [mno=" + mno + ", mname=" + mname + ", mid=" + mid + ", mpw=" + mpw + ", mnick=" + mnick
+				+ ", mtype=" + mtype + ", email=" + email + ", gender=" + gender + ", age=" + age + ", profilePath="
+				+ profilePath + ", joinDate=" + joinDate + ", dropDate=" + dropDate + "]";
 	}
+
+	
 	
 }

@@ -17,4 +17,10 @@ public class MemberServiceImpl implements MemberService {
 		return mDao.selectOne(mid);
 	}
 
+	@Override
+	public int insertMember(Member member) {
+		
+		return mDao.insertMember(member);
+	}
+
 }

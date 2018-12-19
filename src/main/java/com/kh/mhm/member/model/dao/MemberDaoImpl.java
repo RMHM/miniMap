@@ -17,4 +17,10 @@ public class MemberDaoImpl implements MemberDao {
 		return sst.selectOne("member.selectOne", mid);
 	}
 
+	@Override
+	public int insertMember(Member member) {
+
+		return sst.insert("member.insertMember", member);
+	}
+
 }
