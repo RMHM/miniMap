@@ -46,9 +46,10 @@
 			<div class="col-lg-3">
 				<div class="widget">
 					<h5 class="widgetheading">Flickr photostream</h5>
-					<div class="flickr_badge">
+					<!-- 에러나서 주석쳐둠 -->
+					<!-- <div class="flickr_badge">
 						<script type="text/javascript" src="https://www.flickr.com/badge_code_v2.gne?count=8&amp;display=random&amp;size=s&amp;layout=x&amp;source=user&amp;user=34178660@N03"></script>
-					</div>
+					</div> -->
 					<div class="clear">
 					</div>
 				</div>
