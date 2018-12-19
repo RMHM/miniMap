@@ -21,10 +21,10 @@
 						<h4><b>로그인</b></h4>
 						<form action="/member/memberLogin.do" method="post" role="form" class="contactForm">
 							<div class="form-group">
-								<input type="text" class="form-control" id="mId" placeholder="아이디를 입력하세요">
+								<input type="text" class="form-control" name="mid" id="mid" placeholder="아이디를 입력하세요">
 							</div>
 							<div class="form-group">
-								<input type="text" class="form-control" id="mPw" placeholder="비밀번호를 입력하세요">
+								<input type="password" class="form-control" name="mpw" id="mpw" placeholder="비밀번호를 입력하세요">
 							</div>
 							<div class="text-center">
 								<input type="submit" value="로그인" id="btLogin" class="btn btn-theme">
@@ -38,4 +38,5 @@
 		<c:import url="/WEB-INF/views/common/footer.jsp"/>
 	</div>
 </body>
+<script src="/resources/js/member/loginPage.js"></script>
 </html>

@@ -35,6 +35,11 @@ public class Member implements java.io.Serializable{
 		this.joinDate = joinDate;
 		this.dropDate = dropDate;
 	}
+	
+	public Member(String mid, String mpw) {
+		this.mid = mid;
+		this.mpw = mpw;
+	}
 
 	public int getMno() {
 		return mno;
