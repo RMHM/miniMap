@@ -57,7 +57,7 @@
 			</li>
 		</ul>
 		<div id="menu_scroll_down">
-    <button id="btn_scroll_down">↓</button>
+    <button id="btn_scroll_down" disabled="true">↓</button>
   </div>
   <!-- <div id="menu_hide"></div> -->
 		
@@ -93,32 +93,38 @@
 		var today = null;
 		$(function() {
 			$("#sendBtn").click(function() {
-				console.log("send message.....");
-				/* 채팅창에 작성한 메세지 전송 */
-				sendMessage();
-				/* 전송 후 작성창 초기화 */
-				$("#message").val('');
+				if($('#message').val()=='' || $('#message').val()==null){
+					alert('타임라인에 등록할 메세지를 입력해주세요');
+					
+				}else{
+					console.log("send message.....");
+					/* 채팅창에 작성한 메세지 전송 */
+					sendMessage();
+					/* 전송 후 작성창 초기화 */
+					$("#message").val('');
+					
+					/* // 라인 추가
+				    $('#table_chat').append(
+				      $('<tr>').append(
+				        $('<td>').append($('#add_name').val()),
+				        $('<td>').append($('#add_msg').val())
+				      )
+				    ); */
+
+				    if (isScrollUp) {
+				    	// 메뉴가 보이는 상태에서 새로운 라인 추가 시 안 읽은 수 표시
+				      unreadCnt++;
+				      $('#btn_scroll_down').html('↓ ' + unreadCnt);
+				    }
+
+				    // 기본적으로 스크롤 최하단으로 이동 (애니메이션 적용)
+				    if (!isScrollUp) {
+				      $('#div_chat').animate({
+				        scrollTop: $('#div_chat')[0].scrollHeight + 700
+				      }, 100);
+				    }
+				}
 				
-				/* // 라인 추가
-			    $('#table_chat').append(
-			      $('<tr>').append(
-			        $('<td>').append($('#add_name').val()),
-			        $('<td>').append($('#add_msg').val())
-			      )
-			    ); */
-
-			    if (isScrollUp) {
-			    	// 메뉴가 보이는 상태에서 새로운 라인 추가 시 안 읽은 수 표시
-			      unreadCnt++;
-			      $('#btn_scroll_down').html('↓ ' + unreadCnt);
-			    }
-
-			    // 기본적으로 스크롤 최하단으로 이동 (애니메이션 적용)
-			    if (!isScrollUp) {
-			      $('#div_chat').animate({
-			        scrollTop: divChat.scrollHeight - divChat.clientHeight
-			      }, 100);
-			    }
 				
 			});
 			$("#exitBtn").click(function() {
@@ -155,11 +161,10 @@
 				var ck_host = '${host}';
 
 				
-				var startMsec = today.getMilliseconds();
+				/* var startMsec = today.getMilliseconds();
 				var now=new Date();
-				var elapsed = (now.getMilliseconds() - startMsec) / 1000; 
+				var elapsedTime = (now.getMilliseconds() - startMsec) / 1000;  */
 				 
-				// Output: 5000
 				
 				
 				
@@ -168,11 +173,11 @@
 				console.log('host : ' + host);
 				console.log('ck_host : ' + ck_host);
 				/* 서버에서 데이터를 전송할경우 분기 처리 */
-				if (host == ck_host || (host == 0 && ck_host.includes('0:0:'))) {
+				if (host == ck_host || (host == 0 && ck_host.includes('0:0:')) || (host==0&&ck_host.includes('127.0.0.1'))) {
 					var printHTML = "<li><div class='comment-main-level'><div class='comment-avatar'>";
 					printHTML += "<img src='/resources/img/testImgLogo.png' alt=''></div>";
 					printHTML+="<div class='comment-box-me'><div class='comment-head-me'><span class='comment-name '>";
-					printHTML+="<a href='' target='_BLANK'>"+userName+"</a></span><span>"+elapsed+"</span>";
+					printHTML+="<a href='' target='_BLANK'>"+userName+"&nbsp;(나)"+"</a></span><span>"+printDate+"</span>";
 					printHTML+="<i class='fa fa-thumbs-down'>0</i><i class='fa fa-thumbs-up'>0</i>";
 					printHTML+="</div><div class='comment-content'><pre>"+message+"</pre></div>";
 					printHTML+="<div class='comment-bottom-me'><i class='fa fa-link'></i>";
@@ -183,7 +188,7 @@
 					var printHTML = "<li><div class='comment-main-level'><div class='comment-avatar'>";
 					printHTML += "<img src='/resources/img/testImgLogo.png' alt=''></div>";
 					printHTML+="<div class='comment-box'><div class='comment-head'><span class='comment-name '>";
-					printHTML+="<a href='' target='_BLANK'>"+userName+"</a></span><span>"+elapsed+"</span>";
+					printHTML+="<a href='' target='_BLANK'>"+userName+"</a></span><span>"+printDate+"</span>";
 					printHTML+="<i class='fa fa-thumbs-down'>0</i><i class='fa fa-thumbs-up'>0</i>";
 					printHTML+="</div><div class='comment-content'><pre>"+message+"</pre></div>";
 					printHTML+="<div class='comment-bottom'><i class='fa fa-link'></i>";
@@ -244,18 +249,20 @@
 		  $('#btn_scroll_down').on('click', function() {
 		    // 마지막으로 보고 있었던 (스크롤을 올리기 시작했던) 위치로 이동
 		    $('#div_chat').animate({
-		      scrollTop: lastScrollTop
+		      scrollTop: $('#div_chat')[0].scrollHeight + 700
 		    }, 100);
 
-		    if (lastScrollTop == divChat.scrollHeight - divChat.clientHeight) {
+		    if (lastScrollTop >= $('#div_chat')[0].scrollHeight) {
 		      // 마지막 위치와 스크롤 최하단이 같다면 (새로 추가된 라인이 없다면) 메뉴 숨김
 		      $("#menu_scroll_down").css("opacity", "0.0");
+		      $("#btn_scroll_down").css("opacity", "0.0");
+		      $("#btn_scroll_down").attr("disabled",true);
 		      isScrollUp = false;
 		      unreadCnt = 0;
 		      $('#btn_scroll_down').html('↓');
 		    } else {
 		      // 마지막 위치와 스크롤 최하단이 다르다면 (새로 추가된 라인이 있다면) 마지막 위치를 최하단으로 변경
-		      lastScrollTop = divChat.scrollHeight - divChat.clientHeight;
+		      lastScrollTop = $('#div_chat')[0].scrollHeight + 700;
 		    }
 		  })
 		
@@ -267,15 +274,17 @@
 
 		    // 메뉴를 숨겼을 때만 마지막 위치 저장
 		    if (!isScrollUp) {
-		      lastScrollTop = $(this).scrollTop();
+		      lastScrollTop = $('#div_chat')[0].scrollHeight + 700;
 		    }
 
 		    // 스크롤이 생겼을 때
 		    if ($(this).scrollTop() > 0) {
 		      if (delta < 0) {
 		        // 스크롤 내리는 이벤트 중 최하단 도달 시 메뉴 숨김 (-1은 오차 제어)
-		        if ($(this).scrollTop() > divChat.scrollHeight - divChat.clientHeight - 1) {
+		        if ($(this).scrollTop()>=0) {
 		          $("#menu_scroll_down").css("opacity", "0.0");
+		          $("#btn_scroll_down").css("opacity", "0.0");
+		          $("#btn_scroll_down").attr("disabled",true);
 		          isScrollUp = false;
 		          unreadCnt = 0;
 		          $('#btn_scroll_down').html('↓');
@@ -283,6 +292,8 @@
 		      } else {
 		        // 스크롤 올리는 이벤트 발생 시 메뉴 보임
 		        $("#menu_scroll_down").css("opacity", "1.0");
+		        $("#btn_scroll_down").css("opacity", "1.0");
+		        $("#btn_scroll_down").attr("disabled",false);
 		        isScrollUp = true;
 		      }
 		    }
