@@ -14,5 +14,9 @@
 	<select id="selectOne" parameterType="string" resultType="Member">
 		select * from member where mid = #{mid}
 	</select>
+	
+	<select id="selectFindID" parameterType="string" resultType="Member">
+		select * from member where email = #{email}
+	</select>
 
 </mapper>
