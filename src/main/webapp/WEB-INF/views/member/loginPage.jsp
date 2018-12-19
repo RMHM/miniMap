@@ -17,7 +17,7 @@
 		<section id="loginForm">
 			<div class="container">
 				<div class="row">
-					<div class="col-md-8 col-md-offset-2">
+					<div class="col-md-4 col-md-offset-4">
 						<h4><b>로그인</b></h4>
 						<form action="/member/memberLogin.do" method="post" role="form" class="contactForm">
 							<div class="form-group">

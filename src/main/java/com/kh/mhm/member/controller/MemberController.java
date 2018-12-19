@@ -18,22 +18,28 @@ public class MemberController {
 	
 	@Autowired
 	private BCryptPasswordEncoder bcpe;
-	
+
 	@Autowired
 	private MemberService ms;
-	
+
 	private String loc = "/";
 	private String msg = "";
-	
+
 	@RequestMapping("/member/loginPage.go")
 	public String loginGo() {
 		return "member/loginPage";
 	}
-  @RequestMapping(value="/member/memberLogin.do", method = RequestMethod.POST)
+	
+	@RequestMapping("/member/infoFindPage.go")
+	public String infoFindGo() {
+		return "member/infoFindPage";
+	}
+	
+	@RequestMapping(value="/member/memberLogin.do", method = RequestMethod.POST)
 	public ModelAndView memberLogin(@RequestParam String mid, @RequestParam String mpw, Model model) {
 		ModelAndView mv = new ModelAndView();
 
-		 Member m = ms.selectOne(mid);
+		Member m = ms.selectOne(mid);
 
 		if(m == null) {
 			msg = "회원정보가 존재하지 않습니다.";
@@ -44,18 +50,18 @@ public class MemberController {
 				mv.addObject("member", m);
 			} else msg = "비밀번호가 일치하지 않습니다.";
 		}
-		
+
 		mv.addObject("loc", loc).addObject("msg", msg);
 		mv.setViewName("/common/msg");
-		
+
 		return mv;
 	}
-  
-  @RequestMapping("/member/memberEnroll.go")
+
+	@RequestMapping("/member/memberEnroll.go")
 	public String memberEnroll() {
 		return "member/memberEnroll";
 	}
-  
+
   @RequestMapping("/member/memberEnrollEnd.do")
   public String memberEnrollEnd(Member member, Model model) {
 	  
