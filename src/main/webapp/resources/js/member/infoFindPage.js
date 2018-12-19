@@ -184,5 +184,6 @@ $(function(){
 	})
 
 	$('#idTap').click();
+	$('#idTap').click();
 
 })
