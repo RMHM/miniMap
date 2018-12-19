@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+	
+	<!-- Root Context: defines shared resources visible to all other web components -->
+	
+	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" 
+	      destroy-method="close">
+      <property name="driverClassName" value="oracle.jdbc.driver.OracleDriver" />
+      <property name="url" value="jdbc:oracle:thin:@localhost:1521:xe"/>
+      <property name="username" value="MHM"/>
+      <property name="password" value="RED"/>
+    </bean>
+    
+    <!-- 차후 SQL관련 로그 내역 설정하기 -->
+    <!-- <bean id="dataSource" class="net.sf.log4jdbc.Log4jdbcProxyDataSource">
+		<constructor-arg ref="realDataSource"/>
+		<property name="logFormatter">
+			<bean class="net.sf.log4jdbc.tools.Log4JdbcCustomFormatter">
+				<property name="loggingType" value="MULTI_LINE"/>
+				<property name="sqlPrefix" value="[SQL] "/>
+			</bean>
+		</property>
+	</bean> -->
+	
+	<bean id="sqlSessionFactoryBean" class="org.mybatis.spring.SqlSessionFactoryBean">
+    	<!-- dataSource : 마이바티스 빈 객체에 사용할 DB 설정 객체 참조 -->
+		<property name="dataSource" ref="dataSource"/>
+		<!-- mapperLocations : mybatis-config에 작성하였던 mapper 파일들을 한번에 불러오기 위한 설정 -->
+		<property name="mapperLocations" value="classpath*:mappers/*.xml"/>
+		<!-- configLocation : mybatis-config 설정을 읽어 오기 위한 속성 -->
+		<property name="configLocation" value="classpath:mybatis-config.xml"/>
+	</bean>
+	
+	<!-- Mybatis 사용과 관련된 sqlSessionTemplate 등록하기 -->
+    <bean id="sqlSessionTemplate" class="org.mybatis.spring.SqlSessionTemplate">
+    	<constructor-arg index="0" ref="sqlSessionFactoryBean"/>
+    </bean>
+    
+    <!-- 만약 트랜잭션 사용할거면 추가해서 사용하세요! -->
+    
+    <!-- 트랜잭션 처리와 관련된 매니저 객체 설정 -->
+    <!-- <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="dataSource"/>
+    </bean> -->
+    
+    
+    
+</beans>

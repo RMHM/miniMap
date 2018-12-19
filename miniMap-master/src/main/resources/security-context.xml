@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:security="http://www.springframework.org/schema/security"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security.xsd">
+	<!--
+		Spring Security
+		스프링에서 3.1 버전 이후로 제공하는 애플리케이션 보안 모듈
+		인증, 권한, 암호화 등의 로직을 처리할 수 있는 메소드, 객체들을 제공한다.
+		
+		일반적으로 현재 운용하는 스프링 버전에 맞는 모듈을 다운받아야 하나
+		5버전 이후 부터는 SHA관련 암호화 로직이 제거 되었기 때문에 직접 4버전으로 변경하여 실습
+	 -->
+	
+	<!-- 비밀번호 암호화 관련 객체 -->
+	<bean id="shaPasswordEncoder" class="org.springframework.security.authentication.encoding.ShaPasswordEncoder"/>
+	<bean id="bcryptPasswordEncoder" class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder"/>
+	
+</beans>
