@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.kh.mhm.member.model.service.MemberService;
 import com.kh.mhm.member.model.vo.Member;
 
 @Controller
@@ -16,6 +17,9 @@ public class MemberController {
 	
 	@Autowired
 	private BCryptPasswordEncoder bcpe;
+	
+	@Autowired
+	private MemberService ms;
 	
 	private String loc = "/";
 	private String msg = "";
@@ -28,8 +32,7 @@ public class MemberController {
 	public ModelAndView memberLogin(@RequestParam String mid, @RequestParam String mpw, Model model) {
 		ModelAndView mv = new ModelAndView();
 
-		// Member m = ms.selectOne(uid);
-		Member m = null;
+		 Member m = ms.selectOne(mid);
 
 		if(m == null) {
 			msg = "회원정보가 존재하지 않습니다.";
