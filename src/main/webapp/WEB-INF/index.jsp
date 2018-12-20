@@ -65,7 +65,7 @@
 						<div class="big-cta">
 							<div class="cta-text">
 								<h2>
-									<span>Moderna</span> HTML Business Template
+									<span>집</span> 가고 싶다
 								</h2>
 							</div>
 						</div>

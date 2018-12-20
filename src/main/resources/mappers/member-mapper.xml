@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE mapper PUBLIC
+"-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="member">
+
+<insert id="insertMember" parameterType="Member">
+		insert into member values(
+		seq_mno.nextval, #{mid}, #{mpw}, #{mname}, #{mnick}, 
+		#{mtype}, #{email}, #{gender}, #{age}, #{profilePath}, DEFAULT, DEFAULT)
+		
+		
+		
+	</insert>
+	
+	
+
+	<select id="selectOne" parameterType="string" resultType="Member">
+		select * from member where mid = #{mid}
+	</select>
+	
+	<select id="selectFindID" parameterType="string" resultType="Member">
+		select * from member where email = #{email}
+	</select>
+
+</mapper>
