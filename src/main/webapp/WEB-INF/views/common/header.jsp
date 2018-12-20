@@ -38,6 +38,7 @@
 							<ul class="dropdown-menu">
 								<li><a href="/member/loginPage.go">로그인</a></li>
 								<li><a href="/member/memberEnroll.go">회원가입</a></li>
+								<li><a href="/member/infoFindPage.go">id/pw 찾기</a></li>
 							</ul>
 						</li>
 					</c:if>

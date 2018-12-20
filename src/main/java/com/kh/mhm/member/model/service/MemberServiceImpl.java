@@ -19,8 +19,12 @@ public class MemberServiceImpl implements MemberService {
 
 	@Override
 	public int insertMember(Member member) {
-		
 		return mDao.insertMember(member);
+	}
+
+	@Override
+	public Member selectFindID(String email) {
+		return mDao.selectFindID(email);
 	}
 
 }
