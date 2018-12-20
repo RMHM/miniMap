@@ -65,22 +65,22 @@ public class MemberController {
   @RequestMapping("/member/memberEnrollEnd.do")
   public String memberEnrollEnd(Member member, Model model) {
 	  
+	  if(member.getProfilePath() == null) member.setProfilePath("DEFAULT");
 	  
-	  /*int result = ms.insertMember(member);*/
+	  int result = ms.insertMember(member);
 	  
 	  String loc = "/";
 	  String msg = "";
 	  
 	  System.out.println(member);
-	  int result = 0;
-	  
+	
 	  if(result > 0) msg = "회원 가입에 성공하였습니다.";
 	  else msg = "회원 가입 실패";
 	  
 	  model.addAttribute("loc", loc);
 	  model.addAttribute("msg", msg);
 	  
-	  return "member/memberEnrollEnd";
+	  return "common/msg";
 	  
   }
 }
