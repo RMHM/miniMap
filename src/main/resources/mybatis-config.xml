@@ -7,6 +7,7 @@
 	<typeAliases>
 		<!-- <typeAlias type="클래스경로" alias="별칭"/> -->
 		<typeAlias type="com.kh.mhm.member.model.vo.Member" alias="Member"/>
+			<typeAlias type="com.kh.mhm.myPage.model.vo.Schedule" alias="Schedule"/>
 	</typeAliases>
 	
 </configuration>
