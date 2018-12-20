@@ -36,34 +36,34 @@
       				
       				<div class="form-group">
       					<label for="mpw">비밀번호 확인</label>
-      					<input type="text" class="form-control" id="mpw2" placeholder="비밀번호를 확인을 위해 다시한번 입력하세요." />
+      					<input type="text" class="form-control" name="mpw2" id="mpw2" placeholder="비밀번호를 확인을 위해 다시한번 입력하세요." />
       				</div>
       				
       				<div class="from-group">
       					<label for="mname">이름</label>
-      					<input type="text" class="form-control" id="mname" placeholder="이름을 입력하세요." />
+      					<input type="text" class="form-control" name="mname" id="mname" placeholder="이름을 입력하세요." />
       				</div> 
       				
       				 <br>
       				 
       				<div class="from-group">
       					<label for="mnick">닉네임</label>
-      					<input type="text" class="form-control" id="mnick" placeholder="닉네임을 입력하세요." />
+      					<input type="text" class="form-control" name="mnick" id="mnick" placeholder="닉네임을 입력하세요." />
       				</div> 
       				
       				<br>
       				
       				<div class="from-group">
       					<label for="email">이메일</label>
-      					<input type="text" class="form-control" id="email" placeholder="이메일 주소를 입력하세요." />
+      					<input type="text" class="form-control" name="email" id="email" placeholder="이메일 주소를 입력하세요." />
       				</div>
       				
       				<br>
       				
       				<div class="from-group">
       					<label for="mtype">회원유형</label> <br>
-      					<input type="radio" name="member" value="일반" />일반회원
-      					<input type="radio" name="member" value="기업" />기업회원
+      					<input type="radio" name="mtype" value="M" />일반회원
+      					<input type="radio" name="mtype" value="C" />기업회원
       				</div>
       				
       				<br>
@@ -86,7 +86,7 @@
       				
       				<div class="from-group"> <br>
       					<label for="profilePath">이미지경로</label>
-      					<input type="file" />
+      					<input type="file" name="profilePath" />
       				
       				</div>
       				

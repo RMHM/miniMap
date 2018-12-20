@@ -43,6 +43,22 @@ public class Member implements java.io.Serializable{
 		this.mpw = mpw;
 	}
 	
+	public Member(String mname, String mid, String mpw, String mnick, String mtype, String email, String gender, int age,
+			String profilePath) {
+		this.mname = mname;
+		this.mid = mid;
+		this.mpw = mpw;
+		this.mnick = mnick;
+		this.mtype = mtype;
+		this.email = email;
+		this.gender = gender;
+		this.age = age;
+		this.profilePath = profilePath;
+
+	}
+	
+	
+	
 	public int getMno() {
 		return mno;
 	}
