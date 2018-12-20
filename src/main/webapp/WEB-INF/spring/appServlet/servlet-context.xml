@@ -25,6 +25,7 @@
 	
 	<websocket:handlers>
 		<websocket:mapping handler="echoHandler" path="/echo"/>
+		<websocket:mapping handler="messageHandler" path="/message"/>
 		<websocket:handshake-interceptors>
 			<beans:bean class="org.springframework.web.socket.server.support.HttpSessionHandshakeInterceptor"/>
 		</websocket:handshake-interceptors>
@@ -32,6 +33,7 @@
 	</websocket:handlers>
 	
 	<beans:bean id="echoHandler" class="com.kh.mhm.timeLine.common.SocketHandler"/>
+	<beans:bean id="messageHandler" class="com.kh.mhm.message.common.NoticeHandler"/>
 	
 	<context:component-scan base-package="com.kh.mhm" />
 	
