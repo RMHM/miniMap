@@ -9,4 +9,6 @@ public interface MemberService {
 	int insertMember(Member member);
 	
 	Member selectFindID(String email);
+
+	int checkIdDuplicate(String mid);
 }
