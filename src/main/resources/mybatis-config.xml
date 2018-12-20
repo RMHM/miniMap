@@ -3,20 +3,16 @@
 "-//mybatis.org//DTD Config 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
-	<!-- vo 객체를 위한 별점 선언부 -->
-	<typeAliases>
-		<!-- <typeAlias type="클래스경로" alias="별칭"/> -->
-		<typeAlias type="com.kh.mhm.member.model.vo.Member" alias="Member"/>
-	</typeAliases>
 	
+	<settings>
+		<setting name="jdbcTypeForNull" value="NULL"/>
+	</settings>
+
+	<!-- vo 객체를 위한 별청 선언 -->
+	<typeAliases>
+    <!-- <typeAlias type="클래스경로" alias="별칭"/> -->
+    <typeAlias type="com.kh.mhm.member.model.vo.Member" alias="Member"/>
+    <typeAlias type="com.kh.mhm.myPage.model.vo.Schedule" alias="Schedule"/>
+    <typeAlias type="com.kh.mhm.message.model.vo.Message" alias="Message">
+  </typeAlias>
 </configuration>
-
-
-
-
-
-
-
-
-
-

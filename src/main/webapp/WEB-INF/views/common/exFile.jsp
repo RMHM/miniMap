@@ -16,7 +16,7 @@
 <link href="/resources/skins/default.css" rel="stylesheet" />
 
 <!-- js -->
-<script src="/resources/js/jquery-3.3.1.min.js"></script>
+<!-- <script src="/resources/js/jquery-3.3.1.min.js"></script> -->
 <!-- <script src="resources/js/jquery.js"></script> -->
 <script src="/resources/js/jquery.easing.1.3.js"></script>
 <script src="/resources/js/bootstrap.min.js"></script>
@@ -28,3 +28,41 @@
 <script src="/resources/js/jquery.flexslider.js"></script>
 <script src="/resources/js/animate.js"></script>
 <script src="/resources/js/custom.js"></script>
+
+
+<!-- 지우지마셈! 수정해서 쓸거요 -->
+<!-- <script type="text/javascript">
+
+    var wsUri = "ws://localhost:8181/ex/count";
+    
+    function send_message() {
+        websocket = new WebSocket(wsUri);
+        websocket.onopen = function(evt) {
+            onOpen(evt);
+        };
+
+        websocket.onmessage = function(evt) {
+            onMessage(evt);
+        };
+
+        websocket.onerror = function(evt) {
+            onError(evt);
+        };
+    }
+
+    function onOpen(evt) {
+       websocket.send("${nick}");
+    }
+
+    function onMessage(evt) {
+    		$('#count').append(evt.data);
+    }
+
+    function onError(evt) {
+    }
+
+    $(document).ready(function(){
+    		send_message();
+    });
+    
+</script> -->

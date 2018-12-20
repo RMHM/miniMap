@@ -9,6 +9,9 @@ public interface MemberService {
 	int insertMember(Member member);
 	
 	Member selectFindID(String email);
-	
-	int updateMemberPW(Member m);
+  
+  int updateMemberPW(Member m);
+  
+  int checkIdDuplicate(String mid);
+
 }

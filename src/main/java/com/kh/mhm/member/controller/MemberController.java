@@ -3,6 +3,7 @@ package com.kh.mhm.member.controller;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -166,7 +167,18 @@ public class MemberController {
   @RequestMapping("/member/memberEnrollEnd.do")
   public String memberEnrollEnd(Member member, Model model) {
 	  
+	  System.out.println(member);
+	  // ** 이미지 경로 DEFAULT로 안들어가게 지정 **
 	  if(member.getProfilePath() == null) member.setProfilePath("DEFAULT");
+	  
+	  // ** 암호화 **
+	  // 기존 비밀번호
+	  String shapw = member.getMpw();
+	  System.out.println("암호화 전  : " +shapw);
+	  
+	  // 코드 
+	  member.setMpw(bcpe.encode(shapw));
+	  System.out.println("암호화 후 : " +member.getMpw());
 	  
 	  int result = ms.insertMember(member);
 	  
@@ -183,6 +195,25 @@ public class MemberController {
 	  
 	  return "common/msg";
 	  
+   }
+  
+  @RequestMapping("/member/memberView.do")
+  public String memberView(@RequestParam String mid) {
+	  
+	  return "member/memberView";
   }
+  
+  @ResponseBody
+  @RequestMapping(value="/member/checkIdDuplicate.do")
+  public Map<String, Object> checkIdDuplicate(@RequestParam String mid){
+	  
+	  Map<String, Object> map = new HashMap<String, Object>();
+		
+		boolean isUsable = ms.checkIdDuplicate(mid) == 0 ? true : false;
+		
+		map.put("isUsable", isUsable);
+		
+		return map;
+	}
 
 }

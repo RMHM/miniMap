@@ -29,13 +29,33 @@
 	
 	<websocket:handlers>
 		<websocket:mapping handler="echoHandler" path="/echo"/>
+		<websocket:mapping handler="messageHandler" path="/message"/>
 		<websocket:handshake-interceptors>
 			<beans:bean class="org.springframework.web.socket.server.support.HttpSessionHandshakeInterceptor"/>
 		</websocket:handshake-interceptors>
 		<websocket:sockjs />
 	</websocket:handlers>
-	
+	<beans:bean id="viewResolver"
+		class="org.springframework.web.servlet.view.BeanNameViewResolver">
+		<beans:property name="order" value="1" />
+	</beans:bean>
+	<beans:bean id="jsonView"
+		class="net.sf.json.spring.web.servlet.view.JsonView" />
+
+	<!-- @ResponseBody 어노테이션을 제공하여 자바 객체를 자동으로 json 타입으로 변환 해 주는 viewResolver 
+		객체 -->
+	<beans:bean id="jacksonMessageConverter"
+		class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter" />
+	<beans:bean
+		class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter">
+		<beans:property name="messageConverters">
+			<beans:list>
+				<beans:ref bean="jacksonMessageConverter" />
+			</beans:list>
+		</beans:property>
+	</beans:bean>
 	<beans:bean id="echoHandler" class="com.kh.mhm.timeLine.common.SocketHandler"/>
+	<beans:bean id="messageHandler" class="com.kh.mhm.message.common.NoticeHandler"/>
 	
 	<context:component-scan base-package="com.kh.mhm" />
 	
