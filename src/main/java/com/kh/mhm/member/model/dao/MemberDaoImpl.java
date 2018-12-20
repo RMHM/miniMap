@@ -1,5 +1,7 @@
 package com.kh.mhm.member.model.dao;
 
+import java.util.HashMap;
+
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -27,5 +29,13 @@ public class MemberDaoImpl implements MemberDao {
 	public Member selectFindID(String email) {
 		return sst.selectOne("member.selectFindID", email);
 	}
+
+	@Override
+	public int checkIdDuplicate(HashMap<String, Object> hmap) {
+		sst.selectOne("member.checkIdDuplicate", hmap);
+		
+		return (Integer) hmap.get("result");
+	}
+
 
 }

@@ -1,5 +1,7 @@
 package com.kh.mhm.member.model.service;
 
+import java.util.HashMap;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -25,6 +27,16 @@ public class MemberServiceImpl implements MemberService {
 	@Override
 	public Member selectFindID(String email) {
 		return mDao.selectFindID(email);
+	}
+
+	@Override
+	public int checkIdDuplicate(String mid) {
+
+		HashMap<String, Object> hmap = new HashMap<String, Object>();
+		
+		hmap.put("mid", mid);
+		
+		return mDao.checkIdDuplicate(hmap);
 	}
 
 }
