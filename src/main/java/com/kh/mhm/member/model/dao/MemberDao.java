@@ -9,4 +9,6 @@ public interface MemberDao {
 	int insertMember(Member member);
 	
 	Member selectFindID(String email);
+	
+	int updateMemberPW(Member m);
 }

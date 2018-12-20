@@ -27,4 +27,10 @@ public class MemberServiceImpl implements MemberService {
 		return mDao.selectFindID(email);
 	}
 
+	@Override
+	public int updateMemberPW(Member m) {
+		return mDao.updateMemberPW(m);
+	}
+
+		
 }

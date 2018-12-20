@@ -28,4 +28,9 @@ public class MemberDaoImpl implements MemberDao {
 		return sst.selectOne("member.selectFindID", email);
 	}
 
+	@Override
+	public int updateMemberPW(Member m) {
+		return sst.update("member.updatePW", m);
+	}
+
 }

@@ -14,8 +14,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.kh.mhm.common.SendMail;
 import com.kh.mhm.member.model.service.MemberService;
 import com.kh.mhm.member.model.vo.Member;
 
@@ -56,13 +58,26 @@ public class MemberController {
 				msg = "로그인되었습니다!";
 				// @SessionAttributes annotation 사용
 				mv.addObject("member", m);
-			} else msg = "비밀번호가 일치하지 않습니다.";
+			} else {
+				msg = "비밀번호가 일치하지 않습니다.";
+				loc = "/member/loginPage.go";
+			}
 		}
 
 		mv.addObject("loc", loc).addObject("msg", msg);
 		mv.setViewName("/common/msg");
 
 		return mv;
+	}
+	
+	@RequestMapping(value="/member/memberLogout.do")
+	public String memberLogout(SessionStatus sessionStatus, HttpSession session, Model model) {
+		if(!sessionStatus.isComplete()) sessionStatus.setComplete();
+		msg = "로그아웃 되었습니다.";
+		model.addAttribute("loc", loc);
+		model.addAttribute("msg", msg);
+		
+		return "common/msg";
 	}
 	
 	@RequestMapping("/member/memberFindID.do")
@@ -87,7 +102,17 @@ public class MemberController {
 				session.setAttribute("mid", mid);
 				session.setAttribute("mname", mname);
 				session.setAttribute("email", email);
-				// 난수 생성 및 회원 아이디로 비밀번호 발송
+				// 난수 생성
+				String chkCode = "";
+				for(int i=0; i<6; i++) {
+					chkCode += (char)((int)(Math.random()*93+34));
+				}
+				session.setAttribute("code", chkCode);
+				// 인증번호 전송하기
+				String getTitle = "miniMap 회원정보 인증코드 입니다.";
+				String getContent = "입력하신 아이디 " + mid + "에 대한 인증코드입니다.\n인증번호는 " + chkCode + " 입니다.";
+				new SendMail().sendMail(email, getTitle, getContent);
+				
 				result = true;
 			}
 		}
@@ -96,18 +121,35 @@ public class MemberController {
 	
 	@RequestMapping("/member/sessionChk.do")
 	@ResponseBody
-	public String memberSessionValueChk(@RequestParam String mid, @RequestParam String mname,
+	public Map<String, Object> memberSessionValueChk(@RequestParam String mid, @RequestParam String mname,
 										@RequestParam String email, @RequestParam String code,
 										HttpSession session) {
-		String result = "";
+
+		Map<String, Object> result = new HashMap<String, Object>();
+		result.put("isErr", false);
 		
-		if(!mid.equals((String)session.getAttribute("mid"))) result = "아이디가";
-		else if(!mname.equals((String)session.getAttribute("mname"))) result = "이름이";
-		else if(!email.equals((String)session.getAttribute("email"))) result = "이메일이";
-		else if(!code.equals((String)session.getAttribute("code"))) result = "인증번호가";
+		if(!mid.equals((String)session.getAttribute("mid"))) result.put("err", "아이디가");
+		else if(!mname.equals((String)session.getAttribute("mname"))) result.put("err", "이름이");
+		else if(!email.equals((String)session.getAttribute("email"))) result.put("err", "이메일이");
+		else if(!code.equals((String)session.getAttribute("code"))) result.put("err", "인증번호가");
 		else {
-			// 비밀번호 재설정 및 회원 이메일로 임시 비밀번호 발송
+			
+			result.remove("isErr");
+			result.put("isErr", true);
+			// 비밀번호 재설정
 			String newPW = "";
+			for(int i=0; i<10; i++) {
+				newPW += String.valueOf(((int)(Math.random()*10+1)));
+			}
+			Member m = ms.selectOne(mid);
+			m.setMpw(bcpe.encode(newPW));
+			ms.updateMemberPW(m);
+			
+			// 임시번호 발송
+			String getTitle = "miniMap 임시비밀번호 입니다.";
+			String getContent = "아이디 "+mid+"에 대해 임시비밀번호로 재설정 하였습니다.\n빠른 시일내에 비밀번호를 변경하는 것을 권장드립니다.\n임시비밀번호는 "+newPW+" 입니다.";
+			
+			new SendMail().sendMail(email, getTitle, getContent);
 			
 			// 기존 세션에 저장된 정보 제거
 			session.invalidate();

@@ -13,8 +13,6 @@
 		
 		
 	</insert>
-	
-	
 
 	<select id="selectOne" parameterType="string" resultType="Member">
 		select * from member where mid = #{mid}
@@ -23,5 +21,9 @@
 	<select id="selectFindID" parameterType="string" resultType="Member">
 		select * from member where email = #{email}
 	</select>
-
+	
+	<update id="updatePW" parameterType="Member">
+		update member set mpw = #{mpw} where mid = #{mid}
+	</update>
+	
 </mapper>
