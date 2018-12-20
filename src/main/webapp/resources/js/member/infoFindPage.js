@@ -164,8 +164,6 @@ $(function(){
 						"code" : code
 					},
 					success : function(data){
-						console.log(data);
-						console.log(data);
 						if(data.length==0){
 							alert('회원 이메일로 임시 비밀번호가 발송되었습니다.');
 //							location.href = "/member/loginPage.go";
@@ -183,7 +181,6 @@ $(function(){
 
 	})
 
-	$('#idTap').click();
 	$('#idTap').click();
 
 })
