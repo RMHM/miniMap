@@ -20,6 +20,7 @@
 				<ul class="nav navbar-nav">
 					<li class="active"><a href="/">Home</a></li>
 					<li><a href="/testLink.do">타임라인 테스트</a></li>
+					<li><a href="/popUp.do">쪽지 테스트</a></li>
 					<li><a href="/test/testMap.do">지도테스트</a></li>
 					<li><a href="/board/boardmain.do">게시판 테스트</a><li>
 					<li><a href="/myPage/myPageMain.do">마이페이지</a></li>
