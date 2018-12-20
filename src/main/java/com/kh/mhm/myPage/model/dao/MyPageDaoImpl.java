@@ -8,6 +8,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.kh.mhm.member.model.vo.Member;
 import com.kh.mhm.myPage.model.vo.Schedule;
 @Repository
 public class MyPageDaoImpl implements MyPageDao {
@@ -21,6 +22,11 @@ public class MyPageDaoImpl implements MyPageDao {
 	@Override
 	public List<Map<String,Object>> selectSchedule() {
 		return sqlSession.selectList("myPage.selectSchedule");
+	}
+	@Override
+	public int updateMember(Member member) {
+		
+	  return sqlSession.update("member.updateMember",member);
 	}
 
 }

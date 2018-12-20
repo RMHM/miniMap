@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.kh.mhm.member.model.vo.Member;
 import com.kh.mhm.myPage.model.service.MyPageService;
 import com.kh.mhm.myPage.model.vo.Schedule;
 
@@ -108,5 +109,19 @@ public class myPageController {
 		return map;
 	}
 	
+	@RequestMapping("/myPage/updateMemberView.do")
+	public String updateMemberView(Member member) {
+		
+		return "myPage/updateView";
+	}
+	@RequestMapping("/myPage/updateMember.do")
+	public String updateMember(Member member) {
+		
+		
+		
+		int result = ms.updateMember(member);
+		System.out.println(ms.updateMember(member));
+		return "myPage/updateView";
+	}
 	
 }
