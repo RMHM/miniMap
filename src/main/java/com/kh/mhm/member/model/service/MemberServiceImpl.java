@@ -10,10 +10,10 @@ import com.kh.mhm.member.model.vo.Member;
 
 @Service
 public class MemberServiceImpl implements MemberService {
-	
+
 	@Autowired
 	private MemberDao mDao;
-	
+
 	@Override
 	public Member selectOne(String mid) {
 		return mDao.selectOne(mid);
@@ -30,17 +30,17 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	@Override
-  public int updateMemberPW(Member m) {
+	public int updateMemberPW(Member m) {
 		return mDao.updateMemberPW(m);
 	}
-  
-  @Override
-  public int checkIdDuplicate(String mid) {
+
+	@Override
+	public int checkIdDuplicate(String mid) {
 
 		HashMap<String, Object> hmap = new HashMap<String, Object>();
-		
+
 		hmap.put("mid", mid);
-		
+
 		return mDao.checkIdDuplicate(hmap);
 	}
 

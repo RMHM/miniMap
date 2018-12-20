@@ -16,7 +16,7 @@
 <link href="/resources/skins/default.css" rel="stylesheet" />
 
 <!-- js -->
-<!-- <script src="/resources/js/jquery-3.3.1.min.js"></script> -->
+<script src="/resources/js/jquery-3.3.1.min.js"></script>
 <!-- <script src="resources/js/jquery.js"></script> -->
 <script src="/resources/js/jquery.easing.1.3.js"></script>
 <script src="/resources/js/bootstrap.min.js"></script>

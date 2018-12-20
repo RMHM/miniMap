@@ -6,33 +6,33 @@
 <mapper namespace="member">
 
 	<insert id="insertMember" parameterType="Member">
-		insert into member values(
-		seq_mno.nextval, #{mid}, #{mpw}, #{mname}, #{mnick}, 
+		insert into member
+		values(
+		seq_mno.nextval, #{mid}, #{mpw}, #{mname}, #{mnick},
 		#{mtype}, #{email}, #{gender}, #{age}, #{profilePath}, DEFAULT, DEFAULT)
 	</insert>
 
-	<select id="selectOne" parameterType="string" resultType="Member">
+	<select id="selectOne" parameterType="string"
+		resultType="Member">
 		select * from member where mid = #{mid}
 	</select>
-	
-	<select id="selectFindID" parameterType="string" resultType="Member">
+
+	<select id="selectFindID" parameterType="string"
+		resultType="Member">
 		select * from member where email = #{email}
 	</select>
-	
-  <update id="updatePW" parameterType="Member">
-		update member set mpw = #{mpw} where mid = #{mid}
+
+	<update id="updatePW" parameterType="Member">
+		update member set mpw =
+		#{mpw} where mid = #{mid}
 	</update>
-  
-  <!-- 아이디 확인 쿼리 -->
-	<select id="checkIdDuplicate" statementType="CALLABLE" 
-	       parameterType="hashmap">
-		<!-- CallableStatement 는 { } 로 묶여 실행되며
-		    시작괄호 '{' 다음에 tab 기호를 읽지 못한다. -->
-		{ CALL ID_DUP_CHK(
-			#{mid, mode=IN, jdbcType=VARCHAR},
-			#{result, mode=OUT, jdbcType=NUMERIC,
-			  javaType=integer}
-			)
+
+	<!-- 아이디 확인 쿼리 -->
+	<select id="checkIdDuplicate" statementType="CALLABLE"
+		parameterType="hashmap">
+		<!-- CallableStatement 는 { } 로 묶여 실행되며 시작괄호 '{' 다음에 tab 기호를 읽지 못한다. -->
+		{ CALL ID_DUP_CHK(#{mid, mode=IN, jdbcType=VARCHAR},
+			#{result, mode=OUT, jdbcType=NUMERIC, javaType=integer})
 		}
 	</select>
 </mapper>

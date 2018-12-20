@@ -10,10 +10,10 @@ import com.kh.mhm.member.model.vo.Member;
 
 @Repository
 public class MemberDaoImpl implements MemberDao {
-	
+
 	@Autowired
 	private SqlSessionTemplate sst;
-	
+
 	@Override
 	public Member selectOne(String mid) {
 		return sst.selectOne("member.selectOne", mid);
@@ -31,14 +31,13 @@ public class MemberDaoImpl implements MemberDao {
 	}
 
 	@Override
-  public int updateMemberPW(Member m) {
+	public int updateMemberPW(Member m) {
 		return sst.update("member.updatePW", m);
 	}
-  
-  @Override
-  public int checkIdDuplicate(HashMap<String, Object> hmap) {
+
+	@Override
+	public int checkIdDuplicate(HashMap<String, Object> hmap) {
 		sst.selectOne("member.checkIdDuplicate", hmap);
-		
 		return (Integer) hmap.get("result");
 	}
 
