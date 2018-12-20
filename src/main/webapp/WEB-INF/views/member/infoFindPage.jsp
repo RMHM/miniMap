@@ -20,8 +20,8 @@
 				<div class="raw">
 					<div class="col-lg-4 col-md-offset-4">
 						<div class="btn-group">
-							<input type="button" value="ID 찾기" id="idTap" class="btn btn-theme">
-							<input type="button" value="PW 찾기" id="pwTap" class="btn btn-theme">
+							<input type="button" value="ID 찾기" id="idTap" class="btn btn-theme" >
+							<input type="button" value="PW 찾기" id="pwTap" class="btn btn-theme" >
 						</div>
 					</div>
 					<div id="findDiv"  class="col-lg-4 col-md-offset-4">

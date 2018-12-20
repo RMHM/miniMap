@@ -30,7 +30,12 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	@Override
-	public int checkIdDuplicate(String mid) {
+  public int updateMemberPW(Member m) {
+		return mDao.updateMemberPW(m);
+	}
+  
+  @Override
+  public int checkIdDuplicate(String mid) {
 
 		HashMap<String, Object> hmap = new HashMap<String, Object>();
 		

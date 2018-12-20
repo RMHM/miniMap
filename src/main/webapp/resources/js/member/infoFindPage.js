@@ -124,11 +124,10 @@ $(function(){
 					},
 					success : function(data){
 						if(data) {
-							alert('인증 코드가 발송됩니다.');
 							$('#chkCode').prop('disabled', false);
 							$('#btFindPW').prop('disabled', false);
 							$('#btCode').prop('disabled', true);
-							// 컨트롤러에서 난수 생성해서 세션에 저장하기
+							alert('인증 코드가 발송됩니다.');
 						} else {
 							$('#mid').val('').focus();
 							$('#mname').val('');
@@ -164,12 +163,12 @@ $(function(){
 						"code" : code
 					},
 					success : function(data){
-						if(data.length==0){
+						if(!data.isErr){
+							alert(data.err + ' 일치하지 않습니다.');
+						} else {
 							alert('회원 이메일로 임시 비밀번호가 발송되었습니다.');
 //							location.href = "/member/loginPage.go";
 							window.history.back(0);
-						} else {
-							alert(data.err + ' 일치하지 않습니다.');
 						}
 					},
 					error : function(data){

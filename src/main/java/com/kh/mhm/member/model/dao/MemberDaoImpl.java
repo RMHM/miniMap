@@ -31,11 +31,15 @@ public class MemberDaoImpl implements MemberDao {
 	}
 
 	@Override
-	public int checkIdDuplicate(HashMap<String, Object> hmap) {
+  public int updateMemberPW(Member m) {
+		return sst.update("member.updatePW", m);
+	}
+  
+  @Override
+  public int checkIdDuplicate(HashMap<String, Object> hmap) {
 		sst.selectOne("member.checkIdDuplicate", hmap);
 		
 		return (Integer) hmap.get("result");
 	}
-
 
 }

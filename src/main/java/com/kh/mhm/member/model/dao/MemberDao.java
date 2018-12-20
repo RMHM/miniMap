@@ -11,6 +11,8 @@ public interface MemberDao {
 	int insertMember(Member member);
 	
 	Member selectFindID(String email);
-
-	int checkIdDuplicate(HashMap<String, Object> hmap);
+  
+  int checkIdDuplicate(HashMap<String, Object> hmap);
+  
+  int updateMemberPW(Member m);
 }
