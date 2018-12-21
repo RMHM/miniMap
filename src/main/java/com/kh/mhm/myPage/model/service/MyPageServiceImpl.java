@@ -30,5 +30,10 @@ public class MyPageServiceImpl implements MyPageService {
 		return md.updateMember(member);
 		
 	}
+	@Override
+	public int deleteMember(Member member) {
+	
+		return md.deleteMember(member);
+	}
 
 }

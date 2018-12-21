@@ -10,9 +10,9 @@ $(function(){
 				
 				/* 아이디 중복검사 이벤트 추가 */
 				$("#mid_").on("keyup", function(){
-			        var userId = $(this).val().trim();
+			        var mid = $(this).val().trim();
 			        
-			        if(userId.length<4) {
+			        if(mid.length<4) {
 			        	$(".guide.error").hide();
 			        	$(".guide.ok").hide();
 			        	$(".guide.invalid").show();
@@ -21,8 +21,8 @@ $(function(){
 			        } else {
 			        	
 				        $.ajax({
-				            url  : "${pageContext.request.contextPath}/member/checkIdDuplicate.do",
-				            data : {userId:userId},
+				            url  : "/member/checkIdDuplicate.do",
+				            data : { mid : mid },
 				            dataType: "json",
 				            success : function(data){
 				                console.log(data);
@@ -52,10 +52,10 @@ $(function(){
 			});
 			
 			function validate(){
-				var userId = $("#mid_");
-				if(userId.val().trim().length<4){
+				var mid = $("#mid_");
+				if(mid.val().trim().length<4){
 					alert("아이디는 최소 4자리이상이어야 합니다.");
-					userId.focus();
+					mid.focus();
 					return false;
 				}
 				
