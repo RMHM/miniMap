@@ -1,5 +1,6 @@
 package com.kh.mhm.member.model.dao;
 
+import java.util.List;
 import java.util.HashMap;
 
 import org.mybatis.spring.SqlSessionTemplate;
@@ -31,7 +32,17 @@ public class MemberDaoImpl implements MemberDao {
 	}
 
 	@Override
-	public int updateMemberPW(Member m) {
+  public List<Member> selectCommonMember() {
+		return sst.selectList("member.selectCommonMember");
+	}
+  
+  @Override
+	public List<Member> selectCompanyMember() {
+		return sst.selectList("member.selectCompanyMember");
+  }
+  
+  @Override
+  public int updateMemberPW(Member m) {
 		return sst.update("member.updatePW", m);
 	}
 
@@ -40,5 +51,6 @@ public class MemberDaoImpl implements MemberDao {
 		sst.selectOne("member.checkIdDuplicate", hmap);
 		return (Integer) hmap.get("result");
 	}
+
 
 }

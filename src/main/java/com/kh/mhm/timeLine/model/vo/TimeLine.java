@@ -3,31 +3,26 @@ package com.kh.mhm.timeLine.model.vo;
 import java.io.Serializable;
 import java.sql.Timestamp;
 
-public class TimeLine implements Serializable {
+public class TimeLine extends TimeLineSmpl implements Serializable {
 	
 	private int tId;
-	private int mNo;
 	private Timestamp tDate;
-	private String tContent;
 	private String delFlag;
 	
 	public TimeLine() {
 		super();
 	}
 
-	public TimeLine(int tId, int mNo, Timestamp tDate, String tContent, String delFlag) {
+	public TimeLine(int tId, Timestamp tDate, String delFlag) {
 		super();
 		this.tId = tId;
-		this.mNo = mNo;
 		this.tDate = tDate;
-		this.tContent = tContent;
 		this.delFlag = delFlag;
 	}
 
 	@Override
 	public String toString() {
-		return "TimeLine [tId=" + tId + ", mNo=" + mNo + ", tDate=" + tDate + ", tContent=" + tContent + ", delFlag="
-				+ delFlag + "]";
+		return "TimeLine [tId=" + tId + ", tDate=" + tDate + ", delFlag=" + delFlag + "]";
 	}
 
 	public int gettId() {
@@ -38,28 +33,12 @@ public class TimeLine implements Serializable {
 		this.tId = tId;
 	}
 
-	public int getmNo() {
-		return mNo;
-	}
-
-	public void setmNo(int mNo) {
-		this.mNo = mNo;
-	}
-
 	public Timestamp gettDate() {
 		return tDate;
 	}
 
 	public void settDate(Timestamp tDate) {
 		this.tDate = tDate;
-	}
-
-	public String gettContent() {
-		return tContent;
-	}
-
-	public void settContent(String tContent) {
-		this.tContent = tContent;
 	}
 
 	public String getDelFlag() {
@@ -69,5 +48,6 @@ public class TimeLine implements Serializable {
 	public void setDelFlag(String delFlag) {
 		this.delFlag = delFlag;
 	}
+
 	
 }

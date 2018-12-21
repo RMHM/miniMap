@@ -8,7 +8,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>회원 정보 페이지</title>
+<title>에러 500페이지</title>
 </head>
 <body>
    <c:import url="/WEB-INF/views/common/exFile.jsp"/>

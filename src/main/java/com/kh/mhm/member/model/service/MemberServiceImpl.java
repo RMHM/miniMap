@@ -1,5 +1,6 @@
 package com.kh.mhm.member.model.service;
 
+import java.util.List;
 import java.util.HashMap;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,7 +31,17 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	@Override
-	public int updateMemberPW(Member m) {
+  public List<Member> selectCommonMember() {
+		return mDao.selectCommonMember();
+	}
+
+	@Override
+	public List<Member> selectCompanyMember() {
+		return mDao.selectCompanyMember();
+  }
+  
+  @Override
+  public int updateMemberPW(Member m) {
 		return mDao.updateMemberPW(m);
 	}
 

@@ -8,19 +8,13 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>TEST</title>
+<title>에러 404페이지</title>
 </head>
 <body>
-<!-- 아마도 이제 안씀 나중에 정리 -->
    <c:import url="/WEB-INF/views/common/exFile.jsp"/>
    <div id="wrapper">
       <c:import url="/WEB-INF/views/common/header.jsp"/>
-      
-      <form action="/echo.do" method="post">
-		사용자 이름 : <input type="text" name="userName" id="userName"/>
-		<input type="submit" value="입장하기"/>
-	</form>
-
+      <img src="" />
       <c:import url="/WEB-INF/views/common/footer.jsp"/>
    </div>
 </body>

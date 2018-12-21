@@ -1,6 +1,11 @@
 package com.kh.mhm.member.controller;
 
+import java.io.File;
+import java.util.Date;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpSession;
@@ -15,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.kh.mhm.common.SendMail;
@@ -162,8 +168,8 @@ public class MemberController {
 	public String memberEnroll() {
 		return "member/memberEnroll";
 	}
-
-	@RequestMapping("/member/memberEnrollEnd.do")
+  
+  @RequestMapping("/member/memberEnrollEnd.do")
 	public String memberEnrollEnd(Member member, Model model) {
 
 		System.out.println(member);
@@ -187,7 +193,7 @@ public class MemberController {
 		System.out.println(member);
 
 		if(result > 0) msg = "회원 가입에 성공하였습니다.";
-		else msg = "회원 가입 실패";
+		else msg = "회원 가입 실패"; 
 
 		model.addAttribute("loc", loc);
 		model.addAttribute("msg", msg);
@@ -214,5 +220,64 @@ public class MemberController {
 
 		return map;
 	}
+  
+  @RequestMapping("/member/selectCommonMember.do")
+	@ResponseBody
+	public List<Member> selectCommonMember() {
+			
+		List<Member> mlist = ms.selectCommonMember();
+		System.out.println("mlist : " + mlist);
+		
+		return mlist;
+	}
+    
+    @RequestMapping("/member/selectCompanyMember.do")
+    @ResponseBody
+    public List<Member> selectCompanyMember(){
+    	 List<Member> clist = ms.selectCompanyMember();
+    	 
+    	 System.out.println("clist : " + clist);
+    	 return clist;
+    }
+    
+    @RequestMapping("/member/insertFile.do")
+    public void insertFile() {
+    	
+    }
+    
+    @RequestMapping("/member/insertFileEnd.do")
+    public String insertMember(Member member, Model model, HttpSession session,
+    							@RequestParam(value="upFile", required = false) MultipartFile[] upFile) {
+    	
+    	// 저장 경로 생성
+    	String sfile = session.getServletContext().getRealPath("/resources/img/profiles");
+    	List<Member> List = new ArrayList<Member>();
+    	
+    	// 폴더 유무 확인 후 생성
+    	File file = new File(sfile);
+    	
+    	System.out.println("폴더가 있니? " + file.exists());
+    	
+    	if(file.exists() == false) file.mkdirs();
+    	
+    	// 업로드
+    	for(MultipartFile f : upFile) {
+    		if(!f.isEmpty()) {
+    			// 원본 이름 가져오기
+    			String originName = f.getOriginalFilename();
+    			String ext = originName.substring(originName.lastIndexOf(".")+1);
+    			SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd_HHmmss");
+    			
+    			int rNum = (int) (Math.random() * 1000);
+    		
+    			// 서버에서 저장 후 관리할 파일 명
+    			String renamedName = sdf.format(new Date()) + "_" + rNum + "." + ext;
+    		
+    			// 
+    		}
+    	}
+    }
+  
+  } 
 
 }

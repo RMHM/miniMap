@@ -2,37 +2,77 @@
 <!DOCTYPE mapper PUBLIC
 "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-
 <mapper namespace="member">
-	<resultMap type="Member" id="memberMap">
+    
+  <resultMap type="Member" id="memberMap">
   </resultMap>
-
-	<insert id="insertMember" parameterType="Member">
+  
+  <resultMap type="Member" id="CommonMemberMap">
+      <result column="MNO" property="mno" />
+      <result column="MID" property="mid" />
+      <result column="JOIN_DATE" property="joinDate" javaType="java.sql.Date" jdbcType="DATE" /> 
+      <result column="DROP_DATE" property="dropDate" javaType="java.sql.Date" jdbcType="DATE" />
+      <result column="EMAIL" property="email" />
+      <result column="GENDER" property="gender" />
+      <result column="AGE" property="age" /> 
+   </resultMap>
+   
+   <resultMap type="CompanyMember" id="CompMemberMap">
+      <result column="MNO" property="mno" />
+      <result column="MID" property="mid" />
+      <result column="JOIN_DATE" property="joinDate" javaType="java.sql.Date" jdbcType="DATE" /> 
+      <result column="DROP_DATE" property="dropDate" javaType="java.sql.Date" jdbcType="DATE" />
+      <result column="REQUEST_DATE" property="reqDate" javaType="java.sql.Date" jdbcType="DATE" />
+      <result column="GRANT_DATE" property="grantDate" javaType="java.sql.Date" jdbcType="DATE" />
+      <result column="EMAIL" property="email" />
+      <result column="ADDRESS" property="address" />
+      <result column="ANAME" property="aname"/>
+   </resultMap>
+   
+   <resultMap type="BlackList" id="BlackListMap">
+      <result column="MNO" property="mno" />
+      <result column="MID" property="mid" />
+      <result column="JOIN_DATE" property="joinDate" javaType="java.sql.Date" jdbcType="DATE" /> 
+      <result column="DROP_DATE" property="dropDate" javaType="java.sql.Date" jdbcType="DATE" />
+      <result column="EMAIL" property="email" />
+      <result column="GENDER" property="gender" />
+      <result column="AGE" property="age" />
+      <result column="End_Date" property="endDate"/>
+      <result column="REASON" property="reason"/>
+   </resultMap>
+  
+  <insert id="insertMember" parameterType="Member">
 		insert into member
 		values(
 		seq_mno.nextval, #{mid}, #{mpw}, #{mname}, #{mnick},
 		#{mtype}, #{email}, #{gender}, #{age}, #{profilePath}, DEFAULT, DEFAULT)
   </insert>
-  
+
 	<select id="selectOne" parameterType="string"
 		resultType="Member">
-		select * from member where mid = #{mid}
-	</select>
+    select * from member where mid = #{mid}
+	</select>	
 
 	<select id="selectFindID" parameterType="string"
 		resultType="Member">
 		select * from member where email = #{email}
 	</select>
-  
+
   <update id="updateMember" parameterType="Member">
 		UPDATE MEMBER SET
 		MPW = #{mpw},
-		MNAME = #{email},
-		MNICK = #{age},
-		EMAIL = #{phone},
-		GENDER = #{address},
-		PROFILE_PATH=#{profilePath},
-		WHERE MNO = #{mno}
+		MNAME = #{mname},
+		MNICK = #{mnick},
+		EMAIL = #{email},
+		GENDER = #{gender},
+		AGE =#{age},
+		PROFILE_PATH=#{profilePath}
+		WHERE MID = #{mid}
+	</update>
+	<update id="deleteMember" parameterType="Member" >
+	UPDATE MEMBER SET
+		DROP_DATE=SYSDATE
+		WHERE MID = #{mid}
 	</update>
   
   <update id="updatePW" parameterType="Member">
@@ -48,5 +88,24 @@
 			#{result, mode=OUT, jdbcType=NUMERIC, javaType=integer})
 		}
 	</select>
-
+  
+  <select id="selectCommonMember" resultMap="CommonMemberMap">
+		SELECT mno, mid, mname, email, gender, age, join_date, drop_date 
+		FROM MEMBER 
+		WHERE MTYPE = 'M'
+	</select>
+	
+	<select id="selectCompanyMember" resultMap="CompMemberMap">
+		select * 
+		from member
+		full outer join authority a using(mno)
+		full outer join authority_type at on(a.acode = at.acode)
+		where mtype = 'C'
+	</select>
+	
+	<select id="selectBlackList" resultMap="BlackListMap">
+		select mno, mid, mname, email, gender, age, drop_date, end_date, reason
+		from (select * from member join blacklist using(mno))
+	</select>
+  
 </mapper>
