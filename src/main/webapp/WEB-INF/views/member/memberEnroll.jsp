@@ -91,14 +91,14 @@
       				
       				<div class="from-group"> <br>
       					<label for="profilePath">이미지경로</label>
-      					<input type="file" name="profilePath" id="profilePath_" />
+      					<input type="file" name="profilePath" id="profilePath_" accept="image/gif,image/jpeg,image/png"/>
       				
       				</div>
       				
       				<br /><br />
       				</table>
       				<input type="submit" class="btn btn-success" value="회원가입" /> 
-      				<input type="reset" class="btn btn-danger" value="이전으로" />
+      				<input type="reset" class="btn btn-danger" value="취소" />
       	</form>
       	</div>
       	</div>

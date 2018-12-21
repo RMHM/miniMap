@@ -22,7 +22,7 @@ body {
 
 td, th{
 	padding: 3px 3px;
-	text-align: center !important;
+  text-align: center !important;
 	border-bottom: 1px solid lightgray;
     border-left: 1px solid lightgray;
     font-size: 12px;
@@ -105,8 +105,8 @@ table{
 </head>
 <body>
 	<!-- 외부 파일 설정 -->
-	<c:import url="/WEB-INF/views/common/exFile.jsp"/>
-	<c:import url="/WEB-INF/views/common/header.jsp"/>
+  <c:import url="/views/common/exFile.jsp"/>
+	<c:import url="/views/common/header.jsp"/>
 	
 	<p style="text-align: center; font-size: 25px; font-weight: 600;">관리자 페이지</p> 
 	<div id="all">
@@ -123,13 +123,13 @@ table{
 				<thead>
 					<tr>
 						<th width="50px" height="25px" style="text-align: center"></th>
-						<th><b>ID</b></b></th>
-						<th><b>이름</b></th>
-						<th><b>이메일</b></th>
-						<th><b>성별</b></th>
-						<th><b>나이</b></th>
-						<th><b>가입일</b></th>
-						<th><b>상태</b></th>
+             <th>ID</th>
+						<th>이름</th>
+						<th>이메일</th>
+						<th>성별</th>
+						<th>나이</th>
+						<th>가입일</th>
+						<th>상태</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -143,7 +143,7 @@ table{
 					<tr>
 						<th width="50px" height="25px" style="text-align: center">					
 						</th>
-						<th><b>ID</b></th>
+            <th><b>ID</b></th>
 						<th><b>기업명</b></th>
 						<th><b>이메일</b></th>
 						<th><b>권한여부</b></th>
@@ -163,7 +163,7 @@ table{
 				<thead>
 					<tr>
 						<th width="50px" height="25px" style="text-align: center"></th>
-						<th><b>ID</b></th>
+            <th><b>ID</b></th>
 						<th><b>이름</b></th>
 						<th><b>이메일</b></th>
 						<th><b>성별</b></th>
@@ -180,15 +180,13 @@ table{
 		</div>
 	</div>
 
-	</div>
-
 </body>
 <script>
 
 $(function(){
 	
 	 $.ajax({
-		url : '/member/selectCommonMember.do',
+    url : '/member/selectCommonMember.do',
 		type : 'get',
 		success : function(data){
 			
@@ -216,7 +214,7 @@ $(function(){
 					var $tdAge = $('<td>').text("-");
 				}
 				
-				var $tdJoinDate 
+        var $tdJoinDate 
 					= $('<td>').text(new Date(data[i].joinDate).toISOString().slice(0,10));
 				
 				if(data[i].dropDate == null){
@@ -275,7 +273,7 @@ $(function(){
 $(function(){
 	
 	 $.ajax({
-		url : 'selectCompanyMember.do',
+    url : 'selectCompanyMember.do',
 		type : 'get',
 		success : function(data){
 			
@@ -290,7 +288,7 @@ $(function(){
 				var $tdMid = $('<td>').text(data[i].mid);
 				var $tdMname = $('<td>').text(data[i].mname);
 				var $tdEmail = $('<td>').text(data[i].email);
-				var $tdAuthority = $('<td>').text(data[i].aname);
+        var $tdAuthority = $('<td>').text(data[i].aname);
 				var $tdReqDate = $('<td>').text(new Date(data[i].reqDate).toISOString().slice(0,10));
 				var $tdGrantDate = $('<td>').text(new Date(data[i].grantDate).toISOString().slice(0,10));
 				
@@ -401,6 +399,7 @@ $(function(){
 				$trBoard.append($tdCheck).append($tdMid).append($tdMname).append($tdEmail)
 				.append($tdGender).append($tdAge).append($tdDropDate).append($tdEndDate)
 				.append($tdReason);	
+
 				
 				$table.append($trBoard);
 				

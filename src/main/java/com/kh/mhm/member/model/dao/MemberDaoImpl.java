@@ -35,7 +35,12 @@ public class MemberDaoImpl implements MemberDao {
   public List<Member> selectCommonMember() {
 		return sst.selectList("member.selectCommonMember");
 	}
-
+  
+  @Override
+	public List<Member> selectCompanyMember() {
+		return sst.selectList("member.selectCompanyMember");
+  }
+  
   @Override
   public int updateMemberPW(Member m) {
 		return sst.update("member.updatePW", m);
