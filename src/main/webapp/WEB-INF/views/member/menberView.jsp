@@ -14,7 +14,10 @@
    <c:import url="/WEB-INF/views/common/exFile.jsp"/>
    <div id="wrapper">
       <c:import url="/WEB-INF/views/common/header.jsp"/>
-      
+     <form name="memberUpdate" action="${pageContext.request.contextPath}/member/memberUpdate.do" method="post">
+     <input type="text" class="form-control" name="mid" id="mid_" value="${member.mid}" readonly required />
+     
+     </form> 
       <c:import url="/WEB-INF/views/common/footer.jsp"/>
    </div>
 </body>

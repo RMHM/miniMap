@@ -36,31 +36,31 @@
       				
       				<div class="form-group">
       					<label for="mpw">비밀번호</label>
-      					<input type="text" class="form-control" name="mpw" id="mpw_" placeholder="비밀번호를 입력하세요." />
+      					<input type="password" class="form-control" name="mpw" id="mpw_" placeholder="비밀번호를 입력하세요." />
       				</div>
       				
       				<div class="form-group">
       					<label for="mpw">비밀번호 확인</label>
-      					<input type="text" class="form-control" name="mpw2" id="mpw2_" placeholder="비밀번호를 확인을 위해 다시한번 입력하세요." />
+      					<input type="password" class="form-control" id="mpw2_" placeholder="비밀번호를 확인을 위해 다시한번 입력하세요." />
       				</div>
       				
       				<div class="from-group">
       					<label for="mname">이름</label>
-      					<input type="text" class="form-control" name="mname" id="mname_" placeholder="이름을 입력하세요." />
+      					<input type="name" class="form-control" name="mname" id="mname_" placeholder="이름을 입력하세요." />
       				</div> 
       				
       				 <br>
       				 
       				<div class="from-group">
       					<label for="mnick">닉네임</label>
-      					<input type="text" class="form-control" name="mnick" id="mnick_" placeholder="닉네임을 입력하세요." />
+      					<input type="nickname" class="form-control" name="mnick" id="mnick_" placeholder="닉네임을 입력하세요." />
       				</div> 
       				
       				<br>
       				
       				<div class="from-group">
       					<label for="email">이메일</label>
-      					<input type="text" class="form-control" name="email" id="email_" placeholder="이메일 주소를 입력하세요." />
+      					<input type="email" class="form-control" name="email" id="email_" placeholder="이메일 주소를 입력하세요." />
       				</div>
       				
       				<br>
@@ -105,50 +105,7 @@
       	
       	<br>
       	
-      	
-      	<script>
-      	/* 아이디 중복검사 이벤트 추가 */
-		$("#userId_").on("keyup", function(){
-	        var userId = $(this).val().trim();
-	        
-	        if(userId.length<4) {
-	        	$(".guide.error").hide();
-	        	$(".guide.ok").hide();
-	        	$(".guide.invalid").show();
-	        	return;
-	        	
-	        } else {
-	        	
-		        $.ajax({
-		            url  : "${pageContext.request.contextPath}/member/checkIdDuplicate.do",
-		            data : {userId:userId},
-		            dataType: "json",
-		            success : function(data){
-		                console.log(data);
-		                // if(data=="true") //stream 방식
-		                if(data.isUsable==true){ //viewName 방식
-		                    $(".guide.error").hide();
-		                    $(".guide.invalid").hide();
-		                    $(".guide.ok").show();
-		                    $("#idDuplicateCheck").val(1);
-		                } else {
-		                    $(".guide.error").show();
-		                    $(".guide.invalid").hide();
-		                    $(".guide.ok").hide();
-		                    $("#idDuplicateCheck").val(0);
-		                }
-		            }, error : function(jqxhr, textStatus, errorThrown){
-		                console.log("ajax 처리 실패");
-		                //에러로그
-		                console.log(jqxhr);
-		                console.log(textStatus);
-		                console.log(errorThrown);
-		            }
-	        	});
-	     	}
-	     //console.log(userId);
-		});
-      	</script>
+<script src="/resources/js/member/memberEnroll.js"></script>
 
       <c:import url="/WEB-INF/views/common/footer.jsp"/>
    </div>
