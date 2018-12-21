@@ -23,13 +23,12 @@
 					<li><a href="/popUp.do">쪽지 테스트</a></li>
 					<li><a href="/test/testMap.do">지도테스트</a></li>
 					<li><a href="/board/boardmain.do">게시판 테스트</a><li>
-					<li><a href="/myPage/myPageMain.do">마이페이지</a></li>
 					<!-- 로그인여부에 따른 분기점 -->
 					<c:if test="${not empty member}">
 						<li class="dropdown">
 							<a href="#" class="dropdown-toggle " data-toggle="dropdown" data-hover="dropdown" data-delay="0" data-close-others="false">${member.mnick} 님 <b class=" icon-angle-down"></b></a>
 							<ul class="dropdown-menu">
-								<li><a href="#">myPage</a></li>
+								<li><a href="/myPage/myPageMain.do">myPage</a></li>
 								<li><a href="/member/memberLogout.do">로그아웃</a></li>
 							</ul>
 						</li>

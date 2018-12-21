@@ -23,9 +23,7 @@ public class Member implements java.io.Serializable{
 		super();
 	}
 
-	
-	
-	public Member(int mno, String mname, String mid, String mpw, String mnick, String mtype, String email,
+  public Member(int mno, String mname, String mid, String mpw, String mnick, String mtype, String email,
 			String gender, int age, String profilePath, Date joinDate, Date dropDate) {
 		super();
 		this.mno = mno;
@@ -62,17 +60,17 @@ public class Member implements java.io.Serializable{
 		this.profilePath = profilePath;
 
 	}
-
-
-
-	@Override
-	public String toString() {
-		return "Member [mno=" + mno + ", mname=" + mname + ", mid=" + mid + ", mpw=" + mpw + ", mnick=" + mnick
-				+ ", mtype=" + mtype + ", email=" + email + ", gender=" + gender + ", age=" + age + ", profilePath="
-				+ profilePath + ", joinDate=" + joinDate + ", dropDate=" + dropDate + "]";
+	
+	public Member(String mname, String mid, String email, String gender, int age,Date joinDate, Date dropDate) {
+		super();
+		this.mname = mname;
+		this.mid = mid;
+		this.email = email;
+		this.gender = gender;
+		this.age = age;
+		this.joinDate = joinDate;
+		this.dropDate = dropDate;
 	}
-
-
 
 	public int getMno() {
 		return mno;
@@ -192,38 +190,23 @@ public class Member implements java.io.Serializable{
 		this.profilePath = profilePath;
 	}
 
-
-
 	public Date getJoinDate() {
 		return joinDate;
 	}
-
-
 
 	public void setJoinDate(Date joinDate) {
 		this.joinDate = joinDate;
 	}
 
-
-
 	public Date getDropDate() {
 		return dropDate;
 	}
-
-
 
 	public void setDropDate(Date dropDate) {
 		this.dropDate = dropDate;
 	}
 
-
-
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
-	
-	
-	
-	
-	
 }
