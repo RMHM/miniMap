@@ -11,8 +11,13 @@ public interface MemberService {
 	int insertMember(Member member);
 	
 	Member selectFindID(String email);
-
-	List<Member> selectCommonMember();
+  
+  List<Member> selectCommonMember();
 	
 	List<Member> selectCompanyMember();
+  
+  int updateMemberPW(Member m);
+  
+  int checkIdDuplicate(String mid);
+
 }

@@ -3,8 +3,11 @@
 "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="member">
-	
-   <resultMap type="Member" id="CommonMemberMap">
+    
+  <resultMap type="Member" id="memberMap">
+  </resultMap>
+  
+  <resultMap type="Member" id="CommonMemberMap">
       <result column="MNO" property="mno" />
       <result column="MID" property="mid" />
       <result column="JOIN_DATE" property="joinDate" javaType="java.sql.Date" jdbcType="DATE" /> 
@@ -21,22 +24,50 @@
       <result column="DROP_DATE" property="dropDate" javaType="java.sql.Date" jdbcType="DATE" />
       <result column="EMAIL" property="email" />
    </resultMap>
-
-	<insert id="insertMember" parameterType="Member">
-		insert into member values(
-		seq_mno.nextval, #{mid}, #{mpw}, #{mname}, #{mnick}, 
+  
+  <insert id="insertMember" parameterType="Member">
+		insert into member
+		values(
+		seq_mno.nextval, #{mid}, #{mpw}, #{mname}, #{mnick},
 		#{mtype}, #{email}, #{gender}, #{age}, #{profilePath}, DEFAULT, DEFAULT)
-	</insert>
+  </insert>
 
-	<select id="selectOne" parameterType="string" resultType="Member">
-		select * from member where mid = #{mid}
-	</select>
-	
-	<select id="selectFindID" parameterType="string" resultType="Member">
+	<select id="selectOne" parameterType="string"
+		resultType="Member">
+    select * from member where mid = #{mid}
+	</select>	
+
+	<select id="selectFindID" parameterType="string"
+		resultType="Member">
 		select * from member where email = #{email}
 	</select>
-	
-	<select id="selectCommonMember" resultMap="CommonMemberMap">
+  
+  <update id="updateMember" parameterType="Member">
+		UPDATE MEMBER SET
+		MPW = #{mpw},
+		MNAME = #{email},
+		MNICK = #{age},
+		EMAIL = #{phone},
+		GENDER = #{address},
+		PROFILE_PATH=#{profilePath},
+		WHERE MNO = #{mno}
+	</update>
+  
+  <update id="updatePW" parameterType="Member">
+		update member set mpw =
+		#{mpw} where mid = #{mid}
+	</update>
+
+	<!-- 아이디 확인 쿼리 -->
+	<select id="checkIdDuplicate" statementType="CALLABLE"
+		parameterType="hashmap">
+		<!-- CallableStatement 는 { } 로 묶여 실행되며 시작괄호 '{' 다음에 tab 기호를 읽지 못한다. -->
+		{ CALL ID_DUP_CHK(#{mid, mode=IN, jdbcType=VARCHAR},
+			#{result, mode=OUT, jdbcType=NUMERIC, javaType=integer})
+		}
+	</select>
+  
+  <select id="selectCommonMember" resultMap="CommonMemberMap">
 		SELECT * FROM MEMBER WHERE MTYPE = 'M'
 	</select>
 	
@@ -50,5 +81,5 @@
 	<!-- <select id="selectBlackList" resultMap="selectBlackMap">
 	
 	</select> -->
-
+  
 </mapper>

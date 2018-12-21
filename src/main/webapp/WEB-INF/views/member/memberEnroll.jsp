@@ -27,66 +27,71 @@
                     <div class="form-group">
                         <label for="mid">아이디</label>
                         <input type="text" class="form-control"  name="mid" id="mid_" placeholder="사용하실 아이디를 입력하세요.">
+      					<!-- 아이디중복검사 코멘트추가 -->
+						<span class="guide ok">사용 가능</span>
+				        <span class="guide error">사용 불가</span>
+				        <span class="guide invalid">4글자 미만</span>
+				        <input type="hidden" name="idDuplicateCheck" id="idDuplicateCheck" value="0"/>
       				</div>
       				
       				<div class="form-group">
       					<label for="mpw">비밀번호</label>
-      					<input type="text" class="form-control" name="mpw" id="mpw_" placeholder="비밀번호를 입력하세요." />
+      					<input type="password" class="form-control" name="mpw" id="mpw_" placeholder="비밀번호를 입력하세요." />
       				</div>
       				
       				<div class="form-group">
       					<label for="mpw">비밀번호 확인</label>
-      					<input type="text" class="form-control" name="mpw2" id="mpw2" placeholder="비밀번호를 확인을 위해 다시한번 입력하세요." />
+      					<input type="password" class="form-control" id="mpw2_" placeholder="비밀번호를 확인을 위해 다시한번 입력하세요." />
       				</div>
       				
       				<div class="from-group">
       					<label for="mname">이름</label>
-      					<input type="text" class="form-control" name="mname" id="mname" placeholder="이름을 입력하세요." />
+      					<input type="name" class="form-control" name="mname" id="mname_" placeholder="이름을 입력하세요." />
       				</div> 
       				
       				 <br>
       				 
       				<div class="from-group">
       					<label for="mnick">닉네임</label>
-      					<input type="text" class="form-control" name="mnick" id="mnick" placeholder="닉네임을 입력하세요." />
+      					<input type="nickname" class="form-control" name="mnick" id="mnick_" placeholder="닉네임을 입력하세요." />
       				</div> 
       				
       				<br>
       				
       				<div class="from-group">
       					<label for="email">이메일</label>
-      					<input type="text" class="form-control" name="email" id="email" placeholder="이메일 주소를 입력하세요." />
+      					<input type="email" class="form-control" name="email" id="email_" placeholder="이메일 주소를 입력하세요." />
       				</div>
       				
       				<br>
       				
       				<div class="from-group">
       					<label for="mtype">회원유형</label> <br>
-      					<input type="radio" name="mtype" value="M" />일반회원
-      					<input type="radio" name="mtype" value="C" />기업회원
+      					<input type="radio" name="mtype" id="mtype0" value="M" />일반회원
+      					<input type="radio" name="mtype" id="mtype1" value="C" />기업회원
       				</div>
       				
       				<br>
       				
       				<div class="from-group">
       					<label for="gender">성별</label> <br>
-      					<input type="radio" name="gender" value="M" />남성
-      					<input type="radio" name="gender" value="F" />여성
+      					<input type="radio" name="gender" id="gender0" value="M" />남성
+      					<input type="radio" name="gender" id="gender1" value="F" />여성
       				</div>
       				 				
       				<br>
       				
       				<div class=from-group">
       					<label for="age">연령대</label> <br>
-      					<input type="radio" name="age" value="10" />10대
-      					<input type="radio" name="age" value="20" />20대
-      					<input type="radio" name="age" value="30" />30대
-      					<input type="radio" name="age" value="40" />40대
+      					<input type="radio" name="age" id="age_" value="10"/>10대
+      					<input type="radio" name="age" id="age_" value="20"/>20대
+      					<input type="radio" name="age" id="age_" value="30"/>30대
+      					<input type="radio" name="age" id="age_" value="40"/>40대
       				</div>
       				
       				<div class="from-group"> <br>
       					<label for="profilePath">이미지경로</label>
-      					<input type="file" name="profilePath" />
+      					<input type="file" name="profilePath" id="profilePath_" />
       				
       				</div>
       				
@@ -99,6 +104,8 @@
       	</div>
       	
       	<br>
+      	
+<script src="/resources/js/member/memberEnroll.js"></script>
 
       <c:import url="/WEB-INF/views/common/footer.jsp"/>
    </div>

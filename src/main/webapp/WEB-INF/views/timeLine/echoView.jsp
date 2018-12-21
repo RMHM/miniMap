@@ -21,6 +21,7 @@
 		<c:import url="/WEB-INF/views/common/header.jsp" />
 
 		<h2>test</h2>
+		<div class="container">
 		<div class='form-group'>
 			
 		<div id="div_chat">
@@ -56,9 +57,7 @@
 				</div>
 			</li>
 		</ul>
-		<div id="menu_scroll_down">
-    <button id="btn_scroll_down" disabled="true">↓</button>
-  </div>
+		
   <!-- <div id="menu_hide"></div> -->
 		
 		
@@ -73,10 +72,14 @@
 			<button class='btn btn-primary' id='exitBtn'>나가기</button>
 			<!-- 대화내용이 출력되는 부분 -->
 
-			<c:import url="/WEB-INF/views/common/footer.jsp" />
+			
 		</div>
 		
-		
+		</div>
+		<div id="menu_scroll_down">
+    <button id="btn_scroll_down" disabled="true">↓</button>
+  </div>
+		<c:import url="/WEB-INF/views/common/footer.jsp" />
 	</div>
 
 	<script>
