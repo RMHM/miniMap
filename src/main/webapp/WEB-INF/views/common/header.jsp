@@ -43,6 +43,15 @@
 							</ul>
 						</li>
 					</c:if>
+					<%-- <c:if test="${ member eq admin }"> --%>
+						<li class="dropdown">
+							<a href="#" class="dropdown-toggle " data-toggle="dropdown" data-hover="dropdown" data-delay="0" data-close-others="false">${member.mnick} 님 <b class=" icon-angle-down"></b></a>
+							<ul class="dropdown-menu">
+								<li><a href="manager/managerPage.go">관리자 페이지</a></li>
+								<li><a href="/member/memberLogout.do">로그아웃</a></li>
+							</ul>
+						</li>
+					<%-- </c:if> --%>
 				</ul>
 			</div>
 		</div>

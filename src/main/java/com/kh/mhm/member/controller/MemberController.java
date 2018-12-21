@@ -224,15 +224,6 @@ public class MemberController {
 		System.out.println("mlist : " + mlist);
 		
 		return mlist;
-	}
-    
-    @RequestMapping("/member/selectCompanyMember.do")
-    @ResponseBody
-    public List<Member> selectCompanyMember(){
-    	 List<Member> clist = ms.selectCompanyMember();
-    	 
-    	 System.out.println("clist : " + clist);
-    	 return clist;
-    }
+  } 
 
 }
