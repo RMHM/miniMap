@@ -1,6 +1,6 @@
 package com.kh.mhm.member.model.vo;
 
-import java.util.Date;
+import java.sql.Date;
 
 public class Member implements java.io.Serializable{
 	

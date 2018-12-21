@@ -22,7 +22,7 @@
                 </div>
       	
       	<div class="col-sm-6 col-md-offset-3">
-                <form action="/member/memberEnrollEnd.do" method="post">
+                <form action="/member/memberEnrollEnd.do" method="post" onsubmit="return fn_enroll_validate();">
                     <table>
                     <div class="form-group">
                         <label for="mid">아이디</label>
