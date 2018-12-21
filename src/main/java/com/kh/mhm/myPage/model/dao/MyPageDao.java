@@ -15,4 +15,6 @@ public interface MyPageDao {
 
 	int updateMember(Member member);
 
+	int deleteMember(Member member);
+
 }

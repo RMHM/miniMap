@@ -28,5 +28,10 @@ public class MyPageDaoImpl implements MyPageDao {
 		
 	  return sqlSession.update("member.updateMember",member);
 	}
+	@Override
+	public int deleteMember(Member member) {
+	
+		 return sqlSession.update("member.deleteMember",member);
+	}
 
 }

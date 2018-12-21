@@ -41,16 +41,22 @@
 		resultType="Member">
 		select * from member where email = #{email}
 	</select>
-  
+
   <update id="updateMember" parameterType="Member">
 		UPDATE MEMBER SET
 		MPW = #{mpw},
-		MNAME = #{email},
-		MNICK = #{age},
-		EMAIL = #{phone},
-		GENDER = #{address},
-		PROFILE_PATH=#{profilePath},
-		WHERE MNO = #{mno}
+		MNAME = #{mname},
+		MNICK = #{mnick},
+		EMAIL = #{email},
+		GENDER = #{gender},
+		AGE =#{age},
+		PROFILE_PATH=#{profilePath}
+		WHERE MID = #{mid}
+	</update>
+	<update id="deleteMember" parameterType="Member" >
+	UPDATE MEMBER SET
+		DROP_DATE=SYSDATE
+		WHERE MID = #{mid}
 	</update>
   
   <update id="updatePW" parameterType="Member">
