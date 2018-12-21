@@ -11,6 +11,9 @@
 <title>에러페이지</title>
 </head>
 <body>
+<script>
+alert("${msg}")
+</script>
 
 </body>
 </html>
