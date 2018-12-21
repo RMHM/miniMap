@@ -1,6 +1,7 @@
 package com.kh.mhm.member.controller;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpSession;
@@ -162,8 +163,8 @@ public class MemberController {
 	public String memberEnroll() {
 		return "member/memberEnroll";
 	}
-
-	@RequestMapping("/member/memberEnrollEnd.do")
+  
+  @RequestMapping("/member/memberEnrollEnd.do")
 	public String memberEnrollEnd(Member member, Model model) {
 
 		System.out.println(member);
@@ -214,5 +215,24 @@ public class MemberController {
 
 		return map;
 	}
+  
+  @RequestMapping("/member/selectCommonMember.do")
+	@ResponseBody
+	public List<Member> selectCommonMember() {
+			
+		List<Member> mlist = ms.selectCommonMember();
+		System.out.println("mlist : " + mlist);
+		
+		return mlist;
+	}
+    
+    @RequestMapping("/member/selectCompanyMember.do")
+    @ResponseBody
+    public List<Member> selectCompanyMember(){
+    	 List<Member> clist = ms.selectCompanyMember();
+    	 
+    	 System.out.println("clist : " + clist);
+    	 return clist;
+    }
 
 }
