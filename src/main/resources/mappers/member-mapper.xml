@@ -4,8 +4,20 @@
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="member">
     
-  <resultMap type="Member" id="memberMap">
-  </resultMap>
+	<resultMap type="Member" id="memberMap">
+		<result column="MNO" property="mno"/>
+		<result column="MID" property="mid"/>
+		<result column="MPW" property="mpw"/>
+		<result column="MNAME" property="mname"/>
+		<result column="MNICK" property="mnick"/>
+		<result column="MTYPE" property="mtype"/>
+		<result column="EMAIL" property="email"/>
+		<result column="GENDER" property="gender"/>
+		<result column="AGE" property="age"/>
+		<result column="PROFILE_PATH" property="profilePath"/>
+		<result column="JOIN_DATE" property="joinDate" javaType="java.sql.Date" jdbcType="DATE"/>
+		<result column="DROP_DATE" property="dropDate" javaType="java.sql.Date" jdbcType="DATE"/>
+	</resultMap>
   
   <resultMap type="Member" id="CommonMemberMap">
       <result column="MNO" property="mno" />
@@ -32,8 +44,7 @@
 		#{mtype}, #{email}, #{gender}, #{age}, #{profilePath}, DEFAULT, DEFAULT)
   </insert>
 
-	<select id="selectOne" parameterType="string"
-		resultType="Member">
+	<select id="selectOne" parameterType="string" resultMap="memberMap">
     select * from member where mid = #{mid}
 	</select>	
 
