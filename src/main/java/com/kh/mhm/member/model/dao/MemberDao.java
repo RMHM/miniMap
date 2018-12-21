@@ -1,5 +1,7 @@
 package com.kh.mhm.member.model.dao;
 
+import java.util.List;
+
 import com.kh.mhm.member.model.vo.Member;
 
 public interface MemberDao {
@@ -9,4 +11,8 @@ public interface MemberDao {
 	int insertMember(Member member);
 	
 	Member selectFindID(String email);
+
+	List<Member> selectCommonMember();
+	
+	List<Member> selectCompanyMember();
 }

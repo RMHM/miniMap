@@ -1,5 +1,7 @@
 package com.kh.mhm.member.model.vo;
 
+import java.sql.Date;
+
 public class Member implements java.io.Serializable{
 	
 	private static final long serialVersionUID = 1L;
@@ -14,15 +16,15 @@ public class Member implements java.io.Serializable{
 	private String gender;
 	private int age;
 	private String profilePath;
-	private String joinDate;
-	private String dropDate;
+	private Date joinDate;
+	private Date dropDate;
 	
 	public Member() {
 		super();
 	}
 
 	public Member(int mno, String mname, String mid, String mpw, String mnick, String mtype, String email, String gender, int age,
-			String profilePath, String joinDate, String dropDate) {
+			String profilePath, Date joinDate, Date dropDate) {
 		super();
 		this.mno = mno;
 		this.mname = mname;
@@ -59,6 +61,17 @@ public class Member implements java.io.Serializable{
 	
 	
 	
+	public Member(String mname, String mid, String email, String gender, int age,Date joinDate, Date dropDate) {
+		super();
+		this.mname = mname;
+		this.mid = mid;
+		this.email = email;
+		this.gender = gender;
+		this.age = age;
+		this.joinDate = joinDate;
+		this.dropDate = dropDate;
+	}
+
 	public int getMno() {
 		return mno;
 	}
@@ -139,19 +152,19 @@ public class Member implements java.io.Serializable{
 		this.profilePath = profilePath;
 	}
 
-	public String getJoinDate() {
+	public Date getJoinDate() {
 		return joinDate;
 	}
 
-	public void setJoinDate(String joinDate) {
+	public void setJoinDate(Date joinDate) {
 		this.joinDate = joinDate;
 	}
 
-	public String getDropDate() {
+	public Date getDropDate() {
 		return dropDate;
 	}
 
-	public void setDropDate(String dropDate) {
+	public void setDropDate(Date dropDate) {
 		this.dropDate = dropDate;
 	}
 

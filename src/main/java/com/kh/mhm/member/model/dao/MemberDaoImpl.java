@@ -1,5 +1,7 @@
 package com.kh.mhm.member.model.dao;
 
+import java.util.List;
+
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -26,6 +28,16 @@ public class MemberDaoImpl implements MemberDao {
 	@Override
 	public Member selectFindID(String email) {
 		return sst.selectOne("member.selectFindID", email);
+	}
+
+	@Override
+	public List<Member> selectCommonMember() {
+		return sst.selectList("member.selectCommonMember");
+	}
+
+	@Override
+	public List<Member> selectCompanyMember() {
+		return sst.selectList("member.selectCompanyMember");
 	}
 
 }
