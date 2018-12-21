@@ -14,8 +14,6 @@ public interface MemberDao {
 	Member selectFindID(String email);
   
   List<Member> selectCommonMember();
-	
-	List<Member> selectCompanyMember();
   
   int checkIdDuplicate(HashMap<String, Object> hmap);
   

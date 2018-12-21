@@ -17,12 +17,28 @@
       <result column="AGE" property="age" /> 
    </resultMap>
    
-   <resultMap type="Member" id="CompMemberMap">
+   <resultMap type="CompanyMember" id="CompMemberMap">
+      <result column="MNO" property="mno" />
+      <result column="MID" property="mid" />
+      <result column="JOIN_DATE" property="joinDate" javaType="java.sql.Date" jdbcType="DATE" /> 
+      <result column="DROP_DATE" property="dropDate" javaType="java.sql.Date" jdbcType="DATE" />
+      <result column="REQUEST_DATE" property="reqDate" javaType="java.sql.Date" jdbcType="DATE" />
+      <result column="GRANT_DATE" property="grantDate" javaType="java.sql.Date" jdbcType="DATE" />
+      <result column="EMAIL" property="email" />
+      <result column="ADDRESS" property="address" />
+      <result column="ANAME" property="aname"/>
+   </resultMap>
+   
+   <resultMap type="BlackList" id="BlackListMap">
       <result column="MNO" property="mno" />
       <result column="MID" property="mid" />
       <result column="JOIN_DATE" property="joinDate" javaType="java.sql.Date" jdbcType="DATE" /> 
       <result column="DROP_DATE" property="dropDate" javaType="java.sql.Date" jdbcType="DATE" />
       <result column="EMAIL" property="email" />
+      <result column="GENDER" property="gender" />
+      <result column="AGE" property="age" />
+      <result column="End_Date" property="endDate"/>
+      <result column="REASON" property="reason"/>
    </resultMap>
   
   <insert id="insertMember" parameterType="Member">
@@ -68,18 +84,22 @@
 	</select>
   
   <select id="selectCommonMember" resultMap="CommonMemberMap">
-		SELECT * FROM MEMBER WHERE MTYPE = 'M'
+		SELECT mno, mid, mname, email, gender, age, join_date, drop_date 
+		FROM MEMBER 
+		WHERE MTYPE = 'M'
 	</select>
 	
 	<select id="selectCompanyMember" resultMap="CompMemberMap">
-		SELECT * FROM MEMBER M
-		JOIN AUTHORITY A USING(MNO)
-		JOIN AUTHORITY_TYPE AT ON (A.ACODE = AT.ACODE)
-		WHERE MTYPE = 'C'
+		select * 
+		from member
+		full outer join authority a using(mno)
+		full outer join authority_type at on(a.acode = at.acode)
+		where mtype = 'C'
 	</select>
 	
-	<!-- <select id="selectBlackList" resultMap="selectBlackMap">
-	
-	</select> -->
+	<select id="selectBlackList" resultMap="BlackListMap">
+		select mno, mid, mname, email, gender, age, drop_date, end_date, reason
+		from (select * from member join blacklist using(mno))
+	</select>
   
 </mapper>

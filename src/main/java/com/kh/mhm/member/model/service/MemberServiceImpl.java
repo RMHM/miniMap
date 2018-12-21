@@ -31,14 +31,9 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	@Override
-  public List<Member> selectCommonMember() {
+	public List<Member> selectCommonMember() {
 		return mDao.selectCommonMember();
 	}
-
-	@Override
-	public List<Member> selectCompanyMember() {
-		return mDao.selectCompanyMember();
-  }
   
   @Override
   public int updateMemberPW(Member m) {

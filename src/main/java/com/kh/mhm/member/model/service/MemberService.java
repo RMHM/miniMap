@@ -12,12 +12,10 @@ public interface MemberService {
 	
 	Member selectFindID(String email);
   
-  List<Member> selectCommonMember();
+	List<Member> selectCommonMember();
+  
+	int updateMemberPW(Member m);
 	
-	List<Member> selectCompanyMember();
-  
-  int updateMemberPW(Member m);
-  
-  int checkIdDuplicate(String mid);
-
+	int checkIdDuplicate(String mid);
+	
 }
