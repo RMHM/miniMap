@@ -9,7 +9,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>MHM TIMELINE</title>
 <script src="http://cdn.jsdelivr.net/sockjs/1/sockjs.min.js"></script>
 
 <link href="${pageContext.request.contextPath}/resources/css/disqusin.css" rel="stylesheet" />
@@ -20,7 +20,6 @@
 	<div id="wrapper">
 		<c:import url="/WEB-INF/views/common/header.jsp" />
 
-		<h2>test</h2>
 		<div class="container">
 		<div class='form-group'>
 			
@@ -30,7 +29,7 @@
 				<div class="comment-main-level">
 					<div class="comment-avatar">
 						<img
-							src="/resources/img/testImgLogo.png"
+							src="/resources/img/profiles/default.png"
 							alt="">
 					</div>
 					<div class="comment-box">
@@ -67,7 +66,8 @@
 		</div>
 			
 		<!-- 메세지 작성부분 -->
-			<textarea rows="2" cols="50" name='message' id='message'></textarea>
+			<textarea rows="6" cols="150" name='message' id='message'></textarea>
+			<div class="remaining"><span class="count">250</span></div>
 			<button class='btn btn-primary' id='sendBtn'>전송</button>
 			<button class='btn btn-primary' id='exitBtn'>나가기</button>
 			<!-- 대화내용이 출력되는 부분 -->
@@ -83,6 +83,39 @@
 	</div>
 
 	<script>
+	
+	$(function() {
+	    $('.remaining').each(function() {
+	        // count 정보 및 count 정보와 관련된 textarea/input 요소를 찾아내서 변수에 저장한다.
+	        var $count = $('.count', this);
+	        var $input = $(this).prev();
+	        // .text()가 문자열을 반환하기에 이 문자를 숫자로 만들기 위해 1을 곱한다.
+	        var maximumCount = $count.text() * 1;
+	        // update 함수는 keyup, paste, input 이벤트에서 호출한다.
+	        var update = function() {
+	            var before = $count.text() * 1;
+	            var now = maximumCount - $input.val().length;
+	            // 사용자가 입력한 값이 제한 값을 초과하는지를 검사한다.
+	            if (now < 0) {
+	                var str = $input.val();
+	                alert('글자 입력수가 초과하였습니다.');
+	                $input.val(str.substr(0, maximumCount));
+	                now = 0;
+	            }
+	            // 필요한 경우 DOM을 수정한다.
+	            if (before != now) {
+	                $count.text(now);
+	            }
+	        };
+	        // input, keyup, paste 이벤트와 update 함수를 바인드한다
+	        $input.bind('input keyup paste', function() {
+	            setTimeout(update, 0)
+	        });
+	        update();
+	    });
+	});
+	
+	
 		
 	var isScrollUp = false;
 	  var lastScrollTop;
@@ -105,6 +138,7 @@
 					sendMessage();
 					/* 전송 후 작성창 초기화 */
 					$("#message").val('');
+					$('.count').text('250');
 					
 					/* // 라인 추가
 				    $('#table_chat').append(
@@ -145,6 +179,7 @@
 			var host = null;//메세지를 보낸 사용자 ip저장
 			var strArray = data.split("|");//데이터 파싱처리하기
 			var userName = null;//대화명 저장
+			var profPath=null; //프로필 이미지
 
 			//전송된 데이터 출력해보기
 			for (var i = 0; i < strArray.length; i++) {
@@ -155,6 +190,7 @@
 				message = strArray[1];
 				host = strArray[2].substr(1, strArray[2].indexOf(":") - 1);
 				userName = strArray[3];
+				profPath=strArray[4];
 				today = new Date();
 				printDate = today.getFullYear() + "/" + today.getMonth() + "/"
 						+ today.getDate() + " " + today.getHours() + ":"
@@ -175,10 +211,12 @@
 				console.log(message);
 				console.log('host : ' + host);
 				console.log('ck_host : ' + ck_host);
+				var urlProf="/resources/img/profiles/";
 				/* 서버에서 데이터를 전송할경우 분기 처리 */
+				console.log('prof::'+urlProf+profPath);
 				if (host == ck_host || (host == 0 && ck_host.includes('0:0:')) || (host==0&&ck_host.includes('127.0.0.1'))) {
 					var printHTML = "<li><div class='comment-main-level'><div class='comment-avatar'>";
-					printHTML += "<img src='/resources/img/testImgLogo.png' alt=''></div>";
+					printHTML += "<img src='"+urlProf+profPath+"' alt=''></div>";
 					printHTML+="<div class='comment-box-me'><div class='comment-head-me'><span class='comment-name '>";
 					printHTML+="<a href='' target='_BLANK'>"+userName+"&nbsp;(나)"+"</a></span><span>"+printDate+"</span>";
 					printHTML+="<i class='fa fa-thumbs-down'>0</i><i class='fa fa-thumbs-up'>0</i>";
@@ -189,7 +227,7 @@
 					$('.disqusin').append(printHTML);
 				} else {
 					var printHTML = "<li><div class='comment-main-level'><div class='comment-avatar'>";
-					printHTML += "<img src='/resources/img/testImgLogo.png' alt=''></div>";
+					printHTML += "<img src='"+urlProf+profPath+"' alt=''></div>";
 					printHTML+="<div class='comment-box'><div class='comment-head'><span class='comment-name '>";
 					printHTML+="<a href='' target='_BLANK'>"+userName+"</a></span><span>"+printDate+"</span>";
 					printHTML+="<i class='fa fa-thumbs-down'>0</i><i class='fa fa-thumbs-up'>0</i>";
