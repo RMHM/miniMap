@@ -1,5 +1,6 @@
 package com.kh.mhm.member.model.dao;
 
+import java.util.List;
 import java.util.HashMap;
 
 import com.kh.mhm.member.model.vo.Member;
@@ -12,7 +13,12 @@ public interface MemberDao {
 	
 	Member selectFindID(String email);
   
+  List<Member> selectCommonMember();
+	
+	List<Member> selectCompanyMember();
+  
   int checkIdDuplicate(HashMap<String, Object> hmap);
   
   int updateMemberPW(Member m);
+
 }

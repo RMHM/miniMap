@@ -1,6 +1,6 @@
 package com.kh.mhm.member.model.vo;
 
-import java.util.Date;
+import java.sql.Date;
 
 public class Member implements java.io.Serializable{
 	
@@ -61,6 +61,17 @@ public class Member implements java.io.Serializable{
 	
 	
 	
+	public Member(String mname, String mid, String email, String gender, int age,Date joinDate, Date dropDate) {
+		super();
+		this.mname = mname;
+		this.mid = mid;
+		this.email = email;
+		this.gender = gender;
+		this.age = age;
+		this.joinDate = joinDate;
+		this.dropDate = dropDate;
+	}
+
 	public int getMno() {
 		return mno;
 	}
