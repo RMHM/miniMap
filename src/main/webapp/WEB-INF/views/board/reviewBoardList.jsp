@@ -8,7 +8,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>board test page</title>
+<title>후기게시판 리스트</title>
 
 </head>
 <body>
@@ -20,12 +20,12 @@
 			<div class="col-md-2" align="center">
 				&nbsp;&nbsp;
 				<h4>--게시판 목록--</h4>
-				<ul>
+				<ul class="unstyled">
 					&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;
-					<li class=""><a href="/board/boardlist1.do">자유 게시판</a></li> &nbsp;
-					<li class="">정보공유 게시판</li> &nbsp;
-					<li class="">여행후기 게시판</li> &nbsp;
-					<li class="">질문 게시판</li>
+					<li><a href="/board/boardlist1.do">자유 게시판</a></li> &nbsp;
+					<li><a href="/board/boardlist2.do">정보공유 게시판</a></li> &nbsp;
+					<li><a href="/board/boardlist3.do">여행후기 게시판</a></li> &nbsp;
+					<li><a href="/board/boardlist4.do">질문 게시판</a></li>
 				</ul>
 			</div>
 			<div class="col-md-10">
@@ -59,7 +59,7 @@
 								<tr style="background-color:lightskyblue;">
 									<td>1</td>
 									<td>공지</td>
-									<td>여기에 공지가 들어갈꺼야</td>
+									<td>여기에 후기게시판 공지가 들어갈꺼야</td>
 									<td>놀고싶다.</td>
 									<td>0</td>
 									<td>sysdate가 될 것.</td>
@@ -78,7 +78,7 @@
 						</table>
 						<!-- 페이지 처리 해야됨. -->
 						<input type="button" value="글쓰기" id=""
-							class="btn btn-outline-success" onclick="location.href='${pageContext.request.contextPath}/board/boardwrite.do'" 
+							class="btn btn-theme" onclick="location.href='${pageContext.request.contextPath}/board/boardwrite.do'" 
 							style="position: absolute; right: 30px;" />
 						<div class="" id=""
 							style="display: flex; align-items: center; justify-content: center;">
@@ -90,7 +90,7 @@
 					</div>
 				</div>
 			</div>
-
+</div>
 			<c:import url="/WEB-INF/views/common/footer.jsp" />
 		</div>
 </body>

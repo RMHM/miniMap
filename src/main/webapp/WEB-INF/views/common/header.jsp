@@ -22,7 +22,7 @@
 					<li><a href="/testLink.do">타임라인 테스트</a></li>
 					<li><a href="/popUp.do">쪽지 테스트</a></li>
 					<li><a href="/test/testMap.do">지도테스트</a></li>
-					<li><a href="/board/boardmain.do">게시판 테스트</a><li>
+					<li><a href="/board/boardlist1.do">게시판 테스트</a><li>
 					<li><a href="/myPage/myPageMain.do">마이페이지</a></li>
 					<!-- 로그인여부에 따른 분기점 -->
 					<c:if test="${not empty member}">
