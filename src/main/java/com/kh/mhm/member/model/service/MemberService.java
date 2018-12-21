@@ -17,7 +17,7 @@ public interface MemberService {
 	List<Member> selectCompanyMember();
   
   int updateMemberPW(Member m);
-  
-  int checkIdDuplicate(String mid);
-
+	
+	int checkIdDuplicate(String mid);
+	
 }

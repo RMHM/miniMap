@@ -22,7 +22,7 @@ body {
 
 td, th{
 	padding: 3px 3px;
-	text-align: center;
+  text-align: center !important;
 	border-bottom: 1px solid lightgray;
     border-left: 1px solid lightgray;
     font-size: 12px;
@@ -105,7 +105,7 @@ table{
 </head>
 <body>
 	<!-- 외부 파일 설정 -->
-	<c:import url="/views/common/exFile.jsp"/>
+  <c:import url="/views/common/exFile.jsp"/>
 	<c:import url="/views/common/header.jsp"/>
 	
 	<p style="text-align: center; font-size: 25px; font-weight: 600;">관리자 페이지</p> 
@@ -123,7 +123,7 @@ table{
 				<thead>
 					<tr>
 						<th width="50px" height="25px" style="text-align: center"></th>
-						<th>ID</th>
+             <th>ID</th>
 						<th>이름</th>
 						<th>이메일</th>
 						<th>성별</th>
@@ -143,12 +143,14 @@ table{
 					<tr>
 						<th width="50px" height="25px" style="text-align: center">					
 						</th>
-						<th>ID</th>
-						<th>기업명</th>
-						<th>이메일</th>
-						<th>권한여부</th>
-						<th>가입일</th>
-						<th>상태</th>
+            <th><b>ID</b></th>
+						<th><b>기업명</b></th>
+						<th><b>이메일</b></th>
+						<th><b>권한여부</b></th>
+						<th><b>권한요청일</b></th>
+						<th><b>권한부여일</b></th>
+						<th><b>가입일</b></th>
+						<th><b>상태</b></th>
 					</tr>
 				</thead>
 				<tbody>
@@ -161,14 +163,14 @@ table{
 				<thead>
 					<tr>
 						<th width="50px" height="25px" style="text-align: center"></th>
-						<th>ID</th>
-						<th>이름</th>
-						<th>이메일</th>
-						<th>성별</th>
-						<th>나이</th>
-						<th>상태</th>
-						<th>기간</th>
-						<th>사유</th>
+            <th><b>ID</b></th>
+						<th><b>이름</b></th>
+						<th><b>이메일</b></th>
+						<th><b>성별</b></th>
+						<th><b>나이</b></th>
+						<th><b>상태</b></th>
+						<th><b>기간</b></th>
+						<th><b>사유</b></th>
 					</tr>
 				</thead>
 				<tbody>
@@ -178,14 +180,13 @@ table{
 		</div>
 	</div>
 
-	</div>	
 </body>
 <script>
 
 $(function(){
 	
 	 $.ajax({
-		url : 'member/selectCommonMember.do',
+    url : '/member/selectCommonMember.do',
 		type : 'get',
 		success : function(data){
 			
@@ -213,10 +214,10 @@ $(function(){
 					var $tdAge = $('<td>').text("-");
 				}
 				
-				var $tdJoinDate = $('<td>').text(moment(data[i].joinDate).format('YYYY-MM-DD'));
+        var $tdJoinDate 
+					= $('<td>').text(new Date(data[i].joinDate).toISOString().slice(0,10));
 				
 				if(data[i].dropDate == null){
-					
 					var $tdDropDate = $('<td>').text("정상");		
 				} else {
 					var $tdDropDate = $('<td>').text("탈퇴");
@@ -272,7 +273,7 @@ $(function(){
 $(function(){
 	
 	 $.ajax({
-		url : 'member/selectCompanyMember.do',
+    url : 'selectCompanyMember.do',
 		type : 'get',
 		success : function(data){
 			
@@ -287,8 +288,23 @@ $(function(){
 				var $tdMid = $('<td>').text(data[i].mid);
 				var $tdMname = $('<td>').text(data[i].mname);
 				var $tdEmail = $('<td>').text(data[i].email);
-				var $tdAuthority = $('<td>').text("권한")
-				var $tdJoinDate = $('<td>').text(data[i].joinDate);
+        var $tdAuthority = $('<td>').text(data[i].aname);
+				var $tdReqDate = $('<td>').text(new Date(data[i].reqDate).toISOString().slice(0,10));
+				var $tdGrantDate = $('<td>').text(new Date(data[i].grantDate).toISOString().slice(0,10));
+				
+				if(data[i].reqDate != null && data[i].grantDate != null ){
+					$tdAuthority = $('<td>').text(data[i].aname);
+				} else if(data[i].reqDate != null && data[i].grantDate == null) {
+					$tdAuthority = $('<td>').html("<button onclick='authoOk()' id='authoOkBtn'>승인</button>");
+					$tdGrantDate = $('<td>').text("-");
+				} else if(data[i].reqDate == null) {
+					$tdAuthority = $('<td>').text("권한 없음");
+					$tdReqDate = $('<td>').text("-");
+					$tdGrantDate = $('<td>').text("-");
+				}
+				
+				var $tdJoinDate 
+					= $('<td>').text(new Date(data[i].joinDate).toISOString().slice(0,10));
 				
 				if(data[i].dropDate == null){
 					var $tdDropDate = $('<td>').text("정상");		
@@ -298,7 +314,92 @@ $(function(){
 
 				
 				$trBoard.append($tdCheck).append($tdMid).append($tdMname).append($tdEmail)
-				.append($tdAuthority).append($tdJoinDate).append($tdDropDate);	
+				.append($tdAuthority).append($tdReqDate).append($tdGrantDate).append($tdJoinDate)
+				.append($tdDropDate);	
+				
+				$table.append($trBoard);
+				
+			} 
+			
+			$('#mtable tbody').children().mouseenter(function () {
+				$(this).children().not(':first').css({'background':'#F7D58B', 'cursor':'pointer'});
+				$(this).children().not(':first').click(function () {
+					var mno = $(this).parent().children().eq(1).text();
+				});
+					
+			}).mouseleave(function () {
+				$(this).children().not(':first').css({'background':'white'});
+			});
+			
+			$(document).ready(function() {
+			    $("#content div").hide(); // Initially hide all content
+			    $("#tabs li:first").attr("id","current"); // Activate first tab
+			    $("#content div:first").fadeIn(); // Show first tab content
+			    
+			    $('#tabs a').click(function(e) {
+			        e.preventDefault();        
+			        $("#content div").hide(); //Hide all content
+			        $("#tabs li").attr("id",""); //Reset id's
+			        $(this).parent().attr("id","current"); // Activate this
+			        $('#' + $(this).attr('title')).fadeIn(); // Show content for current tab
+			    });
+			})();
+			
+		}, error : function(data){
+			alert("회원 조회 실패!! \n data : " + data);
+			console.log(data);
+		}
+
+	});
+
+});
+
+$(function(){
+	
+	 $.ajax({
+		url : 'selectBlackList.do',
+		type : 'get',
+		success : function(data){
+			
+			$table = $('#btable tbody');
+			
+			console.log("black : " + data);
+			
+			for(var i in data){
+				
+				var $tdCheck = $('<td style="text-align: center">').html($('<input type="checkbox" name="chk'+i+'" style="text-align: center;">'));
+				var $trBoard = $('<tr>');
+				var $tdMid = $('<td>').text(data[i].mid);
+				var $tdMname = $('<td>').text(data[i].mname);
+				var $tdEmail = $('<td>').text(data[i].email);
+				
+				if(data[i].gender != null){
+					var $tdGender = $('<td>').text(data[i].gender);
+				} else {
+					var $tdGender = $('<td>').text("-");
+				}
+				
+				if(data[i].age != 0){
+					var $tdAge = $('<td>').text(data[i].age);
+				} else {
+					var $tdAge = $('<td>').text("-");
+				}
+				
+				if(data[i].dropDate == null){
+					var $tdDropDate = $('<td>').text("정상");		
+				} else {
+					var $tdDropDate = $('<td>').text("탈퇴");
+				}
+
+				var $tdEndDate 
+					= $('<td>').text(new Date(data[i].endDate).toISOString().slice(0,10));
+				
+				var $tdReason = $('<td>').text(data[i].reason);
+				
+				$trBoard.append($tdCheck).append($tdMid).append($tdMname).append($tdEmail)
+				.append($tdGender).append($tdAge).append($tdDropDate).append($tdEndDate)
+				.append($tdReason);	
+
 				
 				$table.append($trBoard);
 				

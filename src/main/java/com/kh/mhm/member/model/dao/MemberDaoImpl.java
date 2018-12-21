@@ -35,8 +35,8 @@ public class MemberDaoImpl implements MemberDao {
   public List<Member> selectCommonMember() {
 		return sst.selectList("member.selectCommonMember");
 	}
-
-	@Override
+  
+  @Override
 	public List<Member> selectCompanyMember() {
 		return sst.selectList("member.selectCompanyMember");
   }
@@ -51,5 +51,6 @@ public class MemberDaoImpl implements MemberDao {
 		sst.selectOne("member.checkIdDuplicate", hmap);
 		return (Integer) hmap.get("result");
 	}
+
 
 }

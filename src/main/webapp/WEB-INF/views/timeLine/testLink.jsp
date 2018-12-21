@@ -11,6 +11,7 @@
 <title>TEST</title>
 </head>
 <body>
+<!-- 아마도 이제 안씀 나중에 정리 -->
    <c:import url="/WEB-INF/views/common/exFile.jsp"/>
    <div id="wrapper">
       <c:import url="/WEB-INF/views/common/header.jsp"/>
