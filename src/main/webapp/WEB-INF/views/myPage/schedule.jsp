@@ -12,17 +12,17 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 	<meta name="description" content="" />
 	<link
-	href="/resources/css/fullcalendar.min.css"
+	href="${pageContext.request.contextPath}/resources/css/fullcalendar.min.css"
 	rel="stylesheet" />
 <link
-	href="/resources/css/fullcalendar.print.min.css"
+	href="${pageContext.request.contextPath}/resources/css/fullcalendar.print.min.css"
 	rel="stylesheet" media="print" />
 <script
-	src="/resources/js/moment.min.js"></script>
+	src="${pageContext.request.contextPath}/resources/js/moment.min.js"></script>
 <script
-	src="/resources/js/jquery.min.js"></script>
+	src="${pageContext.request.contextPath}/resources/js/jquery.min.js"></script>
 <script
-	src="/resources/js/fullcalendar.min.js"></script>
+	src="${pageContext.request.contextPath}/resources/js/fullcalendar.min.js"></script>
 	<script>
 	
 	 
@@ -229,7 +229,7 @@
 		<c:import url="../common/header.jsp" />
 		
 	 <nav style="float: left; width: 100px;height:auto;">
-		<a href="#">쪽지</a><br /> <a href="#">정보수정</a><br /> <a href="#">일정관리</a><br />
+		<a href="#">쪽지</a><br /> <a href="${pageContext.request.contextPath}/myPage/updateMemberView.do">정보수정</a><br /> <a href="#">일정관리</a><br />
 		<a href="#">지도</a><br /> <a href="#">작성한글</a> <br /> <a href="#">권한요청(기업)</a>
 
 	</nav> 
@@ -269,6 +269,7 @@
 								</div>
 							</div>
 						</div>
+						
 						<div style="margin-bottom: 5px;">
 
 							<span style="float: right;"> 날짜 <input type="date" 
