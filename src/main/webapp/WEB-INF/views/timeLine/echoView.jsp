@@ -24,8 +24,77 @@
 		<div class='form-group'>
 			
 		<div id="div_chat">
-		<ul class="disqusin">	
-			<li>
+		<ul class="disqusin">
+		<c:forEach var="i" items="${list}">
+			<c:choose>
+				<c:when test="${i.mNick eq member.mnick}">
+					<li>
+				<div class="comment-main-level">
+					<div class="comment-avatar">
+						<img
+							src="/resources/img/profiles/${i.profile_path}"
+							alt="">
+					</div>
+					<div class="comment-box-me">
+						<div class="comment-head-me">
+							<span class="comment-name ">
+								<a href="" target="_BLANK">${i.mNick}&nbsp;(나)</a>
+							</span>
+							<span>
+								${i.tDate}
+							</span>
+							<i class="fa fa-thumbs-down">0</i>
+							<i class="fa fa-thumbs-up">0</i>
+						</div>
+						<div class="comment-content">
+							<pre>${i.tContent}</pre>
+						</div>
+						<div class="comment-bottom-me">
+							<i class="fa fa-link"></i>
+							<a href="https://www.google.com/search?q=${i.hashTag}" target="_BLANK">
+								${i.hashTag}
+							</a>
+						</div>
+					</div>
+				</div>
+			</li>
+				</c:when>
+				<c:otherwise>
+					<li>
+				<div class="comment-main-level">
+					<div class="comment-avatar">
+						<img
+							src="/resources/img/profiles/${i.profile_path}"
+							alt="">
+					</div>
+					<div class="comment-box">
+						<div class="comment-head">
+							<span class="comment-name ">
+								<a href="" target="_BLANK">${i.mNick}</a>
+							</span>
+							<span>
+								${i.tDate}
+							</span>
+							<i class="fa fa-thumbs-down">0</i>
+							<i class="fa fa-thumbs-up">0</i>
+						</div>
+						<div class="comment-content">
+							<pre>${i.tContent}</pre>
+						</div>
+						<div class="comment-bottom">
+							<i class="fa fa-link"></i>
+							<a href="https://www.google.com/search?q=${i.hashTag}" target="_BLANK">
+								${i.hashTag}
+							</a>
+						</div>
+					</div>
+				</div>
+			</li>
+				</c:otherwise>
+			</c:choose>
+			
+		</c:forEach>
+			<!-- <li>
 				<div class="comment-main-level">
 					<div class="comment-avatar">
 						<img
@@ -54,7 +123,7 @@
 						</div>
 					</div>
 				</div>
-			</li>
+			</li> -->
 		</ul>
 		
   <!-- <div id="menu_hide"></div> -->
@@ -67,7 +136,9 @@
 			
 		<!-- 메세지 작성부분 -->
 			<textarea rows="6" cols="150" name='message' id='message'></textarea>
+			<textarea rows="1" cols="150" name="tag" id="tag"></textarea>
 			<div class="remaining"><span class="count">250</span></div>
+			<div class="remaining2"><span class="count2">50</span></div>
 			<button class='btn btn-primary' id='sendBtn'>전송</button>
 			<button class='btn btn-primary' id='exitBtn'>나가기</button>
 			<!-- 대화내용이 출력되는 부분 -->
@@ -84,11 +155,18 @@
 
 	<script>
 	
+	$(document).ready(function(){
+		$('#div_chat').animate({
+	        scrollTop: $('#div_chat')[0].scrollHeight + 700
+	      }, 100);
+	});
+	
+	// 내용부분 글자제한
 	$(function() {
 	    $('.remaining').each(function() {
 	        // count 정보 및 count 정보와 관련된 textarea/input 요소를 찾아내서 변수에 저장한다.
 	        var $count = $('.count', this);
-	        var $input = $(this).prev();
+	        var $input = $(this).prev().prev();
 	        // .text()가 문자열을 반환하기에 이 문자를 숫자로 만들기 위해 1을 곱한다.
 	        var maximumCount = $count.text() * 1;
 	        // update 함수는 keyup, paste, input 이벤트에서 호출한다.
@@ -98,7 +176,39 @@
 	            // 사용자가 입력한 값이 제한 값을 초과하는지를 검사한다.
 	            if (now < 0) {
 	                var str = $input.val();
-	                alert('글자 입력수가 초과하였습니다.');
+	                alert('글자 입력수를 초과하였습니다.');
+	                $input.val(str.substr(0, maximumCount));
+	                now = 0;
+	            }
+	            // 필요한 경우 DOM을 수정한다.
+	            if (before != now) {
+	                $count.text(now);
+	            }
+	        };
+	        // input, keyup, paste 이벤트와 update 함수를 바인드한다
+	        $input.bind('input keyup paste', function() {
+	            setTimeout(update, 0)
+	        });
+	        update();
+	    });
+	});
+	
+	// 태그부분 글자제한
+	$(function() {
+	    $('.remaining2').each(function() {
+	        // count 정보 및 count 정보와 관련된 textarea/input 요소를 찾아내서 변수에 저장한다.
+	        var $count = $('.count2', this);
+	        var $input = $(this).prev().prev();
+	        // .text()가 문자열을 반환하기에 이 문자를 숫자로 만들기 위해 1을 곱한다.
+	        var maximumCount = $count.text() * 1;
+	        // update 함수는 keyup, paste, input 이벤트에서 호출한다.
+	        var update = function() {
+	            var before = $count.text() * 1;
+	            var now = maximumCount - $input.val().length;
+	            // 사용자가 입력한 값이 제한 값을 초과하는지를 검사한다.
+	            if (now < 0) {
+	                var str = $input.val();
+	                alert('글자 입력수를 초과하였습니다.');
 	                $input.val(str.substr(0, maximumCount));
 	                now = 0;
 	            }
@@ -133,12 +243,18 @@
 					alert('타임라인에 등록할 메세지를 입력해주세요');
 					
 				}else{
+					if($("#tag").val()=='' || $('#tag').val()==null){
+						$('#tag').val('제주도');
+					}
+					
 					console.log("send message.....");
 					/* 채팅창에 작성한 메세지 전송 */
 					sendMessage();
 					/* 전송 후 작성창 초기화 */
 					$("#message").val('');
+					$('#tag').val('');
 					$('.count').text('250');
+					$('.count2').text('50');
 					
 					/* // 라인 추가
 				    $('#table_chat').append(
@@ -172,12 +288,12 @@
 		});
 		function sendMessage() {
 			/* 맵핑된 핸들러 객채의 handleTextMessage메소드가 실행 */
-			sock.send($("#message").val());
+			sock.send($("#message").val()+"|%%|&"+$("#tag").val());
 		};
 		function onMessage(evt) {
 			var data = evt.data;//new text객체로 보내준 값을 받아옴.
 			var host = null;//메세지를 보낸 사용자 ip저장
-			var strArray = data.split("|");//데이터 파싱처리하기
+			var strArray = data.split("|%%|&");//데이터 파싱처리하기
 			var userName = null;//대화명 저장
 			var profPath=null; //프로필 이미지
 
@@ -191,6 +307,7 @@
 				host = strArray[2].substr(1, strArray[2].indexOf(":") - 1);
 				userName = strArray[3];
 				profPath=strArray[4];
+				hashTag=strArray[5];
 				today = new Date();
 				printDate = today.getFullYear() + "/" + today.getMonth() + "/"
 						+ today.getDate() + " " + today.getHours() + ":"
@@ -211,6 +328,8 @@
 				console.log(message);
 				console.log('host : ' + host);
 				console.log('ck_host : ' + ck_host);
+				console.log(profPath);
+				console.log(hashTag);
 				var urlProf="/resources/img/profiles/";
 				/* 서버에서 데이터를 전송할경우 분기 처리 */
 				console.log('prof::'+urlProf+profPath);
@@ -222,7 +341,7 @@
 					printHTML+="<i class='fa fa-thumbs-down'>0</i><i class='fa fa-thumbs-up'>0</i>";
 					printHTML+="</div><div class='comment-content'><pre>"+message+"</pre></div>";
 					printHTML+="<div class='comment-bottom-me'><i class='fa fa-link'></i>";
-					printHTML+="<a href=''>어디에 있을까요</a>";
+					printHTML+="<a href='https://www.google.com/search?q="+hashTag+"' target='_BLANK'>"+hashTag+"</a>";
 					printHTML+="</div></div></div></li>";
 					$('.disqusin').append(printHTML);
 				} else {
@@ -233,7 +352,7 @@
 					printHTML+="<i class='fa fa-thumbs-down'>0</i><i class='fa fa-thumbs-up'>0</i>";
 					printHTML+="</div><div class='comment-content'><pre>"+message+"</pre></div>";
 					printHTML+="<div class='comment-bottom'><i class='fa fa-link'></i>";
-					printHTML+="<a href=''>어디에 있을까요</a>";
+					printHTML+="<a href='https://www.google.com/search?q="+hashTag+"' target='_BLANK'>"+hashTag+"</a>";
 					printHTML+="</div></div></div></li>";
 					$('.disqusin').append(printHTML);
 

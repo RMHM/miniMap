@@ -10,15 +10,22 @@
 	</select>
 
 	<insert id="insertTimeLine" parameterType="TimeLineSmpl">
-		INSERT INTO TIMELINE VALUES (SEQ_TID.NEXTVAL, #{mNo}, DEFAULT, #{tContent}, DEFAULT)
+		INSERT INTO TIMELINE VALUES (SEQ_TID.NEXTVAL, #{mNo}, DEFAULT, #{tContent}, DEFAULT, #{hashTag})
 	</insert>
 	
 	<select id="getMemberByNick" parameterType="string" resultType="Member">
 		SELECT * FROM MEMBER WHERE MNICK=#{mnick}
 	</select>
 	
-	<select id="selectPreTimeLine" resultType="list">
-		SELECT * FROM (SELECT * FROM TIMELINE ORDER BY TID DESC) WHERE <![CDATA[ROWNUM<=20]]>
+	<select id="selectPreTimeLine" resultType="PreTimeLine">
+		SELECT * FROM (
+		SELECT M.PROFILE_PATH, M.MNICK, T.TDATE, T.TCONTENT, T.HASHTAG
+		FROM MEMBER M JOIN TIMELINE T USING(MNO)
+		ORDER BY T.TDATE DESC
+		)
+		WHERE 
+		<![CDATA[ROWNUM<=20]]> 
+		ORDER BY 3 ASC
 	</select>
 	
 </mapper>

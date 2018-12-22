@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.kh.mhm.member.model.vo.Member;
 import com.kh.mhm.timeLine.model.service.TimeLineService;
-import com.kh.mhm.timeLine.model.vo.TimeLine;
+import com.kh.mhm.timeLine.model.vo.PreTimeLine;
 
 @Controller
 public class WebSocketChattingController {
@@ -34,8 +34,7 @@ public class WebSocketChattingController {
 
 		String ipAddr=req.getRemoteAddr();
 		model.addAttribute("host", ipAddr);
-
-		List<TimeLine> list=new ArrayList<TimeLine>();
+    List<PreTimeLine> list=new ArrayList<PreTimeLine>();
 		list=tlsi.selectPreTimeLine();
 		session.setAttribute("list", list);
 
