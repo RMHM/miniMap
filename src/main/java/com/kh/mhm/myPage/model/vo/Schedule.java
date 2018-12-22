@@ -44,9 +44,9 @@ public class Schedule {
 		this.sContent = sContent;
 		this.sColor = sColor;
 	}
-	
-	
-	
+
+
+
 	public int getSId() {
 		return sId;
 	}
@@ -100,7 +100,7 @@ public class Schedule {
 		return "sId=" + sId + ", mNo=" + mNo + ", start_Date=" + start_Date + ", end_Date=" + end_Date
 				+ ", sTitle=" + sTitle + ", sContent=" + sContent + ", sColor=" + sColor + ", delflag=" + delflag ;
 	}
-	
-	
-	
+
+
+
 }

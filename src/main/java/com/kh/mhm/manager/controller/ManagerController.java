@@ -16,28 +16,28 @@ public class ManagerController {
 
 	@Autowired
 	ManagerService mns;
-	
+
 	@RequestMapping("/manager/selectCompanyMember.do")
-    @ResponseBody
-    public List<CompanyMember> selectCompanyMember(){
-    	 List<CompanyMember> clist = mns.selectCompanyMember();
-    	 
-    	 System.out.println("clist : " + clist);
-    	 return clist;
-    }
-	
+	@ResponseBody
+	public List<CompanyMember> selectCompanyMember(){
+		List<CompanyMember> clist = mns.selectCompanyMember();
+
+		System.out.println("clist : " + clist);
+		return clist;
+	}
+
 	@RequestMapping("/manager/selectBlackList.do")
-    @ResponseBody
-    public List<BlackList> selectBlackList(){
-    	List<BlackList> blist = mns.selectBlackList();
-    	
-    	System.out.println("blist : " + blist);
-    	return blist;
-    }
-	
-	 @RequestMapping("manager/managerPage.go")
-	  public String managerPageGo() {
-		  return "manager/ManagerPage";
-	  }
-	
+	@ResponseBody
+	public List<BlackList> selectBlackList(){
+		List<BlackList> blist = mns.selectBlackList();
+
+		System.out.println("blist : " + blist);
+		return blist;
+	}
+
+	@RequestMapping("/manager/managerPage.go")
+	public String managerPageGo() {
+		return "manager/ManagerPage";
+	}
+
 }

@@ -1,11 +1,11 @@
 package com.kh.mhm.timeLine.model.vo;
 
 public class TimeLineSmpl {
-	
+
 	private int mNo;
 	private String tContent;
-	
-	
+
+
 	public TimeLineSmpl() {
 		super();
 	}
@@ -42,5 +42,5 @@ public class TimeLineSmpl {
 	public void settContent(String tContent) {
 		this.tContent = tContent;
 	}
-	
+
 }

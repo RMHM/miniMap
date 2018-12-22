@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller
 public class BoardController {
-		
+
 	@RequestMapping("/board/boardlist1.do")
 	public String freeboard() {
 		return "board/freeBoardList";
@@ -34,12 +34,12 @@ public class BoardController {
 	public String boardwrite() {
 		return "/board/boardwrite";
 	}	
-	
+
 	@RequestMapping("/board/boardview.do")
 	public String boardview() {
 		return "board/boardview";
 	}
-	
+
 	@RequestMapping(value="/board/boardview2.do", method=RequestMethod.POST)
 	public String testEditorResult(HttpServletRequest req, Model model) {
 		String result = req.getParameter("boardcontent");
@@ -48,14 +48,14 @@ public class BoardController {
 		Enumeration e = req.getParameterNames();
 		String name = null;
 		while (e.hasMoreElements()){
-		name = e.nextElement().toString();
-		System.out.println(name + " : " + req.getParameter(name));
+			name = e.nextElement().toString();
+			System.out.println(name + " : " + req.getParameter(name));
 		}		
 		model.addAttribute("result", result);
-		
+
 		return "board/boardview";
 	}
 
 
-	
+
 }

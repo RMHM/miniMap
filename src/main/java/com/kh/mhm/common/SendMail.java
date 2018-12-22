@@ -10,12 +10,12 @@ import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
 public class SendMail {
-	
+
 	public void sendMail(String getUser, String getTitle, String getContent) {
-		
+
 		final String spendUser = "miniMapMNG@gmail.com";
 		final String userPass = "admintest1234";
-		
+
 		Properties prop = new Properties();
 		prop.put("mail.smtp.host", "smtp.gmail.com");
 		prop.put("mail.smtp.port", 465);
@@ -28,7 +28,7 @@ public class SendMail {
 				return new PasswordAuthentication(spendUser, userPass);
 			}
 		});
-		
+
 		try {
 			MimeMessage email = new MimeMessage(session);
 			email.setFrom(new InternetAddress(spendUser));
@@ -38,13 +38,13 @@ public class SendMail {
 			email.setSubject(getTitle);
 			// 내용
 			email.setText(getContent);
-			
+
 			// 보내기
 			Transport.send(email);
 		} catch (Exception e) {
 			e.getMessage();
 		}
-		
+
 	}
-	
+
 }

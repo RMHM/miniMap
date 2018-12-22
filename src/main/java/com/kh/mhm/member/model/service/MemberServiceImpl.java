@@ -31,27 +31,24 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	@Override
-  public List<Member> selectCommonMember() {
+	public List<Member> selectCommonMember() {
 		return mDao.selectCommonMember();
 	}
 
 	@Override
 	public List<Member> selectCompanyMember() {
 		return mDao.selectCompanyMember();
-  }
-  
-  @Override
-  public int updateMemberPW(Member m) {
+	}
+
+	@Override
+	public int updateMemberPW(Member m) {
 		return mDao.updateMemberPW(m);
 	}
 
 	@Override
 	public int checkIdDuplicate(String mid) {
-
 		HashMap<String, Object> hmap = new HashMap<String, Object>();
-
 		hmap.put("mid", mid);
-
 		return mDao.checkIdDuplicate(hmap);
 	}
 

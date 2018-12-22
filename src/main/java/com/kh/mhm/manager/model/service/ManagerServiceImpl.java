@@ -14,7 +14,7 @@ public class ManagerServiceImpl implements ManagerService {
 
 	@Autowired
 	ManagerDao mnDao;
-	
+
 	@Override
 	public List<BlackList> selectBlackList() {
 		return mnDao.selectBlackList();
