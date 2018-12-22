@@ -5,12 +5,12 @@ import java.sql.Date;
 import com.kh.mhm.member.model.vo.Member;
 
 public class CompanyMember extends Member{
-	
+
 	private String address;
 	private String aname; // 권한명
 	private Date reqDate; // 요청 날짜
 	private Date grantDate; // 권한 부여일
-	
+
 	public CompanyMember() {
 		super();
 	}

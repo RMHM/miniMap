@@ -1,15 +1,15 @@
 package com.kh.mhm.board.model.vo;
 
 public class Fileref {
-	
+
 	private int fId;
 	private int bId;
 	private String fType;
 	private String origin_Name;
 	private String change_Name;
 	private String delFlag;
-	
-	
+
+
 	public Fileref() {
 		super();
 	}
@@ -88,7 +88,7 @@ public class Fileref {
 		return "fileref [fId=" + fId + ", bId=" + bId + ", fType=" + fType + ", origin_Name=" + origin_Name
 				+ ", change_Name=" + change_Name + ", delFlag=" + delFlag + "]";
 	}
-     
-	
-	
+
+
+
 }

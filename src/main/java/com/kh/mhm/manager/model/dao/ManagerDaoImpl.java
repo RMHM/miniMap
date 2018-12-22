@@ -14,7 +14,7 @@ public class ManagerDaoImpl implements ManagerDao {
 
 	@Autowired
 	private SqlSessionTemplate sst;
-	
+
 	@Override
 	public List<BlackList> selectBlackList() {
 		return sst.selectList("member.selectBlackList");

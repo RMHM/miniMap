@@ -3,7 +3,7 @@ package com.kh.mhm.board.model.vo;
 import java.sql.Date;
 
 public class Board {
-	
+
 	private int bId;
 	private int mNo;
 	private int bNo;
@@ -17,8 +17,8 @@ public class Board {
 	private String hasFile;
 	private String isNotice;
 	private int bCount;
-	
-	
+
+
 	public Board() {
 		super();
 	}
@@ -179,8 +179,8 @@ public class Board {
 				+ ", bContent=" + bContent + ", bDate=" + bDate + ", likes=" + likes + ", rFlag=" + rFlag + ", delFlag="
 				+ delFlag + ", hasFile=" + hasFile + ", isNotice=" + isNotice + ", bCount=" + bCount + "]";
 	}
-	
-	
-	
+
+
+
 
 }

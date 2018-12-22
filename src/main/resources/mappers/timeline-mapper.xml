@@ -5,8 +5,6 @@
 
 <mapper namespace="TimeLine">
 
-
-
 	<select id="selectMno" parameterType="string" resultType="_int">
 		SELECT MNO FROM MEMBER WHERE MNICK=#{mnick}
 	</select>

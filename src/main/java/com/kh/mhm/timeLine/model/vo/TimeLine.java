@@ -4,11 +4,11 @@ import java.io.Serializable;
 import java.sql.Timestamp;
 
 public class TimeLine extends TimeLineSmpl implements Serializable {
-	
+
 	private int tId;
 	private Timestamp tDate;
 	private String delFlag;
-	
+
 	public TimeLine() {
 		super();
 	}
@@ -49,5 +49,5 @@ public class TimeLine extends TimeLineSmpl implements Serializable {
 		this.delFlag = delFlag;
 	}
 
-	
+
 }

@@ -18,19 +18,19 @@ import com.kh.mhm.timeLine.model.vo.TimeLineSmpl;
 
 @Controller
 public class SocketHandler extends TextWebSocketHandler{
-	
+
 	private List<WebSocketSession> sessionList = new ArrayList();
 	private Logger logger = LoggerFactory.getLogger(SocketHandler.class);
 
 	@Autowired
 	TimeLineService tlsi;
-	
+
 	@Override
 	public void afterConnectionEstablished(WebSocketSession session) throws Exception {
 		sessionList.add(session);
 
 		logger.info("{}연결됨", session.getId());
-		
+
 		System.out.println("채팅방 입장자 :"+session.getId());
 		// super.afterConnectionEstablished(session);
 	}
@@ -40,23 +40,23 @@ public class SocketHandler extends TextWebSocketHandler{
 		//session.sendMessage(new TextMessage(session.getId() + "|" + message.getPayload()));
 		System.out.println("session주소 : "+session.getRemoteAddress());
 		System.out.println(session.getAttributes().get("userName"));
-		
+
 		String nick=(String)session.getAttributes().get("userName");
 		System.out.println("nick::"+nick);
-		
+
 		Member member=tlsi.getMemberByNick(nick);
-		
+
 		System.out.println(member.toString());
-		
-//		int mno=tlsi.selectMno(nick);
+
+		//		int mno=tlsi.selectMno(nick);
 		TimeLineSmpl tls=new TimeLineSmpl(member.getMno(),message.getPayload());
 		int result=tlsi.insertTimeLine(tls);
 		String profPath=member.getProfilePath();
 		System.out.println("profPath::"+profPath);
-		
+
 		// result 따라서 에러처리해야함
-		
-		
+
+
 		for (WebSocketSession one : sessionList) {
 			one.sendMessage(new TextMessage(session.getId() + " | " + message.getPayload()+"|"+session.getRemoteAddress()+"|"+session.getAttributes().get("userName")+"|"+profPath));
 		}
@@ -68,13 +68,13 @@ public class SocketHandler extends TextWebSocketHandler{
 
 		sessionList.remove(session);
 		logger.info("{}연결끊김",session.getId());
-		
+
 		for (WebSocketSession one : sessionList) {
 			if(one==session) continue;
 			one.sendMessage(new TextMessage(session.getAttributes().get("userName")+"님이 퇴장하셨습니다."));
 		}
-		
-		
+
+
 		//super.afterConnectionClosed(session, status);
 	}
 
