@@ -14,4 +14,6 @@ public interface MyPageService {
 	List<Map<String,Object>> selectSchedule();
 
 	int updateMember(Member member);
+
+	int deleteMember(Member member);
 }
