@@ -18,30 +18,29 @@ import com.kh.mhm.timeLine.model.vo.PreTimeLine;
 
 @Controller
 public class WebSocketChattingController {
-	
+
 	@Autowired
 	TimeLineService tlsi;
-	
+
 	@RequestMapping(value="/echo.do", method= {RequestMethod.GET,RequestMethod.POST})
 	public String chattingMethod(String userName, Model model, HttpServletRequest req, HttpSession session) throws Exception {
 		req.setCharacterEncoding("UTF-8");
-		
+
 		/*Member member=(Member) session.getAttribute("member");
 		System.out.println(member.toString());
 		System.out.println(member.getMnick());*/
-		
+
 		session.setAttribute("userName", ((Member) session.getAttribute("member")).getMnick());
-		
+
 		String ipAddr=req.getRemoteAddr();
 		model.addAttribute("host", ipAddr);
-		
-		List<PreTimeLine> list=new ArrayList<PreTimeLine>();
+    List<PreTimeLine> list=new ArrayList<PreTimeLine>();
 		list=tlsi.selectPreTimeLine();
 		session.setAttribute("list", list);
-		
+
 		return "timeLine/echoView";
 	}
-	
+
 	/*@RequestMapping("/testLink.do")
 	public String testLink() {
 		return "timeLine/testLink";

@@ -7,7 +7,7 @@ import com.kh.mhm.board.model.vo.Fileref;
 import com.kh.mhm.board.model.vo.Board;
 
 public interface BoardDao {
-	
+
 	List<Map<String, String>> selectBoardList(int cPage, int numPerPage);
 
 	int selectBoardTotalContents();

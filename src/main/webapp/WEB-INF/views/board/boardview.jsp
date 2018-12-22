@@ -27,15 +27,25 @@
 					<li class="">질문 게시판</li>
 				</ul>
 			</div>			
-			<div class="col-md-10">				
-					<input type="hidden" name="boardNo" value="" />
-					<input type="text" placeholder="제목" name="boardTitle" id="boardTitle" required>
-					<input type="text" class="form-control" name="boardWriter" value="" readonly required>
-					
-					<textarea name="boardcontent" id="boardcontent"></textarea>
-					<input type="button" id="insertBoard" value="등록"/>
-				
+			<div class="col-md-10" overflow:auto >				
+					<!-- 게시판 고유 번호 -->
+					<input type="hidden" name="boardNo" value="" /> 
+					<!-- 게시판 제목 -->
+					<input type="text" placeholder="제목" name="boardTitle" id="boardTitle" 
+					<%-- value="${board.bTitle }" --%> required>
+					<!-- 게시판 작성자 -->
+					<input type="text" class="form-control" name="boardWriter" 
+					<%-- value="${board.boardWriter}" --%> readonly required>
+					<div>${requestScope.result}</div>
+					&nbsp;&nbsp;&nbsp;
+					<input type="button" onclick="location.href='${pageContext.request.contextPath}/board/boardmain.do'"
+					value="리스트로"/>
+					<%-- <c:if test="${member.userId eq board.boardWriter}">  </c:if>--%>
+					<input type="button" name="modify" value="수정">
+					<input type="button" name="delete" value="삭제">				
 			</div>
+			
+			
 			<div class="container-fluid">
 				<div class="row">
 					<div class="col-md-10"></div>

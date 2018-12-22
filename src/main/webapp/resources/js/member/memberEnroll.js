@@ -1,6 +1,6 @@
 $(function(){
 				
-				$("#password2").blur(function(){
+				$("#mpw2").blur(function(){
 					var p1=$("#mpw_").val(), p2=$("#mpw2").val();
 					if(p1!=p2){
 						alert("패스워드가 일치하지 않습니다.");

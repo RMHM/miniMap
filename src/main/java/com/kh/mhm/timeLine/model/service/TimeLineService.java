@@ -7,13 +7,13 @@ import com.kh.mhm.timeLine.model.vo.PreTimeLine;
 import com.kh.mhm.timeLine.model.vo.TimeLineSmpl;
 
 public interface TimeLineService {
-	
-//	int selectMno(String mnick);
-	
+
+	//	int selectMno(String mnick);
+
 	Member getMemberByNick(String mnick);
-	
+
 	int insertTimeLine(TimeLineSmpl tls);
-	
-	List<PreTimeLine> selectPreTimeLine();
+  
+  List<PreTimeLine> selectPreTimeLine();
 
 }

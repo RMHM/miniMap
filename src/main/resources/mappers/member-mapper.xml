@@ -3,89 +3,109 @@
 "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="member">
-    
-  <resultMap type="Member" id="memberMap">
-  </resultMap>
-  
-  <resultMap type="Member" id="CommonMemberMap">
-      <result column="MNO" property="mno" />
-      <result column="MID" property="mid" />
-      <result column="JOIN_DATE" property="joinDate" javaType="java.sql.Date" jdbcType="DATE" /> 
-      <result column="DROP_DATE" property="dropDate" javaType="java.sql.Date" jdbcType="DATE" />
-      <result column="EMAIL" property="email" />
-      <result column="GENDER" property="gender" />
-      <result column="AGE" property="age" /> 
-   </resultMap>
-   
-   <resultMap type="Member" id="CompMemberMap">
-      <result column="MNO" property="mno" />
-      <result column="MID" property="mid" />
-      <result column="JOIN_DATE" property="joinDate" javaType="java.sql.Date" jdbcType="DATE" /> 
-      <result column="DROP_DATE" property="dropDate" javaType="java.sql.Date" jdbcType="DATE" />
-      <result column="EMAIL" property="email" />
-   </resultMap>
-  
-  <insert id="insertMember" parameterType="Member">
+
+	<resultMap type="Member" id="memberMap">
+		<result column="MNO" property="mno" />
+		<result column="MID" property="mid" />
+		<result column="MPW" property="mpw" />
+		<result column="MNAME" property="mname" />
+		<result column="MNICK" property="mnick" />
+		<result column="MTYPE" property="mtype" />
+		<result column="EMAIL" property="email" />
+		<result column="GENDER" property="gender" />
+		<result column="AGE" property="age" />
+		<result column="PROFILE_PATH" property="profilePath" />
+		<result column="JOIN_DATE" property="joinDate" javaType="java.sql.Date" jdbcType="DATE" />
+		<result column="DROP_DATE" property="dropDate" javaType="java.sql.Date" jdbcType="DATE" />
+	</resultMap>
+
+	<resultMap type="Member" id="CommonMemberMap">
+		<result column="MNO" property="mno" />
+		<result column="MID" property="mid" />
+		<result column="JOIN_DATE" property="joinDate" javaType="java.sql.Date" jdbcType="DATE" />
+		<result column="DROP_DATE" property="dropDate" javaType="java.sql.Date" jdbcType="DATE" />
+		<result column="EMAIL" property="email" />
+		<result column="GENDER" property="gender" />
+		<result column="AGE" property="age" />
+	</resultMap>
+
+	<resultMap type="CompanyMember" id="CompMemberMap">
+		<result column="MNO" property="mno" />
+		<result column="MID" property="mid" />
+		<result column="JOIN_DATE" property="joinDate" javaType="java.sql.Date" jdbcType="DATE" />
+		<result column="DROP_DATE" property="dropDate" javaType="java.sql.Date" jdbcType="DATE" />
+		<result column="REQUEST_DATE" property="reqDate" javaType="java.sql.Date" jdbcType="DATE" />
+		<result column="GRANT_DATE" property="grantDate" javaType="java.sql.Date" jdbcType="DATE" />
+		<result column="EMAIL" property="email" />
+		<result column="ADDRESS" property="address" />
+		<result column="ANAME" property="aname" />
+	</resultMap>
+
+	<resultMap type="BlackList" id="BlackListMap">
+		<result column="MNO" property="mno" />
+		<result column="MID" property="mid" />
+		<result column="JOIN_DATE" property="joinDate" javaType="java.sql.Date" jdbcType="DATE" />
+		<result column="DROP_DATE" property="dropDate" javaType="java.sql.Date" jdbcType="DATE" />
+		<result column="EMAIL" property="email" />
+		<result column="GENDER" property="gender" />
+		<result column="AGE" property="age" />
+		<result column="End_Date" property="endDate" />
+		<result column="REASON" property="reason" />
+	</resultMap>
+
+	<insert id="insertMember" parameterType="Member">
 		insert into member
 		values(
-		seq_mno.nextval, #{mid}, #{mpw}, #{mname}, #{mnick},
-		#{mtype}, #{email}, #{gender}, #{age}, #{profilePath}, DEFAULT, DEFAULT)
-  </insert>
+		seq_mno.nextval, #{mid}, #{mpw}, #{mname}, #{mnick}, #{mtype},
+		#{email}, #{gender}, #{age}, #{profilePath}, DEFAULT, DEFAULT)
+	</insert>
 
-	<select id="selectOne" parameterType="string"
-		resultType="Member">
-    select * from member where mid = #{mid}
-	</select>	
+	<select id="selectOne" parameterType="string" resultMap="memberMap">
+		select * from member where mid = #{mid}
+	</select>
 
-	<select id="selectFindID" parameterType="string"
-		resultType="Member">
+	<select id="selectFindID" parameterType="string" resultType="Member">
 		select * from member where email = #{email}
 	</select>
 
-  <update id="updateMember" parameterType="Member">
-		UPDATE MEMBER SET
-		MPW = #{mpw},
-		MNAME = #{mname},
-		MNICK = #{mnick},
-		EMAIL = #{email},
-		GENDER = #{gender},
-		AGE =#{age},
-		PROFILE_PATH=#{profilePath}
+	<update id="updateMember" parameterType="Member">
+		UPDATE MEMBER SET MPW = #{mpw}, MNAME = #{mname}, MNICK = #{mnick}, EMAIL = #{email}, GENDER = #{gender}, AGE =#{age}, PROFILE_PATH=#{profilePath}
 		WHERE MID = #{mid}
 	</update>
-	<update id="deleteMember" parameterType="Member" >
-	UPDATE MEMBER SET
-		DROP_DATE=SYSDATE
+	
+	<update id="deleteMember" parameterType="Member">
+		UPDATE MEMBER SET DROP_DATE=SYSDATE
 		WHERE MID = #{mid}
 	</update>
-  
-  <update id="updatePW" parameterType="Member">
-		update member set mpw =
-		#{mpw} where mid = #{mid}
+
+	<update id="updatePW" parameterType="Member">
+		update member set mpw = #{mpw}
+		where mid = #{mid}
 	</update>
 
 	<!-- 아이디 확인 쿼리 -->
-	<select id="checkIdDuplicate" statementType="CALLABLE"
-		parameterType="hashmap">
+	<select id="checkIdDuplicate" statementType="CALLABLE" parameterType="hashmap">
 		<!-- CallableStatement 는 { } 로 묶여 실행되며 시작괄호 '{' 다음에 tab 기호를 읽지 못한다. -->
 		{ CALL ID_DUP_CHK(#{mid, mode=IN, jdbcType=VARCHAR},
-			#{result, mode=OUT, jdbcType=NUMERIC, javaType=integer})
+			#{result, mode=OUT, jdbcType=NUMERIC, javaType=integer}
+			)
 		}
 	</select>
-  
-  <select id="selectCommonMember" resultMap="CommonMemberMap">
-		SELECT * FROM MEMBER WHERE MTYPE = 'M'
+
+	<select id="selectCommonMember" resultMap="memberMap">
+		SELECT mno, mid, mname, email, gender, age, join_date, drop_date FROM MEMBER
+		WHERE MTYPE = 'M'
 	</select>
-	
+
 	<select id="selectCompanyMember" resultMap="CompMemberMap">
-		SELECT * FROM MEMBER M
-		JOIN AUTHORITY A USING(MNO)
-		JOIN AUTHORITY_TYPE AT ON (A.ACODE = AT.ACODE)
-		WHERE MTYPE = 'C'
+		select * from member
+		full outer join authority a using(mno)
+		full outer join authority_type at on(a.acode = at.acode)
+		where mtype = 'C'
 	</select>
-	
-	<!-- <select id="selectBlackList" resultMap="selectBlackMap">
-	
-	</select> -->
-  
+
+	<select id="selectBlackList" resultMap="BlackListMap">
+		select mno, mid, mname, email, gender, age, drop_date, end_date, reason from (select * from member join blacklist using(mno))
+	</select>
+
 </mapper>

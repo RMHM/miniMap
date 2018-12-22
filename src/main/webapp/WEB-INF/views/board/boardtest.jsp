@@ -22,7 +22,7 @@
 				<h4>--게시판 목록--</h4>
 				<ul>
 					&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;
-					<li class="">자유 게시판</li> &nbsp;
+					<li class=""><a href="/board/boardlist1.do">자유 게시판</a></li> &nbsp;
 					<li class="">정보공유 게시판</li> &nbsp;
 					<li class="">여행후기 게시판</li> &nbsp;
 					<li class="">질문 게시판</li>

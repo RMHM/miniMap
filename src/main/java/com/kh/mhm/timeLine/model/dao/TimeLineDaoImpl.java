@@ -15,19 +15,19 @@ public class TimeLineDaoImpl implements TimeLineDao {
 
 	@Autowired
 	SqlSessionTemplate sqlSession;
-	
+
 	@Override
 	public int insertTimeLine(TimeLineSmpl tls) {
 		return sqlSession.insert("TimeLine.insertTimeLine",tls);			
 	}
-				
-//	@Override
-//	public int selectMno(String mnick) {
-//		System.out.println("DAO mnick::"+mnick);
-//		int result=sqlSession.selectOne("TimeLine.selectMno",mnick);
-//		System.out.println("DAO result::"+result);
-//		return result;
-//	}
+
+	//	@Override
+	//	public int selectMno(String mnick) {
+	//		System.out.println("DAO mnick::"+mnick);
+	//		int result=sqlSession.selectOne("TimeLine.selectMno",mnick);
+	//		System.out.println("DAO result::"+result);
+	//		return result;
+	//	}
 
 	@Override
 	public Member getMemberByNick(String mnick) {

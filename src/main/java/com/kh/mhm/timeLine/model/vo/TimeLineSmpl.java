@@ -1,12 +1,11 @@
 package com.kh.mhm.timeLine.model.vo;
 
 public class TimeLineSmpl {
-	
+
 	private int mNo;
 	private String tContent;
-	private String hashTag;
-	
-	
+  private String hashTag;
+  
 	public TimeLineSmpl() {
 		super();
 	}
@@ -45,8 +44,7 @@ public class TimeLineSmpl {
 		this.tContent = tContent;
 	}
 
-
-	public String getHashTag() {
+  public String getHashTag() {
 		return hashTag;
 	}
 
@@ -54,5 +52,5 @@ public class TimeLineSmpl {
 	public void setHashTag(String hashTag) {
 		this.hashTag = hashTag;
 	}
-	
+  
 }
