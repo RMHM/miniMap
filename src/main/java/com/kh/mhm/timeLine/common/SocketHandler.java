@@ -2,6 +2,7 @@ package com.kh.mhm.timeLine.common;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.StringTokenizer;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -49,16 +50,27 @@ public class SocketHandler extends TextWebSocketHandler{
 		System.out.println(member.toString());
 		
 //		int mno=tlsi.selectMno(nick);
-		TimeLineSmpl tls=new TimeLineSmpl(member.getMno(),message.getPayload());
+		String text=message.getPayload();
+		StringTokenizer st=new StringTokenizer(text,"|%%|&");
+		String content=st.nextToken();
+		String tag=st.nextToken();
+		TimeLineSmpl tls=new TimeLineSmpl(member.getMno(),content,tag);
 		int result=tlsi.insertTimeLine(tls);
 		String profPath=member.getProfilePath();
 		System.out.println("profPath::"+profPath);
+		System.out.println("content::"+content);
+		System.out.println("tag::"+tag);
 		
 		// result 따라서 에러처리해야함
 		
 		
 		for (WebSocketSession one : sessionList) {
-			one.sendMessage(new TextMessage(session.getId() + " | " + message.getPayload()+"|"+session.getRemoteAddress()+"|"+session.getAttributes().get("userName")+"|"+profPath));
+			one.sendMessage(new TextMessage(session.getId() + "|%%|&" 
+						+content+"|%%|&"
+						+session.getRemoteAddress()+"|%%|&"
+						+session.getAttributes().get("userName")+"|%%|&"
+						+profPath+"|%%|&"
+						+tag));
 		}
 		// super.handleTextMessage(session, message);
 	}

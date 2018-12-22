@@ -4,6 +4,7 @@ public class TimeLineSmpl {
 	
 	private int mNo;
 	private String tContent;
+	private String hashTag;
 	
 	
 	public TimeLineSmpl() {
@@ -11,16 +12,17 @@ public class TimeLineSmpl {
 	}
 
 
-	public TimeLineSmpl(int mNo, String tContent) {
+	public TimeLineSmpl(int mNo, String tContent,String hashTag) {
 		super();
 		this.mNo = mNo;
 		this.tContent = tContent;
+		this.hashTag=hashTag;
 	}
 
 
 	@Override
 	public String toString() {
-		return "TimeLineSmpl [mNo=" + mNo + ", tContent=" + tContent + "]";
+		return "TimeLineSmpl [mNo=" + mNo + ", tContent=" + tContent + ", hashTag="+hashTag+"]";
 	}
 
 
@@ -41,6 +43,16 @@ public class TimeLineSmpl {
 
 	public void settContent(String tContent) {
 		this.tContent = tContent;
+	}
+
+
+	public String getHashTag() {
+		return hashTag;
+	}
+
+
+	public void setHashTag(String hashTag) {
+		this.hashTag = hashTag;
 	}
 	
 }

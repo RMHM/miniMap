@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.kh.mhm.member.model.vo.Member;
 import com.kh.mhm.timeLine.model.dao.TimeLineDao;
-import com.kh.mhm.timeLine.model.vo.TimeLine;
+import com.kh.mhm.timeLine.model.vo.PreTimeLine;
 import com.kh.mhm.timeLine.model.vo.TimeLineSmpl;
 
 @Service
@@ -35,7 +35,7 @@ public class TimeLineServiceImpl implements TimeLineService {
 	}
 
 	@Override
-	public List<TimeLine> selectPreTimeLine() {
+	public List<PreTimeLine> selectPreTimeLine() {
 		return tldi.selectPreTimeLine();
 	}
 
