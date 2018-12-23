@@ -16,7 +16,7 @@
 	<annotation-driven />
 	<!-- 게시판 네이버 스마트 에디터용 리소스 경로 -->
 	<mvc:resources location="/Boardeditor/" mapping="/Boardeditor/**"/>
-	<mvc:resources location="/Boardeditor2/" mapping="/Boardeditor2/**"/>	
+	<mvc:resources location="/daumeditor/" mapping="/daumeditor/**"/>	
 	<!-- Handles HTTP GET requests for /resources/** by efficiently serving up static resources in the ${webappRoot}/resources directory -->
 	<resources mapping="/resources/**" location="/resources/"/>
 	
