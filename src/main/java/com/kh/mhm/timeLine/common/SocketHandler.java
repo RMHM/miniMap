@@ -20,7 +20,7 @@ import com.kh.mhm.timeLine.model.vo.TimeLineSmpl;
 @Controller
 public class SocketHandler extends TextWebSocketHandler{
 
-	private List<WebSocketSession> sessionList = new ArrayList();
+	private List<WebSocketSession> sessionList = new ArrayList<WebSocketSession>();
 	private Logger logger = LoggerFactory.getLogger(SocketHandler.class);
 
 	@Autowired

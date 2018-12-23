@@ -24,12 +24,6 @@ public class PreTimeLine {
 		this.hashTag = hashTag;
 	}
 
-	@Override
-	public String toString() {
-		return "PreTimeLine [profile_path=" + profile_path + ", mNick=" + mNick + ", tDate=" + tDate + ", tContent="
-				+ tContent + ", hashTag=" + hashTag + "]";
-	}
-
 	public String getProfile_path() {
 		return profile_path;
 	}
@@ -68,6 +62,12 @@ public class PreTimeLine {
 
 	public void setHashTag(String hashTag) {
 		this.hashTag = hashTag;
+	}
+	
+	@Override
+	public String toString() {
+		return "PreTimeLine [profile_path=" + profile_path + ", mNick=" + mNick + ", tDate=" + tDate + ", tContent="
+				+ tContent + ", hashTag=" + hashTag + "]";
 	}
 	
 }

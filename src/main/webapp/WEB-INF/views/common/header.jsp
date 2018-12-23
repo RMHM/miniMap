@@ -31,7 +31,9 @@
 							<a href="#" class="dropdown-toggle " data-toggle="dropdown" data-hover="dropdown" data-delay="0" data-close-others="false">${member.mnick} 님 <b class=" icon-angle-down"></b></a>
 							<ul class="dropdown-menu">
 								<li><a href="/myPage/myPageMain.do">myPage</a></li>
-								<li><a href="manager/managerPage.go">관리자 페이지</a></li>
+								<c:if test="${member.mtype eq 'A'}">
+									<li><a href="manager/managerPage.go">관리자 페이지</a></li>
+								</c:if>
 								<li><a href="/member/memberLogout.do">로그아웃</a></li>
 							</ul>
 						</li>

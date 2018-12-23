@@ -71,10 +71,9 @@ public class MemberController {
 		return mv;
 	}
 
-	@RequestMapping(value = "/member/memberLogout.do")
-	public String memberLogout(SessionStatus sessionStatus, HttpSession session, Model model) {
-		if (!sessionStatus.isComplete())
-			sessionStatus.setComplete();
+  @RequestMapping(value="/member/memberLogout.do")
+	public String memberLogout(SessionStatus sessionStatus, Model model) {
+		if(!sessionStatus.isComplete()) sessionStatus.setComplete();
 		msg = "로그아웃 되었습니다.";
 		model.addAttribute("loc", loc);
 		model.addAttribute("msg", msg);
