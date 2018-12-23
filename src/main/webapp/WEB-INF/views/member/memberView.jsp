@@ -1,5 +1,5 @@
 <%@
-   page language="java" contentType="text/html; charset=UTF-8"
+	page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
@@ -8,125 +8,144 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>회원 정보 페이지</title>
+<title>miniMap에 오신걸 환영합니다.</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="description" content="" />
 </head>
+
 <body>
+	<!-- 외부파일 선언 -->
+
 	<c:import url="/WEB-INF/views/common/exFile.jsp" />
 	<div id="wrapper">
-		<c:import url="/WEB-INF/views/common/header.jsp" />
-		<nav style="float: left; width: 100px; height: auto;">
-			<a href="#">쪽지</a><br /> <a
-				href="${pageContext.request.contextPath}/myPage/myPageMain.do">정보수정</a><br />
-			<a href="#">일정관리</a><br /> <a href="#">지도</a><br /> <a href="#">작성한글</a>
-			<br /> <a href="#">권한요청(기업)</a>
+		<!-- header 선언 -->
+		<c:import url="../common/header.jsp" />
+		<div class="container">
+			<c:import url="../common/myPageNav.jsp" />
 
-		</nav>
-		<section class="callaction">
-		<div>
-		<form name="updateForm" id="updateForm"
-			<%-- action="${pageContext.request.contextPath}/myPage/updateMember.do" --%>
-			method="post">
+			<div class="col-md-10">
+				<div class="container">
 
-			<div class="form-group">
-				<label for="mid">아이디</label> <input type="text" class="form-control"
-					name="mid" id="mid_" value="${member.mid}" readonly required>
-			</div>
+					<!-- 	<div class="container-fluid"> -->
+					<div class="col-sm-8 text-center">
+						<h1>
+							<small>회원 정보 수정 </small>
+						</h1>
+						<!-- </div> -->
 
-			<div class="form-group">
-				<label for="mpw">비밀번호</label> <input type="password"
-					class="form-control" name="mpw" id="mpw_"
-					placeholder="비밀번호를 입력하세요." />
-			</div>
+						<form class="form-horizontal" id="updateForm" method="post">
+							<div class="form-group">
+								<label class="col-sm-3 control-label" for="userId">유저아이디</label>
+								<div class="col-sm-6">
+									<input class="form-control" id="mid" name="mid" readonly
+										type="" value="${member.mid}">
+								</div>
+							</div>
 
+							<div class="form-group">
+								<label class="col-sm-3 control-label" for="password">비밀번호
+									입력</label>
+								<div class="col-sm-6">
+									<input class="form-control" id="mpw" name="mpw" type="password">
+								</div>
+							</div>
 
-			<div class="from-group">
-				<label for="mname">이름</label> <input type="text"
-					class="form-control" name="mname" id="mname"
-					value="${member.mname}" placeholder=" 이름을 입력하세요." />
-			</div>
+							<div class="form-group">
+								<label class="col-sm-3 control-label" for="mname">이름</label> </label>
+								<div class="col-sm-6">
+									<input class="form-control" id="mname" name="mname" readonly
+										type="text" value="${member.mname}">
+								</div>
+							</div>
 
-			<br>
+							<div class="form-group">
+								<label class="col-sm-3 control-label" for="mnick">닉네임</label> </label>
+								<div class="col-sm-6">
+									<input class="form-control" id="mnick" name="mnick" type="text"
+										value="${member.mnick}">
+								</div>
+							</div>
 
-			<div class="from-group">
-				<label for="mnick">닉네임</label> <input type="text"
-					class="form-control" name="mnick" id="mnick"
-					value="${member.mnick}" placeholder=" 닉네임을 입력하세요." />
-			</div>
+							<div class="form-group">
+								<label class="col-sm-3 control-label" for="email">이메일</label>
+								<div class="col-sm-6">
+									<input class="form-control" id="email" name="email"
+										type="email" value="${member.email}">
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-sm-3 control-label" for="gender">성별</label>
 
-			<br>
+								<div class="col-sm-6">
+									<input type="radio" name="gender" id="gender0" value="M" />남성
+									<input type="radio" name="gender" id="gender1" value="F" />여성
+									<%-- <input class="form-control" id="gender" name="gender" type=""
+										value="${member.gender}"> --%>
+								</div>
+							</div>
 
-			<div class="from-group">
-				<label for="email">이메일</label> <input type="text"
-					class="form-control" name="email" id="email"
-					value="${member.email}" placeholder=" 이메일 주소를 입력하세요." />
-			</div>
+							<div class="form-group">
+								<label class="col-sm-3 control-label" for="age">연령대</label>
 
-			<br>
+								<div class="col-sm-6">
+									<input type="radio" name="age" id="age0" value="10" />10대 <input
+										type="radio" name="age" id="age1" value="20" />20대 <input
+										type="radio" name="age" id="age2" value="30" />30대 <input
+										type="radio" name="age" id="age3" value="40" />40대
 
-			<div class="from-group">
-				<label for="gender">성별</label> <br> <input type="radio"
-					name="gender" value="M" />남성 <input type="radio" name="gender"
-					value="F" />여성
-				<script>
-					
-				</script>
-			</div>
+									<%-- 									<input class="form-control" id="age" name="age" type=""
+										value="${member.age}"> --%>
+								</div>
+							</div>
 
-			<br>
-
-			<div class=from-group">
-				<label for="age">연령대</label> <br> <input type="radio"
-					name="age" value="10" />10대 <input type="radio" name="age"
-					value="20" />20대 <input type="radio" name="age" value="30" />30대
-				<input type="radio" name="age" value="40" />40대
-			</div>
-
-			<div class="from-group">
-				<br> <label for="profilePath">이미지경로</label> <input type="file"
-					name="profilePath" value="${member.profilePath}" />
-
-			</div>
-
-			<br /> <br /> 
-			<div class="form-group">
-							<div class="col-sm-3">
-								<div align="center"  class="col-sm-6">
-								<br>
-									<button class="btn btn-primary" onclick="memberUpdate();">정보
-										수정</button>
-									<button class="btn btn-danger" onclick="memberDelete();">회원
-										탈퇴</button>
-									<button class="btn btn-danger" onclick="memberMain();">
-										뒤로가기</button>
+							<div class="form-group">
+								<label class="col-sm-3 control-label" for="profilePath">프로필
+									사진</label>
+								<div class="col-sm-6">
+									<input class="form-control" id="profilePath" name="profilePath"
+										type="file" value="${member.profilePath}">
 								</div>
 							</div>
 					
+
+						<div class="form-group">
+
+							<button id="mUpdateMember" onclick="memberUpdate();">수정</button>
+							<button id="mDeleteMember" onclick="memberDelete();">탈퇴</button>
+							<button id="back" onclick="memberMain();">뒤로가기</button>
+
+						</div>
+
+	</form>
 					</div>
 
-		</form>
+				</div>
+
+			</div>
 		</div>
-		</section>
-		<c:import url="/WEB-INF/views/common/footer.jsp" />
+
+
+
+
+	</div>
+	<c:import url="../common/footer.jsp" />
 	</div>
 	<script>
 
 		function memberDelete(){
 		console.log("delete 클릭");
-    		$('#updateForm').attr("action", "${pageContext.request.contextPath}/myPage/deleteMember.do");
-	<%-- 	location.href = "<%=request.getContextPath()%>/mDelete.me"; --%>
+    		$('#updateForm').attr("action", "${pageContext.request.contextPath}/myPage/deleteMember.do"); 
+		/*  location.href = "${pageContext.request.contextPath}/myPage/deleteMember.do";  */
      	}
      	function memberUpdate() {
 			/* $("#updateForm").submit(); */
 				$('#updateForm').attr("action", "${pageContext.request.contextPath}/myPage/updateMember.do");
-		 	<%-- location.href = "<%=request.getContextPath() %>/mUpdate.me" --%>
+		 	<%-- location.href = "<%=request.getContextPath()%>/mUpdate.me" --%>
 		}
-    
     	function memberMain(){
-    			$('#updateForm').attr("action", "${pageContext.request.contextPath}/myPage/myPageMain.jsp");
+    			$('#updateForm').attr("action", "/myPage/myPageMain.do");
     		console.log("main클릭");
     	}
-
-		
       </script>
 </body>
 </html>

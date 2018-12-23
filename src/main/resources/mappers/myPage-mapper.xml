@@ -6,33 +6,30 @@
 <mapper namespace="myPage">
 
 	<resultMap type="map" id="scheduleMap">
-	 	
+
 		<result column="sId" property="SID" />
 		<result column="mNo" property="MNO" />
-		<result column="start_Date" property="START_DATE" javaType="java.sql.Date" jdbcType="DATE" /> 
-		<result column="end_Date" property="END_DATE" javaType="java.sql.Date" jdbcType="DATE" />
+		<result column="start_Date" property="START_DATE"
+			javaType="java.sql.Date" jdbcType="DATE" />
+		<result column="end_Date" property="END_DATE"
+			javaType="java.sql.Date" jdbcType="DATE" />
 		<result column="sTitle" property="STITLE" />
 		<result column="sContent" property="SCONTENT" />
 		<result column="sColor" property="SCOLOR" />
-		<result column="delflag" property="DELFLAG" /> 
+		<result column="delflag" property="DELFLAG" />
 	</resultMap>
-	
 
-	
+
+
 	<insert id="insertSchedule" parameterType="Schedule">
-		INSERT INTO SCHEDULE VALUES(SEQ_SID.NEXTVAL,#{mNo},#{start_Date},#{end_Date},#{sTitle},#{sContent},#{sColor},DEFAULT)
-		
+		INSERT INTO SCHEDULE
+		VALUES(SEQ_SID.NEXTVAL,#{mNo},#{start_Date},#{end_Date},#{sTitle},#{sContent},#{sColor},DEFAULT)
+
 	</insert>
 	<!-- <select id="selectSchedule" parameterType="_int" resultMap="scheduleMap"> -->
-	<select id="selectSchedule" resultMap="scheduleMap">
-		SELECT * FROM SCHEDULE WHERE MNO=10
+	<select id="selectSchedule" parameterType="_int" resultMap="scheduleMap">
+		SELECT * FROM SCHEDULE
+		WHERE MNO=#{mno}
 	</select>
-	
-	</mapper>
 
-
-
-
-
-
-
+</mapper>
