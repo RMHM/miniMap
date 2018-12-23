@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import com.kh.mhm.member.model.vo.Member;
 import com.kh.mhm.myPage.model.dao.MyPageDao;
+import com.kh.mhm.myPage.model.vo.Authority;
 import com.kh.mhm.myPage.model.vo.Schedule;
 @Service
 public class MyPageServiceImpl implements MyPageService {
@@ -21,9 +22,9 @@ public class MyPageServiceImpl implements MyPageService {
 		return md.insertSchedule(schedule);
 	}
 	@Override
-	public List<Map<String,Object>>  selectSchedule() {
-
-		return md.selectSchedule();
+  public List<Map<String,Object>> selectSchedule(int mno) {
+		
+		return md.selectSchedule(mno);
 	}
 	@Override
 	public int updateMember(Member member) {
@@ -34,6 +35,10 @@ public class MyPageServiceImpl implements MyPageService {
 	public int deleteMember(Member member) {
 
 		return md.deleteMember(member);
+	}
+	@Override
+	public int insertAuthority(Authority authority) {
+		return md.insertAuthority(authority);
 	}
 
 }
