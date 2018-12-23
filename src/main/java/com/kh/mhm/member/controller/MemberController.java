@@ -22,7 +22,7 @@ import com.kh.mhm.common.SendMail;
 import com.kh.mhm.member.model.service.MemberService;
 import com.kh.mhm.member.model.vo.Member;
 
-@SessionAttributes(value= {"member"})
+@SessionAttributes(value = { "member" })
 @Controller
 public class MemberController {
 
@@ -45,17 +45,17 @@ public class MemberController {
 		return "member/infoFindPage";
 	}
 
-	@RequestMapping(value="/member/memberLogin.do", method = RequestMethod.POST)
+	@RequestMapping(value = "/member/memberLogin.do", method = RequestMethod.POST)
 	public ModelAndView memberLogin(@RequestParam String mid, @RequestParam String mpw, Model model) {
 		ModelAndView mv = new ModelAndView();
 
 		Member m = ms.selectOne(mid);
 
-		if(m == null) {
+		if (m == null) {
 			msg = "회원정보가 존재하지 않습니다.";
 			loc = "/member/loginPage.go";
 		} else {
-			if(bcpe.matches(mpw, m.getMpw())) {
+			if (bcpe.matches(mpw, m.getMpw())) {
 				msg = "로그인되었습니다!";
 				// @SessionAttributes annotation 사용
 				mv.addObject("member", m);
@@ -71,9 +71,10 @@ public class MemberController {
 		return mv;
 	}
 
-	@RequestMapping(value="/member/memberLogout.do")
+	@RequestMapping(value = "/member/memberLogout.do")
 	public String memberLogout(SessionStatus sessionStatus, HttpSession session, Model model) {
-		if(!sessionStatus.isComplete()) sessionStatus.setComplete();
+		if (!sessionStatus.isComplete())
+			sessionStatus.setComplete();
 		msg = "로그아웃 되었습니다.";
 		model.addAttribute("loc", loc);
 		model.addAttribute("msg", msg);
@@ -86,27 +87,30 @@ public class MemberController {
 	public String memberFindID(@RequestParam String mname, @RequestParam String email) {
 		String result = "";
 		Member m = ms.selectFindID(email);
-		if(m!=null) {
-			if(mname.equals(m.getMname())) result = m.getMid();
+		if (m != null) {
+			if (mname.equals(m.getMname()))
+				result = m.getMid();
 		}
 		return result;
 	}
+
 	@RequestMapping("/member/memberFindPW.do")
 	@ResponseBody
-	public boolean memberFindPW(@RequestParam String mid, @RequestParam String mname, @RequestParam String email, HttpSession session) {
+	public boolean memberFindPW(@RequestParam String mid, @RequestParam String mname, @RequestParam String email,
+			HttpSession session) {
 		boolean result = false;
 
 		Member m = ms.selectOne(mid);
 
-		if(m!=null) {
-			if(mname.equals(m.getMname()) && email.equals(m.getEmail())) {
+		if (m != null) {
+			if (mname.equals(m.getMname()) && email.equals(m.getEmail())) {
 				session.setAttribute("mid", mid);
 				session.setAttribute("mname", mname);
 				session.setAttribute("email", email);
 				// 난수 생성
 				String chkCode = "";
-				for(int i=0; i<6; i++) {
-					chkCode += (char)((int)(Math.random()*93+34));
+				for (int i = 0; i < 6; i++) {
+					chkCode += (char) ((int) (Math.random() * 93 + 34));
 				}
 				session.setAttribute("code", chkCode);
 				// 인증번호 전송하기
@@ -123,24 +127,27 @@ public class MemberController {
 	@RequestMapping("/member/sessionChk.do")
 	@ResponseBody
 	public Map<String, Object> memberSessionValueChk(@RequestParam String mid, @RequestParam String mname,
-			@RequestParam String email, @RequestParam String code,
-			HttpSession session) {
+			@RequestParam String email, @RequestParam String code, HttpSession session) {
 
 		Map<String, Object> result = new HashMap<String, Object>();
 		result.put("isErr", false);
 
-		if(!mid.equals((String)session.getAttribute("mid"))) result.put("err", "아이디가");
-		else if(!mname.equals((String)session.getAttribute("mname"))) result.put("err", "이름이");
-		else if(!email.equals((String)session.getAttribute("email"))) result.put("err", "이메일이");
-		else if(!code.equals((String)session.getAttribute("code"))) result.put("err", "인증번호가");
+		if (!mid.equals((String) session.getAttribute("mid")))
+			result.put("err", "아이디가");
+		else if (!mname.equals((String) session.getAttribute("mname")))
+			result.put("err", "이름이");
+		else if (!email.equals((String) session.getAttribute("email")))
+			result.put("err", "이메일이");
+		else if (!code.equals((String) session.getAttribute("code")))
+			result.put("err", "인증번호가");
 		else {
 
 			result.remove("isErr");
 			result.put("isErr", true);
 			// 비밀번호 재설정
 			String newPW = "";
-			for(int i=0; i<10; i++) {
-				newPW += String.valueOf(((int)(Math.random()*10+1)));
+			for (int i = 0; i < 10; i++) {
+				newPW += String.valueOf(((int) (Math.random() * 10 + 1)));
 			}
 			Member m = ms.selectOne(mid);
 			m.setMpw(bcpe.encode(newPW));
@@ -148,7 +155,8 @@ public class MemberController {
 
 			// 임시번호 발송
 			String getTitle = "miniMap 임시비밀번호 입니다.";
-			String getContent = "아이디 "+mid+"에 대해 임시비밀번호로 재설정 하였습니다.\n빠른 시일내에 비밀번호를 변경하는 것을 권장드립니다.\n임시비밀번호는 "+newPW+" 입니다.";
+			String getContent = "아이디 " + mid + "에 대해 임시비밀번호로 재설정 하였습니다.\n빠른 시일내에 비밀번호를 변경하는 것을 권장드립니다.\n임시비밀번호는 "
+					+ newPW + " 입니다.";
 
 			new SendMail().sendMail(email, getTitle, getContent);
 
@@ -163,13 +171,16 @@ public class MemberController {
 	public String memberEnroll() {
 		return "member/memberEnroll";
 	}
+  
+  @RequestMapping("/member/memberEnrollEnd.do")
+	public String memberEnrollEnd(Member member, Model model) {
 
 	@RequestMapping("/member/memberEnrollEnd.do")
 	public String memberEnrollEnd(Member m, Model model) {
 
 		System.out.println(m);
 		// ** 이미지 경로 DEFAULT로 안들어가게 지정 **
-		if(m.getProfilePath() == null || m.getProfilePath().trim() == "") m.setProfilePath("default.png");
+    if(m.getProfilePath() == null || m.getProfilePath().trim() == "") m.setProfilePath("default.png");
 
 		// ** 암호화 **
 		// 기존 비밀번호
@@ -179,13 +190,15 @@ public class MemberController {
 		// 코드 
 		m.setMpw(bcpe.encode(shapw));
 		System.out.println("암호화 후 : " + m.getMpw());
-
+    
 		int result = ms.insertMember(m);
 
 		System.out.println(m);
 
-		if(result > 0) msg = "회원 가입에 성공하였습니다.";
-		else msg = "회원 가입 실패"; 
+		if (result > 0)
+			msg = "회원 가입에 성공하였습니다.";
+		else
+			msg = "회원 가입 실패";
 
 		model.addAttribute("loc", loc);
 		model.addAttribute("msg", msg);
@@ -201,8 +214,8 @@ public class MemberController {
 	}
 
 	@ResponseBody
-	@RequestMapping(value="/member/checkIdDuplicate.do")
-	public Map<String, Object> checkIdDuplicate(@RequestParam String mid){
+	@RequestMapping(value = "/member/checkIdDuplicate.do")
+	public Map<String, Object> checkIdDuplicate(@RequestParam String mid) {
 
 		Map<String, Object> map = new HashMap<String, Object>();
 		
@@ -225,7 +238,8 @@ public class MemberController {
 
 	@RequestMapping("/member/selectCompanyMember.do")
 	@ResponseBody
-	public List<Member> selectCompanyMember(){
+  public List<Member> selectCompanyMember() {
+    
 		List<Member> clist = ms.selectCompanyMember();
 
 		System.out.println("clist : " + clist);
@@ -237,10 +251,9 @@ public class MemberController {
 
 	}
 
-	/*@RequestMapping("/member/insertFileEnd.do")
+  /*@RequestMapping("/member/insertFileEnd.do")
 	public String insertMember(Member member, Model model, HttpSession session,
 			@RequestParam(value="upFile", required = false) MultipartFile[] upFile) {
-
 		// 저장 경로 생성
 		String sfile = session.getServletContext().getRealPath("/resources/img/profiles");
 		List<Member> List = new ArrayList<Member>();
@@ -250,7 +263,7 @@ public class MemberController {
 
 		System.out.println("폴더가 있니? " + file.exists());
 
-		if(file.exists() == false) file.mkdirs();
+    if(file.exists() == false) file.mkdirs();
 
 		// 업로드
 		for(MultipartFile f : upFile) {
