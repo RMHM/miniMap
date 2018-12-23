@@ -71,9 +71,10 @@ public class MemberController {
 		return mv;
 	}
 
-  @RequestMapping(value="/member/memberLogout.do")
+	@RequestMapping(value = "/member/memberLogout.do")
 	public String memberLogout(SessionStatus sessionStatus, Model model) {
-		if(!sessionStatus.isComplete()) sessionStatus.setComplete();
+		if (!sessionStatus.isComplete())
+			sessionStatus.setComplete();
 		msg = "로그아웃 되었습니다.";
 		model.addAttribute("loc", loc);
 		model.addAttribute("msg", msg);
@@ -170,26 +171,24 @@ public class MemberController {
 	public String memberEnroll() {
 		return "member/memberEnroll";
 	}
-  
-  @RequestMapping("/member/memberEnrollEnd.do")
-	public String memberEnrollEnd(Member member, Model model) {
 
 	@RequestMapping("/member/memberEnrollEnd.do")
 	public String memberEnrollEnd(Member m, Model model) {
 
 		System.out.println(m);
 		// ** 이미지 경로 DEFAULT로 안들어가게 지정 **
-    if(m.getProfilePath() == null || m.getProfilePath().trim() == "") m.setProfilePath("default.png");
+		if (m.getProfilePath() == null || m.getProfilePath().trim() == "")
+			m.setProfilePath("default.png");
 
 		// ** 암호화 **
 		// 기존 비밀번호
 		String shapw = m.getMpw();
 		System.out.println("암호화 전  : " + shapw);
 
-		// 코드 
+		// 코드
 		m.setMpw(bcpe.encode(shapw));
 		System.out.println("암호화 후 : " + m.getMpw());
-    
+
 		int result = ms.insertMember(m);
 
 		System.out.println(m);
@@ -201,7 +200,6 @@ public class MemberController {
 
 		model.addAttribute("loc", loc);
 		model.addAttribute("msg", msg);
-		
 
 		return "common/msg";
 	}
@@ -217,7 +215,7 @@ public class MemberController {
 	public Map<String, Object> checkIdDuplicate(@RequestParam String mid) {
 
 		Map<String, Object> map = new HashMap<String, Object>();
-		
+
 		boolean isUsable = ms.checkIdDuplicate(mid) == 0 ? true : false;
 
 		map.put("isUsable", isUsable);
@@ -237,8 +235,8 @@ public class MemberController {
 
 	@RequestMapping("/member/selectCompanyMember.do")
 	@ResponseBody
-  public List<Member> selectCompanyMember() {
-    
+	public List<Member> selectCompanyMember() {
+
 		List<Member> clist = ms.selectCompanyMember();
 
 		System.out.println("clist : " + clist);
@@ -250,36 +248,32 @@ public class MemberController {
 
 	}
 
-  /*@RequestMapping("/member/insertFileEnd.do")
-	public String insertMember(Member member, Model model, HttpSession session,
-			@RequestParam(value="upFile", required = false) MultipartFile[] upFile) {
-		// 저장 경로 생성
-		String sfile = session.getServletContext().getRealPath("/resources/img/profiles");
-		List<Member> List = new ArrayList<Member>();
+	/*
+	 * @RequestMapping("/member/insertFileEnd.do") public String insertMember(Member
+	 * member, Model model, HttpSession session,
+	 * 
+	 * @RequestParam(value="upFile", required = false) MultipartFile[] upFile) { //
+	 * 저장 경로 생성 String sfile =
+	 * session.getServletContext().getRealPath("/resources/img/profiles");
+	 * List<Member> List = new ArrayList<Member>();
+	 * 
+	 * // 폴더 유무 확인 후 생성 File file = new File(sfile);
+	 * 
+	 * System.out.println("폴더가 있니? " + file.exists());
+	 * 
+	 * if(file.exists() == false) file.mkdirs();
+	 * 
+	 * // 업로드 for(MultipartFile f : upFile) { if(!f.isEmpty()) { // 원본 이름 가져오기
+	 * String originName = f.getOriginalFilename(); String ext =
+	 * originName.substring(originName.lastIndexOf(".")+1); SimpleDateFormat sdf =
+	 * new SimpleDateFormat("yyyyMMdd_HHmmss");
+	 * 
+	 * int rNum = (int) (Math.random() * 1000);
+	 * 
+	 * // 서버에서 저장 후 관리할 파일 명 String renamedName = sdf.format(new Date()) + "_" +
+	 * rNum + "." + ext;
+	 * 
+	 * // } } }
+	 */
 
-		// 폴더 유무 확인 후 생성
-		File file = new File(sfile);
-
-		System.out.println("폴더가 있니? " + file.exists());
-
-    if(file.exists() == false) file.mkdirs();
-
-		// 업로드
-		for(MultipartFile f : upFile) {
-			if(!f.isEmpty()) {
-				// 원본 이름 가져오기
-				String originName = f.getOriginalFilename();
-				String ext = originName.substring(originName.lastIndexOf(".")+1);
-				SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd_HHmmss");
-
-				int rNum = (int) (Math.random() * 1000);
-
-				// 서버에서 저장 후 관리할 파일 명
-				String renamedName = sdf.format(new Date()) + "_" + rNum + "." + ext;
-
-				// 
-			}
-		}
-	}*/
-
-} 
+}
