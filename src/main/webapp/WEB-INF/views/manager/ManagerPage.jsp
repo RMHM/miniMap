@@ -9,7 +9,7 @@
 <head>
 <meta charset="UTF-8">
 <title>관리자 페이지</title>
-<script src="/resources/js/jquery-3.3.1.min.js"></script>
+<script src="/WEB-INF/resources/js/jquery-3.3.1.min.js"></script>
 <style>
 
 body {
@@ -105,8 +105,8 @@ table{
 </head>
 <body>
 	<!-- 외부 파일 설정 -->
-  <%-- <c:import url="views/common/exFile.jsp" /> --%>
-	<c:import url="views/common/header.jsp"/>
+  <c:import url="/WEB-INF/views/common/exFile.jsp"/>
+	<c:import url="/WEB-INF/views/common/header.jsp"/>
 	
 	<p style="text-align: center; font-size: 25px; font-weight: 600;">관리자 페이지</p> 
 	<div id="all">

@@ -20,11 +20,6 @@ public class TimeLine extends TimeLineSmpl implements Serializable {
 		this.delFlag = delFlag;
 	}
 
-	@Override
-	public String toString() {
-		return "TimeLine [tId=" + tId + ", tDate=" + tDate + ", delFlag=" + delFlag + "]";
-	}
-
 	public int gettId() {
 		return tId;
 	}
@@ -49,5 +44,8 @@ public class TimeLine extends TimeLineSmpl implements Serializable {
 		this.delFlag = delFlag;
 	}
 
-
+	@Override
+	public String toString() {
+		return "TimeLine [tId=" + tId + ", tDate=" + tDate + ", delFlag=" + delFlag + "]";
+	}
 }

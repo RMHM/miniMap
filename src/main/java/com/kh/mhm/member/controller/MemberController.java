@@ -72,7 +72,7 @@ public class MemberController {
 	}
 
 	@RequestMapping(value="/member/memberLogout.do")
-	public String memberLogout(SessionStatus sessionStatus, HttpSession session, Model model) {
+	public String memberLogout(SessionStatus sessionStatus, Model model) {
 		if(!sessionStatus.isComplete()) sessionStatus.setComplete();
 		msg = "로그아웃 되었습니다.";
 		model.addAttribute("loc", loc);
@@ -91,6 +91,7 @@ public class MemberController {
 		}
 		return result;
 	}
+	
 	@RequestMapping("/member/memberFindPW.do")
 	@ResponseBody
 	public boolean memberFindPW(@RequestParam String mid, @RequestParam String mname, @RequestParam String email, HttpSession session) {
