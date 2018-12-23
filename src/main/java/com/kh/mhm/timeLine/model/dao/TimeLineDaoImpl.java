@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.kh.mhm.member.model.vo.Member;
-import com.kh.mhm.timeLine.model.vo.TimeLine;
+import com.kh.mhm.timeLine.model.vo.PreTimeLine;
 import com.kh.mhm.timeLine.model.vo.TimeLineSmpl;
 
 @Repository
@@ -15,19 +15,19 @@ public class TimeLineDaoImpl implements TimeLineDao {
 
 	@Autowired
 	SqlSessionTemplate sqlSession;
-	
+
 	@Override
 	public int insertTimeLine(TimeLineSmpl tls) {
 		return sqlSession.insert("TimeLine.insertTimeLine",tls);			
 	}
-				
-//	@Override
-//	public int selectMno(String mnick) {
-//		System.out.println("DAO mnick::"+mnick);
-//		int result=sqlSession.selectOne("TimeLine.selectMno",mnick);
-//		System.out.println("DAO result::"+result);
-//		return result;
-//	}
+
+	//	@Override
+	//	public int selectMno(String mnick) {
+	//		System.out.println("DAO mnick::"+mnick);
+	//		int result=sqlSession.selectOne("TimeLine.selectMno",mnick);
+	//		System.out.println("DAO result::"+result);
+	//		return result;
+	//	}
 
 	@Override
 	public Member getMemberByNick(String mnick) {
@@ -37,7 +37,7 @@ public class TimeLineDaoImpl implements TimeLineDao {
 	}
 
 	@Override
-	public List<TimeLine> selectPreTimeLine() {
+	public List<PreTimeLine> selectPreTimeLine() {
 		return sqlSession.selectList("TimeLine.selectPreTimeLine");
 	}
 

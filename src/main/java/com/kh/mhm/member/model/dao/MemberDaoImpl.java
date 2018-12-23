@@ -22,7 +22,6 @@ public class MemberDaoImpl implements MemberDao {
 
 	@Override
 	public int insertMember(Member member) {
-
 		return sst.insert("member.insertMember", member);
 	}
 
@@ -32,17 +31,17 @@ public class MemberDaoImpl implements MemberDao {
 	}
 
 	@Override
-  public List<Member> selectCommonMember() {
+	public List<Member> selectCommonMember() {
 		return sst.selectList("member.selectCommonMember");
 	}
-  
-  @Override
+
+	@Override
 	public List<Member> selectCompanyMember() {
 		return sst.selectList("member.selectCompanyMember");
-  }
-  
-  @Override
-  public int updateMemberPW(Member m) {
+	}
+
+	@Override
+	public int updateMemberPW(Member m) {
 		return sst.update("member.updatePW", m);
 	}
 
@@ -51,6 +50,5 @@ public class MemberDaoImpl implements MemberDao {
 		sst.selectOne("member.checkIdDuplicate", hmap);
 		return (Integer) hmap.get("result");
 	}
-
 
 }

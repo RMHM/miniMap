@@ -7,27 +7,27 @@ import org.springframework.stereotype.Service;
 
 import com.kh.mhm.member.model.vo.Member;
 import com.kh.mhm.timeLine.model.dao.TimeLineDao;
-import com.kh.mhm.timeLine.model.vo.TimeLine;
+import com.kh.mhm.timeLine.model.vo.PreTimeLine;
 import com.kh.mhm.timeLine.model.vo.TimeLineSmpl;
 
 @Service
 public class TimeLineServiceImpl implements TimeLineService {
-	
+
 	@Autowired
 	TimeLineDao tldi;
-	
+
 	@Override
 	public int insertTimeLine(TimeLineSmpl tls) {
 		return tldi.insertTimeLine(tls);
 	}
 
-//	@Override
-//	public int selectMno(String mnick) {
-//		System.out.println("SERVICE mnick::"+mnick);
-//		int result= tldi.selectMno(mnick);
-//		System.out.println("SERVICE result::"+result);
-//		return result;
-//	}
+	//	@Override
+	//	public int selectMno(String mnick) {
+	//		System.out.println("SERVICE mnick::"+mnick);
+	//		int result= tldi.selectMno(mnick);
+	//		System.out.println("SERVICE result::"+result);
+	//		return result;
+	//	}
 
 	@Override
 	public Member getMemberByNick(String mnick) {
@@ -35,7 +35,7 @@ public class TimeLineServiceImpl implements TimeLineService {
 	}
 
 	@Override
-	public List<TimeLine> selectPreTimeLine() {
+	public List<PreTimeLine> selectPreTimeLine() {
 		return tldi.selectPreTimeLine();
 	}
 

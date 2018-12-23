@@ -4,8 +4,8 @@ public class BoardType extends Board {
 
 	private int bCode;
 	private String bName;
-	
-	
+
+
 	public BoardType() {
 		super();
 	}
@@ -42,7 +42,7 @@ public class BoardType extends Board {
 	public String toString() {
 		return "BoardType [bCode=" + bCode + ", bName=" + bName + "]";
 	}
-	
-	
+
+
 
 }

@@ -17,7 +17,7 @@ public class MyPageDaoImpl implements MyPageDao {
 	private SqlSessionTemplate sqlSession;
 	@Override
 	public int insertSchedule(Schedule schedule) {
-		
+
 		return sqlSession.insert("myPage.insertSchedule", schedule);
 	}
 	@Override
@@ -26,13 +26,13 @@ public class MyPageDaoImpl implements MyPageDao {
 	}
 	@Override
 	public int updateMember(Member member) {
-		
-	  return sqlSession.update("member.updateMember",member);
+
+		return sqlSession.update("member.updateMember",member);
 	}
 	@Override
 	public int deleteMember(Member member) {
-	
-		 return sqlSession.update("member.deleteMember",member);
+
+		return sqlSession.update("member.deleteMember",member);
 	}
 	@Override
 	public int insertAuthority(Authority authority) {

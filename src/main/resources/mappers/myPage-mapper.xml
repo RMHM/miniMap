@@ -19,8 +19,6 @@
 		<result column="delflag" property="DELFLAG" />
 	</resultMap>
 
-
-
 	<insert id="insertSchedule" parameterType="Schedule">
 		INSERT INTO SCHEDULE
 		VALUES(SEQ_SID.NEXTVAL,#{mNo},#{start_Date},#{end_Date},#{sTitle},#{sContent},#{sColor},DEFAULT)

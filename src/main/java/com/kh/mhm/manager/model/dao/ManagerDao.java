@@ -8,6 +8,6 @@ import com.kh.mhm.manager.model.vo.CompanyMember;
 public interface ManagerDao {
 
 	List<BlackList> selectBlackList();
-	
+
 	List<CompanyMember> selectCompanyMember();
 }
