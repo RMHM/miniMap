@@ -8,13 +8,17 @@ import com.kh.mhm.board.model.vo.Board;
 
 public interface BoardService {
 
-	List<Map<String, String>> selectBoardList(int cPage, int numPerPage);
+	List<Board> selectBoardList(Board board);	
+	
+	List<Board> selectNoticeList(Board board);		
 
 	int selectBoardTotalContents();
 
 	int insertBoard(Board board, List<Fileref> attachList);
 
-	Board selectOneBoard(int boardNo);
+	Board selectOneBoard(int bId);
+	
+	int updateOneCount(int bId);
 
 	List<Fileref> selectFilerefList(int boardNo);
 

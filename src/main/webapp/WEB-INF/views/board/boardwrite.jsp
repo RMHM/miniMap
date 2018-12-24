@@ -26,24 +26,29 @@
 			<div class="col-md-2" align="center">
 				&nbsp;&nbsp;
 				<h4>--게시판 목록--</h4>
-				<ul>
+				<ul class="unstyled">
 					&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;
-					<li class="">자유 게시판</li> &nbsp;
-					<li class="">정보공유 게시판</li> &nbsp;
-					<li class="">여행후기 게시판</li> &nbsp;
-					<li class="">질문 게시판</li>
+					<li><a href="/board/boardlist1.do">자유 게시판</a></li> &nbsp;
+					<li><a href="/board/boardlist2.do">정보공유 게시판</a></li> &nbsp;
+					<li><a href="/board/boardlist3.do">여행후기 게시판</a></li> &nbsp;
+					<li><a href="/board/boardlist4.do">질문 게시판</a></li>
 				</ul>
 			</div>
 			<!-- 에디터 넣어야됨. -->
 			<div class="col-md-10">
 				<form action="/board/boardview2.do" method="post" id="boardfrm" enctype="multipart/form-data">
-					<input type="hidden" name="bId" value="" />
+					<input type="hidden" name="bId" value="" /><!-- 게시물 고유번호  -->
+					<input type="hidden" name="mNo" value="" /><!-- 작성자 회원번호  -->
+					<input type="hidden" name="bNo" value="" /><!-- 분류내 게시물번호  -->					
 					<input type="text" placeholder="제목" name="bTitle" id="bTitle" required>					
-					<div id="daumeditor" class="edit" style="width:80%; height:100%;"></div>				
+					<div id="daumeditor" class="edit" style="width:90%; height:100%;"></div>				
 					<textarea name="boardcontent" id="boardcontent" style="display:none;"></textarea>
-					<input type="button" class="btn btn-theme" id="insertBoard" value="등록"/><!-- onclick="submitContents(this);" --> 
-					<!-- <input type="button" onclick="pasteHTML();" value="본문에 내용 넣기" />
-					<input type="button" onclick="showHTML();" value="본문 내용 가져오기" />	 -->
+					<input type="radio" name="bCode" value="1">잡담
+					<input type="radio" name="bCode" value="2">정보
+					<input type="radio" name="bCode" value="3">후기
+					<input type="radio" name="bCode" value="4">질문
+					<input type="button" class="btn btn-theme" id="insertBoard" value="등록"
+					 style="position: absolute; right: 100px;"/>			
 									
 				</form>
 			</div>
