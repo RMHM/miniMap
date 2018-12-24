@@ -107,5 +107,9 @@
 	<select id="selectBlackList" resultMap="BlackListMap">
 		select mno, mid, mname, email, gender, age, drop_date, end_date, reason from (select * from member join blacklist using(mno))
 	</select>
-
+	
+	<select id="selectNowBlack" parameterType="_int" resultType="date">
+		select end_date from (select rownum, end_date from (select end_date from blacklist where mno = #{mno} order by end_date desc) where rownum=1)
+	</select>
+	
 </mapper>

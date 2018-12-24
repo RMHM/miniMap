@@ -1,6 +1,7 @@
 package com.kh.mhm.member.model.service;
 
 import java.util.List;
+import java.util.Date;
 import java.util.HashMap;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -50,6 +51,11 @@ public class MemberServiceImpl implements MemberService {
 		HashMap<String, Object> hmap = new HashMap<String, Object>();
 		hmap.put("mid", mid);
 		return mDao.checkIdDuplicate(hmap);
+	}
+
+	@Override
+	public Date selectNowBlack(int mno) {
+		return mDao.selectNowBlack(mno);
 	}
 
 }
