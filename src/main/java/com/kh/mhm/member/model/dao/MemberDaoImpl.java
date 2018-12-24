@@ -1,6 +1,7 @@
 package com.kh.mhm.member.model.dao;
 
 import java.util.List;
+import java.util.Date;
 import java.util.HashMap;
 
 import org.mybatis.spring.SqlSessionTemplate;
@@ -49,6 +50,11 @@ public class MemberDaoImpl implements MemberDao {
 	public int checkIdDuplicate(HashMap<String, Object> hmap) {
 		sst.selectOne("member.checkIdDuplicate", hmap);
 		return (Integer) hmap.get("result");
+	}
+
+	@Override
+	public Date selectNowBlack(int mno) {
+		return sst.selectOne("member.selectNowBlack", mno);
 	}
 
 }

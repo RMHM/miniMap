@@ -24,7 +24,7 @@
 <script src="/resources/js/jquery-3.3.1.min.js"></script>
 <!-- <script src="/resources/js/jquery.js"></script> -->
 <script src='/resources/js/fullcalendar.min.js'></script>
-<script src="/resources/js/jquery.easing.1.3.js"></script>
+<!-- <script src="/resources/js/jquery.easing.1.3.js"></script> -->
 <script src="/resources/js/bootstrap.min.js"></script>
 <script src="/resources/js/jquery.fancybox.pack.js"></script>
 <script src="/resources/js/jquery.fancybox-media.js"></script>

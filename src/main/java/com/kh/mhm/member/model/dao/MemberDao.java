@@ -1,6 +1,7 @@
 package com.kh.mhm.member.model.dao;
 
 import java.util.List;
+import java.util.Date;
 import java.util.HashMap;
 
 import com.kh.mhm.member.model.vo.Member;
@@ -20,5 +21,6 @@ public interface MemberDao {
 	int updateMemberPW(Member m);
 
 	List<Member> selectCompanyMember();
-
+	
+	Date selectNowBlack(int mno);
 }
