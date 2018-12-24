@@ -8,15 +8,19 @@ import com.kh.mhm.board.model.vo.Board;
 
 public interface BoardDao {
 
-	List<Map<String, String>> selectBoardList(int cPage, int numPerPage);
+	List<Board> selectBoardList(Board board);
+	
+	List<Board> selectNoticeList(Board board);
 
 	int selectBoardTotalContents();
 
 	int insertBoard(Board board);
 
 	int insertFileref(Fileref a);
+	
+	int updateOneCount(int bId);
 
-	Board selectOneBoard(int boardNo);
+	Board selectOneBoard(int bId);
 
 	List<Fileref> selectFilerefList(int boardNo);
 
@@ -29,5 +33,7 @@ public interface BoardDao {
 	int deleteFileref(int boardNo);
 
 	int deleteFile(int attNo);
+
+
 
 }
