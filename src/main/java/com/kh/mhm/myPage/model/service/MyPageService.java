@@ -19,4 +19,10 @@ public interface MyPageService {
 	int deleteMember(Member member);
 
 	int insertAuthority(Authority authority);
+
+	int selectBoardTotalContents(int no);
+
+	List<Map<String, Object>> selectMyBoardList(int cPage, int numPerPage, int no);
+
+	List<Authority> selectRequest(int mno);
 }

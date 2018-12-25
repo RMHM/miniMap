@@ -26,15 +26,20 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.kh.mhm.board.model.service.BoardService;
+import com.kh.mhm.board.model.vo.Board;
+import com.kh.mhm.common.util.Utils;
 import com.kh.mhm.member.model.service.MemberService;
 import com.kh.mhm.member.model.vo.Member;
 import com.kh.mhm.myPage.model.service.MyPageService;
 import com.kh.mhm.myPage.model.vo.Authority;
 import com.kh.mhm.myPage.model.vo.Schedule;
+import com.sun.media.sound.SoftSynthesizer;
+
 
 @SessionAttributes(value = { "member" })
 @Controller
-public class myPageController {
+public class MyPageController {
 	@Autowired
 	private MyPageService mps;
 	@Autowired
@@ -46,7 +51,7 @@ public class myPageController {
 	private String msg = "";
 
 	@RequestMapping("/myPage/insertSchedule.do")
-	public void insertSchedule(Member member, @RequestParam String startDateT, @RequestParam String endDateT,
+	public String insertSchedule(Member member, @RequestParam String startDateT, @RequestParam String endDateT,
 			Schedule schedule, Model model) {
 		/* java.util.Date utilDate = new java.util.Date(); */
 		/* Date sqlDate = new Date(utilDate.getTime()); */
@@ -66,12 +71,8 @@ public class myPageController {
 		 * } catch (ParseException e) { e.printStackTrace(); } schedule.setMNo(10);
 		 */ /* System.out.println(schedule); */
 		int result = mps.insertSchedule(schedule);
-		if (result > 0)
-			selectSchedule(member, model);
-		else
-			System.out.println("일정 추가 실패");
+		return selectSchedule(member, model);
 
-		/* return "myPage/selectSchedule.do"; */
 	}
 
 	/*
@@ -84,6 +85,7 @@ public class myPageController {
 	@RequestMapping("/myPage/selectSchedule.do")
 	public String selectSchedule(Member member, Model model) {
 		Map<String, Object> map = new HashMap<String, Object>();
+		System.out.println("insert 이후");
 		/* System.out.println(ms.selectSchedule()); */
 
 		/*
@@ -211,25 +213,62 @@ public class myPageController {
 
 	/* 내 게시글 */
 	@RequestMapping("/myPage/myBoardList.do")
-	public String myBoardList(Member member, Model model) {
+	public String myBoardList(@RequestParam(value="cPage", required=false, defaultValue="1")
+	int cPage,Member member, Model model) {
+		int no = member.getMno();
+		int numPerPage = 10; 
+		
+		int totalContents = mps.selectBoardTotalContents(no);
+		
+		List<Map<String, Object>> list = 
+				new ArrayList<Map<String, Object>>(mps.selectMyBoardList(cPage,numPerPage,no));
+		String pageBar = Utils.getPageBar(totalContents, cPage, numPerPage, "myBoardList.do");
+		model.addAttribute("list", list)
+		.addAttribute("totalContents", totalContents)
+		.addAttribute("numPerPage", numPerPage)
+		.addAttribute("pageBar", pageBar);
+/*		System.out.println(list.get(0));
+		System.out.println(list.size());*/
 		return "myPage/boardMyView";
 	}
 
+	/*nav 클릭*/
 	@RequestMapping("/myPage/rePermissionPage.do")
+	public String requestViewPage(Member member,Model model) {
+		/*int no = member.getMno();
+		int numPerPage = 10; */
+		// 한 페이지당 게시글 수
+		/*ArrayList<Map<String, String>> list = 
+				new ArrayList<Map<String, String>>(mps.selectMyBoardList(cPage, numPerPage));*/
+		/*int totalContents = mps.selectBoardTotalContents(no);*/
+		
+		// 3. 페이지 계산 후 작성할 HTML 추가
+	/*	String pageBar = Utils.getPageBar(totalContents, cPage, numPerPage, "boardList.do");
+		
+		model.addAttribute("list", list)
+		.addAttribute("totalContents", totalContents)
+		.addAttribute("numPerPage", numPerPage)
+		.addAttribute("pageBar", pageBar);
+		*/
+		List<Authority> list = mps.selectRequest(member.getMno());
+		System.out.println(list);
+		model.addAttribute("list", list);
+		return "myPage/requestView";
+	}
+	
+	/* 요청클릭 */ 
+	@RequestMapping("/myPage/rePermissionClick.do")
 	public String requestPage(Member member) {
-
 		return "myPage/requestPermission";
 	}
+	
 
 	/* 권한 요청 */
 	@RequestMapping("/myPage/rePermission.do")
 	public String rePermission(Member member, Authority authority) {
-
 		authority.setMNo(member.getMno());
 		int result = mps.insertAuthority(authority);
-		System.out.println(authority);
-
-		return "myPage/requestPermission";
+		return "myPage/myPageMain";
 	}
 
 }

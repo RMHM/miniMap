@@ -29,58 +29,55 @@
 				<div class="container-fluid">
 					<div class="row">
 						<div class="list">
-
+							<input type="button" value="요청하기" onclick="location.href='/myPage/rePermissionClick.do'"/>
 							<table class="table table-hover">
 								<thead>
 									<tr>
-										<th>번호</th>
 										<th>분류</th>
-										<th>제목</th>
 										<th>작성자</th>
-										<th>조회수</th>
-										<th>작성일</th>
+										<th>요청날짜</th>
+										<th>승인여부</th>
 									</tr>
 								</thead>
-								<tbody>
-								${list.size() } 
-								${list.get(0)} 
-								
-									<%--  <c:out value="${list.size() gt 0 }"></c:out>  --%>
-									<%-- <c:if test="${list.size() gt 0"> --%>
-									<c:forEach items="${list } " var="l">
+								<tbody>${list.size() }
+								 
+									<c:if test="${!empty list }">
+									  <c:forEach items="${list } " var="l">
+										${l}
+										<%-- <tr>
+											<td>l.aId</td>
+											<td>l.mName</td>
+											<td>l.request_date</td>
+											<c:if test="${empty l.grant_date}"><td>승인</td>
+											</c:if>
+											<c:if test="${!empty l.grant_date}"><td>요청중</td>
+											</c:if>
+											
+										</tr> --%>
+									</c:forEach> 
+									</c:if>
 									
-									<%-- <c:out value="${list }"></c:out> --%>
-											<%-- ${l.bNo} --%>
-											<%-- <tr id="${b.boardNo}"> --%>
-											<tr>
-										<%-- 	<td>${l.bNo}</td>
-											<td>${l.bCode}</td>
-											<td>${l.bTitle}</td>
-											<td>${l.mNo}</td>
-											<td>${l.bCount}</td>
-											<td>${l.bDate}</td> --%> 
-										</tr>
-
-									</c:forEach>
-									<%-- </c:if> --%>
-
-									<%-- 	<c:if test="${list.size() eq 0} ">
-							aaaaaaaaaaaa
-										<tr>
-											<td colspan="6">작성한 글이 없습니다.</td>
-										</tr>
-									</c:if>  --%>
+									<c:if test="${empty list }">
+									<tr>
+									<td colspan="4" align="center">요청글이 없습니다.
+									</tr>
+									
+									</c:if> 
 								</tbody>
 							</table>
 
-							<c:out value="${pageBar}" escapeXml="false" />
+
 
 						</div>
 					</div>
 				</div>
 			</div>
 
-
+		<!-- 	<script>
+			$('input[type=button]').click(function{
+				location.href="/myPage/rePermissionClick.do";
+			});
+			</script> -->
 
 
 		</div>

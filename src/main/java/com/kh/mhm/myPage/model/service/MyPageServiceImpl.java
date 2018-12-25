@@ -40,5 +40,19 @@ public class MyPageServiceImpl implements MyPageService {
 	public int insertAuthority(Authority authority) {
 		return md.insertAuthority(authority);
 	}
+	@Override
+	public int selectBoardTotalContents(int no) {
+		return  md.selectMyBoardCount(no);
+	}
+	@Override
+	public List<Map<String, Object>> selectMyBoardList(int cPage, int numPerPage, int no) {
+		return  md.selectMyBoard(cPage,numPerPage,no);
+	}
+	@Override
+	public List<Authority> selectRequest(int mno) {
+	
+		return md.selectRequest(mno);
+	}
+
 
 }
