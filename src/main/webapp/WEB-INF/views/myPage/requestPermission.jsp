@@ -35,25 +35,12 @@
 							<div class="raw">
 									<div class="form-group">
 									<div class="btn-group">
-										<input type="button" id="aCode" name="aCode" value="작성권한" id="reWrite"
-											class="btn btn-theme" text="asd"> <input id="aCode"
-											type="button" name="aCode" value="파워링크" id="rePowerLink"
-											class="btn btn-theme">
-										<!-- 	<script >
-
-											$('input[name=aCode]').click(function(){
-												console.log(this.value=="작성권한");
-												$('#aCode').value((this.value=="작성권한")?1:2); 
-												/* console.log(this.value);
-												this.value==1;
-												
-												console.log(this.value); */
-												
-											});
-											</script> -->
+	
+										<input type="radio" id="aCode1" name="aCode" value="1"/><label for="aCode1">작성권한</label>
+										<input type="radio" id="aCode2"  name="aCode" value="2" /><label for="aCode2">파워링크</label>
 									</div>
 								</div>
-								<div id="findDiv" class="col-lg-4 col-md-offset-4"></div>
+							
 							</div>
 
 							<div class="form-group">
@@ -131,15 +118,7 @@
 															.getElementById('sample4_postcode').value = data.zonecode;
 													document
 															.getElementById("sample4_roadAddress").value = roadAddr;
-													/*   document.getElementById("sample4_jibunAddress").value = data.jibunAddress; */
-
-													/*  // 참고항목 문자열이 있을 경우 해당 필드에 넣는다.
-													 if(roadAddr !== ''){
-													     document.getElementById("sample4_extraAddress").value = extraRoadAddr;
-													 } else {
-													     document.getElementById("sample4_extraAddress").value = '';
-													 } */
-
+				
 													var guideTextBox = document
 															.getElementById("guide");
 													// 사용자가 '선택 안함'을 클릭한 경우, 예상 주소라는 표시를 해준다.

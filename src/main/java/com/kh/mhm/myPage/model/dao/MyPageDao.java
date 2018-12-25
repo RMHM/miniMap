@@ -20,4 +20,11 @@ public interface MyPageDao {
 
 	int insertAuthority(Authority authority);
 
+	int selectMyBoardCount(int no);
+
+	List<Map<String, Object>> selectMyBoard(int cPage, int numPerPage, int no);
+
+	List<Authority> selectRequest(int mno);
+
+
 }
