@@ -53,7 +53,7 @@ public class MemberController {
 	public ModelAndView memberLogin(@RequestParam String mid, @RequestParam String mpw, Model model) {
 		ModelAndView mv = new ModelAndView();
 
-		Member m = ms.selectOne(mid);
+		Member m = ms.selectLogin(mid);
 		
 		String loc = "/";
 		String msg = "";

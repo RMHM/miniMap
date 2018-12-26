@@ -96,7 +96,7 @@ body {
 		<!-- header 선언 -->
 		<c:import url="../common/header.jsp" />
 		<c:import url="../common/myPageNav.jsp" />
-    <div class="container">
+		<div class="container">
 			<div id='calendar'></div>
 			<div id="insertC" class="" tabindex="-1" role="dialog"
 				style="position: absolute; height: auto; width: 350px; top: 137px; left: 202px; display: none; z-index: 101;"
@@ -151,7 +151,7 @@ body {
 
 						</div>
 					</div>
-        </form>
+				</form>
 			</div>
 			<script>
 	
