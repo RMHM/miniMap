@@ -27,20 +27,22 @@
 					<li class="">질문 게시판</li>
 				</ul>
 			</div>			
-			<div class="col-md-10" overflow:auto >				
+			<div class="col-md-10" overflow:auto id="boardview" >				
 					<!-- 게시판 고유 번호 -->
-					<input type="hidden" name="boardNo" value="" /> 
+					<input type="hidden" name="bNo" value="${b.bNo }" />
+					<input type="hidden" name="bId" value="${b.bId }" />  
 					<!-- 게시판 제목 -->
 					<input type="text" placeholder="제목" name="boardTitle" id="boardTitle" 
-					<%-- value="${board.bTitle }" --%> required>
+					value="${b.bTitle }" required>
 					<!-- 게시판 작성자 -->
 					<input type="text" class="form-control" name="boardWriter" 
 					<%-- value="${board.boardWriter}" --%> readonly required>
 					<div>${requestScope.result}</div>
+					<div>${b.bContent}</div>
 					&nbsp;&nbsp;&nbsp;
-					<input type="button" onclick="location.href='${pageContext.request.contextPath}/board/boardmain.do'"
+					<input type="button" onclick="location.href='${pageContext.request.contextPath}/board/boardlist1.do'"
 					value="리스트로"/>
-					<%-- <c:if test="${member.userId eq board.boardWriter}">  </c:if>--%>
+					<%-- <c:if test="${member.userId eq board.boardWriter}"> </c:if>--%>
 					<input type="button" name="modify" value="수정">
 					<input type="button" name="delete" value="삭제">				
 			</div>

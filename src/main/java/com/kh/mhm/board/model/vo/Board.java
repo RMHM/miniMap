@@ -43,72 +43,72 @@ public class Board {
 	}
 
 
-	public int getbId() {
+	public int getBId() {
 		return bId;
 	}
 
 
-	public void setbId(int bId) {
+	public void setBId(int bId) {
 		this.bId = bId;
 	}
 
 
-	public int getmNo() {
+	public int getMNo() {
 		return mNo;
 	}
 
 
-	public void setmNo(int mNo) {
+	public void setMNo(int mNo) {
 		this.mNo = mNo;
 	}
 
 
-	public int getbNo() {
+	public int getBNo() {
 		return bNo;
 	}
 
 
-	public void setbNo(int bNo) {
+	public void setBNo(int bNo) {
 		this.bNo = bNo;
 	}
 
 
-	public int getbCode() {
+	public int getBCode() {
 		return bCode;
 	}
 
 
-	public void setbCode(int bCode) {
+	public void setBCode(int bCode) {
 		this.bCode = bCode;
 	}
 
 
-	public String getbTitle() {
+	public String getBTitle() {
 		return bTitle;
 	}
 
 
-	public void setbTitle(String bTitle) {
+	public void setBTitle(String bTitle) {
 		this.bTitle = bTitle;
 	}
 
 
-	public String getbContent() {
+	public String getBContent() {
 		return bContent;
 	}
 
 
-	public void setbContent(String bContent) {
+	public void setBContent(String bContent) {
 		this.bContent = bContent;
 	}
 
 
-	public Date getbDate() {
+	public Date getBDate() {
 		return bDate;
 	}
 
 
-	public void setbDate(Date bDate) {
+	public void setBDate(Date bDate) {
 		this.bDate = bDate;
 	}
 
@@ -123,12 +123,12 @@ public class Board {
 	}
 
 
-	public String getrFlag() {
+	public String getRFlag() {
 		return rFlag;
 	}
 
 
-	public void setrFlag(String rFlag) {
+	public void setRFlag(String rFlag) {
 		this.rFlag = rFlag;
 	}
 
@@ -163,12 +163,12 @@ public class Board {
 	}
 
 
-	public int getbCount() {
+	public int getBCount() {
 		return bCount;
 	}
 
 
-	public void setbCount(int bCount) {
+	public void setBCount(int bCount) {
 		this.bCount = bCount;
 	}
 

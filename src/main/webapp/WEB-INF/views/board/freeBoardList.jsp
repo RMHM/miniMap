@@ -55,31 +55,32 @@
 									</tr>
 								</thead>
 								<tbody>
-									<tr style="background-color: lightskyblue;">
-										<td>1</td>
-										<td>공지</td>
-										<td>여기에 자유 게시판 공지가 들어갈꺼야</td>
-										<td>놀고싶다.</td>
-										<td>0</td>
-										<td>sysdate가 될 것.</td>
+								<c:forEach var="Board" items="${list2 }">
+									<tr name="bId" id="${Board.bId }" style="background-color: lightskyblue;">									
+									   <td><c:out value="${Board.bNo }"/></td>
+                     				   <td><c:out value="공지"/></td>
+                  				       <td><c:out value="${Board.bTitle }"/></td>
+               				           <td><c:out value="${Board.mNo}"/></td>
+               				           <td><c:out value="${Board.bCount }"/></td>
+                			           <td><c:out value="${Board.bDate}"/></td>
 									</tr>
-									<c:forEach begin="1" end="10" step="1" var="b">
-										<tr>
-											<td>2</td>
-											<td>일반</td>
-											<td>여기 이제 게시물이 들어갈꺼야</td>
-											<td>놀고싶다.</td>
-											<td>0</td>
-											<td>sysdate가 될 것.</td>
-										</tr>
-									</c:forEach>
+									</c:forEach>									
+									<c:forEach var="Board" items="${list }">
+									<tr name="bId" id="${Board.bId }">
+                     				   <td><c:out value="${Board.bNo }"/></td>
+                     				   <td><c:out value="일반"/></td>
+                  				       <td><c:out value="${Board.bTitle }"/></td>
+               				           <td><c:out value="${Board.mNo}"/></td>
+               				           <td><c:out value="${Board.bCount }"/></td>
+                			           <td><c:out value="${Board.bDate}"/></td>
+                    				</tr>
+									</c:forEach>									
 								</tbody>
 							</table>
 							<!-- 페이지 처리 해야됨. -->
-							<input type="button" value="글쓰기" id=""
-								class="btn btn-theme btn-large"
+							<input type="button" value="글쓰기" id=""	class="btn btn-theme btn-large"
 								onclick="location.href='${pageContext.request.contextPath}/board/boardwrite.do'"
-								style="position: absolute; right: 30px;" />
+								style="position: absolute; right: 20px;" />
 
 							<div class="" id=""
 								style="display: flex; align-items: center; justify-content: center;">
@@ -99,4 +100,16 @@
 		<c:import url="/WEB-INF/views/common/footer.jsp" />
 	</div>
 </body>
+<script>
+$(function(){
+	$("tr[name]").on("click",function(){
+		var bId = $(this).attr("id");
+		console.log("bId="+bId);
+		location.href = "${pageContext.request.contextPath}/board/boardview.do?bId="+bId;
+	});
+});
+
+</script>
+
+
 </html>

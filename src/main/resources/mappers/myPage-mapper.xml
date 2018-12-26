@@ -6,7 +6,6 @@
 <mapper namespace="myPage">
 
 	<resultMap type="map" id="scheduleMap">
-
 		<result column="sId" property="SID" />
 		<result column="mNo" property="MNO" />
 		<result column="start_Date" property="START_DATE"
@@ -18,6 +17,24 @@
 		<result column="sColor" property="SCOLOR" />
 		<result column="delflag" property="DELFLAG" />
 	</resultMap>
+	
+	<resultMap type="map" id="boardMap">
+	
+	
+	</resultMap>
+	<resultMap type="map" id="requestMap">
+	<result column="aId" property="AID" />
+	<result column="mNo" property="MNO" />
+	<result column="mName" property="MNAME" />
+	<result column="request_date" property="REQUEST_DATE" />
+	<result column="address" property="ADDRESS" />
+	<result column="aContent" property="ACONTENT" />
+	<result column="aCode" property="ACODE" />
+	<result column="aTake" property="ATAKE" />
+	<result column="grant_date" property="GRANT_DATE" />
+	<result column="delflag" property="DELFLAG" />
+	
+	</resultMap>
 
 	<insert id="insertSchedule" parameterType="Schedule">
 		INSERT INTO SCHEDULE
@@ -25,9 +42,24 @@
 
 	</insert>
 	<!-- <select id="selectSchedule" parameterType="_int" resultMap="scheduleMap"> -->
-	<select id="selectSchedule" parameterType="_int" resultMap="scheduleMap">
+	<select id="selectSchedule" parameterType="_int"
+		resultMap="scheduleMap">
 		SELECT * FROM SCHEDULE
 		WHERE MNO=#{mno}
 	</select>
 
+	<select id="selectMyBoard" parameterType="_int"
+		resultType="Board">
+		SELECT * FROM BOARD WHERE MNO=#{mNo} ORDER BY BDATE
+		DESC,BNO DESC
+	</select>
+
+	<select id="selectBoardCount" parameterType="_int"
+		resultType="_int">
+		SELECT COUNT(*) FROM BOARD WHERE MNO=#{mNo}
+	</select>
+	<select id="selectRequest" parameterType="_int" resultType="Authority">
+		select * from authority where mno=#{mNo}
+
+	</select>
 </mapper>

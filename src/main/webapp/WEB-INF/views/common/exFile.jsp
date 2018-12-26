@@ -24,7 +24,7 @@
 <script src="/resources/js/jquery-3.3.1.min.js"></script>
 <!-- <script src="/resources/js/jquery.js"></script> -->
 <script src='/resources/js/fullcalendar.min.js'></script>
-<script src="/resources/js/jquery.easing.1.3.js"></script>
+<!-- <script src="/resources/js/jquery.easing.1.3.js"></script> -->
 <script src="/resources/js/bootstrap.min.js"></script>
 <script src="/resources/js/jquery.fancybox.pack.js"></script>
 <script src="/resources/js/jquery.fancybox-media.js"></script>
@@ -34,5 +34,5 @@
 <script src="/resources/js/jquery.flexslider.js"></script>
 <script src="/resources/js/animate.js"></script>
 <script src="/resources/js/custom.js"></script>
-<script src="//ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+<!-- <script src="//ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script> -->
 <script src="//d1p7wdleee1q2z.cloudfront.net/post/search.min.js"></script>

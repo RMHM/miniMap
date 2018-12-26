@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.ibatis.session.RowBounds;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -39,5 +40,20 @@ public class MyPageDaoImpl implements MyPageDao {
 	
 		return sqlSession.insert("authority.insertAuthority",authority);
 	}
-
+	@Override
+	public int selectMyBoardCount(int no) {
+		
+		return sqlSession.selectOne("myPage.selectBoardCount",no);
+	}
+	@Override
+	public List<Map<String, Object>> selectMyBoard(int cPage, int numPerPage, int no) {
+		RowBounds rowBounds = new RowBounds((cPage-1)*numPerPage, numPerPage);
+		return sqlSession.selectList("myPage.selectMyBoard",no,rowBounds);
+	}
+	@Override
+/*	public List<Map<String, String>> selectRequest(int mno) {*/
+	public List<Authority> selectRequest(int mno) {
+		return sqlSession.selectList("myPage.selectRequest",mno);
+	}
+	
 }

@@ -1,0 +1,12 @@
+.counter {
+  display: table-cell;
+  margin:1.5%;
+  font-size:50px;
+  color : #fff;
+  background-color: #5050a0;
+  border-radius: 50%;
+  width:200px;
+  height:200px;
+  vertical-align: middle;
+  marin : auto
+}
