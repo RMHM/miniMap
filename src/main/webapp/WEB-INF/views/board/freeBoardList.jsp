@@ -55,26 +55,26 @@
 									</tr>
 								</thead>
 								<tbody>
-								<c:forEach var="Board" items="${list2 }">
-									<tr name="bId" id="${Board.bId }" style="background-color: lightskyblue;">									
-									   <td><c:out value="${Board.bNo }"/></td>
+								<c:forEach var="Board" items="${list2 }"> <!-- 공지 게시글 페이지 -->
+									<tr name="BId" id="${Board.BId }" style="background-color: lightskyblue;">									
+									   <td><c:out value="${Board.BNo }"/></td>
                      				   <td><c:out value="공지"/></td>
-                  				       <td><c:out value="${Board.bTitle }"/></td>
-               				           <td><c:out value="${Board.mNo}"/></td>
-               				           <td><c:out value="${Board.bCount }"/></td>
-                			           <td><c:out value="${Board.bDate}"/></td>
+                  				       <td><c:out value="${Board.BTitle }"/></td>
+               				           <td><c:out value="${Board.mnick}"/></td>
+               				           <td><c:out value="${Board.BCount }"/></td>
+                			           <td><c:out value="${Board.BDate}"/></td>
 									</tr>
-									</c:forEach>									
-									<c:forEach var="Board" items="${list }">
-									<tr name="bId" id="${Board.bId }">
-                     				   <td><c:out value="${Board.bNo }"/></td>
+								</c:forEach>									
+								<c:forEach var="Board" items="${list }"> <!-- 일반 게시글 페이지 -->
+									<tr name="BId" id="${Board.BId }">
+                     				   <td><c:out value="${Board.BNo }"/></td>
                      				   <td><c:out value="일반"/></td>
-                  				       <td><c:out value="${Board.bTitle }"/></td>
-               				           <td><c:out value="${Board.mNo}"/></td>
-               				           <td><c:out value="${Board.bCount }"/></td>
-                			           <td><c:out value="${Board.bDate}"/></td>
+                  				       <td><c:out value="${Board.BTitle }"/></td>
+               				           <td><c:out value="${Board.mnick}"/></td>
+               				           <td><c:out value="${Board.BCount }"/></td>
+                			           <td><c:out value="${Board.BDate}"/></td>
                     				</tr>
-									</c:forEach>									
+								</c:forEach>									
 								</tbody>
 							</table>
 							<!-- 페이지 처리 해야됨. -->
@@ -103,9 +103,9 @@
 <script>
 $(function(){
 	$("tr[name]").on("click",function(){
-		var bId = $(this).attr("id");
-		console.log("bId="+bId);
-		location.href = "${pageContext.request.contextPath}/board/boardview.do?bId="+bId;
+		var BId = $(this).attr("id");
+		console.log("BId="+BId);
+		location.href = "${pageContext.request.contextPath}/board/boardview.do?BId="+BId;
 	});
 });
 
