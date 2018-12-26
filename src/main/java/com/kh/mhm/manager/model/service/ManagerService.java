@@ -11,4 +11,6 @@ public interface ManagerService {
 
 	List<CompanyMember> selectCompanyMember();
 
+	List<Integer> selectCount();
+
 }

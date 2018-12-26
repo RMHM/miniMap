@@ -57,7 +57,30 @@
 				</div>
 			</div>
 		</section>
-		
+		<section class="callaction">
+			<div class="container">
+				<div class="row">
+					<div class="col-lg-12">
+						<div class="row">
+							전체 방문수
+							<div class="counter" data-count="9">0</div>
+							오늘 방문수
+							<div class="counter" data-count="99">0</div>
+							평균 방문수
+							<div class="counter" data-count="999">0</div>
+						</div>
+					
+					
+						<div class="big-cta">
+							<div class="cta-text">
+								
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+		<br>
 		<section class="callaction">
 			<div class="container">
 				<div class="row">
@@ -220,4 +243,6 @@
 	<c:import url="views/common/footer.jsp"/>
 	<a href="#" class="scrollup"><i class="fa fa-angle-up active"></i></a>
 </body>
+<script src="/resources/js/counter.js"></script>
+<!-- <link href="/resources/css/counter.css" rel="stylesheet"/> -->
 </html>

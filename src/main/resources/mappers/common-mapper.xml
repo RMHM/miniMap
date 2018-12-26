@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE mapper PUBLIC
+"-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="common">
+	
+	<select id="selectToday" resultType="_int">
+		select count(*) from visitor where to_char(sysdate, 'yyyymmdd') = to_char(vdate, 'yyyymmdd')
+	</select>
+	
+	<insert id="insertToday">
+		insert into visitor values(seq_vid.nextval, sysdate, default)
+	</insert>
+	
+	<update id="updateCount">
+		update visitor set vcount = vcount + 1 where to_char(sysdate, 'yyyymmdd') = to_char(vdate, 'yyyymmdd')
+	</update>
+	
+	<select id="selectAllCnt" resultType="_int">
+		select sum(vcount) from visitor
+	</select>
+	
+	<select id="selectDayCnt" resultType="_int">
+		select sum(vcount) from visitor where to_char(sysdate, 'yyyymmdd') = to_char(vdate, 'yyyymmdd')
+	</select>
+	
+	<select id="selectAvgCnt" resultType="_int">
+		select avg(vcount) from visitor where to_char(sysdate, 'yyyymmdd') = to_char(vdate, 'yyyymmdd')
+	</select>
+</mapper>

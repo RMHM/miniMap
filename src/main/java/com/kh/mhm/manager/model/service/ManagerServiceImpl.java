@@ -25,4 +25,9 @@ public class ManagerServiceImpl implements ManagerService {
 		return mnDao.selectCompanyMember();
 	}
 
+	@Override
+	public List<Integer> selectCount() {
+		return mnDao.selectCount();
+	}
+
 }
