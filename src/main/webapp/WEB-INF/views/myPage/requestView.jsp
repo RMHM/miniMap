@@ -29,7 +29,8 @@
 				<div class="container-fluid">
 					<div class="row">
 						<div class="list">
-							<input type="button" value="요청하기" onclick="location.href='/myPage/rePermissionClick.do'"/>
+							<input type="button" value="요청하기"
+								onclick="location.href='/myPage/rePermissionClick.do'" />
 							<table class="table table-hover">
 								<thead>
 									<tr>
@@ -39,30 +40,58 @@
 										<th>승인여부</th>
 									</tr>
 								</thead>
-								<tbody>${list.size() }
-								 
+								<tbody>
+									<%-- ${list.size() }--%>
+									<%-- ${list } --%>
+									<%-- ${list.aId } --%>
+									<%--   ${list.size() } --%>
 									<c:if test="${!empty list }">
-									  <c:forEach items="${list } " var="l">
-										${l}
-										<%-- <tr>
-											<td>l.aId</td>
-											<td>l.mName</td>
-											<td>l.request_date</td>
-											<c:if test="${empty l.grant_date}"><td>승인</td>
+										<c:forEach var="a" begin="0" end="${list.size()-1 }" step="1">
+										<%-- 	<c:out value="${ a}" /> --%>
+
+											<tr>
+												<td>${list.get(a).getAId()}</td>
+												<td>${list.get(a).getMName()}</td>
+												<td>${list.get(a).getRequest_date()}</td>
+												<c:if test="${!empty l.getGrant_date()}">
+													<td>승인</td>
+												</c:if>
+												<c:if test="${empty l.getGrant_date()}">
+													<td>요청중</td>
+												</c:if>
+
+
+											</tr>
+										</c:forEach>
+										<%--  <c:forEach begin="0" end ="${list.size()} step="1" var="l">
+									 <c:out value="asd"/>
+									
+									  <tr>
+									  <td>${list.get(0).getAId()} </td>
+									  <td></td>
+									  <td></td>
+									  <td></td>
+									  </tr>
+								${l.get(0).getAId()}
+										<tr>
+											<td>${l.getAId()}</td>
+											<td>${l.getMName()}</td>
+											<td>${l.getRequest_date()}</td>
+											<c:if test="${empty l.getGrant_date()}"><td>승인</td>
 											</c:if>
-											<c:if test="${!empty l.grant_date}"><td>요청중</td>
+											<c:if test="${!empty l.getGrant_date()}"><td>요청중</td>
 											</c:if>
 											
-										</tr> --%>
-									</c:forEach> 
+										</tr> 
+									</c:forEach>  --%>
 									</c:if>
-									
+
 									<c:if test="${empty list }">
-									<tr>
-									<td colspan="4" align="center">요청글이 없습니다.
-									</tr>
-									
-									</c:if> 
+										<tr>
+											<td colspan="4" align="center">요청글이 없습니다.
+										</tr>
+
+									</c:if>
 								</tbody>
 							</table>
 
@@ -73,7 +102,7 @@
 				</div>
 			</div>
 
-		<!-- 	<script>
+			<!-- 	<script>
 			$('input[type=button]').click(function{
 				location.href="/myPage/rePermissionClick.do";
 			});

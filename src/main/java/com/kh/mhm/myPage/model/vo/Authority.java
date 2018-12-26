@@ -54,6 +54,13 @@ public class Authority {
 		this.aCode = aCode;
 	}
 	
+	public Authority(int aId, String mName, Date request_date, char delflag) {
+		super();
+		this.aId = aId;
+		this.mName = mName;
+		this.request_date = request_date;
+		this.delflag = delflag;
+	}
 	public int getAId() {
 		return aId;
 	}

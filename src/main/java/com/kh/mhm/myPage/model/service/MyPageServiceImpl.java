@@ -49,8 +49,8 @@ public class MyPageServiceImpl implements MyPageService {
 		return  md.selectMyBoard(cPage,numPerPage,no);
 	}
 	@Override
+	/*public List<Map<String, String>> selectRequest(int mno) {*/
 	public List<Authority> selectRequest(int mno) {
-	
 		return md.selectRequest(mno);
 	}
 
