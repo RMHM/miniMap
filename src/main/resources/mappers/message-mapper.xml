@@ -5,12 +5,83 @@
 
 <mapper namespace="Message">
 
-	<select id="selectMno" parameterType="string" resultType="_int">
-		SELECT MNO FROM MEMBER WHERE MNICK=#{name}	
+	<select id="selectMessageInbox" parameterType="_int" resultType="Message">
+		SELECT ME.MEID, ME.SPEND_MNO, ME.TAKE_MNO, M.MNICK, ME.MEDATE, ME.METITLE, ME.MECONTENT, 
+		ME.DELFLAG, ME.READFLAG, ME.STOREFLAG, ME.SENTDELFLAG 
+		FROM MESSAGE ME JOIN MEMBER M ON(ME.SPEND_MNO=M.MNO) 
+		WHERE ME.TAKE_MNO=#{mNo} AND ME.DELFLAG='N' AND ME.STOREFLAG='N'
 	</select>
 	
-	<select id="countNewMessage" parameterType="_int" resultType="_int">
-		SELECT COUNT(*) FROM MESSAGE WHERE TAKE_MNO=#{mno} AND READFLAG='N'
+	<update id="deleteMessage" parameterType="hashmap">
+		UPDATE MESSAGE SET DELFLAG='Y' WHERE MEID IN
+		<foreach collection="meId" item="arr" index="index" open="(" close=")" separator=",">
+			#{arr}
+		</foreach>
+	</update>
+	
+	<update id="storeMessage" parameterType="hashmap">
+		UPDATE MESSAGE SET STOREFLAG='Y' WHERE MEID IN
+		<foreach collection="meId" item="arr" index="index" open="(" close=")" separator=",">
+			#{arr}
+		</foreach>
+	</update>
+	
+	<update id="readAllMessage" parameterType="string">
+		UPDATE MESSAGE SET READFLAG='Y' WHERE TAKE_MNO=
+		(SELECT MNO FROM MEMBER WHERE MNICK=#{mNick})
+	</update>
+	
+	<select id="selectDetailOne" parameterType="_int" resultType="Message">
+		SELECT ME.MEID, ME.SPEND_MNO, ME.TAKE_MNO, M.MNICK, ME.MEDATE, ME.METITLE, ME.MECONTENT, 
+		ME.DELFLAG, ME.READFLAG, ME.STOREFLAG, ME.SENTDELFLAG 
+		FROM MESSAGE ME JOIN MEMBER M ON(ME.SPEND_MNO=M.MNO) WHERE ME.MEID=#{meId}
 	</select>
+	
+	<update id="deleteMessageOne" parameterType="_int">
+		UPDATE MESSAGE SET DELFLAG='Y' WHERE MEID=#{meId}
+	</update>
+	
+	<update id="storeMessageOne" parameterType="_int">
+		UPDATE MESSAGE SET STOREFLAG='Y' WHERE MEID=#{meId}
+	</update>
+	
+	<update id="updateReadFlag" parameterType="_int">
+		UPDATE MESSAGE SET READFLAG='Y' WHERE MEID=#{meId}
+	</update>
+	
+	<select id="selectMessageStore" parameterType="_int" resultType="Message">
+		SELECT ME.MEID, ME.SPEND_MNO, ME.TAKE_MNO, M.MNICK, ME.MEDATE, ME.METITLE, ME.MECONTENT, 
+		ME.DELFLAG, ME.READFLAG, ME.STOREFLAG, ME.SENTDELFLAG 
+		FROM MESSAGE ME JOIN MEMBER M ON(ME.SPEND_MNO=M.MNO) 
+		WHERE ME.TAKE_MNO=#{mNo} AND ME.DELFLAG='N' AND ME.STOREFLAG='Y'
+	</select>
+	
+	<select id="selectMessageSent" parameterType="_int" resultType="Message">
+		SELECT ME.MEID, ME.SPEND_MNO, ME.TAKE_MNO, M.MNICK, ME.MEDATE, ME.METITLE, ME.MECONTENT, 
+		ME.DELFLAG, ME.READFLAG, ME.STOREFLAG, ME.SENTDELFLAG 
+		FROM MESSAGE ME JOIN MEMBER M ON(ME.TAKE_MNO=M.MNO) WHERE ME.SPEND_MNO=#{mNo} AND ME.SENTDELFLAG='N'
+	</select>
+	
+	<update id="deleteSentMessage" parameterType="hashmap">
+		UPDATE MESSAGE SET SENTDELFLAG='Y' WHERE MEID IN
+		<foreach collection="meId" item="arr" index="index" open="(" close=")" separator=",">
+			#{arr}
+		</foreach>
+	</update>
+	
+	<select id="selectDetailSent" parameterType="_int" resultType="Message">
+		SELECT ME.MEID, ME.SPEND_MNO, ME.TAKE_MNO, M.MNICK, ME.MEDATE, ME.METITLE, ME.MECONTENT, 
+		ME.DELFLAG, ME.READFLAG, ME.STOREFLAG, ME.SENTDELFLAG 
+		FROM MESSAGE ME JOIN MEMBER M ON(ME.TAKE_MNO=M.MNO) WHERE ME.MEID=#{meId}
+	</select>
+	
+	<update id="deleteSentOne" parameterType="_int">
+		UPDATE MESSAGE SET SENTDELFLAG='Y' WHERE MEID=#{meId}
+	</update>
+	
+	<insert id="sendMessage" parameterType="MessageSmpl">
+		INSERT INTO MESSAGE VALUES(SEQ_MEID.NEXTVAL, #{mNo}, (SELECT MNO FROM MEMBER WHERE MNICK=#{mNick}), 
+		DEFAULT, #{meTitle}, #{meContent}, DEFAULT, DEFAULT, DEFAULT, DEFAULT)
+	</insert>
 	
 </mapper>
