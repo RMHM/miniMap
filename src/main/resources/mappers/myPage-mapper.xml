@@ -17,8 +17,23 @@
 		<result column="sColor" property="SCOLOR" />
 		<result column="delflag" property="DELFLAG" />
 	</resultMap>
-
+	
 	<resultMap type="map" id="boardMap">
+	
+	
+	</resultMap>
+	<resultMap type="map" id="requestMap">
+	<result column="aId" property="AID" />
+	<result column="mNo" property="MNO" />
+	<result column="mName" property="MNAME" />
+	<result column="request_date" property="REQUEST_DATE" />
+	<result column="address" property="ADDRESS" />
+	<result column="aContent" property="ACONTENT" />
+	<result column="aCode" property="ACODE" />
+	<result column="aTake" property="ATAKE" />
+	<result column="grant_date" property="GRANT_DATE" />
+	<result column="delflag" property="DELFLAG" />
+	
 	</resultMap>
 
 	<insert id="insertSchedule" parameterType="Schedule">
