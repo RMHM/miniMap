@@ -22,6 +22,7 @@
 	    <typeAlias type="com.kh.mhm.timeLine.model.vo.TimeLineSmpl" alias="TimeLineSmpl"/>
 	    <typeAlias type="com.kh.mhm.timeLine.model.vo.PreTimeLine" alias="PreTimeLine"/>
 	    <typeAlias type="com.kh.mhm.message.model.vo.MessageSmpl" alias="MessageSmpl"/>
+	    <typeAlias type="com.kh.mhm.coment.model.vo.Coment" alias="Coment"/>
   	</typeAliases>
   	
     <!-- 타임라인 timestamp<->string 변환 핸들러 -->

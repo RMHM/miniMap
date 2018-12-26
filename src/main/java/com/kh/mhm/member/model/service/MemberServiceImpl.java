@@ -17,6 +17,11 @@ public class MemberServiceImpl implements MemberService {
 	private MemberDao mDao;
 
 	@Override
+	public Member selectLogin(String mid) {
+		return mDao.selectLogin(mid);
+	}
+	
+	@Override
 	public Member selectOne(String mid) {
 		return mDao.selectOne(mid);
 	}

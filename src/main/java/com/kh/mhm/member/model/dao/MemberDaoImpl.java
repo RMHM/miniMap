@@ -15,7 +15,12 @@ public class MemberDaoImpl implements MemberDao {
 
 	@Autowired
 	private SqlSessionTemplate sst;
-
+	
+	@Override
+	public Member selectLogin(String mid) {
+		return sst.selectOne("member.selectLogin", mid);
+	}
+	
 	@Override
 	public Member selectOne(String mid) {
 		return sst.selectOne("member.selectOne", mid);

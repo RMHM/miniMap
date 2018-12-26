@@ -7,7 +7,9 @@ import java.util.HashMap;
 import com.kh.mhm.member.model.vo.Member;
 
 public interface MemberDao {
-
+	
+	Member selectLogin(String mid);
+	
 	Member selectOne(String mid);
 
 	int insertMember(Member member);
