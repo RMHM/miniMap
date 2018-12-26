@@ -14,7 +14,7 @@ public interface BoardService {
 
 	int selectBoardTotalContents();
 
-	int insertBoard(Board board, List<Fileref> attachList);
+	int insertBoard(Board board/*, List<Fileref> attachList*/);
 
 	Board selectOneBoard(int bId);
 	
@@ -22,7 +22,7 @@ public interface BoardService {
 
 	List<Fileref> selectFilerefList(int boardNo);
 
-	int updateBoard(Board board, List<Fileref> attachList);
+	int updateBoard(Board board/*, List<Fileref> attachList*/);
 
 	int deleteBoard(int boardNo);
 
