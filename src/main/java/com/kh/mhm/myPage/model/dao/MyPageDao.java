@@ -24,6 +24,7 @@ public interface MyPageDao {
 
 	List<Map<String, Object>> selectMyBoard(int cPage, int numPerPage, int no);
 
+	/*List<Map<String, String>> selectRequest(int mno);*/
 	List<Authority> selectRequest(int mno);
 
 

@@ -42,34 +42,33 @@
 									</tr>
 								</thead>
 								<tbody>
-								${list.size() } 
-								${list.get(0)} 
-								
+									<%-- 	${list.size() } 
+								${list.get(0)}  --%>
+
 									<%--  <c:out value="${list.size() gt 0 }"></c:out>  --%>
 									<%-- <c:if test="${list.size() gt 0"> --%>
-									<c:forEach items="${list } " var="l">
-									
-									<%-- <c:out value="${list }"></c:out> --%>
-											<%-- ${l.bNo} --%>
-											<%-- <tr id="${b.boardNo}"> --%>
-											<tr>
-										<%-- 	<td>${l.bNo}</td>
-											<td>${l.bCode}</td>
-											<td>${l.bTitle}</td>
-											<td>${l.mNo}</td>
-											<td>${l.bCount}</td>
-											<td>${l.bDate}</td> --%> 
-										</tr>
+									<c:if test="${!empty list }">
+										<c:forEach var="a" begin="0" end="${list.size()-1 }" step="1">
+											<%-- 	<c:out value="${ a}" /> --%>
 
-									</c:forEach>
+											<tr id="${list.get(a).getBNo()}">
+												<td>${list.get(a).getBNo()}</td>
+												<td>${list.get(a).getBCode()}</td>
+												<td>${list.get(a).getBTitle()}</td>
+												<td>${list.get(a).getMNo()}</td>
+												<td>${list.get(a).getBCount()}</td>
+												<td>${list.get(a).getBDate()}</td>
+
+											</tr>
+										</c:forEach>
+
+									</c:if>
 									<%-- </c:if> --%>
-
-									<%-- 	<c:if test="${list.size() eq 0} ">
-							aaaaaaaaaaaa
+									<c:if test="${list.size() eq 0} ">
 										<tr>
 											<td colspan="6">작성한 글이 없습니다.</td>
 										</tr>
-									</c:if>  --%>
+									</c:if>
 								</tbody>
 							</table>
 
@@ -80,7 +79,15 @@
 				</div>
 			</div>
 
-
+			<script>
+				$(function() {
+					$("tr[id]").on("click", function() {
+						var boardNo = $(this).attr("id");
+						console.log(boardNo);
+						/* location.href = "${pageContext.request.contextPath}/board/boardView.do?no="+boardNo; */
+					});
+				});
+			</script>
 
 
 		</div>

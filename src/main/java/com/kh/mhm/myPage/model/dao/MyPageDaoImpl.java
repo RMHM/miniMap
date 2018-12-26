@@ -51,8 +51,8 @@ public class MyPageDaoImpl implements MyPageDao {
 		return sqlSession.selectList("myPage.selectMyBoard",no,rowBounds);
 	}
 	@Override
+/*	public List<Map<String, String>> selectRequest(int mno) {*/
 	public List<Authority> selectRequest(int mno) {
-	
 		return sqlSession.selectList("myPage.selectRequest",mno);
 	}
 	

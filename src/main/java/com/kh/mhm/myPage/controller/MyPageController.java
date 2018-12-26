@@ -250,8 +250,18 @@ public class MyPageController {
 		.addAttribute("numPerPage", numPerPage)
 		.addAttribute("pageBar", pageBar);
 		*/
+		/*List<Authority> list = mps.selectRequest(member.getMno());*/
+		/*ArrayList<Map<String, String>> list = 
+				new ArrayList<Map<String, String>>( mps.selectRequest(member.getMno()));
+		
+		System.out.println(list);
+		System.out.println(list.get(0));
+		System.out.println(list.get(0).);
+		*//*Map<Authority,Object> result = new Map<Authority,Object>(mps.selectRequest(member.getMno()));
+		*/
 		List<Authority> list = mps.selectRequest(member.getMno());
 		System.out.println(list);
+	System.out.println(list.get(0).getAddress());
 		model.addAttribute("list", list);
 		return "myPage/requestView";
 	}
