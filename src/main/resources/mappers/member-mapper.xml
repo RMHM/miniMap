@@ -94,6 +94,7 @@
 		SELECT mno, mid, mname, email, gender, age, join_date, drop_date 
 		FROM MEMBER 
 		WHERE MTYPE = 'M'
+		ORDER BY MNO
 	</select>
 	
 	<select id="selectCompanyMember" resultMap="CompMemberMap">
@@ -102,6 +103,7 @@
 		full outer join authority a using(mno)
 		full outer join authority_type at on(a.acode = at.acode)
 		where mtype = 'C'
+		ORDER BY REQUEST_DATE
 	</select>
 	
 	<select id="selectBlackList" resultMap="BlackListMap">

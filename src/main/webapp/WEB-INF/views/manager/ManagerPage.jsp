@@ -124,8 +124,8 @@ table{
 			<table>
 				<thead>
 					<tr>
-						<th width="50px" height="25px" style="text-align: center"></th>
-						<th><b>ID</b></b></th>
+						<th><b>회원번호</b></th>
+						<th><b>ID</b></th>
 						<th><b>이름</b></th>
 						<th><b>이메일</b></th>
 						<th><b>성별</b></th>
@@ -142,8 +142,7 @@ table{
 			<table>
 				<thead>
 					<tr>
-						<th width="50px" height="25px" style="text-align: center">					
-						</th>
+						<th><b>회원번호</b></th>
 						<th><b>ID</b></th>
 						<th><b>기업명</b></th>
 						<th><b>이메일</b></th>
@@ -162,7 +161,7 @@ table{
 			<table>
 				<thead>
 					<tr>
-						<th width="50px" height="25px" style="text-align: center"></th>
+						<th><b>회원번호</b></th>
 						<th><b>ID</b></th>
 						<th><b>이름</b></th>
 						<th><b>이메일</b></th>
@@ -213,7 +212,7 @@ $(document).ready(function() {
 			
 			for(var i in data){
 				
-				var $tdCheck = $('<td style="text-align: center">').html($('<input type="checkbox" name="chk'+i+'" style="text-align: center;">'));
+				var $tdCheck = $('<td>').text(data[i].mno);
 				var $trBoard = $('<tr>');
 				var $tdMid = $('<td>').text(data[i].mid);
 				var $tdMname = $('<td>').text(data[i].mname);
@@ -290,7 +289,7 @@ $(document).ready(function() {
 			
 			for(var i in data){
 				
-					var $tdCheck = $('<td style="text-align: center">').html($('<input type="checkbox" name="chk'+i+'" style="text-align: center;">'));
+					var $tdCheck = $('<td>').text(data[i].mno);
 					var $trBoard = $('<tr>');
 					var $tdMid = $('<td>').text(data[i].mid);
 					var $tdMname = $('<td>').text(data[i].mname);
