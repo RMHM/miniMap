@@ -10,4 +10,6 @@ public interface ManagerDao {
 	List<BlackList> selectBlackList();
 
 	List<CompanyMember> selectCompanyMember();
+	
+	List<Integer> selectCount();
 }

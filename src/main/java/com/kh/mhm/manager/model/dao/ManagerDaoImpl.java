@@ -1,5 +1,6 @@
 package com.kh.mhm.manager.model.dao;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.mybatis.spring.SqlSessionTemplate;
@@ -23,6 +24,15 @@ public class ManagerDaoImpl implements ManagerDao {
 	@Override
 	public List<CompanyMember> selectCompanyMember() {
 		return sst.selectList("member.selectCompanyMember");
+	}
+
+	@Override
+	public List<Integer> selectCount() {
+		List<Integer> list = new ArrayList<Integer>();
+		list.add(sst.selectOne("common.selectAllCnt"));
+		list.add(sst.selectOne("common.selectDayCnt"));
+		list.add(sst.selectOne("common.selectAvgCnt"));
+		return list;
 	}
 
 }

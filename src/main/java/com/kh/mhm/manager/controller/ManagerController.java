@@ -39,5 +39,13 @@ public class ManagerController {
 	public String managerPageGo() {
 		return "manager/ManagerPage";
 	}
-
+	
+	@RequestMapping("/manager/visitCount.do")
+	@ResponseBody
+	public List<Integer> selectCount() {
+		// All Day Avg
+		List<Integer> result = mns.selectCount();
+		return result;
+	}
+	
 }

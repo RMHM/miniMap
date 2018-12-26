@@ -20,6 +20,7 @@
 	<listener>
 		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
 	</listener>
+	
 
 	<!-- Processes application requests -->
 	<servlet>
@@ -78,5 +79,9 @@
     	<error-code>500</error-code>
    		<location>/WEB-INF/views/common/error500.jsp</location>
 	</error-page>
-
+	
+	<listener>
+		<listener-class>com.kh.mhm.common.VisitorHitCount</listener-class>
+	</listener>
+	
 </web-app>
