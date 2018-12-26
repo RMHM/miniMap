@@ -91,69 +91,68 @@ body {
 </head>
 <body>
 
- 	
+
 	<div id="wrapper">
 		<!-- header 선언 -->
 		<c:import url="../common/header.jsp" />
 		<c:import url="../common/myPageNav.jsp" />
-	<div class="container">
-		<div id='calendar'></div>
-		<div id="insertC" class="" tabindex="-1" role="dialog"
-			style=" position: absolute; height: auto; width: 350px; top: 137px; left: 202px; display: none; z-index: 101;"
-			aria-describedby="dialog-message" aria-labelledby="ui-id-1">
+    <div class="container">
+			<div id='calendar'></div>
+			<div id="insertC" class="" tabindex="-1" role="dialog"
+				style="position: absolute; height: auto; width: 350px; top: 137px; left: 202px; display: none; z-index: 101;"
+				aria-describedby="dialog-message" aria-labelledby="ui-id-1">
 
-			<form action="insertSchedule.do" method="post">
-				<div
-					class="ui-dialog-titlebar ui-widget-header ui-corner-all ui-helper-clearfix ui-draggable-handle">
-					<span id="ui-id-1" class="ui-dialog-title"> 일정등록</span>
+				<form action="insertSchedule.do" method="post">
+					<div
+						class="ui-dialog-titlebar ui-widget-header ui-corner-all ui-helper-clearfix ui-draggable-handle">
+						<span id="ui-id-1" class="ui-dialog-title"> 일정등록</span>
 
-				</div>
-				<div id="dialog-message"
-					style="width: auto; min-height: 0px; max-height: none; height: auto;"
-					class="ui-dialog-content ui-widget-content">
+					</div>
+					<div id="dialog-message"
+						style="width: auto; min-height: 0px; max-height: none; height: auto;"
+						class="ui-dialog-content ui-widget-content">
 
-					<div style="text-align: left;">
-					
-						<div>
-							<label>제목</label><input type="text" name="sTitle"></input>
-						</div>
-						<div>
-							<div >
-								<label>메모</label>
-								<div >
-									<textarea cols="30" rows="5" id="edited_title" name="sContent"
-										name="scontent" style="width: 98%;" maxlength="100"></textarea>
+						<div style="text-align: left;">
+
+							<div>
+								<label>제목</label><input type="text" name="sTitle"></input>
+							</div>
+							<div>
+								<div>
+									<label>메모</label>
+									<div>
+										<textarea cols="30" rows="5" id="edited_title" name="sContent"
+											name="scontent" style="width: 98%;" maxlength="100"></textarea>
+									</div>
 								</div>
 							</div>
+
+							<div style="margin-bottom: 5px;">
+
+								<label>날짜</label> <input type="date" id="startDateT"
+									name="startDateT" style="width: auto;" class="ed hasDatepicker">~<input
+									type="date" id="endDateT" name="endDateT"
+									style="width: auto; margin-bottom: 4px;"
+									class="ed hasDatepicker">
+
+							</div>
+
+							<div style="clear: both;"></div>
+							<div>
+								<label> 색상 선택 </label><input type="color" name="sColor">
+							</div>
+
+
 						</div>
+						<div
+							class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix">
+							<input type="submit" value="등록"> <input type="button"
+								id="close" value="취소">
 
-						<div style="margin-bottom: 5px;">
-
-							<label>날짜</label>
-							 <input type="date"
-								id="startDateT" name="startDateT" style="width: auto;"
-								class="ed hasDatepicker">~<input type="date"
-								id="endDateT" name="endDateT"
-								style="width: auto; margin-bottom: 4px;"
-								class="ed hasDatepicker">
-							
 						</div>
-
-						<div style="clear: both;"></div>
-						<div>
-							<label> 색상 선택 </label><input type="color" name="sColor">
-						</div>
-			
-
 					</div>
-					<div
-						class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix">
-						<input type="submit" value="등록"> <input type="button"
-							id="close" value="취소">
-
-					</div>
-				</div>
-			</form></div>
+        </form>
+			</div>
 			<script>
 	
 				$("#close").click(function() {
