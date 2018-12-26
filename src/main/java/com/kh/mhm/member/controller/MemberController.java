@@ -171,9 +171,6 @@ public class MemberController {
 		return "member/memberEnroll";
 	}
   
-  @RequestMapping("/member/memberEnrollEnd.do")
-	public String memberEnrollEnd(Member member, Model model) {
-
 	@RequestMapping("/member/memberEnrollEnd.do")
 	public String memberEnrollEnd(Member m, Model model) {
 

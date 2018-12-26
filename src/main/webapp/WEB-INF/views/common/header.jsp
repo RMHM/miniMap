@@ -20,7 +20,7 @@
 				<ul class="nav navbar-nav">
 					<li class="active"><a href="/">Home</a></li>
 					<li><a href="/echo.do">타임라인 테스트</a></li>
-					<li><a href="/popUp.do">쪽지 테스트</a></li>
+					<li><button type="button" class="pop">쪽지 테스트</button></li>
 					<li><a href="/test/testMap.do">지도테스트</a></li>
           <li><a href="/board/boardlist1.do">게시판 테스트</a><li>
 					<li><a href="/myPage/myPageMain.do">마이페이지</a></li>
@@ -52,4 +52,15 @@
 			</div>
 		</div>
 	</div>
+	<script>
+		$(".pop").click(function(){
+			var popUrl = "/popUp.inbox";	//팝업창에 출력될 페이지 URL
+
+			var popOption = "width=765, height=485, resizable=no, scrollbars=no, status=no;";    //팝업창 옵션(optoin)
+
+				window.open(popUrl,"",popOption);
+
+			
+		});
+	</script>
 </header>
