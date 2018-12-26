@@ -31,12 +31,7 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	@Override
-	public List<Member> selectCommonMember() {
-		return mDao.selectCommonMember();
-	}
-  
-  @Override
-  public int updateMemberPW(Member m) {
+	public int updateMemberPW(Member m) {
 		return mDao.updateMemberPW(m);
 	}
 
@@ -48,6 +43,11 @@ public class MemberServiceImpl implements MemberService {
 		hmap.put("mid", mid);
 
 		return mDao.checkIdDuplicate(hmap);
+	}
+
+	@Override
+	public List selectMemberList(String mtype) {
+		return mDao.selectMemberList(mtype);
 	}
 
 }

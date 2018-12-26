@@ -216,14 +216,25 @@ public class MemberController {
 		return map;
 	}
   
-  @RequestMapping("/member/selectCommonMember.do")
-	@ResponseBody
-	public List<Member> selectCommonMember() {
-			
-		List<Member> mlist = ms.selectCommonMember();
-		System.out.println("mlist : " + mlist);
-		
-		return mlist;
-  } 
+	@RequestMapping("manager/managerPage.go")
+	public String managerPageGo() {
+		return "manager/ManagerPage";
+	}
+	
+	@RequestMapping("manager/grantPermission.go")
+	public String grantPermissionGo() {
+		return "manager/grant_Permission";
+	}
+    
+    @RequestMapping("/member/selectMemberList.do")
+    @ResponseBody
+    public List selectMemberList(String mtype) {
+    	
+    	List list = ms.selectMemberList(mtype);
+    	System.out.println("mtype : " + mtype);
+    	System.out.println("list : " + list);
+    	
+    	return list;
+    }
 
 }

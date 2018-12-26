@@ -27,6 +27,7 @@
       <result column="EMAIL" property="email" />
       <result column="ADDRESS" property="address" />
       <result column="ANAME" property="aname"/>
+      <result column="ATAKE" property="atake"/>
    </resultMap>
    
    <resultMap type="BlackList" id="BlackListMap">

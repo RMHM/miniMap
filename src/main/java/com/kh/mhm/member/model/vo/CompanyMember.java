@@ -1,4 +1,4 @@
-package com.kh.mhm.manager.model.vo;
+package com.kh.mhm.member.model.vo;
 
 import java.sql.Date;
 
@@ -10,6 +10,7 @@ public class CompanyMember extends Member{
 	private String aname; // 권한명
 	private Date reqDate; // 요청 날짜
 	private Date grantDate; // 권한 부여일
+	private String atake;   // 권한 부여 여부
 	
 	public CompanyMember() {
 		super();
@@ -44,7 +45,7 @@ public class CompanyMember extends Member{
 	@Override
 	public String toString() {
 		return "CompanyMember [address=" + address + ", aname=" + aname + ", reqDate=" + reqDate + ", grantDate="
-				+ grantDate + "]";
+				+ grantDate + ", atake=" + atake +"]";
 	}
 	public Date getReqDate() {
 		return reqDate;
@@ -57,6 +58,12 @@ public class CompanyMember extends Member{
 	}
 	public void setGrantDate(Date grantDate) {
 		this.grantDate = grantDate;
+	}
+	public String getAtake() {
+		return atake;
+	}
+	public void setAtake(String atake) {
+		this.atake = atake;
 	}
 
 }

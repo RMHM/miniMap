@@ -13,10 +13,10 @@ public interface MemberDao {
 	
 	Member selectFindID(String email);
   
-  List<Member> selectCommonMember();
-  
-  int checkIdDuplicate(HashMap<String, Object> hmap);
-  
-  int updateMemberPW(Member m);
+    int checkIdDuplicate(HashMap<String, Object> hmap);
+    
+    int updateMemberPW(Member m);
+
+	List selectMemberList(String mtype);
 
 }

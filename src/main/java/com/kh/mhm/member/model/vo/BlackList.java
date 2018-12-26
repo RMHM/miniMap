@@ -1,4 +1,4 @@
-package com.kh.mhm.manager.model.vo;
+package com.kh.mhm.member.model.vo;
 
 import java.sql.Date;
 
