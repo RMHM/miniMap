@@ -9,7 +9,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>${b.BNo }번 게시글</title>
 </head>
 <body>
    <c:import url="/WEB-INF/views/common/exFile.jsp"/>
@@ -29,22 +29,24 @@
 			</div>			
 			<div class="col-md-10" overflow:auto id="boardview" >				
 					<!-- 게시판 고유 번호 -->
-					<input type="hidden" name="bNo" value="${b.bNo }" />
-					<input type="hidden" name="bId" value="${b.bId }" />  
+					<input type="hidden" name="BNo" value="${b.BNo }" />
+					<input type="hidden" name="BId" value="${b.BId }" />  
 					<!-- 게시판 제목 -->
-					<input type="text" placeholder="제목" name="boardTitle" id="boardTitle" 
-					value="${b.bTitle }" required>
+					<input type="text" name="boardTitle" id="boardTitle" value="${b.BTitle }" required readonly>
 					<!-- 게시판 작성자 -->
-					<input type="text" class="form-control" name="boardWriter" 
-					<%-- value="${board.boardWriter}" --%> readonly required>
-					<div>${requestScope.result}</div>
-					<div>${b.bContent}</div>
+					<input type="text" class="form-control" name="boardWriter" value="${b.mnick}" readonly required>
+					<textarea id="content" style="display:none;" >${b.BContent}</textarea>
+					<div id="BContent" style="width:90%; height:500px; background-color: aliceblue">					
+					${b.BContent}
+					</div>
 					&nbsp;&nbsp;&nbsp;
-					<input type="button" onclick="location.href='${pageContext.request.contextPath}/board/boardlist1.do'"
+					<input type="button" class="btn btn-theme btn-large" onclick="location.href='${pageContext.request.contextPath}/board/boardlist1.do'"
 					value="리스트로"/>
 					<%-- <c:if test="${member.userId eq board.boardWriter}"> </c:if>--%>
-					<input type="button" name="modify" value="수정">
-					<input type="button" name="delete" value="삭제">				
+					<input type="button" class="btn btn-theme btn-large" onclick="location.href='${pageContext.request.contextPath}/board/boardUpdateView.do?BId=${b.BId }'"
+					name="modify" value="수정">
+					<input type="button" class="btn btn-theme btn-large" onclick="location.href='${pageContext.request.contextPath}/board/boardDelete.do?BId=${b.BId }'"
+					name="delete" value="삭제">				
 			</div>
 			
 			

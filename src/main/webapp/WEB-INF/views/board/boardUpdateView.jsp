@@ -1,15 +1,14 @@
 <%@
-   page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+   page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"
+%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
-
+<title>${b.BNo }번 게시글 수정페이지</title>
 
 <script type="text/javascript"
 	src="https://code.jquery.com/jquery-3.3.1.js"></script>
@@ -18,11 +17,18 @@
 <script src="<%=request.getContextPath()%>/daumeditor/js/editor_loader.js" type="text/javascript" charset="utf-8"></script>
 
 </head>
+
+
 <body>
-	<c:import url="/WEB-INF/views/common/exFile.jsp" />
-	<div id="wrapper container">
-		<c:import url="/WEB-INF/views/common/header.jsp" />
-		<div class="">
+   <c:import url="/WEB-INF/views/common/exFile.jsp"/>
+<script>
+$(document).ready(function() { 
+    loadContent();
+});
+</script>
+   <div id="wrapper">
+      <c:import url="/WEB-INF/views/common/header.jsp"/>
+      <div class="">
 			<div class="col-md-2" align="center">
 				&nbsp;&nbsp;
 				<h4>--게시판 목록--</h4>
@@ -36,20 +42,22 @@
 			</div>
 			<!-- 에디터 넣어야됨. -->
 			<div class="col-md-10">
-			<c:if test="${not empty member}">
-				<form action="/board/boardinsert.do" method="post" id="boardfrm" enctype="multipart/form-data">					
-					<input type="hidden" id="mNo" name="mNo" value="${member.mno}"/><!-- 작성자 회원번호  -->									
-					<input type="text" placeholder="제목" name="bTitle" id="bTitle" required>					
+			
+				<form action="/board/boardUpdate.do" method="post" id="boardfrm" enctype="multipart/form-data">	
+					<input type="hidden" id="bId" name="bId" value="${board.BId}"/><!-- 작성자 회원번호  -->				
+					<input type="hidden" id="mNo" name="mNo" value="${board.MNo}"/><!-- 작성자 회원번호  -->	
+					<input type="hidden" id="bNo" name="bNo" value="${board.BNo}"/><!-- 작성자 회원번호  -->									
+					<input type="text" placeholder="제목" name="bTitle" id="bTitle" value="${board.BTitle }"required>	
+					<input type="text" name="bWriter" id="bWriter" value="${board.mnick}"> 				
 					<div id="daumeditor" class="edit" style="width:90%; height:100%;"></div>				
-					<textarea name="boardcontent" id="boardcontent" style="display:none;"></textarea>
-					<input type="radio" name="bCode" value="1" checked="checked">잡담
+					<textarea name="boardcontent" id="boardcontent" style="display:none;">${board.BContent}</textarea>
+					<!-- <input type="radio" name="bCode" value="1" checked="checked">잡담
 					<input type="radio" name="bCode" value="2">정보
 					<input type="radio" name="bCode" value="3">후기
-					<input type="radio" name="bCode" value="4">질문
-					<input type="button" class="btn btn-theme" id="insertBoard" value="등록"
-					 style="position: absolute; right: 100px;"/>			
-									
-				</form></c:if>
+					<input type="radio" name="bCode" value="4">질문  -->
+					<input type="button" class="btn btn-theme" id="updateBoard" value="수정하기"
+					 style="position: absolute; right: 100px;"/>												
+				</form>
 			</div>
 			<div>
 			
@@ -60,8 +68,10 @@
 			</div>
 			<c:import url="/WEB-INF/views/common/footer.jsp" />
 		</div>
-	</div>		
+	</div>
+	</div>	
 </body>
+
 <script type="text/javascript">
 
 $(function(){
@@ -127,12 +137,47 @@ $(function(){
     });
      
     //form submit 버튼 클릭
-    $("#insertBoard").click(function(){
+    $("#updateBoard").click(function(){
         //다음에디터가 포함된 form submit
         Editor.save();
     })
 })
- 
+
+function loadContent() {
+	/*var attachments = {};
+	attachments['image'] = [];
+	attachments['image'].push({
+		'attacher': 'image',
+		'data': {
+			'imageurl': 'http://cfile273.uf.daum.net/image/2064CD374EE1ACCB0F15C8',
+			'filename': 'github.gif',
+			'filesize': 59501,
+			'originalurl': 'http://cfile273.uf.daum.net/original/2064CD374EE1ACCB0F15C8',
+			'thumburl': 'http://cfile273.uf.daum.net/P150x100/2064CD374EE1ACCB0F15C8'
+		}
+	});
+	attachments['file'] = [];
+	attachments['file'].push({
+		'attacher': 'file',
+		'data': {
+			'attachurl': 'http://cfile297.uf.daum.net/attach/207C8C1B4AA4F5DC01A644',
+			'filemime': 'image/gif',
+			'filename': 'editor_bi.gif',
+			'filesize': 640
+		}
+	});  */
+	/* 저장된 컨텐츠를 불러오기 위한 함수 호출 */
+	Editor.modify({
+		/* "attachments": function () { /* 저장된 첨부가 있을 경우 배열로 넘김, 위의 부분을 수정하고 아래 부분은 수정없이 사용 */
+		/*	var allattachments = [];
+			for (var i in attachments) {
+				allattachments = allattachments.concat(attachments[i]);
+			}
+			return allattachments;
+		}(), */
+		"content": document.getElementById("boardcontent") /* 내용 문자열, 주어진 필드(textarea) 엘리먼트 */
+	});
+} 
  
 //Editor.save() 호출 한 다음에 validation 검증을 위한 함수
 //validation 체크해줄 입력폼들을 이 함수에 추가 지정해줍니다.
@@ -153,9 +198,7 @@ function setForm(editor) {
     return true;
 }
 
+
+
 </script>
-
-
-
-
 </html>

@@ -41,7 +41,7 @@ public class BoardDaoImpl implements BoardDao {
 	@Override
 	public int insertBoard(Board board) {
 		// TODO Auto-generated method stub
-		return 0;
+		return sqlSession.insert("board.insertBoard", board);
 	}
 
 	@Override
@@ -51,15 +51,15 @@ public class BoardDaoImpl implements BoardDao {
 	}
 
 	@Override
-	public Board selectOneBoard(int bId) {
+	public Board selectOneBoard(int BId) {
 		// TODO Auto-generated method stub
-		return sqlSession.selectOne("board.selectOneBoard", bId);
+		return sqlSession.selectOne("board.selectOneBoard", BId);
 	}
 	
 	@Override
-	public int updateOneCount(int bId) {
+	public int updateOneCount(int BId) {
 		// TODO Auto-generated method stub
-		return sqlSession.update("board.updateOneCount", bId);
+		return sqlSession.update("board.updateOneCount", BId);
 	}
 
 	@Override
@@ -71,7 +71,7 @@ public class BoardDaoImpl implements BoardDao {
 	@Override
 	public int updateBoard(Board board) {
 		// TODO Auto-generated method stub
-		return 0;
+		return sqlSession.update("board.updateBoard", board);
 	}
 
 	@Override
@@ -81,9 +81,9 @@ public class BoardDaoImpl implements BoardDao {
 	}
 
 	@Override
-	public int deleteBoard(int boardNo) {
+	public int deleteBoard(int BId) {
 		// TODO Auto-generated method stub
-		return 0;
+		return sqlSession.update("board.deleteBoard", BId);
 	}
 
 	@Override
