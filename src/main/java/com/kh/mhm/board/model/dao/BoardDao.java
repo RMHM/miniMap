@@ -8,6 +8,8 @@ import com.kh.mhm.board.model.vo.Board;
 
 public interface BoardDao {
 
+	List<Board> selectBoardList(int btype);
+	
 	List<Board> selectBoardList(Board board);
 	
 	List<Board> selectNoticeList(Board board);
@@ -33,6 +35,7 @@ public interface BoardDao {
 	int deleteFileref(int boardNo);
 
 	int deleteFile(int attNo);
+
 
 
 

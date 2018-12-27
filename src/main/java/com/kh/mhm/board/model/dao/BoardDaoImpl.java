@@ -16,6 +16,13 @@ public class BoardDaoImpl implements BoardDao {
 	
 	@Autowired
 	SqlSessionTemplate sqlSession;
+
+	@Override
+	public List<Board> selectBoardList(int btype) {
+		
+        return sqlSession.selectList("board.selectBoardListToBtype", btype);
+		
+	}
 	
 	@Override
 	public List<Board> selectBoardList(Board board) {

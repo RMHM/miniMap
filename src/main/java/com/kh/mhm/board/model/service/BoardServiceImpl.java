@@ -21,6 +21,12 @@ public class BoardServiceImpl implements BoardService {
 	@Autowired
 	BoardDao boardDao;
 
+	@Override
+	public List<Board> selectBoardList(int btype) {
+		List<Board> list = null;
+        list = boardDao.selectBoardList(btype);
+        return list;
+	}
 	
 	@Override
 	public List<Board> selectBoardList(Board board) {

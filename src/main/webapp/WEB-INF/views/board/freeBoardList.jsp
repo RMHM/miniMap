@@ -19,13 +19,13 @@
 		<div class="container">
 
 			<div class="col-md-2" align="center">
-				&nbsp;&nbsp;
+				<br><br>
 				<h4>--게시판 목록--</h4>
 				<ul class="unstyled">
-					&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;
-					<li><a href="/board/boardlist1.do">자유 게시판</a></li> &nbsp;
-					<li><a href="/board/boardlist2.do">정보공유 게시판</a></li> &nbsp;
-					<li><a href="/board/boardlist3.do">여행후기 게시판</a></li> &nbsp;
+					<br><br><br><br>
+					<li><a href="/board/boardlist1.do">자유 게시판</a></li><br>
+					<li><a href="/board/boardlist2.do">정보공유 게시판</a></li><br>
+					<li><a href="/board/boardlist3.do">여행후기 게시판</a></li><br>
 					<li><a href="/board/boardlist4.do">질문 게시판</a></li>
 				</ul>
 			</div>
@@ -78,9 +78,10 @@
 								</tbody>
 							</table>
 							<!-- 페이지 처리 해야됨. -->
+							<c:if test="${not empty member}">
 							<input type="button" value="글쓰기" id=""	class="btn btn-theme btn-large"
 								onclick="location.href='${pageContext.request.contextPath}/board/boardwrite.do'"
-								style="position: absolute; right: 20px;" />
+								style="position: absolute; right: 20px;" /> </c:if>
 
 							<div class="" id=""
 								style="display: flex; align-items: center; justify-content: center;">
