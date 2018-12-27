@@ -25,4 +25,6 @@ public interface MemberDao {
 	List<Member> selectCompanyMember();
 	
 	Date selectNowBlack(int mno);
+
+	List selectMemberList(String mtype);
 }

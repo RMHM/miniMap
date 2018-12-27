@@ -25,4 +25,6 @@ public interface MemberService {
 	
 	Date selectNowBlack(int mno);
 
+	List selectMemberList(String mtype);
+
 }

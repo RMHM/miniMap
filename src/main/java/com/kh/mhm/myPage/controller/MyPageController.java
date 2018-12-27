@@ -280,5 +280,20 @@ public class MyPageController {
 		int result = mps.insertAuthority(authority);
 		return "myPage/myPageMain";
 	}
+	
+	/* 권한 승인 */
+	@RequestMapping("/mypage/grantAuthority.do")
+	public String grantAuthority(Authority autho, Model model) {
+		
+		msg = "승인이 완료 되었습니다.";
+		loc = "/manager/grantPermission.go";
+		
+		/* atake, grant_date Y, sysdate로 수정되게 하기 */
+		
+		model.addAttribute("msg", msg)
+		.addAttribute("loc", loc);
+		
+		return "common/msg";
+	}
 
 }
