@@ -261,7 +261,7 @@ public class MyPageController {
 		*/
 		List<Authority> list = mps.selectRequest(member.getMno());
 		System.out.println(list);
-	System.out.println(list.get(0).getAddress());
+
 		model.addAttribute("list", list);
 		return "myPage/requestView";
 	}

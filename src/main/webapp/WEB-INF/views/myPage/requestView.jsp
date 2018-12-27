@@ -41,54 +41,38 @@
 									</tr>
 								</thead>
 								<tbody>
-									<%-- ${list.size() }--%>
-									<%-- ${list } --%>
-									<%-- ${list.aId } --%>
-									<%--   ${list.size() } --%>
+
 									<c:if test="${!empty list }">
 										<c:forEach var="a" begin="0" end="${list.size()-1 }" step="1">
-										<%-- 	<c:out value="${ a}" /> --%>
 
-											<tr>
+											<tr id="${list.get(a).getAId()}">
 												<td>${list.get(a).getAId()}</td>
 												<td>${list.get(a).getMName()}</td>
 												<td>${list.get(a).getRequest_date()}</td>
 												<c:if test="${!empty l.getGrant_date()}">
-													<td>승인</td>
+													<td>승인</td> 
 												</c:if>
 												<c:if test="${empty l.getGrant_date()}">
 													<td>요청중</td>
 												</c:if>
 
-
 											</tr>
-										</c:forEach>
-										<%--  <c:forEach begin="0" end ="${list.size()} step="1" var="l">
-									 <c:out value="asd"/>
-									
-									  <tr>
-									  <td>${list.get(0).getAId()} </td>
-									  <td></td>
-									  <td></td>
-									  <td></td>
-									  </tr>
-								${l.get(0).getAId()}
-										<tr>
-											<td>${l.getAId()}</td>
-											<td>${l.getMName()}</td>
-											<td>${l.getRequest_date()}</td>
-											<c:if test="${empty l.getGrant_date()}"><td>승인</td>
-											</c:if>
-											<c:if test="${!empty l.getGrant_date()}"><td>요청중</td>
-											</c:if>
+											<script>
+											$('tr').click(function(){
+												/* console.log(this.id); */
+												console.log(a);
+											})
+											</script>
 											
-										</tr> 
-									</c:forEach>  --%>
+										</c:forEach>
+
 									</c:if>
 
 									<c:if test="${empty list }">
+
 										<tr>
-											<td colspan="4" align="center">요청글이 없습니다.
+											<td colspan="4" align="center">요청 내역이 없습니다.</td>
+
 										</tr>
 
 									</c:if>
@@ -102,6 +86,9 @@
 				</div>
 			</div>
 
+			<script>
+		
+			</script>
 			<!-- 	<script>
 			$('input[type=button]').click(function{
 				location.href="/myPage/rePermissionClick.do";

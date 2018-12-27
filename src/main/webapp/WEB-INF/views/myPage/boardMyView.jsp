@@ -63,11 +63,13 @@
 										</c:forEach>
 
 									</c:if>
-									<%-- </c:if> --%>
-									<c:if test="${list.size() eq 0} ">
-										<tr>
-											<td colspan="6">작성한 글이 없습니다.</td>
-										</tr>
+									<c:if test="${empty list }">
+											<tr >
+												<td colspan="6" align="center">작성 게시글이 없습니다.</td>
+									
+
+											</tr>
+									
 									</c:if>
 								</tbody>
 							</table>
