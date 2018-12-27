@@ -50,7 +50,7 @@
 												<td>${list.get(a).getMName()}</td>
 												<td>${list.get(a).getRequest_date()}</td>
 												<c:if test="${!empty l.getGrant_date()}">
-													<td>승인</td>
+													<td>승인</td> 
 												</c:if>
 												<c:if test="${empty l.getGrant_date()}">
 													<td>요청중</td>
