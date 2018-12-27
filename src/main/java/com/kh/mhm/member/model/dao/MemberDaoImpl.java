@@ -57,4 +57,10 @@ public class MemberDaoImpl implements MemberDao {
 		return sst.selectOne("member.selectNowBlack", mno);
 	}
 
+	@Override
+	public int checkNick(HashMap<String, Object> hmap) {
+		sst.selectOne("member.checkNick", hmap);
+		return (Integer) hmap.get("result");
+	}
+
 }

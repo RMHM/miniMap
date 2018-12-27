@@ -58,4 +58,11 @@ public class MemberServiceImpl implements MemberService {
 		return mDao.selectNowBlack(mno);
 	}
 
+	@Override
+	public int checkNick(String mnick) {
+		HashMap<String, Object> hmap = new HashMap<String, Object>();
+		hmap.put("mnick", mnick);
+		return mDao.checkNick(hmap);
+	}
+
 }

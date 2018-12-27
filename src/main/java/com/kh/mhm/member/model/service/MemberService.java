@@ -23,4 +23,6 @@ public interface MemberService {
 	
 	Date selectNowBlack(int mno);
 
+	int checkNick(String mnick);
+
 }
