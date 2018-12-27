@@ -22,9 +22,10 @@
 					<li><a href="/echo.do">타임라인 테스트</a></li>
 					<li><button type="button" class="pop">쪽지 테스트</button></li>
 					<li><a href="/test/testMap.do">지도테스트</a></li>
-          <li><a href="/board/boardlist1.do">게시판 테스트</a><li>
+          			<li><a href="/board/boardlist1.do">게시판 테스트</a><li>
 					<li><a href="/myPage/myPageMain.do">마이페이지</a></li>
 					<li><a href="/manager/managerPage.go">관리자페이지</a></li>
+					<li><a href="/test/testApi.do">제주api테스트</a></li>
 					<!-- 로그인여부에 따른 분기점 -->
 					<c:if test="${not empty member}">
 						<li class="dropdown">
@@ -32,7 +33,7 @@
 							<ul class="dropdown-menu">
 								<li><a href="/myPage/myPageMain.do">myPage</a></li>
 								<c:if test="${member.mtype eq 'A'}">
-									<li><a href="manager/managerPage.go">관리자 페이지</a></li>
+									<li><a href="/manager/managerPage.go">관리자 페이지</a></li>
 								</c:if>
 								<li><a href="/member/memberLogout.do">로그아웃</a></li>
 							</ul>
