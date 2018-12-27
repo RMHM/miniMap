@@ -24,7 +24,8 @@ public interface MemberService {
 	int checkIdDuplicate(String mid);
 	
 	Date selectNowBlack(int mno);
-
-	List selectMemberList(String mtype);
-
+  
+  int checkNick(String mnick);
+  
+  List selectMemberList(String mtype);
 }

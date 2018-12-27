@@ -25,6 +25,9 @@ public interface MemberDao {
 	List<Member> selectCompanyMember();
 	
 	Date selectNowBlack(int mno);
+  
+  int checkNick(HashMap<String, Object> hmap);
+  
+  List selectMemberList(String mtype);
 
-	List selectMemberList(String mtype);
 }

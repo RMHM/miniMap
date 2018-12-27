@@ -25,7 +25,7 @@
                 <form action="/member/memberEnrollEnd.do" method="post" onsubmit="return fn_enroll_validate();">
                     <table>
                     <div class="form-group">
-                        <label for="mid">아이디</label>
+                        <label for="id">아이디</label>
                         <input type="text" class="form-control"  name="mid" id="mid_" placeholder="사용하실 아이디를 입력하세요.">
       					<!-- 아이디중복검사 코멘트추가 -->
 						<span class="guide ok">사용 가능</span>
@@ -35,25 +35,32 @@
       				</div>
       				
       				<div class="form-group">
-      					<label for="mpw">비밀번호</label>
+      					<label for="pwd">비밀번호</label>
       					<input type="password" class="form-control" name="mpw" id="mpw_" placeholder="비밀번호를 입력하세요." />
       				</div>
       				
       				<div class="form-group">
-      					<label for="mpw">비밀번호 확인</label>
+      					<label for="pwd">비밀번호 확인</label>
       					<input type="password" class="form-control" id="mpw2_" placeholder="비밀번호를 확인을 위해 다시한번 입력하세요." />
       				</div>
       				
       				<div class="from-group">
-      					<label for="mname">이름</label>
+      					<label for="name">이름</label>
       					<input type="name" class="form-control" name="mname" id="mname_" placeholder="이름을 입력하세요." />
       				</div> 
       				
       				 <br>
       				 
       				<div class="from-group">
-      					<label for="mnick">닉네임</label>
-      					<input type="nickname" class="form-control" name="mnick" id="mnick_" placeholder="닉네임을 입력하세요." />
+      					<label for="nickname">닉네임</label>
+      					<input type="text" class="form-control" name="mnick" id="mnick_" placeholder="닉네임을 입력하세요." />
+      					<span class="ok">사용 가능</span>
+				        <span class="error">사용 불가</span>
+				        <span class="invalid">4글자 미만</span>
+				        <input type="hidden" name="checkNick" id="checkNick" value="0"/>
+      					<!--  <input type="button" id=checkNick name="checkNick_" value="중복확인" /> -->
+      					<!--  <a href="#" id="checkNick">중복확인</a> -->
+      					
       				</div> 
       				
       				<br>
@@ -61,12 +68,14 @@
       				<div class="from-group">
       					<label for="email">이메일</label>
       					<input type="email" class="form-control" name="email" id="email_" placeholder="이메일 주소를 입력하세요." />
+      					<button onclick="emailCheck()">중복확인</button>
+      					
       				</div>
       				
       				<br>
       				
       				<div class="from-group">
-      					<label for="mtype">회원유형</label> <br>
+      					<label for="type">회원유형</label> <br>
       					<input type="radio" name="mtype" id="mtype0" value="M" />일반회원
       					<input type="radio" name="mtype" id="mtype1" value="C" />기업회원
       				</div>
@@ -97,8 +106,8 @@
       				
       				<br /><br />
       				</table>
-      				<input type="submit" class="btn btn-success" value="회원가입" /> 
-      				<input type="reset" class="btn btn-danger" value="취소" />
+      				<input type="submit" class="btn btn-success" value="가입" /> 
+      				<input type="reset" class="btn btn-success" value="취소" />
       	</form>
       	</div>
       	</div>

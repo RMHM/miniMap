@@ -64,7 +64,14 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	@Override
-	public List selectMemberList(String mtype) {
+  public int checkNick(String mnick) {
+		HashMap<String, Object> hmap = new HashMap<String, Object>();
+		hmap.put("mnick", mnick);
+		return mDao.checkNick(hmap);
+  }
+  
+  @Override
+  public List selectMemberList(String mtype) {
 		return mDao.selectMemberList(mtype);
 	}
 

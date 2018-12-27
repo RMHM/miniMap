@@ -63,7 +63,13 @@ public class MemberDaoImpl implements MemberDao {
 	}
 
 	@Override
-	public List selectMemberList(String mtype) {
+  public int checkNick(HashMap<String, Object> hmap) {
+		sst.selectOne("member.checkNick", hmap);
+		return (Integer) hmap.get("result");
+  }
+  
+  @Override
+  public List selectMemberList(String mtype) {
 		
 		System.out.println("dao mtype : " + mtype);
 		
