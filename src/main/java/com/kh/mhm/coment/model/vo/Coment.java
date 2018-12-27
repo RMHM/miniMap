@@ -13,11 +13,18 @@ public class Coment {
 	private int cref;
 	private String rflag;
 	private String delFlag;
+	private String mnick;
 	
+	
+
+
+
 	public Coment() {}
 
+	
+
 	public Coment(int cid, int bid, int mno, String ccontent, Date cdate, int clevel, int cref, String rflag,
-			String delFlag) {
+			String delFlag, String mnick) {
 		super();
 		this.cid = cid;
 		this.bid = bid;
@@ -28,7 +35,10 @@ public class Coment {
 		this.cref = cref;
 		this.rflag = rflag;
 		this.delFlag = delFlag;
+		this.mnick = mnick;
 	}
+
+
 
 	public int getCid() {
 		return cid;
@@ -101,12 +111,27 @@ public class Coment {
 	public void setDelFlag(String delFlag) {
 		this.delFlag = delFlag;
 	}
+	
+	public String getMnick() {
+		return mnick;
+	}
+
+
+
+	public void setMnick(String mnick) {
+		this.mnick = mnick;
+	}
+
+
 
 	@Override
 	public String toString() {
 		return "Coment [cid=" + cid + ", bid=" + bid + ", mno=" + mno + ", ccontent=" + ccontent + ", cdate=" + cdate
-				+ ", clevel=" + clevel + ", cref=" + cref + ", rflag=" + rflag + ", delFlag=" + delFlag + "]";
-	};
+				+ ", clevel=" + clevel + ", cref=" + cref + ", rflag=" + rflag + ", delFlag=" + delFlag + ", mnick="
+				+ mnick + "]";
+	}
+
+	
 	
 	
 }

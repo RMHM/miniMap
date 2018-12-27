@@ -20,6 +20,8 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.kh.mhm.board.model.service.BoardService;
 import com.kh.mhm.board.model.vo.Board;
+import com.kh.mhm.coment.model.service.ComentService;
+import com.kh.mhm.coment.model.vo.Coment;
 
 
 @SessionAttributes(value = { "member" })
@@ -28,17 +30,20 @@ public class BoardController {
 	
 	@Autowired
 	private BoardService boardService;
+	
+	@Autowired
+	private ComentService comentService;
 
 	@RequestMapping("/board/boardlist1.do")
-	public String freeboard(@ModelAttribute("board") Board board, Model model) {
+	public String freeboard(/*@RequestParam int btype,*/@ModelAttribute("board") Board board, Model model) {
 		
+		/*List<Board> list = boardService.selectBoardList(btype);*/
 		List<Board> list = boardService.selectBoardList(board);	
 		List<Board> list2 = boardService.selectNoticeList(board);	
 		
         model.addAttribute("list", list);
-		model.addAttribute("list2", list2);
+		model.addAttribute("list2", list2);		
 		
-		System.out.println(list);
 
 		return "board/freeBoardList";
 	}
@@ -53,7 +58,9 @@ public class BoardController {
 	@RequestMapping("/board/boardlist4.do")
 	public String qaboard() {
 		return "board/qaBoardList";
-	}	
+	}
+	
+	
 	@RequestMapping("/board/boardwrite.do")
 	public String boardwrite() {
 		
@@ -65,7 +72,7 @@ public class BoardController {
 		int result;
 		
 		System.out.println(session.getAttribute("member"));
-		
+		System.out.println(req.getParameter("boardcontent"));
 		board.setBContent(req.getParameter("boardcontent"));
 		result = boardService.insertBoard(board);
 		System.out.println(board);
@@ -91,9 +98,13 @@ public class BoardController {
 	@RequestMapping("/board/boardview.do")
 	public String boardview(@RequestParam int BId, Model model) {
 		
-		model.addAttribute("b", boardService.selectOneBoard(BId));		
+		List<Coment> clist = comentService.selectCometList(BId);
+		System.out.println(clist);
+		model.addAttribute("b", boardService.selectOneBoard(BId)).
+		addAttribute("clist", clist);
+		
 		System.out.println(BId);
-		System.out.println(model);
+		System.out.println(model);		
 		/*model.addAttribute("b", boardService.updateOneCount(BId));*/
 		return "board/boardview";
 	}

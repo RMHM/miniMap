@@ -8,6 +8,15 @@
 	<resultMap type="Board" id="boardMap"></resultMap>
 	<!-- <resultMap type="Fileref" id="fileMap"></resultMap> -->
 	
+	<select id="selectBoardListToBtype" parameterType="_int" resultType="Board">
+		SELECT A.*, B.*, (SELECT
+		COUNT(*) FROM FILEREF WHERE BID = A.BID) FILECOUNT
+		FROM BOARD A, MEMBER B		
+		WHERE BCODE=#{btype} AND ISNOTICE='N' AND DELFLAG='N' AND RFLAG='N'
+		AND A.MNO = B.MNO
+		ORDER BY BDATE DESC, BNO DESC		
+	</select>
+	
 	<select id="selectBoardList" resultType="Board">
 		SELECT A.*, B.*, (SELECT
 		COUNT(*) FROM FILEREF WHERE BID = A.BID) FILECOUNT
@@ -16,6 +25,7 @@
 		AND A.MNO = B.MNO
 		ORDER BY BDATE DESC, BNO DESC		
 	</select>
+	
 	<select id="selectNoticeList" resultType="Board">
 		<!-- SELECT A.*, (SELECT
 		COUNT(*) FROM FILEREF WHERE BID = A.BID) FILECOUNT

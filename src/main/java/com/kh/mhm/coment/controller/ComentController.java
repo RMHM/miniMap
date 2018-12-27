@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -27,7 +28,7 @@ public class ComentController {
 		return result;
 	}
 	
-	@RequestMapping("/commnet/comentAdd.do")
+	@RequestMapping("/coment/comentAdd.do")
 	public String insertComentContent(Coment coment) {
 		try {
 			cs.insertComentContent(coment);
@@ -37,7 +38,7 @@ public class ComentController {
 		return null;
 	}
 	
-	@RequestMapping("/commnet/comentReport.do")
+	@RequestMapping("/coment/comentReport.do")
 	public String insertComentReport(@RequestParam int cid) {
 		try {
 			cs.insertComentReport(cid);
@@ -48,13 +49,28 @@ public class ComentController {
 	}
 	
 	@RequestMapping("/coment/comentDelete.do")
-	public String deleteComent(@RequestParam int cid) {
-		try {
+	public String deleteComent(@RequestParam int cid, Model model) {
+		/*try {
 			cs.deleteComent(cid);
 		} catch(Exception e) {
 			System.out.println(e.getMessage());
 		}
-		return null;
+		return null;*/
+		int result = cs.deleteComent(cid);
+		
+		String loc = "/board/boardlist1.do";
+		String msg = "";
+		
+		if(result > 0) {
+			msg = "댓글 삭제 성공!";
+			
+		} else {
+			msg = "댓글 삭제 실패!";
+		}
+		
+		model.addAttribute("loc", loc).addAttribute("msg", msg);
+		
+		return "common/msg";
 	}
 	
 	@RequestMapping("/coment/comentUpdate.do")
