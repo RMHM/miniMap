@@ -39,6 +39,7 @@
 		<result column="EMAIL" property="email" />
 		<result column="ADDRESS" property="address" />
 		<result column="ANAME" property="aname" />
+		<result column="ATAKE" property="atake"/>
 	</resultMap>
 
 	<resultMap type="BlackList" id="BlackListMap">
@@ -99,6 +100,7 @@
 	<select id="selectCommonMember" resultMap="memberMap">
 		SELECT mno, mid, mname, email, gender, age, join_date, drop_date FROM MEMBER
 		WHERE MTYPE = 'M'
+		order by mno
 	</select>
 
 	<select id="selectCompanyMember" resultMap="CompMemberMap">
@@ -106,10 +108,13 @@
 		full outer join authority a using(mno)
 		full outer join authority_type at on(a.acode = at.acode)
 		where mtype = 'C'
+		order by request_date
 	</select>
 
 	<select id="selectBlackList" resultMap="BlackListMap">
-		select mno, mid, mname, email, gender, age, drop_date, end_date, reason from (select * from member join blacklist using(mno))
+		select mno, mid, mname, email, gender, age, drop_date, end_date, reason 
+		from (select * from member join blacklist using(mno))
+		order by mno
 	</select>
 	
 	<select id="selectNowBlack" parameterType="_int" resultType="date">

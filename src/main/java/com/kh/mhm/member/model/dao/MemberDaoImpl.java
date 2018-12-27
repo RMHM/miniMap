@@ -62,4 +62,22 @@ public class MemberDaoImpl implements MemberDao {
 		return sst.selectOne("member.selectNowBlack", mno);
 	}
 
+	@Override
+	public List selectMemberList(String mtype) {
+		
+		System.out.println("dao mtype : " + mtype);
+		
+		List list = null;
+		
+		if(mtype.equals("m")) {
+			list = sst.selectList("member.selectCommonMember");
+		} else if (mtype.equals("c")) {
+			list = sst.selectList("member.selectCompanyMember");
+		} else {
+			list = sst.selectList("member.selectBlackList");
+		}
+		
+		return list;
+	}
+
 }

@@ -63,4 +63,9 @@ public class MemberServiceImpl implements MemberService {
 		return mDao.selectNowBlack(mno);
 	}
 
+	@Override
+	public List selectMemberList(String mtype) {
+		return mDao.selectMemberList(mtype);
+	}
+
 }
