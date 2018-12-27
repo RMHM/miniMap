@@ -29,9 +29,9 @@ public class ManagerDaoImpl implements ManagerDao {
 	@Override
 	public List<Integer> selectCount() {
 		List<Integer> list = new ArrayList<Integer>();
-		list.add(sst.selectOne("common.selectAllCnt"));
-		list.add(sst.selectOne("common.selectDayCnt"));
-		list.add(sst.selectOne("common.selectAvgCnt"));
+		list.add((Integer)sst.selectOne("common.selectAllCnt"));
+		list.add((Integer)sst.selectOne("common.selectDayCnt"));
+		list.add((Integer)sst.selectOne("common.selectAvgCnt"));
 		return list;
 	}
 
