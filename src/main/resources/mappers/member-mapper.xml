@@ -61,7 +61,7 @@
 	</insert>
 	
 	<select id="selectLogin" parameterType="string" resultMap="memberMap">
-		select * from member where mid = 'admin' and nvl2(drop_date, 1, 0) = 0
+		select * from member where mid = #{mid} and nvl2(drop_date, 1, 0) = 0
 	</select>
 	
 	<select id="selectOne" parameterType="string" resultMap="memberMap">

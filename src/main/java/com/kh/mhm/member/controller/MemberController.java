@@ -54,7 +54,7 @@ public class MemberController {
 		ModelAndView mv = new ModelAndView();
 
 		Member m = ms.selectLogin(mid);
-		
+		System.out.println(m);
 		String loc = "/";
 		String msg = "";
 		
