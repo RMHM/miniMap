@@ -12,7 +12,7 @@ public interface MyPageDao {
 
 	int insertSchedule(Schedule schedule);
   
-  List<Map<String,Object>>  selectSchedule(int mno);
+    List<Map<String,Object>>  selectSchedule(int mno);
 
 	int updateMember(Member member);
 
@@ -26,6 +26,8 @@ public interface MyPageDao {
 
 	/*List<Map<String, String>> selectRequest(int mno);*/
 	List<Authority> selectRequest(int mno);
+
+	List<Authority> selectRequestAll();
 
 
 }

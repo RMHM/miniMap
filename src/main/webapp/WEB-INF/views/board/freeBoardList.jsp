@@ -19,13 +19,13 @@
 		<div class="container">
 
 			<div class="col-md-2" align="center">
-				&nbsp;&nbsp;
+				<br><br>
 				<h4>--게시판 목록--</h4>
 				<ul class="unstyled">
-					&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;
-					<li><a href="/board/boardlist1.do">자유 게시판</a></li> &nbsp;
-					<li><a href="/board/boardlist2.do">정보공유 게시판</a></li> &nbsp;
-					<li><a href="/board/boardlist3.do">여행후기 게시판</a></li> &nbsp;
+					<br><br><br><br>
+					<li><a href="/board/boardlist1.do">자유 게시판</a></li><br>
+					<li><a href="/board/boardlist2.do">정보공유 게시판</a></li><br>
+					<li><a href="/board/boardlist3.do">여행후기 게시판</a></li><br>
 					<li><a href="/board/boardlist4.do">질문 게시판</a></li>
 				</ul>
 			</div>
@@ -55,32 +55,33 @@
 									</tr>
 								</thead>
 								<tbody>
-								<c:forEach var="Board" items="${list2 }">
-									<tr name="bId" id="${Board.bId }" style="background-color: lightskyblue;">									
-									   <td><c:out value="${Board.bNo }"/></td>
+								<c:forEach var="Board" items="${list2 }"> <!-- 공지 게시글 페이지 -->
+									<tr name="BId" id="${Board.BId }" style="background-color: lightskyblue;">									
+									   <td><c:out value="${Board.BNo }"/></td>
                      				   <td><c:out value="공지"/></td>
-                  				       <td><c:out value="${Board.bTitle }"/></td>
-               				           <td><c:out value="${Board.mNo}"/></td>
-               				           <td><c:out value="${Board.bCount }"/></td>
-                			           <td><c:out value="${Board.bDate}"/></td>
+                  				       <td><c:out value="${Board.BTitle }"/></td>
+               				           <td><c:out value="${Board.mnick}"/></td>
+               				           <td><c:out value="${Board.BCount }"/></td>
+                			           <td><c:out value="${Board.BDate}"/></td>
 									</tr>
-									</c:forEach>									
-									<c:forEach var="Board" items="${list }">
-									<tr name="bId" id="${Board.bId }">
-                     				   <td><c:out value="${Board.bNo }"/></td>
+								</c:forEach>									
+								<c:forEach var="Board" items="${list }"> <!-- 일반 게시글 페이지 -->
+									<tr name="BId" id="${Board.BId }">
+                     				   <td><c:out value="${Board.BNo }"/></td>
                      				   <td><c:out value="일반"/></td>
-                  				       <td><c:out value="${Board.bTitle }"/></td>
-               				           <td><c:out value="${Board.mNo}"/></td>
-               				           <td><c:out value="${Board.bCount }"/></td>
-                			           <td><c:out value="${Board.bDate}"/></td>
+                  				       <td><c:out value="${Board.BTitle }"/></td>
+               				           <td><c:out value="${Board.mnick}"/></td>
+               				           <td><c:out value="${Board.BCount }"/></td>
+                			           <td><c:out value="${Board.BDate}"/></td>
                     				</tr>
-									</c:forEach>									
+								</c:forEach>									
 								</tbody>
 							</table>
 							<!-- 페이지 처리 해야됨. -->
+							<c:if test="${not empty member}">
 							<input type="button" value="글쓰기" id=""	class="btn btn-theme btn-large"
 								onclick="location.href='${pageContext.request.contextPath}/board/boardwrite.do'"
-								style="position: absolute; right: 20px;" />
+								style="position: absolute; right: 20px;" /> </c:if>
 
 							<div class="" id=""
 								style="display: flex; align-items: center; justify-content: center;">
@@ -103,9 +104,9 @@
 <script>
 $(function(){
 	$("tr[name]").on("click",function(){
-		var bId = $(this).attr("id");
-		console.log("bId="+bId);
-		location.href = "${pageContext.request.contextPath}/board/boardview.do?bId="+bId;
+		var BId = $(this).attr("id");
+		console.log("BId="+BId);
+		location.href = "${pageContext.request.contextPath}/board/boardview.do?BId="+BId;
 	});
 });
 

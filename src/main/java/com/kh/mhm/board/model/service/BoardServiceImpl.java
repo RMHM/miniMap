@@ -21,6 +21,12 @@ public class BoardServiceImpl implements BoardService {
 	@Autowired
 	BoardDao boardDao;
 
+	@Override
+	public List<Board> selectBoardList(int btype) {
+		List<Board> list = null;
+        list = boardDao.selectBoardList(btype);
+        return list;
+	}
 	
 	@Override
 	public List<Board> selectBoardList(Board board) {
@@ -43,21 +49,22 @@ public class BoardServiceImpl implements BoardService {
 	}
 
 	@Override
-	public int insertBoard(Board board, List<Fileref> attachList) {
+	public int insertBoard(Board board/*, List<Fileref> attachList*/) {
 		// TODO Auto-generated method stub
-		return 0;
+		return boardDao.insertBoard(board);
+		
 	}
 
 	@Override
-	public Board selectOneBoard(int bId) {
+	public Board selectOneBoard(int BId) {
 		
-		return boardDao.selectOneBoard(bId);
+		return boardDao.selectOneBoard(BId);
 	}
 	
 	@Override
-	public int updateOneCount(int bId) {
+	public int updateOneCount(int BId) {
 		// TODO Auto-generated method stub
-		return boardDao.updateOneCount(bId);
+		return boardDao.updateOneCount(BId);
 	}
 
 	@Override
@@ -67,15 +74,18 @@ public class BoardServiceImpl implements BoardService {
 	}
 
 	@Override
-	public int updateBoard(Board board, List<Fileref> attachList) {
-		// TODO Auto-generated method stub
-		return 0;
+	public int updateBoard(Board board/*, List<Fileref> attachList*/) {
+		int result = 0;
+		
+		result = boardDao.updateBoard(board);
+		
+		return result;
 	}
 
 	@Override
-	public int deleteBoard(int boardNo) {
+	public int deleteBoard(int BId) {
 		// TODO Auto-generated method stub
-		return 0;
+		return boardDao.deleteBoard(BId);
 	}
 
 	@Override

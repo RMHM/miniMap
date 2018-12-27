@@ -26,6 +26,6 @@
 	</select>
 	
 	<select id="selectAvgCnt" resultType="_int">
-		select avg(vcount) from visitor where to_char(sysdate, 'yyyymmdd') = to_char(vdate, 'yyyymmdd')
+		select avg(vcount) from visitor
 	</select>
 </mapper>

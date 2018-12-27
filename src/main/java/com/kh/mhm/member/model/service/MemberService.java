@@ -6,7 +6,9 @@ import java.util.List;
 import com.kh.mhm.member.model.vo.Member;
 
 public interface MemberService {
-
+	
+	Member selectLogin(String mid);
+	
 	Member selectOne(String mid);
 
 	int insertMember(Member member);
@@ -22,7 +24,8 @@ public interface MemberService {
 	int checkIdDuplicate(String mid);
 	
 	Date selectNowBlack(int mno);
-
-	int checkNick(String mnick);
-
+  
+  int checkNick(String mnick);
+  
+  List selectMemberList(String mtype);
 }

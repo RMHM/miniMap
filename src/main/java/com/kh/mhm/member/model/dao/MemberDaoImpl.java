@@ -15,7 +15,12 @@ public class MemberDaoImpl implements MemberDao {
 
 	@Autowired
 	private SqlSessionTemplate sst;
-
+	
+	@Override
+	public Member selectLogin(String mid) {
+		return sst.selectOne("member.selectLogin", mid);
+	}
+	
 	@Override
 	public Member selectOne(String mid) {
 		return sst.selectOne("member.selectOne", mid);
@@ -58,9 +63,27 @@ public class MemberDaoImpl implements MemberDao {
 	}
 
 	@Override
-	public int checkNick(HashMap<String, Object> hmap) {
+  public int checkNick(HashMap<String, Object> hmap) {
 		sst.selectOne("member.checkNick", hmap);
 		return (Integer) hmap.get("result");
+  }
+  
+  @Override
+  public List selectMemberList(String mtype) {
+		
+		System.out.println("dao mtype : " + mtype);
+		
+		List list = null;
+		
+		if(mtype.equals("m")) {
+			list = sst.selectList("member.selectCommonMember");
+		} else if (mtype.equals("c")) {
+			list = sst.selectList("member.selectCompanyMember");
+		} else {
+			list = sst.selectList("member.selectBlackList");
+		}
+		
+		return list;
 	}
 
 }

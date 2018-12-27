@@ -12,7 +12,7 @@
 		width: 737px;
 		height: 484px;
 		margin: 5px;
-		background: url(/resources/img/message_background.png) left top no-repeat;
+		background: url(/resources/img/message/message_background.png) left top no-repeat;
 		background-size: 737px 484px;
 		float: left;
 		display: inline;
@@ -57,7 +57,7 @@
 		padding-top: 35px;
 		border-bottom: solid 1px #B9B9B9;
 		overflow: hidden;
-		background: url(/resources/img/message_title.png) 4px 0 no-repeat;
+		background: url(/resources/img/message/message_title.png) 4px 0 no-repeat;
 		background-size:140px 70px;
 	}
 	#noteLeft dl.menu dd,
@@ -76,7 +76,7 @@
 	}
 	#noteLeft dl.menu li {
 		padding: 10px 0 5px 0;
-		background: url(http://static.inven.co.kr/image/member/note/dot_2x1_B8B8B8.gif) left top repeat-x;
+		background: url(/resources/img/message/dot1.gif) left top repeat-x;
 	}
 	#noteLeft dl.menu li.oldstart {
 		background:none;
@@ -84,7 +84,7 @@
 	}
 
 	#noteLeft dl.menu li span.orange {
-		background: url(http://static.inven.co.kr/image/member/note/bul_circle_orange.gif) left 3px no-repeat;
+		background: url(/resources/img/message/orangeCircle.gif) left 3px no-repeat;
 		margin-left: 6px;
 		float: left;
 		display: inline;
@@ -101,7 +101,7 @@
 		letter-spacing: -1px;
 	}
 	#noteLeft dl.menu li a:hover {
-		background: url(http://static.inven.co.kr/image/member/note/bul_dblarrow_black.gif) right 3px no-repeat;
+		background: url(/resources/img/message/arrow.gif) right 3px no-repeat;
 	}
 	#noteLeft dl.menu li a img.new {
 		border: none;
@@ -119,9 +119,9 @@
 	}
 	#noteMain h1.note {
 		height: auto;
-		background: url(/resources/img/message_icon.png) 6px top no-repeat;
+		background: url(/resources/img/message/message_icon.png) 6px top no-repeat;
 		background-size: 30px 30px;
-		padding: 2px 0 10px 34px;
+		padding: 2px 0 14px 34px;
 		margin: 0;
 		font-family: gulim, 굴림;
 		font-size:9pt;
@@ -152,7 +152,7 @@
 		float: left;
 		text-align: center;
 		display: inline;
-		background: url(http://static.inven.co.kr/image/member/note/bttn_note46.gif) left top no-repeat;
+		background: url(/resources/img/message/smallBtn.gif) left top no-repeat;
 	}
 	#noteMain a:link.bttn92w, #noteMain a:visited.bttn92w, #noteMain a:active.bttn92w, #noteMain a:hover.bttn92w {
 		width: 67px;
@@ -164,7 +164,7 @@
 		float: left;
 		text-align: center;
 		display: inline;
-		background: url(http://static.inven.co.kr/image/member/note/bttn_note92_write.gif) left top no-repeat;
+		background: url(/resources/img/message/sendBtn.gif) left top no-repeat;
 	}
 	#noteMain a:link.bttn65, #noteMain a:visited.bttn65, #noteMain a:active.bttn65, #noteMain a:hover.bttn65 {
 		width: 65px;
@@ -175,7 +175,7 @@
 		float: left;
 		text-align: center;
 		display: inline;
-		background: url(http://static.inven.co.kr/image/member/note/bttn_note65.gif) left top no-repeat;
+		background: url(/resources/img/message/bigBtn.gif) left top no-repeat;
 	}
 	#noteMain a:link.bttn75, #noteMain a:visited.bttn75, #noteMain a:active.bttn75, #noteMain a:hover.bttn75 {
 		width: 75px;
@@ -187,7 +187,7 @@
 		text-align: center;
 		text-indent: 18px;
 		display: inline;
-		background: url(http://static.inven.co.kr/image_2011/member/note/bttn_note75_sendDel.gif) left top no-repeat;
+		background: url(/resources/img/message/deleteBtn.gif) left top no-repeat;
 	}
 	#noteMain a:link.bttn76l, #noteMain a:visited.bttn76l, #noteMain a:active.bttn76l, #noteMain a:hover.bttn76l {
 		width: 50px;
@@ -199,7 +199,7 @@
 		float: left;
 		text-align: center;
 		display: inline;
-		background: url(http://static.inven.co.kr/image/member/note/bttn_note76_list.gif) left top no-repeat;
+		background: url(/resources/img/message/listBtn.gif) left top no-repeat;
 	}
 
 	.IEFix {
@@ -248,7 +248,7 @@
 		margin-top: -2px;
 	}
 	#noteWrite table.content td {
-		background: url(http://static.inven.co.kr/image/member/note/dot_2x3_9C9C9C_td.gif) left top repeat-x;
+		background: url(/resources/img/message/dot2.gif) left top repeat-x;
 		vertical-align: top;
 		line-height: 150%;
 	}
@@ -282,7 +282,7 @@
 		width: 100%;
 		height: auto;
 		padding: 9px 0 8px 0;
-		background: url(http://static.inven.co.kr/image/member/note/dot_2x1_9C9C9C.gif) left top repeat-x;
+		background: url(/resources/img/message/dot3.gif) left top repeat-x;
 		border-bottom: solid 1px #B5B6B5;
 	}
 	#noteWrite div.command #aNoteCancel {
@@ -307,7 +307,7 @@
 		text-indent: -999px;
 		overflow: hidden;
 		display: inline-block;
-		background: url(http://static.inven.co.kr/image/member/note/bttn_allread.gif) left top no-repeat;
+		background: url(/resources/img/message/allRead.gif) left top no-repeat;
 	}
 	#noteMain .selectWrap {float:right;}
 
@@ -334,7 +334,7 @@
 		height: auto;
 		clear: both;
 		padding-top: 8px;
-		background: url(http://static.inven.co.kr/image/member/note/dot_3x1_CCCCCC.gif) left top repeat-x;
+		background: url(/resources/img/message/dot4.gif) left top repeat-x;
 	}
 	#noteList div.cmdWrap #cmdDelete { float: left; margin-left: 7px;}
 	#noteList div.cmdWrap #cmdStore { float: left; margin-left: 5px;}
@@ -358,7 +358,7 @@
 	#noteList div.list table th {
 		font-family: gulim, 굴림;
 		font-size: 9pt;
-		background: url(http://static.inven.co.kr/image/member/note/dot_1x5_CCCCCC_td.gif) left top repeat-x;
+		background: url(/resources/img/message/dot5.gif) left top repeat-x;
 	}
 	#noteList div.list table th {
 		padding: 13px 0 6px;
@@ -502,7 +502,7 @@
 		height: auto;
 	}
 	#noteView table.content td {
-		background: url(http://static.inven.co.kr/image/member/note/dot_2x3_9C9C9C_td.gif) left top repeat-x;
+		background: url(/resources/img/message/dot6.gif) left top repeat-x;
 		padding:9px 0 3px 0;
 		vertical-align: top;
 		line-height: 150%;
@@ -543,7 +543,7 @@
 		width: 100%;
 		height: auto;
 		padding: 9px 0 8px 0;
-		background: url(http://static.inven.co.kr/image/member/note/dot_2x1_9C9C9C.gif) left top repeat-x;
+		background: url(/resources/img/message/dot7.gif) left top repeat-x;
 		border-bottom: solid 1px #B5B6B5;
 	}
 	#noteView div.command #aNoteList {

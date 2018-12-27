@@ -10,7 +10,12 @@
 	<insert id="insertAuthority" parameterType="Authority">
 		INSERT INTO AUTHORITY
 		VALUES(SEQ_AID.NEXTVAL,#{mNo},#{mName},SYSDATE,#{address},#{aContent},#{aCode},DEFAULT,DEFAULT,DEFAULT)
-
 	</insert>
+	
+	<select id="selectRequestAll" resultType="Authority">
+		select * 
+		from authority
+		order by request_date
+	</select>
 	
 </mapper>

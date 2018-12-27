@@ -25,6 +25,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.kh.mhm.common.SendMail;
 import com.kh.mhm.member.model.service.MemberService;
 import com.kh.mhm.member.model.vo.Member;
+import com.kh.mhm.myPage.model.service.MyPageService;
 
 @SessionAttributes(value = { "member" })
 @Controller
@@ -35,6 +36,9 @@ public class MemberController {
 
 	@Autowired
 	private MemberService ms;
+	
+	@Autowired
+	private MyPageService mps;
 
 //	private String loc = "/";
 //	private String msg = "";
@@ -53,8 +57,8 @@ public class MemberController {
 	public ModelAndView memberLogin(@RequestParam String mid, @RequestParam String mpw, Model model) {
 		ModelAndView mv = new ModelAndView();
 
-		Member m = ms.selectOne(mid);
-		
+		Member m = ms.selectLogin(mid);
+		System.out.println(m);
 		String loc = "/";
 		String msg = "";
 		
@@ -196,7 +200,7 @@ public class MemberController {
 		return "member/memberEnroll";
 	}
 
-	@RequestMapping("/member/memberEnrollEnd.do")
+  @RequestMapping("/member/memberEnrollEnd.do")
 	public String memberEnrollEnd(Member m, Model model) {
 		
 		String loc = "/";
@@ -249,26 +253,35 @@ public class MemberController {
 
 		return map;
 	}
-
-	@RequestMapping("/member/selectCommonMember.do")
-	@ResponseBody
-	public List<Member> selectCommonMember() {
-
-		List<Member> mlist = ms.selectCommonMember();
-		System.out.println("mlist : " + mlist);
-
-		return mlist;
+	
+	@RequestMapping("manager/managerPage.go")
+	public String managerPageGo() {
+		return "manager/ManagerPage";
+	}
+	
+	@RequestMapping("manager/grantPermission.go")
+	public String grantPermissionGo(Model model) {
+		
+		List list = mps.selectRequestAll();
+		
+		model.addAttribute("list", list);
+		
+		return "manager/grant_Permission";
 	}
 
-	@RequestMapping("/member/selectCompanyMember.do")
-	@ResponseBody
-	public List<Member> selectCompanyMember() {
-
-		List<Member> clist = ms.selectCompanyMember();
-
-		System.out.println("clist : " + clist);
-		return clist;
-	}
+	@RequestMapping("/member/selectMemberList.do")
+    @ResponseBody
+    public List selectMemberList(String mtype, Model model) {
+    	
+    	List list = ms.selectMemberList(mtype);
+    	
+    	model.addAttribute("list", list);
+    	
+    	System.out.println("mtype : " + mtype);
+    	System.out.println("list : " + list);
+    	
+    	return list;
+    }
 
 	@RequestMapping("/member/insertFile.do")
 	public void insertFile() {
