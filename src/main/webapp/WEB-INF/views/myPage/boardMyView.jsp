@@ -84,9 +84,10 @@
 			<script>
 				$(function() {
 					$("tr[id]").on("click", function() {
-						var boardNo = $(this).attr("id");
-						console.log(boardNo);
-						/* location.href = "${pageContext.request.contextPath}/board/boardView.do?no="+boardNo; */
+						var bId = $(this).attr("id");
+						
+
+						 location.href = "${pageContext.request.contextPath}/board/boardview.do?BId="+bId;  
 					});
 				});
 			</script>
