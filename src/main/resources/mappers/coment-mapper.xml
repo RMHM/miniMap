@@ -6,7 +6,7 @@
 	<resultMap type="Coment" id="comentMap"></resultMap>
 	
 	<select id="selectComentList" parameterType="_int" resultType="Coment">
-		SELECT C.*, M.* FROM COMENT C, MEMBER M WHERE BID = #{bid} AND DELFLAG='N' AND C.MNO = M.MNO
+    		SELECT C.*, M.* FROM COMENT C, MEMBER M WHERE BID = #{bid} AND DELFLAG='N' AND C.MNO = M.MNO
 	</select>
 	
 	<select id="selectOneComent" parameterType="_int" resultType="Coment">

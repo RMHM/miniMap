@@ -260,8 +260,9 @@ public class MyPageController {
 		*//*Map<Authority,Object> result = new Map<Authority,Object>(mps.selectRequest(member.getMno()));
 		*/
 		List<Authority> list = mps.selectRequest(member.getMno());
-/*		System.out.println(list);*/
-
+    
+    /*		System.out.println(list);*/
+    
 		model.addAttribute("list", list);
 		return "myPage/requestView";
 	}
@@ -280,49 +281,5 @@ public class MyPageController {
 		int result = mps.insertAuthority(authority);
 		return "myPage/myPageMain";
 	}
-	
-	/*권한 조회*/
-	@RequestMapping("/myPage/selectRequest.do")
-	@ResponseBody
-	public Authority selectrePermission(@RequestParam String aId,ModelAndView mv) {
-		
-		Authority authority =  mps.selectOneRequest(aId);
-		/*System.out.println("ajax:"+ authority);
-		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("list", authority);
-		mv.addObject(authority); 
-		mv.setViewName("list");
-		System.out.println("mv : " + mv);*/
-		return authority;
-	}
-
-	/* 권한 수정 */
-	@RequestMapping("/myPage/updateRePermission.do")
-	public String UpdaterePermission(@RequestParam(value="delflag", required=false, defaultValue="N") char delflag, Member member, Authority authority) {
-		System.out.println("수정쪽");
-		System.out.println(delflag);
-		System.out.println(authority);
-		authority.setMNo(member.getMno());
-		authority.setDelflag(delflag);
-		int result = mps.updateAuthority(authority);
-		return "myPage/myPageMain";
-	}
-	
-	/* 권한 승인 */
-	@RequestMapping("/mypage/grantAuthority.do")
-	public String grantAuthority(Authority autho, Model model) {
-		
-		msg = "승인이 완료 되었습니다.";
-		loc = "/manager/grantPermission.go";
-		
-		/* atake, grant_date Y, sysdate로 수정되게 하기 */
-		
-		model.addAttribute("msg", msg)
-		.addAttribute("loc", loc);
-		
-		return "common/msg";
-	}
-	
-	
 
 }

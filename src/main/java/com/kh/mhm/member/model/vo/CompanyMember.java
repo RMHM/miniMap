@@ -6,11 +6,12 @@ import com.kh.mhm.member.model.vo.Member;
 
 public class CompanyMember extends Member{
 	
-	private String address;
+	private String address; // 주소
 	private String aname; // 권한명
 	private Date reqDate; // 요청 날짜
 	private Date grantDate; // 권한 부여일
 	private String atake;   // 권한 부여 여부
+	private char delflag; // 삭제 여부
 	
 	public CompanyMember() {
 		super();
@@ -45,7 +46,7 @@ public class CompanyMember extends Member{
 	@Override
 	public String toString() {
 		return "CompanyMember [address=" + address + ", aname=" + aname + ", reqDate=" + reqDate + ", grantDate="
-				+ grantDate + ", atake=" + atake +"]";
+				+ grantDate + ", atake=" + atake + ", delflag= " + delflag + "]";
 	}
 	public Date getReqDate() {
 		return reqDate;
@@ -64,6 +65,12 @@ public class CompanyMember extends Member{
 	}
 	public void setAtake(String atake) {
 		this.atake = atake;
+	}
+	public char getDelflag() {
+		return delflag;
+	}
+	public void setDelflag(char delflag) {
+		this.delflag = delflag;
 	}
 
 }

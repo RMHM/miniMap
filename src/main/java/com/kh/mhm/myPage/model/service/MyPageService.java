@@ -27,11 +27,4 @@ public interface MyPageService {
 	/*List<Map<String, String>> selectRequest(int mno);*/
 	List<Authority> selectRequest(int mno);
 	
-	List<Authority> selectRequestAll();
-
-	int updateAuthority(Authority authority);
-
-	/*나의 요청 상세보기*/
-	Authority selectOneRequest(String aId);
-	
 }

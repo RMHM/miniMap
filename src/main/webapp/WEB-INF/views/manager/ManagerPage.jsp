@@ -161,7 +161,6 @@ table{
 						<th><b>기업명</b></th>
 						<th><b>이메일</b></th>
 						<th><b>권한여부</b></th>
-						<th><b>권한요청일</b></th>
 						<th><b>권한부여일</b></th>
 						<th><b>가입일</b></th>
 						<th><b>상태</b></th>
@@ -216,7 +215,7 @@ $(document).ready(function() {
     });
     
     $.ajax({
-    	url : '/member/selectMemberList.do',
+    	url : 'selectMemberList.do',
     	data : { mtype : mtype },
     	success : function(data){
     		
@@ -228,7 +227,7 @@ $(document).ready(function() {
 			
 			for(var i in data){
 				
-				var $tdCheck = $('<td>').text(data[i].mno);
+				var $tdMno = $('<td id="mno">').text(data[i].mno);
 				var $trBoard = $('<tr>');
 				var $tdMid = $('<td>').text(data[i].mid);
 				var $tdMname = $('<td>').text(data[i].mname);
@@ -255,7 +254,7 @@ $(document).ready(function() {
 					var $tdDropDate = $('<td>').text("탈퇴");
 				}
 				
-				$trBoard.append($tdCheck).append($tdMid).append($tdMname).append($tdEmail).append($tdGender).append($tdAge)
+				$trBoard.append($tdMno).append($tdMid).append($tdMname).append($tdEmail).append($tdGender).append($tdAge)
 				.append($tdJoinDate).append($tdDropDate);	
 				
 				$table.append($trBoard);
@@ -268,7 +267,7 @@ $(document).ready(function() {
 					}
 				});
 				$('#tab' + num + ' table tbody').children().mouseenter(function () {
-					$(this).children().not(':first').css({'background':'rgba(221, 221, 221, 0.685)', 'cursor':'pointer'});
+					$(this).children().not(':first').css({'background':'rgba(221, 221, 221, 0.685)'});
 					$(this).children().not(':first').click(function () {
 						var mno = $(this).parent().children().eq(1).text();
 					});
@@ -287,11 +286,8 @@ $(document).ready(function() {
 	   mtype = $(this).attr("value");
 	   num = $(this).attr("name");
 	   
-	   console.log("mtype : " + mtype);
-	   console.log("num : " + num);
-	   
 	   $.ajax({
-	     url : '/member/selectMemberList.do',
+	     url : 'selectMemberList.do',
 	     data : {
 	        mtype : mtype
 	    },
@@ -305,54 +301,25 @@ $(document).ready(function() {
 			
 			for(var i in data){
 				
-					var $tdCheck = $('<td>').text(data[i].mno);
-					var $trBoard = $('<tr>');
-					var $tdMid = $('<td>').text(data[i].mid);
-					var $tdMname = $('<td>').text(data[i].mname);
-					var $tdEmail = $('<td>').text(data[i].email);
+				var $tdMno = $('<td id="mno">').text(data[i].mno);
+				var $trBoard = $('<tr>');
+				var $tdMid = $('<td>').text(data[i].mid);
+				var $tdMname = $('<td>').text(data[i].mname);
+				var $tdEmail = $('<td>').text(data[i].email);
 					
-				if(mtype=="m"){
-					
-					if(data[i].gender != null){
-						var $tdGender = $('<td>').text(data[i].gender);
-					} else {
-						var $tdGender = $('<td>').text("-");
-					}
-					
-					if(data[i].age != 0){
-						var $tdAge = $('<td>').text(data[i].age);
-					} else {
-						var $tdAge = $('<td>').text("-");
-					}
-					
-					var $tdJoinDate 
-					= $('<td>').text(new Date(data[i].joinDate).toISOString().slice(0,10));
-				
-					if(data[i].dropDate == null){
-						var $tdDropDate = $('<td>').text("정상");		
-					} else {
-						var $tdDropDate = $('<td>').text("탈퇴");
-					}
-					
-					$trBoard.append($tdCheck).append($tdMid).append($tdMname).append($tdEmail).append($tdGender).append($tdAge)
-					.append($tdJoinDate).append($tdDropDate);	
-					
-					$table.append($trBoard);
-					
-				} else if(mtype == "c"){
+				if(mtype == "c"){
 				
 					var $tdAuthority = $('<td>').text(data[i].aname);
-					var $tdReqDate = $('<td>').text(new Date(data[i].reqDate).toISOString().slice(0,10));
 					var $tdGrantDate = $('<td>').text(new Date(data[i].grantDate).toISOString().slice(0,10));
 					
 					if(data[i].atake == "Y"){
 						$tdAuthority = $('<td>').text(data[i].aname);
-					} else if(data[i].reqDate != null && data[i].atake == "N") {
+					} else if(data[i].reqDate != null && data[i].atake == "N" && data[i].delflag == "N") {
 						$tdAuthority = $('<td>').text(data[i].aname);
-						$tdGrantDate = $('<td>').html("<button onclick=location.href='grantPermission.go' id='grantBtn'>승인</button>");
-					} else if(data[i].reqDate == null) {
+						$tdGrantDate = $('<td>').html("<button onclick=window.open('grantPermission.go?mno="+data[i].mno+"') id='grantBtn'>요청확인</button>")
+						console.log("data[i]mno : " + data[i].mno);
+					} else if(data[i].reqDate == null || data[i].delflag == "Y") {
 						$tdAuthority = $('<td>').text("권한 없음");
-						$tdReqDate = $('<td>').text("-");
 						$tdGrantDate = $('<td>').text("-");
 					}
 					
@@ -365,9 +332,8 @@ $(document).ready(function() {
 						var $tdDropDate = $('<td>').text("탈퇴");
 					}
 
-					$trBoard.append($tdCheck).append($tdMid).append($tdMname).append($tdEmail)
-					.append($tdAuthority).append($tdReqDate).append($tdGrantDate).append($tdJoinDate)
-					.append($tdDropDate);	
+					$trBoard.append($tdMno).append($tdMid).append($tdMname).append($tdEmail)
+					.append($tdAuthority).append($tdGrantDate).append($tdJoinDate).append($tdDropDate);	
 					
 					$table.append($trBoard);
 					
@@ -396,24 +362,23 @@ $(document).ready(function() {
 				
 					var $tdReason = $('<td>').text(data[i].reason);
 					
-					$trBoard.append($tdCheck).append($tdMid).append($tdMname).append($tdEmail)
+					$trBoard.append($tdMno).append($tdMid).append($tdMname).append($tdEmail)
 					.append($tdGender).append($tdAge).append($tdDropDate).append($tdEndDate)
 					.append($tdReason);	
 					
 					$table.append($trBoard);
 				}
+				
+				$('#grantBtn').click(function(){
+					/* window.open("grantPermission.go?mno="+data[i].mno, "승인 페이지", "width=600, height=550"); */
+					console.log("mno : " + data[i].mno);
+				});
 					
 			}
 			
-			$('input[name^=chk]').click(function() {
-				if($('input[name^=chk]').is(':checked')==true){
-					buttonOn();
-				}else{
-					buttonOff();
-				}
-			});
+			
 			$('#tab' + num + ' table tbody').children().mouseenter(function () {
-				$(this).children().not(':first').css({'background':'rgba(221, 221, 221, 0.685)', 'cursor':'pointer'});
+				$(this).children().not(':first').css({'background':'rgba(221, 221, 221, 0.685)'});
 				$(this).children().not(':first').click(function () {
 					var mno = $(this).parent().children().eq(1).text();
 				});

@@ -53,20 +53,5 @@ public class MyPageServiceImpl implements MyPageService {
 	public List<Authority> selectRequest(int mno) {
 		return md.selectRequest(mno);
 	}
-	@Override
-	public List<Authority> selectRequestAll() {
-		return md.selectRequestAll();
-	}
-	@Override
-	public int updateAuthority(Authority authority) {
-		
-		return md.updateAuthority(authority);
-	}
-	@Override
-	public Authority selectOneRequest(String aId) {
-		
-		return md.selectOneAuthority(aId);
-	}
-
 
 }

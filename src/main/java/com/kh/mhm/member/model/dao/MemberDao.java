@@ -16,18 +16,12 @@ public interface MemberDao {
 
 	Member selectFindID(String email);
 
-	List<Member> selectCommonMember();
-
 	int checkIdDuplicate(HashMap<String, Object> hmap);
 
 	int updateMemberPW(Member m);
 
-	List<Member> selectCompanyMember();
-	
 	Date selectNowBlack(int mno);
   
   int checkNick(HashMap<String, Object> hmap);
   
-  List selectMemberList(String mtype);
-
 }

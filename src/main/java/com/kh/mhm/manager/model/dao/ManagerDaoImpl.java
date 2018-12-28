@@ -7,6 +7,8 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.kh.mhm.myPage.model.vo.Authority;
+
 @Repository
 public class ManagerDaoImpl implements ManagerDao {
 	
@@ -21,5 +23,37 @@ public class ManagerDaoImpl implements ManagerDao {
 		list.add((Integer)sst.selectOne("common.selectAvgCnt"));
 		return list;
 	}
+	
+	@Override
+	public List selectMemberList(String mtype) {
+		
+		List list = null;
+		
+		if(mtype.equals("m")) {
+			list = sst.selectList("member.selectCommonMember");
+		} else if (mtype.equals("c")) {
+			list = sst.selectList("member.selectCompanyMember");
+		} else {
+			list = sst.selectList("member.selectBlackList");
+		}
+		
+		return list;
+	}
+
+	@Override
+	public int grantAuthority(int mno) {
+		return sst.update("authority.grantAuthority", mno);
+	}
+
+	@Override
+	public Authority selectRequest(int mno) {
+		return sst.selectOne("authority.selectRequest", mno);
+	}
+
+	@Override
+	public int refuseAuthority(int mno) {
+		return sst.update("authority.refuseAuthority", mno);
+	}
+
 
 }
