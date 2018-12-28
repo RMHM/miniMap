@@ -260,8 +260,9 @@ public class MyPageController {
 		*//*Map<Authority,Object> result = new Map<Authority,Object>(mps.selectRequest(member.getMno()));
 		*/
 		List<Authority> list = mps.selectRequest(member.getMno());
-		System.out.println(list);
-
+    
+    /*		System.out.println(list);*/
+    
 		model.addAttribute("list", list);
 		return "myPage/requestView";
 	}
@@ -280,7 +281,5 @@ public class MyPageController {
 		int result = mps.insertAuthority(authority);
 		return "myPage/myPageMain";
 	}
-	
-	
 
 }

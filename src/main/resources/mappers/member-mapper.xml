@@ -120,11 +120,8 @@
 		select end_date from (select rownum, end_date from (select end_date from blacklist where mno = #{mno} order by end_date desc) where rownum=1)
 	</select>
 	
-	<select id="checkNick" statementType="CALLABLE" parameterType="hashMap">
-			{ CALL NICK_CHK(#{mnick, mode=IN, jdbcType=VARCHAR},
-			#{result, mode=OUT, jdbcType=NUMERIC, javaType=integer}
-			)
-		}
+  <select id="checkNick" parameterType="String" resultType="int">
+		select count(*) from member mnick = #{mnick}
 	</select>
 	
 </mapper>

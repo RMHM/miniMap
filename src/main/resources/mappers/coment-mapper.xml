@@ -6,19 +6,26 @@
 	<resultMap type="Coment" id="comentMap"></resultMap>
 	
 	<select id="selectComentList" parameterType="_int" resultType="Coment">
-		SELECT C.*, M.* FROM COMENT C, MEMBER M WHERE BID = #{bId} AND DELFLAG='N' AND C.MNO = M.MNO
+    		SELECT C.*, M.* FROM COMENT C, MEMBER M WHERE BID = #{bid} AND DELFLAG='N' AND C.MNO = M.MNO
 	</select>
 	
-	<insert id="insertComent">
-		INSERT INTO COMENT VALUES( \
-				SEQ_CID.NEXTVAL, #{bId}, #{mNo}, #{cContent}, SYSDATE, DEFAULT, DEFAULT, DEFAULT, DEFAULT )
+	<select id="selectOneComent" parameterType="_int" resultType="Coment">
+		SELECT * FROM COMENT WHERE CID = #{cId}  
+	</select>
+	
+	<insert id="insertComent" parameterType="Coment">
+		INSERT INTO COMENT VALUES 
+		(SEQ_CID.NEXTVAL, #{bid}, #{mno}, #{ccontent}, SYSDATE, #{clevel}, DEFAULT, DEFAULT, DEFAULT )
+		<!-- <selectKey keyProperty="cId" resultType="_int" order="AFTER">
+			SELECT SEQ_CID.CURRVAL FROM DUAL
+		</selectKey> -->
 	</insert>
 	
-	<update id="updateComent">
-		UPDATE COMENT SET CCONTENT =#{cContent} WHERE CID=#{cId}
+	<update id="updateComent" parameterType="Coment">
+		UPDATE COMENT SET CCONTENT =#{ccontent} WHERE CID=#{cid}
 	</update>
 	
-	<update id="deleteComent">
+	<update id="deleteComent" parameterType="Coment">
 		UPDATE COMENT SET DELFLAG = 'Y' WHERE CID = #{cId}
 	</update>
 </mapper>

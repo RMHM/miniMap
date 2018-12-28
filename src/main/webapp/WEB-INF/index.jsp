@@ -14,7 +14,12 @@
 	<meta name="description" content="" />
 	
 </head>
-
+<style>
+	.test-icon:before {
+		width : 25px;
+		content: url("../resources/img/counter/test.png");
+	}
+</style>
 <body>
 	<!-- 외부파일 선언 -->
 	<c:import url="views/common/exFile.jsp" />
@@ -57,29 +62,56 @@
 				</div>
 			</div>
 		</section>
-		<section class="callaction">
+		<!-- counter section -->
+		<section class="content">
 			<div class="container">
-				<div class="row">
+			<div class="row">
 					<div class="col-lg-12">
 						<div class="row">
-							전체 방문수
-							<div class="counter" data-count="9">0</div>
-							오늘 방문수
-							<div class="counter" data-count="99">0</div>
-							평균 방문수
-							<div class="counter" data-count="999">0</div>
-						</div>
-					
-					
-						<div class="big-cta">
-							<div class="cta-text">
-								
+							<div class="col-lg-4">
+								<div class="box">
+									<div class="box-gray aligncenter">
+										<h4>전체 방문자 수</h4>
+										<div class="icon">
+											<i class="fa fa-user-plus fa-3x"></i>
+											<div class="counter" data-count="9">0</div>
+										</div>
+										<p>현재까지 우리를 방문해주신 분들은?</p>
+									</div>
+								</div>
+							</div>
+							<div class="col-lg-4">
+								<div class="box">
+									<div class="box-gray aligncenter">
+										<h4>오늘 방문자 수</h4>
+										<div class="icon">
+											<i class="fa test-icon fa-3x"></i>
+											<div class="counter" data-count="99">0</div>
+										</div>
+										<p>오늘 우리를 방문해주신 분들은?</p>
+
+									</div>
+								</div>
+							</div>
+							
+							<div class="col-lg-4">
+								<div class="box">
+									<div class="box-gray aligncenter">
+										<h4>평균 방문자 수</h4>
+										<div class="icon">
+											<i class="fa fa-balance-scale fa-3x"></i>
+											<div class="counter" data-count="999">0</div>
+										</div>
+										<p>하루에 우리를 이용해주시는 분들은?</p>
+									</div>
+								</div>
 							</div>
 						</div>
 					</div>
 				</div>
-			</div>
+				</div>
 		</section>
+		<!-- end counter -->
 		<br>
 		<section class="callaction">
 			<div class="container">

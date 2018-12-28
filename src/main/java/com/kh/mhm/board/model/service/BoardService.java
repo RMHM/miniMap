@@ -8,6 +8,9 @@ import com.kh.mhm.board.model.vo.Board;
 
 public interface BoardService {
 
+	// btype용
+	List<Board> selectBoardList(int btype);
+	
 	List<Board> selectBoardList(Board board);	
 	
 	List<Board> selectNoticeList(Board board);		

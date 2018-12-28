@@ -55,6 +55,4 @@ public class MyPageDaoImpl implements MyPageDao {
 	public List<Authority> selectRequest(int mno) {
 		return sqlSession.selectList("myPage.selectRequest",mno);
 	}
-	
-	
 }

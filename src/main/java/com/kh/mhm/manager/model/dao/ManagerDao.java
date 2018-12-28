@@ -2,6 +2,7 @@ package com.kh.mhm.manager.model.dao;
 
 import java.util.List;
 
+
 import com.kh.mhm.myPage.model.vo.Authority;
 
 public interface ManagerDao {
@@ -15,5 +16,6 @@ public interface ManagerDao {
 	Authority selectRequest(int mno);
 
 	int refuseAuthority(int mno);
-	
+
+	List<Integer> selectCount();
 }

@@ -24,5 +24,4 @@ public interface MemberDao {
   
   int checkNick(HashMap<String, Object> hmap);
   
-
 }

@@ -55,4 +55,5 @@ public class ManagerDaoImpl implements ManagerDao {
 		return sst.update("authority.refuseAuthority", mno);
 	}
 
+
 }

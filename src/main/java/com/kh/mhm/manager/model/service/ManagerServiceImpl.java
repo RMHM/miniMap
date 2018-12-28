@@ -18,8 +18,8 @@ public class ManagerServiceImpl implements ManagerService {
 	public List<Integer> selectCount() {
 		return mnDao.selectCount();
 	}
-	
-	@Override
+  
+  @Override
 	public List selectMemberList(String mtype) {
 		return mnDao.selectMemberList(mtype);
 	}
@@ -38,5 +38,5 @@ public class ManagerServiceImpl implements ManagerService {
 	public Authority selectRequest(int mno) {
 		return mnDao.selectRequest(mno);
 	}
-
+  
 }

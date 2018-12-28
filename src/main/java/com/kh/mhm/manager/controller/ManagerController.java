@@ -18,9 +18,9 @@ import com.kh.mhm.myPage.model.vo.Authority;
 @Controller
 public class ManagerController {
 	
-	private String msg = "";
+  private String msg = "";
 	private String loc = "/";
-	
+  
 	@Autowired
 	private ManagerService mns;
 	

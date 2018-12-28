@@ -15,5 +15,7 @@ public interface ManagerService {
 	Authority selectRequest(int mno);
 
 	int refuseAuthority(int mno);
+  
+  List<Integer> selectCount();
 
 }

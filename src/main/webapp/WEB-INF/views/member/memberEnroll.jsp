@@ -1,114 +1,122 @@
-<%@
-   page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"
-%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<title>회원가입 페이지</title>
-
+	<meta charset="UTF-8">
+	<title>회원 가입 페이지</title>
+	<c:import url="../common/header.jsp"/>
+	<style>
+		div#enroll-container{width:400px; margin:0 auto; text-align:center;}
+		div#enroll-container input, div#enroll-container select {margin-bottom:10px;}
+		div#enroll-container table th{text-align: right; padding-right:10px;}
+		div#enroll-container table td{text-align: left;}
+		/*중복아이디체크관련*/
+		div#userId-container{position:relative; padding:0px;}
+		div#userId-container span.guide {display:none;font-size: 12px;position:absolute; top:12px; right:10px;}
+		div#userId-container span.ok{color:green;}
+		div#userId-container span.error, span.invalid{color:red;}
+	</style>
 </head>
 <body>
-   <c:import url="/WEB-INF/views/common/exFile.jsp"/>
-   <div id="wrapper">
-      <c:import url="/WEB-INF/views/common/header.jsp"/>
-    
-      	<div class="container">
-      			<div class="col-md-6 col-md-offset-3">
-                <h3>회원가입 Form</h3>
-                </div>
-      	
-      	<div class="col-sm-6 col-md-offset-3">
-                <form action="/member/memberEnrollEnd.do" method="post" onsubmit="return fn_enroll_validate();">
-                    <table>
-                    <div class="form-group">
-                        <label for="mid">아이디</label>
-                        <input type="text" class="form-control"  name="mid" id="mid_" placeholder="사용하실 아이디를 입력하세요.">
-      					<!-- 아이디중복검사 코멘트추가 -->
-						<span class="guide ok">사용 가능</span>
-				        <span class="guide error">사용 불가</span>
-				        <span class="guide invalid">4글자 미만</span>
-				        <input type="hidden" name="idDuplicateCheck" id="idDuplicateCheck" value="0"/>
-      				</div>
-      				
-      				<div class="form-group">
-      					<label for="mpw">비밀번호</label>
-      					<input type="password" class="form-control" name="mpw" id="mpw_" placeholder="비밀번호를 입력하세요." />
-      				</div>
-      				
-      				<div class="form-group">
-      					<label for="mpw">비밀번호 확인</label>
-      					<input type="password" class="form-control" id="mpw2_" placeholder="비밀번호를 확인을 위해 다시한번 입력하세요." />
-      				</div>
-      				
-      				<div class="from-group">
-      					<label for="mname">이름</label>
-      					<input type="name" class="form-control" name="mname" id="mname_" placeholder="이름을 입력하세요." />
-      				</div> 
-      				
-      				 <br>
-      				 
-      				<div class="from-group">
-      					<label for="mnick">닉네임</label>
-      					<input type="nickname" class="form-control" name="mnick" id="mnick_" placeholder="닉네임을 입력하세요." />
-      				</div> 
-      				
-      				<br>
-      				
-      				<div class="from-group">
-      					<label for="email">이메일</label>
-      					<input type="email" class="form-control" name="email" id="email_" placeholder="이메일 주소를 입력하세요." />
-      				</div>
-      				
-      				<br>
-      				
-      				<div class="from-group">
-      					<label for="mtype">회원유형</label> <br>
-      					<input type="radio" name="mtype" id="mtype0" value="M" />일반회원
-      					<input type="radio" name="mtype" id="mtype1" value="C" />기업회원
-      				</div>
-      				
-      				<br>
-      				
-      				<div class="from-group">
-      					<label for="gender">성별</label> <br>
-      					<input type="radio" name="gender" id="gender0" value="M" />남성
-      					<input type="radio" name="gender" id="gender1" value="F" />여성
-      				</div>
-      				 				
-      				<br>
-      				
-      				<div class=from-group">
-      					<label for="age">연령대</label> <br>
-      					<input type="radio" name="age" id="age_" value="10"/>10대
-      					<input type="radio" name="age" id="age_" value="20"/>20대
-      					<input type="radio" name="age" id="age_" value="30"/>30대
-      					<input type="radio" name="age" id="age_" value="40"/>40대
-      				</div>
-      				
-      				<div class="from-group"> <br>
-      					<label for="profilePath">이미지경로</label>
-      					<input type="file" name="profilePath" id="profilePath_" accept="image/gif,image/jpeg,image/png"/>
-      				
-      				</div>
-      				
-      				<br /><br />
-      				</table>
-      				<input type="submit" class="btn btn-success" value="회원가입" /> 
-      				<input type="reset" class="btn btn-danger" value="취소" />
-      	</form>
-      	</div>
-      	</div>
-      	
-      	<br>
-      	
-<script src="/resources/js/member/memberEnroll.js"></script>
-
-      <c:import url="/WEB-INF/views/common/footer.jsp"/>
-   </div>
-
+	<div id="container">
+		 <c:import url="/WEB-INF/views/common/exFile.jsp"/>
+		<section id="content">
+			<div id="enroll-container">
+				<form name="memberEnrollFrm" action="memberEnrollEnd.do" method="post" onsubmit="return fn_enroll_validate();" enctype="multipart/form-data" >
+					<table>
+						<tr>
+							<th>아이디</th>
+							<td>
+								<div id="userId-container">
+									<input type="text" class="form-control" placeholder="사용할 아이디 입력" name="mid" id="mid_" required>
+									<!-- 아이디중복검사 코멘트추가 -->
+									<span class="guide ok">사용 가능</span>
+				            		<span class="guide error">사용 불가</span>
+				            		<span class="guide invalid">4글자 미만</span>
+				            		<input type="hidden" name="idDuplicateCheck" id="idDuplicateCheck" value="0"/>
+				            	</div>
+							</td>
+						</tr>
+						<tr>
+							<th>패스워드</th>
+							<td>
+								<input type="password" class="form-control" name="mpw" id="mpw_" required>
+							</td>
+						</tr>
+						<tr>
+							<th>패스워드확인</th>
+							<td>	
+								<input type="password" class="form-control" id="mpw2" required>
+							</td>
+						</tr>  
+						<tr>
+							<th>이름</th>
+							<td>	
+							<input type="text" class="form-control" name="mname" id="mname_" required>
+							</td>
+						</tr>
+						<tr>
+							<th>닉네임</th>
+							<td>
+							<input type="text" class="form-control" name="mnick" id="mnick_" required/>
+							</td>
+						</tr>
+						<tr>
+							<th>이메일</th>
+							<td>	
+								<input type="email" class="form-control" placeholder="사용할 이메일 입력" name="email" id="email">
+							</td>
+						</tr>
+						<tr>
+							<th>회원 유형</th>
+							<td>
+							<input type="radio" class="form-check-input" name="mtype" id="mtype0" value="M" checked/>일반회원
+							<input type="radio" class="form-check-input" name="mtype" id="mtype0" value="C" />기업회원
+							</td>
+						</tr>
+						<tr>
+							<th>성별 </th>
+							<td>
+								<div class="form-check form-check-inline">
+									<input type="radio" class="form-check-input" name="gender" id="gender0" value="M" checked>
+									<label for="gender0">남</label>
+									<input type="radio" class="form-check-input" name="gender" id="gender1" value="F">
+									<label for="gender1">여</label>
+								</div>
+							</td>
+						</tr>
+						<tr>
+							<th>연령대</th>
+							<td>	
+								<input type="radio" class="form-check-input" name="age" id="age_" value="10" checked>
+								<label for="age0">10대</label>
+								<input type="radio" class="form-check-input" name="age" id="age_"value="20">
+								<label for="age0">20대</label>
+								<input type="radio" class="form-check-input" name="age" id="age_"value="30">
+								<label for="age0">30대</label>
+								<input type="radio" class="form-check-input" name="age" id="age_"value="40">
+								<label for="age0">40대</label>
+							</td>
+						</tr> 
+						<tr>
+							<th>이미지 업로드</th>
+							<td>
+							<input type="file" class="form-check-input" name="profilePath" id="profilePath_" accept="image/gif, image/jpg, image/png" />
+							</td>
+						</tr>
+						
+					</table>
+					<input type="submit" class="btn btn-danger" value="가입" >
+					<input type="reset"  class="btn btn-danger" value="취소">
+				</form>
+			</div>
+			<script src="/resources/js/member/memberEnroll.js"></script>
+		</section>
+		<c:import url="/WEB-INF/views/common/footer.jsp"/>
+	</div>
 </body>
 </html>

@@ -57,7 +57,5 @@ public class MemberDaoImpl implements MemberDao {
 		sst.selectOne("member.checkNick", hmap);
 		return (Integer) hmap.get("result");
   }
-  
-  
 
 }

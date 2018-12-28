@@ -60,6 +60,4 @@ public class MemberServiceImpl implements MemberService {
 		return mDao.checkNick(hmap);
   }
   
-  
-
 }

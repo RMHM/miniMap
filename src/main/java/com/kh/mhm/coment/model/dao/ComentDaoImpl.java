@@ -16,12 +16,12 @@ public class ComentDaoImpl implements ComentDao {
 
 	@Override
 	public List<Coment> selectCometList(int bid) {
-		return sst.selectList("", bid);
+		return sst.selectList("coment.selectComentList", bid);
 	}
 	
 	@Override
 	public int insertComentContent(Coment coment) {
-		return sst.insert("", coment);
+		return sst.insert("coment.insertComent", coment);
 	}
 	
 	@Override
@@ -31,12 +31,18 @@ public class ComentDaoImpl implements ComentDao {
 
 	@Override
 	public int deleteComent(int cid) {
-		return sst.update("", cid);
+		return sst.update("coment.deleteComent", cid);
 	}
 
 	@Override
 	public int updateComent(Coment coment) {
-		return sst.update("", coment);
+		return sst.update("coment.updateComent", coment);
+	}
+
+	@Override
+	public Coment selectOneComent(int cid) {
+		// TODO Auto-generated method stub
+		return sst.selectOne("coment.selectOneComent", cid);
 	}
 
 }

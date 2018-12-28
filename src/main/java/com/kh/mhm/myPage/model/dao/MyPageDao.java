@@ -29,5 +29,9 @@ public interface MyPageDao {
 
 	
 
+	int updateAuthority(Authority authority);
+
+	Authority selectOneAuthority(String aId);
+
 
 }

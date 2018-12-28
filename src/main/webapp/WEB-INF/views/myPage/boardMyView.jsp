@@ -63,11 +63,13 @@
 										</c:forEach>
 
 									</c:if>
-									<%-- </c:if> --%>
-									<c:if test="${list.size() eq 0} ">
-										<tr>
-											<td colspan="6">작성한 글이 없습니다.</td>
-										</tr>
+									<c:if test="${empty list }">
+											<tr >
+												<td colspan="6" align="center">작성 게시글이 없습니다.</td>
+									
+
+											</tr>
+									
 									</c:if>
 								</tbody>
 							</table>
@@ -82,9 +84,10 @@
 			<script>
 				$(function() {
 					$("tr[id]").on("click", function() {
-						var boardNo = $(this).attr("id");
-						console.log(boardNo);
-						/* location.href = "${pageContext.request.contextPath}/board/boardView.do?no="+boardNo; */
+						var bId = $(this).attr("id");
+						
+
+						 location.href = "${pageContext.request.contextPath}/board/boardview.do?BId="+bId;  
 					});
 				});
 			</script>

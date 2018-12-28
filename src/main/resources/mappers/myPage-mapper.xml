@@ -62,4 +62,13 @@
 		select * from authority where mno=#{mNo}
 
 	</select>
+	<update id="updateAuthority" parameterType="Authority">
+		UPDATE AUTHORITY SET REQUEST_DATE = SYSDATE , ADDRESS=#{address},ACONTENT=#{aContent} , ACODE=#{aCode}, DELFLAG=#{delflag} WHERE AId=#{aId}
+	</update>
+	
+	<select id="selectOneMyAuthority" parameterType="string" resultType="Authority">
+		select * from authority where AId=#{aId}
+
+	</select>
+
 </mapper>
