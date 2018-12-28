@@ -53,10 +53,7 @@ public class MyPageServiceImpl implements MyPageService {
 	public List<Authority> selectRequest(int mno) {
 		return md.selectRequest(mno);
 	}
-	@Override
-	public List<Authority> selectRequestAll() {
-		return md.selectRequestAll();
-	}
+	
 
 
 }

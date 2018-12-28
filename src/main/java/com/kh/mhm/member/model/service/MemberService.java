@@ -15,16 +15,13 @@ public interface MemberService {
 
 	Member selectFindID(String email);
 
-	List<Member> selectCommonMember();
-
-	List<Member> selectCompanyMember();
-
 	int updateMemberPW(Member m);
 
 	int checkIdDuplicate(String mid);
 	
 	Date selectNowBlack(int mno);
-
-	List selectMemberList(String mtype);
-
+  
+  int checkNick(String mnick);
+  
+  
 }

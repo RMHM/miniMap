@@ -58,7 +58,7 @@ public class MemberController {
 		ModelAndView mv = new ModelAndView();
 
 		Member m = ms.selectLogin(mid);
-		
+		System.out.println(m);
 		String loc = "/";
 		String msg = "";
 		
@@ -253,35 +253,6 @@ public class MemberController {
 
 		return map;
 	}
-	
-	@RequestMapping("manager/managerPage.go")
-	public String managerPageGo() {
-		return "manager/ManagerPage";
-	}
-	
-	@RequestMapping("manager/grantPermission.go")
-	public String grantPermissionGo(Model model) {
-		
-		List list = mps.selectRequestAll();
-		
-		model.addAttribute("list", list);
-		
-		return "manager/grant_Permission";
-	}
-
-	@RequestMapping("/member/selectMemberList.do")
-    @ResponseBody
-    public List selectMemberList(String mtype, Model model) {
-    	
-    	List list = ms.selectMemberList(mtype);
-    	
-    	model.addAttribute("list", list);
-    	
-    	System.out.println("mtype : " + mtype);
-    	System.out.println("list : " + list);
-    	
-    	return list;
-    }
 
 	@RequestMapping("/member/insertFile.do")
 	public void insertFile() {

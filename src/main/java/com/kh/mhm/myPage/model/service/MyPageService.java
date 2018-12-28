@@ -27,6 +27,5 @@ public interface MyPageService {
 	/*List<Map<String, String>> selectRequest(int mno);*/
 	List<Authority> selectRequest(int mno);
 	
-	List<Authority> selectRequestAll();
 	
 }

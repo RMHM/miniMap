@@ -37,16 +37,6 @@ public class MemberDaoImpl implements MemberDao {
 	}
 
 	@Override
-	public List<Member> selectCommonMember() {
-		return sst.selectList("member.selectCommonMember");
-	}
-
-	@Override
-	public List<Member> selectCompanyMember() {
-		return sst.selectList("member.selectCompanyMember");
-	}
-
-	@Override
 	public int updateMemberPW(Member m) {
 		return sst.update("member.updatePW", m);
 	}
@@ -63,21 +53,11 @@ public class MemberDaoImpl implements MemberDao {
 	}
 
 	@Override
-	public List selectMemberList(String mtype) {
-		
-		System.out.println("dao mtype : " + mtype);
-		
-		List list = null;
-		
-		if(mtype.equals("m")) {
-			list = sst.selectList("member.selectCommonMember");
-		} else if (mtype.equals("c")) {
-			list = sst.selectList("member.selectCompanyMember");
-		} else {
-			list = sst.selectList("member.selectBlackList");
-		}
-		
-		return list;
-	}
+  public int checkNick(HashMap<String, Object> hmap) {
+		sst.selectOne("member.checkNick", hmap);
+		return (Integer) hmap.get("result");
+  }
+  
+  
 
 }

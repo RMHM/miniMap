@@ -37,16 +37,6 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	@Override
-	public List<Member> selectCommonMember() {
-		return mDao.selectCommonMember();
-	}
-
-	@Override
-	public List<Member> selectCompanyMember() {
-		return mDao.selectCompanyMember();
-	}
-
-	@Override
 	public int updateMemberPW(Member m) {
 		return mDao.updateMemberPW(m);
 	}
@@ -64,8 +54,12 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	@Override
-	public List selectMemberList(String mtype) {
-		return mDao.selectMemberList(mtype);
-	}
+  public int checkNick(String mnick) {
+		HashMap<String, Object> hmap = new HashMap<String, Object>();
+		hmap.put("mnick", mnick);
+		return mDao.checkNick(hmap);
+  }
+  
+  
 
 }

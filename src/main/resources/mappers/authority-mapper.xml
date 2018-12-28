@@ -12,10 +12,19 @@
 		VALUES(SEQ_AID.NEXTVAL,#{mNo},#{mName},SYSDATE,#{address},#{aContent},#{aCode},DEFAULT,DEFAULT,DEFAULT)
 	</insert>
 	
-	<select id="selectRequestAll" resultType="Authority">
-		select * 
-		from authority
-		order by request_date
+	<select id="selectRequest" parameterType="_int" resultType="Authority">
+		select * from authority
+		where mno = #{mno}
 	</select>
+	
+	<update id="grantAuthority" parameterType="_int">
+		update authority set atake = 'Y', grant_date = sysdate
+		where mno = #{mno}
+	</update>
+	
+	<update id="refuseAuthority" parameterType="_int">
+		update authority set delflag = 'Y'
+		where mno = #{mno}
+	</update>
 	
 </mapper>
