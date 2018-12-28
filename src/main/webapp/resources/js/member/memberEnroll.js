@@ -51,6 +51,7 @@ $(function(){
 				});
 			});
 			
+/*
 			function validate(){
 				var mid = $("#mid_");
 				if(mid.val().trim().length<4){
@@ -67,3 +68,47 @@ $(function(){
 				
 				return true;
 			}
+*/			
+			
+			/* 닉네임 중복검사 이벤트 추가 */
+			function checkNick(){
+				var nick = $("#mnick").val();
+				
+				$.ajax({
+					url : "/member/checkNick.do",
+					type : "POST",
+					data : { mnick : mnick },
+					dataType : "json",
+					success : function(data){
+						if($.trim(data)==0){
+							$("#chkNick").jsp("<p style= COLOR: blue>사용가능</p>");
+						} else {
+							$("#chkNick").jsp("<p style= COLOR: red>사용불가</p>");
+						}
+					}, error : function(){
+						alert("에러입니다.");
+					}
+				});
+			};
+	
+			
+			
+			/* 파일 확장자명 이미지로만 선언하기 */
+/*			function fileN(){
+				
+				var fileNm = $("#profilePath").val();
+				
+				if (fileNm != ""){
+					var ext = fileNm.slice(fileNm.lastIndexOf(".") + 1).toLowerCase();
+					
+					if(!(ext == "gif" || ext == "jpg" || ext == "png")){
+						alert("이미지파일 (.gif, .jpg, .png)만 업로드 가능합니다.");
+						return false;
+					}
+					
+				}	
+			}
+*/			
+			
+			
+			
