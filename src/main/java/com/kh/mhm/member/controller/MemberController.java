@@ -14,6 +14,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -234,6 +236,12 @@ public class MemberController {
 
 		return "common/msg";
 	}
+  
+  	@RequestMapping("/member/checkNick.do")
+  	public @ResponseBody String checkNick(@ModelAttribute("member") Member member, Model model) throws Exception {
+  		int result = ms.checkNick(member.getMnick());
+  		return String.valueOf(result);
+  	}
 
 	@RequestMapping("/member/memberView.do")
 	public String memberView(@RequestParam String mid) {
