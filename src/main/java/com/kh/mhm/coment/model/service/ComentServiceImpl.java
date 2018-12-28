@@ -39,4 +39,10 @@ public class ComentServiceImpl implements ComentService {
 		return cDao.updateComent(coment);
 	}
 
+	@Override
+	public Coment selectOneComent(int cid) {
+		// TODO Auto-generated method stub
+		return cDao.selectOneComent(cid);
+	}
+
 }

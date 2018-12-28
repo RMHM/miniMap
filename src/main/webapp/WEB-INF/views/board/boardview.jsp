@@ -13,8 +13,8 @@
 </head>
 <style>
 .replyArea {
-	width: 100%;
-	height: 100%;
+	width: 90%;
+	height: 90%;
 	border: 3px solid #F8E5D0;
 }
 
@@ -77,9 +77,10 @@
 							<!-- 댓글 목록 -->
 							<c:if test="${not empty clist}">
 								<c:forEach var="Coment" items="${clist }">
+								<input type=hidden name="bid" id="bid" value="${b.BId }"></input>
 									<tr>
 										<!-- 아이디, 작성날짜 -->
-										<td width="150">
+										<td width="10%">
 											<div>
 												<c:if test="${Coment.clevel >1 }">
 												&nbsp;&nbsp;&nbsp;&nbsp; <!-- 답변글일경우 아이디 앞에 공백을 준다. -->                            
@@ -90,85 +91,94 @@
 											</div>
 										</td>
 										<!-- 본문내용 -->
-										<td width="650">
+										<td width="75%">
 											<div class="text_wrapper">
-												<textarea class="reply-content" readonly="readonly"
+												<textarea class="reply-content" readonly="readonly" id="replycontent" name="replycontent"
 													style="background-color: aliceblue">${Coment.ccontent }</textarea>
 											</div>
 										</td>
 										<!-- 버튼 -->
-										<td width="100">
+										<td width="15%">
 											<div id="btn" style="text-align: center;" align="center">
-												<c:choose>
-													<c:when test="${Coment.mno eq member.mno }">
+											
+													<c:if test="${Coment.mno eq member.mno }">
 														<input type="hidden" name="cid" value="${Coment.cid }" />
-								&nbsp;	  
+								&nbsp;	  				
 								<button type="button" class="updateBtn" id="updateBtn"
 															onclick="updateReply(this);">수정</button>
 
-														<button type="button" class="updateConfirm"
-															id="updateBtn2" onclick="updateConfirm(this);"
-															style="display: none;">등록</button> &nbsp;
+								<button type="button" class="updateConfirm" id="updateBtn2" 
+															onclick="updateConfirm(this);" style="display: none;">등록</button>
 																	
 								<button type="button" class="deleteBtn" id="delteBtn"
 															onclick="deleteReply(this);">삭제</button>
-													</c:when>
-													<c:when test="${Coment.clevel < 3} ">
+													</c:if>													
+													<c:if test="${Coment.clevel lt 3 && Coment.mno ne member.mno}"> 
 														<input type="hidden" name="writer" value="${member.mno }" />
-														<input type="hidden" name="refcid" value="${Coment.cid }" />
-														<input type="hidden" name="clevel"
-															value="${Coment.clevel }" />
-														<!-- <button type="button" class="insertBtn" 
-									  onclick="reComment(this);">댓글 달기</button>  -->
-														<button type="button" class="insertConfirm"
-															onclick="reConfirm(this);" style="display: none;">댓글
-															추가 완료</button>
-													</c:when>
+														<input type="hidden" name="cref" value="${Coment.cid }" />
+														<input type="hidden" name="clevel" value="${Coment.clevel }" />
+														<input type="hidden" name="BId" value="${b.BId }" />
+														<button type="button" class="insertBtn" onclick="reComment(this);">댓글 달기</button>
+													<!-- <button type="button" class="insertConfirm" onclick="reConfirm(this);" style="display: none;">댓글추가 완료</button> -->
+													</c:if>
 
-													<c:when test="${Coment.clevel > 2} ">
+													<c:if test="${Coment.clevel == 2} ">
 														<span> 마지막 레벨입니다.</span>
-													</c:when>
-												</c:choose>
+													</c:if>
+												
 											</div>
 										</td>
 									</tr>
+									<%-- <tr class="comment">
+										<td width="10%"><div><b>${member.mnick }</b></div></td>
+											<td style="background : transparent;" width="75%">
+											<textarea class="reply-content" name="ccontent" style="background : ivory;"></textarea>
+											</td>
+											<td width="15%">
+											<div>
+											<button type="button" class="insertConfirm" onclick="reConfirm(this);" align="center" >댓글추가 완료</button>
+											</div> 
+											</td>
+									</tr> --%>
 								</c:forEach>
 							</c:if>
 
 
-
 							<!-- 로그인 했을 경우만 댓글 작성가능 -->
-							<%--  <c:if test="${not empty member}"> --%>
-							<div class="replyWriteArea">
-								<tr bgcolor="#F5F5F5">
-									<form role="form" class="form-inline" action="">
-										<input type="hidden" name="cwriter" value="" /> <input
-											type="hidden" name="cwriterid" value="" /> <input
-											type="hidden" name="BId" value="" /> <input type="hidden"
-											name="cref" value="0" /> <input type="hidden" name="clevel"
-											value="1" />
+							<c:if test="${not empty member}">
+							<div class="replyWriteArea">							
+								<tr bgcolor="#F5F5F5"> 
+									<form action="/coment/comentAdd.do" method="post" id="coment" enctype="multipart/form-data" > 
+										<input type="hidden" name="mnick" value="${member.mnick }" />
+										<input type="hidden" name="mno" value="${member.mno }" />
+										<input type="hidden" name="BId" value="${b.BId }" />
+										<input type="hidden" name="cref" value="0" />
+										<input type="hidden" name="clevel" value="1" />										
 										<!-- 아이디-->
-										<td width="150">
+										<td width="10%">
 											<div>
-												<b></b>
+												<b>${member.mnick }</b>
 											</div>
 										</td>
 										<!-- 본문 작성-->
-										<td width="550">
+										<td width="75%">
 											<div>
-												<textarea id="replyContent" name="replyContent"></textarea>
+												<textarea id="cContent" name="cContent"></textarea>
 											</div>
 										</td>
 										<!-- 댓글 등록 버튼 -->
-										<td width="100">
+										<td width="15%">
 											<div id="btn" style="text-align: center;">
 												<button type="submit" id="addReply" value="댓글 등록">등록</button>
 											</div>
 										</td>
 									</form>
 								</tr>
+								
+							</div>
+							</c:if>
 						</table>
-						<%-- </c:if> --%>
+						  
 					</div>
 				</div>
 			</div>
@@ -199,19 +209,16 @@
 			// 댓글의 내용 가져오기
 			var content = $(obj).parent().parent().prev().find('textarea')
 					.val();
+			console.log(content);
 
 			// 댓글의 번호 가져오기
 			var cid = $(obj).siblings('input').val();
 
 			// 게시글 번호 가져오기
-			var bid = $
-			{
-				board.bid
-			}
-			;
+			var bid = ${b.BId};
 
 			location.href = "/coment/comentUpdate.do?" + "cid=" + cid
-					+ "&bid=" + bid + "&content=" + content;
+					+ "&bid=" + bid + "&ccontent=" + content;
 		}
 
 		function deleteReply(obj) {
@@ -219,8 +226,8 @@
 			var cid = $(obj).siblings('input').val();
 
 			// 게시글 번호 가져오기
-			var bid = ${b.BId }
-			;
+			var bid = ${b.BId };
+			
 
 			location.href = "/coment/comentDelete.do" + "?cid=" + cid/*  + "&bid="
 					+ bid; */
@@ -234,12 +241,21 @@
 			$(obj).css('display', 'none');
 
 			// 내용 입력 공간 만들기
-			var htmlForm = '<tr class="comment"><td></td>'
-					+ '<td colspan="3" style="background : transparent;">'
-					+ '<textarea class="reply-content" style="background : ivory;" cols="75" rows="3"></textarea>'
-					+ '</td>' + '</tr>';
-
-			$(obj).parents('table').append(htmlForm);
+			var htmlForm = '<tr class="comment"><td width="10%"><div><b>${member.mnick }</b></div></td>'
+					+ '<td style="background : transparent;" width="75%">'
+					+ '<textarea class="reply-content" name="ccontent" style="background : ivory;"></textarea>'
+					+ '</td>'
+					+ '<td width="15%">'
+					+ '<div id="btn" style="text-align: center;" align="center">'
+					+ '<input type="hidden" name="writer" value="${member.mno }" />'
+					+ '<input type="hidden" name="cref" value="${Coment.cid }" />'
+					+ '<input type="hidden" name="clevel" value="${Coment.clevel }" />'					
+					+ '<button type="button" class="insertConfirm" onclick="reConfirm(this);" >댓글추가 완료</button>'
+					+ '</div> </td>'
+					+ '</tr>';
+			
+			$(obj).parent().parent().parent().parent().append(htmlForm);
+			console.log($(obj).parent().parent().parent('tr'));
 
 		}
 
@@ -247,10 +263,14 @@
 			// 댓글의 내용 가져오기
 
 			// 참조할 댓글의 번호 가져오기
-			var refcid = $(obj).siblings('input[name="refcid"]').val();
+			var cref = $(obj).siblings('input[name="cref"]').val();
 			var level = Number($(obj).siblings('input[name="clevel"]').val()) + 1;
+			
+			console.log($(obj).parent('table').siblings());
+			
+			console.log(cref)
 
-			// console.log(refcid + " : " + level);
+			console.log(level);
 
 			// 게시글 번호 가져오기
 			var bid = ${b.BId }
@@ -261,18 +281,18 @@
 
 			var content = siblingsTR.find('textarea').val();
 
-			// console.log(parent.html());
-			// console.log(grandparent.html());
-			// console.log(siblingsTR.html());
-
-			// console.log(content);
+			//console.log(parent.html());
+			//console.log(grandparent.html());
+			//console.log(siblingsTR.html());
+			console.log(bid);
+			console.log(content);
 
 			// writer, replyContent
 			// bid, refcid, clevel
 
-			location.href = '/coment/comentAdd.do' + '?writer=' + ${member.mno}
-			+'&replyContent=' + content + '&bid=' + bid + '&refcid=' + refcid
-					+ '&clevel=' + level;
+			/* location.href = '/coment/comentAdd2.do' + '?writer=' + ${member.mno}
+			+'&cContent=' + content + '&bid=' + bid + '&refcid=' + refcid
+					+ '&clevel=' + level; */
 		}
 
 		$('#inserticon').click(function() {

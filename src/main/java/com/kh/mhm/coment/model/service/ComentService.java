@@ -12,4 +12,6 @@ public interface ComentService {
 	int deleteComent(int cid);
 	int updateComent(Coment coment);
 	
+	Coment selectOneComent(int cid);
+	
 }
