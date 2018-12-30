@@ -15,7 +15,7 @@
 		<c:import url="/WEB-INF/views/common/header.jsp" />
 		<div class="container">
 			<div class="col-md-10" id='calDiv'>
-
+				<img src="/resources/img/loading.gif" id="loading" style="width : 250px;height : 250px;">
 				<div id='calendar'></div>
 
 			</div>
