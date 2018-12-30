@@ -13,14 +13,8 @@
 <meta name="description" content="" />
 
 <c:import url="../common/exFile.jsp" />
-<!-- 
- <link href='/resources/css/fullcalendar.min.css' rel='stylesheet' />
-<link href='/resources/css/fullcalendar.print.min.css' rel='stylesheet' media='print' /> -->
-<!-- <script src='/resources/js/moment.min.js'></script> -->
-<!-- <script src='/resources/js/jquery.min.js'></script> -->
-<!-- <script src='/resources/js/fullcalendar.min.js'></script> -->
-
- <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.2/themes/smoothness/jquery-ui.css">
+<link rel="stylesheet"
+	href="http://code.jquery.com/ui/1.10.2/themes/smoothness/jquery-ui.css">
 <!--  <script src="http://code.jquery.com/ui/1.10.2/jquery-ui.js"></script>
  -->
 
@@ -28,42 +22,80 @@
 <script>
 
 	$(document).ready(function() {
-		
-		console.log("Test");
-		/* console.log(${list.size() }); */
-		/*  console.log("${list[0]}");  */
- 		/*  <c:forEach items="${list}" var="msg"  varStatus="i">
-			 console.log("${msg}"); 
-              alert("${msg}"); 
- 			
-         </c:forEach> 
-	  */
-
+		var today = new Date();
+		console.log(today);
 	  var event = [
  	<c:forEach items="${list}" var="list"  varStatus="i"> 
  	{
         "title":'<c:out value="${list.title}" />'
-        ,"start":"<c:out value="${list.start}" />"
-        ,"end":"<c:out value="${list.end}" />"
-        ,"color":"<c:out value="${list.color}" />"
-        ,"constraint":"<c:out value="${list.constraint}" />"
+        ,"start":'<c:out value="${list.start}" />'
+        ,"end":'<c:out value="${list.end}" />'
+        ,"color":'<c:out value="${list.color}" />'
+        ,"content":'<c:out value="${list.content}" />'
+         ,"sId":'<c:out value="${list.sId}" />' 
     } <c:if test="${!status.last}">,</c:if>
  	</c:forEach>
  	];
-	  console.log(event);
-	
-
- 
- 
+	/*   console.log(event); */
 		$('#calendar').fullCalendar({
 			header : {
 				left : 'prev,next today',
 				center : 'title',
 				right : 'month,agendaWeek,agendaDay,listMonth'
 			},
+			  eventRender: function(event, element){
+		          element.popover({
+		              animation:true,
+		              delay: 300,
+		              content: event.content,
+		              trigger: 'hover'
+		          });
+		        }, 
+		         eventAfterRender: function(event, element, view) { 
+		         	/* var comp = new Date(event.start) ;
+		     		var compEnd = new Date(event.end); */
+		         /* console.log(compEnd); */
+		/* 			console.log((today>event.start));   */
+		         	
+		var new_description ='<a href="#">' 
+		            + '<strong>후기작성</strong>' + '</a>' 
+		            
+					if(event.end==null){
+		         		if(today>event.start)element.append(new_description);
+		         	}else{
+		         		if(today>event.end)element.append(new_description);
+		         	}
+					console.log(event.end);
+		        } , 
+		        eventClick: function(calEvent, jsEvent, view) {
+		
+				console.log(calEvent.end);
+		    	if(calEvent.end==null){
+		    		calEvent.end=calEvent.start
+		    	}
+		    	  $('#sId').val(calEvent.sId);  
+		    	 	$('#sTitle').val(calEvent.title);
+		    		$('#sContent').val(calEvent.content);
+		    		$('#startDateT').val(calEvent.start.format());
+		    		$('#endDateT').val(calEvent.end.format());
+		    		$('#sColor').val(calEvent.color);
+		    		$('#result').attr("style","display:none");
+		    		$('#updateresult').attr("style","display:block");
+		    		 $('#insertC').dialog({});
+		        },
+		          eventMouseover:function(event , jsEvent , view){
+		        	/*   console.log(event); */
+		          },
+		          eventMouseout:function ( event , jsEvent , view ) {
+		        	  
+		          },
 			dayClick : function(date, jsEvent, view) {
-			
-				console.log(date.format());
+ 				$('input').empty(); 
+ 				$('#sId').remove();
+				$('#startDateT').val(date.format());
+				$('#endDateT').val(date.format());
+				$('#result').attr("style","display:block");
+	    		$('#updateresult').attr("style","display:none");
 				$('#insertC').dialog({
 			 		
 			 		/* buttons:[
@@ -75,23 +107,7 @@
 			 			}}
 			 		]  */
 				});
-			
-			/* 	alert("asd"); */
-			 /* 	$("#insertC").attr("style", "display:inline-block");  */
-		/* 	 $("#insertC").dialog("open");
-			 e.preventDefault(); */
-			 	/*  $("#insertC").dialog({
-			 		autoOpen:true,width:400,modal:true,
-			 		buttons:[
-			 			{text:"Ok",click:function(){
-			 			$(this).dialog("close");
-			 			}
-			 			},{text:"cancle",click:function(){
-			 				$(this).dialog("close");
-			 			}}
-			 		]
-			 	});  */
-				/* $('input[type=date]').val(date.format()); */
+	
 			},
 			defaultDate : new Date(),
 		
@@ -137,31 +153,31 @@ body {
 				<!--  <div id="insertC" class="" tabindex="-1" role="dialog" title = "일정 추가"
 				style="position: absolute; height: auto; width: 350px; top: 137px; left: 202px; display: none; z-index: 101;"
 				aria-describedby="dialog-message" aria-labelledby="ui-id-1"> -->
- 				<div id="insertC" title = "일정 추가" style = "display:none">
-				<form action="insertSchedule.do" method="post">
-					<!-- <div
+				<div id="insertC" title="일정 추가" style="display: none">
+					<form id="formAction" action="insertSchedule.do" method="post">
+						<!-- <div
 						class="ui-dialog-titlebar ui-widget-header ui-corner-all ui-helper-clearfix ui-draggable-handle">
 						<span id="ui-id-1" class="ui-dialog-title"> 일정등록</span>
 
 					</div> -->
-					<!-- <div id="dialog-message"
+						<!-- <div id="dialog-message"
 						style="width: auto; min-height: 0px; max-height: none; height: auto;"
 						class="ui-dialog-content ui-widget-content">
  -->
- 					<div id="dialog-message"
-						style="width: auto; min-height: 0px; max-height: none; height: auto;"
-						>
- 
-						<div style="text-align: left;">
+						<div id="dialog-message"
+							style="width: auto; min-height: 0px; max-height: none; height: auto;">
 
+							<div style="text-align: left;">
+								<input type="hidden" id="sId" name="sId">
+							</div>
 							<div>
-								<label>제목</label><input type="text" name="sTitle"></input>
+								<label>제목</label><input type="text" id="sTitle" name="sTitle"></input>
 							</div>
 							<div>
 								<div>
 									<label>메모</label>
 									<div>
-										<textarea cols="30" rows="5" id="edited_title" name="sContent"
+										<textarea cols="30" rows="5" id="sContent" name="sContent"
 											name="scontent" style="width: 98%;" maxlength="100"></textarea>
 									</div>
 								</div>
@@ -179,84 +195,40 @@ body {
 
 							<div style="clear: both;"></div>
 							<div>
-								<label> 색상 선택 </label><input type="color" name="sColor">
+								<label> 색상 선택 </label><input type="color" id="sColor"
+									name="sColor">
 							</div>
 
 
 						</div>
-						<div
+						<div id="result" style="display: block"
 							class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix">
-							<input type="submit" value="등록"> <input type="button"
-								id="close" value="취소">
+							<input id="submit" type="submit" value="등록"> <input
+								type="button" id="close" value="취소">
 
 						</div>
-					</div>
+						<div id="updateresult" style="display: none"
+							class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix">
+							<input id="update" type="submit" value="수정" onclick="updateS();">
+							<input type="submit" id="del" value="삭제" onclick="deleteS();">
+
+						</div>
+				</div>
+				<script>
+					function updateS(){
+						console.log("update실행");
+						$('#formAction').attr("action","updateSchedule.do");
+					}
+					function deleteS(){
+						console.log("delete실행");
+						$('#formAction').attr("action","deleteSchedule.do");
+					}
+					</script>
 				</form>
 			</div>
-		<!-- 	<script>
-				$("#close").click(function() {
-					console.log(this.val);
-
-					$('#insertC').attr("style", "display:none");
-				});
-			</script>  -->
-			</div>
 		</div>
+	</div>
 	</div>
 	<c:import url="../common/footer.jsp" />
 </body>
 </html>
-
-
-
-
-
-<%-- 
-<script>
-	/* 
-	$(document).ready(function() { */
-/* 	var event = []; */
-/* 	$.ajax({
-		url : "${pageContext.request.contextPath}/myPage/selectSchedult.do",
-		data : {
-			mno : 10
-		},
-		async : false,
-		dataType : "json",
-		success : function(data) {
-			var list = data.list;
-			var date = list[0].START_DATE;
-			var arr = [];
-			for (var i = 0; i < list.length; i++) {
-
-				var start = list[i].START_DATE;
-				var end = list[i].END_DATE;
-				var rs = moment(start).format('YYYY-MM-DD');
-				var es = moment(end).format('YYYY-MM-DD');
-				console.log(rs);
-				arr[i] = {
-					title : list[i].STITLE,
-					start : rs,
-					end : es,
-					color : list[i].SCOLOR,
-					constraint : list[i].SCONTENT
-
-				}
-			}
-			console.log(arr);
-			event = arr;
-			scheduleList(data.list);
-		},
-		error : function(jqxhr, textStatus, errorThrown) {
-			console.log("ajax 처리 실패");
-			//에러로그
-			console.log(jqxhr);
-			console.log(textStatus);
-			console.log(errorThrown);
-		}
-	});// ajax-end
- */
- 
-/* 	function scheduleList(list) {
-
---%>
