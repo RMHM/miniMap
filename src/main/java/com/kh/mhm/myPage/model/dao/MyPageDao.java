@@ -9,18 +9,21 @@ import com.kh.mhm.myPage.model.vo.Authority;
 import com.kh.mhm.myPage.model.vo.Schedule;
 
 public interface MyPageDao {
-
+	/* 일정 */
 	int insertSchedule(Schedule schedule);
   
     List<Map<String,Object>>  selectSchedule(int mno);
-
+    
+    /* 회원 정보 */
 	int updateMember(Member member);
 
 	int deleteMember(Member member);
 
-	int insertAuthority(Authority authority);
-
+	/* 작성 글 */
 	int selectMyBoardCount(int no);
+	
+	/* 권한 */
+	int insertAuthority(Authority authority);
 
 	List<Map<String, Object>> selectMyBoard(int cPage, int numPerPage, int no);
 
@@ -32,6 +35,12 @@ public interface MyPageDao {
 	int updateAuthority(Authority authority);
 
 	Authority selectOneAuthority(String aId);
+
+	int deleteSchedule(int sId);
+
+	int updateSchedule(Schedule schedule);
+
+	int deleteMyAuthority(int aId);
 
 
 }

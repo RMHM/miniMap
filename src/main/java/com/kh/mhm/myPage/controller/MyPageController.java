@@ -49,119 +49,83 @@ public class MyPageController {
 	private BCryptPasswordEncoder bcpe;
 	private String loc = "/";
 	private String msg = "";
-
+	/* 일정 추가 */
 	@RequestMapping("/myPage/insertSchedule.do")
 	public String insertSchedule(Member member, @RequestParam String startDateT, @RequestParam String endDateT,
 			Schedule schedule, Model model) {
-		/* java.util.Date utilDate = new java.util.Date(); */
-		/* Date sqlDate = new Date(utilDate.getTime()); */
-		/* System.out.println(sqlDate); */
-		/* SimpleDateFormat sdf = new SimpleDateFormat("yyyy-mm-dd"); */
 		schedule.setStart_Date(Date.valueOf(startDateT));
 		schedule.setEnd_Date(Date.valueOf(endDateT));
 		schedule.setMNo(member.getMno());
 		System.out.println("schedule: " + schedule);
-		/* schedule.setStart_Date(()startDateT); */
-		/*
-		 * try { java.util.Date start =; java.util.Date end = sdf.parse(endDateT);
-		 * 
-		 * schedule.setStart_Date((Date) sdf.parse(startDateT));
-		 * schedule.setEnd_Date((end.getTime())); System.out.println("start : " +start);
-		 * 
-		 * } catch (ParseException e) { e.printStackTrace(); } schedule.setMNo(10);
-		 */ /* System.out.println(schedule); */
+
 		int result = mps.insertSchedule(schedule);
 		return selectSchedule(member, model);
 
 	}
+	
+	/* 일정 삭제*/
+	@RequestMapping("/myPage/deleteSchedule.do")
+	public String deleteSchedule(Member member, @RequestParam int sId, Model model) {
+		System.out.println("delete 실행");
+		Schedule s = new Schedule();
+		s.setSId(sId);
+		System.out.println(sId);
+		mps.deleteSchedule(sId);
+		
+		return selectSchedule(member, model);
 
-	/*
-	 * @RequestMapping("/myPage/schedule.do") public String schedule() {
-	 * 
-	 * return "myPage/schedule"; }
-	 */
+	}
+	
+	/* 일정 수정*/
+	@RequestMapping("/myPage/updateSchedule.do")
+	public String updateSchedule(Member member, @RequestParam String startDateT, @RequestParam String endDateT,
+			Schedule schedule, Model model) {
+		System.out.println("update실행");
+		schedule.setStart_Date(Date.valueOf(startDateT));
+		schedule.setEnd_Date(Date.valueOf(endDateT));
+		schedule.setMNo(member.getMno());
+		System.out.println(schedule);
+		int result = mps.updateSchedule(schedule);
+		return selectSchedule(member, model);
+
+	}
+
+
+
 
 	/* 총 일정 확인 */
 	@RequestMapping("/myPage/selectSchedule.do")
 	public String selectSchedule(Member member, Model model) {
 		Map<String, Object> map = new HashMap<String, Object>();
 		System.out.println("insert 이후");
-		/* System.out.println(ms.selectSchedule()); */
-
-		/*
-		 * List m =ms.selectSchedule();
-		 */
-		/*
-		 * System.out.println("번호"+member.getMno()); map.put("list",
-		 * mps.selectSchedule(member.getMno())); System.out.println(map);
-		 */
 		model.addAttribute("list", mps.selectSchedule(member.getMno()));
-		/* System.out.println(map); */
-
+	
 		ArrayList<Schedule> as = new ArrayList<Schedule>();
 		List l = mps.selectSchedule(member.getMno());
 
 		List list = new ArrayList();
 
-		/*
-		 * System.out.println("리스트 " + l); System.out.println((l.get(0)));
-		 */
 		for (int i = 0; i < l.size(); i++) {
 			Map<String, Object> result = mps.selectSchedule(member.getMno()).get(i);
 			Map<String, Object> arr = new HashMap<String, Object>();
-
+			System.out.println(result);
+			if(result.get("DELFLAG").equals("Y"))continue;
+			/*	if(result.get("delflag").equals("Y"))continue;*/
+			
+			arr.put("sId", result.get("SID"));
 			arr.put("title", result.get("STITLE"));
 			arr.put("start", result.get("START_DATE").toString());
 			arr.put("end", result.get("END_DATE").toString());
 			arr.put("color", result.get("SCOLOR").toString());
-			arr.put("constraint", result.get("SCONTENT"));
-
-			/*
-			 * result.put("start", result.get("START_DATE").toString()); result.put("end",
-			 * result.get("END_DATE").toString()); result.remove("START_DATE");
-			 * result.remove("END_DATE");
-			 */
+			arr.put("content", result.get("SCONTENT"));
 			list.add(arr);
 		}
 		model.addAttribute("list", list);
-		/* System.out.println("list"+list); */
-		/*
-		 * map.put("slist",l ); System.out.println("map"+map);
-		 */
-		/* schedule = */
-		/* model.addAttribute("list", l); */
-		/* l.replaceAll(operator); */
-		/*
-		 * l.remove("END_DATE"); System.out.println("remove" + l);
-		 */
-		/*
-		 * System.out.println(ms.selectSchedule(mNo)); Map<String, Object> map = new
-		 * HashMap<String, Object>(); as = (ArrayList<Schedule>) ms.selectSchedule(mNo);
-		 */
-
-		/*
-		 * List<Map<String, String>> schedule =ms.selectSchedule(mNo);
-		 * System.out.println("list"+schedule);
-		 */
-		/* System.out.println(schedule); */
-		/*
-		 * map.put("list",ms.selectSchedule(mNo)); System.out.println(map);
-		 */
-		/*
-		 * 
-		 * System.out.println("1"+ schedule); schedule = ms.selectSchedule(mNo);
-		 * System.out.println("사이즈"+schedule.size()); Map map=new HashMap(); for(int
-		 * i=0; i<schedule.size();i++) {
-		 * 
-		 * System.out.println(i+":"+schedule.get(i)); } map.put("slist", schedule);
-		 * mv.addObject(map); mv.setViewName("list");
-		 * 
-		 * System.out.println(mv);
-		 */
+		
 		return "myPage/schedule";
 	}
 
-	/* myPagemain경로 */
+	/* myPagemain 경로 */
 	@RequestMapping("/myPage/myPageMain.do")
 	public String myPageMain() {
 
@@ -232,42 +196,15 @@ public class MyPageController {
 		return "myPage/boardMyView";
 	}
 
-	/*nav 클릭*/
+	/*nav클릭 요청목록보기 */
 	@RequestMapping("/myPage/rePermissionPage.do")
 	public String requestViewPage(Member member,Model model) {
-		/*int no = member.getMno();
-		int numPerPage = 10; */
-		// 한 페이지당 게시글 수
-		/*ArrayList<Map<String, String>> list = 
-				new ArrayList<Map<String, String>>(mps.selectMyBoardList(cPage, numPerPage));*/
-		/*int totalContents = mps.selectBoardTotalContents(no);*/
-		
-		// 3. 페이지 계산 후 작성할 HTML 추가
-	/*	String pageBar = Utils.getPageBar(totalContents, cPage, numPerPage, "boardList.do");
-		
-		model.addAttribute("list", list)
-		.addAttribute("totalContents", totalContents)
-		.addAttribute("numPerPage", numPerPage)
-		.addAttribute("pageBar", pageBar);
-		*/
-		/*List<Authority> list = mps.selectRequest(member.getMno());*/
-		/*ArrayList<Map<String, String>> list = 
-				new ArrayList<Map<String, String>>( mps.selectRequest(member.getMno()));
-		
-		System.out.println(list);
-		System.out.println(list.get(0));
-		System.out.println(list.get(0).);
-		*//*Map<Authority,Object> result = new Map<Authority,Object>(mps.selectRequest(member.getMno()));
-		*/
 		List<Authority> list = mps.selectRequest(member.getMno());
-    
-    /*		System.out.println(list);*/
-    
 		model.addAttribute("list", list);
 		return "myPage/requestView";
 	}
 	
-	/* 요청클릭 */ 
+	/* 요청페이지로이동  */ 
 	@RequestMapping("/myPage/rePermissionClick.do")
 	public String requestPage(Member member) {
 		return "myPage/requestPermission";
@@ -279,7 +216,36 @@ public class MyPageController {
 	public String rePermission(Member member, Authority authority) {
 		authority.setMNo(member.getMno());
 		int result = mps.insertAuthority(authority);
-		return "myPage/myPageMain";
+		return "myPage/requestView";
+	}
+	
+	@RequestMapping("/myPage/selectRequest.do")
+	@ResponseBody
+	public Authority selectOneRepermission(@RequestParam String aId) {
+		Authority authority = mps.selectOneRePermission(aId);
+		return authority;
+	}
+	
+	/* 요청 수정 */
+	@RequestMapping("/myPage/updateRePermission.do")
+	public String updateRePermission(Authority authority,Member member,Model model) {
+		System.out.println("수정 하기시작");
+		System.out.println(authority);
+		
+		int result = mps.updateAuthority(authority);
+		
+		return requestViewPage(member,model);
+	}
+	
+	/*요청 취소*/
+	@RequestMapping("/myPage/deleteRePermission.do")
+	public String deleteRePermission(Authority authority,Member member,Model model) {
+		System.out.println("삭제 하기시작");
+		System.out.println(authority);
+		
+		int result = mps.deleteMyAuthority(authority.getAId());
+		
+		return requestViewPage(member,model);
 	}
 
 }

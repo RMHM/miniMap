@@ -63,12 +63,22 @@
 
 	</select>
 	<update id="updateAuthority" parameterType="Authority">
-		UPDATE AUTHORITY SET REQUEST_DATE = SYSDATE , ADDRESS=#{address},ACONTENT=#{aContent} , ACODE=#{aCode}, DELFLAG=#{delflag} WHERE AId=#{aId}
+		UPDATE AUTHORITY SET REQUEST_DATE = SYSDATE , ADDRESS=#{address},ACONTENT=#{aContent} , ACODE=#{aCode} WHERE AId=#{aId}
 	</update>
 	
 	<select id="selectOneMyAuthority" parameterType="string" resultType="Authority">
 		select * from authority where AId=#{aId}
 
 	</select>
+	<update id="deleteSchedule" parameterType="_int">
+		UPDATE SCHEDULE SET DELFLAG = 'Y' WHERE SID=#{sId}
+	</update>
 
+	<update id="updateSchedule" parameterType="Schedule" >
+		UPDATE SCHEDULE SET START_DATE=#{start_Date}, END_DATE=#{end_Date}, STITLE=#{sTitle}, SCONTENT=#{sContent}, SCOLOR=#{sColor} WHERE SID=${sId}
+	</update>
+	
+	<update id="deleteAuthority"  parameterType="_int">
+	 	UPDATE AUTHORITY SET DELFLAG = 'Y' WHERE AID=#{aId}
+	</update>
 </mapper>
