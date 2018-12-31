@@ -414,3 +414,18 @@
   background-color: #FFFFFF;
   box-sizing: border-box;
 } */
+
+.jjokjee{
+	width:20px;
+	height:20px;
+	float:right;
+	position:relative;
+	margin-left: 15px;
+}
+
+.singo{
+	width:20px;
+	height:20px;
+	float:right;
+	position:relative;
+}

@@ -31,8 +31,14 @@ public class MessageController {
 	}
 	
 	@RequestMapping("/popUp.write")
-	public String pupUpWrite() {
-		return "message/message_write";
+	public String pupUpWrite(HttpServletRequest req,HttpSession session) {
+		if(req.getQueryString()==null||req.getQueryString()=="") {
+			return "message/message_write";
+		}else {
+			session.setAttribute("mNick", req.getQueryString());
+			return "message/message_write";
+		}
+		
 	}
 	
 	@RequestMapping("/popUp.sent")
@@ -151,6 +157,9 @@ public class MessageController {
 	public int sendMessage(String nick, String title, String content, HttpSession session) {
 		MessageSmpl message=new MessageSmpl(((Member)session.getAttribute("member")).getMno(),nick,title,content);
 		int result=ms.sendMessage(message);
+		if(session.getAttribute("mNick")!=null||session.getAttribute("mNick")!="") {
+			session.removeAttribute("mNick");
+		}
 		return result;
 	}
 	
