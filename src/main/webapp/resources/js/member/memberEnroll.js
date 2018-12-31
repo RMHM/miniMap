@@ -26,8 +26,7 @@ $(function(){
 				            dataType: "json",
 				            success : function(data){
 				                console.log(data);
-				                // if(data=="true") //stream 방식
-				                if(data.isUsable==true){ //viewName 방식
+				                if(data.isUsable==true){ 
 				                    $(".guide.error").hide();
 				                    $(".guide.invalid").hide();
 				                    $(".guide.ok").show();
@@ -40,14 +39,14 @@ $(function(){
 				                }
 				            }, error : function(jqxhr, textStatus, errorThrown){
 				                console.log("ajax 처리 실패");
-				                //에러로그
+				                
 				                console.log(jqxhr);
 				                console.log(textStatus);
 				                console.log(errorThrown);
 				            }
 			        	});
 			     	}
-			     //console.log(mid);
+			     console.log(mid);
 				});
 			});
 			
