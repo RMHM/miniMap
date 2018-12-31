@@ -26,7 +26,7 @@
 		 <c:import url="/WEB-INF/views/common/exFile.jsp"/>
 		<section id="content">
 			<div id="enroll-container">
-				<form name="memberEnrollFrm" action="memberEnrollEnd.do" method="post" onsubmit="return fn_enroll_validate();" enctype="multipart/form-data" >
+				<form name="memberEnrollFrm" action="memberEnrollEnd.do" method="post" onsubmit="return fn_enroll_validate();" >
 					<table>
 						<tr>
 							<th>아이디</th>
@@ -44,7 +44,7 @@
 						<tr>
 							<th>패스워드</th>
 							<td>
-								<input type="password" class="form-control" name="mpw" id="mpw_" required>
+								<input type="password" class="form-control" placeholder="정규식은 아직 입니다." name="mpw" id="mpw_" required>
 							</td>
 						</tr>
 						<tr>
