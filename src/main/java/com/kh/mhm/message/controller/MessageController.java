@@ -1,5 +1,7 @@
 package com.kh.mhm.message.controller;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -31,11 +33,13 @@ public class MessageController {
 	}
 	
 	@RequestMapping("/popUp.write")
-	public String pupUpWrite(HttpServletRequest req,HttpSession session) {
+	public String pupUpWrite(HttpServletRequest req,HttpSession session) throws UnsupportedEncodingException {
 		if(req.getQueryString()==null||req.getQueryString()=="") {
 			return "message/message_write";
 		}else {
-			session.setAttribute("mNick", req.getQueryString());
+			String mNick=URLDecoder.decode(req.getQueryString(), "UTF-8");
+			System.out.println("QS::"+mNick);
+			session.setAttribute("mNick", mNick);
 			return "message/message_write";
 		}
 		
