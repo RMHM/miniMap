@@ -106,13 +106,7 @@
 																			.split(",");
 																	console
 																			.log(str);
-																	/*  console.log(data);
-																	 console.log(data.aid);
-																	 console.log(data.acode);
-																	 console.log(data.address);
-																	 console.log(data.acontent); */
-																	/* 	 console.log(data.aid); */
-																	/* 		 $('#num').val(data.aid); */
+																
 																	$('#num')
 																			.append(
 																					(data.aid));
