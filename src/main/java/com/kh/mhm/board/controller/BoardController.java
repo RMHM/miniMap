@@ -72,6 +72,7 @@ public class BoardController {
 		int result;
 		
 		System.out.println(session.getAttribute("member"));
+		System.out.println(board);
 		System.out.println(req.getParameter("boardcontent"));
 		board.setBContent(req.getParameter("boardcontent"));
 		result = boardService.insertBoard(board);
