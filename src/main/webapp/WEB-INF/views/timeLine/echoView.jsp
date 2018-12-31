@@ -33,11 +33,15 @@
 											<div class="comment-box-me">
 												<div class="comment-head-me">
 													<span class="comment-name ">
-														<a href="" target="_BLANK">${i.mNick}&nbsp;(나)</a>
+														<a href="" target="_BLANK">${i.mNick}</a>&nbsp;(나)
 													</span>
 													<span> ${i.tDate} </span>
-													<i class="fa fa-thumbs-down">0</i>
-													<i class="fa fa-thumbs-up">0</i>
+													<a href="#" onclick="sendNote($(this).siblings('.comment-name').children('a').text());">
+														<img class="jjokjee" src="/resources/img/timeline/jjokjee.png"/>
+													</a>
+													<a href="#" onclick="report();">
+														<img class="singo" src="/resources/img/timeline/singo.png"/>
+													</a>
 												</div>
 												<div class="comment-content">
 													<pre>${i.tContent}</pre>
@@ -62,8 +66,12 @@
 														<a href="" target="_BLANK">${i.mNick}</a>
 													</span>
 													<span> ${i.tDate} </span>
-													<i class="fa fa-thumbs-down">0</i>
-													<i class="fa fa-thumbs-up">0</i>
+													<a href="#" onclick="sendNote($(this).siblings('.comment-name').children('a').text());">
+														<img class="jjokjee" src="/resources/img/timeline/jjokjee.png"/>
+													</a>
+													<a href="#" onclick="report();">
+														<img class="singo" src="/resources/img/timeline/singo.png"/>
+													</a>
 												</div>
 												<div class="comment-content">
 													<pre>${i.tContent}</pre>
@@ -321,7 +329,10 @@
 					printHTML += "<a href='' target='_BLANK'>" + userName
 							+ "&nbsp;(나)" + "</a></span><span>" + printDate
 							+ "</span>";
-					printHTML += "<i class='fa fa-thumbs-down'>0</i><i class='fa fa-thumbs-up'>0</i>";
+					printHTML += "<a href='#' onclick='sendNote($(this).siblings('.comment-name').children('a').text());'>"
+							+ "<img class='jjokjee' src='/resources/img/timeline/jjokjee.png'/>"
+							+ "</a><a href='#' onclick='report();'>"
+							+ "<img class='singo' src='/resources/img/timeline/singo.png'/></a>";
 					printHTML += "</div><div class='comment-content'><pre>"
 							+ message + "</pre></div>";
 					printHTML += "<div class='comment-bottom-me'><i class='fa fa-link'></i>";
@@ -335,7 +346,10 @@
 					printHTML += "<div class='comment-box'><div class='comment-head'><span class='comment-name '>";
 					printHTML += "<a href='' target='_BLANK'>" + userName
 							+ "</a></span><span>" + printDate + "</span>";
-					printHTML += "<i class='fa fa-thumbs-down'>0</i><i class='fa fa-thumbs-up'>0</i>";
+					printHTML += "<a href='#' onclick='sendNote($(this).siblings('.comment-name').children('a').text());'>"
+							+ "<img class='jjokjee' src='/resources/img/timeline/jjokjee.png'/>"
+							+ "</a><a href='#' onclick='report();'>"
+							+ "<img class='singo' src='/resources/img/timeline/singo.png'/></a>";
 					printHTML += "</div><div class='comment-content'><pre>"
 							+ message + "</pre></div>";
 					printHTML += "<div class='comment-bottom'><i class='fa fa-link'></i>";
@@ -442,6 +456,18 @@
 				}
 			}
 		});
+		
+		function sendNote(nick){
+			var popUrl = "/popUp.write?"+nick;	//팝업창에 출력될 페이지 URL
+
+			var popOption = "width=765, height=485, resizable=no, scrollbars=no, status=no;";    //팝업창 옵션(optoin)
+
+			window.open(popUrl,"",popOption);
+		}
+		
+		function report(){
+			
+		}
 	</script>
 
 
