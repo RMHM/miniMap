@@ -43,6 +43,14 @@
 								</div>
 							
 							</div>
+							
+							<div class="form-group">
+								<label class="col-sm-3 control-label" for="request_Date">권한요청일</label>
+								<div class="col-sm-6">
+									<input class="form-control" id="reqDate" name="reqDate" readonly
+										type="date" value="${autho.getRequest_date()}">
+								</div>
+							</div>
 
 							<div class="form-group">
 								<label class="col-sm-3 control-label" for="mName">회원 이름</label>
@@ -53,7 +61,7 @@
 							</div>
 
 							<div class="form-group">
-								<label class="col-sm-3 control-label" >주소</label>
+								<label class="col-sm-3 control-label" for="address" >주소</label>
 								<div class="col-sm-6">
 									<input type="text" style="width:98%;" value="${autho.getAddress()}" readonly/>
 								</div>
@@ -82,16 +90,16 @@
 			</div>
 		</div>
 
-
-
-
 	</div>
 	<script>
+	
+	var url = "";
+	
 		function grant() {
 		
 			/* $('#request').attr("action", "grantAuthority.do?mno=${autho.getMNo()}"); */
 			
-			var url = "grantAuthority.do?mno=${autho.getMNo()}";
+			url = "grantAuthority.do?mno=${autho.getMNo()}";
 			
 			opener.window.location = url;
 			
@@ -101,7 +109,12 @@
 		function refuse() {
 			// 거절 사유 전달해서 쪽지 내용에 추가하기
 			var content = window.prompt("거절 사유를 작성해 주세요.");
-			$('#request').attr("action", "refuseAuthority.do?mno=${autho.getMNo()}");
+			
+			url = "refuseAuthority.do?mno=${autho.getMNo()}"
+			
+			opener.window.location = url;
+			
+			close();
 
 		}
 	</script>

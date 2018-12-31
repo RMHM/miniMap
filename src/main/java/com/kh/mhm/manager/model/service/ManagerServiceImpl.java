@@ -38,5 +38,10 @@ public class ManagerServiceImpl implements ManagerService {
 	public Authority selectRequest(int mno) {
 		return mnDao.selectRequest(mno);
 	}
+
+	@Override
+	public List searchMember(String condition, String keyword) {
+		return mnDao.searchMember(condition, keyword);
+	}
   
 }

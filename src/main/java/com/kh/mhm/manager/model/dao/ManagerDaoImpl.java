@@ -1,7 +1,9 @@
 package com.kh.mhm.manager.model.dao;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -53,6 +55,17 @@ public class ManagerDaoImpl implements ManagerDao {
 	@Override
 	public int refuseAuthority(int mno) {
 		return sst.update("authority.refuseAuthority", mno);
+	}
+
+	@Override
+	public List searchMember(String condition, String keyword) {
+		
+		Map<String, String> map = new HashMap<String, String>();
+		
+		map.put("condition", condition);
+		map.put("keyword", keyword);
+		
+		return sst.selectList("member.searchMember", map);
 	}
 
 

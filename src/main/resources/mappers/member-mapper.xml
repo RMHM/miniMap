@@ -107,7 +107,7 @@
 		full outer join authority a using(mno)
 		full outer join authority_type at on(a.acode = at.acode)
 		where mtype = 'C'
-		order by request_date
+		order by mno,request_date
 	</select>
 
 	<select id="selectBlackList" resultMap="BlackListMap">
@@ -122,6 +122,12 @@
 	
   <select id="checkNick" parameterType="String" resultType="int">
 		select count(*) from member mnick = #{mnick}
+	</select>
+	
+	<select id="searchMember" parameterType="String" resultMap="memberMap">
+		select * from member
+		where ${condition} like '%'||#{keyword}||'%'
+		order by mtype, mno
 	</select>
 	
 </mapper>
