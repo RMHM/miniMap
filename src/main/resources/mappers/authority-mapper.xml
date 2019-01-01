@@ -14,7 +14,7 @@
 	
 	<select id="selectRequest" parameterType="_int" resultType="Authority">
 		select * from authority
-		where mno = #{mno}
+		where mno = #{mno} and grant_date is null
 	</select>
 	
 	<update id="grantAuthority" parameterType="_int">

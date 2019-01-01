@@ -1,9 +1,6 @@
 package com.kh.mhm.manager.controller;
 
-import java.util.ArrayList;
 import java.util.List;
-
-import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -13,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.kh.mhm.manager.model.service.ManagerService;
+import com.kh.mhm.member.model.vo.CompanyMember;
 import com.kh.mhm.myPage.model.vo.Authority;
 
 @Controller
@@ -58,9 +56,9 @@ public class ManagerController {
     	
     	List list = mns.selectMemberList(mtype);
 		
-    	model.addAttribute("list", list);
+    	/*model.addAttribute("list", list);
     	
-    	System.out.println("list : " + list);
+    	System.out.println("list : " + list);*/
     	
     	return list;
     }
@@ -105,6 +103,18 @@ public class ManagerController {
 		.addAttribute("loc", loc);
 		
 		return "common/msg";
+	}
+	
+	// 회원 검색
+	@RequestMapping("manager/searchMember")
+	@ResponseBody
+	public List searchMember(@RequestParam("condition") String condition, @RequestParam("keyword") String keyword, Model model) {
+		
+		List list = mns.searchMember(condition, keyword);
+		
+		model.addAttribute("list", list);
+		
+		return list;
 	}
 	
 }
