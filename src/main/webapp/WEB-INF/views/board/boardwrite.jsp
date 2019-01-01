@@ -42,6 +42,10 @@
 					<input type="text" placeholder="제목" name="bTitle" id="bTitle" required>					
 					<div id="daumeditor" class="edit" style="width:90%; height:100%;"></div>				
 					<textarea name="boardcontent" id="boardcontent" style="display:none;"></textarea>
+					<c:if test="${member.mtype eq 'A' }">
+					<input type="checkbox" name="isNotice2" checked="checked">공지글로 올리기 <br>					
+					</c:if>
+					<input type="hidden" name="isNotice" value='N'>					
 					<input type="radio" name="bCode" value="1" checked="checked">잡담
 					<input type="radio" name="bCode" value="2">정보
 					<input type="radio" name="bCode" value="3">후기
@@ -128,6 +132,11 @@ $(function(){
      
     //form submit 버튼 클릭
     $("#insertBoard").click(function(){
+    	if ($('input[name=isNotice2]').is(":checked")) {
+    	    $('input[name=isNotice]').val('Y');    	   
+    	} else {
+    	    $('input[name=isNotice]').val('N');    	   
+    	}
         //다음에디터가 포함된 form submit
         Editor.save();
     })
@@ -147,11 +156,17 @@ function validForm(editor) {
 }
   
 //validForm 함수까지 true값을 받으면 이어서 form submit을 시켜주는  setForm함수
+
+
+
 function setForm(editor) {
     var content = editor.getContent();
     $("#boardcontent").val(content)
     return true;
 }
+
+
+
 
 </script>
 

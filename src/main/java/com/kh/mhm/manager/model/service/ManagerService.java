@@ -16,6 +16,6 @@ public interface ManagerService {
 
 	int refuseAuthority(int mno);
   
-  List<Integer> selectCount();
+	List searchMember(String condition, String keyword);
 
 }

@@ -28,7 +28,6 @@
 			<li class=" oldstart"><span class="orange"><a href="/popUp.inbox" onfocus="this.blur();">받은 쪽지함</a></span></li>
 			<li class=""><span class="orange"><a href="/popUp.sent" onfocus="this.blur();">보낸 쪽지함</a></span></li>
 			<li class=""><span class="orange size3"><a href="/popUp.store" onfocus="this.blur();">쪽지 보관함</a></span></li>
-			<li class=" oldstart"><span class="orange size2"><a href="/popUp.block" onfocus="this.blur();">쪽지 차단 설정</a></span></li>
 		</ul>
 	</dd>
 </dl>
@@ -50,7 +49,14 @@
 		<colgroup><col class="th"/><col class="td"/></colgroup>
 							<tr>
 				<td class="label">닉네임</td>
-				<td class="value"><input class="nick" type="text" id="nick" name="nick" value=""/></td>
+				<c:choose>
+					<c:when test="${!empty mNick}">
+						<td class="value"><input class="nick" type="text" id="nick" name="nick" value="${mNick}"/></td>
+					</c:when>
+					<c:otherwise>
+						<td class="value"><input class="nick" type="text" id="nick" name="nick" value=""/></td>
+					</c:otherwise>
+				</c:choose>
 			</tr>
 		
 

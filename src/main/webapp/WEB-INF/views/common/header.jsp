@@ -19,8 +19,7 @@
 			<div class="navbar-collapse collapse ">
 				<ul class="nav navbar-nav">
 					<li class="active"><a href="/">Home</a></li>
-					<li><a href="/echo.do">타임라인 테스트</a></li>
-					<li><button type="button" class="pop">쪽지 테스트</button></li>
+					<li><a href="/echo.do">타임라인</a></li>
 					<li><a href="/test/testMap.do">지도테스트</a></li>
           			<li><a href="/board/boardlist1.do">게시판 테스트</a><li>
 					<li><a href="/myPage/myPageMain.do">마이페이지</a></li>
@@ -32,6 +31,7 @@
 							<a href="#" class="dropdown-toggle " data-toggle="dropdown" data-hover="dropdown" data-delay="0" data-close-others="false">${member.mnick} 님 <b class=" icon-angle-down"></b></a>
 							<ul class="dropdown-menu">
 								<li><a href="/myPage/myPageMain.do">myPage</a></li>
+								<li><a href="#" onclick="message();">쪽지함</a></li>
 								<c:if test="${member.mtype eq 'A'}">
 									<li><a href="/manager/managerPage.go">관리자 페이지</a></li>
 								</c:if>
@@ -53,15 +53,13 @@
 			</div>
 		</div>
 	</div>
-	<script>
-		$(".pop").click(function(){
-			var popUrl = "/popUp.inbox";	//팝업창에 출력될 페이지 URL
+<script>
+function message(){
+	var popUrl = "/popUp.inbox";
 
-			var popOption = "width=765, height=485, resizable=no, scrollbars=no, status=no;";    //팝업창 옵션(optoin)
+	var popOption = "width=765, height=485, resizable=no, scrollbars=no, status=no;";
 
-				window.open(popUrl,"",popOption);
-
-			
-		});
-	</script>
+	window.open(popUrl,"",popOption);
+}
+</script>
 </header>

@@ -78,7 +78,7 @@
 								</tbody>
 							</table>
 							<!-- 페이지 처리 해야됨. -->
-							<c:if test="${not empty member}">
+							<c:if test="${not empty member and member.mtype ne 'C'}">
 							<input type="button" value="글쓰기" id=""	class="btn btn-theme btn-large"
 								onclick="location.href='${pageContext.request.contextPath}/board/boardwrite.do'"
 								style="position: absolute; right: 20px;" /> </c:if>
