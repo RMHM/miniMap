@@ -152,6 +152,27 @@ public class MyPageController {
 
 	
 		String saveDir = session.getServletContext().getRealPath("/resources/img/profiles");
+		File dir = new File(saveDir);
+		
+		if(dir.exists() == false) dir.mkdirs();
+		String originName = profile.getOriginalFilename();
+		String ext = originName.substring(originName.lastIndexOf(".")+1);
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd_HHmmss");
+		int rndNum = (int)(Math.random() * 1000);
+		
+		
+		String renamedName = sdf.format(new java.util.Date()) + "_" + rndNum + "." + ext;
+		
+		// 실제 파일을 지정한 파일명으로 변환하며 데이터를 저장한다.
+		try {
+			profile.transferTo(new File(saveDir + "/" + renamedName));
+		} catch (IllegalStateException | IOException e) {
+			e.printStackTrace();
+		}
+		
+		member.setProfilePath(renamedName);
+		
+		/*String saveDir = session.getServletContext().getRealPath("/resources/img/profiles");
 		System.out.println("경로 :"+saveDir);
 		
 		 try { 
@@ -190,8 +211,8 @@ public class MyPageController {
 	      
 	            }
 	            
-	      /*      returnObject.put("files", resultList); 
-	            returnObject.put("params", mhsr.getParameterMap()); */
+	            returnObject.put("files", resultList); 
+	            returnObject.put("params", mhsr.getParameterMap()); 
 	            } catch (UnsupportedEncodingException e) { 
 	                // TODO Auto-generated catch block 
 	                e.printStackTrace(); 
@@ -201,7 +222,7 @@ public class MyPageController {
 	                e.printStackTrace();
 	            }
 
-	
+	*/
 		
 		/*File dir = new File(saveDir);
 		if (dir.exists() == false)
