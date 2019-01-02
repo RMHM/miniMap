@@ -1,13 +1,11 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Daum에디터 - 이미지 첨부</title>
 <script src="../../js/popup.js" type="text/javascript" charset="utf-8"></script>
-<link rel="stylesheet" href="../../css/popup.css" type="text/css"
-	charset="utf-8" />
-<script type="text/javascript"
-	src="https://code.jquery.com/jquery-3.3.1.js"></script>
+<link rel="stylesheet" href="../../css/popup.css" type="text/css" charset="utf-8" />
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.js"></script>
 <script type="text/javascript" src="jquery.form.js"></script>
 <script type="text/javascript">
 	// <![CDATA[
@@ -18,6 +16,9 @@
 		})
 		//ajax form submit 
 		$('#frm').ajaxForm({
+			url : "/board/imageUpload.do",
+			type : "POST",
+			dataType : "json",
 			beforeSubmit : function(data, form, option) {
 				//validation체크
 				//막기위해서는 return false를 잡아주면됨 
@@ -25,10 +26,13 @@
 			},
 
 			success : function(response, status) {
+				console.log(response);
+				consoel.log(status);
 				//성공후 서버에서 받은 데이터 처리 
 				done(response);
 			},
-			error : function() {
+			error : function(result) {
+				console.log(result)
 				//에러발생을 위한 code페이지
 				alert("error!!");
 			}
@@ -64,7 +68,7 @@
 			<dl class="alert">
 				<dt>사진 첨부 확인</dt>
 				<dd>
-					<form id="frm" action="/fileupload.jsp" method="post">
+					<form id="frm" action="/fileupload.jsp" method="post"">
 						<input type="file" name="image_file" />
 					</form>
 				</dd>

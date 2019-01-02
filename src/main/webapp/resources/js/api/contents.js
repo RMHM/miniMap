@@ -112,11 +112,17 @@ function getWeather(){
 	var str = "";
 	
 	for(var i=0; i<jeju.length; i++){
-		if(jeju[i].fcstTime == d.getHours()+"00" && jeju[i].fcstDate == ""+d.getFullYear()+((d.getMonth()<9)?'0'+(d.getMonth()+1):d.getMonth()+1)+((d.getDate()<10)?'0'+d.getDate():d.getDate())){
+		if(jeju[i].fcstTime == ((d.getHours()<10)?"0"+d.getHours():d.getHours())+"00" && jeju[i].fcstDate == ""+d.getFullYear()+((d.getMonth()<9)?'0'+(d.getMonth()+1):d.getMonth()+1)+((d.getDate()<10)?'0'+d.getDate():d.getDate())){
 			var dFormat = d.getFullYear()+"-"+((d.getMonth()<9)?'0'+(d.getMonth()+1):d.getMonth()+1)+"-"+((d.getDate()<10)?'0'+d.getDate():d.getDate())
 			$('#calendar thead td[data-date="'+ dFormat +'"]').prepend('현재기온 : ' + jeju[i].tempValue);
-		} else if(jeju[i].fcstTime=="0300" && jeju[i].fcstDate == ""+nd.getFullYear()+((nd.getMonth()<9)?'0'+(nd.getMonth()+1):nd.getMonth()+1)+((nd.getDate()<10)?'0'+nd.getDate():nd.getDate())) {
-			str += "<font color=blue>" + jeju[i].tempValue + "</font>/";
+		} else if(jeju[i].fcstTime=="0200" && jeju[i].fcstDate == ""+nd.getFullYear()+((nd.getMonth()<9)?'0'+(nd.getMonth()+1):nd.getMonth()+1)+((nd.getDate()<10)?'0'+nd.getDate():nd.getDate())) {
+			if(jeju[i].fcstDate != jeju[i].baseDate) str += "<font color=blue>" + jeju[i].tempValue + "</font>/";
+			else {
+				var dFormat = nd.getFullYear()+"-"+((nd.getMonth()<9)?'0'+(nd.getMonth()+1):nd.getMonth()+1)+"-"+((nd.getDate()<10)?'0'+nd.getDate():nd.getDate())
+				$('#calendar thead td[data-date="'+ dFormat +'"]').prepend("최저기온 : " + jeju[i].tempValue);
+				break;
+			}
+			
 		} else if(jeju[i].fcstTime=="1500" && jeju[i].fcstDate == ""+nd.getFullYear()+((nd.getMonth()<9)?'0'+(nd.getMonth()+1):nd.getMonth()+1)+((nd.getDate()<10)?'0'+nd.getDate():nd.getDate())) {
 			str += "<font color=red>" + jeju[i].tempValue + "</font>";
 			var dFormat = nd.getFullYear()+"-"+((nd.getMonth()<9)?'0'+(nd.getMonth()+1):nd.getMonth()+1)+"-"+((nd.getDate()<10)?'0'+nd.getDate():nd.getDate())
@@ -124,6 +130,7 @@ function getWeather(){
 			break;
 		}
 	}
+	
 }
 
 // 캘린더 띄우기

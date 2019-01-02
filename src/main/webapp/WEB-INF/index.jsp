@@ -85,7 +85,7 @@
 									<div class="box-gray aligncenter">
 										<h4>오늘 방문자 수</h4>
 										<div class="icon">
-											<i class="fa test-icon fa-3x"></i>
+											<i class="fa fa-users fa-3x"></i>
 											<div class="counter" data-count="99">0</div>
 										</div>
 										<p>오늘 우리를 방문해주신 분들은?</p>
