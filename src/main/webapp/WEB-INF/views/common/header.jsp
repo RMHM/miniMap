@@ -14,7 +14,7 @@
                       <span class="icon-bar"></span>
                       <span class="icon-bar"></span>
                   </button>
-				<a class="navbar-brand" href="/"><span>We</span> need LoGo</a>
+				<a class="navbar-brand" href="/"><span><img src="resources/img/member/4.jpg" alt="" /></span></a>
 			</div>
 			<div class="navbar-collapse collapse ">
 				<ul class="nav navbar-nav">
