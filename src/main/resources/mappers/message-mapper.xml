@@ -85,4 +85,8 @@
 		DEFAULT, #{meTitle}, #{meContent}, DEFAULT, DEFAULT, DEFAULT, DEFAULT)
 	</insert>
 	
+	<select id="findNick" parameterType="string" resultType="_int">
+		SELECT COUNT(*) FROM MEMBER WHERE MNICK=#{nick}
+	</select>
+	
 </mapper>

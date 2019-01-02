@@ -12,7 +12,7 @@
 
 <script src="/resources/js/jquery-3.3.1.min.js"></script>
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
-<link href="${pageContext.request.contextPath}/resources/css/message.css" rel="stylesheet" />
+<link href="/resources/css/message.css" rel="stylesheet" />
 
 </head>
 
@@ -51,12 +51,19 @@
 				<td class="label">닉네임</td>
 				<c:choose>
 					<c:when test="${!empty mNick}">
-						<td class="value"><input class="nick" type="text" id="nick" name="nick" value="${mNick}"/></td>
+						<td class="value"><input class="nick" type="text" id="nick" name="nick" value="${mNick}"/>
+							<span class="guide ok">O</span>
+							<span class="guide error">X</span>
+						</td>
 					</c:when>
 					<c:otherwise>
-						<td class="value"><input class="nick" type="text" id="nick" name="nick" value=""/></td>
+						<td class="value"><input class="nick" type="text" id="nick" name="nick" value=""/>
+							<span class="guide ok">O</span>
+							<span class="guide error">X</span>
+						</td>
 					</c:otherwise>
 				</c:choose>
+				
 			</tr>
 		
 
@@ -106,6 +113,37 @@
 		   	}
 		});
 	}
+	
+	$("#nick").on("keyup", function(){
+        var nick = $(this).val().trim();
+        
+        if(nick.length<1) {
+        	$(".guide.error").hide();
+        	$(".guide.ok").hide();
+        	return;
+        	
+        } else {
+        	
+	        $.ajax({
+	            url  : "/nick.find",
+	            data : { 
+	            	"nick":nick
+	            },
+	            success : function(data){
+	                console.log(data);
+	                if(data.isUsable==true){
+	                    $(".guide.error").hide();
+	                    $(".guide.ok").show();
+	                } else {
+	                    $(".guide.error").show();
+	                    $(".guide.ok").hide();
+	                }
+	            }, error : function(){
+	                console.log("ajax에러");
+	            }
+        	});
+     	}
+	});
 	
 </script>
 </body>
