@@ -52,7 +52,7 @@
 		<table border="0" cellpadding="0" cellspacing="0">
 			<thead>
 			<tr>
-				<th class="chk"><input type="checkbox" id="idx_" name="idx_" onclick="toggleCheck('fmNoteData','idx_',this);" onfocus="this.blur();"/></th>
+				<th class="chk"><input type="checkbox" id="idx_" name="idx_" onfocus="this.blur();"/></th>
 				<th class="meid" style="display:none">쪽지번호</th>
 				<th class="title">제목</th>
 				<th class="nickname">보낸사람</th>
@@ -64,7 +64,7 @@
 					<c:choose>
 						<c:when test="${i.readFlag eq 'N'}">
 							<tr class="unread">
-								<td id="chk"><input type="checkbox" id="idx_" class="idx_" name="idx_"/></td>
+								<td id="chk"><input type="checkbox" id="index_" class="index_" name="index_"/></td>
 								<td id="meid" style="display:none">${i.meId}</td>
 								<td><a href="#" onclick="selectDetailInbox($(this).parent().siblings('#meid').text());" onfocus="this.blur();">${i.meTitle}</a></td>
 								<td>${i.mNick}</td>
@@ -73,7 +73,7 @@
 						</c:when>
 						<c:otherwise>
 							<tr class="read">
-								<td id="chk"><input type="checkbox" id="idx_" class="idx_" name="idx_"/></td>
+								<td id="chk"><input type="checkbox" id="index_" class="index_" name="index_"/></td>
 								<td id="meid" style="display:none">${i.meId}</td>
 								<td><a href="#" onclick="selectDetailInbox($(this).parent().siblings('#meid').text());" onfocus="this.blur();">${i.meTitle}</a></td>
 								<td>${i.mNick}</td>
@@ -100,6 +100,19 @@
 <script>
 // 올체크
 
+$("#idx_").click(function(){
+	if($(this).prop("checked")){
+		$("input[name^=index_]").prop('checked', true);
+	}else{
+		$("input[name^=index_]").prop('checked', false);
+	}
+});
+
+$("input[name^=index_]").click(function(){
+	if($("#idx_").prop("checked")){
+		$("#idx_").prop("checked",false);
+	}
+});
 // 페이징
 
 function deleteMessage(){
