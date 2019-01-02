@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.kh.mhm.manager.model.dao.ManagerDao;
+import com.kh.mhm.member.model.vo.BlackList;
 import com.kh.mhm.myPage.model.vo.Authority;
 
 @Service
@@ -42,6 +43,16 @@ public class ManagerServiceImpl implements ManagerService {
 	@Override
 	public List searchMember(String condition, String keyword) {
 		return mnDao.searchMember(condition, keyword);
+	}
+
+	@Override
+	public int clearBlackList(int mno) {
+		return mnDao.clearBlackList(mno);
+	}
+
+	@Override
+	public BlackList selectOneBlackList(int mno) {
+		return mnDao.selectOneBlackList(mno);
 	}
   
 }

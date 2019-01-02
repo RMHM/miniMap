@@ -7,6 +7,7 @@ import com.kh.mhm.member.model.vo.Member;
 public class BlackList extends Member{
 	private Date endDate;
 	private String reason;
+	private String rdetail;
 	
 	public BlackList() {
 		super();
@@ -32,7 +33,7 @@ public class BlackList extends Member{
 	}
 	@Override
 	public String toString() {
-		return "BlackList [endDate=" + endDate + ", reason=" + reason + "]";
+		return "BlackList [endDate=" + endDate + ", reason=" + reason + ", rdetail=" + rdetail + "]";
 	}
 	
 	public Date getEndDate() {
@@ -46,6 +47,12 @@ public class BlackList extends Member{
 	}
 	public void setReason(String reason) {
 		this.reason = reason;
+	}
+	public String getRdetail() {
+		return rdetail;
+	}
+	public void setRdetail(String rdetail) {
+		this.rdetail = rdetail;
 	}
 	
 	
