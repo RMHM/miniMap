@@ -9,6 +9,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.kh.mhm.member.model.vo.BlackList;
 import com.kh.mhm.myPage.model.vo.Authority;
 
 @Repository
@@ -66,6 +67,16 @@ public class ManagerDaoImpl implements ManagerDao {
 		map.put("keyword", keyword);
 		
 		return sst.selectList("member.searchMember", map);
+	}
+
+	@Override
+	public int clearBlackList(int mno) {
+		return sst.update("member.clearBlackList", mno);
+	}
+
+	@Override
+	public BlackList selectOneBlackList(int mno) {
+		return sst.selectOne("member.selectOneBlackList", mno);
 	}
 
 

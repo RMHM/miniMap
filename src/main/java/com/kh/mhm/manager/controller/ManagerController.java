@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.kh.mhm.manager.model.service.ManagerService;
+import com.kh.mhm.member.model.vo.BlackList;
 import com.kh.mhm.member.model.vo.CompanyMember;
 import com.kh.mhm.myPage.model.vo.Authority;
 
@@ -115,6 +116,39 @@ public class ManagerController {
 		model.addAttribute("list", list);
 		
 		return list;
+	}
+	
+	// 블랙리스트 승인창 이동
+	@RequestMapping("manager/selectBlackList.go")
+	public String clearBlack(Model model, @RequestParam("mno") int mno) {
+		
+		BlackList black = mns.selectOneBlackList(mno);
+		
+		System.out.println("black : " + black);
+		
+		model.addAttribute("black", black);
+		
+		return "manager/reportPage";
+	}
+	
+	// 블랙리스트 해제
+	@RequestMapping("manager/clearBlackList.do")
+	public String clearBlackList(Model model, @RequestParam("mid") int mno) {
+		
+		int result = mns.clearBlackList(mno);
+		
+		loc = "/manager/managerPage.go";
+		
+		if(result > 0) {
+			msg = "해당 회원의 정지가 정상적으로 해제되었습니다.";
+		} else {
+			msg = "블랙리스트 해제 중 오류가 발생했습니다!";
+		}
+		
+		model.addAttribute("msg", msg).addAttribute("loc", loc);
+		
+		return "common/msg";
+		
 	}
 	
 }

@@ -119,10 +119,11 @@
 						<th><b>상태</b></th>
 						<th><b>기간</b></th>
 						<th><b>사유</b></th>
+						<th><b>해제</b></th>
 					</tr>
 				</thead>
 				<tbody>
-					
+				
 				</tbody>	
 			</table>
 		</div>
