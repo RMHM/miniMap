@@ -240,7 +240,7 @@ public class BoardController {
 	}
 	
 	// 이미지 업로드
-	@RequestMapping(value = "/board/imageUpload.do", method = RequestMethod.POST)
+	@RequestMapping(value = "/board/imageUpload.do", method = {RequestMethod.POST})
 	@ResponseBody
 	public Map<String, Object> imageUpload(@RequestParam("image_file") MultipartFile mfile, HttpSession session) {
 		Map<String, Object> fileInfo = null;
@@ -271,7 +271,7 @@ public class BoardController {
 			}
 			
 			// 저장경로
-			String defaultPath = session.getServletContext().getRealPath("/resources/img/upload");
+			String defaultPath = session.getServletContext().getRealPath("/resources/img/upload/");
 			
 			// 저장경로 지정
 			File file = new File(defaultPath);
@@ -291,7 +291,7 @@ public class BoardController {
 				System.out.println(e.getMessage());
 			}
 			
-			String imgUrl = session.getServletContext().getContextPath() + rename;
+			String imgUrl = session.getServletContext().getContextPath() + "/resources/img/upload/" + rename;
 			fileInfo.put("imageurl", imgUrl);		// 상대파일경로
 			fileInfo.put("filename", rename);		// 파일명
 			fileInfo.put("filesize", fileSize);		// 파일 사이즈
