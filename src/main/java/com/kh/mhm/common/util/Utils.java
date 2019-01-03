@@ -12,7 +12,7 @@ public class Utils {
 		
 		//총페이지수 구하기
 		int totalPage = (int)Math.ceil((double)totalContents/numPerPage);
-		
+		if(totalPage ==0) totalPage=1;
 		//1.pageBar작성
 		//pageBar순회용변수 
 		int pageNo = ((cPage - 1)/pageBarSize) * pageBarSize +1;
