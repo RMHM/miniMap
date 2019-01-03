@@ -36,6 +36,7 @@
 							<table class="table table-hover">
 								<thead>
 									<tr>
+										<th>번호</th>
 										<th>분류</th>
 										<th>작성자</th>
 										<th>요청날짜</th>
@@ -50,6 +51,7 @@
 
 											<tr id="${list.get(a).getAId()}">
 												<td>${list.get(a).getAId()}</td>
+												<td>${list.get(a).getACode()}</td>
 												<td>${list.get(a).getMName()}</td>
 												<td>${list.get(a).getRequest_date()}</td>
 												<c:if test="${!empty l.getGrant_date()}">
@@ -78,17 +80,110 @@
 									</c:if>
 								</tbody>
 							</table>
+							<script>
+								$('tr[id]')
+										.click(
+												function() {
 
+													var trId = (this).id;
+													console.log("-----");
+													console.log(trId);
+													var idx = $('tr').index(
+															this) - 1;
+													console.log(idx);
+
+													$
+															.ajax({
+																url : "${pageContext.request.contextPath}/myPage/selectRequest.do",
+																data : {
+																	aId : trId
+																},
+																async : false,
+																dataType : "json",
+																success : function(
+																		data) {
+																	var str = data.address
+																			.split(",");
+																	console
+																			.log(str);
+																
+																	$('#num')
+																			.append(
+																					(data.aid));
+																	$('#aId')
+																			.val(
+																					trId);
+																	$(
+																			$(
+																					"input:radio[value="
+																							+ data.acode
+																							+ "]")
+																					.val())
+																			.attr(
+																					"checked",
+																					"checked");
+																	$(
+																			'#sample4_postcode')
+																			.val(
+																					str[0]);
+																	$(
+																			'#sample4_roadAddress')
+																			.val(
+																					str[1]);
+																	$(
+																			'#sample4_detailAddress')
+																			.val(
+																					str[2]);
+																	$(
+																			'#edited_title')
+																			.val(
+																					data.acontent);
+
+																	$(
+																			'#updateRe')
+																			.dialog(
+																					{
+																					/* 		
+																							buttons:{
+																								
+																								"수정": function(){
+																									/* console.log(this); */
+																					/* 			console.log($(this).find("form"));
+																								$("#updateRe").attr("action","${pageContext.request.contextPath}/myPage/updateRePermission.do").submit();
+																							},
+																							"취소":function(){
+																								$(this).dialog("close");
+																							}
+																					
+																						} */
+
+																					});
+
+																},
+																error : function(
+																		jqxhr,
+																		textStatus,
+																		errorThrown) {
+																	console
+																			.log("ajax 처리 실패");
+
+																}
+															});
+
+												});
+							</script>
 
 							<div id="updateRe" title="요청 정보" style="display: none">
-								<form method="post">
+								<!-- <form action="updateRePermission.do" method="post"> -->
+								<form id="updateRe" method="post" action="updateRePermission.do">
 									<div id="dialog-message"
 										style="width: auto; min-height: 0px; max-height: none; height: auto;">
 
 
 										<div style="text-align: left;">
 											<div>
-												<label id="num">요청 번호 : </label>
+												요청 번호 : <label id="num" name="aId" value=""></label> <input
+													type="hidden" id="aId" name="aId" />
 											</div>
 											<div>
 
@@ -104,12 +199,10 @@
 														type="button" onclick="sample4_execDaumPostcode()"
 														value="우편번호 찾기"><br> <input type="text"
 														id="sample4_roadAddress" name="address"
-														placeholder="도로명주소">
-													<!--  <input
-									type="text" id="sample4_jibunAddress" placeholder="지번주소"> -->
-													<span id="guide" style="color: #999; display: none"></span>
-													<input type="text" id="sample4_detailAddress"
-														name="address" placeholder="상세주소">
+														placeholder="도로명주소"> <span id="guide"
+														style="color: #999; display: none"></span> <input
+														type="text" id="sample4_detailAddress" name="address"
+														placeholder="상세주소">
 												</div>
 											</div>
 
@@ -193,118 +286,39 @@
 
 										</div>
 									</div>
-	<div class="form-group">
+									<!-- <div class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix">
+									 <input type="submit" value="수정">
+									 <input type="submit" value="요청취소">
+									<button id="updateRe" onclick="deleteRe();"name="delflag"value ="Y">요청취소</button>
+									 <input type="button" id="close" value="취소">
+									</div> -->
+									<div class="form-group">
+										<input type="submit" value="수정"> <input type="submit"
+											onclick="deleteRe();" value="요청취소"> <input
+											type="button" onclick="close();" value="취소">
+									</div>
 
-									<button id="updateRe" onclick="updateRe();">수정</button>
-									<button id="deleteRe" onclick="deleteRe();">요청취소</button>
-									<button id="cancle" onclick="close();">취소</button>
-
-								</div>
-
+									<script>
+										function deleteRe() {
+											console.log("삭제 수행");
+											$('#updateRe').attr("action",
+													"deleteRePermission.do");
+										}
+									</script>
 
 								</form>
-							
 
 							</div>
-							<script>
-								function updateRe() {
-									$('#updateRe')
-											.attr("action",
-													"${pageContext.request.contextPath}/myPage/updateRePermission.do");
-								}
-								function deleteRe() {
-									$('#updateRe')
-											.attr("action",
-													"${pageContext.request.contextPath}/myPage/updateRePermission.do?delflag=Y");
-								}
-								function close() {
-									$('#updateRe')
-											.attr("action",
-													"${pageContext.request.contextPath}/myPage/rePermissionClick.do");
-								}
-							</script>
-							<%-- /* var idx = parseInt($('tr').index(this))-1;  */
-							/* 			console.log("${list.get(idx).getAContent}"); */
-										/* $('#tb').append($("<tr class='dropdown-menu'><td>"+${list.get(idx).getAContent}+"</td></tr>")); */		
-										/* console.log(this.id); */ --%>
-
 
 						</div>
 					</div>
 				</div>
 			</div>
 
-			<script>
-				
-			</script>
-
-			<!-- 	<script>
-			$('input[type=button]').click(function{
-				location.href="/myPage/rePermissionClick.do";
-			});
-			</script> -->
-
-
 		</div>
 		<c:import url="../common/footer.jsp" />
 
-		<script>
-			$('tr[id]')
-					.click(
-							function() {
 
-								var trId = (this).id;
-								console.log();
-								var idx = $('tr').index(this) - 1;
-								console.log(idx);
-
-								$
-										.ajax({
-											url : "${pageContext.request.contextPath}/myPage/selectRequest.do",
-											data : {
-												aId : trId
-											},
-											async : false,
-											dataType : "json",
-											success : function(data) {
-												var str = data.address
-														.split(",");
-												console.log(str);
-												/*  console.log(data);
-												 console.log(data.aid);
-												 console.log(data.acode);
-												 console.log(data.address);
-												 console.log(data.acontent); */
-
-												$('#num').append((data.aid));
-												$(
-														$(
-																"input:radio[value="
-																		+ data.acode
-																		+ "]")
-																.val()).attr(
-														"checked", "checked");
-												$('#sample4_postcode').val(
-														str[0]);
-												$('#sample4_roadAddress').val(
-														str[1]);
-												$('#sample4_detailAddress')
-														.val(str[2]);
-												$('#edited_title').val(
-														data.acontent);
-
-												$('#updateRe').dialog({});
-
-											},
-											error : function(jqxhr, textStatus,
-													errorThrown) {
-												console.log("ajax 처리 실패");
-
-											}
-										});
-
-							});
-		</script>
 	</div>
 </body>
 </html>

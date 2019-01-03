@@ -55,4 +55,28 @@ public class MyPageDaoImpl implements MyPageDao {
 	public List<Authority> selectRequest(int mno) {
 		return sqlSession.selectList("myPage.selectRequest",mno);
 	}
+	@Override
+	public int updateAuthority(Authority authority) {
+		// TODO Auto-generated method stub
+		return sqlSession.update("myPage.updateAuthority",authority);
+	}
+	/**/
+	@Override
+	public Authority selectOneAuthority(String aId) {
+		return sqlSession.selectOne("myPage.selectOneMyAuthority",aId);
+	}
+	@Override
+	public int deleteSchedule(int sId) {
+		
+		return sqlSession.update("myPage.deleteSchedule",sId);
+	}
+	@Override
+	public int updateSchedule(Schedule schedule) {
+	
+		return sqlSession.update("myPage.updateSchedule",schedule);
+	}
+	@Override
+	public int deleteMyAuthority(int aId) {
+		return sqlSession.update("myPage.deleteAuthority",aId);
+	}
 }

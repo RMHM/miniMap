@@ -26,5 +26,17 @@ public interface MyPageService {
 
 	/*List<Map<String, String>> selectRequest(int mno);*/
 	List<Authority> selectRequest(int mno);
+
+	Authority selectOneRePermission(String aId);
+
+	int updateAuthority(Authority authority);
+
+	int deleteSchedule(int sId);
+
+	int updateSchedule(Schedule schedule);
+
+	int deleteMyAuthority(int aId);
+	
+	
 	
 }

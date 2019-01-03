@@ -4,7 +4,22 @@
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="TimeLine">
-
+	
+	<resultMap type="Member" id="MemberMap">
+		<result column="MNO" property="mno" />
+		<result column="MID" property="mid" />
+		<result column="MPW" property="mpw" />
+		<result column="MNAME" property="mname" />
+		<result column="MNICK" property="mnick" />
+		<result column="MTYPE" property="mtype" />
+		<result column="EMAIL" property="email" />
+		<result column="GENDER" property="gender" />
+		<result column="AGE" property="age" />
+		<result column="PROFILE_PATH" property="profilePath" />
+		<result column="JOIN_DATE" property="joinDate" javaType="java.sql.Date" jdbcType="DATE" />
+		<result column="DROP_DATE" property="dropDate" javaType="java.sql.Date" jdbcType="DATE" />
+	</resultMap>
+	
 	<select id="selectMno" parameterType="string" resultType="_int">
 		SELECT MNO FROM MEMBER WHERE MNICK=#{mnick}
 	</select>
@@ -13,7 +28,7 @@
 		INSERT INTO TIMELINE VALUES (SEQ_TID.NEXTVAL, #{mNo}, DEFAULT, #{tContent}, DEFAULT, #{hashTag})
 	</insert>
 	
-	<select id="getMemberByNick" parameterType="string" resultType="Member">
+	<select id="getMemberByNick" parameterType="string" resultMap="MemberMap">
 		SELECT * FROM MEMBER WHERE MNICK=#{mnick}
 	</select>
 	

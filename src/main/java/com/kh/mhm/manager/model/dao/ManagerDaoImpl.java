@@ -44,8 +44,8 @@ public class ManagerDaoImpl implements ManagerDao {
 	}
 
 	@Override
-	public int grantAuthority(int mno) {
-		return sst.update("authority.grantAuthority", mno);
+	public int grantAuthority(String mnick) {
+		return sst.update("authority.grantAuthority", mnick);
 	}
 
 	@Override
@@ -54,8 +54,8 @@ public class ManagerDaoImpl implements ManagerDao {
 	}
 
 	@Override
-	public int refuseAuthority(int mno) {
-		return sst.update("authority.refuseAuthority", mno);
+	public int refuseAuthority(String mnick) {
+		return sst.update("authority.refuseAuthority", mnick);
 	}
 
 	@Override

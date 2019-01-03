@@ -12,7 +12,7 @@
 
 <script src="/resources/js/jquery-3.3.1.min.js"></script>
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
-<link href="${pageContext.request.contextPath}/resources/css/message.css" rel="stylesheet" />
+<link href="/resources/css/message.css" rel="stylesheet" />
 
 </head>
 
@@ -28,7 +28,6 @@
 			<li class=" oldstart"><span class="orange"><a href="/popUp.inbox" onfocus="this.blur();">받은 쪽지함</a></span></li>
 			<li class=""><span class="orange"><a href="/popUp.sent" onfocus="this.blur();">보낸 쪽지함</a></span></li>
 			<li class=""><span class="orange size3"><a href="/popUp.store" onfocus="this.blur();">쪽지 보관함</a></span></li>
-			<li class=" oldstart"><span class="orange size2"><a href="/popUp.block" onfocus="this.blur();">쪽지 차단 설정</a></span></li>
 		</ul>
 	</dd>
 </dl>
@@ -50,7 +49,21 @@
 		<colgroup><col class="th"/><col class="td"/></colgroup>
 							<tr>
 				<td class="label">닉네임</td>
-				<td class="value"><input class="nick" type="text" id="nick" name="nick" value=""/></td>
+				<c:choose>
+					<c:when test="${!empty mNick}">
+						<td class="value"><input class="nick" type="text" id="nick" name="nick" value="${mNick}"/>
+							<span class="guide ok">O</span>
+							<span class="guide error">X</span>
+						</td>
+					</c:when>
+					<c:otherwise>
+						<td class="value"><input class="nick" type="text" id="nick" name="nick" value=""/>
+							<span class="guide ok">O</span>
+							<span class="guide error">X</span>
+						</td>
+					</c:otherwise>
+				</c:choose>
+				
 			</tr>
 		
 
@@ -100,6 +113,37 @@
 		   	}
 		});
 	}
+	
+	$("#nick").on("keyup", function(){
+        var nick = $(this).val().trim();
+        
+        if(nick.length<1) {
+        	$(".guide.error").hide();
+        	$(".guide.ok").hide();
+        	return;
+        	
+        } else {
+        	
+	        $.ajax({
+	            url  : "/nick.find",
+	            data : { 
+	            	"nick":nick
+	            },
+	            success : function(data){
+	                console.log(data);
+	                if(data.isUsable==true){
+	                    $(".guide.error").hide();
+	                    $(".guide.ok").show();
+	                } else {
+	                    $(".guide.error").show();
+	                    $(".guide.ok").hide();
+	                }
+	            }, error : function(){
+	                console.log("ajax에러");
+	            }
+        	});
+     	}
+	});
 	
 </script>
 </body>

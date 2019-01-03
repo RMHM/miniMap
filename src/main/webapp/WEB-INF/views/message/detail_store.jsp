@@ -28,7 +28,6 @@
 			<li class=" oldstart"><span class="orange"><a href="/popUp.inbox" onfocus="this.blur();">받은 쪽지함</a></span></li>
 			<li class=""><span class="orange"><a href="/popUp.sent" onfocus="this.blur();">보낸 쪽지함</a></span></li>
 			<li class=""><span class="orange size3"><a href="/popUp.store" onfocus="this.blur();">쪽지 보관함</a></span></li>
-			<li class=" oldstart"><span class="orange size2"><a href="/popUp.block" onfocus="this.blur();">쪽지 차단 설정</a></span></li>
 		</ul>
 	</dd>
 </dl>
@@ -62,6 +61,7 @@
 		</tr>
 	</table>
 	<div class="command">
+		<a id="aNoteRpl" href="#" onclick="sendReply();" onfocus="this.blur();" class="bttn46">답장</a>
 		<a id="aNoteList" href="/popUp.store" onfocus="this.blur();" class="bttn76l">리스트</a>
 		<a id="aNoteDelete" href="#" onclick="deleteNote();" onfocus="this.blur();" class="bttn46">삭제</a>
 				
@@ -95,6 +95,10 @@ function deleteNote() {
 	});
 }
 
+function sendReply(){
+	var url = "/popUp.write?"+$(".sender").text();	//팝업창에 출력될 페이지 URL
+	window.location.href = url;
+}
 
 
 </script>

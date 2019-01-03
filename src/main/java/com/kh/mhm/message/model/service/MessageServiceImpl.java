@@ -97,5 +97,10 @@ public class MessageServiceImpl implements MessageService {
 		return mdi.sendMessage(message);
 	}
 
+	@Override
+	public int findNick(String nick) {
+		return mdi.findNick(nick);
+	}
+
 
 }

@@ -140,19 +140,19 @@ public class ComentController {
 		
 		System.out.println(session.getAttribute("member"));
 		coment.setBid(Integer.parseInt(req.getParameter("BId")));
-		coment.setCcontent(req.getParameter("ccontent"));		
+		/*coment.setCcontent(req.getParameter("recontent"));	*/	
 		System.out.println(coment);
-		System.out.println(req.getParameter("ccontent"));
+		System.out.println(req.getParameter("recontent"));
 		
 		
-		result = cs.insertComentContent(coment);
+		result = cs.insertComentContent2(coment);
 		System.out.println(result);
 		
 		String loc = "/board/boardList.do";
 		String msg = "";
 		
 		if(result > 0) {
-			msg = "댓글 등록 성공!";
+			msg = "대댓글 등록 성공!";
 			loc = "/board/boardview.do?BId="+req.getParameter("BId");
 			
 		} else {

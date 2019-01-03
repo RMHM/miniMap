@@ -36,24 +36,10 @@
 						<div id="main-slider" class="flexslider">
 							<ul class="slides">
 								<li><img src="resources/img/member/3.jpg" alt="" />
-									<div class="flex-caption">
-										<h3>Modern Design</h3>
-										<p>Duis fermentum auctor ligula ac malesuada. Mauris et
-											metus odio, in pulvinar urna</p>
-										<a href="#" class="btn btn-theme">Learn More</a>
-									</div></li>
+									</li>
 								<li><img src="resources/img/member/1.jpg" alt="" />
-									<div class="flex-caption">
-										<h3>Fully Responsive</h3>
-										<p>Sodales neque vitae justo sollicitudin aliquet sit amet diam curabitur sed fermentum.</p>
-										<a href="#" class="btn btn-theme">Learn More</a>
-									</div></li>
+									</li>
 								<li><img src="resources/img/testImgLogo.png" alt="" />
-									<div class="flex-caption">
-										<h3>Clean &amp; Fast</h3>
-										<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit donec mer lacinia.</p>
-										<a href="#" class="btn btn-theme">Learn More</a>
-									</div>
 								</li>
 							</ul>
 						</div>
@@ -85,7 +71,7 @@
 									<div class="box-gray aligncenter">
 										<h4>오늘 방문자 수</h4>
 										<div class="icon">
-											<i class="fa test-icon fa-3x"></i>
+											<i class="fa fa-users fa-3x"></i>
 											<div class="counter" data-count="99">0</div>
 										</div>
 										<p>오늘 우리를 방문해주신 분들은?</p>

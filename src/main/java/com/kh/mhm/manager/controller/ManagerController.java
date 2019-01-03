@@ -56,25 +56,21 @@ public class ManagerController {
     public List selectMemberList(String mtype, Model model) {
     	
     	List list = mns.selectMemberList(mtype);
-		
-    	/*model.addAttribute("list", list);
-    	
-    	System.out.println("list : " + list);*/
     	
     	return list;
     }
 
 	// 권한 승인 (승인 or 거절 시 쪽지 보낼 수 있게 만들기)
 	@RequestMapping("manager/grantAuthority.do")
-	public String grantAuthority(Model model, @RequestParam("mno") int mno) {
+	public String grantAuthority(Model model, @RequestParam("mnick") String mnick) {
 		
-		int result = mns.grantAuthority(mno);
+		int result = mns.grantAuthority(mnick);
 		
-		System.out.println("result : " + result);
+		System.out.println("mnick : " + mnick);
 		
 		if(result > 0) {
 			msg = "승인이 완료 되었습니다.";
-			loc = "managerPage.go"/*"/message/message.write"*/;
+			loc = "/message/message.allow?mnick="+mnick;
 		} else {
 			msg = "승인 오류가 발생하였습니다.";
 			loc = "/manager/grantPermission.go";
@@ -88,13 +84,15 @@ public class ManagerController {
 	
 	// 권한 요청 거부
 	@RequestMapping("manager/refuseAuthority.do")
-	public String refuseAuthority(Model model, @RequestParam("mno") int mno) {
+	public String refuseAuthority(Model model, @RequestParam("mnick") String mnick, @RequestParam("content") String content) {
 		
-		int result = mns.refuseAuthority(mno);
+		int result = mns.refuseAuthority(mnick);
+		
+		System.out.println("mnick : " + mnick);
 		
 		if(result > 0) {
 			msg = "요청이 거부 되었습니다.";
-			loc = "managerPage.go"/*"/message/message.write"*/;
+			loc = "/message/message.reject?content="+content+"&mnick="+mnick;
 		} else {
 			msg = "요청 거부 오류가 발생하였습니다.";
 			loc = "/manager/grantPermission.go";
@@ -133,7 +131,7 @@ public class ManagerController {
 	
 	// 블랙리스트 해제
 	@RequestMapping("manager/clearBlackList.do")
-	public String clearBlackList(Model model, @RequestParam("mid") int mno) {
+	public String clearBlackList(Model model, @RequestParam("mno") int mno) {
 		
 		int result = mns.clearBlackList(mno);
 		

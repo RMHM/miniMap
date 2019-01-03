@@ -1,14 +1,20 @@
 package com.kh.mhm.message.controller;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.kh.mhm.member.model.vo.Member;
@@ -31,8 +37,22 @@ public class MessageController {
 	}
 	
 	@RequestMapping("/popUp.write")
-	public String pupUpWrite() {
-		return "message/message_write";
+	public String pupUpWrite(HttpServletRequest req,HttpSession session) throws UnsupportedEncodingException {
+		if(req.getQueryString()==null||req.getQueryString()=="") {
+			if(session.getAttribute("mNick")!=null||session.getAttribute("mNick")!="") {
+				session.removeAttribute("mNick");
+			}
+			return "message/message_write";
+		}else {
+			if(session.getAttribute("mNick")!=null||session.getAttribute("mNick")!="") {
+				session.removeAttribute("mNick");
+			}
+			String mNick=URLDecoder.decode(req.getQueryString(), "UTF-8");
+			System.out.println("QS::"+mNick);
+			session.setAttribute("mNick", mNick);
+			return "message/message_write";
+		}
+		
 	}
 	
 	@RequestMapping("/popUp.sent")
@@ -151,7 +171,67 @@ public class MessageController {
 	public int sendMessage(String nick, String title, String content, HttpSession session) {
 		MessageSmpl message=new MessageSmpl(((Member)session.getAttribute("member")).getMno(),nick,title,content);
 		int result=ms.sendMessage(message);
+		if(session.getAttribute("mNick")!=null||session.getAttribute("mNick")!="") {
+			session.removeAttribute("mNick");
+		}
 		return result;
 	}
 	
+	@RequestMapping("/nick.find")
+	@ResponseBody
+	public Map<String, Object> findNick(String nick) {
+
+		Map<String, Object> map = new HashMap<String, Object>();
+		boolean isUsable = ms.findNick(nick) == 1 ? true : false;
+		map.put("isUsable", isUsable);
+		return map;
+	}
+	
+	// 회원가입 축하 쪽지 전송
+	// 나중에 회원가입쪽과 연동
+	@RequestMapping("/message.welcome")
+	public String welcomeMHM() {
+		String title="회원가입을 축하드립니다!";
+		String content="회원님의 가입을 진심으로 축하드리며 미니맵에서 즐거운 여행 되시길 바랍니다.";
+		// 사이트 관리자의 회원번호는 1번 고정해야함
+		MessageSmpl message=new MessageSmpl(1, "사이트관리자", title, content);
+		int result=ms.sendMessage(message);
+		// result 결과에 따른 에러처리(추후 진행)
+		return "/";
+	}
+	
+	// 기업회원 승인 허가 쪽지 전송
+	@RequestMapping("/message/message.allow")
+	public String allowMHM(Model model, @RequestParam("mnick") String mnick) {
+		String title="[MHM] 요청해주신 권한이 승인 되었습니다!";
+		String content="요청해주신 권한이 승인 되었습니다.";
+		// 사이트 관리자의 회원번호는 1번 고정해야함
+		MessageSmpl message=new MessageSmpl(1, mnick, title, content);
+		int result=ms.sendMessage(message);
+		// result 결과에 따른 에러처리(추후 진행)
+		
+		String msg = "요청 승인에 대한 쪽지 전송이 완료 되었습니다.";
+		String loc = "/manager/managerPage.go";
+		
+		model.addAttribute("msg", msg).addAttribute("loc", loc);
+		
+		return "common/msg";
+	}
+	
+	// 기업회원 승인 거절 쪽지 전송
+	@RequestMapping("/message/message.reject")
+	public String rejectMHM(@RequestParam("content") String content, @RequestParam("mnick") String mnick, Model model) {
+		String title="[MHM] 요청해주신 권한이 거절 되었습니다.";
+		System.out.println("MSG사유 : " + content);
+		// 사이트 관리자의 회원번호는 1번 고정해야함
+		MessageSmpl message=new MessageSmpl(1, mnick, title, content);
+		int result=ms.sendMessage(message);
+		// result 결과에 따른 에러처리(추후 진행)
+		String msg = "요청 거부에 대한 쪽지 전송이 완료 되었습니다.";
+		String loc = "/manager/managerPage.go";
+		
+		model.addAttribute("msg", msg).addAttribute("loc", loc);
+		
+		return "common/msg";
+	}
 }

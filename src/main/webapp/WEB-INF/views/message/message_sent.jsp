@@ -28,7 +28,6 @@
 			<li class=" oldstart"><span class="orange"><a href="/popUp.inbox" onfocus="this.blur();">받은 쪽지함</a></span></li>
 			<li class="selected"><span class="orange"><a href="/popUp.sent" onfocus="this.blur();">보낸 쪽지함</a></span></li>
 			<li class=""><span class="orange size3"><a href="/popUp.store" onfocus="this.blur();">쪽지 보관함</a></span></li>
-			<li class=" oldstart"><span class="orange size2"><a href="/popUp.block" onfocus="this.blur();">쪽지 차단 설정</a></span></li>
 		</ul>
 	</dd>
 </dl>
@@ -36,7 +35,7 @@
 <div id="noteMain">
 
 
-<h1 class="note"><strong class="page">　보낸 편지함</strong>입니다.</h1>
+<h1 class="note"><strong class="page">　보낸 쪽지함</strong>입니다.</h1>
 
 
 <div id="noteList">
@@ -53,7 +52,7 @@
 		<table border="0" cellpadding="0" cellspacing="0">
 			<thead>
 			<tr>
-				<th class="chk"><input type="checkbox" id="idx_" name="idx_" onclick="toggleCheck('fmNoteData','idx_',this);" onfocus="this.blur();"/></th>
+				<th class="chk"><input type="checkbox" id="idx_" name="idx_" onfocus="this.blur();"/></th>
 				<th class="meid" style="display:none">쪽지번호</th>
 				<th class="title">제목</th>
 				<th class="nickname">보낸사람</th>
@@ -63,7 +62,7 @@
 			<tbody>
 				<c:forEach var="i" items="${message}">
 					<tr class="read">
-						<td id="chk"><input type="checkbox" id="idx_" class="idx_" name="idx_"/></td>
+						<td id="chk"><input type="checkbox" id="index_" class="index_" name="index_"/></td>
 						<td id="meid" style="display:none">${i.meId}</td>
 						<td><a href="#" onclick="selectDetailSent($(this).parent().siblings('#meid').text());" onfocus="this.blur();">${i.meTitle}</a></td>
 						<td>${i.mNick}</td>
@@ -77,7 +76,7 @@
 	</div>
 
 	<div class="tools">
-		<div id="notePaging"><span class="basetext"><img class="leftarrow" src="http://static.inven.co.kr/image/member/note/icon_arrow_left.gif"> <span class="prevtext">이전</span> <span class="currentpg">1</span> <span class="nexttext">다음</span> <img class="rightarrow" src="http://static.inven.co.kr/image/member/note/icon_arrow_right.gif"></span></div>
+		<div id="notePaging"><span class="basetext"><img class="leftarrow" src="/resources/img/message/leftArrow.gif"> <span class="prevtext">이전</span> <span class="currentpg">1</span> <span class="nexttext">다음</span> <img class="rightarrow" src="/resources/img/message/rightArrow.gif"></span></div>
 		
 	</div>
 </div>
@@ -85,6 +84,20 @@
 
 </div>
 <script>
+
+$("#idx_").click(function(){
+	if($(this).prop("checked")){
+		$("input[name^=index_]").prop('checked', true);
+	}else{
+		$("input[name^=index_]").prop('checked', false);
+	}
+});
+
+$("input[name^=index_]").click(function(){
+	if($("#idx_").prop("checked")){
+		$("#idx_").prop("checked",false);
+	}
+});
 
 function deleteNotes() {
 	var arr=new Array();

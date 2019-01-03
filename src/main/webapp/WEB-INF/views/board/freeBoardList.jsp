@@ -17,7 +17,7 @@
 		<c:import url="/WEB-INF/views/common/header.jsp" />
 
 		<div class="container">
-
+		
 			<div class="col-md-2" align="center">
 				<br><br>
 				<h4>--게시판 목록--</h4>
@@ -40,6 +40,7 @@
 					</div>
 				</div>
 				<div class="container-fluid">
+				
 					<div class="row">
 						<div class="list">
 
@@ -74,17 +75,22 @@
                				           <td><c:out value="${Board.BCount }"/></td>
                 			           <td><c:out value="${Board.BDate}"/></td>
                     				</tr>
-								</c:forEach>									
+								</c:forEach>
+														
 								</tbody>
+								
 							</table>
 							<!-- 페이지 처리 해야됨. -->
-							<c:if test="${not empty member}">
+							
+							<c:out value="${pageBar}" escapeXml="false"/>	
+							<c:if test="${not empty member and member.mtype ne 'C'}">
 							<input type="button" value="글쓰기" id=""	class="btn btn-theme btn-large"
 								onclick="location.href='${pageContext.request.contextPath}/board/boardwrite.do'"
 								style="position: absolute; right: 20px;" /> </c:if>
 
 							<div class="" id=""
 								style="display: flex; align-items: center; justify-content: center;">
+								
 								<form class="search">
 									<input class="seracharea" type="text" />
 									<button class="searchbtn" type="submit">검색</button>
@@ -96,7 +102,7 @@
 			</div>
 			
 		</div>
-
+			
 
 		<c:import url="/WEB-INF/views/common/footer.jsp" />
 	</div>
