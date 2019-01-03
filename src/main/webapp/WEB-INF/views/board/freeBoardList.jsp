@@ -40,7 +40,7 @@
 					</div>
 				</div>
 				<div class="container-fluid">
-				
+				<input type="hidden" name="bCode" value="1">
 					<div class="row">
 						<div class="list">
 
@@ -82,7 +82,8 @@
 							</table>
 							<!-- 페이지 처리 해야됨. -->
 							
-							<c:out value="${pageBar}" escapeXml="false"/>	
+							<c:out value="${pageBar}" escapeXml="false"/>
+							
 							<c:if test="${not empty member and member.mtype ne 'C'}">
 							<input type="button" value="글쓰기" id=""	class="btn btn-theme btn-large"
 								onclick="location.href='${pageContext.request.contextPath}/board/boardwrite.do'"

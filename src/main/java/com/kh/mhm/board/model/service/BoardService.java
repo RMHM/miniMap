@@ -12,7 +12,7 @@ public interface BoardService {
 	static int BOARD_SERVICE_COMPLETE = 1;
 
 	// btype용
-	List<Board> selectBoardList(int btype);
+	List<Board> selectBoardList(int bCode);
 	
 	List<Board> selectBoardList(Board board);	
 	

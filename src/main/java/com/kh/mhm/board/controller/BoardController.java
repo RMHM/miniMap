@@ -41,9 +41,7 @@ public class BoardController {
 	private ComentService comentService;
 	
 	@RequestMapping("/board/boardlist1.do")
-	public String freeboard(
-			@RequestParam(value="cPage", required=false, defaultValue="1")
-			int cPage, Model model) {
+	public String freeboard(@RequestParam(value="cPage", required=false, defaultValue="1") int cPage, Model model, Board board) {
 		int numPerPage = 4;
 		
 		ArrayList<Map<String, String>> list = 
@@ -52,20 +50,22 @@ public class BoardController {
 		int totalContents = boardService.selectBoardTotalContents();
 		
 		String pageBar = Utils.getPageBar(totalContents, cPage, numPerPage, "boardlist1.do");
-		
+		List<Board> list2 = boardService.selectNoticeList(board);
+		System.out.println(pageBar);
 		
 		model.addAttribute("list", list)
 		.addAttribute("totalContents", totalContents)
 		.addAttribute("numPerPage", numPerPage)
-		.addAttribute("pageBar", pageBar);
+		.addAttribute("pageBar", pageBar)
+		.addAttribute("list2", list2);
 		
 		
 		return "board/freeBoardList";
 	}
-/*	@RequestMapping("/board/boardlist1.do")
-	public String freeboard(@RequestParam int btype,@ModelAttribute("board") Board board, Model model) {
+	/*@RequestMapping("/board/boardlist.do")
+	public String freeboard2(@RequestParam int bCode, @ModelAttribute("board") Board board, Model model) {
 		
-		List<Board> list = boardService.selectBoardList(btype);
+		List<Board> list = boardService.selectBoardList(bCode);
 		List<Board> list = boardService.selectBoardList(board);	
 		List<Board> list2 = boardService.selectNoticeList(board);	
 		
@@ -100,11 +100,11 @@ public class BoardController {
 		int result;
 		
 		System.out.println(session.getAttribute("member"));
-		System.out.println(board);
+		
 		System.out.println(req.getParameter("boardcontent"));
 		board.setBContent(req.getParameter("boardcontent"));
 		result = boardService.insertBoard(board);
-		System.out.println(board);
+		
 		String loc = "/board/boardList.do";
 		String msg = "";
 		
@@ -118,7 +118,7 @@ public class BoardController {
 		
 		model.addAttribute("loc", loc)
 		.addAttribute("msg", msg);
-		
+		System.out.println(board);
 		return "common/msg";
 		
 	}
@@ -133,6 +133,7 @@ public class BoardController {
 		addAttribute("clist", clist);
 		
 		System.out.println(BId);
+		System.out.println(boardService.selectOneBoard(BId));
 		System.out.println(model);		
 		/*model.addAttribute("b", boardService.updateOneCount(BId));*/
 		return "board/boardview";
