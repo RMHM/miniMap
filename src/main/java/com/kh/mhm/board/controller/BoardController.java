@@ -25,6 +25,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.kh.mhm.board.model.service.BoardService;
 import com.kh.mhm.board.model.vo.Board;
+import com.kh.mhm.board.model.vo.Fileref;
 import com.kh.mhm.coment.model.service.ComentService;
 import com.kh.mhm.coment.model.vo.Coment;
 import com.kh.mhm.common.util.Utils;
@@ -216,9 +217,37 @@ public class BoardController {
 	//////////////////////////////////
 	// 기업 광고 게시판
 	@RequestMapping("/board/adBoard.go")
-	public String adBoard() {
-		// 기업 게시판 게시물 가져오기
-		return "/board/ad/adBoardList";
+	public ModelAndView adBoard() {
+		ModelAndView mv = new ModelAndView();
+		List<Board> list = null;
+		List<String> thumbnail = null;
+		List<Integer> comment = null;
+		
+		try {
+			// 기업 게시판 게시물 가져오기
+			list = new ArrayList<Board>();
+			thumbnail = new ArrayList<String>();
+			comment = new ArrayList<Integer>();
+			
+			list = boardService.selectBoardList(5);
+			int viewNum = (list.size()<6)?list.size():6;
+			for(int i=0; i<viewNum; i++) {
+				thumbnail.add(boardService.selectThumbnailImg(list.get(i).getBId()));
+				comment.add(boardService.selectCommentCnt(list.get(i).getBId()));
+			}
+			
+			mv.addObject("blist", list);
+			mv.addObject("thumb", thumbnail);
+			mv.addObject("comment", comment);
+			mv.setViewName("board/ad/adBoardList");
+		} catch(Exception e) {
+			mv.addObject("msg", "게시물 불러오기를 실패하였습니다.");
+			mv.addObject("loc", "/");
+			mv.setViewName("common/msg");
+			e.getStackTrace();
+		}
+		
+		return mv;
 	}
 	
 	@RequestMapping("/board/adBoardWrite.go")
@@ -254,19 +283,25 @@ public class BoardController {
 		
 		// 게시글 등록
 		try {
-			// boardService.insertImgBoard(b);
-			
+			boardService.insertImgBoard(b);
+			System.out.println("이미지 게시글 등록!");
 			// 이미지 파일이 존재하면 등록
 			if(imgList.size()>0) {
 				for(int i=0; i<imgList.size(); i++) {
-					System.out.println(imgList.get(i));
+					Fileref fref = new Fileref();
+					fref.setbId(b.getBId());
+					fref.setfType("I");
+					fref.setOrigin_Name(imgList.get(i));
+					fref.setChange_Name(imgList.get(i));
+					boardService.insertImgFile(fref);
 				}
 			}
+			mv.addObject("msg", "게시물 등록을 성공하였습니다!");
 		} catch(Exception e) {
 			e.printStackTrace();
+			mv.addObject("msg", "게시물 등록에 실패하였습니다.");
 		}
 		
-		mv.addObject("msg", "게시물 등록을 성공하였습니다!");
 		mv.addObject("loc", "/board/adBoard.go");
 		mv.setViewName("common/msg");
 		
@@ -297,7 +332,7 @@ public class BoardController {
 			}
 			
 			long fileSize = mfile.getSize();
-			long maxSize = 1 * 1024 * 1024; // 1mb
+			long maxSize = 5 * 1024 * 1024; // 5mb
 			if(fileSize>maxSize) {
 				// 파일 크기 제한
 				fileInfo.put("result", -2);

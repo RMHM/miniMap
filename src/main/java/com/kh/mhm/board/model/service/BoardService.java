@@ -37,4 +37,10 @@ public interface BoardService {
 	List<Map<String, String>> selectBoardList2(int cPage, int numPerPage);
   
   int insertImgBoard(Board board);
+	
+	int insertImgFile(Fileref fref);
+	
+	String selectThumbnailImg(int bid);
+	
+	int selectCommentCnt(int bid);
 }
