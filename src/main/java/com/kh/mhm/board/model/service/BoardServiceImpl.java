@@ -105,4 +105,19 @@ public class BoardServiceImpl implements BoardService {
 		return boardDao.insertImgBoard(board);
 	}
 
+	@Override
+	public int insertImgFile(Fileref fref) {
+		return boardDao.insertImgFile(fref);
+	}
+
+	@Override
+	public String selectThumbnailImg(int bid) {
+		return boardDao.selectThumbnailImg(bid);
+	}
+
+	@Override
+	public int selectCommentCnt(int bid) {
+		return boardDao.selectCommentCnt(bid);
+	}
+
 }

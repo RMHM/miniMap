@@ -38,4 +38,9 @@ public interface BoardService {
 	
 	int insertImgBoard(Board board);
 	
+	int insertImgFile(Fileref fref);
+	
+	String selectThumbnailImg(int bid);
+	
+	int selectCommentCnt(int bid);
 }

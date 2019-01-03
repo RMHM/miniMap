@@ -73,11 +73,24 @@
 	</update>
 	
 	<insert id="insertImgBaord" parameterType="Board">
-		insert into board values(seq_bid.nextval, #{mno}, seq_bno_5, 5, #{bTitle}, #{bContent}, default, default, default, default, default, default, default)
+		INSERT INTO BOARD(BID, MNO, BNO, BCODE, BTITLE, BCONTENT, hasfile)
+		VALUES (SEQ_BID.NEXTVAL, #{mNo}, SEQ_BNO_5.NEXTVAL, 5, #{bTitle}, #{bContent}, #{hasFile})
+		<!-- 전달한 board객체의 bNo 프로퍼티에 결과값을 담는다. -->
+		<selectKey keyProperty="bId" resultType="_int" order="AFTER">
+			SELECT SEQ_BID.CURRVAL FROM DUAL
+		</selectKey>
 	</insert>
 	
-	<select id="selectImgBaord" parameterType="Board">
-		
+	<insert id="insertImgFile" parameterType="Fileref">
+		insert into fileref values(seq_fid.nextval, #{bId}, #{fType}, #{origin_Name}, #{change_Name}, default)
+	</insert>
+	
+	<select id="selectThumbnailImg" parameterType="_int" resultType="string">
+		select change_name from (select rownum rnum, sub.* from (select * from fileref where bid = #{bid} order by fid asc) sub) where rnum = 1
+	</select>
+	
+	<select id="selectCommentCnt" parameterType="_int" resultType="_int">
+		select count(*) from coment where bid = #{bid} and rflag = 'N' and delflag='N'
 	</select>
 	
 </mapper>
