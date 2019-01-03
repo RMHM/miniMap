@@ -26,13 +26,13 @@ public class ManagerServiceImpl implements ManagerService {
 	}
 
 	@Override
-	public int grantAuthority(int mno) {
-		return mnDao.grantAuthority(mno);
+	public int grantAuthority(String mnick) {
+		return mnDao.grantAuthority(mnick);
 	}
 
 	@Override
-	public int refuseAuthority(int mno) {
-		return mnDao.refuseAuthority(mno);
+	public int refuseAuthority(String mnick) {
+		return mnDao.refuseAuthority(mnick);
 	}
 	
 	@Override

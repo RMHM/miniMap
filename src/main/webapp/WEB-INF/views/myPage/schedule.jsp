@@ -22,7 +22,7 @@
 <script>
 
 	$(document).ready(function() {
-		console.log("${temper}");
+    /* 	console.log("${temper}"); */
 		var today = new Date();
 		/* console.log(today); */
 	  var event = [
@@ -38,7 +38,6 @@
  	</c:forEach>
  	];
 	/*   console.log(event); */
-	
 		$('#calendar').fullCalendar({
 			header : {
 				left : 'prev,next today',
@@ -54,8 +53,7 @@
 		          });
 		        }, 
 		         eventAfterRender: function(event, element, view) { 
-	    	
-					var new_description ='<a href="#">' 
+                var new_description ='<a href="#">' 
 		            + '<strong>후기작성</strong>' + '</a>' 
 		            
 					if(event.end==null){
@@ -63,11 +61,10 @@
 		         	}else{
 		         		if(today>event.end)element.append(new_description);
 		         	}
-			
+          
 		        } , 
 		        eventClick: function(calEvent, jsEvent, view) {
 		
-			/* 	console.log(calEvent.end); */
 		    	if(calEvent.end==null){
 		    		calEvent.end=calEvent.start
 		    	}
@@ -116,10 +113,67 @@
 			events :event
 		});
 	
-	var trS = $('thead tr td');
-	 var tdS = $('#calendar').find('td[data-date]');
+	$('.fc-prev-button, .fc-next-button').click(function() {	
+		var date = $("#calendar").fullCalendar("getDate");
+		var month = new Date(date).getMonth()+1;
+		$.ajax({
+			url : "${pageContext.request.contextPath}/myPage/temper.do",
+			async : false,
+			data : {
+				num : month,
+			},
+			dataType : "json",
+			success : function(data) {
+				var arr = new Array();
+				for(var i = 0; i<data.length;i++){
+					arr[i] = data[i].low + "/" + data[i].high;
+				}
+				/* console.log(arr.length); */
+				
+				
+				/* for(var j = 0; j <arr.length ; j++){
+					console.log(arr.)
+				} */
+				/* var mon = data[0].day.substr(0,2);
+				 */
+				temperarr(month,arr); 
+			},
+			error : function(e) {
+				console.log("error" + data);
+				alert("ajax 실패");
 
-	 var arr = "${weather}";
+			}
+			
+		});
+		
+	});
+	
+	/* $('.fc-next-button').click(function() {
+		 console.log(this);
+	}); */
+	function temperarr(month,arr){
+	/* 	console.log("길이  : " + arr.length); */
+	/* console.log("Asd");
+	console.log(arr);
+	console.log(mon); */
+	var arrdate = new Date();
+	arrdate.setMonth(month-1);
+	
+		 for(var i =0; i < arr.length; i++){
+			arrdate.setDate(i+1);
+			
+			var re = arrdate.toISOString().slice(0, 10);
+			/* console.log(re); */
+			var tem = arr[i];
+			 
+			 $('#calendar').find('td[data-date='+re+']').prepend(tem);
+		} 
+		
+	}
+	var trS = $('thead tr td');
+	var tdS = $('#calendar').find('td[data-date]');
+
+	var arr = "${weather}";
 	console.log();
 	var result = arr.split(",");
 	
@@ -129,12 +183,31 @@
 	console.log(date.toISOString().slice(0, 10));
  	    */
 	 
-	
+	var today = new Date();
+ 	var r = new Array();
+ 	<c:forEach items="${temper}" var = "t">
+ 	var json = new Object();
+ 	json.q = "${temper.high}";
+ 	json.w = "${temper.low}";
+ 	r.push(json);
+ 	
+ 	</c:forEach>
+ 	console.log(r);
+ 	    /* console.log("${temper}"); */
+ /* 	console.log("${temper}");
+ 	var a = new Array("${temper}");
+ 	console.log(a);
+ 	console.log(a.length);
+ 	console.log(a[0]);
+ 	 */
+ 	for(var i =0; i<"${temper.size()}" ; i++){
+ 		
+ 	}
+ 	
 	for(var i = 1; i<result.length; i++){
 		var date = new Date(); 
 		date.setDate(date.getDate()+(i+2));
 		var re = (date.toISOString().slice(0, 10));
-
 		var we = result[i]; 
 		 var sr = "";
 			switch(we){
@@ -147,28 +220,20 @@
 			case "구름많고 ": sr = "<img src='/resources/img/weather/rain.PNG' width='10px' height='10px'>"; break;
 			default   :  sr = "<img src='/resources/img/weather/rain.PNG' width='10px' height='10px'>";
 			}
-			
-			
-			
-			
 			$('#calendar').find('td[data-date='+re+']').prepend(sr);
-			
-			
-			/* console.log(we); */
 	 }
-	 
-
-
- 	 /* console.log(trS[1].getAttribute('data-date')); */
-	
- 	/* console.log($(trS).dataset.date()); */ 
-	 for(var i =1; i<trS.length ; i++){
+ 	    
+ 	    
+ 	    
+ 	    
+ 	 
+	/*  for(var i =1; i<trS.length ; i++){
 		/* 
-			console.log(trS[i].getAttribute('data-date')); */
+			console.log(trS[i].getAttribute('data-date')); 
 			if(trS[i].getAttribute('data-date')=='2019-01-04'){
-			/* trS[i].prepend("<img src='#'>"); */
+			/* trS[i].prepend("<img src='#'>"); 
 			}
-	}  
+	}   */
 	 
 	
 	
