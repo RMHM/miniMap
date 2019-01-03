@@ -34,3 +34,10 @@ hs_err_pid*
 *.kml
 *.geojson
 *.json
+
+# img
+*.jsp
+*.png
+*.bmp
+*.jpeg
+*.gif

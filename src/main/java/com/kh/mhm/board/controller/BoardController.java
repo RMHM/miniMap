@@ -15,16 +15,17 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.kh.mhm.board.model.service.BoardService;
 import com.kh.mhm.board.model.vo.Board;
+import com.kh.mhm.board.model.vo.Fileref;
 import com.kh.mhm.coment.model.service.ComentService;
 import com.kh.mhm.coment.model.vo.Coment;
 import com.kh.mhm.common.util.Utils;
@@ -48,8 +49,8 @@ public class BoardController {
 				new ArrayList<Map<String, String>>(boardService.selectBoardList2(cPage, numPerPage));
 		
 		int totalContents = boardService.selectBoardTotalContents();
-		
-		String pageBar = Utils.getPageBar(totalContents, cPage, numPerPage, "boardlist1.do");
+    
+    String pageBar = Utils.getPageBar(totalContents, cPage, numPerPage, "boardlist1.do");
 		List<Board> list2 = boardService.selectNoticeList(board);
 		System.out.println(pageBar);
 		
@@ -62,7 +63,7 @@ public class BoardController {
 		
 		return "board/freeBoardList";
 	}
-	/*@RequestMapping("/board/boardlist.do")
+   /*@RequestMapping("/board/boardlist.do")
 	public String freeboard2(@RequestParam int bCode, @ModelAttribute("board") Board board, Model model) {
 		
 		List<Board> list = boardService.selectBoardList(bCode);
@@ -217,9 +218,37 @@ public class BoardController {
 	//////////////////////////////////
 	// 기업 광고 게시판
 	@RequestMapping("/board/adBoard.go")
-	public String adBoard() {
-		// 기업 게시판 게시물 가져오기
-		return "/board/ad/adBoardList";
+	public ModelAndView adBoard() {
+		ModelAndView mv = new ModelAndView();
+		List<Board> list = null;
+		List<String> thumbnail = null;
+		List<Integer> comment = null;
+		
+		try {
+			// 기업 게시판 게시물 가져오기
+			list = new ArrayList<Board>();
+			thumbnail = new ArrayList<String>();
+			comment = new ArrayList<Integer>();
+			
+			list = boardService.selectBoardList(5);
+			int viewNum = (list.size()<6)?list.size():6;
+			for(int i=0; i<viewNum; i++) {
+				thumbnail.add(boardService.selectThumbnailImg(list.get(i).getBId()));
+				comment.add(boardService.selectCommentCnt(list.get(i).getBId()));
+			}
+			
+			mv.addObject("blist", list);
+			mv.addObject("thumb", thumbnail);
+			mv.addObject("comment", comment);
+			mv.setViewName("board/ad/adBoardList");
+		} catch(Exception e) {
+			mv.addObject("msg", "게시물 불러오기를 실패하였습니다.");
+			mv.addObject("loc", "/");
+			mv.setViewName("common/msg");
+			e.getStackTrace();
+		}
+		
+		return mv;
 	}
 	
 	@RequestMapping("/board/adBoardWrite.go")
@@ -227,21 +256,61 @@ public class BoardController {
 		return "/board/ad/adBoardWrite";
 	}
 	
-	@RequestMapping("/board/adBaordAdd.do")
-	public String insertAdBoard(Board b, Model model, HttpSession session) {
+  // 이미지 포함 게시물 등록
+	@RequestMapping("/board/imgBaordAdd.do")
+	public ModelAndView insertImgBoard(Board b, Model model, HttpSession session) {
 		
+		ModelAndView mv = new ModelAndView();
 		Member m = (Member)session.getAttribute("member");
 		
 		System.out.println("광고 게시글");
 		System.out.println(m);
 		System.out.println(b);
 		
+		List<String> imgList = new ArrayList<String>();
+		String str = "upload/";
+		int start = 0;
+		while(true) {
+			// 글 내용에서 이미지 이름 파싱
+			int begin = b.getBContent().indexOf(str, start) + str.length();
+			int end = b.getBContent().indexOf(34, begin);
+			if(start>end) break;
+			imgList.add(b.getBContent().substring(begin, end));
+			start = end;
+		}
 		
-		return "/board/ad/adBoardList";
+		if(imgList.size()>0) b.setHasFile("Y");
+		else b.setHasFile("N");
+		
+		// 게시글 등록
+		try {
+			boardService.insertImgBoard(b);
+			System.out.println("이미지 게시글 등록!");
+			// 이미지 파일이 존재하면 등록
+			if(imgList.size()>0) {
+				for(int i=0; i<imgList.size(); i++) {
+					Fileref fref = new Fileref();
+					fref.setbId(b.getBId());
+					fref.setfType("I");
+					fref.setOrigin_Name(imgList.get(i));
+					fref.setChange_Name(imgList.get(i));
+					boardService.insertImgFile(fref);
+				}
+			}
+			mv.addObject("msg", "게시물 등록을 성공하였습니다!");
+		} catch(Exception e) {
+			e.printStackTrace();
+			mv.addObject("msg", "게시물 등록에 실패하였습니다.");
+		}
+		
+		mv.addObject("loc", "/board/adBoard.go");
+		mv.setViewName("common/msg");
+		
+		return mv;
 	}
 	
 	// 이미지 업로드
-	@RequestMapping(value = "/board/imageUpload.do", method = RequestMethod.POST)
+	@RequestMapping(value = "/board/imageUpload.do", method = {RequestMethod.POST})
 	@ResponseBody
 	public Map<String, Object> imageUpload(@RequestParam("image_file") MultipartFile mfile, HttpSession session) {
 		Map<String, Object> fileInfo = null;
@@ -264,7 +333,7 @@ public class BoardController {
 			}
 			
 			long fileSize = mfile.getSize();
-			long maxSize = 1 * 1024 * 1024; // 1mb
+			long maxSize = 5 * 1024 * 1024; // 5mb
 			if(fileSize>maxSize) {
 				// 파일 크기 제한
 				fileInfo.put("result", -2);
@@ -272,7 +341,7 @@ public class BoardController {
 			}
 			
 			// 저장경로
-			String defaultPath = session.getServletContext().getRealPath("/resources/img/upload");
+      String defaultPath = session.getServletContext().getRealPath("/resources/img/upload/");
 			
 			// 저장경로 지정
 			File file = new File(defaultPath);
@@ -292,7 +361,7 @@ public class BoardController {
 				System.out.println(e.getMessage());
 			}
 			
-			String imgUrl = session.getServletContext().getContextPath() + rename;
+      String imgUrl = session.getServletContext().getContextPath() + "/resources/img/upload/" + rename;
 			fileInfo.put("imageurl", imgUrl);		// 상대파일경로
 			fileInfo.put("filename", rename);		// 파일명
 			fileInfo.put("filesize", fileSize);		// 파일 사이즈

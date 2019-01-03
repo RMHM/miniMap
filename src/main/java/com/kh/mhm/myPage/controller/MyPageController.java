@@ -34,6 +34,8 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.kh.mhm.api.AfterWeather;
+import com.kh.mhm.api.Temperatures;
 import com.kh.mhm.board.model.service.BoardService;
 import com.kh.mhm.board.model.vo.Board;
 import com.kh.mhm.common.Policy;
@@ -60,8 +62,7 @@ public class MyPageController {
 
 	/* 일정 추가 */
 	@RequestMapping("/myPage/insertSchedule.do")
-	public String insertSchedule(Member member, @RequestParam String startDateT, @RequestParam String endDateT,
-			Schedule schedule, Model model) {
+	public String insertSchedule(Member member, @RequestParam String startDateT, @RequestParam String endDateT, Schedule schedule, Model model) throws IOException {
 		schedule.setStart_Date(Date.valueOf(startDateT));
 		schedule.setEnd_Date(Date.valueOf(endDateT));
 		schedule.setMNo(member.getMno());
@@ -74,7 +75,7 @@ public class MyPageController {
 
 	/* 일정 삭제 */
 	@RequestMapping("/myPage/deleteSchedule.do")
-	public String deleteSchedule(Member member, @RequestParam int sId, Model model) {
+  public String deleteSchedule(Member member, @RequestParam int sId, Model model) throws IOException {
 		System.out.println("delete 실행");
 		Schedule s = new Schedule();
 		s.setSId(sId);
@@ -87,8 +88,7 @@ public class MyPageController {
 
 	/* 일정 수정 */
 	@RequestMapping("/myPage/updateSchedule.do")
-	public String updateSchedule(Member member, @RequestParam String startDateT, @RequestParam String endDateT,
-			Schedule schedule, Model model) {
+	public String updateSchedule(Member member, @RequestParam String startDateT, @RequestParam String endDateT, Schedule schedule, Model model) throws IOException {
 		System.out.println("update실행");
 		schedule.setStart_Date(Date.valueOf(startDateT));
 		schedule.setEnd_Date(Date.valueOf(endDateT));
@@ -101,7 +101,7 @@ public class MyPageController {
 
 	/* 총 일정 확인 */
 	@RequestMapping("/myPage/selectSchedule.do")
-	public String selectSchedule(Member member, Model model) {
+	public String selectSchedule(Member member, Model model) throws IOException {
 		Map<String, Object> map = new HashMap<String, Object>();
 		System.out.println("insert 이후");
 		model.addAttribute("list", mps.selectSchedule(member.getMno()));
@@ -127,10 +127,29 @@ public class MyPageController {
 			arr.put("content", result.get("SCONTENT"));
 			list.add(arr);
 		}
+		AfterWeather a = new AfterWeather();
+		Temperatures t = new Temperatures();
+		
+		java.util.Date today = new java.util.Date();
+		int num = today.getMonth()+1;
+		System.out.println(num);
 		model.addAttribute("list", list);
-
+    model.addAttribute("temper",t.temperature(num));
+		model.addAttribute("weather",a.weather());
+    
 		return "myPage/schedule";
 	}
+	
+	/*월 평균 기온*/
+	@RequestMapping(value="/myPage/temper.do")
+	@ResponseBody
+	public ArrayList temperature(@RequestParam int num) throws IOException {
+		
+		Temperatures t = new Temperatures();
+		System.out.println(t.temperature(num));
+		return t.temperature(num);
+	}
+	
 
 	/* myPagemain 경로 */
 	@RequestMapping("/myPage/myPageMain.do")
@@ -298,12 +317,15 @@ public class MyPageController {
 		int numPerPage = 10;
 
 		int totalContents = mps.selectBoardTotalContents(no);
-
+    
+    System.out.println(totalContents);
+    
 		List<Map<String, Object>> list = new ArrayList<Map<String, Object>>(
 				mps.selectMyBoardList(cPage, numPerPage, no));
 		String pageBar = Utils.getPageBar(totalContents, cPage, numPerPage, "myBoardList.do");
 		model.addAttribute("list", list).addAttribute("totalContents", totalContents)
 				.addAttribute("numPerPage", numPerPage).addAttribute("pageBar", pageBar);
+    System.out.println(pageBar);
 		/*
 		 * System.out.println(list.get(0)); System.out.println(list.size());
 		 */
@@ -360,5 +382,24 @@ public class MyPageController {
 
 		return requestViewPage(member, model);
 	}
+	
+	
+/*	@RequestMapping("/myPage/testt.do")
+	public String test1() {
+		
+		return "myPage/test";
+	}
+	
+	@RequestMapping(value = "/myPage/test.do")
+	@ResponseBody
+	public Map<String,Object> test() {
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("msg", "asd");
+		return map;
+
+	}*/
+	
+	
+	
 
 }

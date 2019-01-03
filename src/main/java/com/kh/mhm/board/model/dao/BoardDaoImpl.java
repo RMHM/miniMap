@@ -111,11 +111,24 @@ public class BoardDaoImpl implements BoardDao {
 		return sqlSession.selectList("board.selectBoardList",null,rowBounds);
 	}
 
+	@Override
+	public int insertImgBoard(Board board) {
+		return sqlSession.insert("board.insertImgBaord", board);
+	}
 
+	@Override
+	public int insertImgFile(Fileref fref) {
+		return sqlSession.insert("board.insertImgFile", fref);
+	}
 
+	@Override
+	public String selectThumbnailImg(int bid) {
+		return sqlSession.selectOne("board.selectThumbnailImg", bid);
+	}
 
-
-
-	
+	@Override
+	public int selectCommentCnt(int bid) {
+		return sqlSession.selectOne("board.selectCommentCnt", bid);
+	}
 
 }

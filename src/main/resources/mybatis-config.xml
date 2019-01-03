@@ -16,6 +16,7 @@
 	    <typeAlias type="com.kh.mhm.myPage.model.vo.Authority" alias="Authority"/>
 	    <typeAlias type="com.kh.mhm.message.model.vo.Message" alias="Message"/>
 		<typeAlias type="com.kh.mhm.board.model.vo.Board" alias="Board"/>
+		<typeAlias type="com.kh.mhm.board.model.vo.Fileref" alias="Fileref"/>
 		<typeAlias type="com.kh.mhm.member.model.vo.CompanyMember" alias="CompanyMember"/>
 	    <typeAlias type="com.kh.mhm.member.model.vo.BlackList" alias="BlackList" />
 		<typeAlias type="com.kh.mhm.timeLine.model.vo.TimeLine" alias="TimeLine"/>
