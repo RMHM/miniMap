@@ -6,6 +6,7 @@ public class Authority {
 	private int aId			;//	고유번호
 	private int mNo			;//	회원번호
 	private String mName		;//	회원이름
+	private String mNick		;// 닉네임
 	private Date request_date	;//	요청날짜
 	private String address		;//	주소
 	private String aContent		;//	내용
@@ -123,9 +124,15 @@ public class Authority {
 	}
 	@Override
 	public String toString() {
-		return "Authority [aId=" + aId + ", mNo=" + mNo + ", mName=" + mName + ", request_date=" + request_date
+		return "Authority [aId=" + aId + ", mNo=" + mNo + ", mName=" + mName + ", mNick=" + mNick + ", request_date=" + request_date
 				+ ", address=" + address + ", aContent=" + aContent + ", aCode=" + aCode + ", aTake=" + aTake
 				+ ", grant_date=" + grant_date + ", delflag=" + delflag + "]";
+	}
+	public String getMNick() {
+		return mNick;
+	}
+	public void setMNick(String mNick) {
+		this.mNick = mNick;
 	}
 	
 }
