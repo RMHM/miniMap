@@ -1,8 +1,10 @@
 package com.kh.mhm.member.controller;
 
-import java.sql.Date;
+import java.io.File;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.regex.Matcher;
@@ -14,14 +16,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.kh.mhm.common.SendMail;
@@ -237,11 +239,6 @@ public class MemberController {
 		return "common/msg";
 	}
   
-  	@RequestMapping("/member/checkNick.do")
-  	public @ResponseBody String checkNick(@ModelAttribute("member") Member member, Model model) throws Exception {
-  		int result = ms.checkNick(member.getMnick());
-  		return String.valueOf(result);
-  	}
 
 	@RequestMapping("/member/memberView.do")
 	public String memberView(@RequestParam String mid) {
@@ -257,16 +254,78 @@ public class MemberController {
 
 		boolean isUsable = ms.checkIdDuplicate(mid) == 0 ? true : false;
 
-		map.put("isUsable", isUsable);
+		map.put("isUsable", isUsable);	
 
 		return map;
 	}
-
-	@RequestMapping("/member/insertFile.do")
-	public void insertFile() {
-
-	}
-
+	
+	/*
+	@RequestMapping(value = "/member/fileSave")
+	@ResponseBody
+	public Object fileSave(MultipartHttpServletRequest multipartRequest) {
+		
+		List<HashMap> fileArrayList = new ArrayList<HashMap>();
+		HashMap fileHashMap;
+		
+		String filePath = "/resources/img/profiles/"; // 파일 저장 경로, 설정 파일로 따로 관리
+		
+		File dir = new File(filePath); // 파일 저장 경로 확인, 없으면 만듦 
+		if (!dir.exists()) {
+			dir.mkdir();
+		}
+		
+		Iterator<String> itr = multipartRequest.getFileNames(); // 파일들을 Iterator에 넣는다.
+		
+		while (itr.hasNext()) { // 파일을 하나씩 불러온다.
+			MultipartFile mpf = multipartRequest.getFile(itr.next());
+			
+			fileHashMap = new HashMap();
+			
+			String originalFilename = mpf.getOriginalFilename(); // 파일명
+			
+			String fileFullPath = filePath + "/" + originalFilename; // 파일 전체 경로
+			
+			try {
+				
+				mpf.transferTo(new File(fileFullPath)); // 파일 저장
+				
+				fileHashMap.put("originalFilename", originalFilename);
+				fileHashMap.put("fileFullPath", fileFullPath);
+				
+				fileArrayList.add(fileHashMap);
+				
+			} catch (Exception e) {
+				System.out.println("postTemFile_ERROR =======> "+ fileFullPath);
+				e.printStackTrace();
+			}
+		}
+		
+		Map<String, Object> retVal = new HashMap<String, Object>(); //응답값 셋팅
+		 
+	    try{
+	        retVal.put("fileInfoList", fileArrayList);  
+	        retVal.put("code", "OK");
+	    }catch(Exception e){
+	        retVal.put("code", "FAIL");
+	    }
+	
+	 
+	    return retVal;
+	
+		} */
+		
+		
+		/*
+	@ResponseBody
+	@RequestMapping(value = "/member/nickCheck")
+	public int nickCheck(CommandMap commandMap) throws Exception {
+		
+		int checkData = ms.nickCheck(commandMap.getMap());
+	
+		return checkData;
+	} */
+	
+	
 	/*
 	 * @RequestMapping("/member/insertFileEnd.do") public String insertMember(Member
 	 * member, Model model, HttpSession session,
@@ -294,5 +353,4 @@ public class MemberController {
 	 * 
 	 * // } } }
 	 */
-
 }

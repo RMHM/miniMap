@@ -53,9 +53,8 @@ public class MemberDaoImpl implements MemberDao {
 	}
 
 	@Override
-  public int checkNick(HashMap<String, Object> hmap) {
-		sst.selectOne("member.checkNick", hmap);
-		return (Integer) hmap.get("result");
-  }
+	public Member nickCheck(String mnick) {
+		return sst.selectOne("member.nickCheck", mnick);
+	}
 
 }
