@@ -129,12 +129,27 @@ public class MyPageController {
 		}
 		AfterWeather a = new AfterWeather();
 		Temperatures t = new Temperatures();
+		
+		java.util.Date today = new java.util.Date();
+		int num = today.getMonth()+1;
+		System.out.println(num);
 		model.addAttribute("list", list);
-    model.addAttribute("temper",t.temperature());
+    model.addAttribute("temper",t.temperature(num));
 		model.addAttribute("weather",a.weather());
     
 		return "myPage/schedule";
 	}
+	
+	/*월 평균 기온*/
+	@RequestMapping(value="/myPage/temper.do")
+	@ResponseBody
+	public ArrayList temperature(@RequestParam int num) throws IOException {
+		
+		Temperatures t = new Temperatures();
+		System.out.println(t.temperature(num));
+		return t.temperature(num);
+	}
+	
 
 	/* myPagemain 경로 */
 	@RequestMapping("/myPage/myPageMain.do")
@@ -369,7 +384,7 @@ public class MyPageController {
 	}
 	
 	
-	@RequestMapping("/myPage/testt.do")
+/*	@RequestMapping("/myPage/testt.do")
 	public String test1() {
 		
 		return "myPage/test";
@@ -382,7 +397,7 @@ public class MyPageController {
 		map.put("msg", "asd");
 		return map;
 
-	}
+	}*/
 	
 	
 	
