@@ -6,7 +6,7 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <div class="col-md-2" align="center">
 	
-
+		<!-- <a href="/myPage/testt.do">test</a><br/> -->
 		<a href="#">쪽지</a><br/>
 		<a href="/myPage/myPageMain.do">정보수정</a><br/>
 		<a href="/myPage/selectSchedule.do">일정관리</a><br/>
