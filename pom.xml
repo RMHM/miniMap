@@ -233,6 +233,12 @@
 		</dependency>
 
 		<!-- file upload lib -->
+		<!-- 이미지 썸네일 생성 라이브러리-->
+		<dependency>
+			<groupId>org.imgscalr</groupId>
+			<artifactId>imgscalr-lib</artifactId>
+			<version>4.2</version>
+		</dependency>
 		<!-- https://mvnrepository.com/artifact/commons-fileupload/commons-fileupload -->
 		<dependency>
 			<groupId>commons-fileupload</groupId>

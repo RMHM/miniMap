@@ -1,4 +1,4 @@
-
+// managerPage 용
 	var mtype = "m";
 	var num = 1;
 
@@ -135,7 +135,7 @@ $('#tabs > li a').click(function(){
 					$tdAuthority = $('<td>').text(data[i].aname.substr(0,4));
 				} else if(data[i].reqDate != null && data[i].atake == "N" && data[i].delflag == "N") {
 					$tdAuthority = $('<td>').text(data[i].aname.substr(0,4));
-					$tdGrantDate = $('<td name="aname">').html("<button name='grantBtn'>요청확인</button>") 
+					$tdGrantDate = $('<td name="aname">').html("<button name='requestBtn'>요청확인</button>") 
 				} else if(data[i].reqDate == null) {
 					$tdAuthority = $('<td>').text("권한 없음");
 					$tdGrantDate = $('<td>').text("-");
@@ -180,12 +180,18 @@ $('#tabs > li a').click(function(){
 					var $tdDropDate = $('<td>').text("탈퇴");
 				}
 				
-				var $tdEndDate 
-				= $('<td>').text(moment(new Date(data[i].endDate)).format('YYYY-MM-DD'));
+				var today = moment(new Date()).format('YYYY-MM-DD');
+				var endDate = moment(new Date(data[i].endDate)).format('YYYY-MM-DD');
+				
+				var $tdEndDate = $('<td>').text(endDate);
 			
 				var $tdReason = $('<td>').text(data[i].reason);
 				
-				var $tdClear = $('<td>').html('<button name="clearBlack">해제</button>');
+				if(endDate > today){
+					var $tdClear = $('<td>').html('<button name="clearBlackBtn">해제</button>');
+				} else {
+					var $tdClear = $('<td>').text('해제됨');
+				}
 				
 				$trBoard.append($tdMno).append($tdMid).append($tdMname).append($tdEmail)
 				.append($tdGender).append($tdAge).append($tdDropDate).append($tdEndDate)
@@ -196,12 +202,12 @@ $('#tabs > li a').click(function(){
 		
 		}
 		
-		$('button[name="grantBtn"]').click(function(){
+		$('button[name="requestBtn"]').click(function(){
 			 var mno = $(this).parent().siblings().eq(0).text();
 			 window.open("grantPermission.go?mno="+mno, "승인 페이지", "width=600, height=600");
 		});
 		
-		$('button[name="clearBlack"]').click(function(){
+		$('button[name="clearBlackBtn"]').click(function(){
 			var mno = $(this).parent().siblings().eq(0).text();
 			window.open("selectBlackList.go?mno="+mno, "블랙리스트 해제", "width=600, height=600");
 		});
@@ -222,7 +228,7 @@ $('#tabs > li a').click(function(){
   })
 })
 
-$('#searchBtn').click(function(){
+$('#search').click(function(){
    
    var keyword = $('#keyword').val()
    

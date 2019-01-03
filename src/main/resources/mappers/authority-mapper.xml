@@ -13,18 +13,19 @@
 	</insert>
 	
 	<select id="selectRequest" parameterType="_int" resultType="Authority">
-		select * from authority
+		select mno, mname, (select mnick from member m where m.mno = a.mno) mnick, address, acontent, acode, atake, grant_date,delflag, request_date
+		from authority a
 		where mno = #{mno} and grant_date is null
 	</select>
 	
-	<update id="grantAuthority" parameterType="_int">
-		update authority set atake = 'Y', grant_date = sysdate
-		where mno = #{mno}
+	<update id="grantAuthority" parameterType="string">
+		update authority a set atake = 'Y', grant_date = sysdate
+		where mno = (select mno from member where mnick = #{mnick})
 	</update>
 	
-	<update id="refuseAuthority" parameterType="_int">
+	<update id="refuseAuthority" parameterType="string">
 		update authority set delflag = 'Y'
-		where mno = #{mno}
+		where mno = (select mno from member where mnick = #{mnick})
 	</update>
 	
 </mapper>

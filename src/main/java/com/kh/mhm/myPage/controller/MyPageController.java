@@ -62,8 +62,7 @@ public class MyPageController {
 
 	/* 일정 추가 */
 	@RequestMapping("/myPage/insertSchedule.do")
-	public String insertSchedule(Member member, @RequestParam String startDateT, @RequestParam String endDateT,
-			Schedule schedule, Model model) throws IOException {
+	public String insertSchedule(Member member, @RequestParam String startDateT, @RequestParam String endDateT, Schedule schedule, Model model) throws IOException {
 		schedule.setStart_Date(Date.valueOf(startDateT));
 		schedule.setEnd_Date(Date.valueOf(endDateT));
 		schedule.setMNo(member.getMno());
@@ -76,7 +75,7 @@ public class MyPageController {
 
 	/* 일정 삭제 */
 	@RequestMapping("/myPage/deleteSchedule.do")
-	public String deleteSchedule(Member member, @RequestParam int sId, Model model) throws IOException {
+  public String deleteSchedule(Member member, @RequestParam int sId, Model model) throws IOException {
 		System.out.println("delete 실행");
 		Schedule s = new Schedule();
 		s.setSId(sId);
@@ -89,8 +88,7 @@ public class MyPageController {
 
 	/* 일정 수정 */
 	@RequestMapping("/myPage/updateSchedule.do")
-	public String updateSchedule(Member member, @RequestParam String startDateT, @RequestParam String endDateT,
-			Schedule schedule, Model model) throws IOException {
+	public String updateSchedule(Member member, @RequestParam String startDateT, @RequestParam String endDateT, Schedule schedule, Model model) throws IOException {
 		System.out.println("update실행");
 		schedule.setStart_Date(Date.valueOf(startDateT));
 		schedule.setEnd_Date(Date.valueOf(endDateT));
@@ -136,12 +134,9 @@ public class MyPageController {
 		int num = today.getMonth()+1;
 		System.out.println(num);
 		model.addAttribute("list", list);
-		
-		
-		
-		model.addAttribute("temper",t.temperature(num));
+    model.addAttribute("temper",t.temperature(num));
 		model.addAttribute("weather",a.weather());
-		
+    
 		return "myPage/schedule";
 	}
 	
@@ -322,14 +317,15 @@ public class MyPageController {
 		int numPerPage = 10;
 
 		int totalContents = mps.selectBoardTotalContents(no);
-System.out.println(totalContents);
+    
+    System.out.println(totalContents);
+    
 		List<Map<String, Object>> list = new ArrayList<Map<String, Object>>(
 				mps.selectMyBoardList(cPage, numPerPage, no));
 		String pageBar = Utils.getPageBar(totalContents, cPage, numPerPage, "myBoardList.do");
 		model.addAttribute("list", list).addAttribute("totalContents", totalContents)
 				.addAttribute("numPerPage", numPerPage).addAttribute("pageBar", pageBar);
-		System.out.println(pageBar);
-
+    System.out.println(pageBar);
 		/*
 		 * System.out.println(list.get(0)); System.out.println(list.size());
 		 */

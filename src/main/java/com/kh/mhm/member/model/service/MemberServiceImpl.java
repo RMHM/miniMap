@@ -54,10 +54,8 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	@Override
-  public int checkNick(String mnick) {
-		HashMap<String, Object> hmap = new HashMap<String, Object>();
-		hmap.put("mnick", mnick);
-		return mDao.checkNick(hmap);
-  }
+	public Member nickCheck(String mnick) {
+		return mDao.nickCheck(mnick);
+	}
   
 }

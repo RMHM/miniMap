@@ -17,6 +17,7 @@
 		<result column="PROFILE_PATH" property="profilePath" />
 		<result column="JOIN_DATE" property="joinDate" javaType="java.sql.Date" jdbcType="DATE" />
 		<result column="DROP_DATE" property="dropDate" javaType="java.sql.Date" jdbcType="DATE" />
+		<collection property="endDate" resultMap="BlackListMap" />
 	</resultMap>
 
 	<resultMap type="Member" id="CommonMemberMap">
@@ -121,13 +122,18 @@
 		select end_date from (select rownum, end_date from (select end_date from blacklist where mno = #{mno} order by end_date desc) where rownum=1)
 	</select>
 	
-  	<select id="checkNick" parameterType="String" resultType="int">
-		select count(*) from member mnick = #{mnick}
+  <select id="nickCheck" resultType="Member">
+		select mnick from member where mnick = #{mnick}
 	</select>
 	
 	<select id="searchMember" parameterType="String" resultMap="memberMap">
-		select * from member
+		<!-- select * from member
 		where ${condition} like '%'||#{keyword}||'%'
+		order by mtype, mno -->
+		select mtype, mno, mid, mname, email, gender, age, join_date, drop_date, 
+		(select end_date from blacklist b where b.mno = m.mno) end_date
+		from member m
+		where mnick like '%'||'user'||'%'
 		order by mtype, mno
 	</select>
 	
@@ -136,11 +142,12 @@
 		from blacklist
 		join member using(mno)
 		full outer join report on(mno = target_id)
-		where mno = 2 and end_date > sysdate
+		where mno = #{mno} and end_date > sysdate
 	</select>
 	
-	<!-- <update id="clearBlackList" parameterType="String">
-		update blacklist
-	</update> -->
+	<update id="clearBlackList" parameterType="_int">
+		update blacklist set end_date = sysdate
+		where mno = #{mno}
+	</update>
 	
 </mapper>
