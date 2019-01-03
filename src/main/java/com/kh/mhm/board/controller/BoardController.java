@@ -51,8 +51,8 @@ public class BoardController {
 				new ArrayList<Map<String, String>>(boardService.selectBoardList2(cPage, numPerPage));
 		
 		int totalContents = boardService.selectBoardTotalContents();
-		
-		String pageBar = Utils.getPageBar(totalContents, cPage, numPerPage, "boardlist1.do");
+  
+    String pageBar = Utils.getPageBar(totalContents, cPage, numPerPage, "boardlist1.do");
 		
 		
 		model.addAttribute("list", list)
@@ -63,9 +63,9 @@ public class BoardController {
 		
 		return "board/freeBoardList";
 	}
+  
 /*	@RequestMapping("/board/boardlist1.do")
 	public String freeboard(@RequestParam int btype,@ModelAttribute("board") Board board, Model model) {
-		
 		List<Board> list = boardService.selectBoardList(btype);
 		List<Board> list = boardService.selectBoardList(board);	
 		List<Board> list2 = boardService.selectNoticeList(board);	
@@ -255,12 +255,11 @@ public class BoardController {
 		return "/board/ad/adBoardWrite";
 	}
 	
-	// 이미지 포함 게시물 등록
+  // 이미지 포함 게시물 등록
 	@RequestMapping("/board/imgBaordAdd.do")
 	public ModelAndView insertImgBoard(Board b, Model model, HttpSession session) {
 		
 		ModelAndView mv = new ModelAndView();
-		
 		Member m = (Member)session.getAttribute("member");
 		
 		System.out.println("광고 게시글");
@@ -341,7 +340,7 @@ public class BoardController {
 			}
 			
 			// 저장경로
-			String defaultPath = session.getServletContext().getRealPath("/resources/img/upload/");
+      String defaultPath = session.getServletContext().getRealPath("/resources/img/upload/");
 			
 			// 저장경로 지정
 			File file = new File(defaultPath);
@@ -361,7 +360,7 @@ public class BoardController {
 				System.out.println(e.getMessage());
 			}
 			
-			String imgUrl = session.getServletContext().getContextPath() + "/resources/img/upload/" + rename;
+      String imgUrl = session.getServletContext().getContextPath() + "/resources/img/upload/" + rename;
 			fileInfo.put("imageurl", imgUrl);		// 상대파일경로
 			fileInfo.put("filename", rename);		// 파일명
 			fileInfo.put("filesize", fileSize);		// 파일 사이즈

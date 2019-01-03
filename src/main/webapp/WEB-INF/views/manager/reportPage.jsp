@@ -9,8 +9,10 @@
 <head>
 <meta charset="UTF-8">
 <title>miniMap에 오신걸 환영합니다.</title>
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/manager/manager.css">
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <meta name="description" content="" />
+
 </head>
 
 <body>
@@ -18,6 +20,7 @@
 
 	<c:import url="/WEB-INF/views/common/exFile.jsp" />
 	<div id="wrapper">
+		<!-- header 선언 -->
 		<div class="container">
 
 			<div class="col-md-10">
@@ -54,20 +57,26 @@
 										type="text" value="${black.getMname()}">
 								</div>
 							</div>
-
-							<div class="form-group">
-								<label class="col-sm-3 control-label" for="aContent">상세내용</label>
-								<div class="col-sm-6">
-
-									<textarea cols="30" rows="5" id="edited_title" name="aContent"
-										name="aContent" style="width: 98%; resize:none;" maxlength="100">${black.getRdetail()}</textarea>
+							
+							
+								<div class="form-group">
+									<label class="col-sm-3 control-label" for="aContent">상세내용</label>
+									<div class="col-sm-6">
+										<c:if test="${not empty black.getRdetail()}">
+											<textarea cols="30" rows="5" id="edited_title" name="rDetail"
+											name="rDetail" style="width: 98%; resize:none;" maxlength="100">${black.getRdetail()}</textarea>
+										</c:if>
+										<c:if test="${empty black.getRdetail()}">
+											<textarea cols="30" rows="5" id="edited_title" name="rDetail"
+											name="rDetail" style="width: 98%; resize:none;" maxlength="100">상세 신고 내용이 없습니다.</textarea>
+										</c:if>
+									</div>
 								</div>
-							</div>
 							
 							<div class="form-group">
 
-								<button id="clearBlack" onclick="clearBlack()">해제</button>
-								<button id="resetBlack" onclick="resetBlack()">취소</button>
+								<button id="clearBtn" onclick="clearBlackList()">해제</button> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+								<button id="resetBtn" onclick="resetBlackList()">취소</button>
 
 							</div>
 						</form>
@@ -79,24 +88,38 @@
 		</div>
 
 	</div>
-	
 	<script>
-		function clearBlack() {
-			var checkResult = window.confirm("남성이면 확인 여성이면 취소를 눌러주세요");
+	var url = "";
 
-            console.log("결과 : " + checkResult);
+	function clearBlackList() {
 
-            var str = "";
-
-            if(checkResult){
-                str = "남성";
-            } else {
-                str = "여성";
-            }
-			
-		}
+		var checkResult = window.confirm("${black.getMid()} 회원을 블랙리스트에서 해제 하겠습니까?");
 		
-		function resetBlack(){
+		if(checkResult){
+			url = "clearBlackList.do?mno=${black.getMno()}";
 			
+			opener.window.location = url;
+			
+			close();
+			
+		} else {
+			alert("취소 되었습니다.")
+			url = "managerPage.go"
+			opener.window.location = url;
+			close();
 		}
+
+	}
+
+	function resetBlackList() {
+		alert("취소 되었습니다.")
+		url = "managerPage.go"
+		
+		opener.window.location = url;
+		
+		close();
+
+	}
 	</script>
+</body>
+</html>

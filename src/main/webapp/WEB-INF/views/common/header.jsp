@@ -14,7 +14,7 @@
                       <span class="icon-bar"></span>
                       <span class="icon-bar"></span>
                   </button>
-				<a class="navbar-brand" href="/"><span><img src="resources/img/member/4.jpg" alt="" /></span></a>
+				<a class="navbar-brand" href="/"><span><img src="/resources/img/member/4.jpg" alt="" /></span></a>
 			</div>
 			<div class="navbar-collapse collapse ">
 				<ul class="nav navbar-nav">
@@ -24,7 +24,6 @@
           			<li><a href="/board/boardlist1.do">게시판 테스트</a><li>
           			<li><a href="/board/adBoard.go">업체 광고 게시판</a><li>
 					<li><a href="/myPage/myPageMain.do">마이페이지</a></li>
-					<li><a href="/manager/managerPage.go">관리자페이지</a></li>
 					<li><a href="/event/eventCalendar.go">행사달력</a></li>
 					<!-- 로그인여부에 따른 분기점 -->
 					<c:if test="${not empty member}">
