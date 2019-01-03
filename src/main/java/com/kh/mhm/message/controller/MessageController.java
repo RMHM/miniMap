@@ -201,7 +201,7 @@ public class MessageController {
 	}
 	
 	// 기업회원 승인 허가 쪽지 전송
-	@RequestMapping("/message/message.allow")
+@RequestMapping("/message/message.allow")
 	public String allowMHM(Model model, @RequestParam("mnick") String mnick) {
 		String title="[MHM] 요청해주신 권한이 승인 되었습니다!";
 		String content="요청해주신 권한이 승인 되었습니다.";

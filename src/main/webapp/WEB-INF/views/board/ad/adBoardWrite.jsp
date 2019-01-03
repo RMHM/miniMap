@@ -19,7 +19,7 @@
 			<div class="col-md-10 col-md-offset-1">
 				<h4>게시글 작성</h4>
 				<c:if test="${not empty member}">
-					<form action="/board/adBaordAdd.do" method="post" id="boardfrm" enctype="multipart/form-data">
+        <form action="/board/imgBaordAdd.do" method="post" id="boardfrm" enctype="multipart/form-data">
 						<input type="hidden" id="mNo" name="mNo" value="${member.mno}"/><!-- 작성자 회원번호  -->
 						<div class="form-group">
 							<input type="text" placeholder="제목을 입력하세요" name="bTitle" id="bTitle" class="form-control" required>	

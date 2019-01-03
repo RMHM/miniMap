@@ -26,8 +26,6 @@
 			},
 
 			success : function(response, status) {
-				console.log(response);
-				consoel.log(status);
 				//성공후 서버에서 받은 데이터 처리 
 				done(response);
 			},
@@ -42,8 +40,7 @@
 		if (typeof (execAttach) == 'undefined') { //Virtual Function 
 			return;
 		}
-		var response_object = $.parseJSON(response);
-		execAttach(response_object);
+		execAttach(response);
 		closeWindow();
 	}
 	function initUploader() {
