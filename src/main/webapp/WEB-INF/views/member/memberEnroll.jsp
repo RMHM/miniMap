@@ -26,7 +26,7 @@
 		 <c:import url="/WEB-INF/views/common/exFile.jsp"/>
 		<section id="content">
 			<div id="enroll-container">
-				<form name="memberEnrollFrm" action="memberEnrollEnd.do" method="post" onsubmit="return fn_enroll_validate();" >
+				<form name="memberEnrollFrm" action="memberEnrollEnd.do" method="post" onsubmit="return fn_enroll_validate();">
 					<table>
 						<tr>
 							<th>아이디</th>
@@ -62,7 +62,10 @@
 						<tr>
 							<th>닉네임</th>
 							<td>
-							<input type="text" class="form-control" name="mnick" id="mnick_" required/>
+							<input type="text" class="form-control" name="mnick" id="mnick_" required>
+							</td>
+							<td>
+							<a href="#" id="nickCheck" class="btn">중복확인</a>
 							</td>
 						</tr>
 						<tr>
@@ -70,12 +73,15 @@
 							<td>	
 								<input type="email" class="form-control" placeholder="사용할 이메일 입력" name="email" id="email">
 							</td>
+							<td>
+								<a href="#" id="emailCheck" class="btn">중복확인</a>
+							</td>
 						</tr>
 						<tr>
 							<th>회원 유형</th>
 							<td>
-							<input type="radio" class="form-check-input" name="mtype" id="mtype0" value="M" checked/>일반회원
-							<input type="radio" class="form-check-input" name="mtype" id="mtype0" value="C" />기업회원
+							<input type="radio" class="form-check-input" name="mtype" value="M" checked/>일반회원
+							<input type="radio" class="form-check-input" name="mtype" value="C" />기업회원
 							</td>
 						</tr>
 						<tr>
@@ -92,20 +98,20 @@
 						<tr>
 							<th>연령대</th>
 							<td>	
-								<input type="radio" class="form-check-input" name="age" id="age_" value="10" checked>
+								<input type="radio" class="form-check-input" name="age" value="10" checked>
 								<label for="age0">10대</label>
-								<input type="radio" class="form-check-input" name="age" id="age_"value="20">
+								<input type="radio" class="form-check-input" name="age" value="20">
 								<label for="age0">20대</label>
-								<input type="radio" class="form-check-input" name="age" id="age_"value="30">
+								<input type="radio" class="form-check-input" name="age" value="30">
 								<label for="age0">30대</label>
-								<input type="radio" class="form-check-input" name="age" id="age_"value="40">
+								<input type="radio" class="form-check-input" name="age" value="40">
 								<label for="age0">40대</label>
 							</td>
 						</tr> 
 						<tr>
-							<th>이미지 업로드</th>
+							<th>업로드</th>
 							<td>
-							<input type="file" class="form-check-input" name="profilePath" id="profilePath_" accept="image/gif, image/jpg, image/png" />
+							<input type="file" class="form-check-input" name="profilePath" id="profilePath_" accept="image/gif, image/jpg, image/png">
 							</td>
 						</tr>
 						

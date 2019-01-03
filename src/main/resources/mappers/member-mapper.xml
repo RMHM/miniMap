@@ -120,8 +120,8 @@
 		select end_date from (select rownum, end_date from (select end_date from blacklist where mno = #{mno} order by end_date desc) where rownum=1)
 	</select>
 	
-  <select id="checkNick" parameterType="String" resultType="int">
-		select count(*) from member mnick = #{mnick}
+  	<select id="nickCheck" resultType="Member">
+		select mnick from member where mnick = #{mnick}
 	</select>
 	
 	<select id="searchMember" parameterType="String" resultMap="memberMap">
