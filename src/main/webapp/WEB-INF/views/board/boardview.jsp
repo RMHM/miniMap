@@ -9,7 +9,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>${b.BNo }번게시글</title>
+<title>${b.BNo }번게시글 </title>
 </head>
 <style>
 .replyArea {
@@ -22,14 +22,27 @@
 	border-radius: 5px;
 	resize: none;
 	width: 100%;
-	height: 100%;
+	height: 100%;	
+	
 }
+
+.uploder-profile {
+ 	width: 120px;
+	height: 120px;
+}
+
+.uploader{
+	width: 90%;
+	border: 2px solid;
+	
+}
+
 </style>
 <script>
-$(document).ready(function(){
+/* $(document).ready(function(){
 	
 });
-
+ */
 </script>
 <body>
 	<c:import url="/WEB-INF/views/common/exFile.jsp" />
@@ -53,23 +66,28 @@ $(document).ready(function(){
 			</div>
 			<div class="col-md-10" overflow:auto id="boardview">
 				<!-- 게시판 고유 번호 -->
-				<input type="hidden" name="BNo" value="${b.BNo }" /> <input
-					type="hidden" name="MNo" value="${b.MNo }" /> <input type="hidden"
-					name="BId" value="${b.BId }" />
-				<!-- 게시판 제목 -->
-				<input type="text" name="boardTitle" id="boardTitle"
-					value="${b.BTitle }" readonly>
+				<input type="hidden" name="BNo" value="${b.BNo }" />
+				<input type="hidden" name="MNo" value="${b.MNo }" />
+				<input type="hidden" name="BId" value="${b.BId }" />
+				
 				<!-- 게시판 작성자 -->
-				<input type="text" class="form-control" name="boardWriter"
-					value="${b.mnick}" readonly>
+				<br>
+				<div class="uploader">				
+				<img src="/resources/img/profiles/${b.profile_Path }" class="uploder-profile">				
+				&nbsp;&nbsp; 작성자 &nbsp;: &nbsp;${b.mnick}				
+				<br>
+				</div>
+				<!-- 게시판 제목 -->
+				<div id="titlearea" style="width: 90%; background-color: lightblue">
+				제목 : ${b.BTitle }
+				</div>
 				<textarea id="content" style="display: none;">${b.BContent}</textarea>
-				<div id="BContent"
-					style="width: 90%; height: 500px; background-color: aliceblue">
+				<div id="BContent" style="width: 90%; min-height:300px; background-color: aliceblue">
 					${b.BContent}</div>
-				&nbsp;&nbsp;&nbsp; <input type="button"
-					class="btn btn-theme btn-large"
-					onclick="location.href='${pageContext.request.contextPath}/board/boardlist1.do'"
-					value="리스트로" />
+				&nbsp;&nbsp;&nbsp; 
+				<input type="button" class="btn btn-theme btn-large" 
+				onclick="location.href='${pageContext.request.contextPath}/board/boardlist1.do'"
+				value="리스트로" />
 				<c:if test="${member.mno eq b.MNo}">
 					<input type="button" class="btn btn-theme btn-large"
 						onclick="location.href='${pageContext.request.contextPath}/board/boardUpdateView.do?BId=${b.BId }'"
@@ -81,8 +99,6 @@ $(document).ready(function(){
 						name="delete" value="삭제">
 				</c:if>
 				
-
-
 				<div class="replyArea">
 					<div id="replySelectArea" style="background-color: aliceblue">
 						<table border="1" bordercolor="lightgray" width="100%">
@@ -106,10 +122,9 @@ $(document).ready(function(){
 										<!-- 본문내용 -->
 										<td width="75%">
 											<div class="text_wrapper">
-												<textarea class="reply-content" readonly="readonly"
-													id="replycontent" name="replycontent"
-													style="background-color: aliceblue">${Coment.ccontent }</textarea>
-													<input type="hidden" name="writer" value="${member.mno }" />
+												<textarea class="reply-content" readonly="readonly" id="replycontent" name="replycontent" style="background-color: aliceblue"
+												 ><c:choose><c:when test="${Coment.delFlag eq 'Y'}">삭제된 댓글입니다.</c:when><c:otherwise>${Coment.ccontent }</c:otherwise></c:choose></textarea>
+												 	<input type="hidden" name="writer" value="${member.mno }" />
 													<input type="hidden" name="cref" value="${Coment.cid }" />
 													<input type="hidden" name="clevel" value="${Coment.clevel }" />
 													<input type="hidden" name="BId" value="${b.BId }" />												
@@ -118,15 +133,13 @@ $(document).ready(function(){
 										<!-- 버튼 -->
 										<td width="15%">
 											<div id="btn" style="text-align: center;" align="center">
-
 												<c:if test="${Coment.mno eq member.mno }">
-													<input type="text" name="cid" value="${Coment.cid }" />
-								&nbsp;	  				
+													<input type="hidden" name="cid" value="${Coment.cid }" />											
 								<button type="button" class="updateBtn" id="updateBtn" onclick="updateReply(this);">수정</button>
 								<button type="button" class="updateConfirm" id="updateBtn2"	onclick="updateConfirm(this);" style="display: none;">등록</button>
 								<button type="button" class="deleteBtn" id="delteBtn" onclick="deleteReply(this);">삭제</button>
 												</c:if>
-												<c:if test="${Coment.clevel lt 2 && Coment.mno ne member.mno && not empty member}">
+												<c:if test="${Coment.clevel lt 2 && not empty member}">
 													<input type="hidden" name="writer" value="${member.mno }" />
 													<input type="hidden" name="recref" value="${Coment.cid }" />
 													<input type="hidden" name="clevel" value="${Coment.clevel }" />
@@ -268,6 +281,9 @@ $(document).ready(function(){
 			
 					var htmlForm1 = '<td><div><b>${member.mnick }</b></div></td>'
 					var htmlForm2 = '<textarea class="reply-content" name="recontent" style="background : ivory;"></textarea>'
+						+ '<input type="hidden" name="writer" value="${member.mno }" />'
+						+ '<input type="hidden" name="cref" value="${Coment.cid }" />'
+						+ '<input type="hidden" name="clevel" value="${Coment.clevel }" />'
 					
 			$(obj).parent().parent().prev().prev().append(htmlForm1);
 			$(obj).parent().parent().prev().append(htmlForm2);			

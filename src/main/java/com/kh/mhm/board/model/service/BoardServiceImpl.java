@@ -22,9 +22,9 @@ public class BoardServiceImpl implements BoardService {
 	BoardDao boardDao;
 
 	@Override
-	public List<Board> selectBoardList(int btype) {
+	public List<Board> selectBoardList(int bCode) {
 		List<Board> list = null;
-        list = boardDao.selectBoardList(btype);
+        list = boardDao.selectBoardList(bCode);
         return list;
 	}
 	
