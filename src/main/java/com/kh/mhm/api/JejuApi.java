@@ -25,7 +25,7 @@ import org.xml.sax.InputSource;
 
 public class JejuApi {
 
-	public List<Map<String, Object>> restAPi(String urlStr, Map<String, Object> param, String resultType){
+	public List<Map<String, Object>> restAPi(String urlStr, Map<String, Object> param, String resultType, String strCompile){
 		List<Map<String, Object>> result = null;
 		HttpURLConnection con = null;
 		StringBuilder strUrl = null;
@@ -82,7 +82,7 @@ public class JejuApi {
 			doc = builder.parse(is);
 			XPathFactory xpathFactory = XPathFactory.newInstance();
 			XPath xpath = xpathFactory.newXPath();
-			XPathExpression expr = xpath.compile("//items/item");
+			XPathExpression expr = xpath.compile(strCompile);
 			NodeList nodeList = (NodeList) expr.evaluate(doc, XPathConstants.NODESET);
 			//
 			result = new ArrayList<Map<String, Object>>();

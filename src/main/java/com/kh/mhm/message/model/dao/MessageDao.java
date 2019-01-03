@@ -38,4 +38,6 @@ public interface MessageDao {
 	
 	int sendMessage(MessageSmpl message);
 	
+	int findNick(String nick);
+	
 }

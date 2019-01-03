@@ -14,24 +14,25 @@
                       <span class="icon-bar"></span>
                       <span class="icon-bar"></span>
                   </button>
-				<a class="navbar-brand" href="/"><span>We</span> need LoGo</a>
+				<a class="navbar-brand" href="/"><span><img src="resources/img/member/4.jpg" alt="" /></span></a>
 			</div>
 			<div class="navbar-collapse collapse ">
 				<ul class="nav navbar-nav">
 					<li class="active"><a href="/">Home</a></li>
-					<li><a href="/echo.do">타임라인 테스트</a></li>
-					<li><button type="button" class="pop">쪽지 테스트</button></li>
+					<li><a href="/echo.do">타임라인</a></li>
 					<li><a href="/test/testMap.do">지도테스트</a></li>
           			<li><a href="/board/boardlist1.do">게시판 테스트</a><li>
+          			<li><a href="/board/adBoard.go">업체 광고 게시판</a><li>
 					<li><a href="/myPage/myPageMain.do">마이페이지</a></li>
 					<li><a href="/manager/managerPage.go">관리자페이지</a></li>
-					<li><a href="/test/testApi.do">제주api테스트</a></li>
+					<li><a href="/event/eventCalendar.go">행사달력</a></li>
 					<!-- 로그인여부에 따른 분기점 -->
 					<c:if test="${not empty member}">
 						<li class="dropdown">
 							<a href="#" class="dropdown-toggle " data-toggle="dropdown" data-hover="dropdown" data-delay="0" data-close-others="false">${member.mnick} 님 <b class=" icon-angle-down"></b></a>
 							<ul class="dropdown-menu">
 								<li><a href="/myPage/myPageMain.do">myPage</a></li>
+								<li><a href="#" onclick="message();">쪽지함</a></li>
 								<c:if test="${member.mtype eq 'A'}">
 									<li><a href="/manager/managerPage.go">관리자 페이지</a></li>
 								</c:if>
@@ -53,15 +54,13 @@
 			</div>
 		</div>
 	</div>
-	<script>
-		$(".pop").click(function(){
-			var popUrl = "/popUp.inbox";	//팝업창에 출력될 페이지 URL
+<script>
+function message(){
+	var popUrl = "/popUp.inbox";
 
-			var popOption = "width=765, height=485, resizable=no, scrollbars=no, status=no;";    //팝업창 옵션(optoin)
+	var popOption = "width=765, height=485, resizable=no, scrollbars=no, status=no;";
 
-				window.open(popUrl,"",popOption);
-
-			
-		});
-	</script>
+	window.open(popUrl,"",popOption);
+}
+</script>
 </header>

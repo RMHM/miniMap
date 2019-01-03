@@ -36,5 +36,7 @@ public interface MessageService {
 	int deleteSentOne(int meId);
 	
 	int sendMessage(MessageSmpl message);
+	
+	int findNick(String nick);
 
 }
