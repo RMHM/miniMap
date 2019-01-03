@@ -15,13 +15,13 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.kh.mhm.board.model.service.BoardService;
 import com.kh.mhm.board.model.vo.Board;
@@ -226,8 +226,11 @@ public class BoardController {
 		return "/board/ad/adBoardWrite";
 	}
 	
-	@RequestMapping("/board/adBaordAdd.do")
-	public String insertAdBoard(Board b, Model model, HttpSession session) {
+	// 이미지 포함 게시물 등록
+	@RequestMapping("/board/imgBaordAdd.do")
+	public ModelAndView insertImgBoard(Board b, Model model, HttpSession session) {
+		
+		ModelAndView mv = new ModelAndView();
 		
 		Member m = (Member)session.getAttribute("member");
 		
@@ -235,8 +238,40 @@ public class BoardController {
 		System.out.println(m);
 		System.out.println(b);
 		
+		List<String> imgList = new ArrayList<String>();
+		String str = "upload/";
+		int start = 0;
+		while(true) {
+			// 글 내용에서 이미지 이름 파싱
+			int begin = b.getBContent().indexOf(str, start) + str.length();
+			int end = b.getBContent().indexOf(34, begin);
+			if(start>end) break;
+			imgList.add(b.getBContent().substring(begin, end));
+			start = end;
+		}
 		
-		return "/board/ad/adBoardList";
+		if(imgList.size()>0) b.setHasFile("Y");
+		else b.setHasFile("N");
+		
+		// 게시글 등록
+		try {
+			// boardService.insertImgBoard(b);
+			
+			// 이미지 파일이 존재하면 등록
+			if(imgList.size()>0) {
+				for(int i=0; i<imgList.size(); i++) {
+					System.out.println(imgList.get(i));
+				}
+			}
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+		
+		mv.addObject("msg", "게시물 등록을 성공하였습니다!");
+		mv.addObject("loc", "/board/adBoard.go");
+		mv.setViewName("common/msg");
+		
+		return mv;
 	}
 	
 	// 이미지 업로드

@@ -72,5 +72,12 @@
 		UPDATE BOARD SET DELFLAG = 'Y' WHERE BID= #{BID}
 	</update>
 	
-
+	<insert id="insertImgBaord" parameterType="Board">
+		insert into board values(seq_bid.nextval, #{mno}, seq_bno_5, 5, #{bTitle}, #{bContent}, default, default, default, default, default, default, default)
+	</insert>
+	
+	<select id="selectImgBaord" parameterType="Board">
+		
+	</select>
+	
 </mapper>
