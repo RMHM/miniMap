@@ -22,8 +22,9 @@
 <script>
 
 	$(document).ready(function() {
+    console.log("${temper}");
 		var today = new Date();
-		console.log(today);
+		/* console.log(today); */
 	  var event = [
  	<c:forEach items="${list}" var="list"  varStatus="i"> 
  	{
@@ -52,12 +53,7 @@
 		          });
 		        }, 
 		         eventAfterRender: function(event, element, view) { 
-		         	/* var comp = new Date(event.start) ;
-		     		var compEnd = new Date(event.end); */
-		         /* console.log(compEnd); */
-		/* 			console.log((today>event.start));   */
-		         	
-		var new_description ='<a href="#">' 
+                var new_description ='<a href="#">' 
 		            + '<strong>후기작성</strong>' + '</a>' 
 		            
 					if(event.end==null){
@@ -65,11 +61,11 @@
 		         	}else{
 		         		if(today>event.end)element.append(new_description);
 		         	}
-					console.log(event.end);
+          
 		        } , 
 		        eventClick: function(calEvent, jsEvent, view) {
 		
-				console.log(calEvent.end);
+			    /* 	console.log(calEvent.end); */
 		    	if(calEvent.end==null){
 		    		calEvent.end=calEvent.start
 		    	}
@@ -117,8 +113,76 @@
 			eventLimit: true,
 			events :event
 		});
+	
+	var trS = $('thead tr td');
+	 var tdS = $('#calendar').find('td[data-date]');
+
+	 var arr = "${weather}";
+	console.log();
+	var result = arr.split(",");
+	
+	/* 
+	 var date = new Date();
+	var re = date.setDate(date.getDate()+30);
+	console.log(date.toISOString().slice(0, 10));
+ 	    */
+	 
+	
+	for(var i = 1; i<result.length; i++){
+		var date = new Date(); 
+		date.setDate(date.getDate()+(i+2));
+		var re = (date.toISOString().slice(0, 10));
+
+		var we = result[i]; 
+		 var sr = "";
+			switch(we){
+			case "맑음" : sr = "<img src='/resources/img/weather/sun1.PNG' width='10px' height='10px'>"; break;
+			case "흐림" :sr = "<img src='/resources/img/weather/cloud1.PNG width='10px' height='10px'>"; break;
+			case "구름많음" : sr = "<img src='/resources/img/weather/cloud1.PNG width='10px' height='10px'>"; break;
+			case "비" : sr = "<img src='/resources/img/weather/rain1.PNG' width='10px' height='10px'>"; break;
+			case "눈" : sr = "<img src='/resources/img/weather/snow1.PNG' width='10px' height='10px'>"; break;
+			case "구름많고 비" : sr = "<img src='/resources/img/weather/rain.PNG' width='10px' height='10px'>"; break;
+			case "구름많고 ": sr = "<img src='/resources/img/weather/rain.PNG' width='10px' height='10px'>"; break;
+			default   :  sr = "<img src='/resources/img/weather/rain.PNG' width='10px' height='10px'>";
+			}
+			
+			
+			
+			
+			$('#calendar').find('td[data-date='+re+']').prepend(sr);
+			
+			
+			/* console.log(we); */
+	 }
+	 
+
+
+ 	 /* console.log(trS[1].getAttribute('data-date')); */
+	
+ 	/* console.log($(trS).dataset.date()); */ 
+	 for(var i =1; i<trS.length ; i++){
+		/* 
+			console.log(trS[i].getAttribute('data-date')); */
+			if(trS[i].getAttribute('data-date')=='2019-01-04'){
+			/* trS[i].prepend("<img src='#'>"); */
+			}
+	}  
+	 
+	
+	
+	/* console.log($('thead tr td').length);
+	
+	console.log($('thead tr').find('td[data-date]').length);
+	 *//* console.log($('#calendar').find('td')) ; */
+	/* console.log($('#calendar').find('td').attr('data-date')); */
+		/* $('#calendar').find('td[data-date]').prepend("<img src='#'>") */
+	 /* console.log($('#calendar').find('td[data-date]'));  */
+	
+	 /* console.log($('#calendar').find('td[data-date="2019-01-04"]').prepend("<img src='#'>")); */ 
 
 	});
+	
+	
 </script>
 <style>
 body {

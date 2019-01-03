@@ -61,6 +61,7 @@
 		</tr>
 	</table>
 	<div class="command">
+		<a id="aNoteRpl" href="#" onclick="sendReply();" onfocus="this.blur();" class="bttn46">답장</a>
 		<a id="aNoteList" href="/popUp.store" onfocus="this.blur();" class="bttn76l">리스트</a>
 		<a id="aNoteDelete" href="#" onclick="deleteNote();" onfocus="this.blur();" class="bttn46">삭제</a>
 				
@@ -94,6 +95,10 @@ function deleteNote() {
 	});
 }
 
+function sendReply(){
+	var url = "/popUp.write?"+$(".sender").text();	//팝업창에 출력될 페이지 URL
+	window.location.href = url;
+}
 
 
 </script>

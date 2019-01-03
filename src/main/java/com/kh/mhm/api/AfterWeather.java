@@ -6,6 +6,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.Map;
 
@@ -30,7 +31,7 @@ import java.io.FileInputStream;
 import java.io.IOException;
 
 public class AfterWeather {
-	public String[]  weather() throws IOException {
+	public static ArrayList weather() throws IOException {
 
 		Date today = new Date();
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
@@ -79,7 +80,7 @@ public class AfterWeather {
         factory.setNamespaceAware(true);
         DocumentBuilder builder;
         Document doc = null;
-        String afterWeather[] = new String[14];
+        ArrayList afterWeather = new ArrayList();
         try {
             // xml 파싱하기
             String result = sb.toString();
@@ -97,7 +98,8 @@ public class AfterWeather {
             
                 for (int j = 0; j < child.getLength(); j++) {
                 	Node node = child.item(j);
-                	afterWeather[j]=node.getTextContent();
+                	if(node.getNodeName().indexOf("Pm")>0) continue;
+                	afterWeather.add(node.getTextContent());
                 	
                   /*  System.out.println("현재 노드 이름 : " + node.getNodeName());
                     System.out.println("현재 노드 이름 : " + node.getLocalName());
@@ -109,9 +111,7 @@ public class AfterWeather {
                 	 /* System.out.println(afterWeather[j]);*/
                 }
             }
-            for(int i =0; i<afterWeather.length; i++){
-            	System.out.println(afterWeather[i]);	
-            }
+          
             
           
         } catch (Exception e) {

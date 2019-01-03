@@ -62,6 +62,7 @@
 	</table>
 	<div class="command">
 		<a id="aNoteList" href="/popUp.inbox" onfocus="this.blur();" class="bttn76l">리스트</a>
+		<a id="aNoteRpl" href="#" onclick="sendReply();" onfocus="this.blur();" class="bttn46">답장</a>
 		<a id="aNoteDelete" href="#" onclick="deleteNote();" onfocus="this.blur();" class="bttn46">삭제</a>
 		<a id="aNoteStore" href="#" onclick="storeNote();" onfocus="this.blur();" class="bttn46">보관</a>
 				
@@ -117,6 +118,10 @@ function storeNote() {
 	});
 }
 
+function sendReply(){
+	var url = "/popUp.write?"+$(".sender").text();	//팝업창에 출력될 페이지 URL
+	window.location.href = url;
+}
 
 
 </script>

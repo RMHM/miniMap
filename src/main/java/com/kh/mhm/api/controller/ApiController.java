@@ -44,14 +44,19 @@ public class ApiController {
 		String baseDate = "";
 		
 		sdf.applyPattern("yyyMMdd");
-		if(nowHour>15||nowHour<=4) {
-			baseTime = "0900";
-			baseDate = sdf.format(new Date());
-		} else {
+		if(nowHour>2&&nowHour<16) {
 			baseTime = "2100";
 			Calendar cal = new GregorianCalendar();
 			cal.add(Calendar.DATE, -1);
 			baseDate = sdf.format(cal.getTime());
+		} else if(nowHour<3) {
+			baseTime = "0900";
+			Calendar cal = new GregorianCalendar();
+			cal.add(Calendar.DATE, -1);
+			baseDate = sdf.format(cal.getTime());
+		} else if(nowHour>15) {
+			baseTime = "0900";
+			baseDate = sdf.format(new Date());
 		}
 
 		Map<String, Object> tmpMap = new HashMap<String, Object>();

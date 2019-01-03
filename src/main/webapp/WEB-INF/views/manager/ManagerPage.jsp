@@ -26,7 +26,7 @@
 	<div id="container">
 	
 	<p style="font-size: 25px; font-weight: 600;">관리자 페이지</p>
-	 
+	
 	<br>
 
 	<div class="searchArea">
@@ -36,7 +36,7 @@
 			<option value="email">이메일</option>
 		</select> 
 		<input type="search" id="keyword" placeholder="키워드를 입력하세요:)">
-		<button type="button" id="searchBtn">검색하기</button>
+		<button type="button" id="search">검색하기</button>
 	</div>
 	
 	<div id="resultArea">
@@ -119,10 +119,11 @@
 						<th><b>상태</b></th>
 						<th><b>기간</b></th>
 						<th><b>사유</b></th>
+						<th><b>해제</b></th>
 					</tr>
 				</thead>
 				<tbody>
-					
+				
 				</tbody>	
 			</table>
 		</div>
@@ -134,7 +135,6 @@
 
 	</div>
 	</div>
-
 </body>
 
 </html>
