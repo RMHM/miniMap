@@ -27,8 +27,8 @@ import com.kh.mhm.board.model.service.BoardService;
 import com.kh.mhm.board.model.vo.Board;
 import com.kh.mhm.coment.model.service.ComentService;
 import com.kh.mhm.coment.model.vo.Coment;
+import com.kh.mhm.common.util.Utils;
 import com.kh.mhm.member.model.vo.Member;
-
 
 @SessionAttributes(value = { "member" })
 @Controller
@@ -39,11 +39,33 @@ public class BoardController {
 	
 	@Autowired
 	private ComentService comentService;
-
+	
 	@RequestMapping("/board/boardlist1.do")
-	public String freeboard(/*@RequestParam int btype,*/@ModelAttribute("board") Board board, Model model) {
+	public String freeboard(
+			@RequestParam(value="cPage", required=false, defaultValue="1")
+			int cPage, Model model) {
+		int numPerPage = 4;
 		
-		/*List<Board> list = boardService.selectBoardList(btype);*/
+		ArrayList<Map<String, String>> list = 
+				new ArrayList<Map<String, String>>(boardService.selectBoardList2(cPage, numPerPage));
+		
+		int totalContents = boardService.selectBoardTotalContents();
+		
+		String pageBar = Utils.getPageBar(totalContents, cPage, numPerPage, "boardlist1.do");
+		
+		
+		model.addAttribute("list", list)
+		.addAttribute("totalContents", totalContents)
+		.addAttribute("numPerPage", numPerPage)
+		.addAttribute("pageBar", pageBar);
+		
+		
+		return "board/freeBoardList";
+	}
+/*	@RequestMapping("/board/boardlist1.do")
+	public String freeboard(@RequestParam int btype,@ModelAttribute("board") Board board, Model model) {
+		
+		List<Board> list = boardService.selectBoardList(btype);
 		List<Board> list = boardService.selectBoardList(board);	
 		List<Board> list2 = boardService.selectNoticeList(board);	
 		
@@ -52,7 +74,7 @@ public class BoardController {
 		
 
 		return "board/freeBoardList";
-	}
+	}*/
 	@RequestMapping("/board/boardlist2.do")
 	public String infoboard() {
 		return "board/infoBoardList";

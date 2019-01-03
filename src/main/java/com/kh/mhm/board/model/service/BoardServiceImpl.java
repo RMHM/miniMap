@@ -94,6 +94,12 @@ public class BoardServiceImpl implements BoardService {
 		return 0;
 	}
 
+	@Override
+	public List<Map<String, String>> selectBoardList2(int cPage, int numPerPage) {
+		
+		return boardDao.selectBoardList2(cPage, numPerPage);
+	}
+
 	
 
 	
