@@ -111,11 +111,10 @@ public class BoardDaoImpl implements BoardDao {
 		return sqlSession.selectList("board.selectBoardList",null,rowBounds);
 	}
 
-
-
-
-
-
-	
+	@Override
+	public int insertImgBoard(Board board) {
+		sqlSession.insert("board.insertImgBaord", board);
+		return sqlSession.insert("board.selectImgBaord", board);
+	}
 
 }
