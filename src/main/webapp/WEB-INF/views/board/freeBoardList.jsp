@@ -92,10 +92,15 @@
 							<div class="s-area" id="s-area"
 								style="display: flex; align-items: center; justify-content: center;">
 								
-								<form action="/board/search.do" method="post" id="search" enctype="multipart/form-data">
-								<input type="hidden" name="boardCd" value="${Board.bCode }" />
-									<input class="seracharea" type="text" />
-									<button class="searchbtn" type="submit">검색</button>
+								<form action="/board/boardlist1.do" method="post" name="search" id="search" enctype="multipart/form-data">
+								 <select name="keyField" size="1">
+           						     <option value="mnick" <c:if test="${'mnick'==keyField }"> selected</c:if>> 이름 </option>
+             						 <option value="BTitle" <c:if test="${'BTitle'==keyField }"> selected</c:if>> 제목 </option>
+              						 <option value="BContent" <c:if test="${'BContent'==keyField }"> selected</c:if>> 내용 </option>
+           						 </select>
+                					 <input type="text" size="16" name="keyWord" value="${keyWord }">
+                					 <input type="submit" value="검색" onClick="check()">               						
+
 								</form>
 							</div>
 						</div>
@@ -117,6 +122,16 @@ $(function(){
 		location.href = "${pageContext.request.contextPath}/board/boardview.do?BId="+BId;
 	});
 });
+
+function check() {
+    if (document.search.keyWord.value == "") {
+        alert("검색어를 입력하세요.");
+        document.search.keyWord.focus();
+        return;
+    }
+    document.search.submit();
+}
+
 
 </script>
 
