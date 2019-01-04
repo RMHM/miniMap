@@ -26,7 +26,7 @@
 		 <c:import url="/WEB-INF/views/common/exFile.jsp"/>
 		<section id="content">
 			<div id="enroll-container">
-				<form name="memberEnrollFrm" action="memberEnrollEnd.do" method="post" onsubmit="return fn_enroll_validate();">
+				<form name="memberEnrollFrm" action="memberEnrollEnd.do" method="post" onsubmit="return fn_enroll_validate();" enctype = multipart/form-data>
 					<table>
 						<tr>
 							<th>아이디</th>
@@ -111,7 +111,9 @@
 						<tr>
 							<th>업로드</th>
 							<td>
-							<input type="file" class="form-check-input" name="profilePath" id="profilePath_" accept="image/gif, image/jpg, image/png">
+							<img id="imc" src="/resources/img/profiles/" />
+							<input type="file" class="form-check-input" name="profile" id="profilePath_" 
+								   value="">
 							</td>
 						</tr>
 						
@@ -121,6 +123,38 @@
 				</form>
 			</div>
 			<script src="/resources/js/member/memberEnroll.js"></script>
+			<script> 
+				// 파일 업로드 시 미리보기
+				function readURL(input){
+				
+					if (input.files && input.files[0]){
+					var reader = new FileReader();
+					
+					reader.onload = function(e) {
+						$('#imc').attr('src', e.target.result);
+					
+					}
+					
+					reader.readAsDataURL(input.files[0]);
+					}
+				}
+				
+					$("#profilePath_").change(function() {
+						readURL(this);
+					});
+			</script>
+			<!-- 
+			<script> 
+				// 파일 업로드
+				function readURL(input) { 
+							
+				var reader = new FileReader(); 
+				reader.onload = function (e) {
+				$('#imc').attr('src', e.target.result); 
+				} 
+				reader.readAsDataURL(input.files[0]); } 
+			</script>
+			 -->
 		</section>
 		<c:import url="/WEB-INF/views/common/footer.jsp"/>
 	</div>
