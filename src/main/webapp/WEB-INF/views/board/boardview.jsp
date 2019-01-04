@@ -181,6 +181,7 @@
 										<input type="hidden" name="mnick" value="${member.mnick }" />
 										<input type="hidden" name="mno" value="${member.mno }" /> 
 										<input type="hidden" name="BId" value="${b.BId }" />
+										<input type="hidden" name="BCount" value="${b.BCount }" />
 										<input type="hidden" name="cref" value="0" /> 
 										<input type="hidden" name="clevel" value="1" />
 										<!-- 아이디-->
@@ -337,8 +338,7 @@
 				<div class="modal-dialog" role="document">
 					<div class="modal-content">
 						<div class="modal-header">
-							<h5 class="modal-title" id="myModalLabel">
-								
+							<h5 class="modal-title" id="myModalLabel">								
 							</h5> 
 							<button type="button" class="close" data-dismiss="modal">
 								<span aria-hidden="true">×</span>

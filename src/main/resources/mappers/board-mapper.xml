@@ -25,6 +25,14 @@
 		AND A.MNO = B.MNO
 		ORDER BY BDATE DESC, BNO DESC		
 	</select>
+	<select id="selectSearchList" resultType="Board">
+		SELECT A.*, B.*, (SELECT
+		COUNT(*) FROM FILEREF WHERE BID = A.BID) FILECOUNT
+		FROM BOARD A, MEMBER B		
+		WHERE BCODE='1'	AND ISNOTICE='N' AND DELFLAG='N' AND RFLAG='N'
+		AND A.MNO = B.MNO AND ${keyfield} like '%${keyword}%'
+		ORDER BY BDATE DESC, BNO DESC		
+	</select>
 	
 	<select id="selectNoticeList" resultType="Board">
 		<!-- SELECT A.*, (SELECT
@@ -49,7 +57,7 @@
 		<!-- SELECT * FROM BOARD WHERE BID = #{bId} -->
 		SELECT A.*, B.MNICK, B.PROFILE_PATH FROM BOARD A, MEMBER B WHERE BID = #{bId} AND A.MNO = B.MNO		
 	</select>
-	<update id="updateOneCount">
+	<update id="updateOneCount" parameterType="Board">
 		UPDATE BOARD SET BCOUNT = BCOUNT+1  WHERE BID= #{bId}
 	</update>
 	
