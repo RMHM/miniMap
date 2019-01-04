@@ -25,6 +25,7 @@
 	    <typeAlias type="com.kh.mhm.message.model.vo.MessageSmpl" alias="MessageSmpl"/>
 	    <typeAlias type="com.kh.mhm.coment.model.vo.Coment" alias="Coment"/>
 		<typeAlias type="com.kh.mhm.map.model.vo.Map" alias="MapPersonal"/> 
+		<typeAlias type="com.kh.mhm.report.model.vo.Report" alias="Report"/> 
   	</typeAliases>
   	
     <!-- 타임라인 timestamp<->string 변환 핸들러 -->

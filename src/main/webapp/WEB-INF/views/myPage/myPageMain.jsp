@@ -239,7 +239,7 @@
 							<script>
 								function mUpdate() {
 
-									console.log($('#password').val());
+									console.log($('#mpw').val());
 									$
 											.ajax({
 												url : "${pageContext.request.contextPath}/myPage/passCheck.do",
@@ -250,6 +250,7 @@
 												},
 												dataType : "json",
 												success : function(data) {
+													console.log("asd");
 													console.log("일치" + data);
 													console.log(data.msg);
 													if (data.msg) {
