@@ -22,7 +22,7 @@
 <script>
 
 	$(document).ready(function() {
-		console.log("${temper}");
+    console.log("${temper}");
 		var today = new Date();
 		/* console.log(today); */
 	  var event = [
@@ -38,7 +38,6 @@
  	</c:forEach>
  	];
 	/*   console.log(event); */
-	
 		$('#calendar').fullCalendar({
 			header : {
 				left : 'prev,next today',
@@ -54,8 +53,7 @@
 		          });
 		        }, 
 		         eventAfterRender: function(event, element, view) { 
-	    	
-					var new_description ='<a href="#">' 
+                var new_description ='<a href="#">' 
 		            + '<strong>후기작성</strong>' + '</a>' 
 		            
 					if(event.end==null){
@@ -63,11 +61,11 @@
 		         	}else{
 		         		if(today>event.end)element.append(new_description);
 		         	}
-			
+          
 		        } , 
 		        eventClick: function(calEvent, jsEvent, view) {
 		
-			/* 	console.log(calEvent.end); */
+			    /* 	console.log(calEvent.end); */
 		    	if(calEvent.end==null){
 		    		calEvent.end=calEvent.start
 		    	}

@@ -11,11 +11,11 @@ public interface ManagerDao {
 	
 	List selectMemberList(String mtype);
 
-	int grantAuthority(int mno);
+	int grantAuthority(String mnick);
 
 	Authority selectRequest(int mno);
 
-	int refuseAuthority(int mno);
+	int refuseAuthority(String mnick);
 
 	List searchMember(String condition, String keyword);
 
