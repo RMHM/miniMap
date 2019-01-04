@@ -1,15 +1,14 @@
 package com.kh.mhm.member.controller;
 
 import java.io.File;
+import java.io.IOException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
 import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,7 +22,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.kh.mhm.common.SendMail;
@@ -204,8 +202,30 @@ public class MemberController {
 		return "member/memberEnroll";
 	}
 
-  @RequestMapping("/member/memberEnrollEnd.do")
-	public String memberEnrollEnd(Member m, Model model) {
+	@RequestMapping("/member/memberEnrollEnd.do")
+	public String memberEnrollEnd(@RequestParam(value="profile", required = false)
+				MultipartFile profile, HttpSession session, HttpServletRequest request, Member m, Model model) {
+		String saveDir = session.getServletContext().getRealPath("/resources/img/profiles");
+		File dir = new File(saveDir);
+		
+		if(dir.exists() == false) dir.mkdirs();
+		String originName = profile.getOriginalFilename();
+		String ext = originName.substring(originName.lastIndexOf(".")+1);
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd_HHmmss");
+		int rndNum = (int) (Math.random() * 1000);
+		
+		String renamedName = sdf.format(new java.util.Date()) + "_" + rndNum + "." + ext;
+		
+		
+		try {
+			profile.transferTo(new File(saveDir + "/" + renamedName));
+		} catch (IllegalStateException | IOException e) {
+			e.printStackTrace();
+		}	
+		
+		m.setProfilePath(renamedName);
+		
+		m.setMpw(bcpe.encode(m.getMpw()));
 		
 		String loc = "/";
 		String msg = "";
@@ -259,61 +279,6 @@ public class MemberController {
 		return map;
 	}
 	
-	/*
-	@RequestMapping(value = "/member/fileSave")
-	@ResponseBody
-	public Object fileSave(MultipartHttpServletRequest multipartRequest) {
-		
-		List<HashMap> fileArrayList = new ArrayList<HashMap>();
-		HashMap fileHashMap;
-		
-		String filePath = "/resources/img/profiles/"; // 파일 저장 경로, 설정 파일로 따로 관리
-		
-		File dir = new File(filePath); // 파일 저장 경로 확인, 없으면 만듦 
-		if (!dir.exists()) {
-			dir.mkdir();
-		}
-		
-		Iterator<String> itr = multipartRequest.getFileNames(); // 파일들을 Iterator에 넣는다.
-		
-		while (itr.hasNext()) { // 파일을 하나씩 불러온다.
-			MultipartFile mpf = multipartRequest.getFile(itr.next());
-			
-			fileHashMap = new HashMap();
-			
-			String originalFilename = mpf.getOriginalFilename(); // 파일명
-			
-			String fileFullPath = filePath + "/" + originalFilename; // 파일 전체 경로
-			
-			try {
-				
-				mpf.transferTo(new File(fileFullPath)); // 파일 저장
-				
-				fileHashMap.put("originalFilename", originalFilename);
-				fileHashMap.put("fileFullPath", fileFullPath);
-				
-				fileArrayList.add(fileHashMap);
-				
-			} catch (Exception e) {
-				System.out.println("postTemFile_ERROR =======> "+ fileFullPath);
-				e.printStackTrace();
-			}
-		}
-		
-		Map<String, Object> retVal = new HashMap<String, Object>(); //응답값 셋팅
-		 
-	    try{
-	        retVal.put("fileInfoList", fileArrayList);  
-	        retVal.put("code", "OK");
-	    }catch(Exception e){
-	        retVal.put("code", "FAIL");
-	    }
-	
-	 
-	    return retVal;
-	
-		} */
-		
 		
 		/*
 	@ResponseBody

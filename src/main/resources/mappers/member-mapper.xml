@@ -17,7 +17,6 @@
 		<result column="PROFILE_PATH" property="profilePath" />
 		<result column="JOIN_DATE" property="joinDate" javaType="java.sql.Date" jdbcType="DATE" />
 		<result column="DROP_DATE" property="dropDate" javaType="java.sql.Date" jdbcType="DATE" />
-		
 	</resultMap>
 
 	<resultMap type="Member" id="CommonMemberMap">
@@ -124,6 +123,7 @@
 	
   <select id="nickCheck" resultType="Member">
 		select mnick from member where mnick = #{mnick}
+
 	</select>
 	
 	<select id="searchMember" parameterType="String" resultMap="memberMap">
