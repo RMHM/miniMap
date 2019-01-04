@@ -40,7 +40,7 @@
 					</div>
 				</div>
 				<div class="container-fluid">
-				
+				<input type="hidden" name="bCode" value="1">
 					<div class="row">
 						<div class="list">
 
@@ -82,18 +82,25 @@
 							</table>
 							<!-- 페이지 처리 해야됨. -->
 							
-							<c:out value="${pageBar}" escapeXml="false"/>	
+							<c:out value="${pageBar}" escapeXml="false"/>
+							
 							<c:if test="${not empty member and member.mtype ne 'C'}">
 							<input type="button" value="글쓰기" id=""	class="btn btn-theme btn-large"
 								onclick="location.href='${pageContext.request.contextPath}/board/boardwrite.do'"
 								style="position: absolute; right: 20px;" /> </c:if>
 
-							<div class="" id=""
+							<div class="s-area" id="s-area"
 								style="display: flex; align-items: center; justify-content: center;">
 								
-								<form class="search">
-									<input class="seracharea" type="text" />
-									<button class="searchbtn" type="submit">검색</button>
+								<form action="/board/boardlist1.do" method="post" name="search" id="search" enctype="multipart/form-data">
+								 <select name="keyField" size="1">
+           						     <option value="mnick" <c:if test="${'mnick'==keyField }"> selected</c:if>> 이름 </option>
+             						 <option value="BTitle" <c:if test="${'BTitle'==keyField }"> selected</c:if>> 제목 </option>
+              						 <option value="BContent" <c:if test="${'BContent'==keyField }"> selected</c:if>> 내용 </option>
+           						 </select>
+                					 <input type="text" size="16" name="keyWord" value="${keyWord }">
+                					 <input type="submit" value="검색" onClick="check()">               						
+
 								</form>
 							</div>
 						</div>
@@ -115,6 +122,16 @@ $(function(){
 		location.href = "${pageContext.request.contextPath}/board/boardview.do?BId="+BId;
 	});
 });
+
+function check() {
+    if (document.search.keyWord.value == "") {
+        alert("검색어를 입력하세요.");
+        document.search.keyWord.focus();
+        return;
+    }
+    document.search.submit();
+}
+
 
 </script>
 

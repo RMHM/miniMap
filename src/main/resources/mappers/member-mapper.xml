@@ -123,6 +123,7 @@
 	
   <select id="nickCheck" resultType="Member">
 		select mnick from member where mnick = #{mnick}
+
 	</select>
 	
 	<select id="searchMember" parameterType="String" resultMap="memberMap">

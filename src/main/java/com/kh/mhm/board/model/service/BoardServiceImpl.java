@@ -22,18 +22,21 @@ public class BoardServiceImpl implements BoardService {
 	BoardDao boardDao;
 
 	@Override
-	public List<Board> selectBoardList(int btype) {
+	public List<Board> selectBoardList(int bCode) {
 		List<Board> list = null;
-        list = boardDao.selectBoardList(btype);
+        list = boardDao.selectBoardList(bCode);
         return list;
 	}
 	
 	@Override
-	public List<Board> selectBoardList(Board board) {
+	public List<Board> selectBoardList(String keyfield, String keyword) {
 		List<Board> list = null;
-        list = boardDao.selectBoardList(board);
+        list = boardDao.selectBoardList(keyfield, keyword);
         return list;
 	}
+	
+
+	
 	
 	@Override
 	public List<Board> selectNoticeList(Board board) {

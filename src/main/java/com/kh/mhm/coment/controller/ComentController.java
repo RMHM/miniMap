@@ -139,7 +139,7 @@ public class ComentController {
 		int result;
 		
 		System.out.println(session.getAttribute("member"));
-		coment.setBid(Integer.parseInt(req.getParameter("BId")));
+		coment.setBid(Integer.parseInt(req.getParameter("BId")));		
 		/*coment.setCcontent(req.getParameter("recontent"));	*/	
 		System.out.println(coment);
 		System.out.println(req.getParameter("recontent"));

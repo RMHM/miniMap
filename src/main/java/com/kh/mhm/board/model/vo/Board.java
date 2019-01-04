@@ -18,6 +18,7 @@ public class Board {
 	private String isNotice;
 	private int bCount;
 	private String mnick;
+	private String profile_Path;
 
 
 	
@@ -25,8 +26,8 @@ public class Board {
 	public Board() {
 		super();
 	}
-
-
+	
+		
 	public Board(int bId, int mNo, int bNo, int bCode, String bTitle, String bContent, Date bDate, int likes,
 			String rFlag, String delFlag, String hasFile, String isNotice, int bCount) {
 		super();
@@ -44,9 +45,10 @@ public class Board {
 		this.isNotice = isNotice;
 		this.bCount = bCount;
 	}
-	
+
+
 	public Board(int bId, int mNo, int bNo, int bCode, String bTitle, String bContent, Date bDate, int likes,
-			String rFlag, String delFlag, String hasFile, String isNotice, int bCount, String mnick) {
+			String rFlag, String delFlag, String hasFile, String isNotice, int bCount, String mnick, String profile_Path) {
 		super();
 		this.bId = bId;
 		this.mNo = mNo;
@@ -62,6 +64,7 @@ public class Board {
 		this.isNotice = isNotice;
 		this.bCount = bCount;
 		this.mnick = mnick;
+		this.profile_Path = profile_Path;
 	}
 	
 	public int getBId() {
@@ -203,18 +206,27 @@ public class Board {
 	}
 
 
+
+	public String getprofile_Path() {
+		return profile_Path;
+	}
+
+
+
+	public void setprofile_Path(String profile_Path) {
+		this.profile_Path = profile_Path;
+	}
+
+
+
 	@Override
 	public String toString() {
 		return "Board [bId=" + bId + ", mNo=" + mNo + ", bNo=" + bNo + ", bCode=" + bCode + ", bTitle=" + bTitle
 				+ ", bContent=" + bContent + ", bDate=" + bDate + ", likes=" + likes + ", rFlag=" + rFlag + ", delFlag="
 				+ delFlag + ", hasFile=" + hasFile + ", isNotice=" + isNotice + ", bCount=" + bCount + ", mnick="
-				+ mnick + "]";
+				+ mnick + ", profile_Path=" + profile_Path + "]";
 	}
-
-
 	
-
-
-
+	
 
 }

@@ -42,31 +42,45 @@ public class BoardController {
 	private ComentService comentService;
 	
 	@RequestMapping("/board/boardlist1.do")
-	public String freeboard(
-			@RequestParam(value="cPage", required=false, defaultValue="1")
-			int cPage, Model model) {
+	public String freeboard(@RequestParam(value="cPage", required=false, defaultValue="1")int cPage, 
+							/*@RequestParam(required=false) String keyField,
+							@RequestParam(required=false) String keyWord,*/	
+							Model model, Board board) {
 		int numPerPage = 4;
 		
 		ArrayList<Map<String, String>> list = 
-				new ArrayList<Map<String, String>>(boardService.selectBoardList2(cPage, numPerPage));
+				new ArrayList<Map<String, String>>(boardService.selectBoardList2(cPage, numPerPage/*, keyField, keyWord*/));
 		
 		int totalContents = boardService.selectBoardTotalContents();
-  
+    
     String pageBar = Utils.getPageBar(totalContents, cPage, numPerPage, "boardlist1.do");
+		List<Board> list2 = boardService.selectNoticeList(board);
+		/*List<Board> list3 = boardService.selectBoardList(keyField, keyWord);*/
+		System.out.println(pageBar);
 		
-		
+		/*if(list3 == null) {*/
 		model.addAttribute("list", list)
 		.addAttribute("totalContents", totalContents)
 		.addAttribute("numPerPage", numPerPage)
-		.addAttribute("pageBar", pageBar);
+		.addAttribute("pageBar", pageBar)
+		.addAttribute("list2", list2);
+		/*.addAttribute("keyWord",keyWord)
+		.addAttribute("keyField",keyField);*/
 		
+		/*} else {
+			
+		model.addAttribute("list3", list3)
+		.addAttribute("keyWord",keyWord)
+		.addAttribute("keyField",keyField);
+			
+		}*/
 		
 		return "board/freeBoardList";
 	}
-  
-/*	@RequestMapping("/board/boardlist1.do")
-	public String freeboard(@RequestParam int btype,@ModelAttribute("board") Board board, Model model) {
-		List<Board> list = boardService.selectBoardList(btype);
+   /*@RequestMapping("/board/boardlist.do")
+	public String freeboard2(@RequestParam int bCode, @ModelAttribute("board") Board board, Model model) {
+		
+		List<Board> list = boardService.selectBoardList(bCode);
 		List<Board> list = boardService.selectBoardList(board);	
 		List<Board> list2 = boardService.selectNoticeList(board);	
 		
@@ -97,15 +111,61 @@ public class BoardController {
 	}
 	
 	@RequestMapping("board/boardinsert.do")
-	public String boardinsert(Board board, Model model, HttpSession session, HttpServletRequest req) {
-		int result;
+	public ModelAndView boardinsert(Board board, Model model, HttpSession session, HttpServletRequest req) {
+		
+		ModelAndView mv = new ModelAndView();
+		Member m = (Member)session.getAttribute("member");
+		
+		List<String> imgList = new ArrayList<String>();
+		String str = "upload/";
+		int start = 0;
+		board.setBContent(req.getParameter("boardcontent"));
+		while(true) {
+			// 글 내용에서 이미지 이름 파싱
+			int begin = board.getBContent().indexOf(str, start) + str.length();
+			int end = board.getBContent().indexOf(34, begin);
+			if(start>end) break;
+			imgList.add(board.getBContent().substring(begin, end));
+			start = end;
+		}
+		
+		if(imgList.size()>0) board.setHasFile("Y");
+		else board.setHasFile("N");
+		
+		// 게시글 등록
+				try {
+					boardService.insertBoard(board);
+					System.out.println("이미지 게시글 등록!");
+					// 이미지 파일이 존재하면 등록
+					if(imgList.size()>0) {
+						for(int i=0; i<imgList.size(); i++) {
+							Fileref fref = new Fileref();
+							fref.setbId(board.getBId());
+							fref.setfType("I");
+							fref.setOrigin_Name(imgList.get(i));
+							fref.setChange_Name(imgList.get(i));
+							boardService.insertImgFile(fref);
+						}
+					}
+					mv.addObject("msg", "게시물 등록을 성공하였습니다!");
+				} catch(Exception e) {
+					e.printStackTrace();
+					mv.addObject("msg", "게시물 등록에 실패하였습니다.");
+				}
+				
+				mv.addObject("loc", "/board/boardview.do?BId="+board.getBId());
+				mv.setViewName("common/msg");
+				
+				return mv;
+		
+		/*int result;
 		
 		System.out.println(session.getAttribute("member"));
-		System.out.println(board);
+		
 		System.out.println(req.getParameter("boardcontent"));
 		board.setBContent(req.getParameter("boardcontent"));
 		result = boardService.insertBoard(board);
-		System.out.println(board);
+		
 		String loc = "/board/boardList.do";
 		String msg = "";
 		
@@ -119,8 +179,8 @@ public class BoardController {
 		
 		model.addAttribute("loc", loc)
 		.addAttribute("msg", msg);
-		
-		return "common/msg";
+		System.out.println(board);
+		return "common/msg";*/
 		
 	}
 	
@@ -134,8 +194,9 @@ public class BoardController {
 		addAttribute("clist", clist);
 		
 		System.out.println(BId);
+		System.out.println(boardService.selectOneBoard(BId));		
 		System.out.println(model);		
-		/*model.addAttribute("b", boardService.updateOneCount(BId));*/
+		boardService.updateOneCount(BId);		
 		return "board/boardview";
 	}
 

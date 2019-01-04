@@ -18,17 +18,25 @@ $('#tabs a').click(function(e) {
 });
 
 $.ajax({
-	url : 'selectMemberList.do',
-	data : { mtype : mtype },
+	url : 'visitCount.do',
 	success : function(data){
 		
-		$table = $('#tab'+num+' table tbody');
+//		$first = $('#tab'+num+' table tbody');
 		
-		$table.empty();
-		
-		for(var i in data){
+//		for(var i in data){
 			
-			var $tdMno = $('<td>').text(data[i].mno);
+			var AllVisit = $('<p>').text("총 방문자 : " + data[0]); 
+			var DayVisit = $('<p>').text("오늘 방문자 : " + data[1]);
+			var AvgVisit = $('<p>').text("평균 방문자 : " + data[2]);
+			
+			var $form = $('#statistics');
+			
+			console.log(AllVisit);
+			console.log(DayVisit);
+			
+			$form.append(AllVisit).append(DayVisit).append(AvgVisit);
+			
+			/*var $tdMno = $('<td>').text(data[i].mno);
 			var $trBoard = $('<tr>');
 			var $tdMid = $('<td>').text(data[i].mid);
 			var $tdMname = $('<td>').text(data[i].mname);
@@ -58,9 +66,9 @@ $.ajax({
 			$trBoard.append($tdMno).append($tdMid).append($tdMname).append($tdEmail).append($tdGender).append($tdAge)
 			.append($tdJoinDate).append($tdDropDate);	
 			
-			$table.append($trBoard);
+			$table.append($trBoard);*/
 			
-			$('#tab' + num + ' table tbody').children().mouseenter(function () {
+			/*$('#statistics').children().mouseenter(function () {
 				$(this).children().css({'background':'rgba(221, 221, 221, 0.685)'});
 				$(this).children().click(function () {
 					var mno = $(this).parent().children().eq(1).text();
@@ -68,8 +76,8 @@ $.ajax({
 					
 			}).mouseleave(function () {
 				$(this).children().css({'background':'white'});
-			});
-		}
+			});*/
+//		}
 		
 	}, error : function(data){
 		console.log("회원 조회 실패!! \n data : " + data);
@@ -80,6 +88,9 @@ $('#tabs > li a').click(function(){
    mtype = $(this).attr("value");
    num = $(this).attr("name");
    
+   console.log(mtype);
+   console.log(num);
+
    $.ajax({
      url : 'selectMemberList.do',
      data : {
@@ -90,7 +101,6 @@ $('#tabs > li a').click(function(){
 		$table = $('#tab'+num+' table tbody');
 		
 		$table.empty();
-		
 		
 		for(var i in data){
 			var $tdMno = $('<td id="mno">').text(data[i].mno);
@@ -119,6 +129,7 @@ $('#tabs > li a').click(function(){
 					var $tdDropDate = $('<td>').text("정상");		
 				} else {
 					var $tdDropDate = $('<td>').text("탈퇴");
+					$tdDropDate.css('color', 'red');
 				}
 				
 				$trBoard.append($tdMno).append($tdMid).append($tdMname).append($tdEmail).append($tdGender).append($tdAge)
@@ -127,14 +138,24 @@ $('#tabs > li a').click(function(){
 				$table.append($trBoard);
 			
 			} else if(mtype == "c"){
-			
-				var $tdAuthority = $('<td name="aname">').text(data[i].aname.substr(0,4));
+
+				var aname = data[i].aname;
+				
+				if(typeof aname == "string"){
+					aname = data[i].aname.substr(0,4);
+				} else {
+					aname = "권한 없음"
+				}
+				
+				console.log(aname);
+				
+				var $tdAuthority = $('<td name="aname">').text(aname);
 				var $tdGrantDate = $('<td>').text(moment(new Date(data[i].grantDate)).format('YYYY-MM-DD'));
 				
 				if(data[i].atake == "Y"){
-					$tdAuthority = $('<td>').text(data[i].aname.substr(0,4));
+					$tdAuthority = $('<td>').text(aname);
 				} else if(data[i].reqDate != null && data[i].atake == "N" && data[i].delflag == "N") {
-					$tdAuthority = $('<td>').text(data[i].aname.substr(0,4));
+					$tdAuthority = $('<td>').text(aname);
 					$tdGrantDate = $('<td name="aname">').html("<button name='requestBtn'>요청확인</button>") 
 				} else if(data[i].reqDate == null) {
 					$tdAuthority = $('<td>').text("권한 없음");
@@ -153,6 +174,7 @@ $('#tabs > li a').click(function(){
 					var $tdDropDate = $('<td>').text("정상");		
 				} else {
 					var $tdDropDate = $('<td>').text("탈퇴");
+					$tdDropDate.css('color', 'red');
 				}
 
 				$trBoard.append($tdMno).append($tdMid).append($tdMname).append($tdEmail)
@@ -175,9 +197,11 @@ $('#tabs > li a').click(function(){
 				}
 				
 				if(data[i].dropDate == null){
-					var $tdDropDate = $('<td>').text("정상");		
+					var $tdDropDate = $('<td>').text("정지");
+					$tdDropDate.css('color', 'red');
 				} else {
 					var $tdDropDate = $('<td>').text("탈퇴");
+					$tdDropDate.css('color', 'red');
 				}
 				
 				var today = moment(new Date()).format('YYYY-MM-DD');
@@ -226,7 +250,8 @@ $('#tabs > li a').click(function(){
 		console.log("회원 조회 실패!! \n data : " + data);
 	}
   })
-})
+});
+
 
 $('#search').click(function(){
    
@@ -294,6 +319,7 @@ $('#search').click(function(){
 						   var $tdDropDate = $('<td>').text("정상");		
 					   } else {
 						   var $tdDropDate = $('<td>').text("탈퇴");
+						   $tdDropDate.css('color', 'red');
 					   }
 					   
 					   $trBoard.append($tdMtype).append($tdMno).append($tdMid).append($tdMname).append($tdEmail).append($tdGender).append($tdAge)
@@ -312,7 +338,6 @@ $('#search').click(function(){
 			   
 		   }
 	   });
-	   
    }
 });
 });

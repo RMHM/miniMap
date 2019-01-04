@@ -8,9 +8,9 @@ import com.kh.mhm.board.model.vo.Board;
 
 public interface BoardDao {
 
-	List<Board> selectBoardList(int btype);
+	List<Board> selectBoardList(int bCode);
 	
-	List<Board> selectBoardList(Board board);
+	List<Board> selectBoardList(String keyfield, String keyword);
 	
 	List<Board> selectNoticeList(Board board);
 
