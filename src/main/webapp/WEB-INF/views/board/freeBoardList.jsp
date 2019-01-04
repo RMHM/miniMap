@@ -89,10 +89,11 @@
 								onclick="location.href='${pageContext.request.contextPath}/board/boardwrite.do'"
 								style="position: absolute; right: 20px;" /> </c:if>
 
-							<div class="" id=""
+							<div class="s-area" id="s-area"
 								style="display: flex; align-items: center; justify-content: center;">
 								
-								<form class="search">
+								<form action="/board/search.do" method="post" id="search" enctype="multipart/form-data">
+								<input type="hidden" name="boardCd" value="${Board.bCode }" />
 									<input class="seracharea" type="text" />
 									<button class="searchbtn" type="submit">검색</button>
 								</form>
