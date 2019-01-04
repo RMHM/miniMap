@@ -54,12 +54,11 @@
 	</update>
 	
 	<insert id="insertBoard" parameterType="Board">
-		INSERT INTO BOARD(BID, MNO, BNO, BCODE, BTITLE, BCONTENT, ISNOTICE)
+		INSERT INTO BOARD(BID, MNO, BNO, BCODE, BTITLE, BCONTENT, HASFILE, ISNOTICE)
 		VALUES
-		(SEQ_BID.NEXTVAL,#{mNo},SEQ_BNO_1.NEXTVAL,#{bCode},#{bTitle},#{bContent}, #{isNotice})
+		(SEQ_BID.NEXTVAL,#{mNo},SEQ_BNO_1.NEXTVAL,#{bCode},#{bTitle},#{bContent}, #{hasFile}, #{isNotice})
 		<!-- 전달한 board객체의 bNo 프로퍼티에 결과값을 담는다. -->
-		<selectKey keyProperty="bId" resultType="_int"
-			order="AFTER">
+		<selectKey keyProperty="bId" resultType="_int" order="AFTER">
 			SELECT SEQ_BID.CURRVAL FROM DUAL
 		</selectKey>
 	</insert>

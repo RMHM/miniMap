@@ -110,7 +110,6 @@ $(function(){
 			 
 					
 				 }
-			
 			/*
 			 $("input[type=file]").change(function () {
 	             

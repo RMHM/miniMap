@@ -39,7 +39,7 @@
 									</li>
 								<li><img src="resources/img/member/1.jpg" alt="" />
 									</li>
-								<li><img src="resources/img/testImgLogo.png" alt="" />
+								<li>
 								</li>
 							</ul>
 						</div>
