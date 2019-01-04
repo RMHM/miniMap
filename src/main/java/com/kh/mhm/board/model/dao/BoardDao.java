@@ -34,15 +34,27 @@ public interface BoardDao {
 
 	int deleteFileref(int boardNo);
 
-	int deleteFile(int attNo);
-
 	List<Map<String, String>> selectBoardList2(int cPage, int numPerPage);
 
-  int insertImgBoard(Board board);
+	int insertImgBoard(Board board);
 	
 	int insertImgFile(Fileref fref);
 	
 	String selectThumbnailImg(int bid);
 	
 	int selectCommentCnt(int bid);
+	
+	int deleteImg(int bid);
+	
+	List<String> selectBoardImg(int bid);
+	
+	int deleteOneImg(String imgName);
+	
+	int updateImgBoard(Board b);
+	
+	int selectBoardCnt(int bCode);
+	
+	List<Board> selectBoardListPart(Map<String, Integer> param);
+	
+	int selectAuthority(int mno);
 }

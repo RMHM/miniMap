@@ -278,11 +278,12 @@ public class BoardController {
 	//////////////////////////////////
 	// 기업 광고 게시판
 	@RequestMapping("/board/adBoard.go")
-	public ModelAndView adBoard() {
+	public ModelAndView adBoard(@RequestParam(value="cPage", required=false, defaultValue="1")int cPage, HttpSession session) {
 		ModelAndView mv = new ModelAndView();
 		List<Board> list = null;
 		List<String> thumbnail = null;
 		List<Integer> comment = null;
+		Map<String, Integer> param = null;
 		
 		try {
 			// 기업 게시판 게시물 가져오기
@@ -290,16 +291,29 @@ public class BoardController {
 			thumbnail = new ArrayList<String>();
 			comment = new ArrayList<Integer>();
 			
-			list = boardService.selectBoardList(5);
-			int viewNum = (list.size()<6)?list.size():6;
-			for(int i=0; i<viewNum; i++) {
+			int pageInNum = 3;
+			int totCnt = boardService.selectBoardCnt(5);
+			int maxPage = 0;
+			if(totCnt==0) maxPage = 1;
+			else maxPage = (totCnt%pageInNum==0)?(int)totCnt/pageInNum:(int)(totCnt/pageInNum+1);
+			
+			param = new HashMap<String, Integer>();
+			param.put("bCode", 5);
+			param.put("cPage", cPage);
+			param.put("num", pageInNum);
+			
+			list = boardService.selectBoardListPart(param);
+			for(int i=0; i<list.size(); i++) {
 				thumbnail.add(boardService.selectThumbnailImg(list.get(i).getBId()));
 				comment.add(boardService.selectCommentCnt(list.get(i).getBId()));
 			}
 			
-			mv.addObject("blist", list);
-			mv.addObject("thumb", thumbnail);
-			mv.addObject("comment", comment);
+			Member m = (Member)session.getAttribute("member");
+			String authority = "";
+			if(m != null) if(boardService.selectAuthority(m.getMno())>0) authority = "yse";
+			
+			mv.addObject("blist", list).addObject("thumb", thumbnail).addObject("comment", comment);	// 리스트
+			mv.addObject("cPage", cPage).addObject("maxPage", maxPage).addObject("authority", authority);
 			mv.setViewName("board/ad/adBoardList");
 		} catch(Exception e) {
 			mv.addObject("msg", "게시물 불러오기를 실패하였습니다.");
@@ -401,7 +415,7 @@ public class BoardController {
 			}
 			
 			// 저장경로
-      String defaultPath = session.getServletContext().getRealPath("/resources/img/upload/");
+			String defaultPath = session.getServletContext().getRealPath("/resources/img/upload/");
 			
 			// 저장경로 지정
 			File file = new File(defaultPath);
@@ -421,7 +435,7 @@ public class BoardController {
 				System.out.println(e.getMessage());
 			}
 			
-      String imgUrl = session.getServletContext().getContextPath() + "/resources/img/upload/" + rename;
+			String imgUrl = session.getServletContext().getContextPath() + "/resources/img/upload/" + rename;
 			fileInfo.put("imageurl", imgUrl);		// 상대파일경로
 			fileInfo.put("filename", rename);		// 파일명
 			fileInfo.put("filesize", fileSize);		// 파일 사이즈
@@ -431,5 +445,122 @@ public class BoardController {
 			fileInfo.put("result", 1);
 		}
 		return fileInfo;
+	}
+	
+	// 이미지 게시물 불러오기
+	@RequestMapping("/board/adBoardView.do")
+	public ModelAndView adBoradView(@RequestParam int bid) {
+		ModelAndView mv = new ModelAndView();
+		
+		try {
+			Board b = boardService.selectOneBoard(bid);
+			
+			mv.addObject("b", b);
+			mv.setViewName("board/ad/adBoardView");
+		} catch(Exception e) {
+			e.getStackTrace();
+			mv.addObject("msg", "게시물 불러오기에 실패하였습니다.");
+			mv.addObject("loc", "/");
+			mv.setViewName("common/msg");
+		}
+
+		return mv;
+	}
+	
+	// 이미지 게시물 삭제하기
+	@RequestMapping("/board/adBoardRemove.do")
+	public ModelAndView adBoardRemove(@RequestParam int bid) {
+		ModelAndView mv = new ModelAndView();
+		
+		try {
+			boardService.deleteBoard(bid);	// 게시물 삭제
+			boardService.deleteImg(bid);	// 게시물 내 포함된 이미지 삭제
+			
+			mv.addObject("msg", "게시물 삭제에 성공하였습니다.");
+		} catch(Exception e) {
+			e.getStackTrace();
+			mv.addObject("msg", "게시물 삭제에 실패하였습니다.");
+		}
+		mv.addObject("loc", "/board/adBoard.go");
+		mv.setViewName("common/msg");
+		return mv;
+	}
+	
+	// 이미지 게시물 수정 페이지 전환
+	@RequestMapping("/board/adBoardUpdate.go")
+	public ModelAndView adBoardUpdateView(@RequestParam int bid) {
+		ModelAndView mv = new ModelAndView();
+		
+		try {
+			mv.addObject("b", boardService.selectOneBoard(bid));
+			mv.setViewName("/board/ad/adBoardUpdateView");
+		} catch(Exception e) {
+			e.getStackTrace();
+			mv.addObject("msg", "수정페이지 이동에 실패하였습니다.");
+			mv.addObject("loc", "/board/adBoard.go");
+			mv.setViewName("common/msg");
+		}
+		return mv;
+	}
+	
+	// 이미지 게시물 수정하기
+	@RequestMapping("/board/adBoardUpdate.do")
+	public ModelAndView adBoardUpdate(Board b) {
+		ModelAndView mv = new ModelAndView();
+		
+		try {
+			
+			List<String> imgList = new ArrayList<String>();
+			String str = "upload/";
+			int start = 0;
+			while(true) {
+				// 글 내용에서 이미지 이름 파싱
+				int begin = b.getBContent().indexOf(str, start) + str.length();
+				int end = b.getBContent().indexOf(34, begin);
+				if(start>end) break;
+				imgList.add(b.getBContent().substring(begin, end));
+				start = end;
+			}
+
+			List<String> saveImgList = boardService.selectBoardImg(b.getBId());
+			String hasFile = "N";
+			for(int i=0; i<imgList.size(); i++) {
+				// 추가되는 이미지가 있는지 여부 확인
+				if(!saveImgList.contains(imgList.get(i))) {
+					Fileref fref = new Fileref();
+					fref.setfType("I");
+					fref.setOrigin_Name(imgList.get(i));
+					fref.setChange_Name(imgList.get(i));
+					fref.setbId(b.getBId());
+					// 저장하기
+					boardService.insertImgFile(fref);
+				}
+				hasFile = "Y";
+			}
+			
+			for(int i=0; i<saveImgList.size(); i++) {
+				// 새로 저장되는 게시글에 기존 저장된 이미지를 그대로 사용하는지 확인
+				if(!imgList.contains(saveImgList.get(i))) {
+					// 파일명 삭제
+					boardService.deleteOneImg(saveImgList.get(i));
+				}
+			}
+			
+			b.setHasFile(hasFile);
+			System.out.println(b);
+			boardService.updateImgBoard(b);
+			
+			mv.addObject("msg", "게시물 수정 성공!");
+			mv.addObject("loc", "/board/adBoardView.do?bid="+b.getBId());
+			mv.setViewName("common/msg");
+		} catch(Exception e) {
+			System.out.println(e.getMessage());
+			e.getStackTrace();
+			mv.addObject("msg", "게시물 수정에 실패하였습니다.");
+			mv.addObject("loc", "/board/adBoard.go");
+			mv.setViewName("common/msg");
+		}
+		
+		return mv;
 	}
 }

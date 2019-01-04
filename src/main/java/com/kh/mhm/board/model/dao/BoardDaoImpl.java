@@ -116,12 +116,6 @@ public class BoardDaoImpl implements BoardDao {
 	}
 
 	@Override
-	public int deleteFile(int attNo) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
 	public List<Map<String, String>> selectBoardList2(int cPage, int numPerPage) {
 		RowBounds rowBounds = new RowBounds((cPage-1)*numPerPage, numPerPage);	
 		return sqlSession.selectList("board.selectBoardList",null,rowBounds);
@@ -147,4 +141,38 @@ public class BoardDaoImpl implements BoardDao {
 		return sqlSession.selectOne("board.selectCommentCnt", bid);
 	}
 
+	@Override
+	public int deleteImg(int bid) {
+		return sqlSession.update("board.deleteImg", bid);
+	}
+
+	@Override
+	public List<String> selectBoardImg(int bid) {
+		return sqlSession.selectList("board.selectBoardImg", bid);
+	}
+
+	@Override
+	public int deleteOneImg(String imgName) {
+		return sqlSession.update("board.deleteOneImg", imgName);
+	}
+
+	@Override
+	public int updateImgBoard(Board b) {
+		return sqlSession.update("board.updateImgBoard", b);
+	}
+
+	@Override
+	public int selectBoardCnt(int bCode) {
+		return sqlSession.selectOne("board.selectBoardCnt", bCode);
+	}
+
+	@Override
+	public List<Board> selectBoardListPart(Map<String, Integer> param) {
+		return sqlSession.selectList("board.selectBoardListPart", param);
+	}
+
+	@Override
+	public int selectAuthority(int mno) {
+		return sqlSession.selectOne("board.selectAuthority", mno);
+	}
 }
