@@ -74,8 +74,9 @@
 				<br>
 				<div class="uploader">				
 				<img src="/resources/img/profiles/${b.profile_Path }" class="uploder-profile">				
-				&nbsp;&nbsp; 작성자 &nbsp;: &nbsp;${b.mnick}				
+				&nbsp;&nbsp; 작성자 &nbsp; : &nbsp;${b.mnick}				
 				<br>
+				 <a id="report-modal" href="#report-modal-container" role="button" class="btn" data-toggle="modal">신고하기</a>
 				</div>
 				<!-- 게시판 제목 -->
 				<div id="titlearea" style="width: 90%; background-color: lightblue">
@@ -330,7 +331,44 @@
 
 		
 	</script>
-
+	
+	<!--Modal -->
+	<div class="modal fade" id="report-modal-container" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+				<div class="modal-dialog" role="document">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h5 class="modal-title" id="myModalLabel">
+								
+							</h5> 
+							<button type="button" class="close" data-dismiss="modal">
+								<span aria-hidden="true">×</span>
+							</button>
+						</div>
+						<div class="modal-body">
+							게시물을 신고하시겠습니까?
+						</div>
+						<div class="modal-footer">				 
+							<button type="button" class="btn btn-primary" id="reportbtn">
+								신고하기
+							</button> 
+							<button type="button" class="btn btn-secondary" data-dismiss="modal">
+								취소
+							</button>
+						</div>
+					</div>
+					
+				</div>
+	</div>	
+<script>
+$("#reportbtn").on('click', function(){
+	location.href= <%-- "<%=request.getContextPath()%>/InsertView.bo?bType=report&pickid=<%=p.getId()%>"; --%>
+});
+</script>
 
 </body>
 </html>
+
+	
+		
+		 
+			

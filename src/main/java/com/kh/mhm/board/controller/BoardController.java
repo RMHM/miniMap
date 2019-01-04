@@ -97,8 +97,54 @@ public class BoardController {
 	}
 	
 	@RequestMapping("board/boardinsert.do")
-	public String boardinsert(Board board, Model model, HttpSession session, HttpServletRequest req) {
-		int result;
+	public ModelAndView boardinsert(Board board, Model model, HttpSession session, HttpServletRequest req) {
+		
+		ModelAndView mv = new ModelAndView();
+		Member m = (Member)session.getAttribute("member");
+		
+		List<String> imgList = new ArrayList<String>();
+		String str = "upload/";
+		int start = 0;
+		board.setBContent(req.getParameter("boardcontent"));
+		while(true) {
+			// 글 내용에서 이미지 이름 파싱
+			int begin = board.getBContent().indexOf(str, start) + str.length();
+			int end = board.getBContent().indexOf(34, begin);
+			if(start>end) break;
+			imgList.add(board.getBContent().substring(begin, end));
+			start = end;
+		}
+		
+		if(imgList.size()>0) board.setHasFile("Y");
+		else board.setHasFile("N");
+		
+		// 게시글 등록
+				try {
+					boardService.insertBoard(board);
+					System.out.println("이미지 게시글 등록!");
+					// 이미지 파일이 존재하면 등록
+					if(imgList.size()>0) {
+						for(int i=0; i<imgList.size(); i++) {
+							Fileref fref = new Fileref();
+							fref.setbId(board.getBId());
+							fref.setfType("I");
+							fref.setOrigin_Name(imgList.get(i));
+							fref.setChange_Name(imgList.get(i));
+							boardService.insertImgFile(fref);
+						}
+					}
+					mv.addObject("msg", "게시물 등록을 성공하였습니다!");
+				} catch(Exception e) {
+					e.printStackTrace();
+					mv.addObject("msg", "게시물 등록에 실패하였습니다.");
+				}
+				
+				mv.addObject("loc", "/board/boardview.do?BId="+board.getBId());
+				mv.setViewName("common/msg");
+				
+				return mv;
+		
+		/*int result;
 		
 		System.out.println(session.getAttribute("member"));
 		
@@ -120,7 +166,7 @@ public class BoardController {
 		model.addAttribute("loc", loc)
 		.addAttribute("msg", msg);
 		System.out.println(board);
-		return "common/msg";
+		return "common/msg";*/
 		
 	}
 	
