@@ -91,6 +91,11 @@ public class MessageDaoImpl implements MessageDao {
 		return sqlSession.insert("Message.sendMessage",message);
 	}
 
+	@Override
+	public int findNick(String nick) {
+		return sqlSession.selectOne("Message.findNick",nick);
+	}
+
 
 
 }

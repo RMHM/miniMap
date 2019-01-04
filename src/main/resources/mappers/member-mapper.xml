@@ -53,6 +53,7 @@
 		<result column="AGE" property="age" />
 		<result column="End_Date" property="endDate" />
 		<result column="REASON" property="reason" />
+		<result column="RDETAIL" property="rdetail"/>
 	</resultMap>
 
 	<insert id="insertMember" parameterType="Member">
@@ -120,8 +121,9 @@
 		select end_date from (select rownum, end_date from (select end_date from blacklist where mno = #{mno} order by end_date desc) where rownum=1)
 	</select>
 	
-  	<select id="nickCheck" resultType="Member">
-		select mnick from member where mnick = #{mnick}
+  	<select id="checkNick" parameterType="String" resultType="int">
+		select count(*) from member mnick = #{mnick}
+
 	</select>
 	
 	<select id="searchMember" parameterType="String" resultMap="memberMap">
@@ -129,5 +131,17 @@
 		where ${condition} like '%'||#{keyword}||'%'
 		order by mtype, mno
 	</select>
+	
+	<select id="selectOneBlackList" parameterType="_int" resultMap="BlackListMap">
+		select * 
+		from blacklist
+		join member using(mno)
+		full outer join report on(mno = target_id)
+		where mno = 2 and end_date > sysdate
+	</select>
+	
+	<!-- <update id="clearBlackList" parameterType="String">
+		update blacklist
+	</update> -->
 	
 </mapper>

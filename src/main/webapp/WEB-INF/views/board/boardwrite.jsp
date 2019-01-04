@@ -20,51 +20,65 @@
 </head>
 <body>
 	<c:import url="/WEB-INF/views/common/exFile.jsp" />
-	<div id="wrapper container">
+	<div class="wrapper">
 		<c:import url="/WEB-INF/views/common/header.jsp" />
-		<div class="">
+		<div class="container">
 			<div class="col-md-2" align="center">
 				&nbsp;&nbsp;
 				<h4>--게시판 목록--</h4>
 				<ul class="unstyled">
-					<br><br><br><br>
-					<li><a href="/board/boardlist1.do">자유 게시판</a></li><br>
-					<li><a href="/board/boardlist2.do">정보공유 게시판</a></li><br>
-					<li><a href="/board/boardlist3.do">여행후기 게시판</a></li><br>
+					<br>
+					<br>
+					<br>
+					<br>
+					<li><a href="/board/boardlist1.do">자유 게시판</a></li>
+					<br>
+					<li><a href="/board/boardlist2.do">정보공유 게시판</a></li>
+					<br>
+					<li><a href="/board/boardlist3.do">여행후기 게시판</a></li>
+					<br>
 					<li><a href="/board/boardlist4.do">질문 게시판</a></li>
 				</ul>
 			</div>
 			<!-- 에디터 넣어야됨. -->
 			<div class="col-md-10">
-			<c:if test="${not empty member}">
-				<form action="/board/boardinsert.do" method="post" id="boardfrm" enctype="multipart/form-data">					
-					<input type="hidden" id="mNo" name="mNo" value="${member.mno}"/><!-- 작성자 회원번호  -->									
-					<input type="text" placeholder="제목" name="bTitle" id="bTitle" required>					
-					<div id="daumeditor" class="edit" style="width:90%; height:100%;"></div>				
-					<textarea name="boardcontent" id="boardcontent" style="display:none;"></textarea>
-					<c:if test="${member.mtype eq 'A' }">
-					<input type="checkbox" name="isNotice2" checked="checked">공지글로 올리기 <br>					
-					</c:if>
-					<input type="hidden" name="isNotice" value='N'>					
-					<input type="radio" name="bCode" value="1" checked="checked">잡담
-					<input type="radio" name="bCode" value="2">정보
-					<input type="radio" name="bCode" value="3">후기
-					<input type="radio" name="bCode" value="4">질문
-					<input type="button" class="btn btn-theme" id="insertBoard" value="등록"
-					 style="position: absolute; right: 100px;"/>			
-									
-				</form></c:if>
+				<c:if test="${not empty member}">
+					<form action="/board/boardinsert.do" method="post" id="boardfrm"
+						enctype="multipart/form-data">
+						<input type="hidden" id="mNo" name="mNo" value="${member.mno}" />
+						<!-- 작성자 회원번호  -->
+						<input type="text" placeholder="제목" name="bTitle" id="bTitle"
+							required>
+						<div id="daumeditor" class="edit"
+							style="width: 90%; height: 100%;"></div>
+						<textarea name="boardcontent" id="boardcontent"
+							style="display: none;"></textarea>
+						<c:if test="${member.mtype eq 'A' }">
+							<input type="checkbox" name="isNotice2" checked="checked">공지글로 올리기 <br>
+						</c:if>
+						<input type="hidden" name="isNotice" value='N'> <input
+							type="radio" name="bCode" value="1" checked="checked">잡담
+						<input type="radio" name="bCode" value="2">정보 <input
+							type="radio" name="bCode" value="3">후기 <input
+							type="radio" name="bCode" value="4">질문 <input
+							type="button" class="btn btn-theme" id="insertBoard" value="등록"
+							style="position: absolute; right: 100px;" />
+
+					</form>
+				</c:if>
 			</div>
 			<div>
-			
-			<div class="container-fluid">
-				<div class="row">
-					<div class="col-md-10"></div>
+
+				<div class="container-fluid">
+					<div class="row">
+						<div class="col-md-10"></div>
+					</div>
 				</div>
+				
 			</div>
-			<c:import url="/WEB-INF/views/common/footer.jsp" />
 		</div>
-	</div>		
+		<c:import url="/WEB-INF/views/common/footer.jsp" />
+	</div>
 </body>
 <script type="text/javascript">
 

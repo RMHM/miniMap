@@ -52,7 +52,7 @@
 		<table border="0" cellpadding="0" cellspacing="0">
 			<thead>
 			<tr>
-				<th class="chk"><input type="checkbox" id="idx_" name="idx_" onclick="toggleCheck('fmNoteData','idx_',this);" onfocus="this.blur();"/></th>
+				<th class="chk"><input type="checkbox" id="idx_" name="idx_" onfocus="this.blur();"/></th>
 				<th class="meid" style="display:none">쪽지번호</th>
 				<th class="title">제목</th>
 				<th class="nickname">보낸사람</th>
@@ -64,7 +64,7 @@
 					<c:choose>
 						<c:when test="${i.readFlag eq 'N'}">
 							<tr class="unread">
-								<td id="chk"><input type="checkbox" id="idx_" class="idx_" name="idx_"/></td>
+								<td id="chk"><input type="checkbox" id="index_" class="index_" name="index_"/></td>
 								<td id="meid" style="display:none">${i.meId}</td>
 								<td><a href="#" onclick="selectDetailStore($(this).parent().siblings('#meid').text());" onfocus="this.blur();">${i.meTitle}</a></td>
 								<td>${i.mNick}</td>
@@ -73,7 +73,7 @@
 						</c:when>
 						<c:otherwise>
 							<tr class="read">
-								<td id="chk"><input type="checkbox" id="idx_" class="idx_" name="idx_"/></td>
+								<td id="chk"><input type="checkbox" id="index_" class="index_" name="index_"/></td>
 								<td id="meid" style="display:none">${i.meId}</td>
 								<td><a href="#" onclick="selectDetailStore($(this).parent().siblings('#meid').text());" onfocus="this.blur();">${i.meTitle}</a></td>
 								<td>${i.mNick}</td>
@@ -89,7 +89,7 @@
 	</div>
 
 	<div class="tools">
-		<div id="notePaging"><span class="basetext"><img class="leftarrow" src="http://static.inven.co.kr/image/member/note/icon_arrow_left.gif"> <span class="prevtext">이전</span> <span class="currentpg">1</span> <span class="nexttext">다음</span> <img class="rightarrow" src="http://static.inven.co.kr/image/member/note/icon_arrow_right.gif"></span></div>
+		<div id="notePaging"><span class="basetext"><img class="leftarrow" src="/resources/img/message/leftArrow.gif"> <span class="prevtext">이전</span> <span class="currentpg">1</span> <span class="nexttext">다음</span> <img class="rightarrow" src="/resources/img/message/rightArrow.gif"></span></div>
 		
 	</div>
 </div>
@@ -99,24 +99,19 @@
 
 <script>
 // 전체클릭
-/* function checkAll(fm, prefix, chk) {
-	var fmObj = document.getElementById(fm);
-	var chs = fmObj.getElementsByTagName('INPUT');
-	var n = chs.length;
-	var prefixn = prefix.length;
-	for (var i = 0; i < n; i++) {
-		var item = chs.item(i);
-		if (item.getAttribute('name').substring(0, prefixn) == prefix) {
-			item.checked = chk;
-		}
+$("#idx_").click(function(){
+	if($(this).prop("checked")){
+		$("input[name^=index_]").prop('checked', true);
+	}else{
+		$("input[name^=index_]").prop('checked', false);
 	}
-}
+});
 
-function toggleCheck(fm, prefix, obj) {
-	checkAll(fm, prefix, obj.checked);
-} */
-
-
+$("input[name^=index_]").click(function(){
+	if($("#idx_").prop("checked")){
+		$("#idx_").prop("checked",false);
+	}
+});
 
 function deleteNotes() {
 	/* var fmObj = document.getElementById("fmNoteData");

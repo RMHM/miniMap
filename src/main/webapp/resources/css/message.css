@@ -149,7 +149,7 @@
 		_height: 21px;
 		padding-top: 5px;
 		overflow: hidden;
-		float: left;
+		float: right;
 		text-align: center;
 		display: inline;
 		background: url(/resources/img/message/smallBtn.gif) left top no-repeat;
@@ -266,11 +266,11 @@
 		font-size:9pt;
 		border: solid 1px #C4CAD1;
 	}
-	#noteWrite table.content input.nick { width: 230px; }
-	#noteWrite table.content input.title { width: 358px; }
+	#noteWrite table.content input.nick { width: 150px; }
+	#noteWrite table.content input.title { width: 362px; }
 
 	#noteWrite table.content textarea.content {
-		width: 100%;
+		width: 358px;
 		height: 290px;
 		font-family: gulim, 굴림;
 		font-size:9pt;
@@ -551,6 +551,7 @@
 		float: left;
 	}
 	#noteView div.command #aNoteStore,
+	#noteView div.command #aNoteRpl,
 	#noteView div.command #aNoteReport,
 	#noteView div.command #aNoteDelete,
 	#noteView div.command #aNoteSendDelete,
@@ -577,4 +578,19 @@
 		overflow: hidden !important;
 		padding: 1px 0 0 0 !important;
 		font-size: 1pt !important;
+	}
+	
+	.guide {
+		display:none;
+		font-size: 12px;
+		position: relative;
+		right:16px;
+	}
+	.ok{
+		font-weight:bolder;
+		color:green;
+	}
+	.error{
+		font-weight:bolder;
+		color:red;
 	}
