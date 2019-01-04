@@ -7,7 +7,7 @@
 
 	<resultMap type="Board" id="boardMap"></resultMap>
 	
-	<insert id="insertReport" parameterType="Report" resultType="_int">
+	<insert id="insertReport" parameterType="Report">
 		INSERT INTO REPORT VALUES(SEQ_RID,#{target_type},#{target_id},#{rcode},N,#{report_mno},SYSDATE,#{rdetail})
 	</insert>
 	
