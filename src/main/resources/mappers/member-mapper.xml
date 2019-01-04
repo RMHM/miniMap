@@ -3,7 +3,20 @@
 "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="member">
-
+	
+	<resultMap type="BlackList" id="BlackListMap">
+		<result column="MNO" property="mno" />
+		<result column="MID" property="mid" />
+		<result column="JOIN_DATE" property="joinDate" javaType="java.sql.Date" jdbcType="DATE" />
+		<result column="DROP_DATE" property="dropDate" javaType="java.sql.Date" jdbcType="DATE" />
+		<result column="EMAIL" property="email" />
+		<result column="GENDER" property="gender" />
+		<result column="AGE" property="age" />
+		<result column="End_Date" property="endDate" />
+		<result column="REASON" property="reason" />
+		<result column="RDETAIL" property="rdetail"/>
+	</resultMap>
+	
 	<resultMap type="Member" id="memberMap">
 		<result column="MNO" property="mno" />
 		<result column="MID" property="mid" />
@@ -17,7 +30,6 @@
 		<result column="PROFILE_PATH" property="profilePath" />
 		<result column="JOIN_DATE" property="joinDate" javaType="java.sql.Date" jdbcType="DATE" />
 		<result column="DROP_DATE" property="dropDate" javaType="java.sql.Date" jdbcType="DATE" />
-		<collection property="endDate" resultMap="BlackListMap" />
 	</resultMap>
 
 	<resultMap type="Member" id="CommonMemberMap">
@@ -42,19 +54,6 @@
 		<result column="ANAME" property="aname" />
 		<result column="ATAKE" property="atake"/>
 		<result column="DELFLAG" property="delflag"/>
-	</resultMap>
-
-	<resultMap type="BlackList" id="BlackListMap">
-		<result column="MNO" property="mno" />
-		<result column="MID" property="mid" />
-		<result column="JOIN_DATE" property="joinDate" javaType="java.sql.Date" jdbcType="DATE" />
-		<result column="DROP_DATE" property="dropDate" javaType="java.sql.Date" jdbcType="DATE" />
-		<result column="EMAIL" property="email" />
-		<result column="GENDER" property="gender" />
-		<result column="AGE" property="age" />
-		<result column="End_Date" property="endDate" />
-		<result column="REASON" property="reason" />
-		<result column="RDETAIL" property="rdetail"/>
 	</resultMap>
 
 	<insert id="insertMember" parameterType="Member">

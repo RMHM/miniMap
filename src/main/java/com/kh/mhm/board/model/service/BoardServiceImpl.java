@@ -89,12 +89,6 @@ public class BoardServiceImpl implements BoardService {
 	}
 
 	@Override
-	public int deleteFile(int attNo) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
 	public List<Map<String, String>> selectBoardList2(int cPage, int numPerPage) {
 		
 		return boardDao.selectBoardList2(cPage, numPerPage);
@@ -120,4 +114,38 @@ public class BoardServiceImpl implements BoardService {
 		return boardDao.selectCommentCnt(bid);
 	}
 
+	@Override
+	public int deleteImg(int bid) {
+		return boardDao.deleteImg(bid);
+	}
+
+	@Override
+	public List<String> selectBoardImg(int bid) {
+		return boardDao.selectBoardImg(bid);
+	}
+
+	@Override
+	public int deleteOneImg(String imgName) {
+		return boardDao.deleteOneImg(imgName);
+	}
+
+	@Override
+	public int updateImgBoard(Board b) {
+		return boardDao.updateImgBoard(b);
+	}
+
+	@Override
+	public int selectBoardCnt(int bCode) {
+		return boardDao.selectBoardCnt(bCode);
+	}
+
+	@Override
+	public List<Board> selectBoardListPart(Map<String, Integer> param) {
+		return boardDao.selectBoardListPart(param);
+	}
+
+	@Override
+	public int selectAuthority(int mno) {
+		return boardDao.selectAuthority(mno);
+	}
 }

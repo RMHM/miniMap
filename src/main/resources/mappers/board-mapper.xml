@@ -86,11 +86,40 @@
 	</insert>
 	
 	<select id="selectThumbnailImg" parameterType="_int" resultType="string">
-		select change_name from (select rownum rnum, sub.* from (select * from fileref where bid = #{bid} order by fid asc) sub) where rnum = 1
+		select change_name from (select rownum rnum, sub.* from (select * from fileref where bid = #{bid} and delflag = 'N' order by fid asc) sub) where rnum = 1
 	</select>
 	
 	<select id="selectCommentCnt" parameterType="_int" resultType="_int">
 		select count(*) from coment where bid = #{bid} and rflag = 'N' and delflag='N'
+	</select>
+	
+	<update id="deleteImg" parameterType="_int">
+		update fileref set delflag = 'Y' where bid = #{bid}
+	</update>
+	
+	<select id="selectBoardImg" parameterType="_int" resultType="string">
+		select change_name from fileref where bid = #{bid} and delflag = 'N'
+	</select>
+	
+	<update id="deleteOneImg" parameterType="string">
+		update fileref set delflag = 'Y' where change_name = #{imgName}
+	</update>
+	
+	<update id="updateImgBoard" parameterType="Board">
+		update board set btitle = #{BTitle}, bcontent = #{bContent}, hasfile = #{hasFile} where bid = #{bId}
+	</update>
+	
+	<select id="selectBoardCnt" parameterType="_int" resultType="_int">
+		select count(*) from board where bcode = #{bCode} and delflag = 'N' and rflag = 'N'
+	</select>
+	
+	<select id="selectBoardListPart" parameterType="hashmap" resultType="Board">
+		select * from (select rownum rn, sub.* from (select b.*, m.mnick from board b, member m where bcode = #{bCode} and delflag='N' and rflag='N' order by bid desc) sub)
+		<![CDATA[ where rn >= (#{cPage}-1)*#{num}+1 and rn <= #{cPage}*#{num} ]]>
+	</select>
+	
+	<select id="selectAuthority" parameterType="_int" resultType="_int">
+		select count(*) from authority where delflag='N' and grant_date is not null and acode = 1 and mno = #{mno}
 	</select>
 	
 </mapper>
