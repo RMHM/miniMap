@@ -124,7 +124,7 @@
 			</div>
 			<script src="/resources/js/member/memberEnroll.js"></script>
 			<script> 
-				// 파일 업로드 시 미리보기
+				// 파일 업로드, 미리보기
 				function readURL(input){
 				
 					if (input.files && input.files[0]){
@@ -143,18 +143,18 @@
 						readURL(this);
 					});
 			</script>
-			<!-- 
-			<script> 
-				// 파일 업로드
-				function readURL(input) { 
-							
-				var reader = new FileReader(); 
-				reader.onload = function (e) {
-				$('#imc').attr('src', e.target.result); 
-				} 
-				reader.readAsDataURL(input.files[0]); } 
+			<script>
+			function checkPassword(){
+				var check = /^[A-Za-z0-9{6,12}$]/;
+				
+				if (!check.test($("input[id='mpw_']").val())){
+					// 경고
+					return false;
+				}
+				
+			}
+				
 			</script>
-			 -->
 		</section>
 		<c:import url="/WEB-INF/views/common/footer.jsp"/>
 	</div>
