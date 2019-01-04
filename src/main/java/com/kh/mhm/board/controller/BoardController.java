@@ -42,24 +42,38 @@ public class BoardController {
 	private ComentService comentService;
 	
 	@RequestMapping("/board/boardlist1.do")
-	public String freeboard(@RequestParam(value="cPage", required=false, defaultValue="1") int cPage, Model model, Board board) {
+	public String freeboard(@RequestParam(value="cPage", required=false, defaultValue="1")int cPage, 
+							/*@RequestParam(required=false) String keyField,
+							@RequestParam(required=false) String keyWord,*/	
+							Model model, Board board) {
 		int numPerPage = 4;
 		
 		ArrayList<Map<String, String>> list = 
-				new ArrayList<Map<String, String>>(boardService.selectBoardList2(cPage, numPerPage));
+				new ArrayList<Map<String, String>>(boardService.selectBoardList2(cPage, numPerPage/*, keyField, keyWord*/));
 		
 		int totalContents = boardService.selectBoardTotalContents();
     
     String pageBar = Utils.getPageBar(totalContents, cPage, numPerPage, "boardlist1.do");
 		List<Board> list2 = boardService.selectNoticeList(board);
+		/*List<Board> list3 = boardService.selectBoardList(keyField, keyWord);*/
 		System.out.println(pageBar);
 		
+		/*if(list3 == null) {*/
 		model.addAttribute("list", list)
 		.addAttribute("totalContents", totalContents)
 		.addAttribute("numPerPage", numPerPage)
 		.addAttribute("pageBar", pageBar)
 		.addAttribute("list2", list2);
+		/*.addAttribute("keyWord",keyWord)
+		.addAttribute("keyField",keyField);*/
 		
+		/*} else {
+			
+		model.addAttribute("list3", list3)
+		.addAttribute("keyWord",keyWord)
+		.addAttribute("keyField",keyField);
+			
+		}*/
 		
 		return "board/freeBoardList";
 	}
@@ -180,9 +194,9 @@ public class BoardController {
 		addAttribute("clist", clist);
 		
 		System.out.println(BId);
-		System.out.println(boardService.selectOneBoard(BId));
+		System.out.println(boardService.selectOneBoard(BId));		
 		System.out.println(model);		
-		/*model.addAttribute("b", boardService.updateOneCount(BId));*/
+		boardService.updateOneCount(BId);		
 		return "board/boardview";
 	}
 
