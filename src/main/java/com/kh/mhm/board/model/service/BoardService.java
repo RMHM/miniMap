@@ -14,7 +14,7 @@ public interface BoardService {
 	// btype용
 	List<Board> selectBoardList(int bCode);
 	
-	List<Board> selectBoardList(Board board);	
+	List<Board> selectBoardList(String keyfield, String keyword);	
 	
 	List<Board> selectNoticeList(Board board);		
 
@@ -35,7 +35,7 @@ public interface BoardService {
 	int deleteFile(int attNo);
 	
 	List<Map<String, String>> selectBoardList2(int cPage, int numPerPage);
-  
+	
   int insertImgBoard(Board board);
 	
 	int insertImgFile(Fileref fref);

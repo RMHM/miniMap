@@ -1,9 +1,11 @@
 package com.kh.mhm.board.model.dao;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import org.apache.ibatis.session.RowBounds;
+import org.apache.ibatis.session.SqlSession;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -25,9 +27,23 @@ public class BoardDaoImpl implements BoardDao {
 	}
 	
 	@Override
-	public List<Board> selectBoardList(Board board) {
+	public List<Board> selectBoardList(String keyfield, String keyword) {
+		List<Board> list = null;
+      
+        if(keyfield != null && keyword != null && keyfield !="" && keyword !=""){
+            Map<String, String> map = new HashMap<String, String> ();
+            map.put("keyfield" , keyfield);
+            map.put("keyword", keyword);
+            list = sqlSession.selectList("board.selectSearchList", map);
+            sqlSession.close();
+            return list;
+        }else {
+            list = sqlSession.selectList("board.selectBoardList");
+            sqlSession.close();
+            return list;		
 		
-        return sqlSession.selectList("board.selectBoardList");
+        }
+        
 		
 	}
 	
@@ -107,7 +123,7 @@ public class BoardDaoImpl implements BoardDao {
 
 	@Override
 	public List<Map<String, String>> selectBoardList2(int cPage, int numPerPage) {
-		RowBounds rowBounds = new RowBounds((cPage-1)*numPerPage, numPerPage);
+		RowBounds rowBounds = new RowBounds((cPage-1)*numPerPage, numPerPage);	
 		return sqlSession.selectList("board.selectBoardList",null,rowBounds);
 	}
 
