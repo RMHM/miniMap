@@ -12,7 +12,7 @@ public interface BoardService {
 	static int BOARD_SERVICE_COMPLETE = 1;
 
 	// btype용
-	List<Board> selectBoardList(int btype);
+	List<Board> selectBoardList(int bCode);
 	
 	List<Board> selectBoardList(Board board);	
 	
@@ -37,4 +37,10 @@ public interface BoardService {
 	List<Map<String, String>> selectBoardList2(int cPage, int numPerPage);
   
   int insertImgBoard(Board board);
+	
+	int insertImgFile(Fileref fref);
+	
+	String selectThumbnailImg(int bid);
+	
+	int selectCommentCnt(int bid);
 }

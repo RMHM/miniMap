@@ -6,7 +6,7 @@
 	<resultMap type="Coment" id="comentMap"></resultMap>
 	
 	<select id="selectComentList" parameterType="_int" resultType="Coment">
-    		SELECT C.*, M.* FROM COMENT C, MEMBER M WHERE BID = #{bid} AND DELFLAG='N' AND C.MNO = M.MNO
+    		SELECT C.*, M.* FROM COMENT C, MEMBER M WHERE BID = #{bid} <!-- AND DELFLAG='N' --> AND C.MNO = M.MNO
     		START WITH CLEVEL = '1' CONNECT BY PRIOR  CID = CREF
 	</select>
 	

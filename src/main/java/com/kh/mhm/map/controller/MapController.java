@@ -8,9 +8,44 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 
+import javax.servlet.http.HttpServletRequest;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
+
+@Controller
 public class MapController {
 
+
 	
+
+	 @RequestMapping(value = "/map/map.do", method = {RequestMethod.GET, RequestMethod.POST})    
+	    public ModelAndView test(
+	           HttpServletRequest request,
+	           String[] main//배열 받기 traditional: true
+	           ) {
+	           
+	           ModelAndView view = null;
+			view.setViewName("jsonView");
+	        try {
+	 
+	            System.out.println(main[0]+"===============");//aa
+	            System.out.println(main[1]+"===============");//bb
+	            System.out.println(main[2]+"===============");//errer
+	            //throw new Exception();
+	                        
+	            view.addObject("result", "success");
+	            
+	        }catch(Exception ex){
+	            ex.printStackTrace();
+	        }        
+	        
+	        return view;
+	    }
+
 
 	
 	

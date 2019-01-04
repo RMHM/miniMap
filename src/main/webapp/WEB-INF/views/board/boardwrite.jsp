@@ -56,12 +56,12 @@
 						<c:if test="${member.mtype eq 'A' }">
 							<input type="checkbox" name="isNotice2" checked="checked">공지글로 올리기 <br>
 						</c:if>
-						<input type="hidden" name="isNotice" value='N'> <input
-							type="radio" name="bCode" value="1" checked="checked">잡담
-						<input type="radio" name="bCode" value="2">정보 <input
-							type="radio" name="bCode" value="3">후기 <input
-							type="radio" name="bCode" value="4">질문 <input
-							type="button" class="btn btn-theme" id="insertBoard" value="등록"
+						<input type="hidden" name="isNotice" value='N'> 
+						<input type="radio" name="bCode" value="1" checked="checked">잡담
+						<input type="radio" name="bCode" value="2">정보 
+						<input type="radio" name="bCode" value="3">후기 
+						<input type="radio" name="bCode" value="4">질문 
+						<input type="button" class="btn btn-theme" id="insertBoard" value="등록"
 							style="position: absolute; right: 100px;" />
 
 					</form>

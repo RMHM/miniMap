@@ -18,9 +18,9 @@ public class BoardDaoImpl implements BoardDao {
 	SqlSessionTemplate sqlSession;
 
 	@Override
-	public List<Board> selectBoardList(int btype) {
+	public List<Board> selectBoardList(int bCode) {
 		
-        return sqlSession.selectList("board.selectBoardListToBtype", btype);
+        return sqlSession.selectList("board.selectBoardListToBtype", bCode);
 		
 	}
 	
@@ -42,7 +42,7 @@ public class BoardDaoImpl implements BoardDao {
 	@Override
 	public int selectBoardTotalContents() {
 		// TODO Auto-generated method stub
-		return 0;
+		return sqlSession.selectOne("board.selectBoardTotalContents");
 	}
 
 	@Override
@@ -113,8 +113,22 @@ public class BoardDaoImpl implements BoardDao {
 
 	@Override
 	public int insertImgBoard(Board board) {
-		sqlSession.insert("board.insertImgBaord", board);
-		return sqlSession.insert("board.selectImgBaord", board);
+		return sqlSession.insert("board.insertImgBaord", board);
+	}
+
+	@Override
+	public int insertImgFile(Fileref fref) {
+		return sqlSession.insert("board.insertImgFile", fref);
+	}
+
+	@Override
+	public String selectThumbnailImg(int bid) {
+		return sqlSession.selectOne("board.selectThumbnailImg", bid);
+	}
+
+	@Override
+	public int selectCommentCnt(int bid) {
+		return sqlSession.selectOne("board.selectCommentCnt", bid);
 	}
 
 }

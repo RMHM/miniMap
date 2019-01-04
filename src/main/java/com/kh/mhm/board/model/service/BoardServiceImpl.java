@@ -22,9 +22,9 @@ public class BoardServiceImpl implements BoardService {
 	BoardDao boardDao;
 
 	@Override
-	public List<Board> selectBoardList(int btype) {
+	public List<Board> selectBoardList(int bCode) {
 		List<Board> list = null;
-        list = boardDao.selectBoardList(btype);
+        list = boardDao.selectBoardList(bCode);
         return list;
 	}
 	
@@ -103,6 +103,21 @@ public class BoardServiceImpl implements BoardService {
 	@Override
 	public int insertImgBoard(Board board) {
 		return boardDao.insertImgBoard(board);
+	}
+
+	@Override
+	public int insertImgFile(Fileref fref) {
+		return boardDao.insertImgFile(fref);
+	}
+
+	@Override
+	public String selectThumbnailImg(int bid) {
+		return boardDao.selectThumbnailImg(bid);
+	}
+
+	@Override
+	public int selectCommentCnt(int bid) {
+		return boardDao.selectCommentCnt(bid);
 	}
 
 }
