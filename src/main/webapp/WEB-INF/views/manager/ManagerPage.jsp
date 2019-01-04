@@ -61,14 +61,20 @@
 	
 	<div id="listArea">
 	<ul id="tabs">
-	    <li><a href="#" value="m" name="1" title="tab1">일반회원</a></li>
-	    <li><a href="#" value="c" name="2" title="tab2">기업회원</a></li>
-	    <li><a href="#" value="b" name="3" title="tab3">블랙리스트</a></li>   
-	    <li><a href="#" value="s" name="4" title="tab4">통계</a></li>
+	    <li><a href="#" value="s" name="1" title="tab1">통계</a></li>
+	    <li><a href="#" value="m" name="2" title="tab2">일반회원</a></li>
+	    <li><a href="#" value="c" name="3" title="tab3">기업회원</a></li>
+	    <li><a href="#" value="b" name="4" title="tab4">블랙리스트</a></li>   
 	</ul>
 	
 	<div id="content"> 
-	    <div id="tab1">
+		<div id="tab1">
+			<form id="statistics">
+				
+			</form>
+		</div>
+		
+	    <div id="tab2">
 			<table>
 				<thead>
 					<tr>
@@ -87,7 +93,7 @@
 				</tbody>				
 			</table>
 		</div>
-	    <div id="tab2">
+	    <div id="tab3">
 			<table>
 				<thead>
 					<tr>
@@ -106,7 +112,7 @@
 				</tbody>
 			</table>
 		</div>
-	    <div id="tab3">
+	    <div id="tab4">
 			<table>
 				<thead>
 					<tr>
@@ -127,14 +133,9 @@
 				</tbody>	
 			</table>
 		</div>
-		
-		<div id="tab4">
-			
-		</div>
 	</div>
 
 	</div>
 	</div>
 </body>
-
 </html>
