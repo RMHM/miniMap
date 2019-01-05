@@ -22,34 +22,89 @@ public class BoardServiceImpl implements BoardService {
 	BoardDao boardDao;
 
 	@Override
-	public List<Board> selectBoardList(int bCode) {
+	public List<Map<String, String>> selectBoardList1(int cPage, int numPerPage) {		
+		return boardDao.selectBoardList1(cPage, numPerPage);
+	}	
+	@Override
+	public List<Board> selectSearchList1(String keyfield, String keyword) {
 		List<Board> list = null;
-        list = boardDao.selectBoardList(bCode);
+        list = boardDao.selectSearchList1(keyfield, keyword);
         return list;
+	}
+	@Override
+	public List<Board> selectNoticeList1(Board board) {
+		List<Board> list = null;
+        list = boardDao.selectNoticeList1(board);
+        return list;
+	}	
+	@Override
+	public int selectBoardTotalContents1() {		
+		return boardDao.selectBoardTotalContents1();
 	}
 	
 	@Override
-	public List<Board> selectBoardList(String keyfield, String keyword) {
+	public List<Map<String, String>> selectBoardList2(int cPage, int numPerPage) {		
+		return boardDao.selectBoardList2(cPage, numPerPage);
+	}	
+	@Override
+	public List<Board> selectSearchList2(String keyfield, String keyword) {
 		List<Board> list = null;
-        list = boardDao.selectBoardList(keyfield, keyword);
+        list = boardDao.selectSearchList2(keyfield, keyword);
         return list;
 	}
-	
-
-	
+	@Override
+	public List<Board> selectNoticeList2(Board board) {
+		List<Board> list = null;
+        list = boardDao.selectNoticeList2(board);
+        return list;
+	}	
+	@Override
+	public int selectBoardTotalContents2() {		
+		return boardDao.selectBoardTotalContents2();
+	}
 	
 	@Override
-	public List<Board> selectNoticeList(Board board) {
+	public List<Map<String, String>> selectBoardList3(int cPage, int numPerPage) {		
+		return boardDao.selectBoardList3(cPage, numPerPage);
+	}	
+	@Override
+	public List<Board> selectSearchList3(String keyfield, String keyword) {
 		List<Board> list = null;
-        list = boardDao.selectNoticeList(board);
+        list = boardDao.selectSearchList3(keyfield, keyword);
         return list;
 	}
-	
 	@Override
-	public int selectBoardTotalContents() {
-		
-		return boardDao.selectBoardTotalContents();
+	public List<Board> selectNoticeList3(Board board) {
+		List<Board> list = null;
+        list = boardDao.selectNoticeList3(board);
+        return list;
+	}	
+	@Override
+	public int selectBoardTotalContents3() {		
+		return boardDao.selectBoardTotalContents3();
 	}
+	@Override
+	public List<Map<String, String>> selectBoardList4(int cPage, int numPerPage) {		
+		return boardDao.selectBoardList4(cPage, numPerPage);
+	}	
+	@Override
+	public List<Board> selectSearchList4(String keyfield, String keyword) {
+		List<Board> list = null;
+        list = boardDao.selectSearchList4(keyfield, keyword);
+        return list;
+	}
+	@Override
+	public List<Board> selectNoticeList4(Board board) {
+		List<Board> list = null;
+        list = boardDao.selectNoticeList4(board);
+        return list;
+	}	
+	@Override
+	public int selectBoardTotalContents4() {		
+		return boardDao.selectBoardTotalContents4();
+	}
+	
+	
 
 	@Override
 	public int insertBoard(Board board/*, List<Fileref> attachList*/) {
@@ -91,11 +146,7 @@ public class BoardServiceImpl implements BoardService {
 		return boardDao.deleteBoard(BId);
 	}
 
-	@Override
-	public List<Map<String, String>> selectBoardList2(int cPage, int numPerPage) {
-		
-		return boardDao.selectBoardList2(cPage, numPerPage);
-	}
+	
 
 	@Override
 	public int insertImgBoard(Board board) {
