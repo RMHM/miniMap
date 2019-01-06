@@ -96,7 +96,8 @@
 										value="${member.age}"> --%>
 								</div>
 							</div>
-								<div class="form-group">	
+								<div class="form-group">
+								<label class="col-sm-3 control-label" for="">프로필</label>	
 								<div class="col-sm-6">
 									<img id = "imc" src="/resources/img/profiles/${member.profilePath}">
 									<input class="form-check-input" id="profile" name="profile" onchange="readURL(this);"

@@ -168,8 +168,10 @@ public class MyPageController {
 	/* 회원정보 수정 하고 myPageMain 이동 */
 	@RequestMapping("/myPage/updateMember.do")
 	public String updateMember(@RequestParam(value="profile", required = false) MultipartFile profile,Member member, HttpSession session, HttpServletRequest request) {
+		if(profile.getSize()==0) {
+			System.out.println("원본"+member.getProfilePath());
+		}else {
 
-	
 		String saveDir = session.getServletContext().getRealPath("/resources/img/profiles");
 		File dir = new File(saveDir);
 		
@@ -191,9 +193,10 @@ public class MyPageController {
 		}
 		
 		member.setProfilePath(renamedName);
-		System.out.println(renamedName);
-		
+		}
 		member.setMpw(bcpe.encode(member.getMpw()));
+	
+		
 		int result = mps.updateMember(member);
 		return "myPage/myPageMain";
 	}
@@ -230,21 +233,26 @@ public class MyPageController {
 	public String myBoardList(@RequestParam(value = "cPage", required = false, defaultValue = "1") int cPage,
 			Member member, Model model) {
 		int no = member.getMno();
-		int numPerPage = 10;
+		int numPerPage = 5;
 
 		int totalContents = mps.selectBoardTotalContents(no);
-    
-    System.out.println(totalContents);
-    
+		int totalCoContents = mps.selectCommentTotalContents(no);
+		
 		List<Map<String, Object>> list = new ArrayList<Map<String, Object>>(
 				mps.selectMyBoardList(cPage, numPerPage, no));
+		List<Map<String, Object>> colist = new ArrayList<Map<String, Object>>(
+				mps.selectMyCommentList(cPage, numPerPage, no));
+		
+		String copageBar = Utils.getPageBar(totalCoContents, cPage, numPerPage, "myBoardList.do");
 		String pageBar = Utils.getPageBar(totalContents, cPage, numPerPage, "myBoardList.do");
-		model.addAttribute("list", list).addAttribute("totalContents", totalContents)
-				.addAttribute("numPerPage", numPerPage).addAttribute("pageBar", pageBar);
-    System.out.println(pageBar);
-		/*
-		 * System.out.println(list.get(0)); System.out.println(list.size());
-		 */
+		model.addAttribute("list", list)
+				.addAttribute("totalContents", totalContents)
+				.addAttribute("numPerPage", numPerPage)
+				.addAttribute("pageBar", pageBar)
+				.addAttribute("colist", colist)
+				.addAttribute("totalCoContents", totalCoContents)
+				.addAttribute("copageBar", copageBar)
+				;
 		return "myPage/boardMyView";
 	}
 

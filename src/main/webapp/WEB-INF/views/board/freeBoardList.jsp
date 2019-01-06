@@ -22,7 +22,7 @@
 				<br><br>
 				<h4>--게시판 목록--</h4>
 				<ul class="unstyled">
-					<br><br><br><br>
+					<br><br>
 					<li><a href="/board/boardlist1.do">자유 게시판</a></li><br>
 					<li><a href="/board/boardlist2.do">정보공유 게시판</a></li><br>
 					<li><a href="/board/boardlist3.do">여행후기 게시판</a></li><br>
@@ -92,7 +92,7 @@
 							<div class="s-area" id="s-area"
 								style="display: flex; align-items: center; justify-content: center;">
 								
-								<form action="/board/boardlist1.do" method="post" name="search" id="search" enctype="multipart/form-data">
+								<form action="/board/searchlist1.do" method="post" name="search" id="search" enctype="multipart/form-data">
 								 <select name="keyField" size="1">
            						     <option value="mnick" <c:if test="${'mnick'==keyField }"> selected</c:if>> 이름 </option>
              						 <option value="BTitle" <c:if test="${'BTitle'==keyField }"> selected</c:if>> 제목 </option>

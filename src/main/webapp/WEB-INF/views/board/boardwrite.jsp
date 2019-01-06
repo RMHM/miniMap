@@ -27,10 +27,7 @@
 				&nbsp;&nbsp;
 				<h4>--게시판 목록--</h4>
 				<ul class="unstyled">
-					<br>
-					<br>
-					<br>
-					<br>
+					<br><br>
 					<li><a href="/board/boardlist1.do">자유 게시판</a></li>
 					<br>
 					<li><a href="/board/boardlist2.do">정보공유 게시판</a></li>

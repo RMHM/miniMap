@@ -8,13 +8,41 @@ import com.kh.mhm.board.model.vo.Board;
 
 public interface BoardDao {
 
-	List<Board> selectBoardList(int bCode);
+	/*List<Board> selectBoardList(int bCode);*/
 	
-	List<Board> selectBoardList(String keyfield, String keyword);
+	// 1= 자유 2= 정보 3= 질문 4= 후기 게시판 리스트 출력
 	
-	List<Board> selectNoticeList(Board board);
+	List<Map<String, String>> selectBoardList1(int cPage, int numPerPage);
+	
+	List<Board> selectSearchList1(String keyfield, String keyword);
+	
+	List<Board> selectNoticeList1(Board board);
 
-	int selectBoardTotalContents();
+	int selectBoardTotalContents1();
+	
+	List<Map<String, String>> selectBoardList2(int cPage, int numPerPage);
+	
+	List<Board> selectSearchList2(String keyfield, String keyword);
+	
+	List<Board> selectNoticeList2(Board board);
+
+	int selectBoardTotalContents2();
+	
+	List<Map<String, String>> selectBoardList3(int cPage, int numPerPage);
+	
+	List<Board> selectSearchList3(String keyfield, String keyword);
+	
+	List<Board> selectNoticeList3(Board board);
+
+	int selectBoardTotalContents3();
+	
+	List<Map<String, String>> selectBoardList4(int cPage, int numPerPage);
+	
+	List<Board> selectSearchList4(String keyfield, String keyword);
+	
+	List<Board> selectNoticeList4(Board board);
+
+	int selectBoardTotalContents4();
 
 	int insertBoard(Board board);
 
@@ -34,7 +62,7 @@ public interface BoardDao {
 
 	int deleteFileref(int boardNo);
 
-	List<Map<String, String>> selectBoardList2(int cPage, int numPerPage);
+	
 
 	int insertImgBoard(Board board);
 	
