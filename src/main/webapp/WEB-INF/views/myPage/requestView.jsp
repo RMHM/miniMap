@@ -54,13 +54,18 @@
 												<td>${list.get(a).getACode()}</td>
 												<td>${list.get(a).getMName()}</td>
 												<td>${list.get(a).getRequest_date()}</td>
+												<c:if test="${list.get(a).getDelflag() eq 'Y'.charAt(0) }">
+													<td>요청 취소</td>
+												</c:if>
+												<c:if test="${list.get(a).getDelflag() eq 'N'.charAt(0) }">
+													
 												<c:if test="${!empty l.getGrant_date()}">
 													<td>승인</td>
 												</c:if>
 												<c:if test="${empty l.getGrant_date()}">
 													<td>요청중</td>
 												</c:if>
-
+												</c:if>
 											</tr>
 
 
@@ -83,15 +88,15 @@
 							<script>
 								$('tr[id]')
 										.click(
-												function() {
-
+												function(){
+													
+													if(($(this).children('td:eq(4)').text())=="요청 취소"){
+														alert("취소된 요청입니다.");
+													}else{
 													var trId = (this).id;
-													console.log("-----");
-													console.log(trId);
 													var idx = $('tr').index(
 															this) - 1;
-													console.log(idx);
-
+													
 													$
 															.ajax({
 																url : "${pageContext.request.contextPath}/myPage/selectRequest.do",
@@ -104,9 +109,8 @@
 																		data) {
 																	var str = data.address
 																			.split(",");
-																	console
-																			.log(str);
-																
+																	$(
+																	'#num').empty();
 																	$('#num')
 																			.append(
 																					(data.aid));
@@ -143,20 +147,6 @@
 																			'#updateRe')
 																			.dialog(
 																					{
-																					/* 		
-																							buttons:{
-																								
-																								"수정": function(){
-																									/* console.log(this); */
-																					/* 			console.log($(this).find("form"));
-																								$("#updateRe").attr("action","${pageContext.request.contextPath}/myPage/updateRePermission.do").submit();
-																							},
-																							"취소":function(){
-																								$(this).dialog("close");
-																							}
-																					
-																						} */
-
 																					});
 
 																},
@@ -169,13 +159,13 @@
 
 																}
 															});
-
+													}
 												});
 							</script>
 
 							<div id="updateRe" title="요청 정보" style="display: none">
 								<!-- <form action="updateRePermission.do" method="post"> -->
-								<form id="updateRe" method="post" action="updateRePermission.do">
+								<form id="updateReF" method="post" action="updateRePermission.do">
 									<div id="dialog-message"
 										style="width: auto; min-height: 0px; max-height: none; height: auto;">
 
@@ -293,15 +283,20 @@
 									 <input type="button" id="close" value="취소">
 									</div> -->
 									<div class="form-group">
-										<input type="submit" value="수정"> <input type="submit"
+										<input type="submit" value="수정" onclick=""> <input type="submit"
 											onclick="deleteRe();" value="요청취소"> <input
 											type="button" onclick="close();" value="취소">
 									</div>
 
 									<script>
+									function updateRe() {
+								
+										$('#updateReF').attr("action",
+												"updateRePermission.do");
+									}
 										function deleteRe() {
 											console.log("삭제 수행");
-											$('#updateRe').attr("action",
+											$('#updateReF').attr("action",
 													"deleteRePermission.do");
 										}
 									</script>
