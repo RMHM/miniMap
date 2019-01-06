@@ -14,12 +14,6 @@
 	<meta name="description" content="" />
 	
 </head>
-<style>
-	.test-icon:before {
-		width : 25px;
-		content: url("../resources/img/counter/test.png");
-	}
-</style>
 <body>
 	<!-- 외부파일 선언 -->
 	<c:import url="views/common/exFile.jsp" />

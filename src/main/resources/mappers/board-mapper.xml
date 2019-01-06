@@ -121,7 +121,7 @@
 	</select>
 	
 	<select id="selectBoardListPart" parameterType="hashmap" resultType="Board">
-		select * from (select rownum rn, sub.* from (select b.*, m.mnick from board b, member m where bcode = #{bCode} and delflag='N' and rflag='N' order by bid desc) sub)
+		select * from (select rownum rn, sub.* from (select b.*, m.mnick from board b, member m where bcode = #{bCode} and delflag='N' and rflag='N' and b.mno=m.mno order by bid desc) sub)
 		<![CDATA[ where rn >= (#{cPage}-1)*#{num}+1 and rn <= #{cPage}*#{num} ]]>
 	</select>
 	
