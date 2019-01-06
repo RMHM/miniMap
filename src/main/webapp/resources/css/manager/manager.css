@@ -76,11 +76,11 @@ table{
 #content {
     background-color: #fff;
     background-image: linear-gradient(top, #fff, #ddd);
-    padding-top: -20px;
+    padding: 30px 0 40px 0 !important;
 }
 
 #content div {
-    height: auto; 
+    height: auto;
 }
 
 #container {

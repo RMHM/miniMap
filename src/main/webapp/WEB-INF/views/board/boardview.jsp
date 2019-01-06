@@ -334,36 +334,74 @@
 	</script>
 	
 	<!--Modal -->
+	<form id ="insertReport"  action="${pageContext.request.contextPath}/report/insertReport.do" method="post" >
 	<div class="modal fade" id="report-modal-container" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 				<div class="modal-dialog" role="document">
 					<div class="modal-content">
 						<div class="modal-header">
-							<h5 class="modal-title" id="myModalLabel">								
+              <h5 class="modal-title" id="myModalLabel">
+								게시물을 신고하시겠습니까?
 							</h5> 
 							<button type="button" class="close" data-dismiss="modal">
 								<span aria-hidden="true">×</span>
 							</button>
 						</div>
 						<div class="modal-body">
-							게시물을 신고하시겠습니까?
+						
+							<div>
+							
+							<input type="hidden" id = "targetType" name = "target_type" value="" />
+							<input type="hidden" id = "targetId" name = "target_id" value="" />
+							<input type="hidden" name = "report_mno" value="${member.mno}"  />
+							
+							</div>
+							<div class="modal-body">
+								<div class = "modal-content">
+								<label >신고  사유 : </label></div>
+								<div class = "modal-content">
+								<input type="radio" name="rcode" value = "1" /><label>욕설</label>
+								<input type="radio" name="rcode" value = "2" /><label>도배</label>
+								<input type="radio" name="rcode" value = "3" /><label>사칭</label>
+								<input type="radio" name="rcode" value = "4" /><label>비방</label>
+								<input type="radio" name="rcode" value = "5" /><label>조작</label>
+								<input type="radio" name="rcode" value = "6" /><label>기타</label>
+								</div>
+							</div>
+							<div class="modal-body">
+									<div class = "modal-content">
+								<label>세부 내용: </label>
+								</div>
+									<div class = "modal-content">
+								<textarea name="rdetail" id="rdetail"  rows="10"style="width:400px; height:70px"></textarea>
+								</div>
+							</div>
 						</div>
 						<div class="modal-footer">				 
-							<button type="button" class="btn btn-primary" id="reportbtn">
+							<input id="submit" type="submit" value="신고하기"class="btn btn-primary" >
+							<!-- <button class="btn btn-primary" id="reportbtn" onclick="insertRe();">
 								신고하기
-							</button> 
-							<button type="button" class="btn btn-secondary" data-dismiss="modal">
+							</button>  -->
+							<button  class="btn btn-secondary" data-dismiss="modal">
 								취소
 							</button>
 						</div>
 					</div>
 					
 				</div>
+				<script>
+				$('#report-modal').click(function(){
+					console.log(this);
+					$('#targetType').val("B");
+					$('#targetId').val("${b.BId}");
+				});
+				</script>
 	</div>	
-<script>
-$("#reportbtn").on('click', function(){
-	location.href= <%-- "<%=request.getContextPath()%>/InsertView.bo?bType=report&pickid=<%=p.getId()%>"; --%>
-});
-</script>
+	</form>
+<!-- <script>
+ $("#reportbtn").click(function(){
+	 $('#insertReport').attr(("action", "${pageContext.request.contextPath}/report/insertReport.do"});
+}); 
+</script> -->
 
 </body>
 </html>
