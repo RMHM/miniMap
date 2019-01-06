@@ -225,7 +225,7 @@ public class MemberController {
 		
 		m.setProfilePath(renamedName);
 		
-		m.setMpw(bcpe.encode(m.getMpw()));
+		// m.setMpw(bcpe.encode(m.getMpw()));
 		
 		String loc = "/";
 		String msg = "";

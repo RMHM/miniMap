@@ -372,11 +372,10 @@ public class BoardController {
 
 			Member m = (Member) session.getAttribute("member");
 			String authority = "";
-			if (m != null)
-				if (boardService.selectAuthority(m.getMno()) > 0)
-					authority = "yse";
-
-			mv.addObject("blist", list).addObject("thumb", thumbnail).addObject("comment", comment); // 리스트
+      if(m != null) if(boardService.selectAuthority(m.getMno())>0) authority = "yes";
+			
+			mv.addObject("blist", list).addObject("thumb", thumbnail).addObject("comment", comment);	// 리스트
+      
 			mv.addObject("cPage", cPage).addObject("maxPage", maxPage).addObject("authority", authority);
 			mv.setViewName("board/ad/adBoardList");
 		} catch (Exception e) {
