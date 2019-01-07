@@ -68,7 +68,7 @@
 		SELECT COUNT(*) FROM COMENT WHERE MNO=#{mNo}
 	</select>
 	<select id="selectRequest" parameterType="_int" resultType="Authority">
-		select * from authority where mno=#{mNo}
+		select * from authority JOIN authority_type USING (ACODE) where mno=#{mNo}
 
 	</select>
 	<update id="updateAuthority" parameterType="Authority">

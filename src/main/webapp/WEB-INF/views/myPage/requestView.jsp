@@ -48,10 +48,9 @@
 								<tbody id="tb">
 									<c:if test="${!empty list }">
 										<c:forEach var="a" begin="0" end="${list.size()-1 }" step="1">
-
 											<tr id="${list.get(a).getAId()}">
 												<td>${list.get(a).getAId()}</td>
-												<td>${list.get(a).getACode()}</td>
+												<td>${list.get(a).getAname()}</td>
 												<td>${list.get(a).getMName()}</td>
 												<td>${list.get(a).getRequest_date()}</td>
 												<c:if test="${list.get(a).getDelflag() eq 'Y'.charAt(0) }">
@@ -59,10 +58,10 @@
 												</c:if>
 												<c:if test="${list.get(a).getDelflag() eq 'N'.charAt(0) }">
 													
-												<c:if test="${!empty l.getGrant_date()}">
+												<c:if test="${!empty list.get(a).getGrant_date()}">
 													<td>승인</td>
 												</c:if>
-												<c:if test="${empty l.getGrant_date()}">
+												<c:if test="${empty list.get(a).getGrant_date()}">
 													<td>요청중</td>
 												</c:if>
 												</c:if>
@@ -276,12 +275,7 @@
 
 										</div>
 									</div>
-									<!-- <div class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix">
-									 <input type="submit" value="수정">
-									 <input type="submit" value="요청취소">
-									<button id="updateRe" onclick="deleteRe();"name="delflag"value ="Y">요청취소</button>
-									 <input type="button" id="close" value="취소">
-									</div> -->
+									
 									<div class="form-group">
 										<input type="submit" value="수정" onclick=""> <input type="submit"
 											onclick="deleteRe();" value="요청취소"> <input

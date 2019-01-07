@@ -272,10 +272,32 @@ public class MyPageController {
 
 	/* 권한 요청 */
 	@RequestMapping("/myPage/rePermission.do")
-	public String rePermission(Member member, Authority authority) {
+	public String rePermission(@RequestParam(value="reImg", required = false) MultipartFile reImg,Member member, Model model, Authority authority,HttpSession session, HttpServletRequest request) {
+
+		if(reImg.getSize()!=0) {
+		String saveDir = session.getServletContext().getRealPath("/resources/img/authority");
+		File dir = new File(saveDir);
+		
+		if(dir.exists() == false) dir.mkdirs();
+		String originName = reImg.getOriginalFilename();
+		String ext = originName.substring(originName.lastIndexOf(".")+1);
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd_HHmmss");
+		int rndNum = (int)(Math.random() * 1000);
+		String renamedName = sdf.format(new java.util.Date()) + "_" + rndNum + "." + ext;
+		// 실제 파일을 지정한 파일명으로 변환하며 데이터를 저장한다.
+		try {
+			reImg.transferTo(new File(saveDir + "/" + renamedName));
+		
+		} catch (IllegalStateException | IOException e) {
+			e.printStackTrace();
+		}
+		authority.setImg_file(renamedName);
+		
+		}else authority.setImg_file(null);
 		authority.setMNo(member.getMno());
 		int result = mps.insertAuthority(authority);
-		return "myPage/requestView";
+		
+		return requestViewPage(member,model);
 	}
 
 	@RequestMapping("/myPage/selectRequest.do")
