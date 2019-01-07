@@ -23,11 +23,20 @@ public class ManagerController {
 	@Autowired
 	private ManagerService mns;
 	
+	// 통계
 	@RequestMapping("/manager/visitCount.do")
 	@ResponseBody
 	public List<Integer> selectCount() {
 		// All Day Avg
 		List<Integer> result = mns.selectCount();
+		return result;
+	}
+	
+	@RequestMapping("/manager/statistics.do")
+	@ResponseBody
+	public List selectStatistics(){
+		List result = mns.selectStatistics();
+		System.out.println("result : " + result);
 		return result;
 	}
 

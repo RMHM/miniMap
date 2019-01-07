@@ -22,4 +22,6 @@ public interface ManagerDao {
 	int clearBlackList(int mno);
 
 	BlackList selectOneBlackList(int mno);
+
+	List selectStatistics();
 }

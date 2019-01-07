@@ -23,4 +23,6 @@ public interface ManagerService {
 
 	BlackList selectOneBlackList(int mno);
 
+	List selectStatistics();
+
 }
