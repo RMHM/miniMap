@@ -14,14 +14,38 @@ public class Authority {
 	private char aTake			;//	한부여여부
 	private Date grant_date		;//	권한부여날짜
 	private char delflag		;//	삭제 여부
+	private String img_file 	;
+	private String site_url		;
+	private String aname	;
 	public Authority() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	public Authority(int aId, int mNo, String mName, Date request_date, String address, String aContent, int aCode,
-			char aTake, Date grant_date, char delflag) {
+	
+	
+	public Authority(int aId, int mNo, String mName, String mNick, Date request_date, String address, String aContent,
+			int aCode, char aTake, Date grant_date, char delflag, String img_file, String site_url, String aname) {
 		super();
 		this.aId = aId;
+		this.mNo = mNo;
+		this.mName = mName;
+		this.mNick = mNick;
+		this.request_date = request_date;
+		this.address = address;
+		this.aContent = aContent;
+		this.aCode = aCode;
+		this.aTake = aTake;
+		this.grant_date = grant_date;
+		this.delflag = delflag;
+		this.img_file = img_file;
+		this.site_url = site_url;
+		this.aname = aname;
+	}
+
+
+	public Authority(int mNo, String mName, Date request_date, String address, String aContent, int aCode, char aTake,
+			Date grant_date, char delflag, String img_file, String site_url, String aname) {
+		super();
 		this.mNo = mNo;
 		this.mName = mName;
 		this.request_date = request_date;
@@ -31,8 +55,12 @@ public class Authority {
 		this.aTake = aTake;
 		this.grant_date = grant_date;
 		this.delflag = delflag;
+		this.img_file = img_file;
+		this.site_url = site_url;
+		this.aname = aname;
 	}
-	
+
+
 	public Authority(int mNo, String mName, Date request_date, String address, String aContent, int aCode, char aTake,
 			Date grant_date, char delflag) {
 		super();
@@ -55,6 +83,20 @@ public class Authority {
 		this.aCode = aCode;
 	}
 	
+	public Authority(int mNo, String mName, Date request_date, String address, String aContent, int aCode,
+			String img_file, String site_url) {
+		super();
+		this.mNo = mNo;
+		this.mName = mName;
+		this.request_date = request_date;
+		this.address = address;
+		this.aContent = aContent;
+		this.aCode = aCode;
+		this.img_file = img_file;
+		this.site_url = site_url;
+	}
+
+
 	public Authority(int aId, String mName, Date request_date, char delflag) {
 		super();
 		this.aId = aId;
@@ -122,17 +164,50 @@ public class Authority {
 	public void setDelflag(char delflag) {
 		this.delflag = delflag;
 	}
-	@Override
-	public String toString() {
-		return "Authority [aId=" + aId + ", mNo=" + mNo + ", mName=" + mName + ", mNick=" + mNick + ", request_date=" + request_date
-				+ ", address=" + address + ", aContent=" + aContent + ", aCode=" + aCode + ", aTake=" + aTake
-				+ ", grant_date=" + grant_date + ", delflag=" + delflag + "]";
+	
+	public String getImg_file() {
+		return img_file;
 	}
+
+
+	public void setImg_file(String img_file) {
+		this.img_file = img_file;
+	}
+
+
+	public String getSite_url() {
+		return site_url;
+	}
+
+
+	public void setSite_url(String site_url) {
+		this.site_url = site_url;
+	}
+
+
 	public String getMNick() {
 		return mNick;
 	}
 	public void setMNick(String mNick) {
 		this.mNick = mNick;
 	}
-	
+
+	public String getAname() {
+		return aname;
+	}
+	public void setAname(String aname) {
+		this.aname = aname;
+	}
+
+
+	@Override
+	public String toString() {
+		return "Authority [aId=" + aId + ", mNo=" + mNo + ", mName=" + mName + ", mNick=" + mNick + ", request_date="
+				+ request_date + ", address=" + address + ", aContent=" + aContent + ", aCode=" + aCode + ", aTake="
+				+ aTake + ", grant_date=" + grant_date + ", delflag=" + delflag + ", img_file=" + img_file
+				+ ", site_url=" + site_url + ", aname=" + aname + "]";
+	}
+
+
+
 }

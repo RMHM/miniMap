@@ -241,7 +241,7 @@ public class MemberController {
 		System.out.println("암호화 전  : " + shapw);
 
 		// 코드
-		/*m.setMpw(bcpe.encode(shapw));*/
+		m.setMpw(bcpe.encode(shapw));
 		System.out.println("암호화 후 : " + m.getMpw());
 
 		int result = ms.insertMember(m);

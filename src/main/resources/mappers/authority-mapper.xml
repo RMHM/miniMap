@@ -9,7 +9,7 @@
 	
 	<insert id="insertAuthority" parameterType="Authority">
 		INSERT INTO AUTHORITY
-		VALUES(SEQ_AID.NEXTVAL,#{mNo},#{mName},SYSDATE,#{address},#{aContent},#{aCode},DEFAULT,DEFAULT,DEFAULT)
+		VALUES(SEQ_AID.NEXTVAL,#{mNo},#{mName},SYSDATE,#{address},#{aContent},#{aCode},DEFAULT,DEFAULT,DEFAULT,#{img_file},#{site_url})
 	</insert>
 	
 	<select id="selectRequest" parameterType="_int" resultType="Authority">
