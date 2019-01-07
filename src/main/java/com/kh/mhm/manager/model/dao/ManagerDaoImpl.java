@@ -28,6 +28,19 @@ public class ManagerDaoImpl implements ManagerDao {
 	}
 	
 	@Override
+	public List selectStatistics() {
+		List list = new ArrayList();
+		
+		list.add(sst.selectOne("common.selectGenderCnt"));
+		list.add(sst.selectOne("common.selectAgeCnt"));
+		list.add(sst.selectOne("common.selectMemberCnt"));
+		list.add(sst.selectOne("common.selectBoardCnt"));
+		list.add(sst.selectOne("common.selectBoardTodayCnt"));
+		
+		return list;
+	}
+	
+	@Override
 	public List selectMemberList(String mtype) {
 		
 		List list = null;
@@ -78,6 +91,7 @@ public class ManagerDaoImpl implements ManagerDao {
 	public BlackList selectOneBlackList(int mno) {
 		return sst.selectOne("member.selectOneBlackList", mno);
 	}
+
 
 
 }
