@@ -1,11 +1,16 @@
 package com.kh.mhm.board.model.dao;
 
+import java.io.IOException;
+import java.io.Reader;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.RowBounds;
 import org.apache.ibatis.session.SqlSession;
+import org.apache.ibatis.session.SqlSessionFactory;
+import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -18,48 +23,150 @@ public class BoardDaoImpl implements BoardDao {
 	
 	@Autowired
 	SqlSessionTemplate sqlSession;
+	
+	@Autowired
+	SqlSessionFactory sqlMapper;	   
 
-	@Override
+	/*@Override
 	public List<Board> selectBoardList(int bCode) {
 		
         return sqlSession.selectList("board.selectBoardListToBtype", bCode);
 		
+	}*/
+	
+	@Override
+	public List<Map<String, String>> selectBoardList1(int cPage, int numPerPage) {
+		RowBounds rowBounds = new RowBounds((cPage-1)*numPerPage, numPerPage);	
+		return sqlSession.selectList("board.selectBoardList1",null,rowBounds);
 	}
 	
 	@Override
-	public List<Board> selectBoardList(String keyfield, String keyword) {
-		List<Board> list = null;
-      
+	public List<Board> selectSearchList1(String keyfield, String keyword) {
+		List<Board> list = null;		
+		SqlSession session = sqlMapper.openSession();		      
         if(keyfield != null && keyword != null && keyfield !="" && keyword !=""){
             Map<String, String> map = new HashMap<String, String> ();
             map.put("keyfield" , keyfield);
             map.put("keyword", keyword);
-            list = sqlSession.selectList("board.selectSearchList", map);
-            sqlSession.close();
+            list = session.selectList("board.selectSearchList1", map);
+            session.close();
             return list;
         }else {
-            list = sqlSession.selectList("board.selectBoardList");
-            sqlSession.close();
-            return list;		
-		
-        }
-        
-		
+            list = session.selectList("board.selectBoardList1");
+            session.close();
+            return list;
+        }		        
 	}
 	
-
 	@Override
-	public List<Board> selectNoticeList(Board board) {
-		
-		return sqlSession.selectList("board.selectNoticeList");
+	public List<Board> selectNoticeList1(Board board) {		
+		return sqlSession.selectList("board.selectNoticeList1");
+	}
+	@Override
+	public int selectBoardTotalContents1() {
+		return sqlSession.selectOne("board.selectBoardTotalContents1");
 	}
 	
-
 	@Override
-	public int selectBoardTotalContents() {
-		// TODO Auto-generated method stub
-		return sqlSession.selectOne("board.selectBoardTotalContents");
+	public List<Map<String, String>> selectBoardList2(int cPage, int numPerPage) {
+		RowBounds rowBounds = new RowBounds((cPage-1)*numPerPage, numPerPage);	
+		return sqlSession.selectList("board.selectBoardList2",null,rowBounds);
 	}
+	
+	@Override
+	public List<Board> selectSearchList2(String keyfield, String keyword) {
+		List<Board> list = null;		
+		SqlSession session = sqlMapper.openSession();		      
+        if(keyfield != null && keyword != null && keyfield !="" && keyword !=""){
+            Map<String, String> map = new HashMap<String, String> ();
+            map.put("keyfield" , keyfield);
+            map.put("keyword", keyword);
+            list = session.selectList("board.selectSearchList2", map);
+            session.close();
+            return list;
+        }else {
+            list = session.selectList("board.selectBoardList2");
+            session.close();
+            return list;
+        }		        
+	}
+	
+	@Override
+	public List<Board> selectNoticeList2(Board board) {		
+		return sqlSession.selectList("board.selectNoticeList2");
+	}
+	@Override
+	public int selectBoardTotalContents2() {
+		return sqlSession.selectOne("board.selectBoardTotalContents2");
+	}
+	
+	
+	@Override
+	public List<Map<String, String>> selectBoardList3(int cPage, int numPerPage) {
+		RowBounds rowBounds = new RowBounds((cPage-1)*numPerPage, numPerPage);	
+		return sqlSession.selectList("board.selectBoardList3",null,rowBounds);
+	}
+	
+	@Override
+	public List<Board> selectSearchList3(String keyfield, String keyword) {
+		List<Board> list = null;		
+		SqlSession session = sqlMapper.openSession();		      
+        if(keyfield != null && keyword != null && keyfield !="" && keyword !=""){
+            Map<String, String> map = new HashMap<String, String> ();
+            map.put("keyfield" , keyfield);
+            map.put("keyword", keyword);
+            list = session.selectList("board.selectSearchList3", map);
+            session.close();
+            return list;
+        }else {
+            list = session.selectList("board.selectBoardList3");
+            session.close();
+            return list;
+        }		        
+	}
+	
+	@Override
+	public List<Board> selectNoticeList3(Board board) {		
+		return sqlSession.selectList("board.selectNoticeList3");
+	}
+	@Override
+	public int selectBoardTotalContents3() {
+		return sqlSession.selectOne("board.selectBoardTotalContents3");
+	}
+	
+	@Override
+	public List<Map<String, String>> selectBoardList4(int cPage, int numPerPage) {
+		RowBounds rowBounds = new RowBounds((cPage-1)*numPerPage, numPerPage);	
+		return sqlSession.selectList("board.selectBoardList4",null,rowBounds);
+	}
+	
+	@Override
+	public List<Board> selectSearchList4(String keyfield, String keyword) {
+		List<Board> list = null;		
+		SqlSession session = sqlMapper.openSession();		      
+        if(keyfield != null && keyword != null && keyfield !="" && keyword !=""){
+            Map<String, String> map = new HashMap<String, String> ();
+            map.put("keyfield" , keyfield);
+            map.put("keyword", keyword);
+            list = session.selectList("board.selectSearchList4", map);
+            session.close();
+            return list;
+        }else {
+            list = session.selectList("board.selectBoardList4");
+            session.close();
+            return list;
+        }		        
+	}
+	
+	@Override
+	public List<Board> selectNoticeList4(Board board) {		
+		return sqlSession.selectList("board.selectNoticeList4");
+	}
+	@Override
+	public int selectBoardTotalContents4() {
+		return sqlSession.selectOne("board.selectBoardTotalContents4");
+	}
+	
 
 	@Override
 	public int insertBoard(Board board) {
@@ -115,12 +222,7 @@ public class BoardDaoImpl implements BoardDao {
 		return 0;
 	}
 
-	@Override
-	public List<Map<String, String>> selectBoardList2(int cPage, int numPerPage) {
-		RowBounds rowBounds = new RowBounds((cPage-1)*numPerPage, numPerPage);	
-		return sqlSession.selectList("board.selectBoardList",null,rowBounds);
-	}
-
+	
 	@Override
 	public int insertImgBoard(Board board) {
 		return sqlSession.insert("board.insertImgBaord", board);
