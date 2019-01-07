@@ -354,22 +354,21 @@ public class BoardController {
 			int pageInNum = 3;
 			int totCnt = boardService.selectBoardCnt(5);
 			int maxPage = 0;
-			if (totCnt == 0)
-				maxPage = 1;
-			else
-				maxPage = (totCnt % pageInNum == 0) ? (int) totCnt / pageInNum : (int) (totCnt / pageInNum + 1);
+			if (totCnt == 0) maxPage = 1;
+			else maxPage = (totCnt % pageInNum == 0) ? (int) totCnt / pageInNum : (int) (totCnt / pageInNum + 1);
 
 			param = new HashMap<String, Integer>();
 			param.put("bCode", 5);
 			param.put("cPage", cPage);
 			param.put("num", pageInNum);
-
+			
 			list = boardService.selectBoardListPart(param);
+			
 			for (int i = 0; i < list.size(); i++) {
 				thumbnail.add(boardService.selectThumbnailImg(list.get(i).getBId()));
 				comment.add(boardService.selectCommentCnt(list.get(i).getBId()));
 			}
-
+			
 			Member m = (Member) session.getAttribute("member");
 			String authority = "";
 			if(m != null) if(boardService.selectAuthority(m.getMno())>0) authority = "yes";
@@ -378,10 +377,10 @@ public class BoardController {
 			mv.addObject("cPage", cPage).addObject("maxPage", maxPage).addObject("authority", authority);
 			mv.setViewName("board/ad/adBoardList");
 		} catch (Exception e) {
+			e.getStackTrace();
 			mv.addObject("msg", "게시물 불러오기를 실패하였습니다.");
 			mv.addObject("loc", "/");
 			mv.setViewName("common/msg");
-			e.getStackTrace();
 		}
 
 		return mv;
@@ -415,7 +414,7 @@ public class BoardController {
 			imgList.add(b.getBContent().substring(begin, end));
 			start = end;
 		}
-
+		System.out.println("파싱끝");
 		if (imgList.size() > 0)
 			b.setHasFile("Y");
 		else

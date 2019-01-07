@@ -188,7 +188,7 @@
 				<!-- Portfolio Projects -->
 				<div class="row">
 					<div class="col-lg-12">
-						<h4 class="heading">최근 인증 게시물</h4>
+						<h4 class="heading">최근 후기 게시물</h4>
 						<div class="row">
 							<section id="projects">
 								<ul id="thumbs" class="portfolio">
