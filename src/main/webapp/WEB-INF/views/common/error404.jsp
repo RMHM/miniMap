@@ -9,13 +9,15 @@
 <head>
 <meta charset="UTF-8">
 <title>에러 404페이지</title>
+<style>
+	img { display : block; margin: 0px auto; }
+</style>
 </head>
 <body>
-   <c:import url="/WEB-INF/views/common/exFile.jsp"/>
-   <div id="wrapper">
-      <c:import url="/WEB-INF/views/common/header.jsp"/>
-      <img src="" />
-      <c:import url="/WEB-INF/views/common/footer.jsp"/>
-   </div>
+ <c:import url="/WEB-INF/views/common/exFile.jsp"/>
+<div id="wrapper">
+ <c:import url="/WEB-INF/views/common/header.jsp"/>
+</div>
+<img src="resources/img/404.jpg" alt="" />
 </body>
 </html>

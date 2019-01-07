@@ -1,5 +1,5 @@
 $(function(){
-				
+				// 비밀번호 유효성 검사
 				$("#mpw2").blur(function(){
 					var p1=$("#mpw_").val(), p2=$("#mpw2").val();
 					if(p1!=p2){
@@ -49,7 +49,6 @@ $(function(){
 			     console.log(mid);
 				});
 			});
-			
 
 			function validate(){
 				var mid = $("#mid_");
@@ -68,48 +67,6 @@ $(function(){
 				return true;
 			}			
 			
-			/* 닉네임 중복검사 이벤트 추가 */
-			$(document).ready(function(){
-				$("#nickCheck").unbind("click").click(function(e){
-					e.preventDefault();
-					fn_userNickCheck();
-				});
-			});
-			
-			function fn_userNickCheck(){
-				var userNick = $("#mnick").val();
-				var userData = { "mnick_" : mnick } 
-				
-				if(userNick.length < 1) {
-					alert("닉네임을 입력해주시기 바랍니다.");
-				} else {
-					
-				}
-				
-			 $.ajax({
-		      type : "POST",
-			  url : "/member/nickCheck",
-			  data : userData,
-			  dataType : "json",
-			  success : function(data) {
-			  
-			   if(data == 0) {
-			    $("#mnick").attr("disabled", true);
-			    alert("사용 가능한 닉네임 입니다.");
-			   } else if (data == 1) {
-				   alert("이미 존재하는 닉네임 입니다. \n 다른 닉네임을 사용해주세요.");
-			   } else {
-				   alert("에러 발생");
-			   }
-			   
-			  }, error : function(error){
-				  alert("서버가 응답하지 않습니다. \n 다시 시도해주십시오.");
-			  }
-			  
-			 });
-			 
-					
-				 }
 			/*
 			 $("input[type=file]").change(function () {
 	             

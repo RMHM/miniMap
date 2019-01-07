@@ -96,6 +96,24 @@
 			)
 		}
 	</select>
+	
+	<select id="checkNick" statementType="CALLABLE" parameterType="hashmap">
+		{ CALL NICK_CHK(#{mnick, mode=IN, jdbcType=VARCHAR},
+			#{result, mode=OUT, jdbcType=NUMERIC, javaType=integer}
+		    )
+		}
+	</select>
+	
+	<select id="checkEmail" statementType="CALLABLE" parameterType="hashmap">
+		{ CALL EMAIL_CHK(#{email, mode=IN, jdbcType=VARCHAR},
+			#{result, mode=OUT, jdbcType=NUMERIC, javaType=integer}
+		    )
+		}
+	</select>
+	
+	<select id="checkPw" parameterType="String" resultType="_int">
+		select count(*) from member where mpw = #{mpw}
+	</select>
 
 	<select id="selectCommonMember" resultMap="memberMap">
 		SELECT mno, mid, mname, email, gender, age, join_date, drop_date FROM MEMBER
@@ -119,11 +137,6 @@
 	
 	<select id="selectNowBlack" parameterType="_int" resultType="date">
 		select end_date from (select rownum, end_date from (select end_date from blacklist where mno = #{mno} order by end_date desc) where rownum=1)
-	</select>
-	
-  <select id="nickCheck" resultType="Member">
-		select mnick from member where mnick = #{mnick}
-
 	</select>
 	
 	<select id="searchMember" parameterType="String" resultMap="memberMap">
