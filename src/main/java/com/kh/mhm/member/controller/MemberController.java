@@ -8,6 +8,7 @@ import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import javax.activation.CommandMap;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -279,16 +280,39 @@ public class MemberController {
 		return map;
 	}
 	
-		
-		/*
 	@ResponseBody
-	@RequestMapping(value = "/member/nickCheck")
-	public int nickCheck(CommandMap commandMap) throws Exception {
+	@RequestMapping(value = "member/checkPw.do")
+	public int checkPw(@RequestParam("mpw_") String mpw) {
 		
-		int checkData = ms.nickCheck(commandMap.getMap());
+		return ms.checkPw(mpw);
+	}
+		
 	
-		return checkData;
-	} */
+	@ResponseBody
+	@RequestMapping(value = "/member/checkNick.do")
+	public Map<String, Object> checkNick(@RequestParam String mnick) {
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		
+		boolean isUsable = ms.checkNick(mnick) == 0 ? true : false; 
+		
+		map.put("isUsable", isUsable);
+		
+		return map;
+	}
+	
+	@ResponseBody
+	@RequestMapping(value = "/member/checkEmail.do")
+	public Map<String, Object> checkEmail(@RequestParam String email){
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		
+		boolean isUsable = ms.checkEmail(email) == 0 ? true : false; 
+		
+		map.put("isUsable", isUsable);
+		
+		return map;
+	}
 	
 	
 	/*

@@ -21,7 +21,11 @@ public interface MemberService {
 	
 	Date selectNowBlack(int mno);
 
-	Member nickCheck(String mnick);
+	int checkPw(String mpw);
+
+	int checkNick(String mnick);
+
+	int checkEmail(String email);
 
 	
   
