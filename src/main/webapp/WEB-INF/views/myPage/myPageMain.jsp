@@ -202,12 +202,12 @@
 		<c:import url="../common/header.jsp" />
 		<div class="container">
 			<c:import url="../common/myPageNav.jsp" />
-	
+
 			<div class="col-md-10">
 				<div class="container">
-				
-				<!-- 	<div class="container-fluid"> -->
-					<div class="col-sm-8 text-center"> 
+
+					<!-- 	<div class="container-fluid"> -->
+					<div class="col-sm-8 text-center">
 						<h1>
 							<small>회원 정보 </small>
 						</h1>
@@ -270,18 +270,19 @@
 
 								}
 							</script>
-						
+
 						</div>
 
-				 	</div> 
+					</div>
 
 				</div>
 			</div>
 
 
-		
-			
-		</div><c:import url="../common/footer.jsp" />
+
+
+		</div>
+		<c:import url="../common/footer.jsp" />
 	</div>
 </body>
 </html>
