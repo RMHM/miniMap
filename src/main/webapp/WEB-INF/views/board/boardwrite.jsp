@@ -17,6 +17,7 @@
 <link rel="stylesheet" href="<%=request.getContextPath()%>/daumeditor/css/editor.css" type="text/css" charset="utf-8"/>
 <script src="<%=request.getContextPath()%>/daumeditor/js/editor_loader.js" type="text/javascript" charset="utf-8"></script>
 
+
 </head>
 <body>
 	<c:import url="/WEB-INF/views/common/exFile.jsp" />
@@ -46,34 +47,45 @@
 						<!-- 작성자 회원번호  -->
 						<input type="text" placeholder="제목" name="bTitle" id="bTitle"
 							required>
-						<div id="daumeditor" class="edit"
-							style="width: 90%; height: 100%;"></div>
+						<div></div>	
+						<div id="daumeditor" class="edit" style="width: 90%; height: 100%;"></div>
+													
 						<textarea name="boardcontent" id="boardcontent"
-							style="display: none;"></textarea>
+							style="display: none;"></textarea>							
+							
 						<c:if test="${member.mtype eq 'A' }">
 							<input type="checkbox" name="isNotice2" checked="checked">공지글로 올리기 <br>
 						</c:if>
-						<input type="hidden" name="isNotice" value='N'> 
+						<input type="hidden" name="isNotice" value='N'> 						
 						<input type="radio" name="bCode" value="1" checked="checked">잡담
 						<input type="radio" name="bCode" value="2">정보 
 						<input type="radio" name="bCode" value="3">후기 
-						<input type="radio" name="bCode" value="4">질문 
+						<input type="radio" name="bCode" value="4">질문 	
+						
 						<input type="button" class="btn btn-theme" id="insertBoard" value="등록"
-							style="position: absolute; right: 100px;" />
-
+							style="position: absolute; right: 100px;" />							
 					</form>
 				</c:if>
+				
+										
 			</div>
 			<div>
 
 				<div class="container-fluid">
 					<div class="row">
-						<div class="col-md-10"></div>
+					<button type="button" class="btn btn-theme" id="viewmap" 
+						onclick="viewmap(this);">지도추가 </button>					
+						<div class="col-md-2"></div>
+						<div class="col-md-10" name="jejumap" style="visibility:hidden;">
+						<c:import url="/WEB-INF/views/test/testMap2.jsp"/>
+						</div>
 					</div>
 				</div>
 				
 			</div>
 		</div>
+		
+		
 		<c:import url="/WEB-INF/views/common/footer.jsp" />
 	</div>
 </body>
@@ -176,6 +188,13 @@ function setForm(editor) {
     return true;
 }
 
+function viewmap(obj) {
+	$(obj).css('display', 'none');		
+	
+	$('div[name="jejumap"]').css('visibility', 'visible');
+	
+	
+}
 
 
 

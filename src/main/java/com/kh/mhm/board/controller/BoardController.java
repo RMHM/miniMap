@@ -44,7 +44,7 @@ public class BoardController {
 	@RequestMapping("/board/boardlist1.do")
 	public String freeboard(@RequestParam(value = "cPage", required = false, defaultValue = "1") int cPage, Model model,
 			Board board) {
-		int numPerPage = 4;
+		int numPerPage = 10;
 
 		ArrayList<Map<String, String>> list = new ArrayList<Map<String, String>>(
 				boardService.selectBoardList1(cPage, numPerPage));
@@ -76,7 +76,7 @@ public class BoardController {
 	@RequestMapping("/board/boardlist2.do")
 	public String infoboard(@RequestParam(value = "cPage", required = false, defaultValue = "1") int cPage, Model model,
 			Board board) {
-		int numPerPage = 4;
+		int numPerPage = 10;
 
 		ArrayList<Map<String, String>> list = new ArrayList<Map<String, String>>(
 				boardService.selectBoardList2(cPage, numPerPage));
@@ -108,7 +108,7 @@ public class BoardController {
 	@RequestMapping("/board/boardlist3.do")
 	public String reviewboard(@RequestParam(value = "cPage", required = false, defaultValue = "1") int cPage, Model model,
 			Board board) {
-		int numPerPage = 4;
+		int numPerPage = 10;
 
 		ArrayList<Map<String, String>> list = new ArrayList<Map<String, String>>(
 				boardService.selectBoardList3(cPage, numPerPage));
@@ -116,12 +116,17 @@ public class BoardController {
 		int totalContents = boardService.selectBoardTotalContents3();
 
 		String pageBar = Utils.getPageBar(totalContents, cPage, numPerPage, "boardlist3.do");
-		List<Board> list2 = boardService.selectNoticeList2(board);
+		List<Board> list2 = boardService.selectNoticeList3(board);
 
 		System.out.println(pageBar);
 
-		model.addAttribute("list", list).addAttribute("totalContents", totalContents)
-				.addAttribute("numPerPage", numPerPage).addAttribute("pageBar", pageBar).addAttribute("list2", list2);
+		model.addAttribute("list", list)
+			 .addAttribute("totalContents", totalContents)
+			 .addAttribute("numPerPage", numPerPage)
+			 .addAttribute("pageBar", pageBar)
+			 .addAttribute("list2", list2);
+		
+		System.out.println("list : " + list);
 		
 		return "board/reviewBoardList";
 	}
@@ -140,7 +145,7 @@ public class BoardController {
 	@RequestMapping("/board/boardlist4.do")
 	public String qaboard(@RequestParam(value = "cPage", required = false, defaultValue = "1") int cPage, Model model,
 			Board board) {
-		int numPerPage = 4;
+		int numPerPage = 10;
 
 		ArrayList<Map<String, String>> list = new ArrayList<Map<String, String>>(
 				boardService.selectBoardList4(cPage, numPerPage));
