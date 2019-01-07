@@ -275,10 +275,10 @@
 			<button id=btBack>되돌리기</button>
 			<button id=btShow>마커보이기</button>
 			<button id=btHide>마커숨기기</button>
-			
-			
+
+
 			<input type="button" value="전송하기" id="btn-add"
-				 onclick="fn_goBoardForm();" />
+				onclick="fn_goBoardForm();" />
 		</p>
 
 
@@ -735,7 +735,9 @@
 		var userInputText = document.getElementById('userInputText');
 
 		// 사용자 입력 넣기
-		transferPersonalInputText.push(userInputText);
+		transferPersonalInputText.push(userInputText.value);
+		console.log(userInputText.value);
+		
 		// 카테고리 분류   
 		var sort = document.getElementsByName('sort');
 
@@ -773,23 +775,35 @@
 	}
 	
 	
+	
+	// 전송하기 
 	function fn_goBoardForm() {
-	var arr = ['transferLat', 'transferLng'];
-	 
+	var tLat = transferLat+"";
+	var tLng = transferLng+"";
+	var tInText = transferPersonalInputText+"";
+	
+	console.log(tLat); 
+	console.log(tLng);
+	console.log(tInText);
 	$.ajax({
-	    method      : 'POST',
-	    url         : '/map/map.do',
-	    traditional : true,
-	    data        : {
-	        'main' : arr
-	    },
-	    success     : function(data) {
-	        alert(data);        
-	    },
-	    error       : function(request, status, error) {
-	        alert(error);
-	    }
-	 
+		url : "${pageContext.request.contextPath}/map/hoji.do",
+
+		data : {
+			tLat,
+			tLng,
+			tInText
+		},
+		dataType : "json",
+		success : function() {
+			console.log("asd");
+		
+
+		},
+		error : function() {
+			alert("ajax 실패");
+
+		}
+
 	});
 
 
