@@ -60,11 +60,12 @@
 							</div>
 
 							<div class="form-group">
-								<label class="col-sm-3 control-label" for="mnick">닉네임</label> </label>
+								<label class="col-sm-3 control-label" for="mnick">닉네임</label> 
 								<div class="col-sm-6">
 									<input class="form-control" id="mnick" name="mnick" type="text"
 										value="${member.mnick}">
 								</div>
+								<label id="checkNick"></label>
 							</div>
 
 							<div class="form-group">
@@ -73,6 +74,7 @@
 									<input class="form-control" id="email" name="email"
 										type="email" value="${member.email}">
 								</div>
+								<label id="checkemail"></label>
 							</div>
 							<div class="form-group">
 								<label class="col-sm-3 control-label" for="gender">성별</label>
@@ -105,6 +107,67 @@
 								</div>
 							</div>
 						<script> 
+						
+						$("#mnick").blur(function(){
+							$.ajax({
+								url : "${pageContext.request.contextPath}/myPage/nickCheck.do",
+
+								data : {
+									
+									mnick : $('#mnick').val()
+								},
+								dataType : "json",
+								success : function(data) {
+									
+									if(data.result==1){
+										if(mnick.value == "${member.mnick}"){
+											$('#checkNick').text("현재 닉네임 입니다.");	
+										}else{
+											$('#checkNick').text("이미 존재하는 닉네임 입니다.");	
+										}
+									}else{
+										$('#checkNick').text("사용가능한 닉네임 입니다.");
+									}
+									
+
+								},
+								error : function(e) {
+									console.log("error" + data);
+								}
+
+							});
+						});
+						
+						$("#email").blur(function(){
+							$.ajax({
+								url : "${pageContext.request.contextPath}/myPage/emailCheck.do",
+
+								data : {
+									
+									email : $('#email').val()
+								},
+								dataType : "json",
+								success : function(data) {
+									if(data.result==1){
+										if(email.value == "${member.email}"){
+											$('#checkemail').text("현재 이메일 입니다.");	
+										}else{
+											$('#checkemail').text("이미 존재하는 이메일 입니다.");	
+										}
+									}else{
+										$('#checkemail').text("사용가능한 이메일 입니다.");
+									}
+									
+
+								},
+								error : function(e) {
+									console.log("error" + data);
+								}
+
+							});
+						});
+						
+						
 						function readURL(input) { 
 							
 								var reader = new FileReader(); 
@@ -115,6 +178,7 @@
 								
 						
 						function check(){
+								
 							var regNum = /[0-9]/g;
 					     	var regEng = /[a-z]/ig;
 					     	var pass= $('#mpw').val(); 
@@ -126,8 +190,16 @@
 					     	else if(pass.length<4||pass.length>16){
 					     		alert("비밀번호 4~16자리를 입력하세요");
 					     		return false
+					     	}else if($('#checkNick').text()=="이미 존재하는 닉네임 입니다."){
+					     		alert("닉네임을 다시 설정하세요.");
+					     		return false
+					     	}else if($('#checkemail').text()=="이미 존재하는 이메일 입니다."){
+					     		alert("이메일을 다시 설정하세요.");
+					     		return false
 					     	}
-					     	
+					     			
+					     			
+					     			
 					     	return true;
 					   
 						}

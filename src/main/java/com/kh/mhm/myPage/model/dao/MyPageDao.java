@@ -46,5 +46,9 @@ public interface MyPageDao {
 
 	List<Map<String, Object>> selectMyComment(int cPage, int numPerPage, int no);
 
+	int selectNick(String mnick);
+
+	int selectEmail(String email);
+
 
 }
