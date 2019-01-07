@@ -87,5 +87,15 @@ public class MyPageServiceImpl implements MyPageService {
 		
 		return md.selectCommentTotalContents(no);
 	}
+	@Override
+	public int selectNick(String mnick) {
+		// TODO Auto-generated method stub
+		return  md.selectNick(mnick);
+	}
+	@Override
+	public int selectEmail(String email) {
+		
+		return md.selectEmail(email);
+	}
 
 }

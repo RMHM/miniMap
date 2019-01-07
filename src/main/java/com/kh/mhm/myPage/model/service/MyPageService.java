@@ -38,6 +38,10 @@ public interface MyPageService {
 	int deleteMyAuthority(int aId);
 
 	int selectCommentTotalContents(int no);
+
+	int selectNick(String mnick);
+
+	int selectEmail(String email);
 	
 	
 	
