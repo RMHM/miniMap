@@ -63,10 +63,7 @@ public interface BoardService {
 
 	int deleteBoard(int boardNo);
 	
-	
-	
-	
-  int insertImgBoard(Board board);
+	int insertImgBoard(Board board);
 	
 	int insertImgFile(Fileref fref);
 	
