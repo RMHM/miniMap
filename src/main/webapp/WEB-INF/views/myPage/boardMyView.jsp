@@ -68,7 +68,7 @@
 										<c:forEach var="a" begin="0" end="${list.size()-1 }" step="1">
 											<%-- 	<c:out value="${ a}" /> --%>
 
-											<tr id="${list.get(a).getBNo()}">
+											<tr id="${list.get(a).getBId()}">
 												<td>${list.get(a).getBNo()}</td>
 												<td>${list.get(a).getBCode()}</td>
 												<td>${list.get(a).getBTitle()}</td>
@@ -152,7 +152,10 @@
 					
 					$("tr[id]").on("click", function() {
 						var bId = $(this).attr("id");
-						 location.href = "${pageContext.request.contextPath}/board/boardview.do?BId="+bId;  
+					 	if($(this).children('td:eq(1)').text()==5) location.href = "${pageContext.request.contextPath}/board/adBoardView.do?bid="+bId; 
+						else  location.href = "${pageContext.request.contextPath}/board/boardview.do?BId="+bId; 
+					
+						   
 					});
 				});
 			</script>

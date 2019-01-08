@@ -47,6 +47,7 @@
 									입력</label>
 								<div class="col-sm-6">
 									<input class="form-control" id="mpw" name="mpw" type="password">
+									<input type="hidden" name="mpwTest" value="${member.mpw }"/>
 								</div>
 								
 							</div>
@@ -63,7 +64,8 @@
 								<label class="col-sm-3 control-label" for="mnick">닉네임</label> 
 								<div class="col-sm-6">
 									<input class="form-control" id="mnick" name="mnick" type="text"
-										value="${member.mnick}">
+										value="${member.mnick}"placeholder="닉네임을 입력하세요">
+										
 								</div>
 								<label id="checkNick"></label>
 							</div>
@@ -72,7 +74,7 @@
 								<label class="col-sm-3 control-label" for="email">이메일</label>
 								<div class="col-sm-6">
 									<input class="form-control" id="email" name="email"
-										type="email" value="${member.email}">
+										type="email" value="${member.email}"placeholder="이메일을 입력하세요">
 								</div>
 								<label id="checkemail"></label>
 							</div>
@@ -121,12 +123,17 @@
 									
 									if(data.result==1){
 										if(mnick.value == "${member.mnick}"){
-											$('#checkNick').text("현재 닉네임 입니다.");	
+											$('#checkNick').text("사용가능");	
 										}else{
-											$('#checkNick').text("이미 존재하는 닉네임 입니다.");	
+											$('#checkNick').text("사용불가");	
 										}
 									}else{
-										$('#checkNick').text("사용가능한 닉네임 입니다.");
+										if(mnick.value == ""){
+											$('#checkNick').text("사용불가");
+										}else{
+											$('#checkNick').text("사용가능");	
+										}
+										
 									}
 									
 
@@ -150,12 +157,17 @@
 								success : function(data) {
 									if(data.result==1){
 										if(email.value == "${member.email}"){
-											$('#checkemail').text("현재 이메일 입니다.");	
+											$('#checkemail').text("사용가능");	
 										}else{
-											$('#checkemail').text("이미 존재하는 이메일 입니다.");	
+											$('#checkemail').text("사용불가");	
 										}
 									}else{
-										$('#checkemail').text("사용가능한 이메일 입니다.");
+										if(email.value == ""){
+											$('#checkemail').text("사용불가");
+										}else{
+											$('#checkemail').text("사용가능");	
+										}
+										
 									}
 									
 
@@ -183,21 +195,31 @@
 					     	var regEng = /[a-z]/ig;
 					     	var pass= $('#mpw').val(); 
 					   		var r = "";
-					     	if(!regNum.test(pass)||!regEng.test(pass)) {
-					     		alert("숫자와 영문자를 입력하세요");
-					     		return false
-					     	}
-					     	else if(pass.length<4||pass.length>16){
-					     		alert("비밀번호 4~16자리를 입력하세요");
-					     		return false
-					     	}else if($('#checkNick').text()=="이미 존재하는 닉네임 입니다."){
-					     		alert("닉네임을 다시 설정하세요.");
-					     		return false
-					     	}else if($('#checkemail').text()=="이미 존재하는 이메일 입니다."){
-					     		alert("이메일을 다시 설정하세요.");
-					     		return false
-					     	}
-					     			
+					   		console.log("val : " + $('#mpw').val());
+					   		
+						   		if($('#mpw').val()!=""){
+					
+							     	if(!regNum.test(pass)||!regEng.test(pass)) {
+							     		alert("숫자와 영문자를 입력하세요");
+							     		return false
+							     	}
+							     	else if(pass.length<4||pass.length>16){
+							     		alert("비밀번호 4~16자리를 입력하세요");
+							     		return false
+							     	}
+						   		}else if(($('#checkNick').text()=="")||($('#checkemail').text()=="")){
+						     		alert("값을 입력하세요");
+						     		return false
+						     	}
+						   		
+						     	else if($('#checkNick').text()=="사용불가"){
+						     		alert("닉네임을 다시 설정하세요.");
+						     		return false
+						     	}else if($('#checkemail').text()=="사용불가"){
+						     		alert("이메일을 다시 설정하세요.");
+						     		return false
+						     	}
+					   				
 					     			
 					     			
 					     	return true;
