@@ -229,4 +229,9 @@
 		select count(*) from authority where delflag='N' and grant_date is not null and acode = 1 and mno = #{mno}
 	</select>
 	
+	<select id="selectRecentBoard" parameterType="hashmap" resultType="Board">
+		select * from (select rownum rn, sub.* from (select * from board where bcode = #{bCode} and delflag = 'N' and isnotice = 'N' and hasfile = 'Y' order by bid desc) sub)
+		<![CDATA[where rn>=1 and rn<=#{maxNum}]]>
+	</select>
+	
 </mapper>

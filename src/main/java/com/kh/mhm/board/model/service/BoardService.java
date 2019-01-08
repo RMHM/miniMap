@@ -14,7 +14,7 @@ public interface BoardService {
 	// btype용
 	/*List<Board> selectBoardList(int bCode);*/
 	
-	// 1= 자유 2= 정보 3= 질문 4= 후기 게시판 리스트 출력
+	// 1= 자유 2= 정보 3= 질문 4= 후기 5=광고 게시판  리스트 출력
 	
 	List<Map<String, String>> selectBoardList1(int cPage, int numPerPage);
 	
@@ -84,5 +84,6 @@ public interface BoardService {
 	List<Board> selectBoardListPart(Map<String, Integer> param);
 	
 	int selectAuthority(int mno);
-
+	
+	List<Board> selectRecentBoard(Map<String, Integer> param);
 }

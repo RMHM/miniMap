@@ -35,10 +35,21 @@
 						<article>
 							<div class="post-image">
 								<div class="post-heading">
-									<h3><a href="#">${blist[i].getBTitle()}</a></h3>
+									<h3>
+										<a href="#">
+											<c:if test="${blist[i].getRFlag() eq 'N'}">
+												${blist[i].getBTitle()}
+											</c:if>
+											<c:if test="${blist[i].getRFlag() eq 'Y'}">
+												신고당한 게시글 입니다.
+											</c:if>
+										</a>
+									</h3>
 								</div>
 								<div style="overflow:hidden; height:auto;">
-									<img src="/resources/img/upload/${thumb[i]}" alt=""/>
+									<c:if test="${blist[i].getRFlag() eq 'N'}">
+										<img src="/resources/img/upload/${thumb[i]}" alt=""/>
+									</c:if>
 								</div>
 								
 							</div>

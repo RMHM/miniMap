@@ -202,4 +202,8 @@ public class BoardServiceImpl implements BoardService {
 	public int selectAuthority(int mno) {
 		return boardDao.selectAuthority(mno);
 	}
+	@Override
+	public List<Board> selectRecentBoard(Map<String, Integer> param) {
+		return boardDao.selectRecentBoard(param);
+	}
 }

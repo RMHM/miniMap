@@ -85,4 +85,6 @@ public interface BoardDao {
 	List<Board> selectBoardListPart(Map<String, Integer> param);
 	
 	int selectAuthority(int mno);
+	
+	List<Board> selectRecentBoard(Map<String, Integer> param);
 }
