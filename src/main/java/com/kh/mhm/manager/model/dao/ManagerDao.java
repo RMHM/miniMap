@@ -13,7 +13,7 @@ public interface ManagerDao {
 
 	int grantAuthority(String mnick);
 
-	Authority selectRequest(int mno);
+	List selectRequest(int mno);
 
 	int refuseAuthority(String mnick);
 

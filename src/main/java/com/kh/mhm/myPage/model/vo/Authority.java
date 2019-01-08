@@ -11,6 +11,7 @@ public class Authority {
 	private String address		;//	주소
 	private String aContent		;//	내용
 	private int aCode			;//	권한분류코드
+	private String aName		;// 권한명
 	private char aTake			;//	한부여여부
 	private Date grant_date		;//	권한부여날짜
 	private char delflag		;//	삭제 여부
@@ -125,7 +126,7 @@ public class Authority {
 	@Override
 	public String toString() {
 		return "Authority [aId=" + aId + ", mNo=" + mNo + ", mName=" + mName + ", mNick=" + mNick + ", request_date=" + request_date
-				+ ", address=" + address + ", aContent=" + aContent + ", aCode=" + aCode + ", aTake=" + aTake
+				+ ", address=" + address + ", aContent=" + aContent + ", aCode=" + aCode + ", aname="+ aName + ", aTake=" + aTake
 				+ ", grant_date=" + grant_date + ", delflag=" + delflag + "]";
 	}
 	public String getMNick() {
@@ -133,6 +134,12 @@ public class Authority {
 	}
 	public void setMNick(String mNick) {
 		this.mNick = mNick;
+	}
+	public String getAName() {
+		return aName;
+	}
+	public void setAName(String aName) {
+		this.aName = aName;
 	}
 	
 }

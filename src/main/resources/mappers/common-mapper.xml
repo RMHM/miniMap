@@ -54,6 +54,7 @@
 	
 	<select id="selectBoardCnt" resultType="hashmap">
 		select (select count(*) from board) "전체 게시글 수",
+		(select count(*) from board where bdate like sysdate) "오늘 게시글",
        (select count(*) from board where bcode = 1) "자유 게시글 수",
        (select count(*) from board where bcode = 2) "정보공유 게시글 수",
        (select count(*) from board where bcode = 3) "여행후기 게시글 수",
@@ -61,12 +62,22 @@
 		from dual
 	</select>
 	
-	<select id="selectBoardTodayCnt" resultType="hashmap">
+	<!-- <select id="selectBoardTodayCnt" resultType="hashmap">
 		select (select count(*) from board where bcode=1 and bdate like sysdate) "자유",
        (select count(*) from board where bcode=2 and bdate like sysdate) "정보공유",
        (select count(*) from board where bcode=3 and bdate like sysdate) "여행후기",
        (select count(*) from board where bcode=4 and bdate like sysdate) "질문"
 		from dual
-	</select>
+	</select> -->
 	
+	<select id="selectGroupBoard" resultType="hashmap">
+	<![CDATA[
+		select to_char(bdate, 'YYYY-MM-DD') "날짜", count(*) "개수",
+        SUM(COUNT(*)) OVER(ORDER BY to_char(bdate, 'YYYY-MM-DD')) "누적 게시글"
+		from board
+		where bdate >= '2019-01-01' and bdate < '2019-01-31'
+		group by to_char(bdate, 'YYYY-MM-DD')
+		order by to_char(bdate, 'YYYY-MM-DD')
+	]]>
+	</select>
 </mapper>
