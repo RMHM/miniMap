@@ -204,10 +204,12 @@ public class MemberController {
 	}
 
 	@RequestMapping("/member/memberEnrollEnd.do")
-	public String memberEnrollEnd(@RequestParam(value="profile", required = false)
+	public ModelAndView memberEnrollEnd(@RequestParam(value="profile", required = false)
 				MultipartFile profile, HttpSession session, HttpServletRequest request, Member m, Model model) {
 		String saveDir = session.getServletContext().getRealPath("/resources/img/profiles");
 		File dir = new File(saveDir);
+		
+		ModelAndView mv = new ModelAndView();
 		
 		if(dir.exists() == false) dir.mkdirs();
 		String originName = profile.getOriginalFilename();
@@ -253,11 +255,13 @@ public class MemberController {
 			msg = "회원 가입에 성공하였습니다.";
 		else
 			msg = "회원 가입 실패";
-
-		model.addAttribute("loc", loc);
-		model.addAttribute("msg", msg);
-
-		return "common/msg";
+		
+		mv.setViewName("common/msg");
+		mv.addObject("member", null); // 회원가입 후 자동로그인 세션 유지x
+		mv.addObject("loc", loc);
+		mv.addObject("msg", msg);
+			
+		return mv;
 	}
   
 

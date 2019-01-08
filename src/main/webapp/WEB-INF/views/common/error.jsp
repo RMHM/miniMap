@@ -1,5 +1,5 @@
 <%@
-	page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"
+   page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"
 %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
@@ -8,22 +8,16 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>에러페이지</title>
+<title>에러 페이지</title>
+<style>
+	img { display : block; margin: 0px auto; }
+</style>
 </head>
 <body>
-	<c:import url="/WEB-INF/views/common/exFile.jsp"/>
-	<div id="wrapper">
-		<c:import url="/WEB-INF/views/common/header.jsp"/>
-		
-		<div class="container" style="height:500px">
-			
-			<h1>에러 페이지</h1>
-			똑같은 상황이 다시 발생하면 관리자에게 문의해주세요.
-			
-			
-		</div>
-		
-		<c:import url="/WEB-INF/views/common/footer.jsp"/>
-	</div>
+ <c:import url="/WEB-INF/views/common/exFile.jsp"/>
+<div id="wrapper">
+ <c:import url="/WEB-INF/views/common/header.jsp"/>
+</div>
+<img src="/resources/img/Default.jpg" align="center" alt="" />
 </body>
 </html>
