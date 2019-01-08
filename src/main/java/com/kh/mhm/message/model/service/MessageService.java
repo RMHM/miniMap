@@ -7,7 +7,7 @@ import com.kh.mhm.message.model.vo.MessageSmpl;
 
 public interface MessageService {
 
-	List<Message> selectMyMessage(int mNo);
+	List<Message> selectMyMessage(int cPage, int numPerPage, int mNo);
 	
 	int deleteMessage(int[] arr);
 	
@@ -23,11 +23,11 @@ public interface MessageService {
 	
 	int updateReadFlag(int meId);
 	
-	List<Message> selectMessageStore(int mNo);
+	List<Message> selectMessageStore(int cPage, int numPerPage, int mNo);
 	
 	Message selectDetailStore(String meId);
 	
-	List<Message> selectMessageSent(int mNo);
+	List<Message> selectMessageSent(int cPage, int numPerPage, int mNo);
 	
 	int deleteSentMessage(int[] arr);
 	
@@ -38,5 +38,13 @@ public interface MessageService {
 	int sendMessage(MessageSmpl message);
 	
 	int findNick(String nick);
+	
+	int countNewMessage(int mNo);
+	
+	int countMyMessage(int mNo);
+	
+	int countMessageSent(int mNo);
+	
+	int countMessageStore(int mNo);
 
 }

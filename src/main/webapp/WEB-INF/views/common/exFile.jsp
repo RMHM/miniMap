@@ -26,8 +26,8 @@
 
 <!-- js -->
 <script src='/resources/js/moment.min.js'></script>
-<script src="/resources/js/jquery-3.3.1.min.js"></script>
-<!-- <script src="/resources/js/jquery.js"></script> -->
+<!-- <script src="/resources/js/jquery-3.3.1.min.js"></script> -->
+<script src="/resources/js/jquery.js"></script>
 <script src='/resources/js/fullcalendar.min.js'></script>
 <!-- <script src="/resources/js/jquery.easing.1.3.js"></script> -->
 <script src="/resources/js/bootstrap.min.js"></script>
@@ -42,7 +42,69 @@
 <script src="/resources/js/jquery-ui.min.js"></script>
 <!-- <script src="//ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script> -->
 <script src="//d1p7wdleee1q2z.cloudfront.net/post/search.min.js"></script>
+
+<script src="http://cdn.jsdelivr.net/sockjs/1/sockjs.min.js"></script>
+
+<script>
+
+var sock = new SockJS("<c:url value='/notice'/>");
+sock.onmessage = onMessage;
+sock.onclose = onClose;
+
+sock.onopen=function(){
+	console.log("open");
+	sendMessage();
+}
+
+function sendMessage() {
+	
+	if(sock.readyState===1){
+		setInterval(
+			function() {
+				sock.send("hdn")
+				
+		},1000);
+	}else{
+		console.log("wait...");
+		sendMessage();
+	}
+};
+
+/* function waitForSocketConnection(sock){
+	setTimeout(
+		function(){
+			if(sock.readyState===1){
+				console.log("success");
+				sendMessage();
+			}else{
+				console.log("wait...");
+				waitForSocketConnection(sock);
+			}
+		},1000);
+	
+}; */
+
+
+	
+function onMessage(evt) {
+	var data = evt.data;
+	
+	console.log("data::"+data);
+	
+	$("#test").text(data);
+	/* $('.dropdown-toggle').append(data);
+	$('.note').append(data); */
+
+};
+
+function onClose(evt){
+	
+}
+
+</script>
+
 <!-- Step 1) Load D3.js -->
 <script src="https://d3js.org/d3.v5.min.js"></script>
 <!-- Step 2) Load billboard.js with style -->
 <script src="/resources/js/billboard.js"></script>
+

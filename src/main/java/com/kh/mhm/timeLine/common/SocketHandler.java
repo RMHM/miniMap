@@ -32,7 +32,7 @@ public class SocketHandler extends TextWebSocketHandler{
 
 		logger.info("{}연결됨", session.getId());
 
-		System.out.println("채팅방 입장자 :"+session.getId());
+		System.out.println("타임라인 입장자 :"+session.getId());
 		// super.afterConnectionEstablished(session);
 	}
 
