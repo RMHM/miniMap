@@ -28,14 +28,6 @@
 		<beans:property name="suffix" value=".jsp" />
 	</beans:bean>
 	
-	<websocket:handlers>
-		<websocket:mapping handler="echoHandler" path="/echo"/>
-		<websocket:mapping handler="messageHandler" path="/message"/>
-		<websocket:handshake-interceptors>
-			<beans:bean class="org.springframework.web.socket.server.support.HttpSessionHandshakeInterceptor"/>
-		</websocket:handshake-interceptors>
-		<websocket:sockjs />
-	</websocket:handlers>
 	<beans:bean id="viewResolver"
 		class="org.springframework.web.servlet.view.BeanNameViewResolver">
 		<beans:property name="order" value="1" />
@@ -55,8 +47,19 @@
 			</beans:list>
 		</beans:property>
 	</beans:bean>
+	
 	<beans:bean id="echoHandler" class="com.kh.mhm.timeLine.common.SocketHandler"/>
 	<beans:bean id="messageHandler" class="com.kh.mhm.message.common.NoticeHandler"/>
+	
+	
+	<websocket:handlers>
+		<websocket:mapping handler="echoHandler" path="/echo"/>
+		<websocket:mapping handler="messageHandler" path="/notice"/>
+		<websocket:handshake-interceptors>
+			<beans:bean class="org.springframework.web.socket.server.support.HttpSessionHandshakeInterceptor"/>
+		</websocket:handshake-interceptors>
+		<websocket:sockjs />
+	</websocket:handlers>
 	
 	<!-- 파일 업로드 시에 사용할 MultipartResolver 등록하기 -->
 	 <beans:bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">

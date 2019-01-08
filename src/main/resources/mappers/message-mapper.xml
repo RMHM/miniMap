@@ -89,4 +89,23 @@
 		SELECT COUNT(*) FROM MEMBER WHERE MNICK=#{nick}
 	</select>
 	
+	<select id="countNewMessage" parameterType="_int" resultType="_int">
+		SELECT COUNT(*) FROM MESSAGE WHERE TAKE_MNO=#{mNo} AND DELFLAG='N' AND READFLAG='N'
+	</select>
+	
+	<select id="countMyMessage" parameterType="_int" resultType="_int">
+		SELECT COUNT(*) FROM MESSAGE ME JOIN MEMBER M ON(ME.SPEND_MNO=M.MNO) 
+		WHERE ME.TAKE_MNO=#{mNo} AND ME.DELFLAG='N' AND ME.STOREFLAG='N'
+	</select>
+	
+	<select id="countMessageSent" parameterType="_int" resultType="_int">
+		SELECT COUNT(*) FROM MESSAGE ME JOIN MEMBER M ON(ME.TAKE_MNO=M.MNO) 
+		WHERE ME.SPEND_MNO=#{mNo} AND ME.SENTDELFLAG='N'
+	</select>
+	
+	<select id="countMessageStore" parameterType="_int" resultType="_int">
+		SELECT COUNT(*) FROM MESSAGE ME JOIN MEMBER M ON(ME.SPEND_MNO=M.MNO) 
+		WHERE ME.TAKE_MNO=#{mNo} AND ME.DELFLAG='N' AND ME.STOREFLAG='Y'
+	</select>
+	
 </mapper>

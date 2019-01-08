@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.kh.mhm.message.common.util.Paging;
 import com.kh.mhm.member.model.vo.Member;
 import com.kh.mhm.message.model.service.MessageService;
 import com.kh.mhm.message.model.vo.Message;
@@ -28,10 +29,26 @@ public class MessageController {
 	MessageService ms;
 
 	@RequestMapping("/popUp.inbox")
-	public String popUpInbox(HttpSession session) {
+	public String popUpInbox(@RequestParam(value="cPage", required=false, defaultValue="1") int cPage, HttpSession session) {
 		Member member=(Member) session.getAttribute("member");
-		List<Message> message=ms.selectMyMessage(member.getMno());
+		int numPerPage = 9; // 한 페이지당 게시글 수
+		
+		/*List<Message> message=ms.selectMyMessage(member.getMno());*/
+		
+		// 1. 현재 페이지 게시글 목록 가져오기
+		List<Message> message = ms.selectMyMessage(cPage, numPerPage, member.getMno());
+		
+		
+		// 2. 전체 게시글 개수 가져오기
+		int totalContents = ms.countMyMessage(member.getMno());
+		
+		// 3. 페이지 계산 후 작성할 HTML 추가
+		String pageBar = Paging.getPageBar(totalContents, cPage, numPerPage, "/popUp.inbox");
+		
 		session.setAttribute("message", message);
+		session.setAttribute("totalContents", totalContents);
+		session.setAttribute("numPerPage", numPerPage);
+		session.setAttribute("pageBar", pageBar);
 		return "message/message_inbox";
 	}
 	
@@ -55,18 +72,36 @@ public class MessageController {
 	}
 	
 	@RequestMapping("/popUp.sent")
-	public String pupUpSent(HttpSession session) {
+	public String pupUpSent(@RequestParam(value="cPage", required=false, defaultValue="1") int cPage,HttpSession session) {
 		Member member=(Member) session.getAttribute("member");
-		List<Message> message=ms.selectMessageSent(member.getMno());
+		
+		int numPerPage = 9;
+		
+		List<Message> message = ms.selectMessageSent(cPage, numPerPage, member.getMno());
+		
+		int totalContents = ms.countMessageSent(member.getMno());
+		
+		String pageBar = Paging.getPageBar(totalContents, cPage, numPerPage, "/popUp.sent");
+		
 		session.setAttribute("message", message);
+		session.setAttribute("totalContents", totalContents);
+		session.setAttribute("numPerPage", numPerPage);
+		session.setAttribute("pageBar", pageBar);
+		
 		return "message/message_sent";
 	}
 	
 	@RequestMapping("/popUp.store")
-	public String pupUpStore(HttpSession session) {
+	public String pupUpStore(@RequestParam(value="cPage", required=false, defaultValue="1") int cPage,HttpSession session) {
 		Member member=(Member) session.getAttribute("member");
-		List<Message> message=ms.selectMessageStore(member.getMno());
+		int numPerPage = 9;
+		List<Message> message=ms.selectMessageStore(cPage, numPerPage, member.getMno());
+		int totalContents = ms.countMessageStore(member.getMno());
+		String pageBar = Paging.getPageBar(totalContents, cPage, numPerPage, "/popUp.store");
 		session.setAttribute("message", message);
+		session.setAttribute("totalContents", totalContents);
+		session.setAttribute("numPerPage", numPerPage);
+		session.setAttribute("pageBar", pageBar);
 		return "message/message_store";
 	}
 	
