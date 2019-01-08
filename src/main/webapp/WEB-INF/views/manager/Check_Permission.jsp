@@ -9,36 +9,62 @@
 <head>
 <meta charset="UTF-8">
 <title>miniMap에 오신걸 환영합니다.</title>
-<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/manager/manager.css">
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <meta name="description" content="" />
+<link rel="stylesheet"
+	href="http://code.jquery.com/ui/1.10.2/themes/smoothness/jquery-ui.css">
 </head>
+
 <body>
 	<!-- 외부파일 선언 -->
-
 	<c:import url="/WEB-INF/views/common/exFile.jsp" />
+	
 	<div id="wrapper">
-		<!-- header 선언 -->
 		<div class="container">
-
 			<div class="col-md-10">
-				<div class="container">
+				<div class="container-fluid">
+					<div class="row">
+						<div class="list">
+							<table class="table table-hover">
+								<thead>
+									<tr>
+										<th>회원번호</th>
+										<th>권한분류</th>
+										<th>요청권한</th>
+										<th>요청자</th>
+										<th>요청날짜</th>
+										<th>요청확인</th>
+									</tr>
+								</thead>
 
-					<!-- 	<div class="container-fluid"> -->
-					<div class="col-sm-8 text-center">
-						<h1>
-							<small>승인 페이지</small>
-						</h1>
+
+								<tbody id="tb">
+										<c:forEach var="a" begin="0" end="${list.size()-1 }" step="1">
+											<tr id="code${list.get(a).getACode()}">
+												<td>${list.get(a).getMNo()}</td>
+												<td>${list.get(a).getACode()}</td>
+												<td>${list.get(a).getAName()}</td>
+												<td>${list.get(a).getMName()}</td>
+												<td>${list.get(a).getRequest_date()}</td>
+												<td><button name="checkBtn">요청확인</button></td>
+											</tr>
+										</c:forEach>
+								</tbody>
+							</table>
+						</div>
+						<div id="checkList">
 						<form class="form-horizontal" id="request" method="post">
 							<div class="raw">
 									<div class="form-group">
 									<div class="btn-group">
-										<c:if test="${autho.getACode() == 1}">
+									<c:forEach var="a" begin="0" end="${list.size()-1 }" step="1">
+										<c:if test="${list.get(a).getACode() == 1}">
 											<input type="radio" id="aCode1" name="aCode" value="1" checked/><label for="aCode1">작성권한</label>
 										</c:if>
-										<c:if test="${autho.getACode() == 2}">
+										<c:if test="${list.get(a).getACode() == 2} }">
 											<input type="radio" id="aCode2"  name="aCode" value="2" checked/><label for="aCode2">파워링크</label>
 										</c:if>
+									</c:forEach>
 									</div>
 								</div>
 							
@@ -75,25 +101,27 @@
 										name="aContent" style="width: 98%; resize:none;" maxlength="100" readonly>${autho.getAContent() }</textarea>
 								</div>
 							</div>
-							
 							<div class="form-group">
 
 								<button id="grantBtn" onclick="grant();">승인</button> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 								<button id="refuseBtn" onclick="refuse();">거절</button>
 
 							</div>
-						</form>
+							</form>
+						</div>
 					</div>
-
 				</div>
-
 			</div>
+
 		</div>
-
 	</div>
-	<script>
+<script>
 	var url = "";
-
+	
+	$(document).ready(function(){
+		$('#checkList').hide();
+	});
+	
 	function grant() {
 
 		var checkResult = window.confirm("승인하겠습니까?");
@@ -106,9 +134,6 @@
 			close();
 		} else {
 			alert("승인이 취소 되었습니다.")
-			url = "managerPage.go"
-			opener.window.location = url;
-			close();
 		}
 
 	}
@@ -123,6 +148,15 @@
 		close();
 
 	}
+	
+	$('button[name=checkBtn]').click(function(){
+		$('#checkList').show();
+		$('.list').hide();
+		
+		console.log("test : " + $(this).parent().siblings().eq(1).text());
+		
+	});
+	
 	</script>
 </body>
 </html>

@@ -35,7 +35,8 @@ public class ManagerDaoImpl implements ManagerDao {
 		list.add(sst.selectOne("common.selectAgeCnt"));
 		list.add(sst.selectOne("common.selectMemberCnt"));
 		list.add(sst.selectOne("common.selectBoardCnt"));
-		list.add(sst.selectOne("common.selectBoardTodayCnt"));
+		/*list.add(sst.selectOne("common.selectBoardTodayCnt"));*/
+		list.add(sst.selectList("common.selectGroupBoard"));
 		
 		return list;
 	}
@@ -62,8 +63,8 @@ public class ManagerDaoImpl implements ManagerDao {
 	}
 
 	@Override
-	public Authority selectRequest(int mno) {
-		return sst.selectOne("authority.selectRequest", mno);
+	public List selectRequest(int mno) {
+		return sst.selectList("authority.selectRequest", mno);
 	}
 
 	@Override
