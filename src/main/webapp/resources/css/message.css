@@ -110,6 +110,14 @@
 		vertical-align: middle;
 		margin-bottom:2px;
 	}
+	#noteLogo{
+		border:none;
+	}
+	#noteLogo img{
+		width:134px;
+		height:68px;
+		margin-top:150px;
+	}
 	#noteMain {
 		width: 541px;
 		height: auto;
@@ -400,6 +408,7 @@
 		margin: 0 0 0 6px;
 		font-family: dotum, 돋움;
 		font-size: 8pt;
+		list-style:none;
 	}
 
 	#noteList #noteSearch {
@@ -593,4 +602,9 @@
 	.error{
 		font-weight:bolder;
 		color:red;
+	}
+	
+	.page-item{
+		display:inline;
+		margin:3px;
 	}

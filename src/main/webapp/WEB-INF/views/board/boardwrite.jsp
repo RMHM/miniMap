@@ -17,6 +17,7 @@
 <link rel="stylesheet" href="<%=request.getContextPath()%>/daumeditor/css/editor.css" type="text/css" charset="utf-8"/>
 <script src="<%=request.getContextPath()%>/daumeditor/js/editor_loader.js" type="text/javascript" charset="utf-8"></script>
 
+
 </head>
 <body>
 	<c:import url="/WEB-INF/views/common/exFile.jsp" />
@@ -27,10 +28,7 @@
 				&nbsp;&nbsp;
 				<h4>--게시판 목록--</h4>
 				<ul class="unstyled">
-					<br>
-					<br>
-					<br>
-					<br>
+					<br><br>
 					<li><a href="/board/boardlist1.do">자유 게시판</a></li>
 					<br>
 					<li><a href="/board/boardlist2.do">정보공유 게시판</a></li>
@@ -47,36 +45,56 @@
 						enctype="multipart/form-data">
 						<input type="hidden" id="mNo" name="mNo" value="${member.mno}" />
 						<!-- 작성자 회원번호  -->
-						<input type="text" placeholder="제목" name="bTitle" id="bTitle"
-							required>
-						<div id="daumeditor" class="edit"
-							style="width: 90%; height: 100%;"></div>
-						<textarea name="boardcontent" id="boardcontent"
-							style="display: none;"></textarea>
+						
+						<br>						
+						<select name="bCode" id="bCode">
+							<option value="0">게시판 선택</option>
+  							<option value="1">자유</option>
+  							<option value="2">정보공유</option>
+ 							<option value="3">여행후기</option>
+ 							<option value="4">질문</option> 							
+						</select>
 						<c:if test="${member.mtype eq 'A' }">
 							<input type="checkbox" name="isNotice2" checked="checked">공지글로 올리기 <br>
 						</c:if>
-						<input type="hidden" name="isNotice" value='N'> <input
-							type="radio" name="bCode" value="1" checked="checked">잡담
-						<input type="radio" name="bCode" value="2">정보 <input
-							type="radio" name="bCode" value="3">후기 <input
-							type="radio" name="bCode" value="4">질문 <input
-							type="button" class="btn btn-theme" id="insertBoard" value="등록"
-							style="position: absolute; right: 100px;" />
-
+						<input type="hidden" name="isNotice" value='N'> 						
+						<input type="text" placeholder="제목을 입력해주세요" name="bTitle" id="bTitle" 
+						required style="width:90%;">
+						<div id="daumeditor" class="edit" style="width: 90%; height: 100%;"></div>													
+						<textarea name="boardcontent" id="boardcontent"
+							style="display: none;"></textarea>							
+							
+												
+						<!-- <input type="radio" name="bCode" value="1" checked="checked">잡담
+						<input type="radio" name="bCode" value="2">정보 
+						<input type="radio" name="bCode" value="3">후기 
+						<input type="radio" name="bCode" value="4">질문 	 -->
+						
+						<input type="button" class="btn btn-theme" id="insertBoard" value="등록"
+							style="position: absolute; right: 105px;" />
+						<input type="button" value="취소" onclick="history.back(-1);"
+						class="btn btn-warning" style="position: absolute; right: 160px;"/>								
 					</form>
-				</c:if>
+				</c:if>				
+										
 			</div>
 			<div>
 
 				<div class="container-fluid">
 					<div class="row">
-						<div class="col-md-10"></div>
+					<button type="button" class="btn btn-theme" id="viewmap" 
+						onclick="viewmap(this);">지도추가 </button>					
+						<div class="col-md-2"></div>
+						<div class="col-md-10" name="jejumap" style="visibility:hidden;">
+						<c:import url="/WEB-INF/views/test/testMap2.jsp"/>
+						</div>
 					</div>
 				</div>
 				
 			</div>
 		</div>
+		
+		
 		<c:import url="/WEB-INF/views/common/footer.jsp" />
 	</div>
 </body>
@@ -146,13 +164,20 @@ $(function(){
      
     //form submit 버튼 클릭
     $("#insertBoard").click(function(){
-    	if ($('input[name=isNotice2]').is(":checked")) {
-    	    $('input[name=isNotice]').val('Y');    	   
-    	} else {
-    	    $('input[name=isNotice]').val('N');    	   
+    	var bCode = $('#bCode').val(); 
+    	
+    	if(bCode == 0){
+    		alert('게시판유형을 선택해주세요.');
+    	}else {
+    	    	
+    		if ($('input[name=isNotice2]').is(":checked")) {
+    		    $('input[name=isNotice]').val('Y');    	   
+    		} else {
+    		    $('input[name=isNotice]').val('N');    	   
+    		}
+     	   //다음에디터가 포함된 form submit
+     	   Editor.save();
     	}
-        //다음에디터가 포함된 form submit
-        Editor.save();
     })
 })
  
@@ -172,12 +197,20 @@ function validForm(editor) {
 //validForm 함수까지 true값을 받으면 이어서 form submit을 시켜주는  setForm함수
 
 
-
 function setForm(editor) {
     var content = editor.getContent();
     $("#boardcontent").val(content)
     return true;
 }
+
+function viewmap(obj) {
+	$(obj).css('display', 'none');		
+	
+	$('div[name="jejumap"]').css('visibility', 'visible');	
+	
+}
+
+
 
 
 

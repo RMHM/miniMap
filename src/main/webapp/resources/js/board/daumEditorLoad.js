@@ -37,7 +37,7 @@ $(function() {
 						lineHeight : "1.5",
 						/* 위지윅 영역의 여백 */
 						padding : "8px"
-					},
+					},	
 					showGuideArea : false
 				},
 				events : {

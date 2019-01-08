@@ -7,10 +7,35 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
+
+import com.kh.mhm.member.model.vo.Member;
+
+@Controller
 public class MapController {
 
+
 	
+
+	@RequestMapping(value = "/map/hoji.do")
+	@ResponseBody
+//	public void passCheck(@RequestParam String mpw, @RequestParam String mid) {
+		public void passCheck(@RequestParam String tLat, @RequestParam String tLng, @RequestParam String tInText) {
+//		System.out.println("mpw : "+mpw + "  mid : "+ mid + " abc : " );
+		System.out.println("tLat : "+tLat + "  tLng : "+ tLng + " tInText : " + tInText);
+	}
+
 
 	
 	

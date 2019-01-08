@@ -1,5 +1,5 @@
 $(function(){
-				
+				// 비밀번호 유효성 검사
 				$("#mpw2").blur(function(){
 					var p1=$("#mpw_").val(), p2=$("#mpw2").val();
 					if(p1!=p2){
@@ -49,12 +49,11 @@ $(function(){
 			     console.log(mid);
 				});
 			});
-			
-/*
+
 			function validate(){
 				var mid = $("#mid_");
 				if(mid.val().trim().length<4){
-					alert("아이디는 최소 4자리이상이어야 합니다.");
+					alert("아이디는 최소 4자리 이상이어야 합니다.");
 					mid.focus();
 					return false;
 				}
@@ -66,48 +65,56 @@ $(function(){
 			    }
 				
 				return true;
-			}
-*/			
+			}			
 			
-			/* 닉네임 중복검사 이벤트 추가 */
-			function checkNick(){
-				var nick = $("#mnick").val();
-				
-				$.ajax({
-					url : "/member/checkNick.do",
-					type : "POST",
-					data : { mnick : mnick },
-					dataType : "json",
-					success : function(data){
-						if($.trim(data)==0){
-							$("#chkNick").jsp("<p style= COLOR: blue>사용가능</p>");
-						} else {
-							$("#chkNick").jsp("<p style= COLOR: red>사용불가</p>");
-						}
-					}, error : function(){
-						alert("에러입니다.");
-					}
-				});
-			};
-	
-			
-			
-			/* 파일 확장자명 이미지로만 선언하기 */
-/*			function fileN(){
-				
-				var fileNm = $("#profilePath").val();
-				
-				if (fileNm != ""){
-					var ext = fileNm.slice(fileNm.lastIndexOf(".") + 1).toLowerCase();
-					
-					if(!(ext == "gif" || ext == "jpg" || ext == "png")){
-						alert("이미지파일 (.gif, .jpg, .png)만 업로드 가능합니다.");
-						return false;
-					}
-					
-				}	
-			}
-*/			
-			
-			
-			
+			/*
+			 $("input[type=file]").change(function () {
+	             
+		            var fileListView = "";
+		             
+		            var formData = new FormData(); //ajax로 넘길 data
+		             
+		            var fileInput = document.getElementById("profilePath"); //id로 파일 태그를 호출
+		             
+		            var files = fileInput.files; //업로드한 파일들의 정보를 넣는다.
+		             
+		            for (var i = 0; i < files.length; i++) {
+		                formData.append('file-'+i, files[i]); //업로드한 파일을 하나하나 읽어서 FormData 안에 넣는다.
+		            }
+		             
+		            $.ajax({
+		                url: "/member/fileSave",
+		                data: formData,
+		                processData: false,
+		                contentType: false,
+		                type: 'POST',
+		                success: function(data){
+		                     
+		                    if(data.code == "OK"){ //응답결과
+		                         
+		                        fileInfoList = data.fileInfoList; //응답 결과 데이터 fileInfoList
+		                        $.each(fileInfoList, function( index, fileInfo ) {
+		                             
+		                            console.log("Path: "+fileInfo.fileFullPath); //전체경로
+		                            console.log("FileName: "+fileInfo.originalFilename); //파일명
+		                                                     
+		                            fileListView += "<p>"+fileInfo.originalFilename+"</p>"; //루프를 돌려서 화면에 보여줄 리스트 작성
+		                             
+		                        });
+		                         
+		                        $("#file_view_list").html(fileListView); //리스트를 화면에 보여줌
+		                         
+		                    }else{
+		                        alert("파일 등록에 실패하였습니다.");
+		                    }
+		                     
+		                },
+		                error: function(xhr,textStatus,error){
+		                                         
+		                    console.log("textStatus: "+xhr.status+", error: "+error);
+		                    alert("예상치 못한 오류가 발생했습니다.");
+		                     
+		                }
+		            });
+		        });
+*/

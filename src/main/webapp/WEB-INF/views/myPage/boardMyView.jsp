@@ -23,14 +23,31 @@
 		<c:import url="../common/header.jsp" />
 		<div class="container">
 			<c:import url="../common/myPageNav.jsp" />
-
+		<!-- 	<div class="container">
+				<div class="raw">
+					<div class="col-lg-4 col-md-offset-4">
+						<div class="btn-group">
+							<input type="button" value="작성 게시글" id="boTap" class="btn btn-theme" >
+							<input type="button" value="작성 댓글" id="coTap" class="btn btn-theme" >
+						</div>
+					</div>
+					<div id="findDiv"  class="col-lg-4 col-md-offset-4">
+					</div>
+				</div>
+			</div> -->
 			<div class="col-md-10">
 
 				<div class="container-fluid">
 					<div class="row">
-						<div class="list">
+					<div class="col-lg-4 col-md-offset-4">
+						<div class="btn-group">
+							<input type="button" value="작성 게시글" id="boTap" class="btn btn-theme" >
+							<input type="button" value="작성 댓글" id="coTap" class="btn btn-theme" >
+						</div>
+					</div>
+						<div id = "boTable" class="list">
 
-							<table class="table table-hover">
+							<table  class="table table-hover">
 								<thead>
 									<tr>
 										<th>번호</th>
@@ -51,7 +68,7 @@
 										<c:forEach var="a" begin="0" end="${list.size()-1 }" step="1">
 											<%-- 	<c:out value="${ a}" /> --%>
 
-											<tr id="${list.get(a).getBNo()}">
+											<tr id="${list.get(a).getBId()}">
 												<td>${list.get(a).getBNo()}</td>
 												<td>${list.get(a).getBCode()}</td>
 												<td>${list.get(a).getBTitle()}</td>
@@ -75,19 +92,70 @@
 							</table>
 
 							<c:out value="${pageBar}" escapeXml="false" />
+							
+						</div>
+						
+						<div id = "coTable" class="list" style="display:none">
 
+							<table  class="table table-hover">
+								<thead>
+									<tr>
+										<th>번호</th>
+										<th>분류</th>
+										<th>내용</th>
+										<th>작성자</th>
+										<th>작성일</th>
+									</tr>
+								</thead>
+								<tbody>
+									<c:if test="${!empty colist }">
+										<c:forEach var="a" begin="0" end="${colist.size()-1 }" step="1">
+										
+											<tr id="${colist.get(a).getBid()}">
+												<td>${colist.get(a).getCid()}</td>
+												<td>${colist.get(a).getBid()}</td>
+												<td>${colist.get(a).getCcontent()}</td>
+												<td>${colist.get(a).getMno()}</td>
+												<td>${colist.get(a).getCdate()}</td>
+											</tr>
+										</c:forEach>
+
+									</c:if>
+									<c:if test="${empty colist }">
+											<tr >
+												<td colspan="5" align="center">작성한 댓글이 없습니다.</td>
+									
+
+											</tr>
+									
+									</c:if>
+								</tbody>
+							</table>
+
+							<c:out value="${copageBar}" escapeXml="false" />
+							
 						</div>
 					</div>
 				</div>
 			</div>
 
 			<script>
-				$(function() {
+			$(function() {
+				 $('#boTap').click(function(){
+							$('#boTable').attr('style','display:block');
+							$('#coTable').attr('style','display:none');		
+				 });
+					$('#coTap').click(function(){
+							$('#boTable').attr('style','display:none');
+							$('#coTable').attr('style','display:block');
+					}); 
+					
 					$("tr[id]").on("click", function() {
 						var bId = $(this).attr("id");
-						
-
-						 location.href = "${pageContext.request.contextPath}/board/boardview.do?BId="+bId;  
+					 	if($(this).children('td:eq(1)').text()==5) location.href = "${pageContext.request.contextPath}/board/adBoardView.do?bid="+bId; 
+						else  location.href = "${pageContext.request.contextPath}/board/boardview.do?BId="+bId; 
+					
+						   
 					});
 				});
 			</script>

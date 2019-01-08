@@ -14,13 +14,13 @@ import org.jsoup.select.Elements;
 
 public class Temperatures {
 
-	public ArrayList temperature() throws IOException {
+	public ArrayList temperature(int num) throws IOException {
 	
 		ArrayList l = new ArrayList();
 		ArrayList result = new ArrayList();
 		
-		for(int i =1 ;i<13 ;i++){
-			Document doc = Jsoup.connect("http://www.weather.go.kr/weather/climate/average_30years.jsp?yy_st=2011&stn=184&norm=D&obs=0&mm="+i).get();
+		
+			Document doc = Jsoup.connect("http://www.weather.go.kr/weather/climate/average_30years.jsp?yy_st=2011&stn=184&norm=D&obs=0&mm="+num).get();
 			Elements title = doc.select(".table_develop tbody tr");			
 		
 			Map month = new HashMap();
@@ -37,12 +37,12 @@ public class Temperatures {
 				map.put("low", e.select("td:eq(3)").text());
 				l.add(map);
 			}
-			month.put(i, l);
+		/*	month.put(i, l);
 			result.add(month);
-		}
+	*/
 		
 		
-		return result;
+		return l;
 	}
 
 }

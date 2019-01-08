@@ -12,15 +12,46 @@ public interface BoardService {
 	static int BOARD_SERVICE_COMPLETE = 1;
 
 	// btype용
-	List<Board> selectBoardList(int btype);
+	/*List<Board> selectBoardList(int bCode);*/
 	
-	List<Board> selectBoardList(Board board);	
+	// 1= 자유 2= 정보 3= 질문 4= 후기 5=광고 게시판  리스트 출력
 	
-	List<Board> selectNoticeList(Board board);		
+	List<Map<String, String>> selectBoardList1(int cPage, int numPerPage);
+	
+	List<Board> selectSearchList1(String keyfield, String keyword);	
+	
+	List<Board> selectNoticeList1(Board board);		
 
-	int selectBoardTotalContents();
+	int selectBoardTotalContents1();
+	
+	List<Map<String, String>> selectBoardList2(int cPage, int numPerPage);
+	
+	List<Board> selectSearchList2(String keyfield, String keyword);	
+	
+	List<Board> selectNoticeList2(Board board);		
 
-	int insertBoard(Board board/*, List<Fileref> attachList*/);
+	int selectBoardTotalContents2();
+	
+	List<Map<String, String>> selectBoardList3(int cPage, int numPerPage);
+	
+	List<Board> selectSearchList3(String keyfield, String keyword);	
+	
+	List<Board> selectNoticeList3(Board board);		
+
+	int selectBoardTotalContents3();
+	
+	List<Map<String, String>> selectBoardList4(int cPage, int numPerPage);
+	
+	List<Board> selectSearchList4(String keyfield, String keyword);	
+	
+	List<Board> selectNoticeList4(Board board);		
+
+	int selectBoardTotalContents4();
+	
+	//-------------------------------------//
+	
+
+	int insertBoard(Board board);
 
 	Board selectOneBoard(int bId);
 	
@@ -28,13 +59,31 @@ public interface BoardService {
 
 	List<Fileref> selectFilerefList(int boardNo);
 
-	int updateBoard(Board board/*, List<Fileref> attachList*/);
+	int updateBoard(Board board);
 
 	int deleteBoard(int boardNo);
-
-	int deleteFile(int attNo);
 	
-	List<Map<String, String>> selectBoardList2(int cPage, int numPerPage);
-  
-  int insertImgBoard(Board board);
+	int insertImgBoard(Board board);
+	
+	int insertImgFile(Fileref fref);
+	
+	String selectThumbnailImg(int bid);
+	
+	int selectCommentCnt(int bid);
+	
+	int deleteImg(int bid);
+	
+	List<String> selectBoardImg(int bid);
+	
+	int deleteOneImg(String imgName);
+	
+	int updateImgBoard(Board b);
+	
+	int selectBoardCnt(int bCode);
+	
+	List<Board> selectBoardListPart(Map<String, Integer> param);
+	
+	int selectAuthority(int mno);
+	
+	List<Board> selectRecentBoard(Map<String, Integer> param);
 }

@@ -34,3 +34,7 @@ hs_err_pid*
 *.kml
 *.geojson
 *.json
+
+# imgupload folder
+/src/main/webapp/resources/img/upload/
+/src/main/webapp/resources/img/profiles/

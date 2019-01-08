@@ -42,6 +42,8 @@ import com.kh.mhm.common.Policy;
 import com.kh.mhm.common.util.Utils;
 import com.kh.mhm.member.model.service.MemberService;
 import com.kh.mhm.member.model.vo.Member;
+import com.kh.mhm.message.model.service.MessageService;
+import com.kh.mhm.message.model.vo.Message;
 import com.kh.mhm.myPage.model.service.MyPageService;
 import com.kh.mhm.myPage.model.vo.Authority;
 import com.kh.mhm.myPage.model.vo.Schedule;
@@ -54,7 +56,8 @@ public class MyPageController {
 	private MyPageService mps;
 	@Autowired
 	private MemberService ms;
-
+	@Autowired
+	MessageService mss;
 	@Autowired
 	private BCryptPasswordEncoder bcpe;
 	private String loc = "/";
@@ -129,18 +132,38 @@ public class MyPageController {
 		}
 		AfterWeather a = new AfterWeather();
 		Temperatures t = new Temperatures();
+		
+		java.util.Date today = new java.util.Date();
+		int num = today.getMonth()+1;
+	
 		model.addAttribute("list", list);
-    model.addAttribute("temper",t.temperature());
+		model.addAttribute("temper",t.temperature(num));
 		model.addAttribute("weather",a.weather());
     
 		return "myPage/schedule";
 	}
+	
+	/*월 평균 기온*/
+	@RequestMapping(value="/myPage/temper.do")
+	@ResponseBody
+	public ArrayList temperature(@RequestParam int num) throws IOException {
+		Temperatures t = new Temperatures();
+		return t.temperature(num);
+	}
+	
+	@RequestMapping(value = "/myPage/message.do")
+	@ResponseBody
+	public int messageCount(Member member, Model model) {
 
+		return mps.selectMyMessage(member.getMno());
+	}
+	
+	
 	/* myPagemain 경로 */
 	@RequestMapping("/myPage/myPageMain.do")
-	public String myPageMain() {
-
-		/* return "myPage/schedule"; */
+	public String myPageMain(Member member,Model model) {
+		/*List<Message> message =mss.selectMyMessage(member.getMno());
+		model.addAttribute("msg",message);*/
 		return "myPage/myPageMain";
 	}
 
@@ -152,9 +175,11 @@ public class MyPageController {
 
 	/* 회원정보 수정 하고 myPageMain 이동 */
 	@RequestMapping("/myPage/updateMember.do")
-	public String updateMember(@RequestParam(value="profile", required = false) MultipartFile profile,Member member, HttpSession session, HttpServletRequest request) {
+	public String updateMember(@RequestParam(value="profile", required = false) MultipartFile profile,Member member, @RequestParam String mpwTest, HttpSession session, HttpServletRequest request) {
+		if(profile.getSize()==0) {
+			System.out.println("원본"+member.getProfilePath());
+		}else {
 
-	
 		String saveDir = session.getServletContext().getRealPath("/resources/img/profiles");
 		File dir = new File(saveDir);
 		
@@ -163,9 +188,7 @@ public class MyPageController {
 		String ext = originName.substring(originName.lastIndexOf(".")+1);
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd_HHmmss");
 		int rndNum = (int)(Math.random() * 1000);
-		
-		
-		String renamedName = sdf.format(new java.util.Date()) + "_" + rndNum + "." + ext;
+	String renamedName = sdf.format(new java.util.Date()) + "_" + rndNum + "." + ext;
 		
 		// 실제 파일을 지정한 파일명으로 변환하며 데이터를 저장한다.
 		try {
@@ -175,93 +198,11 @@ public class MyPageController {
 		}
 		
 		member.setProfilePath(renamedName);
-		
-		/*String saveDir = session.getServletContext().getRealPath("/resources/img/profiles");
-		System.out.println("경로 :"+saveDir);
-		
-		 try { 
-	            // MultipartHttpServletRequest 생성 
-	            MultipartHttpServletRequest mhsr = (MultipartHttpServletRequest) request; 
-	            Iterator iter = mhsr.getFileNames(); 
-	            MultipartFile mfile = null; 
-	            String fieldName = ""; 
-	           
-	            // 디레토리가 없다면 생성 
-	            File dir = new File(saveDir); 
-	            if (!dir.isDirectory()) { 
-	                dir.mkdirs(); 
-	            } 
-	            
-	            // 값이 나올때까지 
-	            while (iter.hasNext()) { 
-	                fieldName = (String) iter.next(); // 내용을 가져와서 
-	                mfile = mhsr.getFile(fieldName); 
-	                String origName; 
-	                origName = new String(mfile.getOriginalFilename().getBytes("8859_1"), "UTF-8"); //한글꺠짐 방지 
-	                
-	                System.out.println("origName: " + origName);
-	                // 파일명이 없다면 
-	                if ("".equals(origName)) {
-	                    continue; 
-	                } 
-	       
-	                String saveFileName = origName;
-	                
-	                System.out.println("saveFileName : " + saveFileName);
-	                
-	                // 설정한 path에 파일저장 
-	                File serverFile = new File(saveDir + File.separator + saveFileName);
-	                mfile.transferTo(serverFile);
-	      
-	            }
-	            
-	            returnObject.put("files", resultList); 
-	            returnObject.put("params", mhsr.getParameterMap()); 
-	            } catch (UnsupportedEncodingException e) { 
-	                // TODO Auto-generated catch block 
-	                e.printStackTrace(); 
-	            }catch (IllegalStateException e) { // TODO Auto-generated catch block 
-	                e.printStackTrace();
-	            } catch (IOException e) { // TODO Auto-generated catch block
-	                e.printStackTrace();
-	            }
+		}
 
-	*/
-		
-		/*File dir = new File(saveDir);
-		if (dir.exists() == false)
-			dir.mkdirs();
-		System.out.println("폴더가 있나요? " + dir.exists());
+		member.setMpw((member.getMpw().equals(""))? mpwTest :bcpe.encode(member.getMpw()));
 	
-			String originName = profile.getOriginalFilename();
-			String ext = originName.substring(originName.lastIndexOf(".")+1);
-			SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd_HHmmss");
-			
-			int rnNum = (int)(Math.random() * 1000);
-			
-			// 서버에서 저장 후 관리할 파일 명
-			String renamedName =originName+ sdf.format(new java.util.Date()) + "_" + rnNum + "." + ext;
-			System.out.println("원본 : "+ originName);
-			new File(saveDir+"/"+originName.getRenamedFileName());
 		
-			new File(saveDir+"/"+renamedName);
-			
-			member.setProfilePath(renamedName);*/
-		/*String originName = f;
-		String ext = originName.substring(originName.lastIndexOf(".") + 1);
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd_HHmmss");
-
-		int rndNum = (int)(Math.random() * 1000);
-	
-		String renamedName = sdf.format(new java.util.Date()) + "_" + rndNum + "." + ext;
-		member.setProfilePath(renamedName);
-		
-		*/
-		
-		
-		
-		
-		member.setMpw(bcpe.encode(member.getMpw()));
 		int result = mps.updateMember(member);
 		return "myPage/myPageMain";
 	}
@@ -288,9 +229,43 @@ public class MyPageController {
 	@ResponseBody
 	public Map<String, Object> passCheck(@RequestParam String mpw, @RequestParam String mid, Model model) {
 		Member m = ms.selectOne(mid);
-
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("msg", bcpe.matches(mpw, m.getMpw()));
+		return map;
+	}
+	
+	/* 닉네임 비교 ajax */
+	@RequestMapping(value = "/myPage/nickCheck.do")
+	@ResponseBody
+	public Map<String, Object> nickCheck(@RequestParam String mnick, Model model) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		try{
+			int result = mps.selectNick(mnick);		
+			if(result>0)result = 1;
+			else result=0;
+			System.out.println(result);
+			map.put("result", result);
+		}catch(NullPointerException e) {
+			e.getMessage();
+		}
+		
+		return map;
+	}
+	/* 이메일 비교 ajax */
+	@RequestMapping(value = "/myPage/emailCheck.do")
+	@ResponseBody
+	public Map<String, Object> emailCheck(@RequestParam String email, Model model) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		try{
+			int result = mps.selectEmail(email);		
+			if(result>0)result = 1;
+			else result=0;
+			System.out.println(result);
+			map.put("result", result);
+		}catch(NullPointerException e) {
+			e.getMessage();
+		}
+		
 		return map;
 	}
 
@@ -299,21 +274,26 @@ public class MyPageController {
 	public String myBoardList(@RequestParam(value = "cPage", required = false, defaultValue = "1") int cPage,
 			Member member, Model model) {
 		int no = member.getMno();
-		int numPerPage = 10;
+		int numPerPage = 5;
 
 		int totalContents = mps.selectBoardTotalContents(no);
-    
-    System.out.println(totalContents);
-    
+		int totalCoContents = mps.selectCommentTotalContents(no);
+		
 		List<Map<String, Object>> list = new ArrayList<Map<String, Object>>(
 				mps.selectMyBoardList(cPage, numPerPage, no));
+		List<Map<String, Object>> colist = new ArrayList<Map<String, Object>>(
+				mps.selectMyCommentList(cPage, numPerPage, no));
+		
+		String copageBar = Utils.getPageBar(totalCoContents, cPage, numPerPage, "myBoardList.do");
 		String pageBar = Utils.getPageBar(totalContents, cPage, numPerPage, "myBoardList.do");
-		model.addAttribute("list", list).addAttribute("totalContents", totalContents)
-				.addAttribute("numPerPage", numPerPage).addAttribute("pageBar", pageBar);
-    System.out.println(pageBar);
-		/*
-		 * System.out.println(list.get(0)); System.out.println(list.size());
-		 */
+		model.addAttribute("list", list)
+				.addAttribute("totalContents", totalContents)
+				.addAttribute("numPerPage", numPerPage)
+				.addAttribute("pageBar", pageBar)
+				.addAttribute("colist", colist)
+				.addAttribute("totalCoContents", totalCoContents)
+				.addAttribute("copageBar", copageBar)
+				;
 		return "myPage/boardMyView";
 	}
 
@@ -333,10 +313,32 @@ public class MyPageController {
 
 	/* 권한 요청 */
 	@RequestMapping("/myPage/rePermission.do")
-	public String rePermission(Member member, Authority authority) {
+	public String rePermission(@RequestParam(value="reImg", required = false) MultipartFile reImg,Member member, Model model, Authority authority,HttpSession session, HttpServletRequest request) {
+
+		if(reImg.getSize()!=0) {
+		String saveDir = session.getServletContext().getRealPath("/resources/img/authority");
+		File dir = new File(saveDir);
+		
+		if(dir.exists() == false) dir.mkdirs();
+		String originName = reImg.getOriginalFilename();
+		String ext = originName.substring(originName.lastIndexOf(".")+1);
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd_HHmmss");
+		int rndNum = (int)(Math.random() * 1000);
+		String renamedName = sdf.format(new java.util.Date()) + "_" + rndNum + "." + ext;
+		// 실제 파일을 지정한 파일명으로 변환하며 데이터를 저장한다.
+		try {
+			reImg.transferTo(new File(saveDir + "/" + renamedName));
+		
+		} catch (IllegalStateException | IOException e) {
+			e.printStackTrace();
+		}
+		authority.setImg_file(renamedName);
+		
+		}else authority.setImg_file(null);
 		authority.setMNo(member.getMno());
 		int result = mps.insertAuthority(authority);
-		return "myPage/requestView";
+		
+		return requestViewPage(member,model);
 	}
 
 	@RequestMapping("/myPage/selectRequest.do")
@@ -369,7 +371,7 @@ public class MyPageController {
 	}
 	
 	
-	@RequestMapping("/myPage/testt.do")
+/*	@RequestMapping("/myPage/testt.do")
 	public String test1() {
 		
 		return "myPage/test";
@@ -382,7 +384,7 @@ public class MyPageController {
 		map.put("msg", "asd");
 		return map;
 
-	}
+	}*/
 	
 	
 	
