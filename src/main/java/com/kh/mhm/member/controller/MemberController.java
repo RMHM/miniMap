@@ -1,27 +1,28 @@
 package com.kh.mhm.member.controller;
 
-import java.sql.Date;
+import java.io.File;
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import javax.activation.CommandMap;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.kh.mhm.common.SendMail;
@@ -202,8 +203,30 @@ public class MemberController {
 		return "member/memberEnroll";
 	}
 
-  @RequestMapping("/member/memberEnrollEnd.do")
-	public String memberEnrollEnd(Member m, Model model) {
+	@RequestMapping("/member/memberEnrollEnd.do")
+	public String memberEnrollEnd(@RequestParam(value="profile", required = false)
+				MultipartFile profile, HttpSession session, HttpServletRequest request, Member m, Model model) {
+		String saveDir = session.getServletContext().getRealPath("/resources/img/profiles");
+		File dir = new File(saveDir);
+		
+		if(dir.exists() == false) dir.mkdirs();
+		String originName = profile.getOriginalFilename();
+		String ext = originName.substring(originName.lastIndexOf(".")+1);
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd_HHmmss");
+		int rndNum = (int) (Math.random() * 1000);
+		
+		String renamedName = sdf.format(new java.util.Date()) + "_" + rndNum + "." + ext;
+		
+		
+		try {
+			profile.transferTo(new File(saveDir + "/" + renamedName));
+		} catch (IllegalStateException | IOException e) {
+			e.printStackTrace();
+		}	
+		
+		m.setProfilePath(renamedName);
+		
+		// m.setMpw(bcpe.encode(m.getMpw()));
 		
 		String loc = "/";
 		String msg = "";
@@ -237,11 +260,6 @@ public class MemberController {
 		return "common/msg";
 	}
   
-  	@RequestMapping("/member/checkNick.do")
-  	public @ResponseBody String checkNick(@ModelAttribute("member") Member member, Model model) throws Exception {
-  		int result = ms.checkNick(member.getMnick());
-  		return String.valueOf(result);
-  	}
 
 	@RequestMapping("/member/memberView.do")
 	public String memberView(@RequestParam String mid) {
@@ -257,16 +275,46 @@ public class MemberController {
 
 		boolean isUsable = ms.checkIdDuplicate(mid) == 0 ? true : false;
 
-		map.put("isUsable", isUsable);
+		map.put("isUsable", isUsable);	
 
 		return map;
 	}
-
-	@RequestMapping("/member/insertFile.do")
-	public void insertFile() {
-
+	
+	@ResponseBody
+	@RequestMapping(value = "member/checkPw.do")
+	public int checkPw(@RequestParam("mpw_") String mpw) {
+		
+		return ms.checkPw(mpw);
 	}
-
+		
+	
+	@ResponseBody
+	@RequestMapping(value = "/member/checkNick.do")
+	public Map<String, Object> checkNick(@RequestParam String mnick) {
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		
+		boolean isUsable = ms.checkNick(mnick) == 0 ? true : false; 
+		
+		map.put("isUsable", isUsable);
+		
+		return map;
+	}
+	
+	@ResponseBody
+	@RequestMapping(value = "/member/checkEmail.do")
+	public Map<String, Object> checkEmail(@RequestParam String email){
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		
+		boolean isUsable = ms.checkEmail(email) == 0 ? true : false; 
+		
+		map.put("isUsable", isUsable);
+		
+		return map;
+	}
+	
+	
 	/*
 	 * @RequestMapping("/member/insertFileEnd.do") public String insertMember(Member
 	 * member, Model model, HttpSession session,
@@ -294,5 +342,4 @@ public class MemberController {
 	 * 
 	 * // } } }
 	 */
-
 }

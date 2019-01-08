@@ -51,6 +51,11 @@ public class MyPageDaoImpl implements MyPageDao {
 		return sqlSession.selectList("myPage.selectMyBoard",no,rowBounds);
 	}
 	@Override
+	public List<Map<String, Object>> selectMyComment(int cPage, int numPerPage, int no) {
+		RowBounds rowBounds = new RowBounds((cPage-1)*numPerPage, numPerPage);
+		return sqlSession.selectList("myPage.selectMyComment",no,rowBounds);
+	}
+	@Override
 /*	public List<Map<String, String>> selectRequest(int mno) {*/
 	public List<Authority> selectRequest(int mno) {
 		return sqlSession.selectList("myPage.selectRequest",mno);
@@ -78,5 +83,19 @@ public class MyPageDaoImpl implements MyPageDao {
 	@Override
 	public int deleteMyAuthority(int aId) {
 		return sqlSession.update("myPage.deleteAuthority",aId);
+	}
+	@Override
+	public int selectCommentTotalContents(int no) {
+		
+		return sqlSession.selectOne("myPage.selectCommentCount",no);
+	}
+	@Override
+	public int selectNick(String mnick) {
+		
+		return sqlSession.selectOne("myPage.selectNick",mnick);
+	}
+	@Override
+	public int selectEmail(String email) {
+		return sqlSession.selectOne("myPage.selectEmail",email);
 	}
 }

@@ -45,4 +45,10 @@ public class ComentDaoImpl implements ComentDao {
 		return sst.selectOne("coment.selectOneComent", cid);
 	}
 
+	@Override
+	public int insertComentContent2(Coment coment) {
+		// TODO Auto-generated method stub
+		return sst.insert("coment.insertComent2", coment);
+	}
+
 }

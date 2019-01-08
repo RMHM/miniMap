@@ -42,5 +42,13 @@ public interface MyPageDao {
 
 	int deleteMyAuthority(int aId);
 
+	int selectCommentTotalContents(int no);
+
+	List<Map<String, Object>> selectMyComment(int cPage, int numPerPage, int no);
+
+	int selectNick(String mnick);
+
+	int selectEmail(String email);
+
 
 }

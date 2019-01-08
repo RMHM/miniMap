@@ -21,10 +21,10 @@
 				&nbsp;&nbsp;
 				<h4>--게시판 목록--</h4>
 				<ul class="unstyled">
-					&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;
-					<li><a href="/board/boardlist1.do">자유 게시판</a></li> &nbsp;
-					<li><a href="/board/boardlist2.do">정보공유 게시판</a></li> &nbsp;
-					<li><a href="/board/boardlist3.do">여행후기 게시판</a></li> &nbsp;
+					<br><br>
+					<li><a href="/board/boardlist1.do">자유 게시판</a></li><br>
+					<li><a href="/board/boardlist2.do">정보공유 게시판</a></li><br>
+					<li><a href="/board/boardlist3.do">여행후기 게시판</a></li><br>
 					<li><a href="/board/boardlist4.do">질문 게시판</a></li>
 				</ul>
 			</div>
@@ -45,48 +45,60 @@
 					<div class="col-md-10">
 
 						<table class="table table-hover">
-							<thead>
-								<tr>
-									<th>번호</th>
-									<th>분류</th>
-									<th>제목</th>
-									<th>작성자</th>
-									<th>조회수</th>
-									<th>작성일</th>
-								</tr>
-							</thead>
-							<tbody>
-								<tr style="background-color:lightskyblue;">
-									<td>1</td>
-									<td>공지</td>
-									<td>여기에 질문게시판 공지가 들어갈꺼야</td>
-									<td>놀고싶다.</td>
-									<td>0</td>
-									<td>sysdate가 될 것.</td>
-								</tr>
-								<c:forEach begin="1" end="10" step="1" var="b">
-									<tr>
-										<td>2</td>
-										<td>일반</td>
-										<td>여기 이제 게시물이 들어갈꺼야</td>
-										<td>놀고싶다.</td>
-										<td>0</td>
-										<td>sysdate가 될 것.</td>
+							<thead align="center" style="background-color:lightskyblue;">
+									<tr >
+										<th width="5%">번호</th>
+										<th width="5%">분류</th>										
+										<th>제목</th>
+										<th width="13%">작성자</th>
+										<th width="7%">조회수</th>
+										<th width="10%">작성일</th>
 									</tr>
+								</thead>
+								<tbody>
+								<c:forEach var="Board" items="${list2 }"> <!-- 공지 게시글 페이지 -->
+									<tr name="BId" id="${Board.BId }" style="background-color: #CEECF5;">									
+									   <td align="center"><c:out value="${Board.BNo }"/></td>
+                     				   <td><c:out value="공지"/></td>
+                  				       <td><c:out value="${Board.BTitle }"/></td>
+               				           <td><c:out value="${Board.mnick}"/></td>
+               				           <td align="center"><c:out value="${Board.BCount }"/></td>
+                			           <td><c:out value="${Board.BDate}"/></td>
+									</tr>
+								</c:forEach>									
+								<c:forEach var="Board" items="${list }"> <!-- 일반 게시글 페이지 -->								
+									<tr name="BId" id="${Board.BId }" style="background-color: #EFF8FB;">
+                     				   <td align="center"><c:out value="${Board.BNo }"/></td>
+                     				   <td><c:out value="일반"/></td>
+                  				       <td><c:out value="${Board.BTitle }"/></td>
+               				           <td><c:out value="${Board.mnick}"/></td>
+               				           <td align="center"><c:out value="${Board.BCount }"/></td>
+                			           <td><c:out value="${Board.BDate}"/></td>
+                    				</tr>
 								</c:forEach>
 							</tbody>
 						</table>
 						<!-- 페이지 처리 해야됨. -->
+						<c:out value="${pageBar}" escapeXml="false"/>
+						<c:if test="${not empty member and member.mtype ne 'C'}">
 						<input type="button" value="글쓰기" id=""
 							class="btn btn-theme" onclick="location.href='${pageContext.request.contextPath}/board/boardwrite.do'" 
 							style="position: absolute; right: 30px;" />
-						<div class="" id=""
-							style="display: flex; align-items: center; justify-content: center;">
-							<form class="search">
-								<input class="seracharea" type="text" />
-								<button class="searchbtn" type="submit">검색</button>
-							</form>
-						</div>
+						</c:if>	
+						<div class="s-area" id="s-area"
+								style="display: flex; align-items: center; justify-content: center;">
+								
+								<form action="/board/searchlist3.do" method="post" name="search" id="search" enctype="multipart/form-data">
+								 <select name="keyField" size="1">
+           						     <option value="mnick" <c:if test="${'mnick'==keyField }"> selected</c:if>> 이름 </option>
+             						 <option value="BTitle" <c:if test="${'BTitle'==keyField }"> selected</c:if>> 제목 </option>
+              						 <option value="BContent" <c:if test="${'BContent'==keyField }"> selected</c:if>> 내용 </option>
+           						 </select>
+                					 <input type="text" size="16" name="keyWord" value="${keyWord }">
+                					 <input type="submit" value="검색" onClick="check()">               						
+
+								</form>
+							</div>
 					</div>
 				</div>
 			</div>
@@ -94,4 +106,25 @@
 			<c:import url="/WEB-INF/views/common/footer.jsp" />
 		</div>
 </body>
+
+<script>
+$(function(){
+	$("tr[name]").on("click",function(){
+		var BId = $(this).attr("id");
+		console.log("BId="+BId);
+		location.href = "${pageContext.request.contextPath}/board/boardview.do?BId="+BId;
+	});
+});
+
+function check() {
+    if (document.search.keyWord.value == "") {
+        alert("검색어를 입력하세요.");
+        document.search.keyWord.focus();
+        return;
+    }
+    document.search.submit();
+}
+
+
+</script>
 </html>

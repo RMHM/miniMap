@@ -16,6 +16,7 @@
 	    <typeAlias type="com.kh.mhm.myPage.model.vo.Authority" alias="Authority"/>
 	    <typeAlias type="com.kh.mhm.message.model.vo.Message" alias="Message"/>
 		<typeAlias type="com.kh.mhm.board.model.vo.Board" alias="Board"/>
+		<typeAlias type="com.kh.mhm.board.model.vo.Fileref" alias="Fileref"/>
 		<typeAlias type="com.kh.mhm.member.model.vo.CompanyMember" alias="CompanyMember"/>
 	    <typeAlias type="com.kh.mhm.member.model.vo.BlackList" alias="BlackList" />
 		<typeAlias type="com.kh.mhm.timeLine.model.vo.TimeLine" alias="TimeLine"/>
@@ -23,6 +24,8 @@
 	    <typeAlias type="com.kh.mhm.timeLine.model.vo.PreTimeLine" alias="PreTimeLine"/>
 	    <typeAlias type="com.kh.mhm.message.model.vo.MessageSmpl" alias="MessageSmpl"/>
 	    <typeAlias type="com.kh.mhm.coment.model.vo.Coment" alias="Coment"/>
+		<typeAlias type="com.kh.mhm.map.model.vo.Map" alias="MapPersonal"/> 
+		<typeAlias type="com.kh.mhm.report.model.vo.Report" alias="Report"/> 
   	</typeAliases>
   	
     <!-- 타임라인 timestamp<->string 변환 핸들러 -->

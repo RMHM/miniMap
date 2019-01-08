@@ -14,7 +14,8 @@
                       <span class="icon-bar"></span>
                       <span class="icon-bar"></span>
                   </button>
-				<a class="navbar-brand" href="/"><span>We</span> need LoGo</a>
+				<a class="navbar-brand" href="/">
+				<img src="/resources/img/member/1.png" alt="" /></a>
 			</div>
 			<div class="navbar-collapse collapse ">
 				<input type="hidden" id="hdnSession" data-value="${member.mno}" />
@@ -22,10 +23,18 @@
 					<li class="active"><a href="/">Home</a></li>
 					<li><a href="/echo.do">타임라인</a></li>
 					<li><a href="/test/testMap.do">지도테스트</a></li>
-          			<li><a href="/board/boardlist1.do">게시판 테스트</a><li>
-					<li><a href="/myPage/myPageMain.do">마이페이지</a></li>
-					<li><a href="/manager/managerPage.go">관리자페이지</a></li>
-					<li><a href="/test/testApi.do">제주api테스트</a></li>
+					<li class="dropdown">
+						<a href="#" class="dropdown-toggle " data-toggle="dropdown" data-hover="dropdown" data-delay="0" data-close-others="false">게시판 <b class=" icon-angle-down"></b></a>
+							<ul class="dropdown-menu">
+								<li><a href="/board/boardlist1.do">자유게시판</a></li>
+								<li><a href="/board/boardlist2.do">정보공유 게시판</a></li>
+								<li><a href="/board/boardlist3.do">여행후기게시판</a></li>
+								<li><a href="/board/boardlist4.do">질문 게시판</a></li>
+							</ul>
+						</li>					
+          			<!-- <li><a href="/board/boardlist1.do">게시판 테스트</a><li> -->
+          			<li><a href="/board/adBoard.go">업체 광고 게시판</a><li>
+					<li><a href="/event/eventCalendar.go">행사달력</a></li>
 					<!-- 로그인여부에 따른 분기점 -->
 					<c:if test="${not empty member}">
 						<li class="dropdown">

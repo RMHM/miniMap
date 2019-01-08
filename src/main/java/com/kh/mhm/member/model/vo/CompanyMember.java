@@ -46,7 +46,7 @@ public class CompanyMember extends Member{
 	@Override
 	public String toString() {
 		return "CompanyMember [address=" + address + ", aname=" + aname + ", reqDate=" + reqDate + ", grantDate="
-				+ grantDate + ", atake=" + atake + ", delflag= " + delflag + "]";
+				+ grantDate + ", atake=" + atake + ", delflag= " + delflag + super.toString() + "]";
 	}
 	public Date getReqDate() {
 		return reqDate;

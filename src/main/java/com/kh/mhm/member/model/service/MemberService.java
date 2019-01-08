@@ -20,7 +20,13 @@ public interface MemberService {
 	int checkIdDuplicate(String mid);
 	
 	Date selectNowBlack(int mno);
-  
-  int checkNick(String mnick);
+
+	int checkPw(String mpw);
+
+	int checkNick(String mnick);
+
+	int checkEmail(String email);
+
+	
   
 }

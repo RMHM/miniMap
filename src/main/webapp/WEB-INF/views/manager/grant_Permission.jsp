@@ -9,10 +9,10 @@
 <head>
 <meta charset="UTF-8">
 <title>miniMap에 오신걸 환영합니다.</title>
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/manager/manager.css">
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <meta name="description" content="" />
 </head>
-
 <body>
 	<!-- 외부파일 선언 -->
 
@@ -43,6 +43,14 @@
 								</div>
 							
 							</div>
+							
+							<div class="form-group">
+								<label class="col-sm-3 control-label" for="request_Date">권한요청일</label>
+								<div class="col-sm-6">
+									<input class="form-control" id="reqDate" name="reqDate" readonly
+										type="date" value="${autho.getRequest_date()}">
+								</div>
+							</div>
 
 							<div class="form-group">
 								<label class="col-sm-3 control-label" for="mName">회원 이름</label>
@@ -53,7 +61,7 @@
 							</div>
 
 							<div class="form-group">
-								<label class="col-sm-3 control-label" >주소</label>
+								<label class="col-sm-3 control-label" for="address" >주소</label>
 								<div class="col-sm-6">
 									<input type="text" style="width:98%;" value="${autho.getAddress()}" readonly/>
 								</div>
@@ -64,14 +72,14 @@
 								<div class="col-sm-6">
 
 									<textarea cols="30" rows="5" id="edited_title" name="aContent"
-										name="aContent" style="width: 98%; resize:none;" maxlength="100">${autho.getAContent() }</textarea>
+										name="aContent" style="width: 98%; resize:none;" maxlength="100" readonly>${autho.getAContent() }</textarea>
 								</div>
 							</div>
 							
 							<div class="form-group">
 
-								<button id="grantAuthority" onclick="grant();">승인</button>
-								<button id="refuseAuthority" onclick="refuse();">거절</button>
+								<button id="grantBtn" onclick="grant();">승인</button> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+								<button id="refuseBtn" onclick="refuse();">거절</button>
 
 							</div>
 						</form>
@@ -82,28 +90,39 @@
 			</div>
 		</div>
 
-
-
-
 	</div>
 	<script>
-		function grant() {
+	var url = "";
+
+	function grant() {
+
+		var checkResult = window.confirm("승인하겠습니까?");
 		
-			/* $('#request').attr("action", "grantAuthority.do?mno=${autho.getMNo()}"); */
-			
-			var url = "grantAuthority.do?mno=${autho.getMNo()}";
+		if(checkResult){
+			url = "grantAuthority.do?mnick=${autho.getMNick()}";
 			
 			opener.window.location = url;
 			
 			close();
-
+		} else {
+			alert("승인이 취소 되었습니다.")
+			url = "managerPage.go"
+			opener.window.location = url;
+			close();
 		}
-		function refuse() {
-			// 거절 사유 전달해서 쪽지 내용에 추가하기
-			var content = window.prompt("거절 사유를 작성해 주세요.");
-			$('#request').attr("action", "refuseAuthority.do?mno=${autho.getMNo()}");
 
-		}
+	}
+	function refuse() {
+		// 거절 사유 전달해서 쪽지 내용에 추가하기
+		var content = window.prompt("거절 사유를 작성해 주세요.");
+		
+		url = "refuseAuthority.do?mnick=${autho.getMNick()}&content="+content
+		
+		opener.window.location = url;
+		
+		close();
+
+	}
 	</script>
 </body>
 </html>

@@ -3,7 +3,20 @@
 "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="member">
-
+	
+	<resultMap type="BlackList" id="BlackListMap">
+		<result column="MNO" property="mno" />
+		<result column="MID" property="mid" />
+		<result column="JOIN_DATE" property="joinDate" javaType="java.sql.Date" jdbcType="DATE" />
+		<result column="DROP_DATE" property="dropDate" javaType="java.sql.Date" jdbcType="DATE" />
+		<result column="EMAIL" property="email" />
+		<result column="GENDER" property="gender" />
+		<result column="AGE" property="age" />
+		<result column="End_Date" property="endDate" />
+		<result column="REASON" property="reason" />
+		<result column="RDETAIL" property="rdetail"/>
+	</resultMap>
+	
 	<resultMap type="Member" id="memberMap">
 		<result column="MNO" property="mno" />
 		<result column="MID" property="mid" />
@@ -41,18 +54,6 @@
 		<result column="ANAME" property="aname" />
 		<result column="ATAKE" property="atake"/>
 		<result column="DELFLAG" property="delflag"/>
-	</resultMap>
-
-	<resultMap type="BlackList" id="BlackListMap">
-		<result column="MNO" property="mno" />
-		<result column="MID" property="mid" />
-		<result column="JOIN_DATE" property="joinDate" javaType="java.sql.Date" jdbcType="DATE" />
-		<result column="DROP_DATE" property="dropDate" javaType="java.sql.Date" jdbcType="DATE" />
-		<result column="EMAIL" property="email" />
-		<result column="GENDER" property="gender" />
-		<result column="AGE" property="age" />
-		<result column="End_Date" property="endDate" />
-		<result column="REASON" property="reason" />
 	</resultMap>
 
 	<insert id="insertMember" parameterType="Member">
@@ -95,6 +96,24 @@
 			)
 		}
 	</select>
+	
+	<select id="checkNick" statementType="CALLABLE" parameterType="hashmap">
+		{ CALL NICK_CHK(#{mnick, mode=IN, jdbcType=VARCHAR},
+			#{result, mode=OUT, jdbcType=NUMERIC, javaType=integer}
+		    )
+		}
+	</select>
+	
+	<select id="checkEmail" statementType="CALLABLE" parameterType="hashmap">
+		{ CALL EMAIL_CHK(#{email, mode=IN, jdbcType=VARCHAR},
+			#{result, mode=OUT, jdbcType=NUMERIC, javaType=integer}
+		    )
+		}
+	</select>
+	
+	<select id="checkPw" parameterType="String" resultType="_int">
+		select count(*) from member where mpw = #{mpw}
+	</select>
 
 	<select id="selectCommonMember" resultMap="memberMap">
 		SELECT mno, mid, mname, email, gender, age, join_date, drop_date FROM MEMBER
@@ -107,7 +126,7 @@
 		full outer join authority a using(mno)
 		full outer join authority_type at on(a.acode = at.acode)
 		where mtype = 'C'
-		order by request_date
+		order by mno,request_date
 	</select>
 
 	<select id="selectBlackList" resultMap="BlackListMap">
@@ -120,8 +139,28 @@
 		select end_date from (select rownum, end_date from (select end_date from blacklist where mno = #{mno} order by end_date desc) where rownum=1)
 	</select>
 	
-  <select id="checkNick" parameterType="String" resultType="int">
-		select count(*) from member mnick = #{mnick}
+	<select id="searchMember" parameterType="String" resultMap="memberMap">
+		<!-- select * from member
+		where ${condition} like '%'||#{keyword}||'%'
+		order by mtype, mno -->
+		select mtype, mno, mid, mname, email, gender, age, join_date, drop_date, 
+		(select end_date from blacklist b where b.mno = m.mno) end_date
+		from member m
+		where mnick like '%'||'user'||'%'
+		order by mtype, mno
 	</select>
+	
+	<select id="selectOneBlackList" parameterType="_int" resultMap="BlackListMap">
+		select * 
+		from blacklist
+		join member using(mno)
+		full outer join report on(mno = target_id)
+		where mno = #{mno} and end_date > sysdate
+	</select>
+	
+	<update id="clearBlackList" parameterType="_int">
+		update blacklist set end_date = sysdate
+		where mno = #{mno}
+	</update>
 	
 </mapper>

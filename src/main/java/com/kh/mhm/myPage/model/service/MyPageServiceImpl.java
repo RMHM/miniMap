@@ -49,6 +49,10 @@ public class MyPageServiceImpl implements MyPageService {
 		return  md.selectMyBoard(cPage,numPerPage,no);
 	}
 	@Override
+	public List<Map<String, Object>> selectMyCommentList(int cPage, int numPerPage, int no) {
+		return  md.selectMyComment(cPage,numPerPage,no);
+	}
+	@Override
 	/*public List<Map<String, String>> selectRequest(int mno) {*/
 	public List<Authority> selectRequest(int mno) {
 		return md.selectRequest(mno);
@@ -77,6 +81,21 @@ public class MyPageServiceImpl implements MyPageService {
 	public int deleteMyAuthority(int aId) {
 		
 		return  md.deleteMyAuthority(aId);
+	}
+	@Override
+	public int selectCommentTotalContents(int no) {
+		
+		return md.selectCommentTotalContents(no);
+	}
+	@Override
+	public int selectNick(String mnick) {
+		// TODO Auto-generated method stub
+		return  md.selectNick(mnick);
+	}
+	@Override
+	public int selectEmail(String email) {
+		
+		return md.selectEmail(email);
 	}
 
 }

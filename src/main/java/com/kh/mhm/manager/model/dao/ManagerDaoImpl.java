@@ -1,12 +1,15 @@
 package com.kh.mhm.manager.model.dao;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.kh.mhm.member.model.vo.BlackList;
 import com.kh.mhm.myPage.model.vo.Authority;
 
 @Repository
@@ -21,6 +24,19 @@ public class ManagerDaoImpl implements ManagerDao {
 		list.add((Integer)sst.selectOne("common.selectAllCnt"));
 		list.add((Integer)sst.selectOne("common.selectDayCnt"));
 		list.add((Integer)sst.selectOne("common.selectAvgCnt"));
+		return list;
+	}
+	
+	@Override
+	public List selectStatistics() {
+		List list = new ArrayList();
+		
+		list.add(sst.selectOne("common.selectGenderCnt"));
+		list.add(sst.selectOne("common.selectAgeCnt"));
+		list.add(sst.selectOne("common.selectMemberCnt"));
+		list.add(sst.selectOne("common.selectBoardCnt"));
+		list.add(sst.selectOne("common.selectBoardTodayCnt"));
+		
 		return list;
 	}
 	
@@ -41,8 +57,8 @@ public class ManagerDaoImpl implements ManagerDao {
 	}
 
 	@Override
-	public int grantAuthority(int mno) {
-		return sst.update("authority.grantAuthority", mno);
+	public int grantAuthority(String mnick) {
+		return sst.update("authority.grantAuthority", mnick);
 	}
 
 	@Override
@@ -51,9 +67,31 @@ public class ManagerDaoImpl implements ManagerDao {
 	}
 
 	@Override
-	public int refuseAuthority(int mno) {
-		return sst.update("authority.refuseAuthority", mno);
+	public int refuseAuthority(String mnick) {
+		return sst.update("authority.refuseAuthority", mnick);
 	}
+
+	@Override
+	public List searchMember(String condition, String keyword) {
+		
+		Map<String, String> map = new HashMap<String, String>();
+		
+		map.put("condition", condition);
+		map.put("keyword", keyword);
+		
+		return sst.selectList("member.searchMember", map);
+	}
+
+	@Override
+	public int clearBlackList(int mno) {
+		return sst.update("member.clearBlackList", mno);
+	}
+
+	@Override
+	public BlackList selectOneBlackList(int mno) {
+		return sst.selectOne("member.selectOneBlackList", mno);
+	}
+
 
 
 }

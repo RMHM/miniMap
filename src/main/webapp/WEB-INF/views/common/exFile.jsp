@@ -16,6 +16,11 @@
 <link href="/resources/css/fullcalendar.print.min.css" rel="stylesheet"
 	media="print" />
 
+<!-- Load with base style -->
+<link rel="stylesheet" href="/resources/css/billboard.css">
+<!-- Or load different theme style -->
+<link rel="stylesheet" href="/resources/css/theme/insight.css">
+
 <!-- Theme skin -->
 <link href="/resources/skins/default.css" rel="stylesheet" />
 
@@ -37,6 +42,7 @@
 <script src="/resources/js/jquery-ui.min.js"></script>
 <!-- <script src="//ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script> -->
 <script src="//d1p7wdleee1q2z.cloudfront.net/post/search.min.js"></script>
+
 <script src="http://cdn.jsdelivr.net/sockjs/1/sockjs.min.js"></script>
 
 <script>
@@ -96,3 +102,9 @@ function onClose(evt){
 }
 
 </script>
+
+<!-- Step 1) Load D3.js -->
+<script src="https://d3js.org/d3.v5.min.js"></script>
+<!-- Step 2) Load billboard.js with style -->
+<script src="/resources/js/billboard.js"></script>
+
