@@ -42,36 +42,40 @@
 				</div>
 				<div class="container-fluid">
 				<input type="hidden" name="bCode" value="1">
-					<div class="row">
-						<div class="list">
+					<div class="row">					
+						<div class="list">							
 							<table class="table table-hover">
 								<thead align="center" style="background-color:lightskyblue;">
-									<tr >
+									<tr>
 										<th width="5%">번호</th>
-										<th width="5%">분류</th>										
-										<th>제목</th>
+										<th width="5%">분류</th>
+										<th width="5%"></th>										
+										<th align="center">제목</th>										
 										<th width="13%">작성자</th>
 										<th width="7%">조회수</th>
 										<th width="10%">작성일</th>
 									</tr>
 								</thead>
-								<tbody>
+								<tbody>							
+					
 								<c:forEach var="Board" items="${list2 }"> <!-- 공지 게시글 페이지 -->
 									<tr name="BId" id="${Board.BId }" style="background-color: #CEECF5;">									
 									   <td align="center"><c:out value="${Board.BNo }"/></td>
                      				   <td><c:out value="공지"/></td>
-                  				       <td><c:out value="${Board.BTitle }"/></td>
-               				           <td><c:out value="${Board.mnick}"/></td>
+                     				   <td></td>
+                  				       <td><c:out value="${Board.BTitle }"/></td>                  				       
+               				           <td align="center"><c:out value="${Board.mnick}"/></td>
                				           <td align="center"><c:out value="${Board.BCount }"/></td>
                 			           <td><c:out value="${Board.BDate}"/></td>
 									</tr>
 								</c:forEach>									
-								<c:forEach var="Board" items="${list }"> <!-- 일반 게시글 페이지 -->								
+								<c:forEach var="Board" items="${list }"> <!-- 일반 게시글 페이지 -->														
 									<tr name="BId" id="${Board.BId }" style="background-color: #EFF8FB;">
                      				   <td align="center"><c:out value="${Board.BNo }"/></td>
                      				   <td><c:out value="일반"/></td>
-                  				       <td><c:out value="${Board.BTitle }"/></td>
-               				           <td><c:out value="${Board.mnick}"/></td>
+                     				   <td></td>
+                  				       <td><c:out value="${Board.BTitle }"/></td>                  				       
+               				           <td align="center"><c:out value="${Board.mnick}"/></td>
                				           <td align="center"><c:out value="${Board.BCount }"/></td>
                 			           <td><c:out value="${Board.BDate}"/></td>
                     				</tr>
