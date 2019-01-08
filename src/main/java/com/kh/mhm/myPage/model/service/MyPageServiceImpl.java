@@ -97,5 +97,10 @@ public class MyPageServiceImpl implements MyPageService {
 		
 		return md.selectEmail(email);
 	}
+	@Override
+	public int selectMyMessage(int mno) {
+	
+		return md.selectmessage(mno);
+	}
 
 }

@@ -42,6 +42,8 @@ public interface MyPageService {
 	int selectNick(String mnick);
 
 	int selectEmail(String email);
+
+	int selectMyMessage(int mno);
 	
 	
 	

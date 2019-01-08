@@ -58,11 +58,9 @@
 
 									<input class="form-control" type="text" id="sample4_postcode" placeholder="우편번호"name="address" readonly>
 									<input type="button" onclick="sample4_execDaumPostcode()"
-										value="우편번호 찾기"><br> <input type="text"
-										id="sample4_roadAddress" name="address" placeholder="도로명주소">
-									<!--  <input
-									type="text" id="sample4_jibunAddress" placeholder="지번주소"> -->
-									<span id="guide" style="color: #999; display: none"></span> <input
+										value="우편번호 찾기"><br> 
+										<input type="text" id="sample4_roadAddress" name="address" placeholder="도로명주소" readonly>
+									<span id="guide" style="color: #999; display: none"></span> <input 
 										type="text" id="sample4_detailAddress" name="address"
 										placeholder="상세주소">
 									<!-- <input type="text" id="sample4_extraAddress" placeholder="참고항목"> -->
@@ -148,8 +146,8 @@
 							<div class="form-group" id = "powerUrl" style="display:none">
 								<label class="col-sm-3 control-label" for="site_url">사이트 주소</label>
 								<div class="col-sm-6">
-									<input class="form-control" id="site_url" name="site_url" style="display:none"
-										type="url"  pattern="https://" value="">
+									<input class="form-control" id="site_url" name="site_url"
+										type="url"   value="">
 								</div>
 								
 							

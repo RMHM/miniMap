@@ -98,4 +98,9 @@ public class MyPageDaoImpl implements MyPageDao {
 	public int selectEmail(String email) {
 		return sqlSession.selectOne("myPage.selectEmail",email);
 	}
+	@Override
+	public int selectmessage(int mno) {
+		
+		return sqlSession.selectOne("myPage.selectMessageCount",mno);
+	}
 }
