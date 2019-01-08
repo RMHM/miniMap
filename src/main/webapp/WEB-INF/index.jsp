@@ -192,56 +192,6 @@
 						<div class="row">
 							<section id="projects">
 								<ul id="thumbs" class="portfolio">
-									<!-- Item Project and Filter Name -->
-									<li class="col-lg-3 design" data-id="id-0" data-type="web">
-										<div class="item-thumbs">
-											<!-- Fancybox - Gallery Enabled - Title - Full Image -->
-											<a class="hover-wrap fancybox" data-fancybox-group="gallery" title="Work 1" href="resources/img/works/1.jpg">
-												<span class="overlay-img"></span>
-												<span class="overlay-img-thumb font-icon-plus"></span>
-											</a>
-											<!-- Thumb Image and Description -->
-											<img src="resources/img/works/1.jpg"
-												alt="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus quis elementum odio. Curabitur pellentesque, dolor vel pharetra mollis.">
-										</div>
-									</li>
-									<!-- End Item Project -->
-									<!-- Item Project and Filter Name -->
-									<li class="item-thumbs col-lg-3 design" data-id="id-1" data-type="icon">
-										<!-- Fancybox - Gallery Enabled - Title - Full Image -->
-										<a class="hover-wrap fancybox" data-fancybox-group="gallery" title="Work 2" href="resources/img/works/2.jpg"> 
-											<span class="overlay-img"></span>
-											<span class="overlay-img-thumb font-icon-plus"></span>
-										</a> <!-- Thumb Image and Description -->
-										
-										<img src="resources/img/works/2.jpg"
-										alt="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus quis elementum odio. Curabitur pellentesque, dolor vel pharetra mollis.">
-									</li>
-									<!-- End Item Project -->
-									<!-- Item Project and Filter Name -->
-									<li class="item-thumbs col-lg-3 photography" data-id="id-2" data-type="illustrator">
-										<!-- Fancybox - Gallery Enabled - Title - Full Image -->
-										<a class="hover-wrap fancybox" data-fancybox-group="gallery" title="Work 3" href="resources/img/works/3.jpg">
-										<span class="overlay-img"></span>
-										<span class="overlay-img-thumb font-icon-plus"></span>
-									</a>
-									<!-- Thumb Image and Description -->
-									<img src="resources/img/works/3.jpg"
-										alt="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus quis elementum odio. Curabitur pellentesque, dolor vel pharetra mollis.">
-									</li>
-									<!-- End Item Project -->
-									<!-- Item Project and Filter Name -->
-									<li class="item-thumbs col-lg-3 photography" data-id="id-2" data-type="illustrator">
-										<!-- Fancybox - Gallery Enabled - Title - Full Image -->
-										<a class="hover-wrap fancybox" data-fancybox-group="gallery" title="Work 4" href="resources/img/works/4.jpg">
-										<span class="overlay-img"></span>
-										<span class="overlay-img-thumb font-icon-plus"></span>
-									</a>
-									<!-- Thumb Image and Description -->
-									<img src="resources/img/works/4.jpg"
-										alt="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus quis elementum odio. Curabitur pellentesque, dolor vel pharetra mollis.">
-									</li>
-									<!-- End Item Project -->
 								</ul>
 							</section>
 						</div>
@@ -256,5 +206,6 @@
 	<a href="#" class="scrollup"><i class="fa fa-angle-up active"></i></a>
 </body>
 <script src="/resources/js/counter.js"></script>
+<script src="/resources/js/main/index.js"></script>
 <!-- <link href="/resources/css/counter.css" rel="stylesheet"/> -->
 </html>

@@ -1,16 +1,12 @@
 package com.kh.mhm.board.model.dao;
 
-import java.io.IOException;
-import java.io.Reader;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.RowBounds;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
-import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -276,5 +272,10 @@ public class BoardDaoImpl implements BoardDao {
 	@Override
 	public int selectAuthority(int mno) {
 		return sqlSession.selectOne("board.selectAuthority", mno);
+	}
+
+	@Override
+	public List<Board> selectRecentBoard(Map<String, Integer> param) {
+		return sqlSession.selectList("board.selectRecentBoard", param);
 	}
 }

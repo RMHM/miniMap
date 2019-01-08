@@ -629,4 +629,26 @@ public class BoardController {
 
 		return mv;
 	}
+	
+	// 최근 후기 게시물 가져오기
+	@RequestMapping("/board/recentBoard.do")
+	@ResponseBody
+	public List<Board> recentBaord(){
+		List<Board> result = null;
+		Map<String, Integer> param = null;
+		
+		try {
+			result = new ArrayList<Board>();
+			param = new HashMap<String, Integer>();
+			param.put("bCode", 3);
+			param.put("maxNum", 4);
+			
+			result = boardService.selectRecentBoard(param);
+			
+		} catch(Exception e) {
+			e.getStackTrace();
+		}
+		
+		return result;
+	}
 }
