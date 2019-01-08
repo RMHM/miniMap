@@ -15,7 +15,7 @@
                       <span class="icon-bar"></span>
                   </button>
 				<a class="navbar-brand" href="/">
-				<img src="/resources/img/member/1.png" alt="" /></a>
+				<img src="/resources/img/MHM.png" style="width:120px;" alt="" /></a>
 			</div>
 			<div class="navbar-collapse collapse ">
 				<ul class="nav navbar-nav">
