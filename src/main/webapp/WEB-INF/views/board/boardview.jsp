@@ -111,7 +111,7 @@
 											<div>
 												<c:if test="${Coment.clevel >1 }">
 												&nbsp;&nbsp;&nbsp;&nbsp; <!-- 답변글일경우 아이디 앞에 공백을 준다. -->                            
-                         						Re :
+                         						<img alt="" src="/resources/img/re-reply.png">
              						            </c:if>
 												<b>${Coment.mnick }</b><br>												 
 												<font size="2" color="lightgray">${Coment.cdate }</font>

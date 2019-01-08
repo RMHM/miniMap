@@ -181,17 +181,23 @@
 							
 							
 							function check(){
-								
-								if(('#sample4_postcode').val==null){
-								alert("주소를 입력하세요.");
-								return false
-								}else if($('#powerImg').val==null){
-						     		alert("대표이미지를 등록하세요.");
-						     		return false
-								}else if($('#powerUrl').val==null){
-									alert("사이트 주소를 작성하세요.")
+								 
+
+								if($('input:radio[name="aCode"]:checked').val()==2){
+									
+									if(('#sample4_postcode').val==null){
+									alert("주소를 입력하세요.");
+									return false
+									}else if($('#powerImg').val==null){
+							     		alert("대표이미지를 등록하세요.");
+							     		return false
+									}else if($('#powerUrl').val==null){
+										alert("사이트 주소를 작성하세요.")
+									}
+								}else{
+									$('#powerImg').val(null);
+									$('#powerUrl').val(null);
 								}
-						     	
 						     	return true;
 						   
 							}

@@ -227,6 +227,41 @@ public class MyPageController {
 		map.put("msg", bcpe.matches(mpw, m.getMpw()));
 		return map;
 	}
+	
+	/* 닉네임 비교 ajax */
+	@RequestMapping(value = "/myPage/nickCheck.do")
+	@ResponseBody
+	public Map<String, Object> nickCheck(@RequestParam String mnick, Model model) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		try{
+			int result = mps.selectNick(mnick);		
+			if(result>0)result = 1;
+			else result=0;
+			System.out.println(result);
+			map.put("result", result);
+		}catch(NullPointerException e) {
+			e.getMessage();
+		}
+		
+		return map;
+	}
+	/* 이메일 비교 ajax */
+	@RequestMapping(value = "/myPage/emailCheck.do")
+	@ResponseBody
+	public Map<String, Object> emailCheck(@RequestParam String email, Model model) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		try{
+			int result = mps.selectEmail(email);		
+			if(result>0)result = 1;
+			else result=0;
+			System.out.println(result);
+			map.put("result", result);
+		}catch(NullPointerException e) {
+			e.getMessage();
+		}
+		
+		return map;
+	}
 
 	/* 내 게시글 */
 	@RequestMapping("/myPage/myBoardList.do")

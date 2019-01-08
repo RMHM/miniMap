@@ -28,4 +28,45 @@
 	<select id="selectAvgCnt" resultType="_int">
 		select avg(vcount) from visitor
 	</select>
+	
+	<select id="selectGenderCnt" resultType="hashmap">
+		select (select count(*) from member where gender like 'F') "여성 회원수",
+       (select count(*) from member where gender like 'M') "남성 회원수",
+       (select count(*) from member where gender is null) "기타 회원수"
+		from dual
+	</select>
+	
+	<select id="selectAgeCnt" resultType="hashmap">
+		select (select count(*) from member where age = 10) "10대 회원수",
+       (select count(*) from member where age = 20) "20대 회원수",
+       (select count(*) from member where age = 30) "30대 회원수",
+       (select count(*) from member where age = 40) "40대 회원수",
+       (select count(*) from member where age is null) "기타 회원수"
+		from dual
+	</select>
+	
+	<select id="selectMemberCnt" resultType="hashmap">
+		select (select count(*) from member m) "전체 회원수",
+       (select count(*) from member where drop_date is not null) "탈퇴 회원",
+       (select count(*) from member where drop_date is null) "현재 회원수"
+		from dual
+	</select>
+	
+	<select id="selectBoardCnt" resultType="hashmap">
+		select (select count(*) from board) "전체 게시글 수",
+       (select count(*) from board where bcode = 1) "자유 게시글 수",
+       (select count(*) from board where bcode = 2) "정보공유 게시글 수",
+       (select count(*) from board where bcode = 3) "여행후기 게시글 수",
+       (select count(*) from board where bcode = 4) "질문 게시글 수"
+		from dual
+	</select>
+	
+	<select id="selectBoardTodayCnt" resultType="hashmap">
+		select (select count(*) from board where bcode=1 and bdate like sysdate) "자유",
+       (select count(*) from board where bcode=2 and bdate like sysdate) "정보공유",
+       (select count(*) from board where bcode=3 and bdate like sysdate) "여행후기",
+       (select count(*) from board where bcode=4 and bdate like sysdate) "질문"
+		from dual
+	</select>
+	
 </mapper>

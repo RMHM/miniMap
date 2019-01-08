@@ -90,4 +90,10 @@
 	<update id="deleteAuthority"  parameterType="_int">
 	 	UPDATE AUTHORITY SET DELFLAG = 'Y' WHERE AID=#{aId}
 	</update>
+	<select id="selectNick" parameterType="string" resultType="_int">
+	select * from member where MNICK=#{mnick}
+	</select>
+	<select id="selectEmail" parameterType="string" resultType="_int">
+	select * from member where EMAIL=#{email}
+	</select>
 </mapper>

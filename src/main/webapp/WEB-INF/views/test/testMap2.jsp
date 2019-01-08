@@ -6,11 +6,8 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <!DOCTYPE html>
 <html>
-
-<head>
 <meta charset="UTF-8">
-<title>지도테스트</title>
-<!-- services와 clusterer, drawing 라이브러리 불러오기 -->
+
 <script type="text/javascript"
 	src="//dapi.kakao.com/v2/maps/sdk.js?appkey=c36204e30027f76eb155fbd17afedf52&libraries=services,clusterer,drawing"></script>
 
@@ -202,7 +199,7 @@
 <body>
 	<c:import url="/WEB-INF/views/common/exFile.jsp" />
 	<div id="wrapper">
-		<c:import url="/WEB-INF/views/common/header.jsp" />
+		
 		<h1>mapTest</h1>
 
 
@@ -275,15 +272,12 @@
 			<button id=btBack>되돌리기</button>
 			<button id=btShow>마커보이기</button>
 			<button id=btHide>마커숨기기</button>
-
-
+			
+			
 			<input type="button" value="전송하기" id="btn-add"
-				onclick="fn_goBoardForm();" />
+				 onclick="fn_goBoardForm();" />
 		</p>
-
-
-
-		<c:import url="/WEB-INF/views/common/footer.jsp" />
+		
 	</div>
 
 
@@ -735,9 +729,7 @@
 		var userInputText = document.getElementById('userInputText');
 
 		// 사용자 입력 넣기
-		transferPersonalInputText.push(userInputText.value);
-		console.log(userInputText.value);
-		
+		transferPersonalInputText.push(userInputText);
 		// 카테고리 분류   
 		var sort = document.getElementsByName('sort');
 
@@ -775,35 +767,23 @@
 	}
 	
 	
-	
-	// 전송하기 
 	function fn_goBoardForm() {
-	var tLat = transferLat+"";
-	var tLng = transferLng+"";
-	var tInText = transferPersonalInputText+"";
-	
-	console.log(tLat); 
-	console.log(tLng);
-	console.log(tInText);
+	var arr = ['transferLat', 'transferLng'];
+	 
 	$.ajax({
-		url : "${pageContext.request.contextPath}/map/hoji.do",
-
-		data : {
-			tLat,
-			tLng,
-			tInText
-		},
-		dataType : "json",
-		success : function() {
-			console.log("asd");
-		
-
-		},
-		error : function() {
-			alert("ajax 실패");
-
-		}
-
+	    method      : 'POST',
+	    url         : '/map/map.do',
+	    traditional : true,
+	    data        : {
+	        'main' : arr
+	    },
+	    success     : function(data) {
+	        alert(data);        
+	    },
+	    error       : function(request, status, error) {
+	        alert(error);
+	    }
+	 
 	});
 
 
