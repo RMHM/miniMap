@@ -68,6 +68,7 @@
 		    	if(calEvent.end==null){
 		    		calEvent.end=calEvent.start
 		    	}
+		    	$('#myModalLabel').text('일정수정');
 		    	  $('#sId').val(calEvent.sId);  
 		    	 	$('#sTitle').val(calEvent.title);
 		    		$('#sContent').val(calEvent.content);
@@ -76,7 +77,8 @@
 		    		$('#sColor').val(calEvent.color);
 		    		$('#result').attr("style","display:none");
 		    		$('#updateresult').attr("style","display:block");
-		    		 $('#insertC').dialog({});
+		    		/*  $('#insertC').dialog({}); */
+		    		 $('#test').modal('show');
 		        },
 		          eventMouseover:function(event , jsEvent , view){
 		        	/*   console.log(event); */
@@ -85,35 +87,27 @@
 		        	  
 		          },
 			dayClick : function(date, jsEvent, view) {
- 				$('input').empty(); 
+				
+				$('input').empty(); 
  				$('#sId').remove();
 				$('#startDateT').val(date.format());
 				$('#endDateT').val(date.format());
 				$('#result').attr("style","display:block");
 	    		$('#updateresult').attr("style","display:none");
-				$('#insertC').dialog({
-			 		
-			 		/* buttons:[
-			 			{text:"Ok",click:function(){
-			 			$(this).dialog("close");
-			 			}
-			 			},{text:"cancle",click:function(){
-			 				$(this).dialog("close");
-			 			}}
-			 		]  */
-				});
+	    		$('#test').modal('show');
+	    		/* $('#insertC').dialog({}); */
 	
 			},
 			defaultDate : new Date(),
 		
 			navLinks : true, // can click day/week names to navigate views
 			businessHours : true, // display business hours
-			editable : true,
+			editable : false,
 			eventLimit: true,
 			events :event
 		});
 	
-	$('.fc-prev-button, .fc-next-button').click(function() {	
+	$('.fc-prev-button, .fc-next-button, .fc-today-button').click(function() {	
 		var date = $("#calendar").fullCalendar("getDate");
 		var month = new Date(date).getMonth()+1;
 		$.ajax({
@@ -128,14 +122,7 @@
 				for(var i = 0; i<data.length;i++){
 					arr[i] = data[i].low + "/" + data[i].high;
 				}
-				/* console.log(arr.length); */
 				
-				
-				/* for(var j = 0; j <arr.length ; j++){
-					console.log(arr.)
-				} */
-				/* var mon = data[0].day.substr(0,2);
-				 */
 				temperarr(month,arr); 
 			},
 			error : function(e) {
@@ -148,62 +135,34 @@
 		
 	});
 	
-	/* $('.fc-next-button').click(function() {
-		 console.log(this);
-	}); */
+	var tod = new Date();
+	var d = tod.getMonth()+1;
+	var todayArr = new Array();
+	<c:forEach items="${temper}" var="list" varStatus="i" > 
+ 	 todayArr[${i.index}] =${list.low}+"/"+${list.high}; 
+ 	</c:forEach>
+	
+	temperarr(d,todayArr);
+	 
 	function temperarr(month,arr){
-	/* 	console.log("길이  : " + arr.length); */
-	/* console.log("Asd");
-	console.log(arr);
-	console.log(mon); */
 	var arrdate = new Date();
 	arrdate.setMonth(month-1);
-	
 		 for(var i =0; i < arr.length; i++){
-			arrdate.setDate(i+1);
-			
+			arrdate.setDate(i+1);	
 			var re = arrdate.toISOString().slice(0, 10);
-			/* console.log(re); */
 			var tem = arr[i];
-			 
-			 $('#calendar').find('td[data-date='+re+']').prepend(tem);
+			 $('#calendar').find('td[data-date='+re+']').prepend(tem).attr('style','font-size:x-small');
 		} 
-		
 	}
+	
 	var trS = $('thead tr td');
 	var tdS = $('#calendar').find('td[data-date]');
 
 	var arr = "${weather}";
-	console.log();
+
 	var result = arr.split(",");
-	
-	/* 
-	 var date = new Date();
-	var re = date.setDate(date.getDate()+30);
-	console.log(date.toISOString().slice(0, 10));
- 	    */
-	 
 	var today = new Date();
- 	var r = new Array();
- 	<c:forEach items="${temper}" var = "t">
- 	var json = new Object();
- 	json.q = "${temper.high}";
- 	json.w = "${temper.low}";
- 	r.push(json);
- 	
- 	</c:forEach>
- 	console.log(r);
- 	    /* console.log("${temper}"); */
- /* 	console.log("${temper}");
- 	var a = new Array("${temper}");
- 	console.log(a);
- 	console.log(a.length);
- 	console.log(a[0]);
- 	 */
- 	for(var i =0; i<"${temper.size()}" ; i++){
- 		
- 	}
- 	
+
 	for(var i = 1; i<result.length; i++){
 		var date = new Date(); 
 		date.setDate(date.getDate()+(i+2));
@@ -211,42 +170,17 @@
 		var we = result[i]; 
 		 var sr = "";
 			switch(we){
-			case "맑음" : sr = "<img src='/resources/img/weather/sun1.PNG' width='10px' height='10px'>"; break;
-			case "흐림" :sr = "<img src='/resources/img/weather/cloud1.PNG width='10px' height='10px'>"; break;
-			case "구름많음" : sr = "<img src='/resources/img/weather/cloud1.PNG width='10px' height='10px'>"; break;
-			case "비" : sr = "<img src='/resources/img/weather/rain1.PNG' width='10px' height='10px'>"; break;
-			case "눈" : sr = "<img src='/resources/img/weather/snow1.PNG' width='10px' height='10px'>"; break;
-			case "구름많고 비" : sr = "<img src='/resources/img/weather/rain.PNG' width='10px' height='10px'>"; break;
-			case "구름많고 ": sr = "<img src='/resources/img/weather/rain.PNG' width='10px' height='10px'>"; break;
-			default   :  sr = "<img src='/resources/img/weather/rain.PNG' width='10px' height='10px'>";
+			case "맑음" : sr = "<img src='/resources/img/weather/sun1.PNG' width='15px' height='15px'>"; break;
+			case "흐림" :sr = "<img src='/resources/img/weather/cloud1.PNG width='15px' height='15px'>"; break;
+			case "구름많음" : sr = "<img src='/resources/img/weather/cloud1.PNG width='15px' height='15px'>"; break;
+			case "비" : sr = "<img src='/resources/img/weather/rain1.PNG' width='15px' height='15px'>"; break;
+			case "눈" : sr = "<img src='/resources/img/weather/snow1.PNG' width='15px' height='15px'>"; break;
+			case "구름많고 비" : sr = "<img src='/resources/img/weather/rain.PNG' width='15px' height='15px'>"; break;
+			case "구름많고 ": sr = "<img src='/resources/img/weather/rain.PNG' width='15px' height='15px'>"; break;
+			default   :  sr = "<img src='/resources/img/weather/rain.PNG' width='15px' height='15px'>";
 			}
 			$('#calendar').find('td[data-date='+re+']').prepend(sr);
 	 }
- 	    
- 	    
- 	    
- 	    
- 	 
-	/*  for(var i =1; i<trS.length ; i++){
-		/* 
-			console.log(trS[i].getAttribute('data-date')); 
-			if(trS[i].getAttribute('data-date')=='2019-01-04'){
-			/* trS[i].prepend("<img src='#'>"); 
-			}
-	}   */
-	 
-	
-	
-	/* console.log($('thead tr td').length);
-	
-	console.log($('thead tr').find('td[data-date]').length);
-	 *//* console.log($('#calendar').find('td')) ; */
-	/* console.log($('#calendar').find('td').attr('data-date')); */
-		/* $('#calendar').find('td[data-date]').prepend("<img src='#'>") */
-	 /* console.log($('#calendar').find('td[data-date]'));  */
-	
-	 /* console.log($('#calendar').find('td[data-date="2019-01-04"]').prepend("<img src='#'>")); */ 
-
 	});
 	
 	
@@ -279,22 +213,100 @@ body {
 
 				<div id='calendar'></div>
 
+				<form id="formAction" action="insertSchedule.do" method="post">
+					<div class="modal fade" id="test" role="dialog"
+						aria-labelledby="myModalLabel" aria-hidden="true">
+						<div class="modal-dialog" role="document">
+							<div class="modal-content">
+								<div class="modal-header">
+									<h5 class="modal-title" id="myModalLabel">일정 등록</h5>
+									<button type="button" class="modal-title close"
+										data-dismiss="modal">
+										<span aria-hidden="true">×</span>
+									</button>
+								</div>
+								<div class="modal-body">
+								<div style="text-align: left;">
+								<input type="hidden" id="sId" name="sId">
+								</div>
+									<div>
+										<label>제목</label><input type="text" id="sTitle" name="sTitle"></input>
+									</div>
+									<div>
+										<div>
+											<label>메모</label>
+											<div>
+												<textarea cols="30" rows="5" id="sContent" name="sContent"
+													name="scontent" style="width: 48%;" maxlength="100"></textarea>
+											</div>
+										</div>
+									</div>
 
+									<div>
+										<label>날짜</label> <input type="date" id="startDateT"
+											name="startDateT" style="width: auto;"
+											class="ed hasDatepicker">~<input type="date"
+											id="endDateT" name="endDateT"
+											style="width: auto; margin-bottom: 4px;"
+											class="ed hasDatepicker">
+									</div>
+									<div style="clear: both;"></div>
+									<div>
+										<label> 색상 선택 </label><input type="color" id="sColor"
+											name="sColor">
+									</div>
+								</div>
+								<div id="result" class="modal-footer">
+									<input  type="submit" value="등록"
+										class="btn btn-primary">
+									<button class="btn btn-secondary" data-dismiss="modal">
+										취소</button>
+								</div>
+								<div class="modal-footer" id="updateresult"
+									style="display: none">
+									<input id="update" type="submit" class="btn btn-primary"
+										value="수정" onclick="updateS();"> <input type="submit"
+										id="del" class="btn btn-primary" value="삭제"
+										onclick="deleteS();">
+									<button class="btn btn-secondary" data-dismiss="modal">
+										취소</button>
+								</div>
+							</div>
+						</div>
+					</div>
+					<script>
+					function updateS(){
+						console.log("update실행");
+						$('#formAction').attr("action","updateSchedule.do");
+					}
+					function deleteS(){
+						console.log("delete실행");
+						$('#formAction').attr("action","deleteSchedule.do");
+					}
+					</script>
+				</form>
+			</div>
+		</div>
+	</div>
+	</div>
+	<c:import url="../common/footer.jsp" />
+</body>
+</html>
 
-				<!--  <div id="insertC" class="" tabindex="-1" role="dialog" title = "일정 추가"
+<!--  <div id="insertC" class="" tabindex="-1" role="dialog" title = "일정 추가"
 				style="position: absolute; height: auto; width: 350px; top: 137px; left: 202px; display: none; z-index: 101;"
 				aria-describedby="dialog-message" aria-labelledby="ui-id-1"> -->
-				<div id="insertC" title="일정 추가" style="display: none">
+<!-- <div id="insertC" title="일정 추가" style="display: none">
 					<form id="formAction" action="insertSchedule.do" method="post">
-						<!-- <div
+						<div
 						class="ui-dialog-titlebar ui-widget-header ui-corner-all ui-helper-clearfix ui-draggable-handle">
 						<span id="ui-id-1" class="ui-dialog-title"> 일정등록</span>
 
-					</div> -->
-						<!-- <div id="dialog-message"
+					</div>
+						<div id="dialog-message"
 						style="width: auto; min-height: 0px; max-height: none; height: auto;"
 						class="ui-dialog-content ui-widget-content">
- -->
+
 						<div id="dialog-message"
 							style="width: auto; min-height: 0px; max-height: none; height: auto;">
 
@@ -344,22 +356,4 @@ body {
 							<input type="submit" id="del" value="삭제" onclick="deleteS();">
 
 						</div>
-				</div>
-				<script>
-					function updateS(){
-						console.log("update실행");
-						$('#formAction').attr("action","updateSchedule.do");
-					}
-					function deleteS(){
-						console.log("delete실행");
-						$('#formAction').attr("action","deleteSchedule.do");
-					}
-					</script>
-				</form>
-			</div>
-		</div>
-	</div>
-	</div>
-	<c:import url="../common/footer.jsp" />
-</body>
-</html>
+				</div> -->

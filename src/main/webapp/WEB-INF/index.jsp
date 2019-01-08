@@ -14,12 +14,6 @@
 	<meta name="description" content="" />
 	
 </head>
-<style>
-	.test-icon:before {
-		width : 25px;
-		content: url("../resources/img/counter/test.png");
-	}
-</style>
 <body>
 	<!-- 외부파일 선언 -->
 	<c:import url="views/common/exFile.jsp" />
@@ -194,7 +188,7 @@
 				<!-- Portfolio Projects -->
 				<div class="row">
 					<div class="col-lg-12">
-						<h4 class="heading">최근 인증 게시물</h4>
+						<h4 class="heading">최근 후기 게시물</h4>
 						<div class="row">
 							<section id="projects">
 								<ul id="thumbs" class="portfolio">

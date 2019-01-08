@@ -35,9 +35,6 @@ hs_err_pid*
 *.geojson
 *.json
 
-# img
-*.jsp
-*.png
-*.bmp
-*.jpeg
-*.gif
+# imgupload folder
+/src/main/webapp/resources/img/upload/
+/src/main/webapp/resources/img/profiles/

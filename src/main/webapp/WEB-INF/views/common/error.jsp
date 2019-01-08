@@ -8,9 +8,22 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>에러 페이지</title>
+<title>에러페이지</title>
 </head>
 <body>
-
+	<c:import url="/WEB-INF/views/common/exFile.jsp"/>
+	<div id="wrapper">
+		<c:import url="/WEB-INF/views/common/header.jsp"/>
+		
+		<div class="container" style="height:500px">
+			
+			<h1>에러 페이지</h1>
+			똑같은 상황이 다시 발생하면 관리자에게 문의해주세요.
+			
+			
+		</div>
+		
+		<c:import url="/WEB-INF/views/common/footer.jsp"/>
+	</div>
 </body>
 </html>
