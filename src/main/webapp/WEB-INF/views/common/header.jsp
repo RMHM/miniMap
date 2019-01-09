@@ -17,7 +17,7 @@
 				<a class="navbar-brand" href="/">
 				<img src="/resources/img/member/1.png" alt="" /></a>
 			</div>
-			<div class="navbar-collapse collapse ">
+			<div class="navbar-collapse collapse in" style="height: auto;">
 				<ul class="nav navbar-nav">
 					<li class="active"><a href="/">Home</a></li>
 					<li><a href="/echo.do">타임라인</a></li>

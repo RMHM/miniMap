@@ -378,7 +378,7 @@
 		};
 
 		function onClose(evt) {
-			location.href = '${pageContext.request.contextPath};';
+			
 		};
 
 		/* 추가 버튼 클릭 시 */

@@ -10,9 +10,10 @@ $(function(){
 			var imgPath = [];
 			var title = [];
 			var content = [];
+			var bid = [];
 			
 			for(var i=0; i<result.length; i++){
-				
+				bid[i] = result[i].bid;
 				imgPath[i] = result[i].bcontent.substring(result[i].bcontent.indexOf('/resources/img/'), 
 						result[i].bcontent.indexOf(String.fromCharCode(34), result[i].bcontent.indexOf('/resources/img/')));
 				title[i] = result[i].btitle;
@@ -51,7 +52,7 @@ $(function(){
 					$div2 = $('<div>').attr({
 						'class' : 'fancybox-wrap fancybox-desktop fancybox-type-image fancybox-opened',
 						'tabindex' : -1,
-						'style' : 'width: 800px; height: auto; position: absolute; top: 106px; left: 217px; opacity: 1; overflow: visible;'
+						'style' : 'width: 800px; height: auto; position: absolute; top: 10%; left: 30%; opacity: 1; overflow: visible;'
 					})
 					$div3 = $('<div>').attr({
 						'class' : 'fancybox-skin',
@@ -95,8 +96,11 @@ $(function(){
 					//
 					$div32 = $('<div>').attr({'class' : 'fancybox-title fancybox-title-inside-wrap'});
 					$div32h = $('<h4>').text(title[id]);
-					$div32p = $('<p>').text(content[id]);
-					$div32.append($div32h).append($div32p);
+					$div32p1 = $('<p>').text(content[id]);
+					$div32p2 = $('<a>').attr({
+						'href' : '/board/adBoardView.do?bid='+bid[id]
+					}).text('자세히보러가기');
+					$div32.append($div32h).append($div32p1).append($div32p2);
 					
 					//
 					$div3a = $('<a>').attr({
@@ -126,9 +130,11 @@ $(function(){
 					$('.fancybox-nav').click(function(e){
 						var con = $(this).attr('title');
 						var obj;
+						
 						if(con == 'Next') obj = $('#thumbs').find('li[data-id="id-'+((Number(id)+1)%i)+'"]');
 						else if(con == 'Previous') obj = $('#thumbs').find('li[data-id="id-'+((Number(id)+(i-1))%i)+'"]');
 						
+						$('.fancybox-item.fancybox-close').click();
 						$(obj).find('a').click()
 					})
 					
@@ -142,8 +148,7 @@ $(function(){
 		},
 		error : function(result){
 			console.log(result);
-		},
-		async : false
+		}
 	})
 	
 })
