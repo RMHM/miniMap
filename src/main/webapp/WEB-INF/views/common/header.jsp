@@ -17,7 +17,7 @@
 				<a class="navbar-brand" href="/">
 				<img src="/resources/img/MHM.png" style="width:120px;" alt="" /></a>
 			</div>
-			<div class="navbar-collapse collapse ">
+      <div class="navbar-collapse collapse ">
 				<input type="hidden" id="hdnSession" data-value="${member.mno}" />
 				<ul class="nav navbar-nav">
 					<li class="active"><a href="/">Home</a></li>

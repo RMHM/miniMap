@@ -381,10 +381,10 @@
 			
 		}
 
-		/* function onClose(evt) {
+    /* function onClose(evt) {
 			location.href = '${pageContext.request.contextPath};';
 		}; */
-
+    
 		/* 추가 버튼 클릭 시 */
 		/* $('#sendBtn').on("click", function() {
 		  /* // 라인 추가

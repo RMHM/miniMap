@@ -32,7 +32,8 @@ public class ComentController {
 	}
 	
 	@RequestMapping("/coment/comentAdd.do")
-	public String insertComentContent(Coment coment, Model model, HttpSession session, HttpServletRequest req) {
+	public String insertComentContent(Coment coment, Model model, HttpSession session, HttpServletRequest req,
+				@RequestParam(value = "bCode", required = false, defaultValue = "1") int bCode) {
 		
 		int result;
 		
@@ -50,7 +51,8 @@ public class ComentController {
 		
 		if(result > 0) {
 			msg = "댓글 등록 성공!";
-			loc = "/board/boardview.do?BId="+req.getParameter("BId");
+			if(bCode==5) loc = "/board/adBoardView.do?bid="+req.getParameter("BId");
+			else loc = "/board/boardview.do?BId="+req.getParameter("BId");
 			
 		} else {
 			msg = "댓글 등록 실패!";
@@ -73,7 +75,8 @@ public class ComentController {
 	}
 	
 	@RequestMapping("/coment/comentDelete.do")
-	public String deleteComent(Coment coment, HttpSession session, Model model, HttpServletRequest req) {
+	public String deleteComent(Coment coment, HttpSession session, Model model, HttpServletRequest req,
+			@RequestParam(value = "bCode", required = false, defaultValue = "1") int bCode) {
 		
 		System.out.println("delete");
 		System.out.println(coment);
@@ -89,7 +92,9 @@ public class ComentController {
 		
 		if(result > 0) {
 			msg = "댓글 삭제 성공!";
-			loc = "/board/boardview.do?BId="+originComent.getBid();
+			if(bCode == 5) loc = "/board/adBoardView.do?bid="+originComent.getBid();
+			else loc = "/board/boardview.do?BId="+originComent.getBid();
+			
 		} else {
 			msg = "댓글 삭제 실패!";
 		}
@@ -100,7 +105,8 @@ public class ComentController {
 	}
 	
 	@RequestMapping("/coment/comentUpdate.do")
-	public String updateComent(Coment coment, HttpSession session, Model model, HttpServletRequest req) {
+	public String updateComent(Coment coment, HttpSession session, Model model, HttpServletRequest req,
+			@RequestParam(value = "bCode", required = false, defaultValue = "1") int bCode) {
 		
 		int cid = coment.getCid();
 		System.out.println("update");
@@ -122,7 +128,9 @@ public class ComentController {
 		
 		if(result > 0) {
 			msg = "댓글 수정 성공!";
-			loc = "/board/boardview.do?BId="+coment.getBid();
+			if(bCode == 5) loc = "/board/adBoardView.do?bid="+coment.getBid();
+			else loc = "/board/boardview.do?BId="+coment.getBid();
+			
 		} else {
 			msg = "댓글 수정 실패!";
 		}

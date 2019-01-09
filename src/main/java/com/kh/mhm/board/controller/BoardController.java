@@ -523,9 +523,12 @@ public class BoardController {
 		ModelAndView mv = new ModelAndView();
 
 		try {
+			boardService.updateOneCount(bid);
 			Board b = boardService.selectOneBoard(bid);
-
+			List<Coment> clist = comentService.selectCometList(bid);
+			System.out.println(clist);
 			mv.addObject("b", b);
+			mv.addObject("clist", clist);
 			mv.setViewName("board/ad/adBoardView");
 		} catch (Exception e) {
 			e.getStackTrace();

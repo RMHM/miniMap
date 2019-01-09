@@ -9,6 +9,12 @@
 <head>
 <meta charset="UTF-8">
 <title>광고 게시판</title>
+<style>
+	img {
+		max-width : 100%;
+		height : auto;
+	}
+</style>
 </head>
 <body>
 	<c:import url="/WEB-INF/views/common/exFile.jsp"/>
@@ -16,7 +22,9 @@
 		<c:import url="/WEB-INF/views/common/header.jsp"/>
 		<div class="navbar-header" style="background:#68A4C4; width:100%">
 			<div class="container">
-				<h4>게시판 목록</h4>
+				<div class="col-md-10 col-md-offset-1">
+					<h3>게시물 목록</h3>
+				</div>
 			</div>
 		</div>
 		<div class="container">
