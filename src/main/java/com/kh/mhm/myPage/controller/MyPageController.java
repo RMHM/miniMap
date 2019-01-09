@@ -42,6 +42,8 @@ import com.kh.mhm.common.Policy;
 import com.kh.mhm.common.util.Utils;
 import com.kh.mhm.member.model.service.MemberService;
 import com.kh.mhm.member.model.vo.Member;
+import com.kh.mhm.message.model.service.MessageService;
+import com.kh.mhm.message.model.vo.Message;
 import com.kh.mhm.myPage.model.service.MyPageService;
 import com.kh.mhm.myPage.model.vo.Authority;
 import com.kh.mhm.myPage.model.vo.Schedule;
@@ -54,7 +56,8 @@ public class MyPageController {
 	private MyPageService mps;
 	@Autowired
 	private MemberService ms;
-
+	@Autowired
+	MessageService mss;
 	@Autowired
 	private BCryptPasswordEncoder bcpe;
 	private String loc = "/";
@@ -132,9 +135,9 @@ public class MyPageController {
 		
 		java.util.Date today = new java.util.Date();
 		int num = today.getMonth()+1;
-		System.out.println(num);
+	
 		model.addAttribute("list", list);
-    model.addAttribute("temper",t.temperature(num));
+		model.addAttribute("temper",t.temperature(num));
 		model.addAttribute("weather",a.weather());
     
 		return "myPage/schedule";
@@ -144,18 +147,23 @@ public class MyPageController {
 	@RequestMapping(value="/myPage/temper.do")
 	@ResponseBody
 	public ArrayList temperature(@RequestParam int num) throws IOException {
-		
 		Temperatures t = new Temperatures();
-		System.out.println(t.temperature(num));
 		return t.temperature(num);
 	}
 	
+	@RequestMapping(value = "/myPage/message.do")
+	@ResponseBody
+	public int messageCount(Member member, Model model) {
 
+		return mps.selectMyMessage(member.getMno());
+	}
+	
+	
 	/* myPagemain 경로 */
 	@RequestMapping("/myPage/myPageMain.do")
-	public String myPageMain() {
-
-		/* return "myPage/schedule"; */
+	public String myPageMain(Member member,Model model) {
+		/*List<Message> message =mss.selectMyMessage(member.getMno());
+		model.addAttribute("msg",message);*/
 		return "myPage/myPageMain";
 	}
 
@@ -167,7 +175,7 @@ public class MyPageController {
 
 	/* 회원정보 수정 하고 myPageMain 이동 */
 	@RequestMapping("/myPage/updateMember.do")
-	public String updateMember(@RequestParam(value="profile", required = false) MultipartFile profile,Member member, HttpSession session, HttpServletRequest request) {
+	public String updateMember(@RequestParam(value="profile", required = false) MultipartFile profile,Member member, @RequestParam String mpwTest, HttpSession session, HttpServletRequest request) {
 		if(profile.getSize()==0) {
 			System.out.println("원본"+member.getProfilePath());
 		}else {
@@ -180,10 +188,7 @@ public class MyPageController {
 		String ext = originName.substring(originName.lastIndexOf(".")+1);
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd_HHmmss");
 		int rndNum = (int)(Math.random() * 1000);
-		System.out.println("origint"+originName);
-		System.out.println("ext"+ext);
-		
-		String renamedName = sdf.format(new java.util.Date()) + "_" + rndNum + "." + ext;
+	String renamedName = sdf.format(new java.util.Date()) + "_" + rndNum + "." + ext;
 		
 		// 실제 파일을 지정한 파일명으로 변환하며 데이터를 저장한다.
 		try {
@@ -194,7 +199,8 @@ public class MyPageController {
 		
 		member.setProfilePath(renamedName);
 		}
-		member.setMpw(bcpe.encode(member.getMpw()));
+
+		member.setMpw((member.getMpw().equals(""))? mpwTest :bcpe.encode(member.getMpw()));
 	
 		
 		int result = mps.updateMember(member);

@@ -36,7 +36,7 @@ public class ManagerServiceImpl implements ManagerService {
 	}
 	
 	@Override
-	public Authority selectRequest(int mno) {
+	public List selectRequest(int mno) {
 		return mnDao.selectRequest(mno);
 	}
 

@@ -96,4 +96,7 @@
 	<select id="selectEmail" parameterType="string" resultType="_int">
 	select * from member where EMAIL=#{email}
 	</select>
+	<select id="selectMessageCount" parameterType="_int" resultType="_int">
+	select count(*) from message where TAKE_MNO=#{mNo} AND READFLAG='N' AND DELFLAG='N'
+	</select>
 </mapper>

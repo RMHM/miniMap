@@ -138,11 +138,21 @@
 						</tr>
 						
 					</table>
-					<input type="submit" class="btn btn-danger" value="가입" >
-					<input type="reset"  class="btn btn-danger" value="취소">
+					<input type="submit" class="btn btn-success" value="가입">
+					<input type="reset"  class="btn btn-success" value="취소" onclick="loginForm()">
 				</form>
 			</div>
 			<script src="/resources/js/member/memberEnroll.js"></script>
+			<script>
+				function loginForm(){
+					location.href = "/";
+					if (confirm("회원 가입을 취소하고 돌아가시겠습니까?") == true){ // yes
+						document.form.submit();
+					} else { // no
+						return;
+					}
+				}
+			</script>
 			<script> 
 				// 파일 업로드, 미리보기
 				function readURL(input){

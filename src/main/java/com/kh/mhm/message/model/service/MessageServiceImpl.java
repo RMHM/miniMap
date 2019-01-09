@@ -17,8 +17,8 @@ public class MessageServiceImpl implements MessageService {
 	MessageDao mdi;
 
 	@Override
-	public List<Message> selectMyMessage(int mNo) {
-		return mdi.selectMyMessage(mNo);
+	public List<Message> selectMyMessage(int cPage, int numPerPage, int mNo) {
+		return mdi.selectMyMessage(cPage, numPerPage, mNo);
 	}
 	
 	@Override
@@ -61,8 +61,8 @@ public class MessageServiceImpl implements MessageService {
 	}
 
 	@Override
-	public List<Message> selectMessageStore(int mNo) {
-		return mdi.selectMessageStore(mNo);
+	public List<Message> selectMessageStore(int cPage, int numPerPage, int mNo) {
+		return mdi.selectMessageStore(cPage, numPerPage, mNo);
 	}
 
 	@Override
@@ -71,8 +71,8 @@ public class MessageServiceImpl implements MessageService {
 	}
 
 	@Override
-	public List<Message> selectMessageSent(int mNo) {
-		return mdi.selectMessageSent(mNo);
+	public List<Message> selectMessageSent(int cPage, int numPerPage, int mNo) {
+		return mdi.selectMessageSent(cPage, numPerPage, mNo);
 	}
 
 	@Override
@@ -100,6 +100,26 @@ public class MessageServiceImpl implements MessageService {
 	@Override
 	public int findNick(String nick) {
 		return mdi.findNick(nick);
+	}
+
+	@Override
+	public int countNewMessage(int mNo) {
+		return mdi.countNewMessage(mNo);
+	}
+
+	@Override
+	public int countMyMessage(int mNo) {
+		return mdi.countMyMessage(mNo);
+	}
+
+	@Override
+	public int countMessageSent(int mNo) {
+		return mdi.countMessageSent(mNo);
+	}
+
+	@Override
+	public int countMessageStore(int mNo) {
+		return mdi.countMessageStore(mNo);
 	}
 
 

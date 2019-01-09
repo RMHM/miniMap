@@ -13,7 +13,7 @@
 </head>
 <style>
 .replyArea {
-	width: 90%;
+	width: 100%;
 	height: 90%;
 	border: 3px solid #F8E5D0;
 }
@@ -26,15 +26,39 @@
 	
 }
 
-.uploder-profile {
- 	width: 120px;
-	height: 120px;
+.uploaderp{	
+	border: 1px solid;
+	float:left;
+	margin:0 auto;	
+	width: 17%;
+	height: 121px;		
 }
 
-.uploader{
-	width: 90%;
-	border: 2px solid;
+.uploaderi{
+	width: 83%;
+	border: 1px solid;
+	background-color: #F5FBEF;
+	margin:0 auto;	
+	float:left;	 
+}
+
+#titlearea{	
+	margin:0 auto;
+	float: left;
+	border-top:solid 1px;
+	border: 2px solid lightgray;
+	border-bottom:dashed 1px lightgray;
 	
+}
+
+.uploder-profile {
+ 	width: 100%;
+	height: 100%;
+}
+
+#BContent p img{
+	max-width: 95%;
+	max-height: auto;
 }
 
 </style>
@@ -69,33 +93,42 @@
 				
 				<!-- 게시판 작성자 -->
 				<br>
-				<div class="uploader">				
-				<img src="/resources/img/profiles/${b.profile_Path }" class="uploder-profile">				
-				&nbsp;&nbsp; 작성자 &nbsp; : &nbsp;${b.mnick}				
+				<div class="uploder-wrap">
+				<div class="uploaderp">				
+				<img src="/resources/img/profiles/${b.profile_Path }" class="uploder-profile">
+				</div>
+				<div  class="uploaderi" >				
+				<b>&nbsp; 작성자 : &nbsp;${b.mnick}</b> <br>
+				<b>&nbsp; 작성일 : &nbsp;${b.BDate }</b> <br>
+				<b>&nbsp; 조회수 : &nbsp;${b.BCount }</b> <br>
+				<b>&nbsp; 추천수 : &nbsp;${b.likes }</b> <br>		
+				<a id="report-modal" href="#report-modal-container" 
+				role="button" class="btn" data-toggle="modal">신고하기</a>
+				</div>
+				</div>			
 				<br>
-				 <a id="report-modal" href="#report-modal-container" role="button" class="btn" data-toggle="modal">신고하기</a>
-				</div>
 				<!-- 게시판 제목 -->
-				<div id="titlearea" style="width: 90%; background-color: lightblue">
-				제목 : ${b.BTitle }
-				</div>
+				<div id="titlearea" style="width:100%;">				
+				<span class="bTitle" style="margin: 10px; margin-left:0px;">${b.BTitle }</span>
+				</div>				
 				<textarea id="content" style="display: none;">${b.BContent}</textarea>
-				<div id="BContent" style="width: 90%; min-height:300px; background-color: aliceblue">
-					${b.BContent}</div>
-				&nbsp;&nbsp;&nbsp; 
-				<input type="button" class="btn btn-theme btn-large" 
-				onclick="location.href='${pageContext.request.contextPath}/board/boardlist1.do'"
-				value="리스트로" />
+				<div id="BContent" style="width:100%; min-height:500px; border: 2px solid lightgray; border-top: 0px;
+				margin:0 auto; float:left;"><br>${b.BContent}</div>				
+				
 				<c:if test="${member.mno eq b.MNo}">
 					<input type="button" class="btn btn-theme btn-large"
 						onclick="location.href='${pageContext.request.contextPath}/board/boardUpdateView.do?BId=${b.BId }'"
 						name="modify" value="수정">
 				</c:if>
+				&nbsp;
 				<c:if test="${member.mno eq b.MNo or member.mtype eq 'A'}">
 					<input type="button" class="btn btn-theme btn-large"
 						onclick="location.href='${pageContext.request.contextPath}/board/boardDelete.do?BId=${b.BId }'"
 						name="delete" value="삭제">
 				</c:if>
+				<input type="button" class="btn btn-theme btn-large" 
+				onclick="location.href='${pageContext.request.contextPath}/board/boardlist${b.BCode }.do'" 
+				value="리스트로" style="position: absolute; right: 20px;" />
 				
 				<div class="replyArea">
 					<div id="replySelectArea" style="background-color: aliceblue">
@@ -118,9 +151,9 @@
 											</div>
 										</td>
 										<!-- 본문내용 -->
-										<td width="75%">
+										<td width="80%">
 											<div class="text_wrapper">
-												<textarea class="reply-content" readonly="readonly" id="replycontent" name="replycontent" style="background-color: aliceblue"
+												<textarea class="reply-content" readonly="readonly" id="replycontent" name="replycontent" style="border-top: solid 2px;"
 												 ><c:choose><c:when test="${Coment.delFlag eq 'Y'}">삭제된 댓글입니다.</c:when><c:otherwise>${Coment.ccontent }</c:otherwise></c:choose></textarea>
 												 	<input type="hidden" name="writer" value="${member.mno }" />
 													<input type="hidden" name="cref" value="${Coment.cid }" />
@@ -129,9 +162,9 @@
 											</div>
 										</td>
 										<!-- 버튼 -->
-										<td width="15%">
+										<td width="10%">
 											<div id="btn" style="text-align: center;" align="center">
-												<c:if test="${Coment.mno eq member.mno }">
+												<c:if test="${Coment.mno eq member.mno and Coment.delFlag eq 'N' }">
 													<input type="hidden" name="cid" value="${Coment.cid }" />											
 								<button type="button" class="updateBtn" id="updateBtn" onclick="updateReply(this);">수정</button>
 								<button type="button" class="updateConfirm" id="updateBtn2"	onclick="updateConfirm(this);" style="display: none;">등록</button>
@@ -369,7 +402,7 @@
 								<label>세부 내용: </label>
 								</div>
 									<div class = "modal-content">
-								<textarea name="rdetail" id="rdetail"  rows="10"style="width:400px; height:70px"></textarea>
+								<textarea name="rdetail" id="rdetail"  rows="10"style="width:100%; height:100%;"></textarea>
 								</div>
 							</div>
 						</div>
@@ -389,7 +422,7 @@
 				$('#report-modal').click(function(){
 					console.log(this);
 					$('#targetType').val("B");
-					$('#targetId').val("${b.BId}");
+					$('#targetId').val("${b.BId}");					
 				});
 				</script>
 	</div>	

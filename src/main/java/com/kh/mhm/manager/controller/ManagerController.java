@@ -47,16 +47,16 @@ public class ManagerController {
 	}
 	
 	// 승인 페이지로 이동
-	@RequestMapping("manager/grantPermission.go")
-	public String grantPermissionGo(Model model, @RequestParam("mno") int mno) {
+	@RequestMapping("manager/CheckPermission.go")
+	public String CheckPermissionGo(Model model, @RequestParam("mno") int mno) {
 		
-		Authority autho = mns.selectRequest(mno);
+		List list = mns.selectRequest(mno);
 		
-		System.out.println("autho : " + autho);
+		System.out.println("list : " + list);
 		
-		model.addAttribute("autho", autho);
+		model.addAttribute("list", list);
 		
-		return "manager/grant_Permission";
+		return "manager/Check_Permission";
 	}
 
 	// 회원 조회

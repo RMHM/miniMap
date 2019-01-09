@@ -11,14 +11,16 @@
 <title>정보게시판 리스트</title>
 
 </head>
+
 <body>
 	<c:import url="/WEB-INF/views/common/exFile.jsp" />
 	<div id="wrapper">
 		<c:import url="/WEB-INF/views/common/header.jsp" />
 
 		<div class="container">
+		
 			<div class="col-md-2" align="center">
-				&nbsp;&nbsp;
+				<br><br>
 				<h4>--게시판 목록--</h4>
 				<ul class="unstyled">
 					<br><br>
@@ -38,56 +40,60 @@
 						</div>
 					</div>
 				</div>
-			</div>
-			<div class="container-fluid">
-				<div class="row">
-					
-					<div class="col-md-10">
-
-						<table class="table table-hover">
-							<thead align="center" style="background-color:lightskyblue;">
-									<tr >
+				<div class="container-fluid">
+				<input type="hidden" name="bCode" value="1">
+					<div class="row">					
+						<div class="list">							
+							<table class="table table-hover">
+								<thead align="center" style="background-color:lightskyblue;">
+									<tr>
 										<th width="5%">번호</th>
-										<th width="5%">분류</th>										
-										<th>제목</th>
+										<th width="5%">분류</th>
+										<th width="5%"></th>										
+										<th align="center">제목</th>										
 										<th width="13%">작성자</th>
 										<th width="7%">조회수</th>
 										<th width="10%">작성일</th>
 									</tr>
 								</thead>
-								<tbody>
+								<tbody>							
+					
 								<c:forEach var="Board" items="${list2 }"> <!-- 공지 게시글 페이지 -->
 									<tr name="BId" id="${Board.BId }" style="background-color: #CEECF5;">									
 									   <td align="center"><c:out value="${Board.BNo }"/></td>
                      				   <td><c:out value="공지"/></td>
-                  				       <td><c:out value="${Board.BTitle }"/></td>
-               				           <td><c:out value="${Board.mnick}"/></td>
+                     				   <td></td>
+                  				       <td><c:out value="${Board.BTitle }"/></td>                  				       
+               				           <td align="center"><c:out value="${Board.mnick}"/></td>
                				           <td align="center"><c:out value="${Board.BCount }"/></td>
                 			           <td><c:out value="${Board.BDate}"/></td>
 									</tr>
 								</c:forEach>									
-								<c:forEach var="Board" items="${list }"> <!-- 일반 게시글 페이지 -->								
+								<c:forEach var="Board" items="${list }"> <!-- 일반 게시글 페이지 -->														
 									<tr name="BId" id="${Board.BId }" style="background-color: #EFF8FB;">
                      				   <td align="center"><c:out value="${Board.BNo }"/></td>
                      				   <td><c:out value="일반"/></td>
-                  				       <td><c:out value="${Board.BTitle }"/></td>
-               				           <td><c:out value="${Board.mnick}"/></td>
+                     				   <td></td>
+                  				       <td><c:out value="${Board.BTitle }"/></td>                  				       
+               				           <td align="center"><c:out value="${Board.mnick}"/></td>
                				           <td align="center"><c:out value="${Board.BCount }"/></td>
                 			           <td><c:out value="${Board.BDate}"/></td>
                     				</tr>
 								</c:forEach>
-							</tbody>
-						</table>
-						<!-- 페이지 처리 해야됨. -->
-						
-						<c:out value="${pageBar}" escapeXml="false"/>
+														
+								</tbody>
+								
+							</table>
+							<!-- 페이지 처리 해야됨. -->
 							
-						<c:if test="${not empty member and member.mtype ne 'C'}">
-						<input type="button" value="글쓰기" id=""
-							class="btn btn-theme" onclick="location.href='${pageContext.request.contextPath}/board/boardwrite.do'" 
-							style="position: absolute; right: 30px;" />
-						</c:if>
-						<div class="s-area" id="s-area"
+							<c:out value="${pageBar}" escapeXml="false"/>
+							
+							<c:if test="${not empty member and member.mtype ne 'C'}">
+							<input type="button" value="글쓰기" id=""	class="btn btn-theme btn-large"
+								onclick="location.href='${pageContext.request.contextPath}/board/boardwrite.do'"
+								style="position: absolute; right: 20px;" /> </c:if>
+
+							<div class="s-area" id="s-area"
 								style="display: flex; align-items: center; justify-content: center;">
 								
 								<form action="/board/searchlist2.do" method="post" name="search" id="search" enctype="multipart/form-data">
@@ -97,18 +103,21 @@
               						 <option value="BContent" <c:if test="${'BContent'==keyField }"> selected</c:if>> 내용 </option>
            						 </select>
                 					 <input type="text" size="16" name="keyWord" value="${keyWord }">
-                					 <input type="submit" value="검색" onClick="check()">               						
+                					 <input type="submit" class="btn btn-info" value="검색" onClick="check()">           						
 
 								</form>
 							</div>
+						</div>
 					</div>
 				</div>
 			</div>
-</div>
-			<c:import url="/WEB-INF/views/common/footer.jsp" />
+			
 		</div>
-</body>
+			
 
+		<c:import url="/WEB-INF/views/common/footer.jsp" />
+	</div>
+</body>
 <script>
 $(function(){
 	$("tr[name]").on("click",function(){
@@ -129,4 +138,6 @@ function check() {
 
 
 </script>
+
+
 </html>

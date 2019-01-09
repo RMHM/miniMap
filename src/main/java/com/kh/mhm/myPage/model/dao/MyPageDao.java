@@ -50,5 +50,7 @@ public interface MyPageDao {
 
 	int selectEmail(String email);
 
+	int selectmessage(int mno);
+
 
 }

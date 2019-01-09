@@ -169,17 +169,21 @@
 		var re = (date.toISOString().slice(0, 10));
 		var we = result[i]; 
 		 var sr = "";
-			switch(we){
-			case "맑음" : sr = "<img src='/resources/img/weather/sun1.PNG' width='15px' height='15px'>"; break;
-			case "흐림" :sr = "<img src='/resources/img/weather/cloud1.PNG width='15px' height='15px'>"; break;
-			case "구름많음" : sr = "<img src='/resources/img/weather/cloud1.PNG width='15px' height='15px'>"; break;
-			case "비" : sr = "<img src='/resources/img/weather/rain1.PNG' width='15px' height='15px'>"; break;
-			case "눈" : sr = "<img src='/resources/img/weather/snow1.PNG' width='15px' height='15px'>"; break;
-			case "구름많고 비" : sr = "<img src='/resources/img/weather/rain.PNG' width='15px' height='15px'>"; break;
-			case "구름많고 ": sr = "<img src='/resources/img/weather/rain.PNG' width='15px' height='15px'>"; break;
-			default   :  sr = "<img src='/resources/img/weather/rain.PNG' width='15px' height='15px'>";
-			}
-			$('#calendar').find('td[data-date='+re+']').prepend(sr);
+	/* 	we.match(/비/)
+		we.match(/눈/)
+		we.match(/맑음/)
+		we.match(/구름많음/)
+		we.match(/구름조금/)
+		we.match(/흐림/); */
+		console.log(we);
+		if(we.match(/맑음/))sr = "<img src='/resources/img/weather/sun1.PNG' width='15px';height='15px'>";
+		else if(we.match(/흐림/))sr = "<img src='/resources/img/weather/cloud1.PNG' width='15px';height='15px'>";
+		else if(we.match(/구름많음/))sr = "<img src='/resources/img/weather/cloud1.PNG' width='15px';height='15px'>";
+		else if(we.match(/비/))sr = "<img src='/resources/img/weather/rain1.PNG' width='15px';height='15px'>";
+		else if(we.match(/눈/)) sr = "<img src='/resources/img/weather/snow1.PNG' width='15px';height='15px'>"; 
+		else sr = "<img src='/resources/img/weather/sunCloud1.PNG' width='15px';height='15px'>";
+		
+		$('#calendar').find('td[data-date='+re+']').prepend(sr);
 	 }
 	});
 	
@@ -196,6 +200,9 @@ body {
 #calendar {
 	max-width: 900px;
 	margin: 0 auto;
+}
+.modal-content{
+	width : 60%;
 }
 </style>
 
@@ -215,15 +222,15 @@ body {
 
 				<form id="formAction" action="insertSchedule.do" method="post">
 					<div class="modal fade" id="test" role="dialog"
-						aria-labelledby="myModalLabel" aria-hidden="true">
-						<div class="modal-dialog" role="document">
-							<div class="modal-content">
+						aria-labelledby="myModalLabel" aria-hidden="true" >
+						<div class="modal-dialog" role="document" >
+							<div class="modal-content" >
 								<div class="modal-header">
-									<h5 class="modal-title" id="myModalLabel">일정 등록</h5>
+									<h5 class="modal-title" id="myModalLabel">일정 등록
 									<button type="button" class="modal-title close"
 										data-dismiss="modal">
 										<span aria-hidden="true">×</span>
-									</button>
+									</button></h5>
 								</div>
 								<div class="modal-body">
 								<div style="text-align: left;">
@@ -237,7 +244,7 @@ body {
 											<label>메모</label>
 											<div>
 												<textarea cols="30" rows="5" id="sContent" name="sContent"
-													name="scontent" style="width: 48%;" maxlength="100"></textarea>
+													name="scontent" style="width: 100%;" maxlength="100"></textarea>
 											</div>
 										</div>
 									</div>

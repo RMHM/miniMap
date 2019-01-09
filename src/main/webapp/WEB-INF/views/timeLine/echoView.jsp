@@ -8,8 +8,8 @@
 <head>
 <meta charset="UTF-8">
 <title>MHM TIMELINE</title>
-<script src="http://cdn.jsdelivr.net/sockjs/1/sockjs.min.js"></script>
-<link href="${pageContext.request.contextPath}/resources/css/disqusin.css" rel="stylesheet" />
+<!-- <script src="http://cdn.jsdelivr.net/sockjs/1/sockjs.min.js"></script> -->
+<link href="/resources/css/disqusin.css" rel="stylesheet" />
 </head>
 <body>
 
@@ -376,11 +376,15 @@
 				 */
 			}
 		};
-
-		function onClose(evt) {
+		
+		function onClose(evt){
 			
-		};
+		}
 
+    /* function onClose(evt) {
+			location.href = '${pageContext.request.contextPath};';
+		}; */
+    
 		/* 추가 버튼 클릭 시 */
 		/* $('#sendBtn').on("click", function() {
 		  /* // 라인 추가

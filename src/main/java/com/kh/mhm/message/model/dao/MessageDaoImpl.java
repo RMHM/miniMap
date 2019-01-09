@@ -3,6 +3,7 @@ package com.kh.mhm.message.model.dao;
 import java.util.HashMap;
 import java.util.List;
 
+import org.apache.ibatis.session.RowBounds;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -17,8 +18,9 @@ public class MessageDaoImpl implements MessageDao {
 	SqlSessionTemplate sqlSession;
 	
 	@Override
-	public List<Message> selectMyMessage(int mNo) {
-		return sqlSession.selectList("Message.selectMessageInbox",mNo);
+	public List<Message> selectMyMessage(int cPage, int numPerPage, int mNo) {
+		RowBounds rowBounds = new RowBounds((cPage-1)*numPerPage, numPerPage);
+		return sqlSession.selectList("Message.selectMessageInbox",mNo,rowBounds);
 	}
 
 	@Override
@@ -57,8 +59,9 @@ public class MessageDaoImpl implements MessageDao {
 	}
 
 	@Override
-	public List<Message> selectMessageStore(int mNo) {
-		return sqlSession.selectList("Message.selectMessageStore",mNo);
+	public List<Message> selectMessageStore(int cPage, int numPerPage, int mNo) {
+		RowBounds rowBounds = new RowBounds((cPage-1)*numPerPage, numPerPage);
+		return sqlSession.selectList("Message.selectMessageStore",mNo,rowBounds);
 	}
 
 	@Override
@@ -67,8 +70,9 @@ public class MessageDaoImpl implements MessageDao {
 	}
 
 	@Override
-	public List<Message> selectMessageSent(int mNo) {
-		return sqlSession.selectList("Message.selectMessageSent",mNo);
+	public List<Message> selectMessageSent(int cPage, int numPerPage, int mNo) {
+		RowBounds rowBounds = new RowBounds((cPage-1)*numPerPage, numPerPage);
+		return sqlSession.selectList("Message.selectMessageSent",mNo,rowBounds);
 	}
 
 	@Override
@@ -94,6 +98,26 @@ public class MessageDaoImpl implements MessageDao {
 	@Override
 	public int findNick(String nick) {
 		return sqlSession.selectOne("Message.findNick",nick);
+	}
+
+	@Override
+	public int countNewMessage(int mNo) {
+		return sqlSession.selectOne("Message.countNewMessage",mNo);
+	}
+
+	@Override
+	public int countMyMessage(int mNo) {
+		return sqlSession.selectOne("Message.countMyMessage",mNo);
+	}
+
+	@Override
+	public int countMessageSent(int mNo) {
+		return sqlSession.selectOne("Message.countMessageSent",mNo);
+	}
+
+	@Override
+	public int countMessageStore(int mNo) {
+		return sqlSession.selectOne("Message.countMessageStore",mNo);
 	}
 
 
