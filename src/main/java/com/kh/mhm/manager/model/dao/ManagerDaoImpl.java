@@ -93,6 +93,17 @@ public class ManagerDaoImpl implements ManagerDao {
 		return sst.selectOne("member.selectOneBlackList", mno);
 	}
 
+	@Override
+	public Authority selectRequestOne(int mno, int acode) {
+		
+		Map<String, Integer> map = new HashMap<String, Integer>();
+		
+		map.put("mno", mno);
+		map.put("acode", acode);
+		
+		return sst.selectOne("authority.selectRequestOne", map);
+	}
+
 
 
 }

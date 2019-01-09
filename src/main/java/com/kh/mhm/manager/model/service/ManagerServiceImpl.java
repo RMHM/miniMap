@@ -59,5 +59,10 @@ public class ManagerServiceImpl implements ManagerService {
 	public List selectStatistics() {
 		return mnDao.selectStatistics();
 	}
+
+	@Override
+	public Authority selectRequestOne(int mno, int acode) {
+		return mnDao.selectRequestOne(mno, acode);
+	}
   
 }

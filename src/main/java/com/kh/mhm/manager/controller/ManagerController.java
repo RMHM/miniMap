@@ -58,6 +58,20 @@ public class ManagerController {
 		
 		return "manager/Check_Permission";
 	}
+	
+	// 요청 정보 조회
+	@RequestMapping("manager/selectRequestOne.do")
+	@ResponseBody
+	public Authority selectRequestOne(@RequestParam("mno") int mno, @RequestParam("acode") int acode) {
+		
+		Authority autho = mns.selectRequestOne(mno, acode);
+		
+		System.out.println("mno : " + mno + "\n acode : " + acode);
+		
+		System.out.println("autho : " + autho);
+		
+		return autho;
+	}
 
 	// 회원 조회
 	@RequestMapping("manager/selectMemberList.do")
