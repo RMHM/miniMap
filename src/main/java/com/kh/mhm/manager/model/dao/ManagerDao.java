@@ -24,4 +24,6 @@ public interface ManagerDao {
 	BlackList selectOneBlackList(int mno);
 
 	List selectStatistics();
+
+	Authority selectRequestOne(int mno, int acode);
 }

@@ -25,4 +25,6 @@ public interface ManagerService {
 
 	List selectStatistics();
 
+	Authority selectRequestOne(int mno, int acode);
+
 }

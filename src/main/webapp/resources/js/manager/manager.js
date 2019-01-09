@@ -17,6 +17,8 @@
 		url : 'statistics.do',
 		success : function(data){
 			
+			$('div[id^=chart]').empty();
+			
 			var chart = bb.generate({
 			    bindto: "#chart1",
 			    size: {
@@ -288,6 +290,8 @@
 		url : 'statistics.do',
 		success : function(data){
 			
+			$('div[id^=chart]').empty();
+			
 			var chart = bb.generate({
 			    bindto: "#chart1",
 			    size: {
@@ -466,7 +470,6 @@
 				   
 			   }, error : function(data){
 				   var $trBoard = $('<tr>');
-				   var $tdNull = $('<td colspan="5">').text("검색 결과가 없습니다.");
 				   
 				   $trBoard.append($tdNull)
 				   
