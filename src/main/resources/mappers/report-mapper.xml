@@ -8,7 +8,7 @@
 	<resultMap type="Board" id="boardMap"></resultMap>
 	
 	<insert id="insertReport" parameterType="Report">
-    INSERT INTO REPORT VALUES(SEQ_RID.NEXTVAL,#{target_type},#{target_id},#{rcode},'N',#{report_mno},SYSDATE,#{rdetail})
+    INSERT INTO REPORT VALUES(SEQ_RID.NEXTVAL,#{target_type},#{target_id},#{rcode},default,#{report_mno},SYSDATE,#{rdetail})
 	</insert>
 	
 </mapper>

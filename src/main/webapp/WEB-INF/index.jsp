@@ -12,6 +12,15 @@
 	<title>miniMap에 오신걸 환영합니다.</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 	<meta name="description" content="" />
+	<style>
+		.fancybox-overlay [class^="fancybox-"] {
+			max-width : width;
+		}
+		
+		.fancybox-close {
+			
+		}
+	</style>
 </head>
 <body>
 	<!-- 외부파일 선언 -->
