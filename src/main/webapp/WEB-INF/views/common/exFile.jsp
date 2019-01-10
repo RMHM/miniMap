@@ -20,7 +20,6 @@
 <link rel="stylesheet" href="/resources/css/billboard.css">
 <!-- Or load different theme style -->
 <link rel="stylesheet" href="/resources/css/theme/insight.css">
-
 <!-- Theme skin -->
 <link href="/resources/skins/default.css" rel="stylesheet" />
 
