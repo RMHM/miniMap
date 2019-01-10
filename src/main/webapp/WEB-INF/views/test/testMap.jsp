@@ -632,7 +632,7 @@
 	///////////////////////////////////////////
 	// 지도에 표시된 마커 객체를 가지고 있을 배열입니다
 	var markersPersonal = [];
-	var positionsPersonal = [];
+//	var positionsPersonal = [];
 	
 	// 전역변수에 넣어서 클릭시 넣을수있따.
 	var latlng;
@@ -688,34 +688,7 @@
 		}
 	}
 
-	// "마커 보이기" 버튼을 클릭하면 호출되어 배열에 추가된 마커를 지도에 표시하는 함수입니다
-	function showMarkers() {
-		setMarkers(map)
-	}
 
-	// "마커 감추기" 버튼을 클릭하면 호출되어 배열에 추가된 마커를 지도에서 삭제하는 함수입니다
-	function hideMarkers() {
-		setMarkers(null);
-	}
-
-	// 되돌리기
-	$('#btBack').click(function() {
-		hideMarkers();
-		markersPersonal.pop();
-		showMarkers();
-		if (markersPersonal.length == 0)
-			$('#btBack').prop('disabled', true);
-		else
-			$('#btBack').prop('disabled', false);
-	})
-
-	// 마커 숨기기 보이기 지정
-	$('#btShow').click(function() {
-		showMarkers()
-	});
-	$('#btHide').click(function() {
-		hideMarkers()
-	});
 
 	///////////////////////////////////////////
 	//                                //
@@ -724,7 +697,7 @@
 	//                               //
 	//                               //
 	///////////////////////////////////////////
-
+		var infowPersonal = [];
 	function personalInputText() {
 
 		var message = '클릭한 위치의 위도는 ' + latlng.getLat() + ' 이고, ';
@@ -765,15 +738,70 @@
 
 	function createInfowindow(iwPosition, iwContent) {
 		// 인포윈도우를 생성합니다
-		var infowindow = new daum.maps.InfoWindow({
+		var infowindow2 = new daum.maps.InfoWindow({
 			position : iwPosition,
 			content : iwContent
 		});
 
 		// 마커 위에 인포윈도우를 표시합니다. 두번째 파라미터인 marker를 넣어주지 않으면 지도 위에 표시됩니다
-		infowindow.open(map, personalMarker);
+		infowindow2.open(map, personalMarker);
+		infowPersonal.push(infowindow2);		
 	}
 	
+	function setInfowidow(map)
+	{
+		for (var i = 0; i < infowPersonal.length; i++) {
+			// 각 마커에다 넣어야한다
+			
+			infowPersonal[i].open(map, markersPersonal[i]);
+			console.log(infowPersonal[i]);
+		}
+	}
+	
+
+
+	///////////////////////////////////////////
+	//                                //
+	//                               //
+	//        마커 & 인포윈도우 설정하기          //
+	//                               //
+	//                               //
+	///////////////////////////////////////////	
+	
+	
+	
+	// "마커 보이기" 버튼을 클릭하면 호출되어 배열에 추가된 마커를 지도에 표시하는 함수입니다
+	function showMarkers() {
+		setMarkers(map);
+		setInfowidow(map);
+	}
+
+	// "마커 감추기" 버튼을 클릭하면 호출되어 배열에 추가된 마커를 지도에서 삭제하는 함수입니다
+	function hideMarkers() {
+		setMarkers(null);
+		setInfowidow(null);
+		//infowindow2.close();   
+	}
+
+	// 되돌리기
+	$('#btBack').click(function() {
+		hideMarkers();
+		markersPersonal.pop();
+		infowPersonal.pop();
+		showMarkers();
+		if (markersPersonal.length == 0 && infowPersonal.length==0)
+			$('#btBack').prop('disabled', true);
+		else
+			$('#btBack').prop('disabled', false);
+	})
+
+	// 마커 숨기기 보이기 지정
+	$('#btShow').click(function() {
+		showMarkers()
+	});
+	$('#btHide').click(function() {
+		hideMarkers()
+	});
 	
 	
 	// 전송하기 
@@ -781,6 +809,7 @@
 	var tLat = transferLat+"";
 	var tLng = transferLng+"";
 	var tInText = transferPersonalInputText+"";
+	var tInSubject = transferSubject+"";
 	
 	console.log(tLat); 
 	console.log(tLng);
@@ -791,7 +820,8 @@
 		data : {
 			tLat,
 			tLng,
-			tInText
+			tInText,
+			tInSubject
 		},
 		dataType : "json",
 		success : function() {
