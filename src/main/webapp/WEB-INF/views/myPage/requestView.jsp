@@ -50,7 +50,7 @@
 										<c:forEach var="a" begin="0" end="${list.size()-1 }" step="1">
 											<tr id="${list.get(a).getAId()}">
 												<td>${list.get(a).getAId()}</td>
-												<td>${list.get(a).getAname()}</td>
+												<td>${list.get(a).getAName()}</td>
 												<td>${list.get(a).getMName()}</td>
 												<td>${list.get(a).getRequest_date()}</td>
 												<c:if test="${list.get(a).getDelflag() eq 'Y'.charAt(0) }">

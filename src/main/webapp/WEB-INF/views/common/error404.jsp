@@ -18,6 +18,7 @@
 <div id="wrapper">
  <c:import url="/WEB-INF/views/common/header.jsp"/>
 </div>
+<br>
 <img src="/resources/img/404.jpg" align="center" alt="" />
 </body>
 </html>

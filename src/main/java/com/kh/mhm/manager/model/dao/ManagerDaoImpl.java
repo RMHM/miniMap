@@ -51,7 +51,7 @@ public class ManagerDaoImpl implements ManagerDao {
 		} else if (mtype.equals("c")) {
 			list = sst.selectList("member.selectCompanyMember");
 		} else {
-			list = sst.selectList("member.selectBlackList");
+			list = sst.selectList("member.selectBlackMember");
 		}
 		
 		return list;
@@ -89,8 +89,8 @@ public class ManagerDaoImpl implements ManagerDao {
 	}
 
 	@Override
-	public BlackList selectOneBlackList(int mno) {
-		return sst.selectOne("member.selectOneBlackList", mno);
+	public List selectReportList(int mno) {
+		return sst.selectList("member.selectReportList", mno);
 	}
 
 	@Override

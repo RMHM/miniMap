@@ -38,3 +38,4 @@ hs_err_pid*
 # imgupload folder
 /src/main/webapp/resources/img/upload/
 /src/main/webapp/resources/img/profiles/
+/src/main/webapp/resources/img/authority/

@@ -53,8 +53,9 @@ public class MemberDaoImpl implements MemberDao {
 	}
 
 	@Override
-	public int checkPw(String mpw) {
-		return sst.selectOne("member.checkPw", mpw);
+	public int checkPw(HashMap<String, Object> hmap) {
+		sst.selectOne("member.checkPw", hmap);
+		return (Integer) hmap.get("result");
 	}
 
 	@Override

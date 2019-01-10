@@ -10,23 +10,27 @@
 	<title>회원 가입 페이지</title>
 	<c:import url="../common/header.jsp"/>
 	<style>
-		div#enroll-container{width:400px; margin:0 auto; text-align:center;}
+		div#enroll-container {width:400px; margin:0 auto; text-align:center;}
 		div#enroll-container input, div#enroll-container select {margin-bottom:10px;}
-		div#enroll-container table th{text-align: right; padding-right:10px;}
-		div#enroll-container table td{text-align: left;}
+		div#enroll-container table th {text-align: right; padding-right:10px;}
+		div#enroll-container table td {text-align: left;}
 		/*중복아이디체크관련*/
-		div#userId-container{position:relative; padding:0px;}
-		div#userId-container span.guide {display:none;font-size: 12px;position:absolute; top:12px; right:10px;}
-		div#userId-container span.ok{color:green;}
-		div#userId-container span.error, span.invalid{color:red;}
-		div#userNick-container{position:relative; padding:0px;}
-		div#userNick-container span.nick {display:none;font-size: 12px;position:absolute; top:12px; right:10px;}
-		div#userNick-container span.o{color:green;}
-		div#userNick-container span.e, span.i{color:red;}
-		div#email-container{position:relative; padding:0px;}
-		div#email-container span.email {display:none;font-size: 12px;position:absolute; top:12px; right:10px;}
-		div#email-container span.okk{color:green;}
-		div#email-container span.er, span.in{color:red;}
+		div#userId-container {position:relative; padding:0px;}
+		div#userId-container span.guide {display:none; font-size: 12px; position:absolute; top:12px; right:10px;}
+		div#userId-container span.ok {color:green;}
+		div#userId-container span.error, span.invalid {color:red;}
+		div#userNick-container {position:relative; padding:0px;}
+		div#userNick-container span.nick {display:none; font-size: 12px; position:absolute; top:12px; right:10px;}
+		div#userNick-container span.o {color:green;}
+		div#userNick-container span.e, span.i {color:red;}
+		div#email-container {position:relative; padding:0px;}
+		div#email-container span.email {display:none; font-size: 12px; position:absolute; top:12px; right:10px;}
+		div#email-container span.o {color:green;}
+		div#email-container span.e, span.i {color:red;}
+		div#userPw-container {position:relative; padding:0px;}
+		div#userPw-container span.pw {display:none; font-size: 12px; position:abosulte; top:12px; right:10px;}
+		div#userPw-container span.o {color:green;}
+		div#userPw-container span.e, span.i {color:red;}
 	</style>
 </head>
 <body>
@@ -52,8 +56,14 @@
 						<tr>
 							<th>패스워드</th>
 							<td>
+							   <div id="userPw-container">
 								<input type="password" class="form-control" name="mpw" id="mpw_" required>
 								<div class="check_font" id="pw_check"></div>
+								<span class="pw o">사용 가능한 비밀번호</span>
+				            	<span class="pw e">이미 사용중인 비밀번호</span>
+				            	<span class="pw i">6글자 이상 입력</span>
+				            	<input type="hidden" name="pwCheck" id="pwCheck" value="0"/>
+				            	</div>
 							</td>
 						</tr>
 						<tr>
@@ -89,9 +99,9 @@
 							<td>	
 								<div id="email-container">
 								<input type="email" class="form-control" placeholder="사용할 이메일 입력" name="email" id="email">
-								<span class="email okk">사용 가능</span>
-					            <span class="email er">사용중인 이메일</span>
-					            <span class="email in">6글자 이상 입력</span>
+								<span class="email o">사용 가능</span>
+					            <span class="email e">사용중인 이메일</span>
+					            <span class="email i">6글자 이상 입력</span>
 					            <input type="hidden" name="emailCheck" id="emailCheck" value="0"/>
 								</div>
 							</td>
@@ -131,7 +141,7 @@
 						<tr>
 							<th>업로드</th>
 							<td>
-							<img id="imc" src="/resources/img/profiles/" />
+							<img id="imc" src="/resources/img/profiles" />
 							<input type="file" class="form-check-input" name="profile" id="profilePath_" 
 								   value="">
 							</td>
@@ -146,10 +156,9 @@
 			<script>
 				function loginForm(){
 					location.href = "/";
-					if (confirm("회원 가입을 취소하고 돌아가시겠습니까?") == true){ // yes
-						document.form.submit();
-					} else { // no
-						return;
+					if (confirm("메인 페이지로 돌아가시겠습니까?") == true){ // yes
+					} else {
+						location.href = "/member/memberEnroll.go";
 					}
 				}
 			</script>
@@ -173,7 +182,7 @@
 						readURL(this);
 					});
 			</script>
-			<script>
+			<!--  <script>
 			// 비밀번호 정규식 : A~z, a~z, 0~9, 6~12자리
 			var pw = /^[A-Za-z0-9]{6,12}$/; 
 			
@@ -231,7 +240,7 @@
 						}
 					});
 				});  */
-			</script> 
+			</script> -->
 			<!-- 
 			/* 닉네임 유효성 검사 */
 			<script>
@@ -249,6 +258,46 @@
 			});
 			</script> 
 			-->
+			<script>
+			$("#mpw_").on("keyup", function(){
+				var mpw = $(this).val().trim();
+
+				
+				if (mpw.length < 6){
+					$(".pw.e").hide();
+					$(".pw.o").hide();
+					$(".pw.i").show();
+					return;
+				} else {
+					$.ajax({
+							url : "/member/checkPw.do",
+							data : { mpw : mpw },
+							dataType : "json",
+							success : function(data){
+								console.log(data);
+								if(data.isUsable==true){
+									$(".pw.e").hide();
+									$(".pw.i").hide();
+									$(".pw.o").show();
+									$("#pwCheck").val(1);
+								} else {
+									$(".pw.e").show();
+									$(".pw.i").hide();
+									$(".pw.o").hide();
+									$("#pwCheck").val(0);
+								}
+							}, error : function(jqxhr, testStatus, errorThrown){
+								console.log("ajax 처리 실패");
+								
+								console.log(jqxhr);
+							}
+						});
+					}
+			
+					console.log(mpw);
+				}); 
+				
+			</script>
 			<script>
 			$("#mnick_").on("keyup", function(){
 				var mnick = $(this).val().trim();
@@ -296,9 +345,9 @@
 
 				
 				if (email.length < 6){
-					$(".email.er").hide();
-					$(".email.okk").hide();
-					$(".email.in").show();
+					$(".email.e").hide();
+					$(".email.o").hide();
+					$(".email.i").show();
 					return;
 				} else {
 					
@@ -309,14 +358,14 @@
 							success : function(data){
 								console.log(data);
 								if(data.isUsable==true){
-									$(".email.er").hide();
-									$(".email.in").hide();
-									$(".email.okk").show();
+									$(".email.e").hide();
+									$(".email.i").hide();
+									$(".email.o").show();
 									$("#emailCheck").val(1);
 								} else {
-									$(".email.er").show();
-									$(".email.in").hide();
-									$(".email.okk").hide();
+									$(".email.e").show();
+									$(".email.i").hide();
+									$(".email.o").hide();
 									$("#emailCheck").val(0);
 								}
 							}, error : function(jqxhr, testStatus, errorThrown){

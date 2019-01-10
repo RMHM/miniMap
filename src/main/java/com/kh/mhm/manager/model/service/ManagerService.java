@@ -21,7 +21,7 @@ public interface ManagerService {
 
 	int clearBlackList(int mno);
 
-	BlackList selectOneBlackList(int mno);
+	List selectReportList(int mno);
 
 	List selectStatistics();
 

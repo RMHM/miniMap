@@ -9,11 +9,24 @@
 <head>
 <meta charset="UTF-8">
 <title>miniMap에 오신걸 환영합니다.</title>
+<style>
+table {
+	text-align : center;
+}
+button[id*=Btn], button[name*=Btn]{ 
+   border : 1px solid lightgray;
+   background : rgba(218, 218, 218, 0.623);
+}
+
+button:hover {
+    border : 1px solid rgba(119, 188, 224, 0.623);
+    background : rgba(128, 202, 241, 0.568);
+}
+</style>
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <meta name="description" content="" />
 <link rel="stylesheet"
 	href="http://code.jquery.com/ui/1.10.2/themes/smoothness/jquery-ui.css">
-<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/manager/manager.css">
 </head>
 
 <body>
@@ -50,16 +63,19 @@
 													<td>${list.get(a).getAName()}</td>
 													<td>${list.get(a).getMName()}</td>
 													<td>${list.get(a).getRequest_date()}</td>
-													<td>${list.get(a).getATake()}</td>
-													<c:if test="${list.get(a).getATake() eq N and list.get(a).getDelflag() eq N }">
-														<td><button name="checkBtn">요청확인</button></td>
-													</c:if>
-													<c:if test="${list.get(a).getATake() eq Y and list.get(a).getDelflag() eq N }">
-														<td>부여됨</td>
-													</c:if>
-													<c:if test="${list.get(a).getATake() eq N and list.get(a).getDelflag() eq Y }">
-														<td>거부됨</td>
-													</c:if>
+													<c:set var="atake" value="${list.get(a).getATake()}"/>
+													<c:set var="delflag" value="${list.get(a).getDelflag()}"/>
+													<c:choose>
+														<c:when test="${fn:contains(atake, 'N') and fn:contains(delflag, 'N')}">
+															<td><button name="checkBtn">요청확인</button></td>
+														</c:when>
+														<c:when test="${fn:contains(atake, 'Y') and fn:contains(delflag, 'N')}">
+															<td>부여됨</td>
+														</c:when>
+														<c:when test="${fn:contains(atake, 'N') and fn:contains(delflag, 'Y') }">
+															<td style="">거부됨</td>
+														</c:when>
+													</c:choose>
 												</tr>
 											</c:forEach>
 									</tbody>
@@ -70,14 +86,6 @@
 										
 										close();
 									</script>
-									<!-- <tbody id="tb">
-										<tr id="tdNull">
-											<td colspan="6">해당 회원의 권한이 존재하지 않습니다.</td>
-										</tr>
-									</tbody>
-									<div class="form-group">
-										<button onclick="window.close()">닫기</button>
-									</div> -->
 								</c:if>
 							</table>
 						</div>
@@ -117,9 +125,24 @@
 							<div class="form-group">
 								<label class="col-sm-3 control-label" for="aContent">내용</label>
 								<div class="col-sm-6">
-
 									<textarea cols="30" rows="5" id="aContent" name="aContent" 
 									style="width: 98%; resize:none;" maxlength="100" readonly></textarea>
+								</div>
+							</div>
+							
+							<div id="aCode2Div">
+								<div class="form-group">
+									<label class="col-sm-3 control-label" for="img">대표 이미지</label>
+									<div class="col-sm-6">
+										<img id="mainImg" src="" alt="">
+									</div>
+								</div>
+								
+								<div class="form-group">
+									<label class="col-sm-3 control-label" for="mName">URL</label>
+									<div class="col-sm-6">
+										<a href="" id="siteUrl"></a>
+									</div>
 								</div>
 							</div>
 							<div class="form-group">
@@ -142,6 +165,7 @@
 	
 	$(document).ready(function(){
 		$('#checkList').hide();
+		$('#aCode2Div').hide();
 	});
 	
 	function grant() {
@@ -187,6 +211,12 @@
 			success : function(data){
 				
 				console.log(data);
+				console.log($('#mainImg').html());
+				console.log($('#siteUrl').html());
+				console.log(data.img_file);
+				
+				var imgFile = data.img_file;
+				var siteUrl = data.site_url;
 				
 				if(acode == 1){
 					$('#aCode1').attr('checked', 'true');
@@ -194,6 +224,8 @@
 				} else {
 					$('#aCode1').attr('disabled', 'true');
 					$('#aCode2').attr('checked', 'true');
+					$('#mainImg').attr('src', '${pageContext.request.contextPath}/resources/img/' + imgFile);
+					$('#siteUrl').attr('href', siteUrl);
 				}
 				
 				console.log();				
