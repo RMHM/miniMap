@@ -50,24 +50,22 @@
 				<!-- 게시판 제목 -->
 				<label id="bTitle" style="font-size:2em; font-weight:bold">${b.BTitle }</label><br>
 				<!-- 게시판 작성자 -->
-				<table style="width:100%">
-					<tr>
-						<td><strong>작성자 : ${b.mnick} &nbsp; 작성일 : ${b.BDate} &nbsp; 방문수 : ${b.BCount}</strong></td>
-						<td align="right">
-							<!-- 회원정보 확인 -->
-							<c:if test="${member.mno eq b.MNo}">
-								<input type="button" class="btn btn-warning btn-large" name="modify" value="수정"
-									onclick="location.href='${pageContext.request.contextPath}/board/adBoardUpdate.go?bid=${b.BId }'">
-							</c:if>
-							<!-- 회원번호와 작성자 번호가 일치하거나 회원이 관리자 일 경우 -->
-							<c:if test="${member.mno eq b.MNo or member.mtype eq 'A'}">
-								<input type="button" class="btn btn-danger btn-large" name="delete" value="삭제"
-									onclick="location.href='${pageContext.request.contextPath}/board/adBoardRemove.do?bid=${b.BId }'">
-							</c:if>
-							<input type="button" class="btn btn-theme btn-large" onclick="location.href='${pageContext.request.contextPath}/board/adBoard.go'" value="이전 항목으로" />
-						</td>
-					</tr>
-				</table>
+				<div class="col-md-6">
+					<strong>작성자 : ${b.mnick} &nbsp; 작성일 : ${b.BDate} &nbsp; 방문수 : ${b.BCount}</strong>
+				</div>
+				<div class="col-md-6" align="right">
+					<!-- 회원정보 확인 -->
+					<c:if test="${member.mno eq b.MNo}">
+						<input type="button" class="btn btn-warning btn-large" name="modify" value="수정"
+							onclick="location.href='${pageContext.request.contextPath}/board/adBoardUpdate.go?bid=${b.BId }'">
+					</c:if>
+					<!-- 회원번호와 작성자 번호가 일치하거나 회원이 관리자 일 경우 -->
+					<c:if test="${member.mno eq b.MNo or member.mtype eq 'A'}">
+						<input type="button" class="btn btn-danger btn-large" name="delete" value="삭제"
+							onclick="location.href='${pageContext.request.contextPath}/board/adBoardRemove.do?bid=${b.BId }'">
+					</c:if>
+					<input type="button" class="btn btn-theme btn-large" onclick="location.href='${pageContext.request.contextPath}/board/adBoard.go'" value="이전 항목으로" />
+				</div>
 				
 				<textarea id="content" style="display: none;">${b.BContent}</textarea>
 				<div id="BContent" style="width: 100%; height: auto; background-color: aliceblue; overflow:hidden"> ${b.BContent}</div>
