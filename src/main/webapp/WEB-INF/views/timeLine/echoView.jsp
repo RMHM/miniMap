@@ -19,13 +19,14 @@
 
 		<div class="container">
 			<div class='form-group'>
-
+			<div class="membernick" style="display:none">${member.mnick}</div>
 				<div id="div_chat">
 					<ul class="disqusin">
 						<c:forEach var="i" items="${list}">
 							<c:choose>
-								<c:when test="${i.mNick eq member.mnick}">
+								<c:when test="${i.getMNick() eq member.mnick}">
 									<li>
+										<div class="lastTID" style="display:none">${i.getTId()}</div>
 										<div class="comment-main-level">
 											<div class="comment-avatar">
 												<img src="/resources/img/profiles/${i.profile_path}" alt="">
@@ -33,9 +34,9 @@
 											<div class="comment-box-me">
 												<div class="comment-head-me">
 													<span class="comment-name ">
-														<a href="" target="_BLANK">${i.mNick}</a>&nbsp;(나)
+														<a href="" target="_BLANK">${i.getMNick()}</a>&nbsp;(나)
 													</span>
-													<span> ${i.tDate} </span>
+													<span> ${i.getTDate()} </span>
 													<a href="#" onclick="sendNote($(this).siblings('.comment-name').children('a').text());">
 														<img class="jjokjee" src="/resources/img/timeline/jjokjee.png"/>
 													</a>
@@ -44,7 +45,7 @@
 													</a>
 												</div>
 												<div class="comment-content">
-													<pre>${i.tContent}</pre>
+													<pre>${i.getTContent()}</pre>
 												</div>
 												<div class="comment-bottom-me">
 													<i class="fa fa-link"></i>
@@ -56,6 +57,7 @@
 								</c:when>
 								<c:otherwise>
 									<li>
+										<div class="lastTID" style="display:none">${i.getTId()}</div>
 										<div class="comment-main-level">
 											<div class="comment-avatar">
 												<img src="/resources/img/profiles/${i.profile_path}" alt="">
@@ -63,9 +65,9 @@
 											<div class="comment-box">
 												<div class="comment-head">
 													<span class="comment-name ">
-														<a href="" target="_BLANK">${i.mNick}</a>
+														<a href="" target="_BLANK">${i.getMNick()}</a>
 													</span>
-													<span> ${i.tDate} </span>
+													<span> ${i.getTDate()} </span>
 													<a href="#" onclick="sendNote($(this).siblings('.comment-name').children('a').text());">
 														<img class="jjokjee" src="/resources/img/timeline/jjokjee.png"/>
 													</a>
@@ -74,7 +76,7 @@
 													</a>
 												</div>
 												<div class="comment-content">
-													<pre>${i.tContent}</pre>
+													<pre>${i.getTContent()}</pre>
 												</div>
 												<div class="comment-bottom">
 													<i class="fa fa-link"></i>
@@ -125,6 +127,9 @@
 					<!-- <div class='panel panel-default'>
 				<div id='chatdata' class='panel-body'></div>
 			</div> -->
+				<div class="container" id="menu_scroll_down">
+					<button id="btn_scroll_down" disabled="true">↓</button>
+				</div>
 				</div>
 
 				<!-- 메세지 작성부분 -->
@@ -144,17 +149,18 @@
 			</div>
 
 		</div>
-		<div id="menu_scroll_down">
+		<!-- <div id="menu_scroll_down">
 			<button id="btn_scroll_down" disabled="true">↓</button>
-		</div>
+		</div> -->
 		<c:import url="/WEB-INF/views/common/footer.jsp" />
 	</div>
 
 	<script>
 		$(document).ready(function() {
+			console.log("tsock open");
 			$('#div_chat').animate({
-				scrollTop : $('#div_chat')[0].scrollHeight + 700
-			}, 100);
+				scrollTop : $('#div_chat').prop('scrollHeight')+1
+			}, 500);
 		});
 
 		// 내용부분 글자제한
@@ -222,7 +228,7 @@
 		});
 
 		var isScrollUp = false;
-		var lastScrollTop;
+		/* var lastScrollTop; */
 		var unreadCnt = 0;
 
 		/* SockJS객체생성 보낼 url경로를 매개변수로 등록 */
@@ -266,8 +272,8 @@
 					// 기본적으로 스크롤 최하단으로 이동 (애니메이션 적용)
 					if (!isScrollUp) {
 						$('#div_chat').animate({
-							scrollTop : $('#div_chat')[0].scrollHeight + 700
-						}, 100);
+							scrollTop : $('#div_chat').prop('scrollHeight') + 1
+						}, 500);
 					}
 				}
 
@@ -280,7 +286,12 @@
 		});
 		function sendMessage() {
 			/* 맵핑된 핸들러 객채의 handleTextMessage메소드가 실행 */
-			sock.send($("#message").val() + "|%%|&" + $("#tag").val());
+			if(sock.readyState===1){
+				sock.send($("#message").val() + "|%%|&" + $("#tag").val());
+			}else{
+				console.log("메세지 전송 실패(일시적 문제)");
+			}
+			
 		};
 		function onMessage(evt) {
 			var data = evt.data;//new text객체로 보내준 값을 받아옴.
@@ -288,6 +299,8 @@
 			var strArray = data.split("|%%|&");//데이터 파싱처리하기
 			var userName = null;//대화명 저장
 			var profPath = null; //프로필 이미지
+			var hashTag=null;
+			var tId=null;
 
 			//전송된 데이터 출력해보기
 			for (var i = 0; i < strArray.length; i++) {
@@ -300,6 +313,7 @@
 				userName = strArray[3];
 				profPath = strArray[4];
 				hashTag = strArray[5];
+				tId=strArray[6];
 				today = new Date();
 				printDate = today.getFullYear() + "/" + today.getMonth() + "/"
 						+ today.getDate() + " " + today.getHours() + ":"
@@ -318,12 +332,13 @@
 				console.log('ck_host : ' + ck_host);
 				console.log(profPath);
 				console.log(hashTag);
+				console.log(tId);
 				var urlProf = "/resources/img/profiles/";
 				/* 서버에서 데이터를 전송할경우 분기 처리 */
 				console.log('prof::' + urlProf + profPath);
 				if (host == ck_host || (host == 0 && ck_host.includes('0:0:'))
 						|| (host == 0 && ck_host.includes('127.0.0.1'))) {
-					var printHTML = "<li><div class='comment-main-level'><div class='comment-avatar'>";
+					var printHTML = "<li><div class='lastTID' style='display:none'>"+tId+"</div><div class='comment-main-level'><div class='comment-avatar'>";
 					printHTML += "<img src='"+urlProf+profPath+"' alt=''></div>";
 					printHTML += "<div class='comment-box-me'><div class='comment-head-me'><span class='comment-name '>";
 					printHTML += "<a href='' target='_BLANK'>" + userName
@@ -341,7 +356,7 @@
 					printHTML += "</div></div></div></li>";
 					$('.disqusin').append(printHTML);
 				} else {
-					var printHTML = "<li><div class='comment-main-level'><div class='comment-avatar'>";
+					var printHTML = "<li><div class='lastTID' style='display:none'>"+tId+"</div><div class='comment-main-level'><div class='comment-avatar'>";
 					printHTML += "<img src='"+urlProf+profPath+"' alt=''></div>";
 					printHTML += "<div class='comment-box'><div class='comment-head'><span class='comment-name '>";
 					printHTML += "<a href='' target='_BLANK'>" + userName
@@ -413,44 +428,44 @@
 		$('#btn_scroll_down').on('click', function() {
 			// 마지막으로 보고 있었던 (스크롤을 올리기 시작했던) 위치로 이동
 			$('#div_chat').animate({
-				scrollTop : $('#div_chat')[0].scrollHeight + 700
-			}, 100);
-
-			if (lastScrollTop >= $('#div_chat')[0].scrollHeight) {
-				// 마지막 위치와 스크롤 최하단이 같다면 (새로 추가된 라인이 없다면) 메뉴 숨김
-				$("#menu_scroll_down").css("opacity", "0.0");
-				$("#btn_scroll_down").css("opacity", "0.0");
-				$("#btn_scroll_down").attr("disabled", true);
-				isScrollUp = false;
-				unreadCnt = 0;
-				$('#btn_scroll_down').html('↓');
-			} else {
-				// 마지막 위치와 스크롤 최하단이 다르다면 (새로 추가된 라인이 있다면) 마지막 위치를 최하단으로 변경
-				lastScrollTop = $('#div_chat')[0].scrollHeight + 700;
-			}
+				scrollTop : $('#div_chat').prop('scrollHeight')+1
+			}, 500);
+			
+			$('#btn_scroll_down').html('↓');
+			$("#menu_scroll_down").css("opacity", "0.0");
+			$("#btn_scroll_down").css("opacity", "0.0");
+			$("#btn_scroll_down").attr("disabled", true);
+			isScrollUp = false;
+			unreadCnt = 0;
+			
 		})
 
 		/* 스크롤 이벤트 */
-		$("#div_chat").on('mousewheel DOMMouseScroll', function(e) {
-			var E = e.originalEvent, delta = E.wheelDelta || -E.detail;
-
+		$("#div_chat").on('scroll touchmove mousewheel DOMMouseScroll', function(e) {
+			var E = e.originalEvent
+			var delta = 0;
+			if(E.detail){
+				delta=E.detail*-40;
+			}else{
+				delta=E.wheelDelta;
+			}
+/* 
 			// 메뉴를 숨겼을 때만 마지막 위치 저장
 			if (!isScrollUp) {
 				lastScrollTop = $('#div_chat')[0].scrollHeight + 700;
-			}
+			} */
 
 			// 스크롤이 생겼을 때
 			if ($(this).scrollTop() > 0) {
 				if (delta < 0) {
 					// 스크롤 내리는 이벤트 중 최하단 도달 시 메뉴 숨김 (-1은 오차 제어)
-					if ($(this).scrollTop() >= 0) {
-						$("#menu_scroll_down").css("opacity", "0.0");
-						$("#btn_scroll_down").css("opacity", "0.0");
-						$("#btn_scroll_down").attr("disabled", true);
-						isScrollUp = false;
-						unreadCnt = 0;
-						$('#btn_scroll_down').html('↓');
-					}
+					$('#btn_scroll_down').html('↓');
+					$("#menu_scroll_down").css("opacity", "0.0");
+					$("#btn_scroll_down").css("opacity", "0.0");
+					$("#btn_scroll_down").attr("disabled", true);
+					isScrollUp = false;
+					unreadCnt = 0;
+					
 				} else {
 					// 스크롤 올리는 이벤트 발생 시 메뉴 보임
 					$("#menu_scroll_down").css("opacity", "1.0");
@@ -458,8 +473,73 @@
 					$("#btn_scroll_down").attr("disabled", false);
 					isScrollUp = true;
 				}
+			}else if($(this).scrollTop()==0){
+				var lt=$('.lastTID').eq(0).text()*1;	
+				var list=loadMore(lt);
+				console.log(list);
+				
+				for(var i=0;i<list.length;i++){
+					if($(".membernick").text()==(list[i].mnick)){
+						console.log("돌긴하냐1?");
+						var printHTML = "<li><div class='lastTID' style='display:none'>"+list[i].tid+"</div><div class='comment-main-level'><div class='comment-avatar'>";
+						printHTML += "<img src='/resources/img/profiles/"+list[i].profile_path+"' alt=''></div>";
+						printHTML += "<div class='comment-box-me'><div class='comment-head-me'><span class='comment-name '>";
+						printHTML += "<a href='' target='_BLANK'>" + list[i].mnick
+								+ "&nbsp;(나)" + "</a></span><span>" + list[i].tdate
+								+ "</span>";
+						printHTML += "<a href='#' onclick='sendNote($(this).siblings('.comment-name').children('a').text());'>"
+								+ "<img class='jjokjee' src='/resources/img/timeline/jjokjee.png'/>"
+								+ "</a><a href='#' onclick='report();'>"
+								+ "<img class='singo' src='/resources/img/timeline/singo.png'/></a>";
+						printHTML += "</div><div class='comment-content'><pre>"
+								+ list[i].tcontent + "</pre></div>";
+						printHTML += "<div class='comment-bottom-me'><i class='fa fa-link'></i>";
+						printHTML += "<a href='https://www.google.com/search?q="
+								+ list[i].hashTag + "' target='_BLANK'>" + list[i].hashTag + "</a>";
+						printHTML += "</div></div></div></li>";
+						$('.disqusin').prepend(printHTML);
+					}else {
+						console.log("돌긴하냐2?");
+						var printHTML = "<li><div class='lastTID' style='display:none'>"+list[i].tid+"</div><div class='comment-main-level'><div class='comment-avatar'>";
+						printHTML += "<img src='/resources/img/profiles/"+list[i].profile_path+"' alt=''></div>";
+						printHTML += "<div class='comment-box'><div class='comment-head'><span class='comment-name '>";
+						printHTML += "<a href='' target='_BLANK'>" + list[i].mnick
+								+ "</a></span><span>" + list[i].tdate + "</span>";
+						printHTML += "<a href='#' onclick='sendNote($(this).siblings('.comment-name').children('a').text());'>"
+								+ "<img class='jjokjee' src='/resources/img/timeline/jjokjee.png'/>"
+								+ "</a><a href='#' onclick='report();'>"
+								+ "<img class='singo' src='/resources/img/timeline/singo.png'/></a>";
+						printHTML += "</div><div class='comment-content'><pre>"
+								+ list[i].tcontent + "</pre></div>";
+						printHTML += "<div class='comment-bottom'><i class='fa fa-link'></i>";
+						printHTML += "<a href='https://www.google.com/search?q="
+								+ list[i].hashTag + "' target='_BLANK'>" + list[i].hashTag + "</a>";
+						printHTML += "</div></div></div></li>";
+						$('.disqusin').prepend(printHTML);
+
+					}
+				}
 			}
 		});
+		
+		function loadMore(lt){
+			var list="";
+			$.ajax({
+				url:'/load.more',
+				type:'post',
+				async:false,
+				data:{
+					'tId':lt
+				},
+				success:function(data){
+					list=data;
+				},
+				error:function(err){
+					console.log("load-more-error");
+				}
+			});
+			return list;
+		}
 		
 		function sendNote(nick){
 			var popUrl = "/popUp.write?"+nick;	//팝업창에 출력될 페이지 URL

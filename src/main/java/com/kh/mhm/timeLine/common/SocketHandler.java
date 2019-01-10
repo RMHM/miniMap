@@ -70,7 +70,8 @@ public class SocketHandler extends TextWebSocketHandler{
 						+session.getRemoteAddress()+"|%%|&"
 						+session.getAttributes().get("userName")+"|%%|&"
 						+profPath+"|%%|&"
-						+tag));
+						+tag+"|%%|&"
+						+result));
 		}
 		// super.handleTextMessage(session, message);
 	}
