@@ -286,9 +286,15 @@ public class MemberController {
 	
 	@ResponseBody
 	@RequestMapping(value = "member/checkPw.do")
-	public int checkPw(@RequestParam("mpw_") String mpw) {
+	public Map<String, Object> checkPw(@RequestParam String mpw) {
 		
-		return ms.checkPw(mpw);
+		Map<String, Object> map = new HashMap<String, Object>();
+		
+		boolean isUsable = ms.checkPw(mpw) == 0 ? true : false;
+		
+		map.put("isUsable", isUsable);
+				
+		return map;
 	}
 		
 	

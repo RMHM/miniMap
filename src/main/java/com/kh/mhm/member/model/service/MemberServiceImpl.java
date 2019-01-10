@@ -55,7 +55,9 @@ public class MemberServiceImpl implements MemberService {
 
 	@Override
 	public int checkPw(String mpw) {
-		return mDao.checkPw(mpw);
+		HashMap<String, Object> hmap = new HashMap<String, Object>();
+		hmap.put("mpw", mpw);
+		return mDao.checkPw(hmap);
 	}
 
 	@Override

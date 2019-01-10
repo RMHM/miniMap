@@ -22,10 +22,12 @@ public interface MemberDao {
 
 	Date selectNowBlack(int mno);
 
-	int checkPw(String mpw);
+	int checkPw(HashMap<String, Object> hmap);
 
 	int checkNick(HashMap<String, Object> hmap);
 
 	int checkEmail(HashMap<String, Object> hmap);
+
+	
   
 }

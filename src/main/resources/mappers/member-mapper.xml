@@ -111,8 +111,11 @@
 		}
 	</select>
 	
-	<select id="checkPw" parameterType="String" resultType="_int">
-		select count(*) from member where mpw = #{mpw}
+	<select id="checkPw" parameterType="CALLABLE" parameterType="hashmap">
+		{ CALL PASS_CHK(#{mpw, mode=IN, jdbcType=VARCHAR},
+			#{result, mode=OUT, jdbcType=NUMERIC, javaType=integer}
+		    )
+		}
 	</select>
 
 	<select id="selectCommonMember" resultMap="memberMap">
