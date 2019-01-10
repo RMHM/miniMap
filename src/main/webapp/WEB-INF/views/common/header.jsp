@@ -37,13 +37,11 @@
 					<li><a href="/event/eventCalendar.go">행사달력</a></li>
 					<!-- 로그인여부에 따른 분기점 -->
 					<c:if test="${not empty member}">
-						<li class="dropdown active"><a href="#" class="dropdown-toggle"
-							data-toggle="dropdown" data-hover="dropdown" data-delay="0"
-							data-close-others="false">${member.mnick} 님 <b
-								class=" icon-angle-down"></b></a><span id="test">1</span>
+            <li class="dropdown">
+							<a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-delay="0" data-close-others="false">${member.mnick} 님 <b class=" icon-angle-down"></b></a>
 							<ul class="dropdown-menu">
 								<li><a href="/myPage/myPageMain.do">myPage</a></li>
-								<li><a href="#" class="note" onclick="message();">쪽지함</a><span id="test">1</span></li>
+								<li><a href="#" class="note" onclick="message();">쪽지함 <b class="newMsg"></b></a></li>
 								<c:if test="${member.mtype eq 'A'}">
 									<li><a href="/manager/managerPage.go">관리자 페이지</a></li>
 								</c:if>

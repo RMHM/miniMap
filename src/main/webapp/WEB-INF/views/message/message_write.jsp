@@ -112,6 +112,7 @@
 		    },
 		    error : function() { 
 		    	// 에러 처리 고민
+		    	alert('존재하지 않는 회원입니다.');
 		    	console.log('error');
 		   	}
 		});

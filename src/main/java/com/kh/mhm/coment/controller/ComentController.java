@@ -38,10 +38,12 @@ public class ComentController {
 		int result;
 		
 		System.out.println(session.getAttribute("member"));
+		
 		coment.setBid(Integer.parseInt(req.getParameter("BId")));
-		coment.setCcontent(req.getParameter("cContent"));		
+		coment.setCcontent(req.getParameter("cContent").replace("\r\n","<br>"));		
 		System.out.println(coment);
 		System.out.println(req.getParameter("cContent"));
+				
 		
 		result = cs.insertComentContent(coment);
 		System.out.println(result);
@@ -149,9 +151,7 @@ public class ComentController {
 		
 		System.out.println(session.getAttribute("member"));
 		coment.setBid(Integer.parseInt(req.getParameter("BId")));		
-		/*coment.setCcontent(req.getParameter("recontent"));	*/	
-		System.out.println(coment);
-		System.out.println(req.getParameter("recontent"));
+		coment.setCcontent(coment.getCcontent().replace("\r\n","<br>"));	
 		
 		
 		result = cs.insertComentContent2(coment);
