@@ -9,7 +9,17 @@
 <head>
 <meta charset="UTF-8">
 <title>miniMap에 오신걸 환영합니다.</title>
-<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/manager/manager.css">
+<style>
+button[id*=Btn], button[name*=Btn] { 
+   border : 1px solid lightgray;
+   background : rgba(218, 218, 218, 0.623);
+}
+
+button:hover {
+    border : 1px solid rgba(119, 188, 224, 0.623);
+    background : rgba(128, 202, 241, 0.568);
+}
+</style>
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <meta name="description" content="" />
 
@@ -17,87 +27,57 @@
 
 <body>
 	<!-- 외부파일 선언 -->
-
 	<c:import url="/WEB-INF/views/common/exFile.jsp" />
-	<div id="wrapper">
-		<!-- header 선언 -->
+	
+	<div id="wrapper" align="center">
 		<div class="container">
-
 			<div class="col-md-10">
-				<div class="container">
-
-					<!-- 	<div class="container-fluid"> -->
-					<div class="col-sm-8 text-center">
-						<h1>
-							<small>블랙리스트 해제</small>
-						</h1>
-						<form class="form-horizontal" id="request" method="post">
-							<div class="raw">
-									<div class="form-group">
-									<div class="btn-group">
-										<label for="reason">정지 사유</label>
-										<input type="text" class="form-control" id="reason" name="reason" value="${black.getReason()}" readonly/>
-									</div>
-								</div>
-							
-							</div>
-							
+				<div class="container-fluid">
+					<div class="row">
+						<div class="list">
+						<br><br>
+							<table class="table table-hover">
+								<thead>
+									<tr>
+										<th>신고자</th>
+										<th>신고내용</th>
+										<th>신고날짜</th>
+									</tr>
+								</thead>
+									<tbody id="tb" align="center">
+											<c:forEach var="r" begin="0" end="${report.size()-1}" step="1">
+												<tr>
+													<td style="display:none">${report.get(r).getMno()}</td>
+													<td>${report.get(r).getRep_mid()}</td>
+													<td>${report.get(r).getRdetail()}</td>
+													<td>${report.get(r).getRDate()}</td>
+												</tr>
+											</c:forEach>
+									</tbody>
+							</table>
 							<div class="form-group">
-								<label class="col-sm-3 control-label" for="request_Date">정지 기간</label>
-								<div class="col-sm-6">
-									<input class="form-control" id="endDate" name="endDate" readonly
-										type="date" value="${black.getEndDate()}">
-								</div>
+								<br>
+								<button id="clearBtn" onclick="clearBlackList();">해제</button> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+								<button id="resetBtn" onclick="resetBlackList();">취소</button>
 							</div>
-
-							<div class="form-group">
-								<label class="col-sm-3 control-label" for="mName">회원 이름</label>
-								<div class="col-sm-6">
-									<input class="form-control" id="mName" name="mName" readonly
-										type="text" value="${black.getMname()}">
-								</div>
-							</div>
-							
-							
-								<div class="form-group">
-									<label class="col-sm-3 control-label" for="aContent">상세내용</label>
-									<div class="col-sm-6">
-										<c:if test="${not empty black.getRdetail()}">
-											<textarea cols="30" rows="5" id="edited_title" name="rDetail"
-											name="rDetail" style="width: 98%; resize:none;" maxlength="100">${black.getRdetail()}</textarea>
-										</c:if>
-										<c:if test="${empty black.getRdetail()}">
-											<textarea cols="30" rows="5" id="edited_title" name="rDetail"
-											name="rDetail" style="width: 98%; resize:none;" maxlength="100">상세 신고 내용이 없습니다.</textarea>
-										</c:if>
-									</div>
-								</div>
-							
-							<div class="form-group">
-
-								<button id="clearBtn" onclick="clearBlackList()">해제</button> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-								<button id="resetBtn" onclick="resetBlackList()">취소</button>
-
-							</div>
-						</form>
+						</div>
 					</div>
-
 				</div>
-
 			</div>
-		</div>
 
+		</div>
 	</div>
 	<script>
 	var url = "";
 
 	function clearBlackList() {
 
-		var checkResult = window.confirm("${black.getMid()} 회원을 블랙리스트에서 해제 하겠습니까?");
+		var checkResult = window.confirm("해당 회원을 블랙리스트에서 해제 하겠습니까?");
+		var mno = $('#tb:first td').eq(0).text();
 		
 		if(checkResult){
-			url = "clearBlackList.do?mno=${black.getMno()}";
-			
+			url = "clearBlackList.do?mno="+mno;
+
 			opener.window.location = url;
 			
 			close();
