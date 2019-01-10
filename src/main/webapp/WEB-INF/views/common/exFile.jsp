@@ -47,26 +47,26 @@
 
 <script>
 
-var sock = new SockJS("<c:url value='/notice'/>");
-sock.onmessage = onMessage;
-sock.onclose = onClose;
+var socket = new SockJS("<c:url value='/notice'/>");
+socket.onmessage = onMsg;
+socket.onclose = onCls;
 
-sock.onopen=function(){
+socket.onopen=function(){
 	console.log("open");
-	sendMessage();
+	sendMsg();
 }
 
-function sendMessage() {
+function sendMsg() {
 	
-	if(sock.readyState===1){
+	if(socket.readyState===1){
 		setInterval(
 			function() {
-				sock.send("hdn")
+				socket.send("hdn")
 				
 		},1000);
 	}else{
 		console.log("wait...");
-		sendMessage();
+		sendMsg();
 	}
 };
 
@@ -86,18 +86,30 @@ function sendMessage() {
 
 
 	
-function onMessage(evt) {
-	var data = evt.data;
+function onMsg(evt) {
+	var data = Number(evt.data);
 	
-	console.log("data::"+data);
+	if(data!=0){
+		/* $('.newMsg').attr("color","red");
+		$('.newMsg').removeAttr('position left');
+		$('.newMsg').text(data); */
+		$('.newMsg').html("<b style='color:red'>"+data+"</b>")
+	}else{/* 
+		$('.newMsg').attr({
+			color:"white",
+			positon:"absolute",
+			left:"-2000px"
+		}); */
+		$('.newMsg').html("<b style='position:absolute; left:-2000px; color:white;'>"+data+"</b>")
+	}
 	
-	$("#test").text(data);
+	/* $("#test").text(data); */
 	/* $('.dropdown-toggle').append(data);
 	$('.note').append(data); */
 
 };
 
-function onClose(evt){
+function onCls(evt){
 	
 }
 

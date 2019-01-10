@@ -18,7 +18,12 @@ public class TimeLineDaoImpl implements TimeLineDao {
 
 	@Override
 	public int insertTimeLine(TimeLineSmpl tls) {
-		return sqlSession.insert("TimeLine.insertTimeLine", tls);
+		int result=sqlSession.insert("TimeLine.insertTimeLine", tls);
+		if(result>0) {
+			return sqlSession.selectOne("TimeLine.getTid");
+		}else {
+			return 0;
+		}
 	}
 
 	// @Override
@@ -39,6 +44,11 @@ public class TimeLineDaoImpl implements TimeLineDao {
 	@Override
 	public List<PreTimeLine> selectPreTimeLine() {
 		return sqlSession.selectList("TimeLine.selectPreTimeLine");
+	}
+
+	@Override
+	public List<PreTimeLine> loadMoreLine(int tId) {
+		return sqlSession.selectList("TimeLine.loadMoreLine",tId);
 	}
 
 }

@@ -15,5 +15,6 @@ public interface TimeLineService {
 	int insertTimeLine(TimeLineSmpl tls);
 
 	List<PreTimeLine> selectPreTimeLine();
-
+	
+	List<PreTimeLine> loadMoreLine(int tId);
 }

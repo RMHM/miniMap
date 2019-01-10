@@ -1,10 +1,12 @@
 package com.kh.mhm.timeLine.model.vo;
 
+import java.io.Serializable;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 
-public class PreTimeLine {
+public class PreTimeLine implements Serializable {
 	
+	private int tId;
 	private String profile_path;
 	private String mNick;
 	private String tDate;
@@ -15,13 +17,24 @@ public class PreTimeLine {
 		super();
 	}
 
-	public PreTimeLine(String profile_path, String mNick, Timestamp tDate, String tContent, String hashTag) {
+	public PreTimeLine(int tId,String profile_path, String mNick, Timestamp tDate, String tContent, String hashTag) {
 		super();
+		this.tId=tId;
 		this.profile_path = profile_path;
 		this.mNick = mNick;
 		this.tDate = new SimpleDateFormat("MM/dd/yyyy HH:mm:ss").format(tDate);
 		this.tContent = tContent;
 		this.hashTag = hashTag;
+	}
+	
+	
+
+	public int getTId() {
+		return tId;
+	}
+
+	public void setTId(int tId) {
+		this.tId = tId;
 	}
 
 	public String getProfile_path() {
@@ -32,27 +45,27 @@ public class PreTimeLine {
 		this.profile_path = profile_path;
 	}
 
-	public String getmNick() {
+	public String getMNick() {
 		return mNick;
 	}
 
-	public void setmNick(String mNick) {
+	public void setMNick(String mNick) {
 		this.mNick = mNick;
 	}
 
-	public String gettDate() {
+	public String getTDate() {
 		return tDate;
 	}
 
-	public void settDate(Timestamp tDate) {
+	public void setTDate(Timestamp tDate) {
 		this.tDate = new SimpleDateFormat("MM/dd/yyyy HH:mm:ss").format(tDate);
 	}
 
-	public String gettContent() {
+	public String getTContent() {
 		return tContent;
 	}
 
-	public void settContent(String tContent) {
+	public void setTContent(String tContent) {
 		this.tContent = tContent;
 	}
 
@@ -67,7 +80,7 @@ public class PreTimeLine {
 	@Override
 	public String toString() {
 		return "PreTimeLine [profile_path=" + profile_path + ", mNick=" + mNick + ", tDate=" + tDate + ", tContent="
-				+ tContent + ", hashTag=" + hashTag + "]";
+				+ tContent + ", hashTag=" + hashTag + "tId="+tId+"]";
 	}
 	
 }

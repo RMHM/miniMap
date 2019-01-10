@@ -206,6 +206,7 @@
 .disqusin .comment-box-me .comment-bottom-me {
 	background: #FCFCFC;
 	padding: 10px 12px;
+
 	border-bottom: 1px solid #E5E5E5;
 	overflow: hidden;
 	-webkit-border-radius: 4px 4px 0 0;
@@ -428,4 +429,8 @@
 	height:20px;
 	float:right;
 	position:relative;
+}
+
+.btn btn-primary{
+	z-index:150;
 }
