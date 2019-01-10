@@ -364,7 +364,8 @@
 	</script>
 	
 	<!--Modal -->
-	<form id ="insertReport"  action="${pageContext.request.contextPath}/report/insertReport.do" method="post" >
+	<form id ="insertReport"  method="post" >
+	<%-- <form id ="insertReport"  action="${pageContext.request.contextPath}/report/insertReport.do" method="post" > --%>
 	<div class="modal fade" id="report-modal-container" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 				<div class="modal-dialog" role="document">
 					<div class="modal-content">
@@ -380,10 +381,18 @@
 						
 							<div>
 							
-							<input type="hidden" id = "targetType" name = "target_type" value="" />
+							<!-- <input type="hidden" id = "targetType" name = "target_type" value="" /> -->
 							<input type="hidden" id = "targetId" name = "target_id" value="" />
 							<input type="hidden" name = "report_mno" value="${member.mno}"  />
 							
+							</div>
+							<div class="modal-body">
+								<div class = "modal-content">
+								<label >신고  대상  </label></div>
+								<div class = "modal-content">
+								<input type="radio" name="target_type" value = "M" /><label>작성자</label>
+								<input type="radio" name="target_type" value = "B" /><label>게시글</label>
+								</div>
 							</div>
 							<div class="modal-body">
 								<div class = "modal-content">
@@ -407,10 +416,11 @@
 							</div>
 						</div>
 						<div class="modal-footer">				 
-							<input id="submit" type="submit" value="신고하기"class="btn btn-primary" >
-							<!-- <button class="btn btn-primary" id="reportbtn" onclick="insertRe();">
+							<!-- <input id="submit" type="submit" value="신고하기"class="btn btn-primary" > -->
+							<!-- <button class="" id="reportbtn" onclick="insertRe();"> -->
+							<button class="" id="reportbtn"data-dismiss="modal" >
 								신고하기
-							</button>  -->
+							</button> 
 							<button  class="btn btn-secondary" data-dismiss="modal">
 								취소
 							</button>
@@ -419,11 +429,57 @@
 					
 				</div>
 				<script>
+				
 				$('#report-modal').click(function(){
-					console.log(this);
+					console.log("${b.BId}");
 					$('#targetType').val("B");
 					$('#targetId').val("${b.BId}");					
+				
+					$('#reportbtn').click(function(){
+						
+ 						var re = $('#insertReport').serializeArray(); 
+ 						
+	 					$.ajax({
+						url : "${pageContext.request.contextPath}/report/insertReport.do",
+						 data :re, 
+						 
+						 contentType: "application/json", 
+							dataType : "json",
+							success : function() {
+								alert("신고접수 완료");
+								 
+							},
+							error : function(e) {
+								alert("신고 실패");
+							}
+							
+						});	  
+						
+					});
+				
 				});
+				
+			/* 	function insertRe(){
+					/* console.log(this.serialize());
+					console.log($('#insertReport').val());
+					console.log($('#targetType').val()); 
+					alert("test");
+					
+					 	$.ajax({
+							url : "${pageContext.request.contextPath}/report/insertReport.do",
+							data : {kkk:$('#insertReport').serialsize()},
+							dataType : "json",
+							success : function(data) {
+								alert(data);
+								 
+							},
+							error : function(e) {
+								alert("신고 실패");
+							}
+							
+						});	 
+			
+				} */
 				</script>
 	</div>	
 	</form>

@@ -20,9 +20,9 @@
 <link rel="stylesheet" href="/resources/css/billboard.css">
 <!-- Or load different theme style -->
 <link rel="stylesheet" href="/resources/css/theme/insight.css">
-<!-- manager page -->
+<%-- <!-- manager page -->
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/manager/manager.css">
-
+ --%>
 <!-- Theme skin -->
 <link href="/resources/skins/default.css" rel="stylesheet" />
 
