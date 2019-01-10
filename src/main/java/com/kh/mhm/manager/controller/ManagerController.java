@@ -66,8 +66,6 @@ public class ManagerController {
 		
 		Authority autho = mns.selectRequestOne(mno, acode);
 		
-		System.out.println("mno : " + mno + "\n acode : " + acode);
-		
 		System.out.println("autho : " + autho);
 		
 		return autho;
@@ -96,7 +94,7 @@ public class ManagerController {
 			loc = "/message/message.allow?mnick="+mnick;
 		} else {
 			msg = "승인 오류가 발생하였습니다.";
-			loc = "/manager/grantPermission.go";
+			loc = "/manager/managerPage.go";
 		}
 		
 		model.addAttribute("msg", msg)
@@ -111,14 +109,12 @@ public class ManagerController {
 		
 		int result = mns.refuseAuthority(mnick);
 		
-		System.out.println("mnick : " + mnick);
-		
 		if(result > 0) {
 			msg = "요청이 거부 되었습니다.";
 			loc = "/message/message.reject?content="+content+"&mnick="+mnick;
 		} else {
 			msg = "요청 거부 오류가 발생하였습니다.";
-			loc = "/manager/grantPermission.go";
+			loc = "/manager/managerPage.go";
 		}
 		
 		model.addAttribute("msg", msg)
@@ -128,7 +124,7 @@ public class ManagerController {
 	}
 	
 	// 회원 검색
-	@RequestMapping("manager/searchMember")
+	@RequestMapping("manager/searchMember.do")
 	@ResponseBody
 	public List searchMember(@RequestParam("condition") String condition, @RequestParam("keyword") String keyword, Model model) {
 		
@@ -140,14 +136,14 @@ public class ManagerController {
 	}
 	
 	// 블랙리스트 승인창 이동
-	@RequestMapping("manager/selectBlackList.go")
+	@RequestMapping("manager/selectReportList.go")
 	public String clearBlack(Model model, @RequestParam("mno") int mno) {
 		
-		BlackList black = mns.selectOneBlackList(mno);
+		List report = mns.selectReportList(mno);
 		
-		System.out.println("black : " + black);
+		System.out.println("report : " + report);
 		
-		model.addAttribute("black", black);
+		model.addAttribute("report", report);
 		
 		return "manager/reportPage";
 	}

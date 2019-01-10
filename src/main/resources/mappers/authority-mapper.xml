@@ -13,13 +13,18 @@
 	</insert>
 	
 	<select id="selectRequest" parameterType="_int" resultType="Authority">
-		select mno, mname, (select mnick from member m where m.mno = a.mno) mnick, address, acontent, acode, atake, grant_date,delflag, request_date, (select substr(aname,0,4) from authority_type at where a.acode = at.acode) aname
+		select mno, mname, (select mnick from member m where m.mno = a.mno) mnick, address, acontent, acode, atake, grant_date,delflag, request_date, 
+               (select substr(aname,0,4) from authority_type at where a.acode = at.acode) aname,
+               img_file, site_url
 		from authority a
 		where mno = #{mno}
 	</select>
 	
 	<select id="selectRequestOne" parameterType="_int" resultType="Authority">
-		select mno, mname, (select mnick from member m where m.mno = a.mno) mnick, address, acontent, acode, atake, grant_date,delflag, request_date, (select substr(aname,0,4) from authority_type at where a.acode = at.acode) aname
+		select mno, mname, (select mnick from member m where m.mno = a.mno) mnick,
+               address, acontent, acode, atake, grant_date,delflag, request_date, 
+               (select substr(aname,0,4) from authority_type at where a.acode = at.acode) aname,
+               img_file, site_url
 		from authority a
 		where mno = #{mno} and acode = #{acode} and grant_date is null
 	</select>

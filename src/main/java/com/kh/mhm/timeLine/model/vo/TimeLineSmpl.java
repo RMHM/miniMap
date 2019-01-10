@@ -1,6 +1,8 @@
 package com.kh.mhm.timeLine.model.vo;
 
-public class TimeLineSmpl {
+import java.io.Serializable;
+
+public class TimeLineSmpl implements Serializable {
 
 	private int mNo;
 	private String tContent;
