@@ -150,13 +150,13 @@ public class MyPageController {
 		Temperatures t = new Temperatures();
 		return t.temperature(num);
 	}
-	
-	@RequestMapping(value = "/myPage/message.do")
+	/*ajax 실시간 문자수 ==> 소켓 활용하기로 했음*/
+	/*@RequestMapping(value = "/myPage/message.do")
 	@ResponseBody
 	public int messageCount(Member member, Model model) {
 
 		return mps.selectMyMessage(member.getMno());
-	}
+	}*/
 	
 	
 	/* myPagemain 경로 */

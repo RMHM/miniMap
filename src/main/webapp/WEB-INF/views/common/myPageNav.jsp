@@ -37,7 +37,7 @@
 		</c:if>
 		
 		<script>
-		$(function(){
+/* 		$(function(){
 			timer = setInterval( function () {
 				$.ajax({
 					url : "${pageContext.request.contextPath}/myPage/message.do",
@@ -60,7 +60,7 @@
 
 			    }, 1000);
 
-			});	
+			});	 */
 		
 		function test(){
 			

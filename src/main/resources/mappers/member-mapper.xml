@@ -90,7 +90,7 @@
 		}
 	</select>
 	
-	<select id="checkPw" statementType="CALLABLE" parameterType="hashmap">
+  <select id="checkPw" statementType="CALLABLE" parameterType="hashmap">
 		{ CALL PASS_CHK(#{mpw, mode=IN, jdbcType=VARCHAR},
 			#{result, mode=OUT, jdbcType=NUMERIC, javaType=integer}
 		    )
