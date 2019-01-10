@@ -27,30 +27,36 @@ public class MapController {
 
 
 	
+//
+//	@RequestMapping(value = "/map/hoji.do")
+//	@ResponseBody
+////	public void passCheck(@RequestParam String mpw, @RequestParam String mid) {
+//		public void passCheck(@RequestParam String tLat, @RequestParam String tLng,
+//				@RequestParam String tInText, @RequestParam String tInSubject ) {
+////		System.out.println("mpw : "+mpw + "  mid : "+ mid + " abc : " );
+//		System.out.println("tLat : "+tLat + "  tLng : "+ tLng + " tInText : " + tInText + " tInSubject : " + tInSubject);
+//	}
+
 
 	@RequestMapping(value = "/map/hoji.do")
 	@ResponseBody
-//	public void passCheck(@RequestParam String mpw, @RequestParam String mid) {
-		public void passCheck(@RequestParam String tLat, @RequestParam String tLng, @RequestParam String tInText) {
-//		System.out.println("mpw : "+mpw + "  mid : "+ mid + " abc : " );
-		System.out.println("tLat : "+tLat + "  tLng : "+ tLng + " tInText : " + tInText);
-	}
-
-
-	
-	
-	public static void CreateFile()
+	public static void CreateFile(@RequestParam String tLat, @RequestParam String tLng,
+			@RequestParam String tInText, @RequestParam String tInSubject)
 	
 	{
-		 try{
+		System.out.println("tLat : "+tLat + "  tLng : "+ tLng + " tInText : " + tInText + " tInSubject : " + tInSubject);
+		// 저장을 list outp fie read r List 단위로 불러와서 
+		
+		try{
 	            //파일 객체 생성
-	            File file = new File("C:\\test\\a.txt");
+	            File file = new File("C:\\test\\hoji.txt");
 	            BufferedWriter bw = new BufferedWriter(new FileWriter(file));
-	            
+	            // ObjectFilestream 사용하기
 	            if(file.isFile() && file.canWrite()){
 	                //쓰기
 	                bw.write("문자열 추가1");
 	                //개행문자쓰기
+	                bw.write(tLat+tLng+tInText+tInSubject);
 	                bw.newLine();
 	                bw.write("문자열 추가2");
 	                
