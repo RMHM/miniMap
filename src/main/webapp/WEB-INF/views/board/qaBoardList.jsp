@@ -46,38 +46,48 @@
 
 						<table class="table table-hover">
 							<thead align="center" style="background-color:lightskyblue;">
-									<tr >
+									<tr>
 										<th width="5%">번호</th>
-										<th width="5%">분류</th>										
-										<th>제목</th>
+										<th width="5%">분류</th>
+										<th width="5%"></th>										
+										<th align="center">제목</th>										
 										<th width="13%">작성자</th>
 										<th width="7%">조회수</th>
 										<th width="10%">작성일</th>
 									</tr>
-								</thead>
+								</thead>								
 								<tbody>
 								<c:forEach var="Board" items="${list2 }"> <!-- 공지 게시글 페이지 -->
 									<tr name="BId" id="${Board.BId }" style="background-color: #CEECF5;">									
 									   <td align="center"><c:out value="${Board.BNo }"/></td>
                      				   <td><c:out value="공지"/></td>
-                  				       <td><c:out value="${Board.BTitle }"/></td>
-               				           <td><c:out value="${Board.mnick}"/></td>
+                     				   <td></td>
+                  				       <td><c:out value="${Board.BTitle }"/></td>                  				       
+               				           <td align="center"><c:out value="${Board.mnick}"/></td>
                				           <td align="center"><c:out value="${Board.BCount }"/></td>
                 			           <td><c:out value="${Board.BDate}"/></td>
 									</tr>
 								</c:forEach>									
-								<c:forEach var="Board" items="${list }"> <!-- 일반 게시글 페이지 -->								
+								<c:forEach var="Board" items="${list }"> <!-- 일반 게시글 페이지 -->														
 									<tr name="BId" id="${Board.BId }" style="background-color: #EFF8FB;">
                      				   <td align="center"><c:out value="${Board.BNo }"/></td>
                      				   <td><c:out value="일반"/></td>
-                  				       <td><c:out value="${Board.BTitle }"/></td>
-               				           <td><c:out value="${Board.mnick}"/></td>
+                     				   <td></td>
+                  				       <td><c:out value="${Board.BTitle }"/></td>                  				       
+               				           <td align="center"><c:out value="${Board.mnick}"/></td>
                				           <td align="center"><c:out value="${Board.BCount }"/></td>
                 			           <td><c:out value="${Board.BDate}"/></td>
                     				</tr>
 								</c:forEach>
 							</tbody>
 						</table>
+						<c:if test="${list.size() eq 0}">
+							<article>
+								<div>
+									<h2>등록된 게시물이 없습니다.</h2>
+								</div>
+							</article>
+						</c:if>
 						<!-- 페이지 처리 해야됨. -->
 						<c:out value="${pageBar}" escapeXml="false"/>
 						<c:if test="${not empty member and member.mtype ne 'C'}">
@@ -88,14 +98,14 @@
 						<div class="s-area" id="s-area"
 								style="display: flex; align-items: center; justify-content: center;">
 								
-								<form action="/board/searchlist3.do" method="post" name="search" id="search" enctype="multipart/form-data">
+								<form action="/board/searchlist4.do" method="post" name="search" id="search" enctype="multipart/form-data">
 								 <select name="keyField" size="1">
            						     <option value="mnick" <c:if test="${'mnick'==keyField }"> selected</c:if>> 이름 </option>
              						 <option value="BTitle" <c:if test="${'BTitle'==keyField }"> selected</c:if>> 제목 </option>
               						 <option value="BContent" <c:if test="${'BContent'==keyField }"> selected</c:if>> 내용 </option>
            						 </select>
                 					 <input type="text" size="16" name="keyWord" value="${keyWord }">
-                					 <input type="submit" value="검색" onClick="check()">               						
+                					 <input type="submit" class="btn btn-info" value="검색" onClick="check()">               						
 
 								</form>
 							</div>

@@ -31,6 +31,9 @@
 		</ul>
 	</dd>
 </dl>
+<div id="noteLogo">
+	<img src="/resources/img/mhm_logo.png" alt="" />
+</div>
 </div>
 <div id="noteMain">
 

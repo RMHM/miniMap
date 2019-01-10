@@ -31,6 +31,9 @@
 		</ul>
 	</dd>
 </dl>
+<div id="noteLogo">
+	<img src="/resources/img/mhm_logo.png" alt="" />
+</div>
 </div>
 <div id="noteMain">
 
@@ -90,7 +93,7 @@
 
 	<div class="tools">
 	<!-- 페이징처리 해야함 -->
-		<div id="notePaging"><span class="basetext"><img class="leftarrow" src="/resources/img/message/leftArrow.gif"> <span class="prevtext">이전</span> <span class="currentpg">1</span> <span class="nexttext">다음</span> <img class="rightarrow" src="/resources/img/message/rightArrow.gif"></span></div>
+		<c:out value="${pageBar}" escapeXml="false"/>
 	</div>
 </div>
 </div>

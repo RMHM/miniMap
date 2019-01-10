@@ -47,16 +47,30 @@ public class ManagerController {
 	}
 	
 	// 승인 페이지로 이동
-	@RequestMapping("manager/grantPermission.go")
-	public String grantPermissionGo(Model model, @RequestParam("mno") int mno) {
+	@RequestMapping("manager/CheckPermission.go")
+	public String CheckPermissionGo(Model model, @RequestParam("mno") int mno) {
 		
-		Authority autho = mns.selectRequest(mno);
+		List list = mns.selectRequest(mno);
+		
+		System.out.println("list : " + list);
+		
+		model.addAttribute("list", list);
+		
+		return "manager/Check_Permission";
+	}
+	
+	// 요청 정보 조회
+	@RequestMapping("manager/selectRequestOne.do")
+	@ResponseBody
+	public Authority selectRequestOne(@RequestParam("mno") int mno, @RequestParam("acode") int acode) {
+		
+		Authority autho = mns.selectRequestOne(mno, acode);
+		
+		System.out.println("mno : " + mno + "\n acode : " + acode);
 		
 		System.out.println("autho : " + autho);
 		
-		model.addAttribute("autho", autho);
-		
-		return "manager/grant_Permission";
+		return autho;
 	}
 
 	// 회원 조회

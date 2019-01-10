@@ -32,17 +32,7 @@
 		<result column="DROP_DATE" property="dropDate" javaType="java.sql.Date" jdbcType="DATE" />
 	</resultMap>
 
-	<resultMap type="Member" id="CommonMemberMap">
-		<result column="MNO" property="mno" />
-		<result column="MID" property="mid" />
-		<result column="JOIN_DATE" property="joinDate" javaType="java.sql.Date" jdbcType="DATE" />
-		<result column="DROP_DATE" property="dropDate" javaType="java.sql.Date" jdbcType="DATE" />
-		<result column="EMAIL" property="email" />
-		<result column="GENDER" property="gender" />
-		<result column="AGE" property="age" />
-	</resultMap>
-
-	<resultMap type="CompanyMember" id="CompMemberMap">
+	<!-- <resultMap type="CompanyMember" id="CompMemberMap">
 		<result column="MNO" property="mno" />
 		<result column="MID" property="mid" />
 		<result column="JOIN_DATE" property="joinDate" javaType="java.sql.Date" jdbcType="DATE" />
@@ -54,7 +44,7 @@
 		<result column="ANAME" property="aname" />
 		<result column="ATAKE" property="atake"/>
 		<result column="DELFLAG" property="delflag"/>
-	</resultMap>
+	</resultMap> -->
 
 	<insert id="insertMember" parameterType="Member">
 		insert into member
@@ -124,12 +114,10 @@
 		order by mno
 	</select>
 
-	<select id="selectCompanyMember" resultMap="CompMemberMap">
-		select * from member
-		full outer join authority a using(mno)
-		full outer join authority_type at on(a.acode = at.acode)
+	<select id="selectCompanyMember" resultMap="memberMap">
+		select mno, mid, mname, email, gender, age, join_date, drop_date from member
 		where mtype = 'C'
-		order by mno,request_date
+		order by mno
 	</select>
 
 	<select id="selectBlackList" resultMap="BlackListMap">

@@ -11,6 +11,7 @@ public class Authority {
 	private String address		;//	주소
 	private String aContent		;//	내용
 	private int aCode			;//	권한분류코드
+	private String aName		;// 권한명
 	private char aTake			;//	한부여여부
 	private Date grant_date		;//	권한부여날짜
 	private char delflag		;//	삭제 여부
@@ -155,6 +156,7 @@ public class Authority {
 	public Date getGrant_date() {
 		return grant_date;
 	}
+  
 	public void setGrant_date(Date grant_date) {
 		this.grant_date = grant_date;
 	}
@@ -164,26 +166,22 @@ public class Authority {
 	public void setDelflag(char delflag) {
 		this.delflag = delflag;
 	}
-	
-	public String getImg_file() {
+
+  public String getImg_file() {
 		return img_file;
 	}
-
 
 	public void setImg_file(String img_file) {
 		this.img_file = img_file;
 	}
 
-
 	public String getSite_url() {
 		return site_url;
 	}
-
-
+  
 	public void setSite_url(String site_url) {
 		this.site_url = site_url;
 	}
-
 
 	public String getMNick() {
 		return mNick;
@@ -191,23 +189,19 @@ public class Authority {
 	public void setMNick(String mNick) {
 		this.mNick = mNick;
 	}
-
-	public String getAname() {
-		return aname;
+  
+  public String getAName() {
+		return aName;
 	}
-	public void setAname(String aname) {
-		this.aname = aname;
+	public void setAName(String aName) {
+		this.aName = aName;
 	}
-
-
-	@Override
+  
+  @Override
 	public String toString() {
 		return "Authority [aId=" + aId + ", mNo=" + mNo + ", mName=" + mName + ", mNick=" + mNick + ", request_date="
 				+ request_date + ", address=" + address + ", aContent=" + aContent + ", aCode=" + aCode + ", aTake="
 				+ aTake + ", grant_date=" + grant_date + ", delflag=" + delflag + ", img_file=" + img_file
 				+ ", site_url=" + site_url + ", aname=" + aname + "]";
 	}
-
-
-
 }

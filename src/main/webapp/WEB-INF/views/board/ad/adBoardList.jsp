@@ -9,6 +9,12 @@
 <head>
 <meta charset="UTF-8">
 <title>광고 게시판</title>
+<style>
+	img {
+		max-width : 100%;
+		height : auto;
+	}
+</style>
 </head>
 <body>
 	<c:import url="/WEB-INF/views/common/exFile.jsp"/>
@@ -16,7 +22,9 @@
 		<c:import url="/WEB-INF/views/common/header.jsp"/>
 		<div class="navbar-header" style="background:#68A4C4; width:100%">
 			<div class="container">
-				<h4>게시판 목록</h4>
+				<div class="col-md-10 col-md-offset-1">
+					<h3>게시물 목록</h3>
+				</div>
 			</div>
 		</div>
 		<div class="container">
@@ -35,10 +43,21 @@
 						<article>
 							<div class="post-image">
 								<div class="post-heading">
-									<h3><a href="#">${blist[i].getBTitle()}</a></h3>
+									<h3>
+										<a href="#">
+											<c:if test="${blist[i].getRFlag() eq 'N'}">
+												${blist[i].getBTitle()}
+											</c:if>
+											<c:if test="${blist[i].getRFlag() eq 'Y'}">
+												신고당한 게시글 입니다.
+											</c:if>
+										</a>
+									</h3>
 								</div>
 								<div style="overflow:hidden; height:auto;">
-									<img src="/resources/img/upload/${thumb[i]}" alt=""/>
+									<c:if test="${blist[i].getRFlag() eq 'N'}">
+										<img src="/resources/img/upload/${thumb[i]}" alt=""/>
+									</c:if>
 								</div>
 								
 							</div>

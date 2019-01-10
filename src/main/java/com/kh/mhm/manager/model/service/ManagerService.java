@@ -13,7 +13,7 @@ public interface ManagerService {
 
 	int grantAuthority(String mnick);
 
-	Authority selectRequest(int mno);
+	List selectRequest(int mno);
 
 	int refuseAuthority(String mnick);
   
@@ -24,5 +24,7 @@ public interface ManagerService {
 	BlackList selectOneBlackList(int mno);
 
 	List selectStatistics();
+
+	Authority selectRequestOne(int mno, int acode);
 
 }
