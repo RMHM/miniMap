@@ -65,7 +65,7 @@ $(function(){
 							$('#mname').focus();
 							alert("회원정보가 존재하지 않습니다.");
 						}
-						else alert("회원님의 아이디는 " + data + " 입니다.");
+						else alert("회원님의 아이디는 " + data.replace(/.{3}$/, "***") + " 입니다.");
 					},
 					error : function(data){
 						console.log(data);
@@ -115,6 +115,7 @@ $(function(){
 				$('#email').val('').focus();
 				alert('이메일을 입력해 주세요.');
 			} else {
+				$('#btCode').prop('disabled', true);
 				$.ajax({
 					url : '/member/memberFindPW.do',
 					data : {
@@ -126,9 +127,9 @@ $(function(){
 						if(data) {
 							$('#chkCode').prop('disabled', false);
 							$('#btFindPW').prop('disabled', false);
-							$('#btCode').prop('disabled', true);
 							alert('인증 코드가 발송됩니다.');
 						} else {
+							$('#btCode').prop('disabled', false);
 							$('#mid').val('').focus();
 							$('#mname').val('');
 							$('#email').val('');
@@ -136,6 +137,8 @@ $(function(){
 						}
 					},
 					error : function(data){
+						alert("에러가 발생하였습니다.")
+						$('#btCode').prop('disabled', false);
 						console.log(data)
 					}
 				})

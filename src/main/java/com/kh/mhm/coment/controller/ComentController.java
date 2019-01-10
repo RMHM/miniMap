@@ -142,7 +142,8 @@ public class ComentController {
 	
 	
 	@RequestMapping("/coment/comentAdd2.do")
-	public String insertComentContent2(Coment coment, Model model, HttpSession session, HttpServletRequest req) {
+	public String insertComentContent2(Coment coment, Model model, HttpSession session, HttpServletRequest req,
+			@RequestParam(value = "bCode", required = false, defaultValue = "1") int bCode) {
 		
 		int result;
 		
@@ -161,7 +162,9 @@ public class ComentController {
 		
 		if(result > 0) {
 			msg = "대댓글 등록 성공!";
-			loc = "/board/boardview.do?BId="+req.getParameter("BId");
+			if(bCode==5) loc = "/board/adBoardView.do?bid="+req.getParameter("BId");
+			else loc = "/board/boardview.do?BId="+req.getParameter("BId");
+			
 			
 		} else {
 			msg = "댓글 등록 실패!";
