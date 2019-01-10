@@ -64,6 +64,9 @@
 						<input type="button" class="btn btn-danger btn-large" name="delete" value="삭제"
 							onclick="location.href='${pageContext.request.contextPath}/board/adBoardRemove.do?bid=${b.BId }'">
 					</c:if>
+					<c:if test="${not empty member and member.mno ne b.MNo}">
+						<input type="button" value="신고" class="btn btn-danger btn-large" name="report">
+					</c:if>
 					<input type="button" class="btn btn-theme btn-large" onclick="location.href='${pageContext.request.contextPath}/board/adBoard.go'" value="이전 항목으로" />
 				</div>
 				
@@ -250,11 +253,11 @@
 					+ '<button type="button" class="insertConfirm" onclick="reConfirm(this);" >댓글추가 완료</button>'
 					+ '</div> </td>' + '</tr>';
 			
-					var htmlForm1 = '<td><div><b>${member.mnick }</b></div></td>'
-					var htmlForm2 = '<textarea class="reply-content" name="recontent" style="background : ivory;"></textarea>'
-						+ '<input type="hidden" name="writer" value="${member.mno }" />'
-						+ '<input type="hidden" name="cref" value="${Coment.cid }" />'
-						+ '<input type="hidden" name="clevel" value="${Coment.clevel }" />'
+			var htmlForm1 = '<td><div><b>${member.mnick }</b></div></td>'
+			var htmlForm2 = '<textarea class="reply-content" name="recontent" style="background : ivory;"></textarea>'
+				+ '<input type="hidden" name="writer" value="${member.mno }" />'
+				+ '<input type="hidden" name="cref" value="${Coment.cid }" />'
+				+ '<input type="hidden" name="clevel" value="${Coment.clevel }" />'
 					
 			$(obj).parent().parent().prev().prev().append(htmlForm1);
 			$(obj).parent().parent().prev().append(htmlForm2);			
@@ -296,7 +299,7 @@
 
 			location.href = '/coment/comentAdd2.do' + '?BId=' + bid
 			+'&ccontent=' + content + '&mno=' + ${member.mno} + '&cref=' + cref
-					+ '&clevel=' + level; 
+					+ '&clevel=' + level + "&bCode=" + ${b.BCode}; 
 		}
 
 		
