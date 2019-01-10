@@ -202,12 +202,12 @@
 		<c:import url="../common/header.jsp" />
 		<div class="container">
 			<c:import url="../common/myPageNav.jsp" />
-	
+
 			<div class="col-md-10">
 				<div class="container">
-				
-				<!-- 	<div class="container-fluid"> -->
-					<div class="col-sm-8 text-center"> 
+
+					<!-- 	<div class="container-fluid"> -->
+					<div class="col-sm-8 text-center">
 						<h1>
 							<small>회원 정보 </small>
 						</h1>
@@ -239,7 +239,7 @@
 							<script>
 								function mUpdate() {
 
-									console.log($('#password').val());
+									console.log($('#mpw').val());
 									$
 											.ajax({
 												url : "${pageContext.request.contextPath}/myPage/passCheck.do",
@@ -250,6 +250,7 @@
 												},
 												dataType : "json",
 												success : function(data) {
+													console.log("asd");
 													console.log("일치" + data);
 													console.log(data.msg);
 													if (data.msg) {
@@ -269,18 +270,19 @@
 
 								}
 							</script>
-						
+
 						</div>
 
-				 	</div> 
+					</div>
 
 				</div>
 			</div>
 
 
-		
-			
-		</div><c:import url="../common/footer.jsp" />
+
+
+		</div>
+		<c:import url="../common/footer.jsp" />
 	</div>
 </body>
 </html>

@@ -7,6 +7,9 @@ import com.kh.mhm.member.model.vo.Member;
 public class BlackList extends Member{
 	private Date endDate;
 	private String reason;
+	private String rdetail;
+	private Date rDate;// 신고날짜
+	private String rep_mid; // 신고자 회원번호 
 	
 	public BlackList() {
 		super();
@@ -32,7 +35,7 @@ public class BlackList extends Member{
 	}
 	@Override
 	public String toString() {
-		return "BlackList [endDate=" + endDate + ", reason=" + reason + "]";
+		return "BlackList [endDate=" + endDate + ", reason=" + reason + ", rdetail=" + rdetail + ", rDate=" + rDate+ ", rep_mid="+rep_mid+ "]" + super.toString();
 	}
 	
 	public Date getEndDate() {
@@ -46,6 +49,24 @@ public class BlackList extends Member{
 	}
 	public void setReason(String reason) {
 		this.reason = reason;
+	}
+	public String getRdetail() {
+		return rdetail;
+	}
+	public void setRdetail(String rdetail) {
+		this.rdetail = rdetail;
+	}
+	public Date getRDate() {
+		return rDate;
+	}
+	public void setRDate(Date rDate) {
+		this.rDate = rDate;
+	}
+	public String getRep_mid() {
+		return rep_mid;
+	}
+	public void setRep_mno(String rep_mid) {
+		this.rep_mid = rep_mid;
 	}
 	
 	

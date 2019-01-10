@@ -12,5 +12,6 @@ public interface ComentDao {
 	int deleteComent(int cid);
 	int updateComent(Coment coment);
 	Coment selectOneComent(int cid);
+	int insertComentContent2(Coment coment);
 	
 }

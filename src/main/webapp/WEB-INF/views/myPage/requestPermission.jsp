@@ -31,13 +31,13 @@
 						<h1>
 							<small>권한 요청</small>
 						</h1>
-						<form class="form-horizontal" id="request" method="post">
+						<form class="form-horizontal" id="request" method="post" enctype = "multipart/form-data" onsubmit="return check()">
 							<div class="raw">
 									<div class="form-group">
 									<div class="btn-group">
 	
-										<input type="radio" id="aCode1" name="aCode" value="1"/><label for="aCode1">작성권한</label>
-										<input type="radio" id="aCode2"  name="aCode" value="2" /><label for="aCode2">파워링크</label>
+										<input type="radio" id="aCode1" name="aCode" value="1" checked="checked"onclick="reperBtn();"/><label for="aCode1">작성권한</label>
+										<input type="radio" id="aCode2"  name="aCode" value="2" onclick="powerBtn();"/><label for="aCode2">파워링크</label>
 									</div>
 								</div>
 							
@@ -56,13 +56,11 @@
 								<div class="col-sm-6">
 
 
-									<input type="text" id="sample4_postcode" placeholder="우편번호"name="address">
+									<input class="form-control" type="text" id="sample4_postcode" placeholder="우편번호"name="address" readonly>
 									<input type="button" onclick="sample4_execDaumPostcode()"
-										value="우편번호 찾기"><br> <input type="text"
-										id="sample4_roadAddress" name="address" placeholder="도로명주소">
-									<!--  <input
-									type="text" id="sample4_jibunAddress" placeholder="지번주소"> -->
-									<span id="guide" style="color: #999; display: none"></span> <input
+										value="우편번호 찾기"><br> 
+										<input type="text" id="sample4_roadAddress" name="address" placeholder="도로명주소" readonly>
+									<span id="guide" style="color: #999; display: none"></span> <input 
 										type="text" id="sample4_detailAddress" name="address"
 										placeholder="상세주소">
 									<!-- <input type="text" id="sample4_extraAddress" placeholder="참고항목"> -->
@@ -145,9 +143,65 @@
 								}
 							</script>
 
+							<div class="form-group" id = "powerUrl" style="display:none">
+								<label class="col-sm-3 control-label" for="site_url">사이트 주소</label>
+								<div class="col-sm-6">
+									<input class="form-control" id="site_url" name="site_url"
+										type="url"   value="">
+								</div>
+								
+							
+							</div>
+							<div class="form-group" id = "powerImg">
+								<label class="col-sm-3 control-label" for="reImg">대표 이미지</label>
+								<div class="col-sm-6">
+									<img id = "imc" src="/resources/img/authrity/">
+									<input class="form-check-input" id="reImg" name="reImg" onchange="readURL(this);"
+										type="file" value="">
+								</div>
+							</div>
+							<script> 
+							function reperBtn(){
+								$('#powerUrl,#powerImg').attr("style","display:none");
+							}
+							function powerBtn(){
+								$('#powerUrl,#powerImg').attr("style","display:block");
+							}
+							
+							function readURL(input) { 
+							
+								var reader = new FileReader(); 
+								reader.onload = function (e) {
+									$('#imc').attr('src', e.target.result); 
+									} 
+								reader.readAsDataURL(input.files[0]); 
+							}
+							
+							
+							function check(){
+								 
 
+								if($('input:radio[name="aCode"]:checked').val()==2){
+									
+									if(('#sample4_postcode').val==null){
+									alert("주소를 입력하세요.");
+									return false
+									}else if($('#powerImg').val==null){
+							     		alert("대표이미지를 등록하세요.");
+							     		return false
+									}else if($('#powerUrl').val==null){
+										alert("사이트 주소를 작성하세요.")
+									}
+								}else{
+									$('#powerImg').val(null);
+									$('#powerUrl').val(null);
+								}
+						     	return true;
+						   
+							}
+							</script>
 
-
+							
 							<div class="form-group">
 
 								<button id="mUpdateMember" onclick="request();">요청하기</button>

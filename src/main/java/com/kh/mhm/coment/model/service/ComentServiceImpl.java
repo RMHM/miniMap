@@ -45,4 +45,10 @@ public class ComentServiceImpl implements ComentService {
 		return cDao.selectOneComent(cid);
 	}
 
+	@Override
+	public int insertComentContent2(Coment coment) {
+		// TODO Auto-generated method stub
+		return cDao.insertComentContent2(coment);
+	}
+
 }

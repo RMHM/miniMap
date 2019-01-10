@@ -23,7 +23,7 @@ public interface MyPageService {
 	int selectBoardTotalContents(int no);
 
 	List<Map<String, Object>> selectMyBoardList(int cPage, int numPerPage, int no);
-
+	List<Map<String, Object>> selectMyCommentList(int cPage, int numPerPage, int no);
 	/*List<Map<String, String>> selectRequest(int mno);*/
 	List<Authority> selectRequest(int mno);
 
@@ -36,6 +36,14 @@ public interface MyPageService {
 	int updateSchedule(Schedule schedule);
 
 	int deleteMyAuthority(int aId);
+
+	int selectCommentTotalContents(int no);
+
+	int selectNick(String mnick);
+
+	int selectEmail(String email);
+
+	int selectMyMessage(int mno);
 	
 	
 	

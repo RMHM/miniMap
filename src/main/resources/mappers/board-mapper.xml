@@ -8,30 +8,34 @@
 	<resultMap type="Board" id="boardMap"></resultMap>
 	<!-- <resultMap type="Fileref" id="fileMap"></resultMap> -->
 	
-	<select id="selectBoardListToBtype" parameterType="_int" resultType="Board">
+	<!-- <select id="selectBoardListToBcode" parameterType="_int" resultType="Board">
 		SELECT A.*, B.*, (SELECT
 		COUNT(*) FROM FILEREF WHERE BID = A.BID) FILECOUNT
 		FROM BOARD A, MEMBER B		
-		WHERE BCODE=#{btype} AND ISNOTICE='N' AND DELFLAG='N' AND RFLAG='N'
+		WHERE BCODE=#{bCode} AND ISNOTICE='N' AND DELFLAG='N' AND RFLAG='N'
+		AND A.MNO = B.MNO
+		ORDER BY BDATE DESC, BNO DESC		
+	</select> -->
+	
+	<!-- 자유게시판 쪽 리스트 불러오기 관련. -->
+	<select id="selectBoardList1" resultType="Board">
+		SELECT A.*, B.*, (SELECT
+		COUNT(*) FROM FILEREF WHERE BID = A.BID) FILECOUNT
+		FROM BOARD A, MEMBER B		
+		WHERE BCODE='1'	AND ISNOTICE='N' AND DELFLAG='N'<!--  AND RFLAG='N' -->
 		AND A.MNO = B.MNO
 		ORDER BY BDATE DESC, BNO DESC		
 	</select>
-	
-	<select id="selectBoardList" resultType="Board">
+	<select id="selectSearchList1" resultType="Board">
 		SELECT A.*, B.*, (SELECT
 		COUNT(*) FROM FILEREF WHERE BID = A.BID) FILECOUNT
 		FROM BOARD A, MEMBER B		
 		WHERE BCODE='1'	AND ISNOTICE='N' AND DELFLAG='N' AND RFLAG='N'
-		AND A.MNO = B.MNO
+		AND A.MNO = B.MNO AND ${keyfield} like '%${keyword}%'
 		ORDER BY BDATE DESC, BNO DESC		
 	</select>
 	
-	<select id="selectNoticeList" resultType="Board">
-		<!-- SELECT A.*, (SELECT
-		COUNT(*) FROM FILEREF WHERE BID = A.BID) FILECOUNT
-		FROM BOARD A 
-		WHERE BCODE='1'	AND ISNOTICE='Y' AND DELFLAG='N'	
-		ORDER BY BDATE DESC, BNO DESC -->
+	<select id="selectNoticeList1" resultType="Board">		
 		SELECT A.*, B.*, (SELECT
 		COUNT(*) FROM FILEREF WHERE BID = A.BID) FILECOUNT
 		FROM BOARD A, MEMBER B
@@ -40,37 +44,194 @@
 		ORDER BY BDATE DESC, BNO DESC	
 	</select>	
 	
-	<select id="selectBoardTotalContents" resultType="_int">
+	<select id="selectBoardTotalContents1" resultType="_int">
 		SELECT COUNT(*)
-		FROM BOARD
+		FROM BOARD WHERE BCODE='1'
 	</select>
+	
+	<!-- 정보게시판 쪽 리스트 불러오기-->
+	
+	<select id="selectBoardList2" resultType="Board">
+		SELECT A.*, B.*, (SELECT
+		COUNT(*) FROM FILEREF WHERE BID = A.BID) FILECOUNT
+		FROM BOARD A, MEMBER B		
+		WHERE BCODE='2'	AND ISNOTICE='N' AND DELFLAG='N' AND RFLAG='N'
+		AND A.MNO = B.MNO
+		ORDER BY BDATE DESC, BNO DESC		
+	</select>
+	<select id="selectSearchList2" resultType="Board">
+		SELECT A.*, B.*, (SELECT
+		COUNT(*) FROM FILEREF WHERE BID = A.BID) FILECOUNT
+		FROM BOARD A, MEMBER B		
+		WHERE BCODE='2'	AND ISNOTICE='N' AND DELFLAG='N' AND RFLAG='N'
+		AND A.MNO = B.MNO AND ${keyfield} like '%${keyword}%'
+		ORDER BY BDATE DESC, BNO DESC		
+	</select>
+	
+	<select id="selectNoticeList2" resultType="Board">		
+		SELECT A.*, B.*, (SELECT
+		COUNT(*) FROM FILEREF WHERE BID = A.BID) FILECOUNT
+		FROM BOARD A, MEMBER B
+		WHERE BCODE='2'	AND ISNOTICE='Y' AND DELFLAG='N'
+        AND A.MNO = B.MNO        
+		ORDER BY BDATE DESC, BNO DESC	
+	</select>	
+	
+	<select id="selectBoardTotalContents2" resultType="_int">
+		SELECT COUNT(*)
+		FROM BOARD WHERE BCODE='2'
+	</select>
+	
+	<!-- 질문게시판 -->
+	
+	<select id="selectBoardList3" resultType="Board">
+		SELECT A.*, B.*, (SELECT
+		COUNT(*) FROM FILEREF WHERE BID = A.BID) FILECOUNT
+		FROM BOARD A, MEMBER B		
+		WHERE BCODE='3'	AND ISNOTICE='N' AND DELFLAG='N' AND RFLAG='N'
+		AND A.MNO = B.MNO
+		ORDER BY BDATE DESC, BNO DESC		
+	</select>
+	<select id="selectSearchList3" resultType="Board">
+		SELECT A.*, B.*, (SELECT
+		COUNT(*) FROM FILEREF WHERE BID = A.BID) FILECOUNT
+		FROM BOARD A, MEMBER B		
+		WHERE BCODE='3'	AND ISNOTICE='N' AND DELFLAG='N' AND RFLAG='N'
+		AND A.MNO = B.MNO AND ${keyfield} like '%${keyword}%'
+		ORDER BY BDATE DESC, BNO DESC		
+	</select>
+	
+	<select id="selectNoticeList3" resultType="Board">		
+		SELECT A.*, B.*, (SELECT
+		COUNT(*) FROM FILEREF WHERE BID = A.BID) FILECOUNT
+		FROM BOARD A, MEMBER B
+		WHERE BCODE='3'	AND ISNOTICE='Y' AND DELFLAG='N'
+        AND A.MNO = B.MNO        
+		ORDER BY BDATE DESC, BNO DESC	
+	</select>	
+	
+	<select id="selectBoardTotalContents3" resultType="_int">
+		SELECT COUNT(*)
+		FROM BOARD WHERE BCODE='3'
+	</select>
+	
+	<!-- 후기 게시판 -->
+	<select id="selectBoardList4" resultType="Board">
+		SELECT A.*, B.*, (SELECT
+		COUNT(*) FROM FILEREF WHERE BID = A.BID) FILECOUNT
+		FROM BOARD A, MEMBER B		
+		WHERE BCODE='4'	AND ISNOTICE='N' AND DELFLAG='N' AND RFLAG='N'
+		AND A.MNO = B.MNO
+		ORDER BY BDATE DESC, BNO DESC		
+	</select>
+	<select id="selectSearchList4" resultType="Board">
+		SELECT A.*, B.*, (SELECT
+		COUNT(*) FROM FILEREF WHERE BID = A.BID) FILECOUNT
+		FROM BOARD A, MEMBER B		
+		WHERE BCODE='4'	AND ISNOTICE='N' AND DELFLAG='N' AND RFLAG='N'
+		AND A.MNO = B.MNO AND ${keyfield} like '%${keyword}%'
+		ORDER BY BDATE DESC, BNO DESC		
+	</select>
+	
+	<select id="selectNoticeList4" resultType="Board">		
+		SELECT A.*, B.*, (SELECT
+		COUNT(*) FROM FILEREF WHERE BID = A.BID) FILECOUNT
+		FROM BOARD A, MEMBER B
+		WHERE BCODE='4'	AND ISNOTICE='Y' AND DELFLAG='N'
+        AND A.MNO = B.MNO        
+		ORDER BY BDATE DESC, BNO DESC	
+	</select>	
+	
+	<select id="selectBoardTotalContents4" resultType="_int">
+		SELECT COUNT(*)
+		FROM BOARD WHERE BCODE='4'
+	</select>
+	
+	
+	
 	<select id="selectOneBoard" parameterType="_int"
 		resultType="Board">
 		<!-- SELECT * FROM BOARD WHERE BID = #{bId} -->
-		SELECT A.*, B.* FROM BOARD A, MEMBER B WHERE BID = #{bId} AND A.MNO = B.MNO		
+		SELECT A.*, B.MNICK, B.PROFILE_PATH FROM BOARD A, MEMBER B WHERE BID = #{bId} AND A.MNO = B.MNO		
 	</select>
-	<update id="updateOneCount">
+	<update id="updateOneCount" parameterType="Board">
 		UPDATE BOARD SET BCOUNT = BCOUNT+1  WHERE BID= #{bId}
 	</update>
 	
 	<insert id="insertBoard" parameterType="Board">
-		INSERT INTO BOARD(BID, MNO, BNO, BCODE, BTITLE, BCONTENT)
+		INSERT INTO BOARD(BID, MNO, BNO, BCODE, BTITLE, BCONTENT, HASFILE, ISNOTICE)
 		VALUES
-		(SEQ_BID.NEXTVAL,#{mNo},SEQ_BNO_1.NEXTVAL,#{bCode},#{bTitle},#{bContent})
+		(SEQ_BID.NEXTVAL,#{mNo},SEQ_BNO_1.NEXTVAL,#{bCode},#{bTitle},#{bContent}, #{hasFile}, #{isNotice})
 		<!-- 전달한 board객체의 bNo 프로퍼티에 결과값을 담는다. -->
-		<selectKey keyProperty="bId" resultType="_int"
-			order="AFTER">
+		<selectKey keyProperty="bId" resultType="_int" order="AFTER">
 			SELECT SEQ_BID.CURRVAL FROM DUAL
 		</selectKey>
 	</insert>
 	
 	<update id="updateBoard" parameterType="Board">
-		UPDATE BOARD SET BTITLE = #{BTitle}, BCONTENT = #{BContent} WHERE BID= #{BId}	
+		UPDATE BOARD SET BTITLE = #{BTitle}, BCONTENT = #{BContent}, ISNOTICE=#{isNotice} WHERE BID= #{BId}	
 	</update>
 	
 	<update id="deleteBoard">
 		UPDATE BOARD SET DELFLAG = 'Y' WHERE BID= #{BID}
 	</update>
 	
-
+	
+	<!-- 기업게시판 -->
+	
+	<insert id="insertImgBaord" parameterType="Board">
+		INSERT INTO BOARD(BID, MNO, BNO, BCODE, BTITLE, BCONTENT, hasfile)
+		VALUES (SEQ_BID.NEXTVAL, #{mNo}, SEQ_BNO_5.NEXTVAL, 5, #{bTitle}, #{bContent}, #{hasFile})
+		<!-- 전달한 board객체의 bNo 프로퍼티에 결과값을 담는다. -->
+		<selectKey keyProperty="bId" resultType="_int" order="AFTER">
+			SELECT SEQ_BID.CURRVAL FROM DUAL
+		</selectKey>
+	</insert>
+	
+	<insert id="insertImgFile" parameterType="Fileref">
+		insert into fileref values(seq_fid.nextval, #{bId}, #{fType}, #{origin_Name}, #{change_Name}, default)
+	</insert>
+	
+	<select id="selectThumbnailImg" parameterType="_int" resultType="string">
+		select change_name from (select rownum rnum, sub.* from (select * from fileref where bid = #{bid} and delflag = 'N' order by fid asc) sub) where rnum = 1
+	</select>
+	
+	<select id="selectCommentCnt" parameterType="_int" resultType="_int">
+		select count(*) from coment where bid = #{bid} and rflag = 'N' and delflag='N'
+	</select>
+	
+	<update id="deleteImg" parameterType="_int">
+		update fileref set delflag = 'Y' where bid = #{bid}
+	</update>
+	
+	<select id="selectBoardImg" parameterType="_int" resultType="string">
+		select change_name from fileref where bid = #{bid} and delflag = 'N'
+	</select>
+	
+	<update id="deleteOneImg" parameterType="string">
+		update fileref set delflag = 'Y' where change_name = #{imgName}
+	</update>
+	
+	<update id="updateImgBoard" parameterType="Board">
+		update board set btitle = #{BTitle}, bcontent = #{bContent}, hasfile = #{hasFile} where bid = #{bId}
+	</update>
+	
+	<select id="selectBoardCnt" parameterType="_int" resultType="_int">
+		select count(*) from board where bcode = #{bCode} and delflag = 'N' and rflag = 'N'
+	</select>
+	
+	<select id="selectBoardListPart" parameterType="hashmap" resultType="Board">
+		select * from (select rownum rn, sub.* from (select b.*, m.mnick from board b, member m where bcode = #{bCode} and delflag='N' and rflag='N' and b.mno=m.mno order by bid desc) sub)
+		<![CDATA[ where rn >= (#{cPage}-1)*#{num}+1 and rn <= #{cPage}*#{num} ]]>
+	</select>
+	
+	<select id="selectAuthority" parameterType="_int" resultType="_int">
+		select count(*) from authority where delflag='N' and grant_date is not null and acode = 1 and mno = #{mno}
+	</select>
+	
+	<select id="selectRecentBoard" parameterType="hashmap" resultType="Board">
+		select * from (select rownum rn, sub.* from (select * from board where bcode = #{bCode} and delflag = 'N' and isnotice = 'N' and hasfile = 'Y' order by bid desc) sub)
+		<![CDATA[where rn>=1 and rn<=#{maxNum}]]>
+	</select>
+	
 </mapper>

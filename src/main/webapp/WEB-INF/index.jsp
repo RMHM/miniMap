@@ -12,13 +12,16 @@
 	<title>miniMap에 오신걸 환영합니다.</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 	<meta name="description" content="" />
+	<style>
+		.fancybox-overlay [class^="fancybox-"] {
+			max-width : width;
+		}
+		
+		.fancybox-close {
+			
+		}
+	</style>
 </head>
-<style>
-	.test-icon:before {
-		width : 25px;
-		content: url("../resources/img/counter/test.png");
-	}
-</style>
 <body>
 	<!-- 외부파일 선언 -->
 	<c:import url="views/common/exFile.jsp" />
@@ -35,24 +38,10 @@
 						<div id="main-slider" class="flexslider">
 							<ul class="slides">
 								<li><img src="resources/img/member/3.jpg" alt="" />
-									<div class="flex-caption">
-										<h3>Modern Design</h3>
-										<p>Duis fermentum auctor ligula ac malesuada. Mauris et
-											metus odio, in pulvinar urna</p>
-										<a href="#" class="btn btn-theme">Learn More</a>
-									</div></li>
+									</li>
 								<li><img src="resources/img/member/1.jpg" alt="" />
-									<div class="flex-caption">
-										<h3>Fully Responsive</h3>
-										<p>Sodales neque vitae justo sollicitudin aliquet sit amet diam curabitur sed fermentum.</p>
-										<a href="#" class="btn btn-theme">Learn More</a>
-									</div></li>
-								<li><img src="resources/img/testImgLogo.png" alt="" />
-									<div class="flex-caption">
-										<h3>Clean &amp; Fast</h3>
-										<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit donec mer lacinia.</p>
-										<a href="#" class="btn btn-theme">Learn More</a>
-									</div>
+									</li>
+								<li>
 								</li>
 							</ul>
 						</div>
@@ -84,7 +73,7 @@
 									<div class="box-gray aligncenter">
 										<h4>오늘 방문자 수</h4>
 										<div class="icon">
-											<i class="fa test-icon fa-3x"></i>
+											<i class="fa fa-users fa-3x"></i>
 											<div class="counter" data-count="99">0</div>
 										</div>
 										<p>오늘 우리를 방문해주신 분들은?</p>
@@ -142,60 +131,10 @@
 				<!-- Portfolio Projects -->
 				<div class="row">
 					<div class="col-lg-12">
-						<h4 class="heading">최근 인증 게시물</h4>
+						<h4 class="heading">최근 후기 게시물</h4>
 						<div class="row">
 							<section id="projects">
 								<ul id="thumbs" class="portfolio">
-									<!-- Item Project and Filter Name -->
-									<li class="col-lg-3 design" data-id="id-0" data-type="web">
-										<div class="item-thumbs">
-											<!-- Fancybox - Gallery Enabled - Title - Full Image -->
-											<a class="hover-wrap fancybox" data-fancybox-group="gallery" title="Work 1" href="resources/img/works/1.jpg">
-												<span class="overlay-img"></span>
-												<span class="overlay-img-thumb font-icon-plus"></span>
-											</a>
-											<!-- Thumb Image and Description -->
-											<img src="resources/img/works/1.jpg"
-												alt="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus quis elementum odio. Curabitur pellentesque, dolor vel pharetra mollis.">
-										</div>
-									</li>
-									<!-- End Item Project -->
-									<!-- Item Project and Filter Name -->
-									<li class="item-thumbs col-lg-3 design" data-id="id-1" data-type="icon">
-										<!-- Fancybox - Gallery Enabled - Title - Full Image -->
-										<a class="hover-wrap fancybox" data-fancybox-group="gallery" title="Work 2" href="resources/img/works/2.jpg"> 
-											<span class="overlay-img"></span>
-											<span class="overlay-img-thumb font-icon-plus"></span>
-										</a> <!-- Thumb Image and Description -->
-										
-										<img src="resources/img/works/2.jpg"
-										alt="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus quis elementum odio. Curabitur pellentesque, dolor vel pharetra mollis.">
-									</li>
-									<!-- End Item Project -->
-									<!-- Item Project and Filter Name -->
-									<li class="item-thumbs col-lg-3 photography" data-id="id-2" data-type="illustrator">
-										<!-- Fancybox - Gallery Enabled - Title - Full Image -->
-										<a class="hover-wrap fancybox" data-fancybox-group="gallery" title="Work 3" href="resources/img/works/3.jpg">
-										<span class="overlay-img"></span>
-										<span class="overlay-img-thumb font-icon-plus"></span>
-									</a>
-									<!-- Thumb Image and Description -->
-									<img src="resources/img/works/3.jpg"
-										alt="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus quis elementum odio. Curabitur pellentesque, dolor vel pharetra mollis.">
-									</li>
-									<!-- End Item Project -->
-									<!-- Item Project and Filter Name -->
-									<li class="item-thumbs col-lg-3 photography" data-id="id-2" data-type="illustrator">
-										<!-- Fancybox - Gallery Enabled - Title - Full Image -->
-										<a class="hover-wrap fancybox" data-fancybox-group="gallery" title="Work 4" href="resources/img/works/4.jpg">
-										<span class="overlay-img"></span>
-										<span class="overlay-img-thumb font-icon-plus"></span>
-									</a>
-									<!-- Thumb Image and Description -->
-									<img src="resources/img/works/4.jpg"
-										alt="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus quis elementum odio. Curabitur pellentesque, dolor vel pharetra mollis.">
-									</li>
-									<!-- End Item Project -->
 								</ul>
 							</section>
 						</div>
@@ -210,7 +149,6 @@
 	<a href="#" class="scrollup"><i class="fa fa-angle-up active"></i></a>
 </body>
 <script src="/resources/js/counter.js"></script>
-
-
+<script src="/resources/js/main/index.js"></script>
 <!-- <link href="/resources/css/counter.css" rel="stylesheet"/> -->
 </html>
