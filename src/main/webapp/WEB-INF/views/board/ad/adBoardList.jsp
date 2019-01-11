@@ -30,13 +30,6 @@
 		<div class="container">
 			
 			<div class="col-md-10 col-md-offset-1">
-				<c:if test="${blist.size() eq 0}">
-					<article>
-						<div>
-							<h2>등록된 게시물이 없습니다.</h2>
-						</div>
-					</article>
-				</c:if>
 				<c:if test="${blist.size() ne 0}">
 					<c:forEach var="i" begin="0" end="${blist.size()-1}">
 						<%-- ${blist[i].getBDate()} --%>
@@ -77,42 +70,52 @@
 						</article>
 						
 					</c:forEach>
-					<br>
-					<div id="pagination">
+					<div id="pagination" class="col-md-6">
 						<span class="all">Page ${cPage} of ${maxPage}</span>
 						<c:forEach var="i" begin="1" end="${maxPage}">
 							<c:if test="${i eq cPage}">
 								<span class="current">${i}</span>
 							</c:if>
 							<c:if test="${i ne cPage}">
-								<a href="/board/adBoard.go?cPage=${i}" class="inactive">${i}</a>
+								<a href="/board/adBoard.go?cPage=${i}&type=${type}&keyword=${keyword}" class="inactive">${i}</a>
 							</c:if>
 						</c:forEach>
+					</div> 
+					<div class="col-md-6">
+						<div align="right">
+							<select name="" id="selSearch">
+								<option value="">선택</option>
+								<option value="mnick">닉네임</option>
+								<option value="title">제목</option>
+							</select>
+							<input type="text" name="" id="txtFind">
+							<input type="button" value="검색" id="btnSearch" class='btn btn-theme'>
+							<c:if test="${sessionScope.member.mtype eq 'A' or authority eq 'yes'}">
+								<input type="button" value="글쓰기" id="adWrite" class="btn btn-theme"
+								onclick="javascript:location.href='/board/adBoardWrite.go'">
+							</c:if>
+						</div>
 					</div>
 				</c:if>
-				
-				<div align="right">
-					<c:if test="${sessionScope.member.mtype eq 'A' or authority eq 'yes'}">
-						<input type="button" value="글쓰기" id="adWrite" class="btn btn-theme"
-						onclick="javascript:location.href='/board/adBoardWrite.go'">
-					</c:if>
-					
-				</div>
+				<c:if test="${blist.size() eq 0}">
+					<article>
+						<div class="col-md-12">
+							<h2>등록된 게시물이 없습니다.</h2>
+								<c:if test="${sessionScope.member.mtype eq 'A' or authority eq 'yes'}">
+								<input type="button" value="글쓰기" id="adWrite" class="btn btn-theme"
+								onclick="javascript:location.href='/board/adBoardWrite.go'">
+							</c:if>
+						</div>
+					</article>
+				</c:if>
 				<br>
 			</div>
 			
 		</div>
-		
+		<br>
 		<c:import url="/WEB-INF/views/common/footer.jsp"/>
 	</div>
 </body>
 
-<script>
-	$(function(){
-		$('article a').click(function(){
-			var bid = $(this).parents('article').find('input:hidden').val();
-			location.href = '/board/adBoardView.do?bid=' + bid;
-		})
-	})
-</script>
+<script src="/resources/js/board/adBoardList.js"></script>
 </html>

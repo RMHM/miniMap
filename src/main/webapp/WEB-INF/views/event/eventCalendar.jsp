@@ -14,9 +14,12 @@
 		<c:import url="/WEB-INF/views/common/header.jsp" />
 		<div class="navbar-header" style="background:#68A4C4; width:100%">
 			<div class="container">
-				<div class="col-md-10 col-md-offset-1">
+				<div class="col-md-1"></div>
+				<div class="col-md-8">
 					<h3>전시/공연</h3>
 				</div>
+				<div class="col-md-2" align=center><img src="/resources/img/profiles/frame.png" alt=""></div>
+				<div class="col-md-1"></div>
 			</div>
 		</div>
 		<div class="container">
