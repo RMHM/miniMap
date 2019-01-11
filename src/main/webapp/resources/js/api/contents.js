@@ -1,8 +1,29 @@
-var content = new Object;
 var category = new Object;
-var event = [];
+var event = new Object;
+var weather;
 
 $(function(){
+	
+	// 날씨 가져오기
+	$.ajax({
+		url : "/jeju/jejuWeather.do",
+		type : "GET",
+		success : function(result){
+			console.log(result)
+			weather = result;
+			getWeather();
+			
+			$('#calendar .fc-next-button, #calendar .fc-prev-button, #calendar .fc-today-button').click(function(){
+				getWeather();
+			})
+			
+		},
+		error : function(result){
+			console.log(result)
+		}
+	})
+	
+	// 제주도 공연전시 api 가져오기
 	$.ajax({
 		url : "/jeju/jejuContent.do",
 		type : "GET",
@@ -27,6 +48,7 @@ $(function(){
 			for(var i in result){
 				var tmpList = [];
 				for(var j=0; j<result[i].length; j++){
+					var content = new Object;
 					var description = (result[i][j].intro == undefined)?"상세정보 없음":result[i][j].intro;
 					var hour = (result[i][j].hour == undefined)?"-":result[i][j].hour;
 					var pay = (result[i][j].pay == undefined)?"-":result[i][j].pay;
@@ -51,10 +73,10 @@ $(function(){
 							constraint : detail,
 							img : result[i][j].coverThumb,
 							color : selColor[result[i][j].stat],
-							textColor : selTextColor[result[i][j].stat]
+							textColor : selTextColor[result[i][j].stat],
+							imageurl : '../../resources/img/profiles/default.png'
 					};
 					tmpList.push(content);
-//					event.push(content);
 				}
 				category[i] = tmpList;
 			}
@@ -64,46 +86,52 @@ $(function(){
 			console.log(result);
 		},
 		complete : function(){
+			// 전체 리스트
 			var allList = [];
-			// 전체 선택 버튼
-			$allBtn = $('<input>').attr({
-				type : "button",
-				id : "all",
-				value : "전체"
-			})
-			$('#calDiv').append($allBtn).append('<br>')
-			$('#all').click(function(){
-				console.log(this.value);
-				console.log(allList)
-				$('#calendar').fullCalendar('removeEvents')
-				$('#calendar').fullCalendar('addEventSource', allList)
-			})
-			// 카테고리별 버튼
+		
+			// 카테고리 단위별 분리
 			for(var i in category){
 				allList = allList.concat(category[i]);
-				$rd = $('<input>').attr({
-					type : 'button',
-					id : i,
-					value : i
-				})
-				$('#calDiv').append($rd).append('<br>')
 
-				$('#'+i).click(function(){
-					console.log(this.value)
-					console.log(category[this.value])
-					$('#calendar').fullCalendar('removeEvents')
-					$('#calendar').fullCalendar('addEventSource', category[this.value])
-
-				})
-
+				event[i] = category[i];
 			}
+			event['all'] = allList;
 			$('#loading').hide();
 			getFullcalendar(allList)
-		},
-		async : false
+			
+		}
 	})
 
 })
+
+// 날씨 가져오기
+function getWeather(){
+	var jeju = weather['제주'];
+	var d = new Date();
+	var nd = new Date(d.getFullYear(), d.getMonth(), d.getDate()+1);
+	var str = "";
+	
+	for(var i=0; i<jeju.length; i++){
+		if(jeju[i].fcstTime == ((d.getHours()<10)?"0"+d.getHours():d.getHours())+"00" && jeju[i].fcstDate == ""+d.getFullYear()+((d.getMonth()<9)?'0'+(d.getMonth()+1):d.getMonth()+1)+((d.getDate()<10)?'0'+d.getDate():d.getDate())){
+			var dFormat = d.getFullYear()+"-"+((d.getMonth()<9)?'0'+(d.getMonth()+1):d.getMonth()+1)+"-"+((d.getDate()<10)?'0'+d.getDate():d.getDate())
+			$('#calendar thead td[data-date="'+ dFormat +'"]').prepend('현재기온 : ' + jeju[i].tempValue);
+		} else if(jeju[i].fcstTime=="0200" && jeju[i].fcstDate == ""+nd.getFullYear()+((nd.getMonth()<9)?'0'+(nd.getMonth()+1):nd.getMonth()+1)+((nd.getDate()<10)?'0'+nd.getDate():nd.getDate())) {
+			if(jeju[i].fcstDate != jeju[i].baseDate) str += "<font color=blue>" + jeju[i].tempValue + "</font>/";
+			else {
+				var dFormat = nd.getFullYear()+"-"+((nd.getMonth()<9)?'0'+(nd.getMonth()+1):nd.getMonth()+1)+"-"+((nd.getDate()<10)?'0'+nd.getDate():nd.getDate())
+				$('#calendar thead td[data-date="'+ dFormat +'"]').prepend("최저기온 : " + jeju[i].tempValue);
+				break;
+			}
+			
+		} else if(jeju[i].fcstTime=="1500" && jeju[i].fcstDate == ""+nd.getFullYear()+((nd.getMonth()<9)?'0'+(nd.getMonth()+1):nd.getMonth()+1)+((nd.getDate()<10)?'0'+nd.getDate():nd.getDate())) {
+			str += "<font color=red>" + jeju[i].tempValue + "</font>";
+			var dFormat = nd.getFullYear()+"-"+((nd.getMonth()<9)?'0'+(nd.getMonth()+1):nd.getMonth()+1)+"-"+((nd.getDate()<10)?'0'+nd.getDate():nd.getDate())
+			$('#calendar thead td[data-date="'+ dFormat +'"]').prepend(str);
+			break;
+		}
+	}
+	
+}
 
 // 캘린더 띄우기
 function getFullcalendar(evt){
@@ -111,12 +139,11 @@ function getFullcalendar(evt){
 		header : {
 			left : 'prev,next today',
 			center : 'title',
-			right : 'month,agendaWeek,agendaDay,listMonth'
+			right : 'btnAll, btnExhibit, btnShow'
+			//right : 'month,agendaWeek,agendaDay,listMonth'
 		},
 		dayClick : function(date, jsEvent, view) {
-
 			console.log(date.format());
-			
 		},
 		// 이벤트 hover
 		eventRender: function(eventObj, $el) {
@@ -132,9 +159,34 @@ function getFullcalendar(evt){
 		eventClick : function(evt){
 			alert(evt.constraint);
 		},
+		// 우상단 분류 버튼
+		customButtons : {
+			btnAll : {
+				text : '전체',
+				click : function(){
+					$('#calendar').fullCalendar('removeEvents')
+					$('#calendar').fullCalendar('addEventSource', event['all'])
+				}
+			},
+			btnExhibit : {
+				text : '공연',
+				click : function(){
+					$('#calendar').fullCalendar('removeEvents')
+					$('#calendar').fullCalendar('addEventSource', event['공연'])
+				}
+			},
+			btnShow : {
+				text : '전시',
+				click : function(){
+					$('#calendar').fullCalendar('removeEvents')
+					$('#calendar').fullCalendar('addEventSource', event['전시'])
+				}
+			}
+			
+		},
 		defaultDate : new Date(),
 
-		navLinks : true, // can click day/week names to navigate views
+		navLinks : false, // can click day/week names to navigate views
 		businessHours : true, // display business hours
 		editable : false,
 		eventLimit: true,

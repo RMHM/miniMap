@@ -6,18 +6,24 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>제주도 api 테스트으으으으으으으으으으으으</title>
+<title>행사 달력</title>
 <c:import url="/WEB-INF/views/common/exFile.jsp" />
 </head>
 <body>
-
 	<div id="wrapper">
 		<c:import url="/WEB-INF/views/common/header.jsp" />
+		<div class="navbar-header" style="background:#68A4C4; width:100%">
+			<div class="container">
+				<div class="col-md-10 col-md-offset-1">
+					<h3>전시/공연</h3>
+				</div>
+			</div>
+		</div>
 		<div class="container">
-			<div class="col-md-10" id='calDiv'>
+			<div class="col-md-10 col-md-offset-1" id='calDiv'>
+				<br>
 				<img src="/resources/img/loading.gif" id="loading" style="width : 250px;height : 250px;">
 				<div id='calendar'></div>
-
 			</div>
 		</div>
 

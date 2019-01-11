@@ -54,10 +54,25 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	@Override
-  public int checkNick(String mnick) {
+	public int checkPw(String mpw) {
+		HashMap<String, Object> hmap = new HashMap<String, Object>();
+		hmap.put("mpw", mpw);
+		return mDao.checkPw(hmap);
+	}
+
+	@Override
+	public int checkNick(String mnick) {
 		HashMap<String, Object> hmap = new HashMap<String, Object>();
 		hmap.put("mnick", mnick);
 		return mDao.checkNick(hmap);
-  }
+	}
+
+	@Override
+	public int checkEmail(String email) {
+		HashMap<String, Object> hmap = new HashMap<String, Object>();
+		hmap.put("email", email);
+		return mDao.checkEmail(hmap);
+	}
+
   
 }

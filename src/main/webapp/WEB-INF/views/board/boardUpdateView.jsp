@@ -33,7 +33,7 @@ $(document).ready(function() {
 				&nbsp;&nbsp;
 				<h4>--게시판 목록--</h4>
 				<ul class="unstyled">
-					<br><br><br><br>
+					<br><br>
 					<li><a href="/board/boardlist1.do">자유 게시판</a></li><br>
 					<li><a href="/board/boardlist2.do">정보공유 게시판</a></li><br>
 					<li><a href="/board/boardlist3.do">여행후기 게시판</a></li><br>
@@ -48,9 +48,14 @@ $(document).ready(function() {
 					<input type="hidden" id="mNo" name="mNo" value="${board.MNo}"/><!-- 작성자 회원번호  -->	
 					<input type="hidden" id="bNo" name="bNo" value="${board.BNo}"/><!-- 작성자 회원번호  -->									
 					<input type="text" placeholder="제목" name="bTitle" id="bTitle" value="${board.BTitle }"required>	
-					<input type="text" name="bWriter" id="bWriter" value="${board.mnick}"> 				
+					<input type="hidden" name="bWriter" id="bWriter" value="${board.mnick}"> 				
 					<div id="daumeditor" class="edit" style="width:90%; height:100%;"></div>				
 					<textarea name="boardcontent" id="boardcontent" style="display:none;">${board.BContent}</textarea>
+					
+						<c:if test="${member.mtype eq 'A' }">
+							<input type="checkbox" name="isNotice2" checked="checked">공지글로 올리기 <br>
+						</c:if>
+						<input type="hidden" name="isNotice" value='N'> 
 					<!-- <input type="radio" name="bCode" value="1" checked="checked">잡담
 					<input type="radio" name="bCode" value="2">정보
 					<input type="radio" name="bCode" value="3">후기
@@ -138,7 +143,12 @@ $(function(){
      
     //form submit 버튼 클릭
     $("#updateBoard").click(function(){
-        //다음에디터가 포함된 form submit
+        //다음에디터가 포함된 form submit       
+    	if ($('input[name=isNotice2]').is(":checked")) {
+    	    $('input[name=isNotice]').val('Y');    	   
+    	} else {
+    	    $('input[name=isNotice]').val('N');    	   
+    	}
         Editor.save();
     })
 })

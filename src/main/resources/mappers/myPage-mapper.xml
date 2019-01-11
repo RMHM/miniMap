@@ -53,13 +53,22 @@
 		SELECT * FROM BOARD WHERE MNO=#{mNo} ORDER BY BDATE
 		DESC,BNO DESC
 	</select>
+	<select id="selectMyComment" parameterType="_int"
+		resultType="Coment">
+		SELECT * FROM COMENT WHERE MNO=#{mNo} ORDER BY CDATE
+		DESC,CID DESC
+	</select>
 
 	<select id="selectBoardCount" parameterType="_int"
 		resultType="_int">
 		SELECT COUNT(*) FROM BOARD WHERE MNO=#{mNo}
 	</select>
+	<select id="selectCommentCount" parameterType="_int"
+		resultType="_int">
+		SELECT COUNT(*) FROM COMENT WHERE MNO=#{mNo}
+	</select>
 	<select id="selectRequest" parameterType="_int" resultType="Authority">
-		select * from authority where mno=#{mNo}
+		select * from authority JOIN authority_type USING (ACODE) where mno=#{mNo}
 
 	</select>
 	<update id="updateAuthority" parameterType="Authority">
@@ -81,4 +90,13 @@
 	<update id="deleteAuthority"  parameterType="_int">
 	 	UPDATE AUTHORITY SET DELFLAG = 'Y' WHERE AID=#{aId}
 	</update>
+	<select id="selectNick" parameterType="string" resultType="_int">
+	select * from member where MNICK=#{mnick}
+	</select>
+	<select id="selectEmail" parameterType="string" resultType="_int">
+	select * from member where EMAIL=#{email}
+	</select>
+	<select id="selectMessageCount" parameterType="_int" resultType="_int">
+	select count(*) from message where TAKE_MNO=#{mNo} AND READFLAG='N' AND DELFLAG='N'
+	</select>
 </mapper>
