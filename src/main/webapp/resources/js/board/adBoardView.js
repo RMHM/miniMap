@@ -108,7 +108,7 @@ function reConfirm(obj, bid, mno, bcode) {
 	var grandparent = parent.parent();
 	var siblingsTR = grandparent.siblings().last();
 
-	var content = grandparent.siblings().find('textarea[name="recontent"]').val();
+	var content = grandparent.siblings().find('textarea[name="recontent"]').val().replace(/\n/gim, '<br>');
 
 	location.href = '/coment/comentAdd2.do' + '?BId=' + bid
 	+'&ccontent=' + content + '&mno=' + mno + '&cref=' + cref

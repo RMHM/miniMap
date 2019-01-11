@@ -320,13 +320,42 @@ public class BoardController {
 
 		return "common/msg";
 	}
+	
+	@RequestMapping("/board/boardBlindOff.do")
+	public String boardBlindOff(@RequestParam("BId") int BId, HttpSession session, Model model) {
+		
+		
+		Board originBoard = boardService.selectOneBoard(BId);
+		int bcode = originBoard.getBCode();
+		
+		int result = boardService.updateBlindOff(BId);
+		
+		String loc = "/board/boardlist"+bcode+".do";
+		String msg = "";
+
+		if (result > 0) {
+			msg = "게시물의 블라인드가 해제되었습니다";
+
+		} else {
+			msg = "신고해제 실패!";
+		}
+
+		model.addAttribute("loc", loc).addAttribute("msg", msg);
+
+		return "common/msg";				
+
+	}
 
 	@RequestMapping("/board/boardDelete.do")
 	public String boardDelete(@RequestParam("BId") int BId, HttpSession session, Model model) {
-
-		int result = boardService.deleteBoard(BId);
-
-		String loc = "/board/boardlist1.do";
+		
+		Board originBoard = boardService.selectOneBoard(BId);
+		int bcode = originBoard.getBCode();
+		
+		int result = boardService.deleteBoard(BId);		
+		
+		String loc = "/board/boardlist"+bcode+".do";
+		
 		String msg = "";
 
 		if (result > 0) {
