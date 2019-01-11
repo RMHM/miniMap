@@ -152,7 +152,7 @@
 								
 							
 							</div>
-							<div class="form-group" id = "powerImg">
+							<div class="form-group" id = "powerImg" style="display:none">
 								<label class="col-sm-3 control-label" for="reImg">대표 이미지</label>
 								<div class="col-sm-6">
 									<img id = "imc" src="/resources/img/authrity/">
@@ -183,13 +183,13 @@
 
 								if($('input:radio[name="aCode"]:checked').val()==2){
 									
-									if(('#sample4_postcode').val==null){
+									if(('#sample4_postcode').val()==null){
 									alert("주소를 입력하세요.");
 									return false
-									}else if($('#powerImg').val==null){
+									}else if($('#powerImg').val()==null){
 							     		alert("대표이미지를 등록하세요.");
 							     		return false
-									}else if($('#powerUrl').val==null){
+									}else if($('#powerUrl').val()==null){
 										alert("사이트 주소를 작성하세요.")
 									}
 								}else{
@@ -224,6 +224,7 @@
 	<c:import url="../common/footer.jsp" />
 	</div>
 	<script>
+	
 		function request() {
 		
 			$('#request')

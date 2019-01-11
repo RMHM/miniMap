@@ -176,30 +176,40 @@ public class MyPageController {
 	/* 회원정보 수정 하고 myPageMain 이동 */
 	@RequestMapping("/myPage/updateMember.do")
 	public String updateMember(@RequestParam(value="profile", required = false) MultipartFile profile,Member member, @RequestParam String mpwTest, HttpSession session, HttpServletRequest request) {
+		System.out.println("이름 : " + profile);
+		System.out.println(profile.getOriginalFilename());
+		System.out.println(profile.getSize());
+		System.out.println(profile.getName());
+		System.out.println(profile.getContentType());
+		System.out.println("-----------------------");
 		if(profile.getSize()==0) {
 			System.out.println("원본"+member.getProfilePath());
+		
 		}else {
-
-		String saveDir = session.getServletContext().getRealPath("/resources/img/profiles");
-		File dir = new File(saveDir);
-		
-		if(dir.exists() == false) dir.mkdirs();
-		String originName = profile.getOriginalFilename();
-		String ext = originName.substring(originName.lastIndexOf(".")+1);
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd_HHmmss");
-		int rndNum = (int)(Math.random() * 1000);
-	String renamedName = sdf.format(new java.util.Date()) + "_" + rndNum + "." + ext;
-		
-		// 실제 파일을 지정한 파일명으로 변환하며 데이터를 저장한다.
-		try {
-			profile.transferTo(new File(saveDir + "/" + renamedName));
-		} catch (IllegalStateException | IOException e) {
-			e.printStackTrace();
+			if(profile.getName().equals("default.PNG")) {
+				System.out.println("기본이미지 :+ " + profile.getName());
+				member.setProfilePath(profile.getName());
+			}else {
+				String saveDir = session.getServletContext().getRealPath("/resources/img/profiles");
+				File dir = new File(saveDir);
+				
+				if(dir.exists() == false) dir.mkdirs();
+				String originName = profile.getOriginalFilename();
+				String ext = originName.substring(originName.lastIndexOf(".")+1);
+				SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd_HHmmss");
+				int rndNum = (int)(Math.random() * 1000);
+				String renamedName = sdf.format(new java.util.Date()) + "_" + rndNum + "." + ext;
+				
+				// 실제 파일을 지정한 파일명으로 변환하며 데이터를 저장한다.
+				try {
+					profile.transferTo(new File(saveDir + "/" + renamedName));
+				} catch (IllegalStateException | IOException e) {
+					e.printStackTrace();
+				}
+				
+				member.setProfilePath(renamedName);
+			}
 		}
-		
-		member.setProfilePath(renamedName);
-		}
-
 		member.setMpw((member.getMpw().equals(""))? mpwTest :bcpe.encode(member.getMpw()));
 	
 		
@@ -336,8 +346,10 @@ public class MyPageController {
 		
 		}else authority.setImg_file(null);
 		authority.setMNo(member.getMno());
-		int result = mps.insertAuthority(authority);
 		
+		int result = mps.insertAuthority(authority);
+		if (result==0) model.addAttribute("msg","이미 요청하셨습니다.");
+		else model.addAttribute("msg","요청되셨습니다.");
 		return requestViewPage(member,model);
 	}
 

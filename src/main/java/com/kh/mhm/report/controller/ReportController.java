@@ -37,20 +37,9 @@ public class ReportController {
 	public void insertReport(@RequestParam Map<String,Object> re,  Member member,Model model){
 	
 		Gson gson = new Gson();
-
 		Report report = gson.fromJson(re.toString(),Report.class);
 
 		int result = rs.insertReport(report);
-		/*return map;
-*/		/*System.out.println("insert수행");
-		System.out.println(report);
-		int result = rs.insertReport(report);
-		
-		String str = "";
-		switch(report.getTarget_type()) {
-		case 'M': break;
-		case 'B': str = bc.boardview(report.getTarget_id(), model);break;
-		case 'C': break;	
-		}*/
+
 	}
 }

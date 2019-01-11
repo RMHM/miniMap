@@ -409,7 +409,7 @@
 					<div class="modal-content">
 						<div class="modal-header">
               <h5 class="modal-title" id="myModalLabel">
-								게시물을 신고하시겠습니까?
+								신고하시겠습니까?
 							</h5> 
 							<button type="button" class="close" data-dismiss="modal">
 								<span aria-hidden="true">×</span>
@@ -456,7 +456,7 @@
 						<div class="modal-footer">				 
 							<!-- <input id="submit" type="submit" value="신고하기"class="btn btn-primary" > -->
 							<!-- <button class="" id="reportbtn" onclick="insertRe();"> -->
-							<button class="" id="reportbtn"data-dismiss="modal" >
+							<button class="" id="reportbtn" data-dismiss="modal" >
 								신고하기
 							</button> 
 							<button  class="btn btn-secondary" data-dismiss="modal">
@@ -469,16 +469,22 @@
 				<script>
 				
 				$('#report-modal').click(function(){
+					$('#insertReport')[0].reset();
 					console.log("${b.BId}");
 					$('#targetType').val("B");
 					$('#targetId').val("${b.BId}");					
-				
+					$('#reportbtn').unbind('click');
+					
 					$('#reportbtn').click(function(){
-						
- 						var re = $('#insertReport').serializeArray(); 
- 						
-	 					$.ajax({
-						url : "${pageContext.request.contextPath}/report/insertReport.do",
+				
+				
+					 	if($("input:radio[name='target_type']").is(":checked")==false)alert('대상을 선택해주세요');
+						else if($("input:radio[name='rcode']").is(":checked")==false)alert('신고사유를 선택해주세요');
+						else{
+							if(($('#rdetail').val()==""))$('#rdetail').val("세부내용없음");
+ 						var re = $('#insertReport').serializeArray();
+	 					 $.ajax({
+						 url : "${pageContext.request.contextPath}/report/insertReport.do",
 						 data :re, 
 						 
 						 contentType: "application/json", 
@@ -492,7 +498,9 @@
 							}
 							
 						});	  
-						
+						} 
+	 					
+	 					
 					});
 				
 				});

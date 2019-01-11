@@ -101,15 +101,32 @@
 								</div>
 							</div>
 								<div class="form-group">
-								<label class="col-sm-3 control-label" for="">프로필</label>	
+								<label class="col-sm-3 control-label" for="">프로필</label>
+								<div class=" col-sm-6">
+								<button type="button" id="defa" >기본이미지</button>
+								</div>
+								
 								<div class="col-sm-6">
+								
 									<img id = "imc" src="/resources/img/profiles/${member.profilePath}">
 									<input class="form-check-input" id="profile" name="profile" onchange="readURL(this);"
 										type="file" value="${member.profilePath}">
 								</div>
+								<div class="form-group">
+								
+								<div class="col-sm-6">
+								
+								</div>
 							</div>
 						<script> 
+						$('#defa').click(function(){
+							/* console.log($('#profile').val());
+							console.log("클릭"); */
+							$('#imc').attr('src','/resources/img/profiles/default.png');
+							/* $('#profile').attr('value','default.PNG'); */
+							/* console.log($('#imc').attr('src').value); */
 						
+						});
 						$("#mnick").blur(function(){
 							$.ajax({
 								url : "${pageContext.request.contextPath}/myPage/nickCheck.do",
@@ -186,7 +203,9 @@
 								reader.onload = function (e) {
 									$('#imc').attr('src', e.target.result); 
 									} 
-								reader.readAsDataURL(input.files[0]); } 
+								reader.readAsDataURL(input.files[0]); 
+							console.log("read : " + reader.readAsDataURL(input.files[0]));		
+						} 
 								
 						
 						function check(){
