@@ -11,7 +11,12 @@
 <title>miniMap에 오신걸 환영합니다.</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <meta name="description" content="" />
+<style>
+td{
+text-align:center;
+}
 
+</style>
 </head>
 
 <body>
@@ -66,17 +71,26 @@
 									<%-- <c:if test="${list.size() gt 0"> --%>
 									<c:if test="${!empty list }">
 										<c:forEach var="a" begin="0" end="${list.size()-1 }" step="1">
-											<%-- 	<c:out value="${ a}" /> --%>
-
+							
+											 <c:if test="${list.get(a).getRFlag() eq 'Y' }">
+											<tr id="${list.get(a).getBId()}" name="rflag" style="color:red; background:lightgray;">
+												<!-- <td colspan="6" style="color:red; background:lightgray;">신고된 게시글 입니다.</td> -->
+											
+											</c:if>
+					
+											<c:if test="${list.get(a).getRFlag() eq 'N' }">
+										
 											<tr id="${list.get(a).getBId()}">
+											 </c:if> 
 												<td>${list.get(a).getBNo()}</td>
-												<td>${list.get(a).getBCode()}</td>
+												<td>${list.get(a).getBName()}</td>
 												<td>${list.get(a).getBTitle()}</td>
-												<td>${list.get(a).getMNo()}</td>
+												<td>${member.mname }</td>
 												<td>${list.get(a).getBCount()}</td>
 												<td>${list.get(a).getBDate()}</td>
 
 											</tr>
+										
 										</c:forEach>
 
 									</c:if>
@@ -146,6 +160,7 @@
 							$('#coTable').attr('style','display:none');		
 				 });
 					$('#coTap').click(function(){
+
 							$('#boTable').attr('style','display:none');
 							$('#coTable').attr('style','display:block');
 					}); 
@@ -157,6 +172,26 @@
 					
 						   
 					});
+					var def ="";
+					/* $('tr[name=rflag]').hover(function(){
+						$(this).append('삭제됨')});
+					 */
+					 $('tr[name=rflag]').mouseover(function(){
+						def = this;
+						console.log(this.change('<tr><td colspan="6">삭제된 게시글입니다.</td></tr>'));
+					 	/* this.append('<td colspan="6">삭제된 게시글입니다.</td>'); */ 
+						
+					 	/* this.html('<tr><td colspan="6">삭제된 게시글입니다.</td></tr>'); 
+						this.change('<tr><td colspan="6">삭제된 게시글입니다.</td></tr>'); */
+						console.log(def);
+					  });
+					  $("tr[name=rflag]").mouseout(function(){
+					   /* $(this).removeClass("hover"); */
+					   console.log(def);
+					   	this.find('td').remove();
+						this.val(def);
+					   /* $(this).html(def); */ 
+					  }); 
 				});
 			</script>
 

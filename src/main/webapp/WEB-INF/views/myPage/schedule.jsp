@@ -22,10 +22,10 @@
 <script>
 
 	$(document).ready(function() {
-    /* 	console.log("${temper}"); */
-		var today = new Date();
-		/* console.log(today); */
-	  var event = [
+
+	var today = new Date();
+
+	var event = [
  	<c:forEach items="${list}" var="list"  varStatus="i"> 
  	{
         "title":'<c:out value="${list.title}" />'
@@ -37,7 +37,9 @@
     } <c:if test="${!status.last}">,</c:if>
  	</c:forEach>
  	];
-	/*   console.log(event); */
+	
+	
+	
 		$('#calendar').fullCalendar({
 			header : {
 				left : 'prev,next today',
@@ -107,9 +109,17 @@
 			events :event
 		});
 	
+	
+	
+	
+	
+	
 	$('.fc-prev-button, .fc-next-button, .fc-today-button').click(function() {	
 		var date = $("#calendar").fullCalendar("getDate");
 		var month = new Date(date).getMonth()+1;
+		var lastToday = new Date();
+	
+		
 		$.ajax({
 			url : "${pageContext.request.contextPath}/myPage/temper.do",
 			async : false,
@@ -122,8 +132,8 @@
 				for(var i = 0; i<data.length;i++){
 					arr[i] = data[i].low + "/" + data[i].high;
 				}
-				
 				temperarr(month,arr); 
+				if((lastToday.getMonth()+1)==month)weaderToday();
 			},
 			error : function(e) {
 				console.log("error" + data);
@@ -142,26 +152,15 @@
  	 todayArr[${i.index}] =${list.low}+"/"+${list.high}; 
  	</c:forEach>
 	temperarr(d,todayArr);
-	function temperarr(month,arr){
-	var arrdate = new Date();
-	arrdate.setMonth(month-1);
-		 for(var i =0; i < arr.length; i++){
-			arrdate.setDate(i+1);	
-			var re = arrdate.toISOString().slice(0, 10);
-			var tem = arr[i];
-			 $('#calendar').find('td[data-date='+re+']').prepend(tem).attr('style','font-size:x-small');
-		} 
-	}
+	weaderToday();
 	
-	var trS = $('thead tr td');
-	var tdS = $('#calendar').find('td[data-date]');
-
-	var arr = "${weather}";
-
-	var result = arr.split(",");
-	var today = new Date();
-
-	for(var i = 1; i<result.length; i++){
+	
+	function weaderToday(){
+		var trS = $('thead tr td');
+		var tdS = $('#calendar').find('td[data-date]');
+		var arr = "${weather}";
+		var result = arr.split(",");
+		for(var i = 1; i<result.length; i++){
 		var date = new Date(); 
 		date.setDate(date.getDate()+(i+2));
 		var re = (date.toISOString().slice(0, 10));
@@ -177,6 +176,31 @@
 		
 		$('#calendar').find('td[data-date='+re+']').prepend(sr);
 	 }
+	}
+	
+	
+	
+	function temperarr(month,arr){
+		
+	var arrdate = new Date();
+	
+	
+	arrdate.setMonth(month-1);
+	
+		for(var i =0; i < arr.length; i++){
+			arrdate.setDate(i+1);	
+			var re = arrdate.toISOString().slice(0, 10);
+			var tem = arr[i];
+			 $('#calendar').find('td[data-date='+re+']').prepend(tem).attr('style','font-size:x-small');
+		}
+		 
+		if(arrdate.getMonth()==month-1 ){
+				
+				
+		}
+	}
+	
+	
 	});
 	
 	
