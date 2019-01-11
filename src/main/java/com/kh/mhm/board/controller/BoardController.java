@@ -345,6 +345,8 @@ public class BoardController {
 	// 기업 광고 게시판
 	@RequestMapping("/board/adBoard.go")
 	public ModelAndView adBoard(@RequestParam(value = "cPage", required = false, defaultValue = "1") int cPage,
+			@RequestParam(value = "keyword", required = false, defaultValue = "") String keyword,
+			@RequestParam(value = "type", required = false, defaultValue = "") String type,
 			HttpSession session) {
 		ModelAndView mv = new ModelAndView();
 		List<Board> list = null;
@@ -357,7 +359,8 @@ public class BoardController {
 			list = new ArrayList<Board>();
 			thumbnail = new ArrayList<String>();
 			comment = new ArrayList<Integer>();
-
+			System.out.println(type);
+			System.out.println(keyword);
 			int pageInNum = 3;
 			int totCnt = boardService.selectBoardCnt(5);
 			int maxPage = 0;
@@ -381,7 +384,7 @@ public class BoardController {
 			if(m != null) if(boardService.selectAuthority(m.getMno())>0) authority = "yes";
 			
 			mv.addObject("blist", list).addObject("thumb", thumbnail).addObject("comment", comment);	// 리스트
-			mv.addObject("cPage", cPage).addObject("maxPage", maxPage).addObject("authority", authority);
+			mv.addObject("cPage", cPage).addObject("type", type).addObject("keyword", keyword).addObject("maxPage", maxPage).addObject("authority", authority);
 			mv.setViewName("board/ad/adBoardList");
 		} catch (Exception e) {
 			e.getStackTrace();
