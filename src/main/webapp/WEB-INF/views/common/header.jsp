@@ -15,7 +15,7 @@
                       <span class="icon-bar"></span>
                   </button>
 				<a class="navbar-brand" href="/">
-				<img src="/resources/img/MHM.png" style="width:120px;" alt="" /></a>
+				<img src="/resources/img/mhm_logo.png" style="width:120px;" alt="" /></a>
 			</div>
       <div class="navbar-collapse collapse ">
 				<input type="hidden" id="hdnSession" data-value="${member.mno}" />
