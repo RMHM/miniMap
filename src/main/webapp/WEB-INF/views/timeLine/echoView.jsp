@@ -128,7 +128,9 @@
 				<div id='chatdata' class='panel-body'></div>
 			</div> -->
 				<div class="container" id="menu_scroll_down">
-					<button id="btn_scroll_down" disabled="true">↓</button>
+					<div class="col-lg-12">
+						<button id="btn_scroll_down" disabled="true">↓</button>
+					</div>
 				</div>
 				</div>
 
@@ -438,41 +440,130 @@
 			isScrollUp = false;
 			unreadCnt = 0;
 			
-		})
-
+		});
+		
 		/* 스크롤 이벤트 */
-		$("#div_chat").on('scroll touchmove mousewheel DOMMouseScroll', function(e) {
-			var E = e.originalEvent
-			var delta = 0;
-			if(E.detail){
-				delta=E.detail*-40;
-			}else{
-				delta=E.wheelDelta;
-			}
-/* 
+		$("#div_chat").bind('scroll touchmove mousewheel', function(e) {
+
+			
 			// 메뉴를 숨겼을 때만 마지막 위치 저장
-			if (!isScrollUp) {
+			/*if (!isScrollUp) {
 				lastScrollTop = $('#div_chat')[0].scrollHeight + 700;
 			} */
-
-			// 스크롤이 생겼을 때
-			if ($(this).scrollTop() > 0) {
-				if (delta < 0) {
-					// 스크롤 내리는 이벤트 중 최하단 도달 시 메뉴 숨김 (-1은 오차 제어)
+			
+			//console.log("delta::"+e.originalEvent.wheelDelta);
+			
+			var delta=e.originalEvent.wheelDelta;
+			/* var scrollTo = e.originalEvent.wheelDelta * -1;
+		    e.preventDefault();
+			
+		    $(this).scrollTop(scrollTo + $(this).scrollTop()); */
+		    
+			if (delta>0&&delta!=undefined) {
+				// 스크롤업
+				console.log("scroll UP");
+				$("#menu_scroll_down").css("opacity", "1.0");
+				$("#btn_scroll_down").css("opacity", "1.0");
+				$("#btn_scroll_down").attr("disabled", false);
+				isScrollUp = true;
+			}else if(delta<0&&delta!=undefined) {
+				// 스크롤다운
+				var scrollHeight = $(this).height();
+				var scrollPosition = $(this).height() + $(this).scrollTop();
+				
+				
+				if ((scrollHeight - scrollPosition) / scrollHeight === 0){
+					console.log("scroll DOWN");
 					$('#btn_scroll_down').html('↓');
 					$("#menu_scroll_down").css("opacity", "0.0");
 					$("#btn_scroll_down").css("opacity", "0.0");
 					$("#btn_scroll_down").attr("disabled", true);
 					isScrollUp = false;
 					unreadCnt = 0;
-					
-				} else {
-					// 스크롤 올리는 이벤트 발생 시 메뉴 보임
+				}else{
+					console.log("scroll DOWN");
+					$("#menu_scroll_down").css("opacity", "0.0");
+					$("#btn_scroll_down").css("opacity", "0.0");
+					$("#btn_scroll_down").attr("disabled", true);
+					isScrollUp = false;
+				}
+				
+			} 
+			
+			if($(this).scrollTop()==0){
+				var lt=$('.lastTID').eq(0).text()*1;	
+				var list=loadMore(lt);
+				console.log(list);
+				
+				var oldScrollHeight = $('#div_chat').prop('scrollHeight');
+				
+				for(var i=0;i<list.length;i++){
+					if($(".membernick").text()==(list[i].mnick)){
+						console.log("돌긴하냐1?");
+						var printHTML = "<li><div class='lastTID' style='display:none'>"+list[i].tid+"</div><div class='comment-main-level'><div class='comment-avatar'>";
+						printHTML += "<img src='/resources/img/profiles/"+list[i].profile_path+"' alt=''></div>";
+						printHTML += "<div class='comment-box-me'><div class='comment-head-me'><span class='comment-name '>";
+						printHTML += "<a href='' target='_BLANK'>" + list[i].mnick
+								+ "&nbsp;(나)" + "</a></span><span>" + list[i].tdate
+								+ "</span>";
+						printHTML += "<a href='#' onclick='sendNote($(this).siblings('.comment-name').children('a').text());'>"
+								+ "<img class='jjokjee' src='/resources/img/timeline/jjokjee.png'/>"
+								+ "</a><a href='#' onclick='report();'>"
+								+ "<img class='singo' src='/resources/img/timeline/singo.png'/></a>";
+						printHTML += "</div><div class='comment-content'><pre>"
+								+ list[i].tcontent + "</pre></div>";
+						printHTML += "<div class='comment-bottom-me'><i class='fa fa-link'></i>";
+						printHTML += "<a href='https://www.google.com/search?q="
+								+ list[i].hashTag + "' target='_BLANK'>" + list[i].hashTag + "</a>";
+						printHTML += "</div></div></div></li>";
+						$('.disqusin').prepend(printHTML);
+					}else {
+						console.log("돌긴하냐2?");
+						var printHTML = "<li><div class='lastTID' style='display:none'>"+list[i].tid+"</div><div class='comment-main-level'><div class='comment-avatar'>";
+						printHTML += "<img src='/resources/img/profiles/"+list[i].profile_path+"' alt=''></div>";
+						printHTML += "<div class='comment-box'><div class='comment-head'><span class='comment-name '>";
+						printHTML += "<a href='' target='_BLANK'>" + list[i].mnick
+								+ "</a></span><span>" + list[i].tdate + "</span>";
+						printHTML += "<a href='#' onclick='sendNote($(this).siblings('.comment-name').children('a').text());'>"
+								+ "<img class='jjokjee' src='/resources/img/timeline/jjokjee.png'/>"
+								+ "</a><a href='#' onclick='report();'>"
+								+ "<img class='singo' src='/resources/img/timeline/singo.png'/></a>";
+						printHTML += "</div><div class='comment-content'><pre>"
+								+ list[i].tcontent + "</pre></div>";
+						printHTML += "<div class='comment-bottom'><i class='fa fa-link'></i>";
+						printHTML += "<a href='https://www.google.com/search?q="
+								+ list[i].hashTag + "' target='_BLANK'>" + list[i].hashTag + "</a>";
+						printHTML += "</div></div></div></li>";
+						$('.disqusin').prepend(printHTML);
+
+					}
+				}
+				
+				var newScrollHeight=$('#div_chat').prop('scrollHeight');
+				
+				$(this).scrollTop(newScrollHeight-oldScrollHeight);
+			}
+			
+			// 스크롤이 생겼을 때
+			/* if ($(this).scrollTop() > 0) {
+				if (e.originalEvent.wheelDelta > 0 || e.originalEvent.detail < 0) {
+					// 스크롤업
+					console.log("scroll UP");
 					$("#menu_scroll_down").css("opacity", "1.0");
 					$("#btn_scroll_down").css("opacity", "1.0");
 					$("#btn_scroll_down").attr("disabled", false);
 					isScrollUp = true;
-				}
+				}else {
+					// 스크롤다운
+					console.log("scroll DOWN");
+					$('#btn_scroll_down').html('↓');
+					$("#menu_scroll_down").css("opacity", "0.0");
+					$("#btn_scroll_down").css("opacity", "0.0");
+					$("#btn_scroll_down").attr("disabled", true);
+					isScrollUp = false;
+					unreadCnt = 0;
+						
+				} 
 			}else if($(this).scrollTop()==0){
 				var lt=$('.lastTID').eq(0).text()*1;	
 				var list=loadMore(lt);
@@ -519,7 +610,7 @@
 
 					}
 				}
-			}
+			} */
 		});
 		
 		function loadMore(lt){
