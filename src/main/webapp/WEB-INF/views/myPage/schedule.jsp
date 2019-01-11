@@ -141,9 +141,7 @@
 	<c:forEach items="${temper}" var="list" varStatus="i" > 
  	 todayArr[${i.index}] =${list.low}+"/"+${list.high}; 
  	</c:forEach>
-	
 	temperarr(d,todayArr);
-	 
 	function temperarr(month,arr){
 	var arrdate = new Date();
 	arrdate.setMonth(month-1);
@@ -169,13 +167,7 @@
 		var re = (date.toISOString().slice(0, 10));
 		var we = result[i]; 
 		 var sr = "";
-	/* 	we.match(/비/)
-		we.match(/눈/)
-		we.match(/맑음/)
-		we.match(/구름많음/)
-		we.match(/구름조금/)
-		we.match(/흐림/); */
-		console.log(we);
+
 		if(we.match(/맑음/))sr = "<img src='/resources/img/weather/sun1.PNG' width='15px';height='15px'>";
 		else if(we.match(/흐림/))sr = "<img src='/resources/img/weather/cloud1.PNG' width='15px';height='15px'>";
 		else if(we.match(/구름많음/))sr = "<img src='/resources/img/weather/cloud1.PNG' width='15px';height='15px'>";
@@ -299,68 +291,3 @@ body {
 	<c:import url="../common/footer.jsp" />
 </body>
 </html>
-
-<!--  <div id="insertC" class="" tabindex="-1" role="dialog" title = "일정 추가"
-				style="position: absolute; height: auto; width: 350px; top: 137px; left: 202px; display: none; z-index: 101;"
-				aria-describedby="dialog-message" aria-labelledby="ui-id-1"> -->
-<!-- <div id="insertC" title="일정 추가" style="display: none">
-					<form id="formAction" action="insertSchedule.do" method="post">
-						<div
-						class="ui-dialog-titlebar ui-widget-header ui-corner-all ui-helper-clearfix ui-draggable-handle">
-						<span id="ui-id-1" class="ui-dialog-title"> 일정등록</span>
-
-					</div>
-						<div id="dialog-message"
-						style="width: auto; min-height: 0px; max-height: none; height: auto;"
-						class="ui-dialog-content ui-widget-content">
-
-						<div id="dialog-message"
-							style="width: auto; min-height: 0px; max-height: none; height: auto;">
-
-							<div style="text-align: left;">
-								<input type="hidden" id="sId" name="sId">
-							</div>
-							<div>
-								<label>제목</label><input type="text" id="sTitle" name="sTitle"></input>
-							</div>
-							<div>
-								<div>
-									<label>메모</label>
-									<div>
-										<textarea cols="30" rows="5" id="sContent" name="sContent"
-											name="scontent" style="width: 98%;" maxlength="100"></textarea>
-									</div>
-								</div>
-							</div>
-
-							<div style="margin-bottom: 5px;">
-
-								<label>날짜</label> <input type="date" id="startDateT"
-									name="startDateT" style="width: auto;" class="ed hasDatepicker">~<input
-									type="date" id="endDateT" name="endDateT"
-									style="width: auto; margin-bottom: 4px;"
-									class="ed hasDatepicker">
-
-							</div>
-
-							<div style="clear: both;"></div>
-							<div>
-								<label> 색상 선택 </label><input type="color" id="sColor"
-									name="sColor">
-							</div>
-
-
-						</div>
-						<div id="result" style="display: block"
-							class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix">
-							<input id="submit" type="submit" value="등록"> <input
-								type="button" id="close" value="취소">
-
-						</div>
-						<div id="updateresult" style="display: none"
-							class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix">
-							<input id="update" type="submit" value="수정" onclick="updateS();">
-							<input type="submit" id="del" value="삭제" onclick="deleteS();">
-
-						</div>
-				</div> -->

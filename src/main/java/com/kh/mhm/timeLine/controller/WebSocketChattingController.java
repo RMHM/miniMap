@@ -11,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.kh.mhm.member.model.vo.Member;
 import com.kh.mhm.timeLine.model.service.TimeLineService;
@@ -20,7 +21,7 @@ import com.kh.mhm.timeLine.model.vo.PreTimeLine;
 public class WebSocketChattingController {
 
 	@Autowired
-	TimeLineService tlsi;
+	TimeLineService tls;
 
 	@RequestMapping(value = "/echo.do", method = { RequestMethod.GET, RequestMethod.POST })
 	public String chattingMethod(String userName, Model model, HttpServletRequest req, HttpSession session) throws Exception {
@@ -36,7 +37,7 @@ public class WebSocketChattingController {
 		String ipAddr = req.getRemoteAddr();
 		model.addAttribute("host", ipAddr);
 		List<PreTimeLine> list = new ArrayList<PreTimeLine>();
-		list = tlsi.selectPreTimeLine();
+		list = tls.selectPreTimeLine();
 		session.setAttribute("list", list);
 
 		return "timeLine/echoView";
@@ -46,4 +47,12 @@ public class WebSocketChattingController {
 	 * @RequestMapping("/testLink.do") public String testLink() { return
 	 * "timeLine/testLink"; }
 	 */
+	
+	@RequestMapping(value="/load.more", method=RequestMethod.POST)
+	@ResponseBody
+	public List<PreTimeLine> loadMoreLine(int tId) {
+		List<PreTimeLine> list=tls.loadMoreLine(Integer.valueOf(tId));
+		System.out.println(list);
+		return list;
+	}
 }

@@ -51,8 +51,8 @@ public class ManagerServiceImpl implements ManagerService {
 	}
 
 	@Override
-	public BlackList selectOneBlackList(int mno) {
-		return mnDao.selectOneBlackList(mno);
+	public List selectReportList(int mno) {
+		return mnDao.selectReportList(mno);
 	}
 
 	@Override

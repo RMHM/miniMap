@@ -41,7 +41,6 @@ public class NoticeHandler extends TextWebSocketHandler{
 		
 		if(member!=null) {
 			String counts=String.valueOf(ms.countNewMessage(member.getMno()));
-			System.out.println("new message :: "+counts);
 			
 			for(WebSocketSession one:sessionList) {
 				one.sendMessage(new TextMessage(counts));
@@ -54,13 +53,9 @@ public class NoticeHandler extends TextWebSocketHandler{
 	@Override
 	public void afterConnectionClosed(WebSocketSession session, CloseStatus status) throws Exception {
 
-		//		sessionList.remove(session);
-		//		logger.info("{}연결끊김",session.getId());
-		//		
-		//		for (WebSocketSession one : sessionList) {
-		//			if(one==session) continue;
-		//			one.sendMessage(new TextMessage(session.getAttributes().get("userName")+"님이 퇴장하셨습니다."));
-		//		}
+				sessionList.remove(session);
+				logger.info("{}연결끊김",session.getId());
+		
 
 
 		//super.afterConnectionClosed(session, status);

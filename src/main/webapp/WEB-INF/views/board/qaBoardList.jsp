@@ -81,13 +81,13 @@
 								</c:forEach>
 							</tbody>
 						</table>
-						<c:if test="${list.size() eq 0}">
+						<%-- <c:if test="${list.size() eq 0}">
 							<article>
 								<div>
 									<h2>등록된 게시물이 없습니다.</h2>
 								</div>
 							</article>
-						</c:if>
+						</c:if> --%>
 						<!-- 페이지 처리 해야됨. -->
 						<c:out value="${pageBar}" escapeXml="false"/>
 						<c:if test="${not empty member and member.mtype ne 'C'}">

@@ -38,10 +38,12 @@ public class ComentController {
 		int result;
 		
 		System.out.println(session.getAttribute("member"));
+		
 		coment.setBid(Integer.parseInt(req.getParameter("BId")));
-		coment.setCcontent(req.getParameter("cContent"));		
+		coment.setCcontent(req.getParameter("cContent").replace("\r\n","<br>"));		
 		System.out.println(coment);
 		System.out.println(req.getParameter("cContent"));
+				
 		
 		result = cs.insertComentContent(coment);
 		System.out.println(result);
@@ -142,15 +144,14 @@ public class ComentController {
 	
 	
 	@RequestMapping("/coment/comentAdd2.do")
-	public String insertComentContent2(Coment coment, Model model, HttpSession session, HttpServletRequest req) {
+	public String insertComentContent2(Coment coment, Model model, HttpSession session, HttpServletRequest req,
+			@RequestParam(value = "bCode", required = false, defaultValue = "1") int bCode) {
 		
 		int result;
 		
 		System.out.println(session.getAttribute("member"));
 		coment.setBid(Integer.parseInt(req.getParameter("BId")));		
-		/*coment.setCcontent(req.getParameter("recontent"));	*/	
-		System.out.println(coment);
-		System.out.println(req.getParameter("recontent"));
+		coment.setCcontent(coment.getCcontent().replace("\r\n","<br>"));	
 		
 		
 		result = cs.insertComentContent2(coment);
@@ -161,7 +162,9 @@ public class ComentController {
 		
 		if(result > 0) {
 			msg = "대댓글 등록 성공!";
-			loc = "/board/boardview.do?BId="+req.getParameter("BId");
+			if(bCode==5) loc = "/board/adBoardView.do?bid="+req.getParameter("BId");
+			else loc = "/board/boardview.do?BId="+req.getParameter("BId");
+			
 			
 		} else {
 			msg = "댓글 등록 실패!";

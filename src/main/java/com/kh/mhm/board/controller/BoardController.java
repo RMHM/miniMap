@@ -55,9 +55,11 @@ public class BoardController {
 		List<Board> list2 = boardService.selectNoticeList1(board);
 
 		System.out.println(pageBar);
+		
 
 		model.addAttribute("list", list).addAttribute("totalContents", totalContents)
-				.addAttribute("numPerPage", numPerPage).addAttribute("pageBar", pageBar).addAttribute("list2", list2);
+				.addAttribute("numPerPage", numPerPage).addAttribute("pageBar", pageBar)
+				.addAttribute("list2", list2);
 
 		return "board/freeBoardList";
 	}
