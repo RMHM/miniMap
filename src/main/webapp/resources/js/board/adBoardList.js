@@ -9,10 +9,14 @@ $(function(){
 		var type = $('#selSearch').val().trim();
 		var keyword = $('#txtFind').val().trim();
 		
-		if(type=="") alert('검색 유형을 선택하세요.');
-		else if(txt == "") alert('검색할 키워드를 입력하세요.');
-		else{
-			location.href = '/board/adBoardView.do?bid=' + bid;
+		if(type=="" || keyword == "") {
+			alert('검색 유형과 키워드를 모두 입력바랍니다.');
+			if(keyword==""){
+				$('#txtFind').val('');
+				$('#txtFind').focus();
+			}
+		} else{
+			location.href = '/board/adBoard.go?type=' + type + '&keyword=' + keyword;
 		}
 		
 	})

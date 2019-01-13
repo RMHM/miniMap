@@ -79,9 +79,9 @@ public interface BoardService {
 	
 	int updateImgBoard(Board b);
 	
-	int selectBoardCnt(int bCode);
+	int selectBoardCnt(Map<String, Object> param);
 	
-	List<Board> selectBoardListPart(Map<String, Integer> param);
+	List<Board> selectBoardListPart(Map<String, Object> param);
 	
 	int selectAuthority(int mno);
 	
