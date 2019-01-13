@@ -65,6 +65,10 @@
 	max-width: 95%;
 	max-height: auto;
 }
+.jjokjee{
+	width: 15px;
+	height: 15px;
+}
 
 </style>
 <script>
@@ -98,7 +102,10 @@
 					<img src="/resources/img/profiles/${b.profile_Path }" class="uploder-profile">
 				</div>
 				<div class="col-md-10 uploaderi">
-					<b>&nbsp; 작성자 : &nbsp;${b.mnick}</b> <br>
+				<b>&nbsp; 작성자 : &nbsp;<span>${b.mnick}</span></b>
+				<a href="#" onclick="sendNote($(this).siblings('b').children('span').text());">
+				<img class="jjokjee" src="/resources/img/timeline/jjokjee.png"/>
+				</a> <br>
 				<b>&nbsp; 작성일 : &nbsp;${b.BDate }</b> <br>
 				<b>&nbsp; 조회수 : &nbsp;${b.BCount }</b> <br>
 				<b>&nbsp; 추천수 : &nbsp;${b.likes }</b> <br>		
@@ -107,7 +114,11 @@
 				<a id="report-modal" href="#report-modal-container" 
 				role="button" class="btn btn-danger" data-toggle="modal">신고하기</a>
 				</c:if>
-				
+				<c:if test="${b.RFlag eq 'Y' }">
+				<input type="button" class="btn btn-warning"
+						onclick="location.href='${pageContext.request.contextPath}/board/boardBlindOff.do?BId=${b.BId }'" 
+						name="blindoff" value="블라인드해제">
+				</c:if>
 				</div>
 			</div>
 			<div class="row" style="width:90%;">
@@ -157,8 +168,8 @@
 										<td width="67%">
 											<div class="text_wrapper" >
 											<p id="cc"><c:choose><c:when test="${Coment.delFlag eq 'Y'}">삭제된 댓글입니다.</c:when><c:otherwise>${Coment.ccontent }</c:otherwise></c:choose></p>
-												<textarea class="reply-content" readonly="readonly" id="replycontent" name="replycontent" style="display:none;"
-												 ><c:choose><c:when test="${Coment.delFlag eq 'Y'}">삭제된 댓글입니다.</c:when><c:otherwise>${Coment.ccontent }</c:otherwise></c:choose></textarea>
+												<%-- <textarea class="reply-content" readonly="readonly" id="replycontent" name="replycontent" style="display:none;"
+												 ><c:choose><c:when test="${Coment.delFlag eq 'Y'}">삭제된 댓글입니다.</c:when><c:otherwise>${Coment.ccontent }</c:otherwise></c:choose></textarea> --%>
 												 												 
 												 	<input type="hidden" name="writer" value="${member.mno }" />
 													<input type="hidden" name="cref" value="${Coment.cid }" />
@@ -180,7 +191,7 @@
 													<input type="hidden" name="recref" value="${Coment.cid }" />
 													<input type="hidden" name="clevel" value="${Coment.clevel }" />
 													<input type="hidden" name="BId" value="${b.BId }" />
-													<button type="button" class="insertBtn"
+													<button type="button" class="insertBtn" id="reinsert"
 														onclick="reComment(this);">댓글 달기</button>
 													<button type="button" class="insertConfirm" onclick="reConfirm(this);" style="display: none;">댓글달기</button>
 												</c:if>
@@ -269,43 +280,37 @@
 	
 	
 		function updateReply(obj) {
-			// 현재 위치와 가장 근접한 textarea 접근하기
-			$(obj).parent().parent().prev().find('textarea').removeAttr(
-					'readonly');
-			$(obj).parent().parent().prev().find('textarea').css(
-					'background-color', 'white');
+						
+			// 다른 버튼 숨기기.
+			$(obj).siblings('#delteBtn').css('display', 'none');
+			$(obj).siblings('#reinsert').css('display', 'none');
 			
-			var content = $(obj).parent().parent().prev().find('textarea').val();
-			content = content.replace(/<br>/g,"\r\n");
-			console.log(content);
-			$(obj).parent().parent().prev().find('textarea').css(
-					'display', 'inline');
-			var a = $(obj).parent().parent().prev().find('p');			
-			a.css('display','none');
+			var t = $(obj).parents('tr').find('td').eq(1).find('p').html().trim().replace(/\<br\>/gim, '\n');
+			console.log(t)
+			$(obj).parents('tr').find('td').eq(1).find('p').remove();
+			$(obj).parents('tr').find('td').eq(1).append($('<textarea>').attr({'style':'height:50px; background:white'}).text(t));
 			
 			// 수정 완료 버튼을 화면 보이게 하기
-			$(obj).siblings('.updateConfirm').css('display', 'inline');
+			$(obj).siblings('#updateBtn2').css('display', 'inline');
 
 			// 수정하기 버튼 숨기기
-			$(obj).css('display', 'none');
-			
+			$(obj).css('display', 'none');			
 			
 		}
 
 		function updateConfirm(obj) {
+			
 			// 댓글의 내용 가져오기
-			var content = $(obj).parent().parent().prev().find('textarea').val();
-			console.log(content);
-			content = content.replace(/<br>/g,"\r\n");
-
+			var content = $(obj).parent().parent().prev().find('textarea').val().replace(/\n/gim, '<br>');
+			
 			// 댓글의 번호 가져오기
 			var cid = $(obj).siblings('input').val();
-
 			// 게시글 번호 가져오기
-			var bid = ${b.BId};
-
+			var bid = ${b.BId};			
+			
 			location.href = "/coment/comentUpdate.do?" + "cid=" + cid + "&bid="
-					+ bid + "&ccontent=" + content;
+					+ bid + "&ccontent=" + content;						
+			
 		}
 
 		function deleteReply(obj) {
@@ -313,11 +318,9 @@
 			var cid = $(obj).siblings('input').val();
 
 			// 게시글 번호 가져오기
-			var bid = ${b.BId}
-			;
+			var bid = ${b.BId};
 
-			location.href = "/coment/comentDelete.do" + "?cid=" + cid/*  + "&bid="
-								+ bid; */
+			location.href = "/coment/comentDelete.do" + "?cid=" + cid
 		}
 
 		function reComment(obj) {
@@ -328,7 +331,7 @@
 			$(obj).css('display', 'none');
 
 			// 내용 입력 공간 만들기
-			var htmlForm = '<tr class="recomment"><td width="10%"><div><b>${member.mnick }</b></div></td>'
+			/* var htmlForm = '<tr class="recomment"><td width="10%"><div><b>${member.mnick }</b></div></td>'
 					+ '<td style="background : transparent;" width="75%">'
 					+ '<textarea class="reply-content" name="ccontent" style="background : ivory;" ></textarea>'
 					+ '</td>'
@@ -338,7 +341,7 @@
 					+ '<input type="hidden" name="cref" value="${Coment.cid }" />'
 					+ '<input type="hidden" name="clevel" value="${Coment.clevel }" />'
 					+ '<button type="button" class="insertConfirm" onclick="reConfirm(this);" >댓글달기</button>'
-					+ '</div> </td>' + '</tr>';
+					+ '</div> </td>' + '</tr>'; */
 			
 					var htmlForm1 = '<td><div><b>${member.mnick }</b></div></td>'
 					var htmlForm2 = '<textarea class="reply-content" id="recontent" name="recontent" style="background : white " required></textarea>'
@@ -360,12 +363,6 @@
 			var cref = $(obj).siblings('input[name="recref"]').val();
 			var level = Number($(obj).siblings('input[name="clevel"]').val()) + 1;
 
-			console.log($(obj).parent('div').siblings());
-
-			console.log('cref=' + cref);
-
-			console.log('clevel=' + level);
-
 			// 게시글 번호 가져오기
 			var bid = ${b.BId}
 
@@ -373,13 +370,7 @@
 			var grandparent = parent.parent();
 			var siblingsTR = grandparent.siblings().last();
 
-			var content = grandparent.siblings().find('textarea[name="recontent"]').val();
-
-			//console.log(parent.html());
-			//console.log(grandparent.html());
-			//console.log(siblingsTR.html());
-			console.log('bid='+bid);
-			console.log('ccontent='+content);
+			var content = grandparent.siblings().find('textarea[name="recontent"]').val().replace(/\n/gim, '<br>');			
 
 			// writer, replyContent
 			// bid, refcid, clevel	
@@ -396,7 +387,13 @@
 			
 		}
 		
-		
+		function sendNote(nick){
+			var popUrl = "/popUp.write?"+nick;	//팝업창에 출력될 페이지 URL
+
+			var popOption = "width=765, height=485, resizable=no, scrollbars=no, status=no;";    //팝업창 옵션(optoin)
+
+			window.open(popUrl,"",popOption);
+		}	
 		
 		
 	</script>

@@ -124,6 +124,12 @@ public class BoardServiceImpl implements BoardService {
 		// TODO Auto-generated method stub
 		return boardDao.updateOneCount(BId);
 	}
+	
+	@Override
+	public int updateBlindOff(int BId) {
+		return boardDao.updateBlindOff(BId);
+	}
+	
 
 	@Override
 	public List<Fileref> selectFilerefList(int boardNo) {

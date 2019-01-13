@@ -49,6 +49,8 @@ public interface BoardDao {
 	int insertFileref(Fileref a);
 	
 	int updateOneCount(int bId);
+	
+	int updateBlindOff(int bId);
 
 	Board selectOneBoard(int bId);
 
