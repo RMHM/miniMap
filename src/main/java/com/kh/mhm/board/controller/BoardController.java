@@ -403,12 +403,12 @@ public class BoardController {
 			list = new ArrayList<Board>();
 			thumbnail = new ArrayList<String>();
 			comment = new ArrayList<Integer>();
-						
-			param = new HashMap<String, Object>();
+      
+      param = new HashMap<String, Object>();
 			param.put("bCode", 5);
 			param.put("type", type);
 			param.put("keyword", keyword);
-			
+      
 			int pageInNum = 3;
 			int totCnt = boardService.selectBoardCnt(param);
 			int maxPage = 0;

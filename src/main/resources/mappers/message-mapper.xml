@@ -108,4 +108,21 @@
 		WHERE ME.TAKE_MNO=#{mNo} AND ME.DELFLAG='N' AND ME.STOREFLAG='Y'
 	</select>
 	
+	<select id="selectMessageBlock" parameterType="_int" resultType="MessageBlock">
+		SELECT B.MNO, M.MNICK, B.BLOCK_DATE, B.BLOCK_NOTE 
+		FROM BLOCK_MESSAGE B JOIN MEMBER M ON(B.BLOCK_MNO=M.MNO) 
+		WHERE B.MNO=#{mNo}
+	</select>
+	
+	<select id="countMessageBlock" parameterType="_int" resultType="_int">
+		SELECT COUNT(*) FROM BLOCK_MESSAGE WHERE MNO=#{mNo}
+	</select>
+	
+	<delete id="unblockMessage" parameterType="map">
+		DELETE FROM BLOCK_MESSAGE  WHERE MNO=#{mId} AND BLOCK_MNO IN
+		<foreach collection="mId" item="arr" index="index" open="(" close=")" separator=",">
+			(SELECT MNO FROM MEMBER WHERE MNICK=#{arr})
+		</foreach>
+	</delete>
+	
 </mapper>

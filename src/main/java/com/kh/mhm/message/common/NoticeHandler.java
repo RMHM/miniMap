@@ -27,11 +27,6 @@ public class NoticeHandler extends TextWebSocketHandler{
 	@Override
 	public void afterConnectionEstablished(WebSocketSession session) throws Exception {
 		sessionList.add(session);
-
-		logger.info("쪽지 웹소켓", session.getId());
-
-		System.out.println(""+session.getId());
-		// super.afterConnectionEstablished(session);
 	}
 
 	@Override
@@ -54,11 +49,6 @@ public class NoticeHandler extends TextWebSocketHandler{
 	public void afterConnectionClosed(WebSocketSession session, CloseStatus status) throws Exception {
 
 				sessionList.remove(session);
-				logger.info("{}연결끊김",session.getId());
-		
-
-
-		//super.afterConnectionClosed(session, status);
 	}
 
 }

@@ -428,7 +428,7 @@
 	</script>
 	
 	<!--Modal -->
-	<%-- <form id ="insertReport"  method="post" >
+  <%-- <form id ="insertReport"  method="post" >
 	<form id ="insertReport"  action="${pageContext.request.contextPath}/report/insertReport.do" method="post" >
 	<div class="modal fade" id="report-modal-container" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 				<div class="modal-dialog" role="document">
@@ -482,7 +482,7 @@
 						<div class="modal-footer">				 
 							<!-- <input id="submit" type="submit" value="신고하기"class="btn btn-primary" > -->
 							<!-- <button class="" id="reportbtn" onclick="insertRe();"> -->
-							<button class="" id="reportbtn" data-dismiss="modal" >
+              <button class="" id="reportbtn" data-dismiss="modal" >
 								신고하기
 							</button> 
 							<button  class="btn btn-secondary" data-dismiss="modal">
@@ -494,7 +494,7 @@
 				</div>
 				<script>
 				
-				/* $('#report-modal').click(function(){
+        /* $('#report-modal').click(function(){
 					$('#insertReport')[0].reset();
 					console.log("${b.BId}");
 					$('#targetType').val("B");
@@ -524,7 +524,7 @@
 							}
 							
 						});	  
-						} 
+        } 
 	 					
 	 					
 					});
@@ -563,8 +563,3 @@
 
 </body>
 </html>
-
-	
-		
-		 
-			

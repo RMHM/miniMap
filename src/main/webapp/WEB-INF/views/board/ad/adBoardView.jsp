@@ -69,7 +69,7 @@
 							<%-- <input type="button" id="btnReport" value="신고" class="btn btn-danger btn-large" onclick="report(${b.BId});"> --%>
 							<a id="report-modal" href="#report-modal-container" role="button" class="btn btn-danger btn-large" data-toggle="modal">신고하기</a>
 						</c:if>
-						<input type="button" class="btn btn-theme btn-large" onclick="history.back();" value="이전 항목으로" />
+            <input type="button" class="btn btn-theme btn-large" onclick="history.back();" value="이전 항목으로" />
 					</div>
 				</div>
 				
@@ -90,18 +90,17 @@
 											<!-- 아이디, 작성날짜 -->
 											<td width="10%">
 												<div>
-													<c:if test="${Coment.clevel > 1}">
+                          <c:if test="${Coment.clevel > 1}">
 													&nbsp;&nbsp;&nbsp;&nbsp; <!-- 답변글일경우 아이디 앞에 공백을 준다. -->                            
 	                         						<img alt="" src="/resources/img/re-reply.png">
 	             						            </c:if>
 													<b>${Coment.mnick }</b><br>												 
-													<font size="2" color="gray">${Coment.cdate }</font>
+                          <font size="2" color="gray">${Coment.cdate }</font>
 													<a id="report-modal" href="javascript:reportModal(${Coment.mno}, ${Coment.cid}, 'C')" style="color:red;font-size:2">신고</a>
 													<!-- data-toggle="modal" role="button" -->
 												</div>
 											</td>
 											<!-- 본문내용 -->
-											
 											<td width="65%" <c:if test="${empty member or Coment.delFlag eq 'Y' or Coment.rflag eq 'Y' or member.mno ne Coment.mno}">colspan=2</c:if>>
 												<div class="text_wrapper">
 													<p>
@@ -174,13 +173,13 @@
 													</div>
 												</td>
 												<!-- 본문 작성-->
-												<td width="60%">
+                        <td width="60%">
 													<div>
 														<textarea id="cContent" name="cContent"></textarea>
 													</div>
 												</td>
 												<!-- 댓글 등록 버튼 -->
-												<td width="">
+                        <td width="">
 													<div id="btn" style="text-align: center;">
 														<input type="submit" class='btn btn-submit' value="댓글등록" id="addReply">
 														

@@ -1,6 +1,8 @@
 package com.kh.mhm.timeLine.model.dao;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,14 +28,6 @@ public class TimeLineDaoImpl implements TimeLineDao {
 		}
 	}
 
-	// @Override
-	// public int selectMno(String mnick) {
-	// System.out.println("DAO mnick::"+mnick);
-	// int result=sqlSession.selectOne("TimeLine.selectMno",mnick);
-	// System.out.println("DAO result::"+result);
-	// return result;
-	// }
-
 	@Override
 	public Member getMemberByNick(String mnick) {
 		Member member = sqlSession.selectOne("TimeLine.getMemberByNick", mnick);
@@ -49,6 +43,14 @@ public class TimeLineDaoImpl implements TimeLineDao {
 	@Override
 	public List<PreTimeLine> loadMoreLine(int tId) {
 		return sqlSession.selectList("TimeLine.loadMoreLine",tId);
+	}
+
+	@Override
+	public int blockTimeLine(int tId, String mNick) {
+		Map<String,Object> map=new HashMap<String,Object>();
+		map.put("tId", tId);
+		map.put("mNick", mNick);
+		return sqlSession.insert("TimeLine.blockTimeLine",map);
 	}
 
 }
