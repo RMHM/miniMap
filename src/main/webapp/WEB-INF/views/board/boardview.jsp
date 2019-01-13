@@ -104,13 +104,17 @@
 				</div>
 				<div class="col-md-10 uploaderi">
 				<b>&nbsp; 작성자 : &nbsp;<span>${b.mnick}</span></b>
+				<c:if test="${b.MNo ne member.mno  }">
 				<a href="#" onclick="sendNote($(this).siblings('b').children('span').text());">
 				<img class="jjokjee" src="/resources/img/timeline/jjokjee.png"/>
-				</a> <br>
+				</a></c:if> <br>
 				<b>&nbsp; 작성일 : &nbsp;${b.BDate }</b> <br>
 				<b>&nbsp; 조회수 : &nbsp;${b.BCount }</b> <br>
 				<b>&nbsp; 추천수 : &nbsp;${b.likes }</b> <br>		
-				<a id="" href="" role="button" class="btn btn-success"> 추천하기</a>
+				<!-- <a id="likes" href="" onclick="likesupdate()" 
+				role="button" class="btn btn-success"> 추천하기</a> -->
+				<input type="button" class="btn btn-theme btn-large" onclick="likesEvent();" 
+					name="likes" value="개추">
 				<c:if test="${b.isNotice eq 'N' }">
 				<!-- <a id="report-modal" href="#report-modal-container"  -->
 				<a id="report-modal" href="javascript:void(0);" onclick="reportModal(${b.MNo},${b.BId},'B');" 
@@ -140,9 +144,8 @@
 				</c:if>
 				&nbsp;
 				<c:if test="${member.mno eq b.MNo or member.mtype eq 'A'}">
-					<input type="button" class="btn btn-theme btn-large"
-						onclick="location.href='${pageContext.request.contextPath}/board/boardDelete.do?BId=${b.BId }'"
-						name="delete" value="삭제">
+					<input type="button" class="btn btn-theme btn-large" onclick="deleteEvent();" 
+					name="delete" value="삭제">
 				</c:if>				
 				
 				<div class="replyArea">
@@ -280,6 +283,28 @@
 	</div>
 
 	<script>	
+				
+	
+		function deleteEvent(){
+			
+			if (confirm("정말 삭제하시겠습니까?") == true){    //확인
+				var bid = ${b.BId};
+				location.href="/board/boardDelete.do?"+"BId="+bid
+			}else{   //취소
+			    return;
+			}
+		}
+		
+		function likesEvent(){
+			
+			if (confirm("게시글을 추천하시겠습니까?") == true){    //확인
+				
+				var bid = ${b.BId};
+				location.href="/likes/insertLikes.do?"+"target_bid="+bid+'&like_mno=' + ${member.mno}
+			}else{   //취소
+			    return;
+			}
+		}
 	
 	
 		function updateReply(obj) {
@@ -316,12 +341,13 @@
 			
 		}
 
-		function deleteReply(obj) {
+		function deleteReply(obj) {			
+			
 			// 댓글의 번호 가져오기
 			var cid = $(obj).siblings('input').val();
 
 			// 게시글 번호 가져오기
-			var bid = ${b.BId};
+			var bid = ${b.BId};			
 
 			location.href = "/coment/comentDelete.do" + "?cid=" + cid
 		}
@@ -397,7 +423,7 @@
 
 			window.open(popUrl,"",popOption);
 		}	
-		
+	
 		
 	</script>
 	

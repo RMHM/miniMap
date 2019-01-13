@@ -50,6 +50,8 @@ public interface BoardDao {
 	
 	int updateOneCount(int bId);
 	
+	int updateLikes(int bId);
+	
 	int updateBlindOff(int bId);
 
 	Board selectOneBoard(int bId);

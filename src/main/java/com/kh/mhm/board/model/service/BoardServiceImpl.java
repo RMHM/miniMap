@@ -126,6 +126,12 @@ public class BoardServiceImpl implements BoardService {
 	}
 	
 	@Override
+	public int updateLikes(int BId) {
+		// TODO Auto-generated method stub
+		return boardDao.updateLikes(BId);
+	}
+	
+	@Override
 	public int updateBlindOff(int BId) {
 		return boardDao.updateBlindOff(BId);
 	}
@@ -212,4 +218,5 @@ public class BoardServiceImpl implements BoardService {
 	public List<Board> selectRecentBoard(Map<String, Integer> param) {
 		return boardDao.selectRecentBoard(param);
 	}
+	
 }
