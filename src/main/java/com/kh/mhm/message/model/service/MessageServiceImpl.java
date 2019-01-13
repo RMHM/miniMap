@@ -2,6 +2,7 @@ package com.kh.mhm.message.model.service;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -120,6 +121,21 @@ public class MessageServiceImpl implements MessageService {
 	@Override
 	public int countMessageStore(int mNo) {
 		return mdi.countMessageStore(mNo);
+	}
+
+	@Override
+	public List<Message> selectMessageBlock(int cPage, int numPerPage, int mNo) {
+		return mdi.selectMessageBlock(cPage, numPerPage, mNo);
+	}
+
+	@Override
+	public int countMessageBlock(int mNo) {
+		return mdi.countMessageBlock(mNo);
+	}
+
+	@Override
+	public int unblockMessage(String[] arr, int mId) {
+		return mdi.unblockMessage(arr,mId);
 	}
 
 

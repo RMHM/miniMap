@@ -17,4 +17,6 @@ public interface TimeLineService {
 	List<PreTimeLine> selectPreTimeLine();
 	
 	List<PreTimeLine> loadMoreLine(int tId);
+	
+	int blockTimeLine(int tId, String mNick);
 }

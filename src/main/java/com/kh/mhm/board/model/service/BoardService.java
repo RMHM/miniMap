@@ -57,6 +57,8 @@ public interface BoardService {
 	
 	int updateOneCount(int bId);
 	
+	int updateLikes(int bId);
+	
 	int updateBlindOff(int bId);
 
 	List<Fileref> selectFilerefList(int boardNo);

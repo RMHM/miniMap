@@ -27,32 +27,36 @@ public class WebSocketChattingController {
 	public String chattingMethod(String userName, Model model, HttpServletRequest req, HttpSession session) throws Exception {
 		req.setCharacterEncoding("UTF-8");
 
-		/*
-		 * Member member=(Member) session.getAttribute("member");
-		 * System.out.println(member.toString()); System.out.println(member.getMnick());
-		 */
+		if((Member) session.getAttribute("member")==null||((Member) session.getAttribute("member")).getMnick()=="") {
+			model.addAttribute("msg", "회원가입을 하시면 타임라인을 이용하실 수 있습니다."); 
+			model.addAttribute("url", "/"); 
+			return "common/redirect";
+		}else {
+			session.setAttribute("userName", ((Member) session.getAttribute("member")).getMnick());
 
-		session.setAttribute("userName", ((Member) session.getAttribute("member")).getMnick());
+			String ipAddr = req.getRemoteAddr();
+			model.addAttribute("host", ipAddr);
+			List<PreTimeLine> list = new ArrayList<PreTimeLine>();
+			list = tls.selectPreTimeLine();
+			session.setAttribute("list", list);
 
-		String ipAddr = req.getRemoteAddr();
-		model.addAttribute("host", ipAddr);
-		List<PreTimeLine> list = new ArrayList<PreTimeLine>();
-		list = tls.selectPreTimeLine();
-		session.setAttribute("list", list);
-
-		return "timeLine/echoView";
+			return "timeLine/echoView";
+			
+		}
+		
 	}
 
-	/*
-	 * @RequestMapping("/testLink.do") public String testLink() { return
-	 * "timeLine/testLink"; }
-	 */
 	
 	@RequestMapping(value="/load.more", method=RequestMethod.POST)
 	@ResponseBody
 	public List<PreTimeLine> loadMoreLine(int tId) {
 		List<PreTimeLine> list=tls.loadMoreLine(Integer.valueOf(tId));
-//		System.out.println(list);
 		return list;
+	}
+	
+	@RequestMapping(value="/block.timeline", method=RequestMethod.POST)
+	@ResponseBody
+	public int blockTimeLine(String tId,String mNick) {
+		return tls.blockTimeLine(Integer.valueOf(tId),mNick);
 	}
 }

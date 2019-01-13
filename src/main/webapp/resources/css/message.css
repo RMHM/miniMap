@@ -608,3 +608,28 @@
 		display:inline;
 		margin:3px;
 	}
+	#blockList div.cmdWrap {
+width: 535px;
+height: auto;
+clear: both;
+padding-top: 8px;
+background: url(/resources/img/message/dot1.gif) left top repeat-x;
+}
+#blockList div.list {margin-top: 8px;}
+#blockList div.tbodyscroll{ overflow-y: scroll; height: 367px; clear:both; padding-right:3px;}
+#blockList div.list table { width: 521px; overflow: hidden;}
+#blockList div.cmdWrap #cmdDelete,
+#blockList div.cmdWrap #cmdStore{
+	float: right;
+	margin-left: 7px;
+}
+.blockcnt {padding: 4px 0 2px 14px;}
+.listB table th {border-top: 2px solid #bebebe;}
+.listB table .chk {width: 20px;}
+.listB table .blocknick {width: 80px;}
+.listB table .blockdate {width: 80px;}
+.listB table .comment {}
+.listB table th {background-color:#F7F7F7;}
+.listB table th,
+.listB table td {padding: 4px 8px 2px 8px; text-align: center; border-bottom: 1px solid #bebebe;}
+.listB table td.comment {text-align: left; white-space: nowrap;}

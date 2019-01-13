@@ -9,7 +9,7 @@ $(function(){
 		var type = $('#selSearch').val().trim();
 		var keyword = $('#txtFind').val().trim();
 		
-		if(type=="" || keyword == "") {
+    if(type=="" || keyword == "") {
 			alert('검색 유형과 키워드를 모두 입력바랍니다.');
 			if(keyword==""){
 				$('#txtFind').val('');

@@ -76,7 +76,7 @@
 						
 					</c:forEach>
 					<div id="pagination" class="col-md-6">
-						<!-- 변수선언부  페이지 최소 최대 -->
+          <!-- 변수선언부  페이지 최소 최대 -->
 						<c:set var="paging" value="5"/>
 						<c:set var="min">
 							<c:choose>
@@ -107,7 +107,7 @@
 								<span class="current">${i}</span>
 							</c:if>
 							<c:if test="${i ne cPage}">
-								<a href="/board/adBoard.go?cPage=${i}<c:if test="${type ne ''}">&type=${type}</c:if><c:if test="${keyword ne ''}">&keyword=${keyword}</c:if>" class="inactive">${i}</a>
+            <a href="/board/adBoard.go?cPage=${i}<c:if test="${type ne ''}">&type=${type}</c:if><c:if test="${keyword ne ''}">&keyword=${keyword}</c:if>" class="inactive">${i}</a>
 							</c:if>
 						</c:forEach>
 						<c:if test="${cPage eq maxPage}">
@@ -123,7 +123,7 @@
 						<div align="right">
 							<select name="" id="selSearch">
 								<option value="">선택</option>
-								<option value="nick">닉네임</option>
+                <option value="nick">닉네임</option>
 								<option value="title">제목</option>
 							</select>
 							<input type="text" name="" id="txtFind">
@@ -138,7 +138,7 @@
 				<c:if test="${blist.size() eq 0}">
 					<article>
 						<div class="col-md-12">
-							<h2>검색결과 또는 등록된 게시물이 없습니다.</h2>
+              <h2>검색결과 또는 등록된 게시물이 없습니다.</h2>
 							<a href="/board/adBoard.go">처음으로</a>
 							<div align="right">
 								<select name="" id="selSearch">

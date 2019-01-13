@@ -189,6 +189,13 @@ public class BoardDaoImpl implements BoardDao {
 	}
 	
 	@Override
+	public int updateLikes(int BId) {
+		// TODO Auto-generated method stub
+		return sqlSession.update("board.updateLikes",BId);
+	}
+
+	
+	@Override
 	public int updateBlindOff(int BId) {
 		// TODO Auto-generated method stub
 		return sqlSession.update("board.updateBlindOff", BId);
@@ -286,5 +293,6 @@ public class BoardDaoImpl implements BoardDao {
 		return sqlSession.selectList("board.selectRecentBoard", param);
 	}
 
+	
 	
 }

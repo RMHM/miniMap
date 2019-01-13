@@ -56,7 +56,7 @@ function reComment(obj, bid, bcode, mnick, mno, cid, clevel) {
 	})
 	$td2.append($textArea);
 	
-	$td3 = $('<td>').attr({'width' : ''});
+  $td3 = $('<td>').attr({'width' : ''});
 	$div3 = $('<div>').attr({
 		'id' : 'btn',
 		'style' : 'text-align: center;',
@@ -93,7 +93,7 @@ function reComment(obj, bid, bcode, mnick, mno, cid, clevel) {
 	
 	// 추가 완료 버튼을 화면 보이게 하기
 	$(obj).siblings('.insertConfirm').css('display', 'inline');
-	//$(obj).parents('tr').find('td').eq(1).attr({'colspan' : '2'});
+  //$(obj).parents('tr').find('td').eq(1).attr({'colspan' : '2'});
 	//$(obj).parents('tr').find('td').eq(2).remove();
 }
 
@@ -108,8 +108,8 @@ function reConfirm(obj, bid, mno, bcode) {
 	var grandparent = parent.parent();
 	var siblingsTR = grandparent.siblings().last();
 
-	var content = grandparent.siblings().find('textarea[name="recontent"]').val().replace(/\n/gim, '<br>');
-
+  var content = grandparent.siblings().find('textarea[name="recontent"]').val().replace(/\n/gim, '<br>');
+  
 	location.href = '/coment/comentAdd2.do' + '?BId=' + bid
 	+'&ccontent=' + content + '&mno=' + mno + '&cref=' + cref
 			+ '&clevel=' + level + "&bCode=" + bcode; 
@@ -136,7 +136,7 @@ function report(mno, tid){
 				alert("신고 실패");
 			},
 			complete : function(){
-				$('#insertReport')[0].reset();
+        $('#insertReport')[0].reset();
 				$('#btnCancel').click();
 			}
 		});

@@ -48,4 +48,9 @@ public interface MessageDao {
 	
 	int countMessageStore(int mNo);
 	
+	List<Message> selectMessageBlock(int cPage, int numPerPage, int mNo);
+	
+	int countMessageBlock(int mNo);
+	
+	int unblockMessage(String[] arr, int mId);
 }

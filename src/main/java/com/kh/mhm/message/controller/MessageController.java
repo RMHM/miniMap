@@ -106,11 +106,6 @@ public class MessageController {
 		return "message/message_store";
 	}
 	
-	@RequestMapping("/popUp.block")
-	public String pupUpBlock() {
-		return "message/message_block";
-	}
-	
 	@RequestMapping(value="/message.delete", method = {RequestMethod.POST})
 	@ResponseBody
 	public int deleteMessage(int[] arr) {
@@ -268,5 +263,41 @@ public class MessageController {
 		model.addAttribute("msg", msg).addAttribute("loc", loc);
 		
 		return "common/msg";
+	}
+	
+	@RequestMapping("/popUp.block")
+	public String popUpblock(@RequestParam(value="cPage", required=false, defaultValue="1") int cPage, HttpSession session) {
+		Member member=(Member) session.getAttribute("member");
+		int numPerPage = 9; // 한 페이지당 게시글 수
+		
+		/*List<Message> message=ms.selectMyMessage(member.getMno());*/
+		
+		// 1. 현재 페이지 게시글 목록 가져오기
+		List<Message> block = ms.selectMessageBlock(cPage, numPerPage, member.getMno());
+		
+		
+		// 2. 전체 게시글 개수 가져오기
+		int totalContents = ms.countMessageBlock(member.getMno());
+		
+		// 3. 페이지 계산 후 작성할 HTML 추가
+		String pageBar = Paging.getPageBar(totalContents, cPage, numPerPage, "/popUp.block");
+		
+		session.setAttribute("block", block);
+		session.setAttribute("totalContents", totalContents);
+		session.setAttribute("numPerPage", numPerPage);
+		session.setAttribute("pageBar", pageBar);
+		return "message/message_block";
+	}
+	
+	@RequestMapping(value="/message.unblock", method = {RequestMethod.POST})
+	@ResponseBody
+	public int unblockMessage(String[] arr, int mId) {
+		int result=ms.unblockMessage(arr,mId);
+		return result;
+	}
+	
+	@RequestMapping("/block.message")
+	public String popUpBlockMessage() {
+		return "message/block";
 	}
 }
