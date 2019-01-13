@@ -101,15 +101,32 @@
 								</div>
 							</div>
 								<div class="form-group">
-								<label class="col-sm-3 control-label" for="">프로필</label>	
+								<label class="col-sm-3 control-label" for="">프로필</label>
+								<div class=" col-sm-6">
+								<button type="button" id="defa" >기본이미지</button>
+								</div>
+								
 								<div class="col-sm-6">
+								
 									<img id = "imc" src="/resources/img/profiles/${member.profilePath}">
 									<input class="form-check-input" id="profile" name="profile" onchange="readURL(this);"
 										type="file" value="${member.profilePath}">
 								</div>
+								<div class="form-group">
+								
+								<div class="col-sm-6">
+								
+								</div>
 							</div>
 						<script> 
+						$('#defa').click(function(){
+							/* console.log($('#profile').val());
+							console.log("클릭"); */
+							$('#imc').attr('src','/resources/img/profiles/default.png');
+							/* $('#profile').attr('value','default.PNG'); */
+							/* console.log($('#imc').attr('src').value); */
 						
+						});
 						$("#mnick").blur(function(){
 							$.ajax({
 								url : "${pageContext.request.contextPath}/myPage/nickCheck.do",
@@ -186,44 +203,54 @@
 								reader.onload = function (e) {
 									$('#imc').attr('src', e.target.result); 
 									} 
-								reader.readAsDataURL(input.files[0]); } 
+								reader.readAsDataURL(input.files[0]); 
+							console.log("read : " + reader.readAsDataURL(input.files[0]));		
+						} 
 								
 						
 						function check(){
-								
-							var regNum = /[0-9]/g;
-					     	var regEng = /[a-z]/ig;
-					     	var pass= $('#mpw').val(); 
-					   		var r = "";
-					   		console.log("val : " + $('#mpw').val());
-					   		
-						   		if($('#mpw').val()!=""){
-					
-							     	if(!regNum.test(pass)||!regEng.test(pass)) {
-							     		alert("숫자와 영문자를 입력하세요");
-							     		return false
-							     	}
-							     	else if(pass.length<4||pass.length>16){
-							     		alert("비밀번호 4~16자리를 입력하세요");
-							     		return false
-							     	}
-						   		}else if(($('#checkNick').text()=="")||($('#checkemail').text()=="")){
-						     		alert("값을 입력하세요");
-						     		return false
-						     	}
+							$('#mUpdateMember').click(function(){
+								var regNum = /[0-9]/g;
+						     	var regEng = /[a-z]/ig;
+						     	var pass= $('#mpw').val(); 
+						   		var r = "";
+						   		console.log("val : " + $('#mpw').val());
 						   		
-						     	else if($('#checkNick').text()=="사용불가"){
-						     		alert("닉네임을 다시 설정하세요.");
-						     		return false
-						     	}else if($('#checkemail').text()=="사용불가"){
-						     		alert("이메일을 다시 설정하세요.");
-						     		return false
-						     	}
-					   				
-					     			
-					     			
-					     	return true;
-					   
+							   		if($('#mpw').val()!=""){
+						
+								     	if(!regNum.test(pass)||!regEng.test(pass)) {
+								     		alert("숫자와 영문자를 입력하세요");
+								     		return false
+								     	}
+								     	else if(pass.length<4||pass.length>16){
+								     		alert("비밀번호 4~16자리를 입력하세요");
+								     		return false
+								     	}
+							   		}else if(($('#checkNick').text()=="")||($('#checkemail').text()=="")){
+							     		alert("값을 입력하세요");
+							     		return false
+							     	}
+							   		
+							     	else if($('#checkNick').text()=="사용불가"){
+							     		alert("닉네임을 다시 설정하세요.");
+							     		return false
+							     	}else if($('#checkemail').text()=="사용불가"){
+							     		alert("이메일을 다시 설정하세요.");
+							     		return false
+							     	}
+						   				
+						     			
+						     			
+						     	return true;
+							
+							
+							
+							
+							
+							});
+						
+							
+							
 						}
 						</script>
 

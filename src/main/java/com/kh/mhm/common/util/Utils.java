@@ -9,10 +9,11 @@ public class Utils {
 	public static String getPageBar(int totalContents, int cPage, int numPerPage, String url ){
 		String pageBar = "";
 		int pageBarSize = 5;
-		cPage = cPage==0?1:cPage;
+
 		
 		//총페이지수 구하기
     int totalPage = (int)Math.ceil((double)totalContents/numPerPage);
+    totalPage = (totalPage==0?1:totalPage);
 		//1.pageBar작성
 		//pageBar순회용변수 
 		int pageNo = ((cPage - 1)/pageBarSize) * pageBarSize +1;

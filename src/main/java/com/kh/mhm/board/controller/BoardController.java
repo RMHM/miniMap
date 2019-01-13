@@ -1,6 +1,7 @@
 package com.kh.mhm.board.controller;
 
 import java.io.File;
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -10,6 +11,7 @@ import java.util.Map;
 import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -258,17 +260,30 @@ public class BoardController {
 	}
 
 	@RequestMapping("/board/boardview.do")
-	public String boardview(@RequestParam int BId, Model model) {
+	public String boardview(@RequestParam int BId, Model model,
+			HttpServletRequest request, HttpServletResponse response) {
+		// 게시물 볼대 비로그인시 로그인페이지로 이동.
+		if(request.getSession().getAttribute("member") ==null) {
+			try {
+				response.sendRedirect("/member/loginPage.go");
+			} catch (IOException e) {
+				
+				e.printStackTrace();
+			}			
+		}else {
+			List<Coment> clist = comentService.selectCometList(BId);
+			System.out.println(clist);
+			model.addAttribute("b", boardService.selectOneBoard(BId)).addAttribute("clist", clist);
 
-		List<Coment> clist = comentService.selectCometList(BId);
-		System.out.println(clist);
-		model.addAttribute("b", boardService.selectOneBoard(BId)).addAttribute("clist", clist);
-
-		System.out.println(BId);
-		System.out.println(boardService.selectOneBoard(BId));
-		System.out.println(model);
-		boardService.updateOneCount(BId);
+			System.out.println(BId);
+			System.out.println(boardService.selectOneBoard(BId));
+			System.out.println(model);
+			boardService.updateOneCount(BId);
+			return "board/boardview";
+		}
 		return "board/boardview";
+
+		
 	}
 
 	/*
@@ -320,13 +335,42 @@ public class BoardController {
 
 		return "common/msg";
 	}
+	
+	@RequestMapping("/board/boardBlindOff.do")
+	public String boardBlindOff(@RequestParam("BId") int BId, HttpSession session, Model model) {
+		
+		
+		Board originBoard = boardService.selectOneBoard(BId);
+		int bcode = originBoard.getBCode();
+		
+		int result = boardService.updateBlindOff(BId);
+		
+		String loc = "/board/boardlist"+bcode+".do";
+		String msg = "";
+
+		if (result > 0) {
+			msg = "게시물의 블라인드가 해제되었습니다";
+
+		} else {
+			msg = "신고해제 실패!";
+		}
+
+		model.addAttribute("loc", loc).addAttribute("msg", msg);
+
+		return "common/msg";				
+
+	}
 
 	@RequestMapping("/board/boardDelete.do")
 	public String boardDelete(@RequestParam("BId") int BId, HttpSession session, Model model) {
-
-		int result = boardService.deleteBoard(BId);
-
-		String loc = "/board/boardlist1.do";
+		
+		Board originBoard = boardService.selectOneBoard(BId);
+		int bcode = originBoard.getBCode();
+		
+		int result = boardService.deleteBoard(BId);		
+		
+		String loc = "/board/boardlist"+bcode+".do";
+		
 		String msg = "";
 
 		if (result > 0) {
@@ -352,23 +396,25 @@ public class BoardController {
 		List<Board> list = null;
 		List<String> thumbnail = null;
 		List<Integer> comment = null;
-		Map<String, Integer> param = null;
+		Map<String, Object> param = null;
 
 		try {
 			// 기업 게시판 게시물 가져오기
 			list = new ArrayList<Board>();
 			thumbnail = new ArrayList<String>();
 			comment = new ArrayList<Integer>();
-			System.out.println(type);
-			System.out.println(keyword);
+      
+      param = new HashMap<String, Object>();
+			param.put("bCode", 5);
+			param.put("type", type);
+			param.put("keyword", keyword);
+      
 			int pageInNum = 3;
-			int totCnt = boardService.selectBoardCnt(5);
+			int totCnt = boardService.selectBoardCnt(param);
 			int maxPage = 0;
 			if (totCnt == 0) maxPage = 1;
 			else maxPage = (totCnt % pageInNum == 0) ? (int) totCnt / pageInNum : (int) (totCnt / pageInNum + 1);
-
-			param = new HashMap<String, Integer>();
-			param.put("bCode", 5);
+			 	
 			param.put("cPage", cPage);
 			param.put("num", pageInNum);
 			
@@ -528,20 +574,25 @@ public class BoardController {
 		ModelAndView mv = new ModelAndView();
 
 		try {
-			boardService.updateOneCount(bid);
 			Board b = boardService.selectOneBoard(bid);
-			List<Coment> clist = comentService.selectCometList(bid);
-			System.out.println(clist);
-			mv.addObject("b", b);
-			mv.addObject("clist", clist);
-			mv.setViewName("board/ad/adBoardView");
+			if(b.getRFlag().equals("N")) {
+				boardService.updateOneCount(bid);
+				List<Coment> clist = comentService.selectCometList(bid);
+				System.out.println(clist);
+				mv.addObject("b", b);
+				mv.addObject("clist", clist);
+				mv.setViewName("board/ad/adBoardView");
+			} else {
+				mv.addObject("loc", "/board/adBoard.go");
+				mv.addObject("msg", "신고된 게시물은 열람하실수 없습니다.");
+				mv.setViewName("common/msg");
+			}
 		} catch (Exception e) {
 			e.getStackTrace();
 			mv.addObject("msg", "게시물 불러오기에 실패하였습니다.");
 			mv.addObject("loc", "/");
 			mv.setViewName("common/msg");
 		}
-
 		return mv;
 	}
 

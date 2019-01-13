@@ -39,7 +39,7 @@
 							<ul class="slides">
 								<li><img src="resources/img/member/3.jpg" alt="" />
 									</li>
-								<li><img src="resources/img/member/1.jpg" alt="" />
+								<li><img src="" alt="" />
 									</li>
 								<li>
 								</li>

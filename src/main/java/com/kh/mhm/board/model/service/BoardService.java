@@ -56,6 +56,10 @@ public interface BoardService {
 	Board selectOneBoard(int bId);
 	
 	int updateOneCount(int bId);
+	
+	int updateLikes(int bId);
+	
+	int updateBlindOff(int bId);
 
 	List<Fileref> selectFilerefList(int boardNo);
 
@@ -79,9 +83,9 @@ public interface BoardService {
 	
 	int updateImgBoard(Board b);
 	
-	int selectBoardCnt(int bCode);
+	int selectBoardCnt(Map<String, Object> param);
 	
-	List<Board> selectBoardListPart(Map<String, Integer> param);
+	List<Board> selectBoardListPart(Map<String, Object> param);
 	
 	int selectAuthority(int mno);
 	

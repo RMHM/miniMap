@@ -91,6 +91,7 @@ table[id$=Table]{
 
 #resultArea {
 	margin: 0 auto;
+	padding: 50px 0 40px 0;
 }
 
 .searchArea {

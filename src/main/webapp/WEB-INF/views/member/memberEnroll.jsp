@@ -17,20 +17,29 @@
 		/*중복아이디체크관련*/
 		div#userId-container {position:relative; padding:0px;}
 		div#userId-container span.guide {display:none; font-size: 12px; position:absolute; top:12px; right:10px;}
-		div#userId-container span.ok {color:green;}
-		div#userId-container span.error, span.invalid {color:red;}
+		div#userId-container span.ok {color:#0431B4;}
+		div#userId-container span.error {color:#FF8000;}
+		div#userId-container span.invalid {color:#FF0000;}
 		div#userNick-container {position:relative; padding:0px;}
 		div#userNick-container span.nick {display:none; font-size: 12px; position:absolute; top:12px; right:10px;}
-		div#userNick-container span.o {color:green;}
-		div#userNick-container span.e, span.i {color:red;}
+		div#userNick-container span.o {color:#0431B4;}
+		div#userNick-container span.e {color:#FF8000;}
+		div#userNick-container span.i {color:#FF0000;}
 		div#email-container {position:relative; padding:0px;}
 		div#email-container span.email {display:none; font-size: 12px; position:absolute; top:12px; right:10px;}
-		div#email-container span.o {color:green;}
-		div#email-container span.e, span.i {color:red;}
+		div#email-container span.o {color:#0431B4;}
+		div#email-container span.e {color:#FF8000;}
+		div#email-container span.i {color:#FF0000;}
 		div#userPw-container {position:relative; padding:0px;}
-		div#userPw-container span.pw {display:none; font-size: 12px; position:abosulte; top:12px; right:10px;}
-		div#userPw-container span.o {color:green;}
-		div#userPw-container span.e, span.i {color:red;}
+		div#userPw-container span.pw {display:none; font-size: 12px; position:absolute; top:12px; right:10px;}
+		div#userPw-container span.o {color:#0431B4;}
+		div#userPw-container span.e {color:#FF8000;}
+		div#userPw-container span.i {color:#FF0000;}
+		div#userPw2-container {position:relative; padding:0px;}
+		div#userPw2-container span.pw2 {display:none; font-size: 12px; position:absolute; top:12px; right:10px;}
+		div#userPw2-container span.o {color:#0431B4;}
+		div#userPw2-container span.e {color:#FF8000;}
+		div#userPw2-container span.i {color:#FF0000;}
 	</style>
 </head>
 <body>
@@ -38,18 +47,20 @@
 		 <c:import url="/WEB-INF/views/common/exFile.jsp"/>
 		<section id="content">
 			<div id="enroll-container">
-				<form name="memberEnrollFrm" action="memberEnrollEnd.do" method="post" onsubmit="return fn_enroll_validate();" enctype = multipart/form-data>
+				<form name="memberEnrollFrm" action="memberEnrollEnd.do" method="post" enctype = multipart/form-data>
 					<table>
 						<tr>
 							<th>아이디</th>
 							<td>
 								<div id="userId-container">
 									<input type="text" class="form-control" placeholder="사용할 아이디 입력" name="mid" id="mid_" required>
+									<div class="check_font" id="id_check"></div>
 									<!-- 아이디중복검사 코멘트추가 -->
 									<span class="guide ok">사용 가능한 아이디</span>
 				            		<span class="guide error">이미 사용중인 아이디</span>
-				            		<span class="guide invalid">4글자 이상 입력</span>
+				            		<span class="guide invalid">6글자 이상 입력</span>
 				            		<input type="hidden" name="idDuplicateCheck" id="idDuplicateCheck" value="0"/>
+				       
 				            	</div>
 							</td>
 						</tr>
@@ -68,9 +79,15 @@
 						</tr>
 						<tr>
 							<th>패스워드확인</th>
-							<td>	
+							<td>
+								<div id="userPw2-container">	
 								<input type="password" class="form-control" id="mpw2" required>
 								<div class="check_font" id="pw2_check"></div>
+								<span class="pw2 o">사용 가능한 비밀번호</span>
+				            	<span class="pw2 e">이미 사용중인 비밀번호</span>
+				            	<span class="pw2 i">6글자 이상 입력</span>
+				            	<input type="hidden" name="pw2Check" id="pw2Check" value="0"/>
+				            	</div>
 							</td>
 						</tr>  
 						<tr>
@@ -84,7 +101,8 @@
 							<td>
 								<div id="userNick-container">
 								<input type="text" class="form-control" name="mnick" id="mnick_" required>
-								<span class="nick o">사용 가능</span>
+								<div class="check_font" id="nick_check"></div>
+								<span class="nick o">사용 가능한 닉네임</span>
 					            <span class="nick e">사용중인 닉네임 </span>
 					            <span class="nick i">2글자 이상 입력</span>
 					            <input type="hidden" name="nickCheck" id="nickCheck" value="0"/>
@@ -99,7 +117,8 @@
 							<td>	
 								<div id="email-container">
 								<input type="email" class="form-control" placeholder="사용할 이메일 입력" name="email" id="email">
-								<span class="email o">사용 가능</span>
+								<div class="check-font" id="email_check"></div>
+								<span class="email o">사용 가능한 이메일</span>
 					            <span class="email e">사용중인 이메일</span>
 					            <span class="email i">6글자 이상 입력</span>
 					            <input type="hidden" name="emailCheck" id="emailCheck" value="0"/>
@@ -141,9 +160,9 @@
 						<tr>
 							<th>업로드</th>
 							<td>
-							<img id="imc" src="/resources/img/profiles" />
+							<img id="imc" src="" style="height:40%"/>
 							<input type="file" class="form-check-input" name="profile" id="profilePath_" 
-								   value="">
+								   value="/resources/img/profiles/default.png" accept=".gif, .jpg, .png .jpeg"  >
 							</td>
 						</tr>
 						
@@ -182,7 +201,7 @@
 						readURL(this);
 					});
 			</script>
-			<!--  <script>
+<!--
 			// 비밀번호 정규식 : A~z, a~z, 0~9, 6~12자리
 			var pw = /^[A-Za-z0-9]{6,12}$/; 
 			
@@ -240,25 +259,23 @@
 						}
 					});
 				});  */
-			</script> -->
-			<!-- 
-			/* 닉네임 유효성 검사 */
+-->
 			<script>
-			var nick = /^[가-힣]{2,6}$/;
+			var pw = /^[A-Za-z0-9]{6,12}$/;
 			
-			$("#mnick_").blur(function(){
-				if (nick.test($('#mnick_').val())){
+			$("#mpw_").blur(function(){
+				console.log(pw);
+				console.log($('#mpw_').val());
+				if(pw.test($('#mpw_').val())){
 					console.log('true');
-					$('nick_check').text('');
+					$('#pw_check').text('');
 				} else {
-					console.log('false');	
-					$('#nick_check').text('한글 2자리 이상 6자리 이하 입력해주세요.');
-					$('#nick_check').css('color', 'red');
-				} 
+					console.log('false');
+					$('#pw_check').text('숫자, 대소문자 혼용 6자이상 입력바랍니다.');
+					$('#pw_check').css('color', 'green'); 
+				}
 			});
-			</script> 
-			-->
-			<script>
+			
 			$("#mpw_").on("keyup", function(){
 				var mpw = $(this).val().trim();
 
@@ -288,17 +305,79 @@
 								}
 							}, error : function(jqxhr, testStatus, errorThrown){
 								console.log("ajax 처리 실패");
-								
-								console.log(jqxhr);
 							}
 						});
 					}
-			
 					console.log(mpw);
 				}); 
-				
 			</script>
 			<script>
+			var pw = /^[A-Za-z0-9]{6,12}$/;
+			
+			$("#mpw2").blur(function(){
+				console.log(pw);
+				console.log($('#mpw2').val());
+				if(pw.test($('#mpw2').val())){
+					console.log('true');
+					$('#pw2_check').text('');
+				} else {
+					console.log('false');
+					$('#pw2_check').text('숫자, 대소문자 혼용 6자이상 입력바랍니다.');
+					$('#pw2_check').css('color', 'green'); 
+				}
+			});
+			
+			$("#mpw2").on("keyup", function(){
+				var mpw = $(this).val().trim();
+
+				
+				if (mpw.length < 6){
+					$(".pw2.e").hide();
+					$(".pw2.o").hide();
+					$(".pw2.i").show();
+					return;
+				} else {
+					$.ajax({
+							url : "/member/checkPw.do",
+							data : { mpw : mpw },
+							dataType : "json",
+							success : function(data){
+								console.log(data);
+								if(data.isUsable==true){
+									$(".pw2.e").hide();
+									$(".pw2.i").hide();
+									$(".pw2.o").show();
+									$("#pwCheck").val(1);
+								} else {
+									$(".pw2.e").show();
+									$(".pw2.i").hide();
+									$(".pw2.o").hide();
+									$("#pwCheck").val(0);
+								}
+							}, error : function(jqxhr, testStatus, errorThrown){
+								console.log("ajax 처리 실패");
+							}
+						});
+					}
+					console.log(mpw2);
+				}); 
+			</script>
+			<script>
+			var nick = /^[가-힣]{2,6}$/;
+			
+			$("#mnick_").blur(function(){
+				console.log(nick);
+				console.log($('#mnick_').val());
+				if(nick.test($('#mnick_').val())){
+					console.log('true');
+					$('#nick_check').text('');
+				} else {
+					console.log('false');
+					$('#nick_check').text('한글로만 이루어진 닉네임 2자이상 입력바랍니다.');
+					$('#nick_check').css('color', 'green');
+				}
+			});
+			
 			$("#mnick_").on("keyup", function(){
 				var mnick = $(this).val().trim();
 
@@ -337,9 +416,23 @@
 			
 					console.log(mnick);
 				}); 
-				
 			</script>
 			<script>
+			var email = /^[a-z@]{6,12}$/; 
+			 
+			$("#email").blur(function(){
+				console.log(email);
+				console.log($('#email').val());
+				if(email.test($('#email').val())){
+					console.log('true');
+					$('#email_check').text('');
+				} else {
+					console.log('false');
+					$('#email_check').text('@포함 소문자만 이루어진 이메일 6자이상 입력바랍니다.');
+					$('#email_check').css('color', 'green');
+				}
+			});
+			
 			$("#email").on("keyup", function(){
 				var email = $(this).val().trim();
 

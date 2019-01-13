@@ -217,16 +217,25 @@ public class MemberController {
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd_HHmmss");
 		int rndNum = (int) (Math.random() * 1000);
 		
-		String renamedName = sdf.format(new java.util.Date()) + "_" + rndNum + "." + ext;
+		if (originName == null || originName.trim().equals("")) {
+			m.setProfilePath("default.png");
+			
+			String random = "";
+			for (int i = 1; i <= 10; i++) {
+				m.setProfilePath("default.png");
+			}
+			
+		} else {
+			String renamedName = sdf.format(new java.util.Date()) + "_" + rndNum + "." + ext;
+			try {
+				profile.transferTo(new File(saveDir + "/" + renamedName));
+			} catch (IllegalStateException | IOException e) {
+				e.printStackTrace();
+			}	
+			
+			m.setProfilePath(renamedName);
+		}
 		
-		
-		try {
-			profile.transferTo(new File(saveDir + "/" + renamedName));
-		} catch (IllegalStateException | IOException e) {
-			e.printStackTrace();
-		}	
-		
-		m.setProfilePath(renamedName);
 		
 		// m.setMpw(bcpe.encode(m.getMpw()));
 		
@@ -324,32 +333,4 @@ public class MemberController {
 		return map;
 	}
 	
-	
-	/*
-	 * @RequestMapping("/member/insertFileEnd.do") public String insertMember(Member
-	 * member, Model model, HttpSession session,
-	 * 
-	 * @RequestParam(value="upFile", required = false) MultipartFile[] upFile) { //
-	 * 저장 경로 생성 String sfile =
-	 * session.getServletContext().getRealPath("/resources/img/profiles");
-	 * List<Member> List = new ArrayList<Member>();
-	 * 
-	 * // 폴더 유무 확인 후 생성 File file = new File(sfile);
-	 * 
-	 * System.out.println("폴더가 있니? " + file.exists());
-	 * 
-	 * if(file.exists() == false) file.mkdirs();
-	 * 
-	 * // 업로드 for(MultipartFile f : upFile) { if(!f.isEmpty()) { // 원본 이름 가져오기
-	 * String originName = f.getOriginalFilename(); String ext =
-	 * originName.substring(originName.lastIndexOf(".")+1); SimpleDateFormat sdf =
-	 * new SimpleDateFormat("yyyyMMdd_HHmmss");
-	 * 
-	 * int rNum = (int) (Math.random() * 1000);
-	 * 
-	 * // 서버에서 저장 후 관리할 파일 명 String renamedName = sdf.format(new Date()) + "_" +
-	 * rNum + "." + ext;
-	 * 
-	 * // } } }
-	 */
 }

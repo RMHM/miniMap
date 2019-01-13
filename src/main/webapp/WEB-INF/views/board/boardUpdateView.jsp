@@ -60,8 +60,8 @@ $(document).ready(function() {
 					<input type="radio" name="bCode" value="2">정보
 					<input type="radio" name="bCode" value="3">후기
 					<input type="radio" name="bCode" value="4">질문  -->
-					<input type="button" class="btn btn-theme" id="updateBoard" value="수정하기"
-					 style="position: absolute; right: 100px;"/>												
+					<input type="button" class="btn btn-theme" id="updateBoard" value="수정하기"/>
+					<input type="button" value="취소" onclick="history.back(-1);" class="btn btn-warning" />													
 				</form>
 			</div>
 			<div>

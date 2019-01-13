@@ -277,8 +277,11 @@
 			<button id=btHide>마커숨기기</button>
 
 
-			<input type="button" value="전송하기" id="btn-add"
-				onclick="fn_goBoardForm();" />
+			<input type="button" value="저장하기" id="btn-add"
+				onclick="transferSave();" /> 
+				
+				<input type="button" value="불러오기"
+				id="btn-load" onclick="transferLoad();" />
 		</p>
 
 
@@ -782,9 +785,10 @@
 		setInfowidow(null);
 		//infowindow2.close();   
 	}
-
+	var userId = ${member.mid};
 	// 되돌리기
 	$('#btBack').click(function() {
+		console.log(userId);
 		hideMarkers();
 		markersPersonal.pop();
 		infowPersonal.pop();
@@ -803,9 +807,52 @@
 		hideMarkers()
 	});
 	
+	///////////////////////////////////////////
+	//                                //
+	//                               //
+	//        저장하기 & 불러오기         //
+	//                               //
+	//                               //
+	///////////////////////////////////////////	
 	
-	// 전송하기 
-	function fn_goBoardForm() {
+	// 저장하기 
+	function transferSave() {
+	var tLat = transferLat+"";
+	var tLng = transferLng+"";
+	var tInText = transferPersonalInputText+"";
+	var tInSubject = transferSubject+"";
+	
+	console.log(tLat); 
+	console.log(tLng);
+	console.log(tInText);
+	$.ajax({
+		url : "${pageContext.request.contextPath}/map/hoji.do",
+
+		data : {
+			tLat,
+			tLng,
+			tInText,
+			tInSubject
+		},
+		/* dataType : "json", */
+		success : function(data) {
+			console.log(data);
+		
+
+		},
+		error : function() {
+			alert("ajax 실패");
+
+		}
+
+	});
+
+	}
+	
+	
+	
+	// 불러오기
+	function transferLoad() {
 	var tLat = transferLat+"";
 	var tLng = transferLng+"";
 	var tInText = transferPersonalInputText+"";
@@ -835,10 +882,6 @@
 		}
 
 	});
-
-
-	
-
 
 	}
 	
