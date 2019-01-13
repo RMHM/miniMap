@@ -34,12 +34,19 @@ public class ReportController {
 	
 	@RequestMapping(value = "/report/insertReport.do")
 	@ResponseBody
-	public void insertReport(@RequestParam Map<String,Object> re,  Member member,Model model){
+	public Map<String, Object> insertReport(@RequestParam Map<String,Object> re,  Member member,Model model){
 	
 		Gson gson = new Gson();
 		Report report = gson.fromJson(re.toString(),Report.class);
-
+System.out.println(report);
 		int result = rs.insertReport(report);
+		String msg = "";
+		
+		if(result ==0)msg="이미 신고하셨습니다.";
+		else msg="신고 접수가 완료되었습니다";
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("msg",msg);
+		return map;
 
 	}
 }

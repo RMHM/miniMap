@@ -8,7 +8,11 @@
 	<resultMap type="Board" id="boardMap"></resultMap>
 	
 	<insert id="insertReport" parameterType="Report">
-    INSERT INTO REPORT VALUES(SEQ_RID.NEXTVAL,#{target_type},#{target_id},#{rcode},default,#{report_mno},SYSDATE,#{rdetail})
+INSERT INTO REPORT 
+SELECT SEQ_RID.NEXTVAL,#{target_type},#{target_id},#{rcode},'Y',#{report_mno},SYSDATE,#{rdetail} 
+FROM DUAL 
+WHERE NOT EXISTS(
+SELECT * FROM REPORT WHERE TARGET_TYPE=#{target_type} AND TARGET_ID=#{target_id} AND REPORT_MNO=#{report_mno})
 	</insert>
 	
 </mapper>

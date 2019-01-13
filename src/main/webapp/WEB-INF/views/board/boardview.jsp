@@ -77,6 +77,7 @@
 });
  */
 </script>
+<script src="/resources/js/board/adBoardView.js"></script>
 <body>
 	<c:import url="/WEB-INF/views/common/exFile.jsp" />
 	<div id="wrapper">
@@ -111,7 +112,9 @@
 				<b>&nbsp; 추천수 : &nbsp;${b.likes }</b> <br>		
 				<a id="" href="" role="button" class="btn btn-success"> 추천하기</a>
 				<c:if test="${b.isNotice eq 'N' }">
-				<a id="report-modal" href="#report-modal-container" 
+				<!-- <a id="report-modal" href="#report-modal-container"  -->
+				<a id="report-modal" href="javascript:void(0);" onclick="reportModal(${b.MNo},${b.BId},'B');" 
+
 				role="button" class="btn btn-danger" data-toggle="modal">신고하기</a>
 				</c:if>
 				<c:if test="${b.RFlag eq 'Y' }">
@@ -160,7 +163,7 @@
              						            </c:if>
 												&nbsp;<b>${Coment.mnick }</b><br>												 
 												&nbsp;<font size="2" color="lightgray">${Coment.cdate }</font>
-												<a id="report-modal" href="#report-modal-container" 
+												<a id="report-modal" href="#report-modal-container" onclick="reportModal(${Coment.mno},${Coment.cid},'C');" 
 												role="button" class="btn" data-toggle="modal">신고</a>
 											</div>
 										</td>
@@ -399,8 +402,8 @@
 	</script>
 	
 	<!--Modal -->
-	<form id ="insertReport"  method="post" >
-	<%-- <form id ="insertReport"  action="${pageContext.request.contextPath}/report/insertReport.do" method="post" > --%>
+	<%-- <form id ="insertReport"  method="post" >
+	<form id ="insertReport"  action="${pageContext.request.contextPath}/report/insertReport.do" method="post" >
 	<div class="modal fade" id="report-modal-container" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 				<div class="modal-dialog" role="document">
 					<div class="modal-content">
@@ -465,7 +468,7 @@
 				</div>
 				<script>
 				
-				$('#report-modal').click(function(){
+				/* $('#report-modal').click(function(){
 					$('#insertReport')[0].reset();
 					console.log("${b.BId}");
 					$('#targetType').val("B");
@@ -500,7 +503,7 @@
 	 					
 					});
 				
-				});
+				}); */
 				
 			/* 	function insertRe(){
 					/* console.log(this.serialize());
@@ -525,7 +528,7 @@
 				} */
 				</script>
 	</div>	
-	</form>
+	</form> --%>
 <!-- <script>
  $("#reportbtn").click(function(){
 	 $('#insertReport').attr(("action", "${pageContext.request.contextPath}/report/insertReport.do"});
