@@ -129,8 +129,8 @@ function report(mno, tid){
 			data :re,
 			contentType: "application/json", 
 			dataType : "json",
-			success : function() {
-				alert("신고접수 완료");
+			success : function(data) {
+				alert(data.msg);
 			},
 			error : function(e) {
 				alert("신고 실패");
@@ -143,7 +143,7 @@ function report(mno, tid){
 		
 	}
 }
-
+/*
 $(function(){
 	$('#addReply').click(function(e){
 		if($(this).parents('tr').find('textarea').val().trim() == ""){
@@ -153,11 +153,11 @@ $(function(){
 		}
 	})
 	
-})
+});*/
 
 // modal 생성 및 띄워주기
 function reportModal(mno, tid, type){
-	$('#insertReport').remove();
+	/*$('#insertReport').remove();*/
 	
 	$form = $('<form>').attr({'method' : 'post', 'id' : 'insertReport'});
 	$divFade = $('<div>').attr({
