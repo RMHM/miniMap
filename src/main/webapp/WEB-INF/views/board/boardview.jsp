@@ -401,8 +401,9 @@
 		
 	</script>
 	
-<script src="/resources/js/board/adBoardView.js"></script>
+
 </body>
+<script src="/resources/js/board/adBoardView.js"></script>
 </html>
 
 	
