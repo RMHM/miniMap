@@ -352,23 +352,25 @@ public class BoardController {
 		List<Board> list = null;
 		List<String> thumbnail = null;
 		List<Integer> comment = null;
-		Map<String, Integer> param = null;
+		Map<String, Object> param = null;
 
 		try {
 			// 기업 게시판 게시물 가져오기
 			list = new ArrayList<Board>();
 			thumbnail = new ArrayList<String>();
 			comment = new ArrayList<Integer>();
-			System.out.println(type);
-			System.out.println(keyword);
+						
+			param = new HashMap<String, Object>();
+			param.put("bCode", 5);
+			param.put("type", type);
+			param.put("keyword", keyword);
+			
 			int pageInNum = 3;
-			int totCnt = boardService.selectBoardCnt(5);
+			int totCnt = boardService.selectBoardCnt(param);
 			int maxPage = 0;
 			if (totCnt == 0) maxPage = 1;
 			else maxPage = (totCnt % pageInNum == 0) ? (int) totCnt / pageInNum : (int) (totCnt / pageInNum + 1);
-
-			param = new HashMap<String, Integer>();
-			param.put("bCode", 5);
+			 	
 			param.put("cPage", cPage);
 			param.put("num", pageInNum);
 			
@@ -528,20 +530,25 @@ public class BoardController {
 		ModelAndView mv = new ModelAndView();
 
 		try {
-			boardService.updateOneCount(bid);
 			Board b = boardService.selectOneBoard(bid);
-			List<Coment> clist = comentService.selectCometList(bid);
-			System.out.println(clist);
-			mv.addObject("b", b);
-			mv.addObject("clist", clist);
-			mv.setViewName("board/ad/adBoardView");
+			if(b.getRFlag().equals("N")) {
+				boardService.updateOneCount(bid);
+				List<Coment> clist = comentService.selectCometList(bid);
+				System.out.println(clist);
+				mv.addObject("b", b);
+				mv.addObject("clist", clist);
+				mv.setViewName("board/ad/adBoardView");
+			} else {
+				mv.addObject("loc", "/board/adBoard.go");
+				mv.addObject("msg", "신고된 게시물은 열람하실수 없습니다.");
+				mv.setViewName("common/msg");
+			}
 		} catch (Exception e) {
 			e.getStackTrace();
 			mv.addObject("msg", "게시물 불러오기에 실패하였습니다.");
 			mv.addObject("loc", "/");
 			mv.setViewName("common/msg");
 		}
-
 		return mv;
 	}
 

@@ -217,11 +217,24 @@
 	</update>
 	
 	<select id="selectBoardCnt" parameterType="_int" resultType="_int">
-		select count(*) from board where bcode = #{bCode} and delflag = 'N' and rflag = 'N'
+		select count(*) from board where bcode = #{bCode} and delflag = 'N'
+		<if test="type eq 'nick'">
+			and mno in (select mno from member where mnick like '%'|| #{keyword} ||'%')
+		</if>
+		<if test="type eq 'title'">
+			and btitle like '%'|| #{keyword} ||'%'
+		</if>
 	</select>
 	
 	<select id="selectBoardListPart" parameterType="hashmap" resultType="Board">
-		select * from (select rownum rn, sub.* from (select b.*, m.mnick from board b, member m where bcode = #{bCode} and delflag='N' and rflag='N' and b.mno=m.mno order by bid desc) sub)
+		select * from (select rownum rn, sub.* from (select b.*, m.mnick from board b, member m where bcode = #{bCode} and delflag='N'
+		<if test="type eq 'nick'">
+			and m.mno in (select tmp.mno from member tmp where tmp.mnick like '%'|| #{keyword} ||'%')
+		</if>
+		<if test="type eq 'title'">
+			and btitle like '%'|| #{keyword} ||'%'
+		</if>
+		and b.mno=m.mno order by bid desc) sub)
 		<![CDATA[ where rn >= (#{cPage}-1)*#{num}+1 and rn <= #{cPage}*#{num} ]]>
 	</select>
 	

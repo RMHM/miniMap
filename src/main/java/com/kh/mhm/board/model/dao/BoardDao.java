@@ -62,7 +62,7 @@ public interface BoardDao {
 
 	int deleteFileref(int boardNo);
 
-	
+	int selectBoardCnt(Map<String, Object> param);
 
 	int insertImgBoard(Board board);
 	
@@ -80,11 +80,10 @@ public interface BoardDao {
 	
 	int updateImgBoard(Board b);
 	
-	int selectBoardCnt(int bCode);
-	
-	List<Board> selectBoardListPart(Map<String, Integer> param);
+	List<Board> selectBoardListPart(Map<String, Object> param);
 	
 	int selectAuthority(int mno);
 	
 	List<Board> selectRecentBoard(Map<String, Integer> param);
+
 }

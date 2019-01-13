@@ -260,12 +260,12 @@ public class BoardDaoImpl implements BoardDao {
 	}
 
 	@Override
-	public int selectBoardCnt(int bCode) {
-		return sqlSession.selectOne("board.selectBoardCnt", bCode);
+	public int selectBoardCnt(Map<String, Object> param) {
+		return sqlSession.selectOne("board.selectBoardCnt", param);
 	}
 
 	@Override
-	public List<Board> selectBoardListPart(Map<String, Integer> param) {
+	public List<Board> selectBoardListPart(Map<String, Object> param) {
 		return sqlSession.selectList("board.selectBoardListPart", param);
 	}
 
