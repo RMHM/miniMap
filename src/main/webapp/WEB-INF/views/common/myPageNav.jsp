@@ -18,8 +18,6 @@
 		<!-- <a href="/myPage/testt.do">test</a><br/> -->
 		${member.mnick } 님 
 
-		
-		
 		 <a id= "aTest" href="#" onclick="test();" class="note">
 			<img id="imgtest"alt=""src="/resources/img/timeline/jjokjee.png" width="20px"height="20px">
 			 <b class="newMsg"></b>

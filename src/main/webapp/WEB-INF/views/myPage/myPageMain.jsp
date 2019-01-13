@@ -11,7 +11,25 @@
 <title>miniMap에 오신걸 환영합니다.</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <meta name="description" content="" />
+<style>
+#sun{
+ animation-duration: 5s;
+  animation-name: slidein;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
+}
+@keyframes slidein {
+  from {
+    margin-left: 80%;
+    width: 1%
+  }
 
+  to {
+    margin-left: 0%;
+    width: 1%;
+  }
+}
+</style>
 </head>
 
 <body>
@@ -23,6 +41,10 @@
 		<c:import url="../common/header.jsp" />
 		<div class="container">
 			<c:import url="../common/myPageNav.jsp" />
+<hr/>
+
+<img src="/resources/img/weather/sun.PNG" alt="" width="10px" height="10px" id="sun"/>
+
 
 			<div class="col-md-10">
 				<div class="container">
