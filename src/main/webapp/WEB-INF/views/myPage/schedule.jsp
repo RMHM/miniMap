@@ -55,7 +55,7 @@
 		          });
 		        }, 
 		         eventAfterRender: function(event, element, view) { 
-                var new_description ='<a href="#">' 
+                var new_description ='<a href="${pageContext.request.contextPath}/board/boardwrite.do">' 
 		            + '<strong>후기작성</strong>' + '</a>' 
 		            
 					if(event.end==null){
@@ -269,7 +269,7 @@ body {
 										<label>날짜</label> <input type="date" id="startDateT"
 											name="startDateT" style="width: auto;"
 											class="ed hasDatepicker">~<input type="date"
-											id="endDateT" name="endDateT"
+											id="endDateT" name="endDateT" min="2019-01-05"
 											style="width: auto; margin-bottom: 4px;"
 											class="ed hasDatepicker">
 									</div>
@@ -298,6 +298,13 @@ body {
 						</div>
 					</div>
 					<script>
+				/* 		$('#endDateT').click(function(){
+				
+						 $('#endDateT').attr('min',$('#startDateT').val());
+
+						 });  */
+					
+					
 					function updateS(){
 						console.log("update실행");
 						$('#formAction').attr("action","updateSchedule.do");

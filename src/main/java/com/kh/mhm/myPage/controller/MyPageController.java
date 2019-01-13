@@ -224,11 +224,13 @@ public class MyPageController {
 		int result = mps.deleteMember(member);
 		if (result > 0) {
 			sessionStatus.setComplete();
+			/*session.invalidate();*/
 
-			msg = "로그아웃 되었습니다.";
+			msg = "탈퇴를 완료했습니다.";
 
 		} else
 			msg = "탈퇴실패";
+		
 		model.addAttribute("loc", loc);
 		model.addAttribute("msg", msg);
 		return "common/msg";
@@ -287,26 +289,49 @@ public class MyPageController {
 		int numPerPage = 5;
 
 		int totalContents = mps.selectBoardTotalContents(no);
-		int totalCoContents = mps.selectCommentTotalContents(no);
+		/*int totalCoContents = mps.selectCommentTotalContents(no);*/
 		
 		List<Map<String, Object>> list = new ArrayList<Map<String, Object>>(
 				mps.selectMyBoardList(cPage, numPerPage, no));
-		List<Map<String, Object>> colist = new ArrayList<Map<String, Object>>(
+	/*	List<Map<String, Object>> colist = new ArrayList<Map<String, Object>>(
 				mps.selectMyCommentList(cPage, numPerPage, no));
-		
-		String copageBar = Utils.getPageBar(totalCoContents, cPage, numPerPage, "myBoardList.do");
+		*/
+		/*String copageBar = Utils.getPageBar(totalCoContents, cPage, numPerPage, "myBoardList.do");*/
 		String pageBar = Utils.getPageBar(totalContents, cPage, numPerPage, "myBoardList.do");
 		model.addAttribute("list", list)
 				.addAttribute("totalContents", totalContents)
 				.addAttribute("numPerPage", numPerPage)
 				.addAttribute("pageBar", pageBar)
-				.addAttribute("colist", colist)
+				.addAttribute("myType","board")
+				/*.addAttribute("colist", colist)
 				.addAttribute("totalCoContents", totalCoContents)
-				.addAttribute("copageBar", copageBar)
+				.addAttribute("copageBar", copageBar)*/
 				;
 		return "myPage/boardMyView";
 	}
-
+	
+	/* 댓글 */
+	@RequestMapping("/myPage/myCommentList.do")
+	public String myCommentList(@RequestParam(value = "cPage", required = false, defaultValue = "1") int cPage,
+			Member member, Model model) {
+		int no = member.getMno();
+		int numPerPage = 5;
+		int totalCoContents = mps.selectCommentTotalContents(no);
+		
+		List<Map<String, Object>> colist = new ArrayList<Map<String, Object>>(
+				mps.selectMyCommentList(cPage, numPerPage, no));
+		
+		String copageBar = Utils.getPageBar(totalCoContents, cPage, numPerPage, "myCommentList.do");
+	
+		model.addAttribute("numPerPage", numPerPage)
+				.addAttribute("colist", colist)
+				.addAttribute("totalCoContents", totalCoContents)
+				.addAttribute("copageBar", copageBar)
+				.addAttribute("myType","comment")
+				;
+		return "myPage/boardMyView";
+	}
+	
 	/* nav클릭 요청목록보기 */
 	@RequestMapping("/myPage/rePermissionPage.do")
 	public String requestViewPage(Member member, Model model) {
