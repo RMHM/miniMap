@@ -209,40 +209,48 @@
 								
 						
 						function check(){
-								
-							var regNum = /[0-9]/g;
-					     	var regEng = /[a-z]/ig;
-					     	var pass= $('#mpw').val(); 
-					   		var r = "";
-					   		console.log("val : " + $('#mpw').val());
-					   		
-						   		if($('#mpw').val()!=""){
-					
-							     	if(!regNum.test(pass)||!regEng.test(pass)) {
-							     		alert("숫자와 영문자를 입력하세요");
-							     		return false
-							     	}
-							     	else if(pass.length<4||pass.length>16){
-							     		alert("비밀번호 4~16자리를 입력하세요");
-							     		return false
-							     	}
-						   		}else if(($('#checkNick').text()=="")||($('#checkemail').text()=="")){
-						     		alert("값을 입력하세요");
-						     		return false
-						     	}
+							$('#mUpdateMember').click(function(){
+								var regNum = /[0-9]/g;
+						     	var regEng = /[a-z]/ig;
+						     	var pass= $('#mpw').val(); 
+						   		var r = "";
+						   		console.log("val : " + $('#mpw').val());
 						   		
-						     	else if($('#checkNick').text()=="사용불가"){
-						     		alert("닉네임을 다시 설정하세요.");
-						     		return false
-						     	}else if($('#checkemail').text()=="사용불가"){
-						     		alert("이메일을 다시 설정하세요.");
-						     		return false
-						     	}
-					   				
-					     			
-					     			
-					     	return true;
-					   
+							   		if($('#mpw').val()!=""){
+						
+								     	if(!regNum.test(pass)||!regEng.test(pass)) {
+								     		alert("숫자와 영문자를 입력하세요");
+								     		return false
+								     	}
+								     	else if(pass.length<4||pass.length>16){
+								     		alert("비밀번호 4~16자리를 입력하세요");
+								     		return false
+								     	}
+							   		}else if(($('#checkNick').text()=="")||($('#checkemail').text()=="")){
+							     		alert("값을 입력하세요");
+							     		return false
+							     	}
+							   		
+							     	else if($('#checkNick').text()=="사용불가"){
+							     		alert("닉네임을 다시 설정하세요.");
+							     		return false
+							     	}else if($('#checkemail').text()=="사용불가"){
+							     		alert("이메일을 다시 설정하세요.");
+							     		return false
+							     	}
+						   				
+						     			
+						     			
+						     	return true;
+							
+							
+							
+							
+							
+							});
+						
+							
+							
 						}
 						</script>
 
