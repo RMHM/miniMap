@@ -1,6 +1,7 @@
 package com.kh.mhm.board.controller;
 
 import java.io.File;
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -10,6 +11,7 @@ import java.util.Map;
 import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -258,17 +260,30 @@ public class BoardController {
 	}
 
 	@RequestMapping("/board/boardview.do")
-	public String boardview(@RequestParam int BId, Model model) {
+	public String boardview(@RequestParam int BId, Model model,
+			HttpServletRequest request, HttpServletResponse response) {
+		// 게시물 볼대 비로그인시 로그인페이지로 이동.
+		if(request.getSession().getAttribute("member") ==null) {
+			try {
+				response.sendRedirect("/member/loginPage.go");
+			} catch (IOException e) {
+				
+				e.printStackTrace();
+			}			
+		}else {
+			List<Coment> clist = comentService.selectCometList(BId);
+			System.out.println(clist);
+			model.addAttribute("b", boardService.selectOneBoard(BId)).addAttribute("clist", clist);
 
-		List<Coment> clist = comentService.selectCometList(BId);
-		System.out.println(clist);
-		model.addAttribute("b", boardService.selectOneBoard(BId)).addAttribute("clist", clist);
-
-		System.out.println(BId);
-		System.out.println(boardService.selectOneBoard(BId));
-		System.out.println(model);
-		boardService.updateOneCount(BId);
+			System.out.println(BId);
+			System.out.println(boardService.selectOneBoard(BId));
+			System.out.println(model);
+			boardService.updateOneCount(BId);
+			return "board/boardview";
+		}
 		return "board/boardview";
+
+		
 	}
 
 	/*
