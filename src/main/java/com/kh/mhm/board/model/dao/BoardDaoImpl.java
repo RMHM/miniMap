@@ -58,6 +58,12 @@ public class BoardDaoImpl implements BoardDao {
 	public List<Board> selectNoticeList1(Board board) {		
 		return sqlSession.selectList("board.selectNoticeList1");
 	}
+	
+	@Override
+	public List<Board> selectBestList1(Board board) {
+		return sqlSession.selectList("board.selectBestList1");
+	}
+	
 	@Override
 	public int selectBoardTotalContents1() {
 		return sqlSession.selectOne("board.selectBoardTotalContents1");
@@ -91,6 +97,12 @@ public class BoardDaoImpl implements BoardDao {
 	public List<Board> selectNoticeList2(Board board) {		
 		return sqlSession.selectList("board.selectNoticeList2");
 	}
+	
+	@Override
+	public List<Board> selectBestList2(Board board) {
+		return sqlSession.selectList("board.selectBestList2");
+	}
+	
 	@Override
 	public int selectBoardTotalContents2() {
 		return sqlSession.selectOne("board.selectBoardTotalContents2");
@@ -125,6 +137,12 @@ public class BoardDaoImpl implements BoardDao {
 	public List<Board> selectNoticeList3(Board board) {		
 		return sqlSession.selectList("board.selectNoticeList3");
 	}
+	
+	@Override
+	public List<Board> selectBestList3(Board board) {
+		return sqlSession.selectList("board.selectBestList3");
+	}
+	
 	@Override
 	public int selectBoardTotalContents3() {
 		return sqlSession.selectOne("board.selectBoardTotalContents3");
@@ -158,6 +176,12 @@ public class BoardDaoImpl implements BoardDao {
 	public List<Board> selectNoticeList4(Board board) {		
 		return sqlSession.selectList("board.selectNoticeList4");
 	}
+	
+	@Override
+	public List<Board> selectBestList4(Board board) {
+		return sqlSession.selectList("board.selectBestList4");
+	}
+	
 	@Override
 	public int selectBoardTotalContents4() {
 		return sqlSession.selectOne("board.selectBoardTotalContents4");
@@ -292,6 +316,8 @@ public class BoardDaoImpl implements BoardDao {
 	public List<Board> selectRecentBoard(Map<String, Integer> param) {
 		return sqlSession.selectList("board.selectRecentBoard", param);
 	}
+
+	
 
 	
 	

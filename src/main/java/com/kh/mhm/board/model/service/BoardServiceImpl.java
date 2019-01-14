@@ -41,6 +41,13 @@ public class BoardServiceImpl implements BoardService {
 	public int selectBoardTotalContents1() {		
 		return boardDao.selectBoardTotalContents1();
 	}
+	@Override
+	public List<Board> selectBestList1(Board board) {
+		List<Board> list = null;
+        list = boardDao.selectBestList1(board);
+        return list;
+	}
+	
 	
 	@Override
 	public List<Map<String, String>> selectBoardList2(int cPage, int numPerPage) {		
@@ -64,6 +71,13 @@ public class BoardServiceImpl implements BoardService {
 	}
 	
 	@Override
+	public List<Board> selectBestList2(Board board) {
+		List<Board> list = null;
+        list = boardDao.selectBestList2(board);
+        return list;
+	}
+	
+	@Override
 	public List<Map<String, String>> selectBoardList3(int cPage, int numPerPage) {		
 		return boardDao.selectBoardList3(cPage, numPerPage);
 	}	
@@ -83,6 +97,13 @@ public class BoardServiceImpl implements BoardService {
 	public int selectBoardTotalContents3() {		
 		return boardDao.selectBoardTotalContents3();
 	}
+	@Override
+	public List<Board> selectBestList3(Board board) {
+		List<Board> list = null;
+        list = boardDao.selectBestList3(board);
+        return list;
+	}	
+	
 	@Override
 	public List<Map<String, String>> selectBoardList4(int cPage, int numPerPage) {		
 		return boardDao.selectBoardList4(cPage, numPerPage);
@@ -104,6 +125,12 @@ public class BoardServiceImpl implements BoardService {
 		return boardDao.selectBoardTotalContents4();
 	}
 	
+	@Override
+	public List<Board> selectBestList4(Board board) {
+		List<Board> list = null;
+        list = boardDao.selectBestList4(board);
+        return list;
+	}
 	
 
 	@Override
@@ -218,5 +245,6 @@ public class BoardServiceImpl implements BoardService {
 	public List<Board> selectRecentBoard(Map<String, Integer> param) {
 		return boardDao.selectRecentBoard(param);
 	}
+	
 	
 }
