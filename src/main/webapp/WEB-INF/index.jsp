@@ -44,10 +44,10 @@
 								관광 휴양도시, 국제 자유도시, 평화의 도시, 세계 지식자유중심도시 등 다양한 수식어를 가진 특별함이 하나로 함축되어 모여있는 곳 'Only Jeju Island'를 지향한다.
 								</h4>
 									</li>
+								<li><img src="resources/img/index_sketch.png" alt="" />
+									</li>
 								<li><img src="resources/img/member/ee.jpg" alt="" />
 									</li>
-								<li><img src="resources/img/member/eee.jpg" alt="" />
-								</li>
 							</ul>
 						</div>
 						<!-- end slider -->
