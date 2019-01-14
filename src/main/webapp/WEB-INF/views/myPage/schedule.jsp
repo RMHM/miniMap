@@ -28,14 +28,12 @@
 	var event = [
  	<c:forEach items="${list}" var="list"  varStatus="i"> 
  	{
- 	
         "title":'<c:out value="${list.title}" />'
         ,"start":'<c:out value="${list.start}" />'
         ,"end":'<c:out value="${list.end}" />T23:59:59'
         ,"color":'<c:out value="${list.color}" />'
         ,"content":'<c:out value="${list.content}" />'
-          ,"sId":'<c:out value="${list.sId}" />' 
-          
+        ,"sId":'<c:out value="${list.sId}" />' 
     } <c:if test="${!status.last}">,</c:if>
  	</c:forEach>
  	];
