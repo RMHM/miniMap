@@ -1,19 +1,24 @@
 // 댓글 추가 버튼 눌렀을시 추가 div 생성
+
 function updateReply(obj) {
-	// 현재 위치와 가장 근접한 textarea 접근하기
+	
+	// 다른 버튼 숨기기.
+	$(obj).siblings('#delteBtn').css('display', 'none');
+	$(obj).siblings('#reinsert').css('display', 'none');
+	
 	var t = $(obj).parents('tr').find('td').eq(1).find('p').html().trim().replace(/\<br\>/gim, '\n');
 	console.log(t)
 	$(obj).parents('tr').find('td').eq(1).find('p').remove();
-	$(obj).parents('tr').find('td').eq(1).append($('<textarea>').attr({'style':'height:50px'}).text(t));
-
+	$(obj).parents('tr').find('td').eq(1).append($('<textarea>').attr({'style':'height:50px; background:white'}).text(t));
+	
 	// 수정 완료 버튼을 화면 보이게 하기
 	$(obj).siblings('#updateBtn2').css('display', 'inline');
 
 	// 수정하기 버튼 숨기기
-	$(obj).css('display', 'none');
+	$(obj).css('display', 'none');			
+	
 }
 
-// 댓글 수정하기
 function updateConfirm(obj, bid, bCode) {
 	// 댓글의 내용 가져오기
 	var content = $(obj).parent().parent().prev().find('textarea').val().replace(/\n/gim, '<br>');
@@ -26,7 +31,7 @@ function updateConfirm(obj, bid, bCode) {
 			+ bid + "&ccontent=" + content + "&bCode=" + bCode;
 }
 
-// 댓글 삭제하기
+
 function deleteReply(obj, bid, bCode) {
 	// 댓글의 번호 가져오기
 	var cid = $(obj).siblings('input').val();
@@ -34,7 +39,6 @@ function deleteReply(obj, bid, bCode) {
 	location.href = "/coment/comentDelete.do" + "?cid=" + cid + "&bCode=" + bCode
 }
 
-// 대댓글 작성란 생성
 function reComment(obj, bid, bcode, mnick, mno, cid, clevel) {	
 	// 클릭한 버튼 숨기기
 	$(obj).css('display', 'none');
@@ -52,7 +56,7 @@ function reComment(obj, bid, bcode, mnick, mno, cid, clevel) {
 	$textArea = $('<textarea>').attr({
 		'class' : 'reply-content',
 		'name' : 'recontent',
-		'style' : 'background : ivory;'
+		'style' : 'background : white;'
 	})
 	$td2.append($textArea);
 	
@@ -98,27 +102,42 @@ function reComment(obj, bid, bcode, mnick, mno, cid, clevel) {
 }
 
 function reConfirm(obj, bid, mno, bcode) {
-	var parent = $(obj).parent();
-	var grandparent = parent.parent();
-	var siblingsTR = grandparent.siblings().last();
-  // 댓글의 내용 가져오기
-	var content = grandparent.siblings().find('textarea[name="recontent"]').val().replace(/\n/gim, '<br>');
-	
-	if(content.trim()==""){
-		alert("댓글 내용을 입력해주세요.");
-		grandparent.siblings().find('textarea[name="recontent"]').val('');
-		grandparent.siblings().find('textarea[name="recontent"]').focus();
-		return false;
-	}
-	
+	// 댓글의 내용 가져오기
+
 	// 참조할 댓글의 번호 가져오기
 	var cref = $(obj).siblings('input[name="recref"]').val();
 	var level = Number($(obj).siblings('input[name="clevel"]').val()) + 1;
-  
-	location.href = '/coment/comentAdd2.do' + '?BId=' + bid
-	+'&ccontent=' + content + '&mno=' + mno + '&cref=' + cref
-			+ '&clevel=' + level + "&bCode=" + bcode; 
+	
+
+	var parent = $(obj).parent();
+	var grandparent = parent.parent();
+	var siblingsTR = grandparent.siblings().last();
+
+	var content = grandparent.siblings().find('textarea[name="recontent"]').val().replace(/\n/gim, '<br>');			
+
+	// writer, replyContent
+	// bid, refcid, clevel	
+	
+	if(content == null || content.length < 1){
+		alert('댓글을 입력해 주셔야 합니다.');				
+	}else{
+		location.href = '/coment/comentAdd2.do' + '?BId=' + bid
+		+'&ccontent=' + content + '&mno=' + mno + '&cref=' + cref
+				+ '&clevel=' + level + "&bCode=" + bcode;
+		
+	}
+	
 }
+
+function sendNote(nick){
+	var popUrl = "/popUp.write?"+nick;	//팝업창에 출력될 페이지 URL
+
+	var popOption = "width=765, height=485, resizable=no, scrollbars=no, status=no;";    //팝업창 옵션(optoin)
+
+	window.open(popUrl,"",popOption);
+}	
+
+
 
 // 신고 버튼 눌렀을 경우
 function report(mno, tid){
@@ -129,7 +148,6 @@ function report(mno, tid){
 	} else {
 		if(re[2].name == 'target_type' && re[2].value == 'M') re[0].value = mno;
 		else if(re[2].name == 'target_type' && (re[2].value == 'B' || re[2].value == 'C')) re[0].value = tid;	
-		if(re[4].value.trim()=="") re[4].value = '내용없음';
 		$.ajax({
 			url : "/report/insertReport.do",
 			data :re,
@@ -142,10 +160,11 @@ function report(mno, tid){
 				alert("신고 실패");
 			},
 			complete : function(){
-				$('#insertReport')[0].reset();
+        $('#insertReport')[0].reset();
 				$('#btnCancel').click();
 			}
 		});
+		
 	}
 }
 /*

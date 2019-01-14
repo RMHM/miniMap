@@ -147,11 +147,10 @@ function weaderToday(){
  }
 }
 
-function nextTemper(){
-	
-$('.fc-prev-button, .fc-next-button, .fc-today-button').click(function() {	
-	$('#loading').show();
-	var date = $("#calendar").fullCalendar("getDate");
+function nextTemper(){	
+	$('.fc-prev-button, .fc-next-button, .fc-today-button').click(function() {	
+		$('#loading').show();
+		var date = $("#calendar").fullCalendar("getDate");
 		var month = new Date(date).getMonth()+1;
 		var lastToday = new Date();
 		
@@ -176,16 +175,13 @@ $('.fc-prev-button, .fc-next-button, .fc-today-button').click(function() {
 			error : function(e) {
 				console.log("error" + data);
 				alert("ajax 실패");
-
+	
 			},complete : function(){
 				$('#loading').hide();
 			}
 			
 		});
-		
 	});
-
-
 }
 
 

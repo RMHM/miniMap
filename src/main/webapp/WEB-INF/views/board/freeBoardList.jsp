@@ -23,7 +23,7 @@
 				<br><br>
 				<h4>--게시판 목록--</h4>
 				<ul class="unstyled">
-					<br><br>
+					<br>
 					<li><a href="/board/boardlist1.do">자유 게시판</a></li><br>
 					<li><a href="/board/boardlist2.do">정보공유 게시판</a></li><br>
 					<li><a href="/board/boardlist3.do">여행후기 게시판</a></li><br>
@@ -32,11 +32,9 @@
 			</div>
 			<div class="col-md-10">
 				<div class="ad">
-					<div class="ad">
-						<img class="" alt="" src="" />
+					<div class="ad">						
 						<div class="ad caption">
-							<h4>광-고</h4>
-							<p>광고좀 넣어주세요 현기증 난단 말이에요. 빨리 하야끄</p>
+						<!-- <img src="/resources/img/adtest.png" style='max-width:100%; max-height:100%; margin:auto; display:block;' alt=""> -->							
 						</div>
 					</div>
 				</div>
@@ -68,7 +66,19 @@
                				           <td align="center"><c:out value="${Board.BCount }"/></td>
                 			           <td><c:out value="${Board.BDate}"/></td>
 									</tr>
-								</c:forEach>									
+								</c:forEach>								
+								<c:forEach var="Board" items="${list3 }"> <!-- 베스트 게시글 페이지 -->
+									<tr name="BId" id="${Board.BId }" style="background-color: #E0F8F7;">									
+									   <td align="center"><c:out value="${Board.BNo }"/></td>
+                     				   <td><c:out value="Best"/></td>
+                     				   <td></td>
+                  				       <td><c:out value="${Board.BTitle }"/></td>                  				       
+               				           <td align="center"><c:out value="${Board.mnick}"/></td>
+               				           <td align="center"><c:out value="${Board.BCount }"/></td>
+                			           <td><c:out value="${Board.BDate}"/></td>
+									</tr>
+								</c:forEach>		
+																	
 								<c:forEach var="Board" items="${list }"> <!-- 일반 게시글 페이지 -->
 								<c:choose>	
 								<c:when test="${Board.RFlag eq 'Y' and member.mtype eq 'A' }">

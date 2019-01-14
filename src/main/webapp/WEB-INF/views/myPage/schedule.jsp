@@ -16,6 +16,7 @@
 <link rel="stylesheet"
 	href="http://code.jquery.com/ui/1.10.2/themes/smoothness/jquery-ui.css">
 
+
 <style>
 body {
 	margin: 40px 10px;
@@ -112,7 +113,6 @@ body {
 				</form>
 			</div>
 		</div>
-	</div>
 	</div>
 	<c:import url="../common/footer.jsp" />
 	<script src="/resources/js/myPage/myPageSchedule.js"></script>
