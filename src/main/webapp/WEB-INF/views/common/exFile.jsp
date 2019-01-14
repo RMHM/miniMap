@@ -20,10 +20,6 @@
 <link rel="stylesheet" href="/resources/css/billboard.css">
 <!-- Or load different theme style -->
 <link rel="stylesheet" href="/resources/css/theme/insight.css">
-
-<!-- manager page 
-<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/manager/manager.css"> -->
-
 <!-- Theme skin -->
 <link href="/resources/skins/default.css" rel="stylesheet" />
 
@@ -48,78 +44,9 @@
 
 <script src="http://cdn.jsdelivr.net/sockjs/1/sockjs.min.js"></script>
 
-<script>
-
-var socket = new SockJS("<c:url value='/notice'/>");
-socket.onmessage = onMsg;
-socket.onclose = onCls;
-
-socket.onopen=function(){
-	console.log("open");
-	sendMsg();
-}
-
-function sendMsg() {
-	
-	if(socket.readyState===1){
-		setInterval(
-			function() {
-				socket.send("hdn")
-				
-		},1000);
-	}else{
-		console.log("wait...");
-		sendMsg();
-	}
-};
-
-/* function waitForSocketConnection(sock){
-	setTimeout(
-		function(){
-			if(sock.readyState===1){
-				console.log("success");
-				sendMessage();
-			}else{
-				console.log("wait...");
-				waitForSocketConnection(sock);
-			}
-		},1000);
-	
-}; */
-
-
-	
-function onMsg(evt) {
-	var data = Number(evt.data);
-	
-	if(data!=0){
-		/* $('.newMsg').attr("color","red");
-		$('.newMsg').removeAttr('position left');
-		$('.newMsg').text(data); */
-		$('.newMsg').html("<b style='color:red'>"+data+"</b>")
-	}else{/* 
-		$('.newMsg').attr({
-			color:"white",
-			positon:"absolute",
-			left:"-2000px"
-		}); */
-		$('.newMsg').html("<b style='position:absolute; left:-2000px; color:white;'>"+data+"</b>")
-	}
-	
-	/* $("#test").text(data); */
-	/* $('.dropdown-toggle').append(data);
-	$('.note').append(data); */
-
-};
-
-function onCls(evt){
-	
-}
-
-</script>
-
 <!-- Step 1) Load D3.js -->
 <script src="https://d3js.org/d3.v5.min.js"></script>
 <!-- Step 2) Load billboard.js with style -->
 <script src="/resources/js/billboard.js"></script>
-
+<!-- message notice js -->
+<script src="/resources/js/message/notice.js"></script>

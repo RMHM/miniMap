@@ -50,6 +50,7 @@ text-align:center;
 							<input type="button" value="작성 댓글" id="coTap" class="btn btn-theme" >
 						</div>
 					</div>
+					<c:if test="${myType eq 'board' }">
 						<div id = "boTable" class="list">
 
 							<table  class="table table-hover">
@@ -64,6 +65,8 @@ text-align:center;
 									</tr>
 								</thead>
 								<tbody>
+								
+								
 									<%-- 	${list.size() } 
 								${list.get(0)}  --%>
 
@@ -102,14 +105,16 @@ text-align:center;
 											</tr>
 									
 									</c:if>
+								
 								</tbody>
 							</table>
 
 							<c:out value="${pageBar}" escapeXml="false" />
 							
 						</div>
-						
-						<div id = "coTable" class="list" style="display:none">
+						</c:if>
+						<c:if test="${myType eq 'comment' }">
+						 <div id = "coTable" class="list" >
 
 							<table  class="table table-hover">
 								<thead>
@@ -127,9 +132,9 @@ text-align:center;
 										
 											<tr id="${colist.get(a).getBid()}">
 												<td>${colist.get(a).getCid()}</td>
-												<td>${colist.get(a).getBid()}</td>
+												<td>${colist.get(a).getBname()}</td>
 												<td>${colist.get(a).getCcontent()}</td>
-												<td>${colist.get(a).getMno()}</td>
+												<td>${member.mname }</td>
 												<td>${colist.get(a).getCdate()}</td>
 											</tr>
 										</c:forEach>
@@ -148,21 +153,26 @@ text-align:center;
 
 							<c:out value="${copageBar}" escapeXml="false" />
 							
-						</div>
+						</div> 
+						</c:if>
 					</div>
 				</div>
 			</div>
 
 			<script>
+		
+			
 			$(function() {
 				 $('#boTap').click(function(){
-							$('#boTable').attr('style','display:block');
-							$('#coTable').attr('style','display:none');		
+					 location.href = "${pageContext.request.contextPath}/myPage/myBoardList.do";
+				 
+							/* $('#boTable').attr('style','display:block');
+							$('#coTable').attr('style','display:none');		 */
 				 });
 					$('#coTap').click(function(){
-
-							$('#boTable').attr('style','display:none');
-							$('#coTable').attr('style','display:block');
+						location.href = "${pageContext.request.contextPath}/myPage/myCommentList.do";
+							/* $('#boTable').attr('style','display:none');
+							$('#coTable').attr('style','display:block'); */
 					}); 
 					
 					$("tr[id]").on("click", function() {

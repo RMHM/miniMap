@@ -77,6 +77,7 @@
 });
  */
 </script>
+
 <body>
 	<c:import url="/WEB-INF/views/common/exFile.jsp" />
 	<div id="wrapper">
@@ -103,15 +104,21 @@
 				</div>
 				<div class="col-md-10 uploaderi">
 				<b>&nbsp; 작성자 : &nbsp;<span>${b.mnick}</span></b>
+				<c:if test="${b.MNo ne member.mno  }">
 				<a href="#" onclick="sendNote($(this).siblings('b').children('span').text());">
 				<img class="jjokjee" src="/resources/img/timeline/jjokjee.png"/>
-				</a> <br>
+				</a></c:if> <br>
 				<b>&nbsp; 작성일 : &nbsp;${b.BDate }</b> <br>
 				<b>&nbsp; 조회수 : &nbsp;${b.BCount }</b> <br>
 				<b>&nbsp; 추천수 : &nbsp;${b.likes }</b> <br>		
-				<a id="" href="" role="button" class="btn btn-success"> 추천하기</a>
+				<!-- <a id="likes" href="" onclick="likesupdate()" 
+				role="button" class="btn btn-success"> 추천하기</a> -->
+				<input type="button" class="btn btn-theme btn-large" onclick="likesEvent();" 
+					name="likes" value="개추">
 				<c:if test="${b.isNotice eq 'N' }">
-				<a id="report-modal" href="#report-modal-container" 
+				<!-- <a id="report-modal" href="#report-modal-container"  -->
+				<a id="report-modal" href="javascript:void(0);" onclick="reportModal(${b.MNo},${b.BId},'B');" 
+
 				role="button" class="btn btn-danger" data-toggle="modal">신고하기</a>
 				</c:if>
 				<c:if test="${b.RFlag eq 'Y' }">
@@ -137,9 +144,8 @@
 				</c:if>
 				&nbsp;
 				<c:if test="${member.mno eq b.MNo or member.mtype eq 'A'}">
-					<input type="button" class="btn btn-theme btn-large"
-						onclick="location.href='${pageContext.request.contextPath}/board/boardDelete.do?BId=${b.BId }'"
-						name="delete" value="삭제">
+					<input type="button" class="btn btn-theme btn-large" onclick="deleteEvent();" 
+					name="delete" value="삭제">
 				</c:if>				
 				
 				<div class="replyArea">
@@ -160,7 +166,7 @@
              						            </c:if>
 												&nbsp;<b>${Coment.mnick }</b><br>												 
 												&nbsp;<font size="2" color="lightgray">${Coment.cdate }</font>
-												<a id="report-modal" href="#report-modal-container" 
+												<a id="report-modal" href="#report-modal-container" onclick="reportModal(${Coment.mno},${Coment.cid},'C');" 
 												role="button" class="btn" data-toggle="modal">신고</a>
 											</div>
 										</td>
@@ -277,6 +283,28 @@
 	</div>
 
 	<script>	
+				
+	
+		function deleteEvent(){
+			
+			if (confirm("정말 삭제하시겠습니까?") == true){    //확인
+				var bid = ${b.BId};
+				location.href="/board/boardDelete.do?"+"BId="+bid
+			}else{   //취소
+			    return;
+			}
+		}
+		
+		function likesEvent(){
+			
+			if (confirm("게시글을 추천하시겠습니까?") == true){    //확인
+				
+				var bid = ${b.BId};
+				location.href="/likes/insertLikes.do?"+"target_bid="+bid+'&like_mno=' + ${member.mno}
+			}else{   //취소
+			    return;
+			}
+		}
 	
 	
 		function updateReply(obj) {
@@ -313,12 +341,13 @@
 			
 		}
 
-		function deleteReply(obj) {
+		function deleteReply(obj) {			
+			
 			// 댓글의 번호 가져오기
 			var cid = $(obj).siblings('input').val();
 
 			// 게시글 번호 가져오기
-			var bid = ${b.BId};
+			var bid = ${b.BId};			
 
 			location.href = "/coment/comentDelete.do" + "?cid=" + cid
 		}
@@ -394,148 +423,10 @@
 
 			window.open(popUrl,"",popOption);
 		}	
-		
+	
 		
 	</script>
 	
-	<!--Modal -->
-	<form id ="insertReport"  method="post" >
-	<%-- <form id ="insertReport"  action="${pageContext.request.contextPath}/report/insertReport.do" method="post" > --%>
-	<div class="modal fade" id="report-modal-container" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-				<div class="modal-dialog" role="document">
-					<div class="modal-content">
-						<div class="modal-header">
-              <h5 class="modal-title" id="myModalLabel">
-								신고하시겠습니까?
-							</h5> 
-							<button type="button" class="close" data-dismiss="modal">
-								<span aria-hidden="true">×</span>
-							</button>
-						</div>
-						<div class="modal-body">
-						
-							<div>
-							
-							<!-- <input type="hidden" id = "targetType" name = "target_type" value="" /> -->
-							<input type="hidden" id = "targetId" name = "target_id" value="" />
-							<input type="hidden" name = "report_mno" value="${member.mno}"  />
-							
-							</div>
-							<div class="modal-body">
-								<div class = "modal-content">
-								<label >신고  대상  </label></div>
-								<div class = "modal-content">
-								<input type="radio" name="target_type" value = "M" /><label>작성자</label>
-								<input type="radio" name="target_type" value = "B" /><label>게시글</label>
-								</div>
-							</div>
-							<div class="modal-body">
-								<div class = "modal-content">
-								<label >신고  사유 : </label></div>
-								<div class = "modal-content">
-								<input type="radio" name="rcode" value = "1" /><label>욕설</label>
-								<input type="radio" name="rcode" value = "2" /><label>도배</label>
-								<input type="radio" name="rcode" value = "3" /><label>사칭</label>
-								<input type="radio" name="rcode" value = "4" /><label>비방</label>
-								<input type="radio" name="rcode" value = "5" /><label>조작</label>
-								<input type="radio" name="rcode" value = "6" /><label>기타</label>
-								</div>
-							</div>
-							<div class="modal-body">
-									<div class = "modal-content">
-								<label>세부 내용: </label>
-								</div>
-									<div class = "modal-content">
-								<textarea name="rdetail" id="rdetail"  rows="10"style="width:100%; height:100%;"></textarea>
-								</div>
-							</div>
-						</div>
-						<div class="modal-footer">				 
-							<!-- <input id="submit" type="submit" value="신고하기"class="btn btn-primary" > -->
-							<!-- <button class="" id="reportbtn" onclick="insertRe();"> -->
-							<button class="" id="reportbtn" data-dismiss="modal" >
-								신고하기
-							</button> 
-							<button  class="btn btn-secondary" data-dismiss="modal">
-								취소
-							</button>
-						</div>
-					</div>
-					
-				</div>
-				<script>
-				
-				$('#report-modal').click(function(){
-					$('#insertReport')[0].reset();
-					console.log("${b.BId}");
-					$('#targetType').val("B");
-					$('#targetId').val("${b.BId}");					
-					$('#reportbtn').unbind('click');
-					
-					$('#reportbtn').click(function(){
-				
-				
-					 	if($("input:radio[name='target_type']").is(":checked")==false)alert('대상을 선택해주세요');
-						else if($("input:radio[name='rcode']").is(":checked")==false)alert('신고사유를 선택해주세요');
-						else{
-							if(($('#rdetail').val()==""))$('#rdetail').val("세부내용없음");
- 						var re = $('#insertReport').serializeArray();
-	 					 $.ajax({
-						 url : "${pageContext.request.contextPath}/report/insertReport.do",
-						 data :re, 
-						 
-						 contentType: "application/json", 
-							dataType : "json",
-							success : function() {
-								alert("신고접수 완료");
-								 
-							},
-							error : function(e) {
-								alert("신고 실패");
-							}
-							
-						});	  
-						} 
-	 					
-	 					
-					});
-				
-				});
-				
-			/* 	function insertRe(){
-					/* console.log(this.serialize());
-					console.log($('#insertReport').val());
-					console.log($('#targetType').val()); 
-					alert("test");
-					
-					 	$.ajax({
-							url : "${pageContext.request.contextPath}/report/insertReport.do",
-							data : {kkk:$('#insertReport').serialsize()},
-							dataType : "json",
-							success : function(data) {
-								alert(data);
-								 
-							},
-							error : function(e) {
-								alert("신고 실패");
-							}
-							
-						});	 
-			
-				} */
-				</script>
-	</div>	
-	</form>
-<!-- <script>
- $("#reportbtn").click(function(){
-	 $('#insertReport').attr(("action", "${pageContext.request.contextPath}/report/insertReport.do"});
-}); 
-</script> -->
-
 </body>
+<script src="/resources/js/board/adBoardView.js"></script>
 </html>
-
-	
-		
-		 
-			

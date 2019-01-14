@@ -56,7 +56,7 @@ function reComment(obj, bid, bcode, mnick, mno, cid, clevel) {
 	})
 	$td2.append($textArea);
 	
-	$td3 = $('<td>').attr({'width' : ''});
+  $td3 = $('<td>').attr({'width' : ''});
 	$div3 = $('<div>').attr({
 		'id' : 'btn',
 		'style' : 'text-align: center;',
@@ -93,7 +93,7 @@ function reComment(obj, bid, bcode, mnick, mno, cid, clevel) {
 	
 	// 추가 완료 버튼을 화면 보이게 하기
 	$(obj).siblings('.insertConfirm').css('display', 'inline');
-	//$(obj).parents('tr').find('td').eq(1).attr({'colspan' : '2'});
+  //$(obj).parents('tr').find('td').eq(1).attr({'colspan' : '2'});
 	//$(obj).parents('tr').find('td').eq(2).remove();
 }
 
@@ -101,8 +101,7 @@ function reConfirm(obj, bid, mno, bcode) {
 	var parent = $(obj).parent();
 	var grandparent = parent.parent();
 	var siblingsTR = grandparent.siblings().last();
-	
-	// 댓글의 내용 가져오기
+  // 댓글의 내용 가져오기
 	var content = grandparent.siblings().find('textarea[name="recontent"]').val().replace(/\n/gim, '<br>');
 	
 	if(content.trim()==""){
@@ -115,7 +114,7 @@ function reConfirm(obj, bid, mno, bcode) {
 	// 참조할 댓글의 번호 가져오기
 	var cref = $(obj).siblings('input[name="recref"]').val();
 	var level = Number($(obj).siblings('input[name="clevel"]').val()) + 1;
-
+  
 	location.href = '/coment/comentAdd2.do' + '?BId=' + bid
 	+'&ccontent=' + content + '&mno=' + mno + '&cref=' + cref
 			+ '&clevel=' + level + "&bCode=" + bcode; 
@@ -135,21 +134,21 @@ function report(mno, tid){
 			data :re,
 			contentType: "application/json", 
 			dataType : "json",
-			success : function() {
-				alert("신고접수 완료");
+			success : function(data) {
+				alert(data.msg);
 			},
 			error : function(e) {
 				alert("신고 실패");
 			},
 			complete : function(){
-				$('#insertReport')[0].reset();
+        $('#insertReport')[0].reset();
 				$('#btnCancel').click();
 			}
 		});
 		
 	}
 }
-
+/*
 $(function(){
 	$('#addReply').click(function(e){
 		if($(this).parents('tr').find('textarea').val().trim() == ""){
@@ -159,11 +158,11 @@ $(function(){
 		}
 	})
 	
-})
+});*/
 
 // modal 생성 및 띄워주기
 function reportModal(mno, tid, type){
-	$('#insertReport').remove();
+	/*$('#insertReport').remove();*/
 	
 	$form = $('<form>').attr({'method' : 'post', 'id' : 'insertReport'});
 	$divFade = $('<div>').attr({

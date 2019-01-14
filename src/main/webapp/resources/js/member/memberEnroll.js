@@ -34,10 +34,12 @@ $(function(){
 					if(id.test($('#mid_').val())){
 						console.log('true');
 						$('#id_check').text('');
+
 					} else {
 						console.log('false');
-						$('#id_check').text('숫자, 대소문자 혼용 6자이상 입력바랍니다.');
-						$('#id_check').css('color', 'green');
+						$('#id_check').attr("required","문자열");
+						//$('#id_check').text('숫자, 대소문자 혼용 6자이상 입력바랍니다.');
+						//$('#id_check').css('color', 'green');
 					}
 				});
 				

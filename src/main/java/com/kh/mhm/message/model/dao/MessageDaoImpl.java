@@ -2,6 +2,7 @@ package com.kh.mhm.message.model.dao;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.RowBounds;
 import org.mybatis.spring.SqlSessionTemplate;
@@ -118,6 +119,24 @@ public class MessageDaoImpl implements MessageDao {
 	@Override
 	public int countMessageStore(int mNo) {
 		return sqlSession.selectOne("Message.countMessageStore",mNo);
+	}
+
+	@Override
+	public List<Message> selectMessageBlock(int cPage, int numPerPage, int mNo) {
+		RowBounds rowBounds = new RowBounds((cPage-1)*numPerPage, numPerPage);
+		return sqlSession.selectList("Message.selectMessageBlock",mNo,rowBounds);
+	}
+
+	@Override
+	public int countMessageBlock(int mNo) {
+		return sqlSession.selectOne("Message.countMessageBlock",mNo);
+	}
+
+	@Override
+	public int unblockMessage(String[] arr, int mId) {
+		Map<Integer,String[]> map=new HashMap<Integer,String[]>();
+		map.put(mId, arr);
+		return sqlSession.delete("Message.unblockMessage",map);
 	}
 
 

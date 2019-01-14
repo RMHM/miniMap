@@ -28,6 +28,7 @@
 			<li class=" oldstart"><span class="orange"><a href="/popUp.inbox" onfocus="this.blur();">받은 쪽지함</a></span></li>
 			<li class=""><span class="orange"><a href="/popUp.sent" onfocus="this.blur();">보낸 쪽지함</a></span></li>
 			<li class=""><span class="orange size3"><a href="/popUp.store" onfocus="this.blur();">쪽지 보관함</a></span></li>
+			<li class="oldstart"><span class="orange size2"><a href="/popUp.block" onfocus="this.blur();">쪽지 차단</a></span></li>
 		</ul>
 	</dd>
 </dl>
@@ -90,65 +91,6 @@
 
 </div>
 
-<script>
-	function sendMessage() {
-		var fmObj = document.getElementById("fmNoteWrite");
-		if (fmObj.nick.value.trim() == '') { alert("받는 사람을 적어주세요."); fmObj.nick.focus(); return; }
-		if (fmObj.title.value.trim() == '') { alert("쪽지 제목을 적어주세요."); fmObj.title.focus(); return; }
-		if (fmObj.content.value.trim() == '') { alert("쪽지 내용을 적어주세요."); fmObj.content.focus(); return; }
-		
-		$.ajax({
-			url : '/message.write',
-		    type : 'post',
-		    traditional:true,
-		    data : {
-		    	'nick':fmObj.nick.value.trim(),
-		    	'title':fmObj.title.value.trim(),
-		    	'content':fmObj.content.value.trim()
-		    },
-		    success : function(data) {
-		    	alert('쪽지 보내기 성공');
-		    	window.location.href ="/popUp.sent";
-		    },
-		    error : function() { 
-		    	// 에러 처리 고민
-		    	alert('존재하지 않는 회원입니다.');
-		    	console.log('error');
-		   	}
-		});
-	}
-	
-	$("#nick").on("keyup", function(){
-        var nick = $(this).val().trim();
-        
-        if(nick.length<1) {
-        	$(".guide.error").hide();
-        	$(".guide.ok").hide();
-        	return;
-        	
-        } else {
-        	
-	        $.ajax({
-	            url  : "/nick.find",
-	            data : { 
-	            	"nick":nick
-	            },
-	            success : function(data){
-	                console.log(data);
-	                if(data.isUsable==true){
-	                    $(".guide.error").hide();
-	                    $(".guide.ok").show();
-	                } else {
-	                    $(".guide.error").show();
-	                    $(".guide.ok").hide();
-	                }
-	            }, error : function(){
-	                console.log("ajax에러");
-	            }
-        	});
-     	}
-	});
-	
-</script>
+<script src="/resources/js/message/message_write.js"></script>
 </body>
 </html>
