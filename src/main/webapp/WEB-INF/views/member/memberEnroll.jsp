@@ -39,7 +39,7 @@
 		div#userPw2-container span.pw2 {display:none; font-size: 12px; position:absolute; top:12px; right:10px;}
 		div#userPw2-container span.o {color:#0431B4;}
 		div#userPw2-container span.e {color:#FF8000;}
-		div#userPw2-container span.i {color:#FF0000;}
+		div#userPw2-container span.i {color:#FF0000;} 
 	</style>
 </head>
 <body>
@@ -53,8 +53,8 @@
 							<th>아이디</th>
 							<td>
 								<div id="userId-container">
-									<input type="text" class="form-control" placeholder="사용할 아이디 입력" name="mid" id="mid_" required>
-									<div class="check_font" id="id_check"></div>
+									<input type="text" autofocus class="form-control" placeholder="사용할 아이디 입력" name="mid" id="mid_" required oninvalid="this.setCustomValidity('숫자, 대소문자 혼용 6자이상 입력바랍니다.')" oninput="setCustomValidity('')">
+									<div class="check_font" id="id_check" ></div>
 									<!-- 아이디중복검사 코멘트추가 -->
 									<span class="guide ok">사용 가능한 아이디</span>
 				            		<span class="guide error">이미 사용중인 아이디</span>
@@ -73,7 +73,7 @@
 								<span class="pw o">사용 가능한 비밀번호</span>
 				            	<span class="pw e">이미 사용중인 비밀번호</span>
 				            	<span class="pw i">6글자 이상 입력</span>
-				            	<input type="hidden" name="pwCheck" id="pwCheck" value="0"/>
+				            	<input type="hidden" name="pwCheck" id="pwCheck" value="0" required/>
 				            	</div>
 							</td>
 						</tr>
@@ -116,7 +116,7 @@
 							<th>이메일</th>
 							<td>	
 								<div id="email-container">
-								<input type="email" class="form-control" placeholder="사용할 이메일 입력" name="email" id="email">
+								<input type="email" class="form-control" placeholder="사용할 이메일 입력" name="email" id="email" required>
 								<div class="check-font" id="email_check"></div>
 								<span class="email o">사용 가능한 이메일</span>
 					            <span class="email e">사용중인 이메일</span>
@@ -428,7 +428,7 @@
 					$('#email_check').text('');
 				} else {
 					console.log('false');
-					$('#email_check').text('@포함 소문자만 이루어진 이메일 6자이상 입력바랍니다.');
+					$('#email_check').text("'@' 포함 소문자로만 이루어진 이메일 6자이상 입력바랍니다.");
 					$('#email_check').css('color', 'green');
 				}
 			});

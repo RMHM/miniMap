@@ -72,7 +72,8 @@ public class MyPageController {
 		System.out.println("schedule: " + schedule);
 
 		int result = mps.insertSchedule(schedule);
-		return selectSchedule(member, model);
+		/*return selectSchedule(member, model);*/
+		return "myPage/schedule";
 
 	}
 
@@ -85,7 +86,8 @@ public class MyPageController {
 		System.out.println(sId);
 		mps.deleteSchedule(sId);
 
-		return selectSchedule(member, model);
+		/*return selectSchedule(member, model);*/
+		return "myPage/schedule";
 
 	}
 
@@ -98,13 +100,19 @@ public class MyPageController {
 		schedule.setMNo(member.getMno());
 		System.out.println(schedule);
 		int result = mps.updateSchedule(schedule);
-		return selectSchedule(member, model);
+		/*return selectSchedule(member, model);*/
+		return "myPage/schedule";
 
+	}
+	@RequestMapping("/myPage/selectScheduleNav.do")
+	public String scheduleNav(Member member, Model model) {
+		return "myPage/schedule";
 	}
 
 	/* 총 일정 확인 */
 	@RequestMapping("/myPage/selectSchedule.do")
-	public String selectSchedule(Member member, Model model) throws IOException {
+	@ResponseBody
+	public Map<String,Object> selectSchedule(Member member, Model model) throws IOException {
 		Map<String, Object> map = new HashMap<String, Object>();
 		System.out.println("insert 이후");
 		model.addAttribute("list", mps.selectSchedule(member.getMno()));
@@ -136,18 +144,24 @@ public class MyPageController {
 		java.util.Date today = new java.util.Date();
 		int num = today.getMonth()+1;
 	
-		model.addAttribute("list", list);
+		
+		/*model.addAttribute("list", list);
 		model.addAttribute("temper",t.temperature(num));
-		model.addAttribute("weather",a.weather());
-    
-		return "myPage/schedule";
+		model.addAttribute("weather",a.weather());*/
+		map.put("list", list);
+		map.put("temper",t.temperature(num));
+		map.put("weather",a.weather());
+		/*return "myPage/schedule";*/
+		return map;
 	}
 	
 	/*월 평균 기온*/
 	@RequestMapping(value="/myPage/temper.do")
 	@ResponseBody
 	public ArrayList temperature(@RequestParam int num) throws IOException {
+		System.out.println("다음 날짜 확인 ");
 		Temperatures t = new Temperatures();
+		System.out.println(t);
 		return t.temperature(num);
 	}
 	/*ajax 실시간 문자수 ==> 소켓 활용하기로 했음*/
