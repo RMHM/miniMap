@@ -101,7 +101,7 @@
 												</div>
 											</td>
 											<!-- 본문내용 -->
-											<td width="65%" <c:if test="${empty member or Coment.delFlag eq 'Y' or Coment.rflag eq 'Y' or member.mno ne Coment.mno}">colspan=2</c:if>>
+                      <td width="65%" <c:if test="${empty member or Coment.delFlag eq 'Y' or Coment.rflag eq 'Y'}">colspan=2</c:if><c:if test="${Coment.mno ne member.mno and Coment.clevel ne 1}">colspan=2</c:if>>
 												<div class="text_wrapper">
 													<p>
 														<c:choose>
@@ -123,7 +123,7 @@
 												</div>
 											</td>
 											<!-- 버튼 -->
-											<c:if test="${not empty member and Coment.delFlag ne 'Y' and Coment.rflag ne 'Y' and Coment.mno eq member.mno}">
+											<c:if test="${not empty member and Coment.delFlag ne 'Y' and Coment.rflag ne 'Y'}">
 												<td width="" align="center">
 													<div id="btn" style="text-align: center;" class='btn-group'>
 														<c:if test="${Coment.mno eq member.mno }">
@@ -132,7 +132,7 @@
 															<input type="button" value="등록" class="btn btn-theme" id="updateBtn2" onclick='updateConfirm(this, ${b.BId}, ${b.BCode});' style="display: none;">
 															<input type="button" value="삭제" class="btn btn-danger" id="delteBtn" onclick="deleteReply(this, ${b.BId}, ${b.BCode});">
 														</c:if>
-														<c:if test="${Coment.clevel lt 2 && not empty member}">
+														<c:if test="${Coment.clevel lt 2 and not empty member}">
 															<input type="hidden" name="writer" value="${member.mno }" />
 															<input type="hidden" name="recref" value="${Coment.cid }" />
 															<input type="hidden" name="clevel" value="${Coment.clevel }" />
