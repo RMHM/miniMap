@@ -42,7 +42,7 @@ public class ReportController {
 		int result = rs.insertReport(report);
 		String msg = "";
 		
-    if(result ==0)msg="이미 신고하셨습니다.";
+		if(result ==0)msg="이미 신고하셨습니다.";
 		else msg="신고 접수가 완료되었습니다";
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("msg",msg);
