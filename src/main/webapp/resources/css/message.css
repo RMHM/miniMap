@@ -1,635 +1,1005 @@
-	body {
-		margin: 0px;
-		padding: 0px;
-	}
-	body, a, td {
-		font-family: gulim, 굴림;
-		font-size:9pt;
-		color: #3E3E3E;
-		text-decoration: none;
-	}
-	#noteWrap {
-		width: 737px;
-		height: 484px;
-		margin: 5px;
-		background: url(/resources/img/message/message_background.png) left top no-repeat;
-		background-size: 737px 484px;
-		float: left;
-		display: inline;
-	}
-	#noteLeft {
-		width: 147px;
-		height: auto;
-		float: left;
-		display: inline;
-		margin: 26px 0 0 7px;
-	}
-	#noteLeft,
-	#noteLeft a {
-		font-family: gulim, 굴림;
-		font-size:9pt;
-		color: #3E3E3E;
-		text-decoration: none;
-	}
-	#noteLeft a:hover {
-		font-weight: bold;
-		letter-spacing: -1px;
-	}
-	#noteLeft dl,
-	#noteLeft dt,
-	#noteLeft dd,
-	#noteLeft ul,
-	#noteLeft li {
-		float: left;
-		display: inline;
-		margin: 0;
-		padding: 0;
-	}
-	#noteLeft dl.menu {
-		width: 100%;
-		height: auto;
-	}
-	#noteLeft dl.menu dt {
-		width: 100%;
-		height: 60px;
-		text-indent: -100em;
-		_height: 35px;
-		padding-top: 35px;
-		border-bottom: solid 1px #B9B9B9;
-		overflow: hidden;
-		background: url(/resources/img/message/message_title.png) 4px 0 no-repeat;
-		background-size:140px 70px;
-	}
-	#noteLeft dl.menu dd,
-	#noteLeft dl.menu ul,
-	#noteLeft dl.menu li {
-		width: 100%;
-		height: auto;
-		clear: both;
-	}
-	#noteLeft dl.menu dd {
-		margin-top: 6px;
-		overflow: hidden;
-	}
-	#noteLeft dl.menu ul {
-		margin-top: -1px;
-	}
-	#noteLeft dl.menu li {
-		padding: 10px 0 5px 0;
-		background: url(/resources/img/message/dot1.gif) left top repeat-x;
-	}
-	#noteLeft dl.menu li.oldstart {
-		background:none;
-		border-top: 1px solid #b8b8b8;
-	}
-
-	#noteLeft dl.menu li span.orange {
-		background: url(/resources/img/message/orangeCircle.gif) left 3px no-repeat;
-		margin-left: 6px;
-		float: left;
-		display: inline;
-	}
-	#noteLeft dl.menu li a {
-		width: 118px;
-		height: auto;
-		margin-left: 15px;
-		float: left;
-		display: inline;
-	}
-	#noteLeft dl.menu li.selected a {
-		font-weight: bold;
-		letter-spacing: -1px;
-	}
-	#noteLeft dl.menu li a:hover {
-		background: url(/resources/img/message/arrow.gif) right 3px no-repeat;
-	}
-	#noteLeft dl.menu li a img.new {
-		border: none;
-		width: 9px;
-		height: 9px;
-		vertical-align: middle;
-		margin-bottom:2px;
-	}
-	#noteLogo{
-		border:none;
-	}
-	#noteLogo img{
-		width:134px;
-		height:68px;
-		margin-top:150px;
-	}
-	#noteMain {
-		width: 541px;
-		height: auto;
-		float: left;
-		display: inline;
-		margin: 0 0 0 33px;
-	}
-	#noteMain h1.note {
-		height: auto;
-		background: url(/resources/img/message/message_icon.png) 6px top no-repeat;
-		background-size: 30px 30px;
-		padding: 2px 0 14px 34px;
-		margin: 0;
-		font-family: gulim, 굴림;
-		font-size:9pt;
-		color: #000000;
-		font-weight: normal;
-		float: left;
-		clear: both;
-		display: inline;
-	}
-	#noteMain h1.note strong.nick {
-		font-weight: bold;
-		font-style: normal;
-	}
-	#noteMain h1.note strong.page {
-		color: #DD5020;
-		font-style: normal;
-		font-weight: normal;
-		letter-spacing: 0px;
-	}
-
-
-	#noteMain a:link.bttn46, #noteMain a:visited.bttn46, #noteMain a:active.bttn46, #noteMain a:hover.bttn46 {
-		width: 46px;
-		height: 16px;
-		_height: 21px;
-		padding-top: 5px;
-		overflow: hidden;
-		float: right;
-		text-align: center;
-		display: inline;
-		background: url(/resources/img/message/smallBtn.gif) left top no-repeat;
-	}
-	#noteMain a:link.bttn92w, #noteMain a:visited.bttn92w, #noteMain a:active.bttn92w, #noteMain a:hover.bttn92w {
-		width: 67px;
-		_width: 92px;
-		height: 16px;
-		_height: 21px;
-		padding: 5px 0 0 25px;
-		overflow: hidden;
-		float: left;
-		text-align: center;
-		display: inline;
-		background: url(/resources/img/message/sendBtn.gif) left top no-repeat;
-	}
-	#noteMain a:link.bttn65, #noteMain a:visited.bttn65, #noteMain a:active.bttn65, #noteMain a:hover.bttn65 {
-		width: 65px;
-		height: 16px;
-		_height: 21px;
-		padding-top: 5px;
-		overflow: hidden;
-		float: left;
-		text-align: center;
-		display: inline;
-		background: url(/resources/img/message/bigBtn.gif) left top no-repeat;
-	}
-	#noteMain a:link.bttn75, #noteMain a:visited.bttn75, #noteMain a:active.bttn75, #noteMain a:hover.bttn75 {
-		width: 75px;
-		height: 16px;
-		_height: 21px;
-		padding-top: 5px;
-		overflow: hidden;
-		float: left;
-		text-align: center;
-		text-indent: 18px;
-		display: inline;
-		background: url(/resources/img/message/deleteBtn.gif) left top no-repeat;
-	}
-	#noteMain a:link.bttn76l, #noteMain a:visited.bttn76l, #noteMain a:active.bttn76l, #noteMain a:hover.bttn76l {
-		width: 50px;
-		_width: 76px;
-		height: 16px;
-		_height: 21px;
-		padding: 5px 0 0 26px;
-		overflow: hidden;
-		float: left;
-		text-align: center;
-		display: inline;
-		background: url(/resources/img/message/listBtn.gif) left top no-repeat;
-	}
-
-	.IEFix {
-		width:1px !important;
-		height:0px !important;
-		_height:1px !important;
-		margin:-1 0 0 0 !important;
-		clear:both !important;
-		display:inline !important;
-		overflow:hidden !important;
-		padding:1 0 0 0 !important;
-		font-size:1pt !important;
-	}
-
-
-
-
-	#noteWrite {
-		width: 538px;
-		_width: 540px;
-		height: auto;
-		margin: 10px 0 0 0;
-		float: left;
-		clear: both;
-		display: inline;
-		border: solid 1px #B5B6B5;
-	}
-	#noteWrite div,
-	#noteWrite table,
-	#noteWrite form {
-		float: left;
-		display: inline;
-		margin: 0;
-		padding: 0;
-	}
-
-	#noteWrite table {
-		width: 538px;
-		table-layout: fixed;
-	}
-	#noteWrite table col.th { width: 147px; }
-	#noteWrite table col.td { width: 391px; }
-	#noteWrite table.content {
-		width: 100%;
-		height: auto;
-		margin-top: -2px;
-	}
-	#noteWrite table.content td {
-		background: url(/resources/img/message/dot2.gif) left top repeat-x;
-		vertical-align: top;
-		line-height: 150%;
-	}
-	#noteWrite table.content td.label {
-		padding:9px 0 0px 0;
-		width: 147px;
-		text-align: center;
-		background-color: #F2F2F2;
-	}
-	#noteWrite table.content td.value {
-		padding:7px 2px 4px 19px;
-	}
-	#noteWrite table.content input {
-		font-family: gulim, 굴림;
-		font-size:9pt;
-		border: solid 1px #C4CAD1;
-	}
-	#noteWrite table.content input.nick { width: 150px; }
-	#noteWrite table.content input.title { width: 362px; }
-
-	#noteWrite table.content textarea.content {
-		width: 358px;
-		height: 290px;
-		font-family: gulim, 굴림;
-		font-size:9pt;
-		border: solid 1px #C4CAD1;
-	}
-
-	/* 버튼 */
-	#noteWrite div.command {
-		width: 100%;
-		height: auto;
-		padding: 9px 0 8px 0;
-		background: url(/resources/img/message/dot3.gif) left top repeat-x;
-		border-bottom: solid 1px #B5B6B5;
-	}
-	#noteWrite div.command #aNoteCancel {
-		margin-left: 13px;
-		float: left;
-	}
-	#noteWrite div.command #aNoteSave {
-		margin-right: 13px;
-		float: right;
-	}
-
-
-
-
-	#noteMain {
-		margin-top: 24px;
-	}
-	#noteMain a:link.allread, #noteMain a:visited.allread, #noteMain a:active.allread, #noteMain a:hover.allread {
-		width: 48px;
-		height: 16px;
-		margin: 0 0 0 5px;
-		text-indent: -999px;
-		overflow: hidden;
-		display: inline-block;
-		background: url(/resources/img/message/allRead.gif) left top no-repeat;
-	}
-	#noteMain .selectWrap {float:right;}
-
-	#noteList {
-		width: 100%;
-		height: auto;
-		display: inline;
-		margin: 9px 0 0 0;
-		height: 0px;
-		float: left;
-		clear: both;
-	}
-	#noteList div,
-	#noteList table,
-	#noteList form {
-		float: left;
-		display: inline;
-		margin: 0;
-		padding: 0;
-
-	}
-	#noteList div.cmdWrap {
-		width: 535px;
-		height: auto;
-		clear: both;
-		padding-top: 8px;
-		background: url(/resources/img/message/dot4.gif) left top repeat-x;
-	}
-	#noteList div.cmdWrap #cmdDelete { float: left; margin-left: 7px;}
-	#noteList div.cmdWrap #cmdStore { float: left; margin-left: 5px;}
-	#noteList div.cmdWrap #cmdWrite { float: right; margin-right 1px; }
-
-	#noteList div.list {
-		width: 541px;
-		height: auto;
-		border-top: solid 1px #CCCCCC;
-		border-bottom: solid 1px #CCCCCC;
-		padding-bottom: 1px;
-		overflow: hidden;
-		margin: 6px 0 0 0;
-	}
-	#noteList div.list table {
-		width: 541px;
-		margin-top: -3px;
-		border-top: solid 1px #BBBBBB;
-	}
-	#noteList div.list table td,
-	#noteList div.list table th {
-		font-family: gulim, 굴림;
-		font-size: 9pt;
-		background: url(/resources/img/message/dot5.gif) left top repeat-x;
-	}
-	#noteList div.list table th {
-		padding: 13px 0 6px;
-		font-weight: normal;
-		background-color: #F7F7F7;
-		text-align: center;
-	}
-	#noteList div.list table td {
-		padding: 10px 0 3px 0;
-		line-height: 15px;
-		text-align: center;
-		color: #000000;
-	}
-	#noteList div.list table td a {
-		color: #000000;
-	}
-	#noteList div.list table .chk { width: 49px; padding: 5px 0 0 0; }
-	#noteList div.list table .title { width: 312px; }
-	#noteList div.list table .nickname { width: 90px; }
-	#noteList div.list table .date { width: 90px; }
-
-	#noteList div.list table td.title { text-align: left; padding-left: 7px; }
-	#noteList div.list table tr.unread td { background-color: #F4FFFF; color: #1376AD; }
-	#noteList div.list table tr.unread td a { color: #1376AD; }
-
-	/* 하단 페이징 / 검색 */
-	#noteList div.tools {
-		width: 100%;
-		height: auto;
-		margin: 2px 0 0 0;
-		background: #F2F2F2;
-	}
-	#noteList #notePaging {
-		width: 527px;
-		height: auto;
-		padding: 10px 0 7px 0;
-		text-align: center;
-		border-bottom: solid 1px #D0D0D0;
-		margin: 0 0 0 6px;
-		font-family: dotum, 돋움;
-		font-size: 8pt;
-		list-style:none;
-	}
-
-	#noteList #noteSearch {
-		width: 527px;
-		height: auto;
-		padding: 6px 0 9px 0;
-		text-align: center;
-		border-top: solid 1px #FFFFFF;
-		margin: 0 0 0 6px;
-	}
-	#noteList #noteSearch input,
-	#noteList #noteSearch select {
-		float: left;
-		display: inline;
-	}
-	#noteList #noteSearch select {
-		width: 86px;
-		font-family: gulim, 굴림;
-		font-size: 9pt;
-		margin: 0px 0 0 114px;
-	}
-	#noteList #noteSearch input.word {
-		width: 132px;
-		font-family: gulim, 굴림;
-		font-size: 9pt;
-		border: solid 1px #808080;
-		margin: 2px 0 0 8px;
-	}
-	#noteList #noteSearch input.submit {
-		width: 56px;
-		height: 21px;
-		border: none;
-		margin: 0 0 0 5px;
-	}
-	/* classes : leftarrow, rightarrow, pg, currentpg, basetext, prevtext, nexttext */
-	#noteList #notePaging * {
-		float:none;
-		font-size: 8pt;
-	}
-
-	#noteList #notePaging .leftarrow, #noteList #notePaging .rightarrow {
-		width:3px;
-		height:5px;
-		border:none;
-		margin-bottom:2px;
-	}
-	#noteList #notePaging .pg, #noteList #notePaging A.pg {
-		text-decoration:none;
-	}
-	#noteList #notePaging .currentpg {
-		font-weight:bold;
-	}
-	#noteList #notePaging .basetext {
-	}
-	#noteList #notePaging .prevtext, #noteList #notePaging .nexttext, #noteList #notePaging A.prevtext, #noteList #notePaging A.nexttext {
-		text-decoration:none;
-	}
-
-	#noteView {
-		width: 540px;
-		height: auto;
-		margin: 10px 0 0 0;
-		float: left;
-		clear: both;
-		display: inline;
-		border-top: solid 1px #B5B6B5;
-		border-bottom: solid 1px #B5B6B5;
-	}
-	#noteView div,
-	#noteView table,
-	#noteView dl,
-	#noteView dt,
-	#noteView dd {
-		float: left;
-		display: inline;
-		margin: 0;
-		padding: 0;
-	}
-	#noteView dl.topInfo {
-		width: 100%;
-		height: auto;
-		padding: 10px 0 6px 0;
-	}
-	#noteView dl.topInfo dt { display: none; }
-	#noteView dl.topInfo dd {
-		color: #000000;
-	}
-	#noteView dl.topInfo dd.sender {
-		margin-left: 25px;
-	}
-	#noteView dl.topInfo dd.cancel {
-		margin: -4px 0 0 5px;
-	}
-	#noteView dl.topInfo dd.date {
-		float: right;
-		margin-right: 15px;
-	}
-	#noteView table.content {
-		width: 100%;
-		height: auto;
-	}
-	#noteView table.content td {
-		background: url(/resources/img/message/dot6.gif) left top repeat-x;
-		padding:9px 0 3px 0;
-		vertical-align: top;
-		line-height: 150%;
-	}
-	#noteView table.content td.label {
-		width: 147px;
-		text-align: center;
-		background-color: #F2F2F2;
-	}
-	#noteView table.content td.value {
-		width: 393px;
-		padding-left: 19px;
-		padding-right: 2px
-	}
-	#noteView table.content tr.content td.value {
-		padding-top: 2px;
-		padding-bottom: 2px;
-	}
-	#noteView table.content div.content {
-		position: relative;
-		width: 100%;
-		height: 294px;
-		_height: 300px;
-		overflow: auto;
-		overflow-x: hidden;
-		overflow-y: scroll;
-		padding-top: 6px;
-	}
-	#noteView table.content div.content #contentBody {
-		width: 350px;
-		height: auto;
-		overflow-x: hidden;
-		word-wrap: break-word;
-		text-align:justify;
-	}
-	/* 버튼 */
-	#noteView div.command {
-		width: 100%;
-		height: auto;
-		padding: 9px 0 8px 0;
-		background: url(/resources/img/message/dot7.gif) left top repeat-x;
-		border-bottom: solid 1px #B5B6B5;
-	}
-	#noteView div.command #aNoteList {
-		margin-left: 26px;
-		float: left;
-	}
-	#noteView div.command #aNoteStore,
-	#noteView div.command #aNoteRpl,
-	#noteView div.command #aNoteReport,
-	#noteView div.command #aNoteDelete,
-	#noteView div.command #aNoteSendDelete,
-	#noteView div.command #aNoteDelivery  {
-		margin-right: 5px;
-		float: right;
-	}
-	#noteView div.command #aNoteReply {
-		margin-right: 21px;
-		float: right;
-	}
-	
-	.hidden { display: none; }
-	.hide { text-indent: -1000em; }
-	.wh0 { display: inline; float: left; width: 1px; height: 1px; margin:-1px 0 0 -1px; overflow: hidden; }
-	.iefix {
-		width: 1px !important;
-		height: 0px !important;
-		_height: 1px !important;
-		margin: -1px 0 0 0 !important;
-		clear: both !important;;
-		display: none !important;
-		_display: inline !important;
-		overflow: hidden !important;
-		padding: 1px 0 0 0 !important;
-		font-size: 1pt !important;
-	}
-	
-	.guide {
-		display:none;
-		font-size: 12px;
-		position: relative;
-		right:16px;
-	}
-	.ok{
-		font-weight:bolder;
-		color:green;
-	}
-	.error{
-		font-weight:bolder;
-		color:red;
-	}
-	
-	.page-item{
-		display:inline;
-		margin:3px;
-	}
-	#blockList div.cmdWrap {
-width: 535px;
-height: auto;
-clear: both;
-padding-top: 8px;
-background: url(/resources/img/message/dot1.gif) left top repeat-x;
+body {
+	margin: 0px;
+	padding: 0px;
 }
-#blockList div.list {margin-top: 8px;}
-#blockList div.tbodyscroll{ overflow-y: scroll; height: 367px; clear:both; padding-right:3px;}
-#blockList div.list table { width: 521px; overflow: hidden;}
-#blockList div.cmdWrap #cmdDelete,
-#blockList div.cmdWrap #cmdStore{
+
+body, a, td {
+	font-family: gulim, 굴림;
+	font-size: 9pt;
+	color: #3E3E3E;
+	text-decoration: none;
+}
+
+#noteWrap {
+	width: 737px;
+	height: 484px;
+	margin: 5px;
+	background: url(/resources/img/message/message_background.png) left top
+		no-repeat;
+	background-size: 737px 484px;
+	float: left;
+	display: inline;
+}
+
+#noteLeft {
+	width: 147px;
+	height: auto;
+	float: left;
+	display: inline;
+	margin: 26px 0 0 7px;
+}
+
+#noteLeft, #noteLeft a {
+	font-family: gulim, 굴림;
+	font-size: 9pt;
+	color: #3E3E3E;
+	text-decoration: none;
+}
+
+#noteLeft a:hover {
+	font-weight: bold;
+	letter-spacing: -1px;
+}
+
+#noteLeft dl, #noteLeft dt, #noteLeft dd, #noteLeft ul, #noteLeft li {
+	float: left;
+	display: inline;
+	margin: 0;
+	padding: 0;
+}
+
+#noteLeft dl.menu {
+	width: 100%;
+	height: auto;
+}
+
+#noteLeft dl.menu dt {
+	width: 100%;
+	height: 60px;
+	text-indent: -100em;
+	_height: 35px;
+	padding-top: 35px;
+	border-bottom: solid 1px #B9B9B9;
+	overflow: hidden;
+	background: url(/resources/img/message/message_title.png) 4px 0
+		no-repeat;
+	background-size: 140px 70px;
+}
+
+#noteLeft dl.menu dd, #noteLeft dl.menu ul, #noteLeft dl.menu li {
+	width: 100%;
+	height: auto;
+	clear: both;
+}
+
+#noteLeft dl.menu dd {
+	margin-top: 6px;
+	overflow: hidden;
+}
+
+#noteLeft dl.menu ul {
+	margin-top: -1px;
+}
+
+#noteLeft dl.menu li {
+	padding: 10px 0 5px 0;
+	background: url(/resources/img/message/dot1.gif) left top repeat-x;
+}
+
+#noteLeft dl.menu li.oldstart {
+	background: none;
+	border-top: 1px solid #b8b8b8;
+}
+
+#noteLeft dl.menu li span.orange {
+	background: url(/resources/img/message/orangeCircle.gif) left 3px
+		no-repeat;
+	margin-left: 6px;
+	float: left;
+	display: inline;
+}
+
+#noteLeft dl.menu li a {
+	width: 118px;
+	height: auto;
+	margin-left: 15px;
+	float: left;
+	display: inline;
+}
+
+#noteLeft dl.menu li.selected a {
+	font-weight: bold;
+	letter-spacing: -1px;
+}
+
+#noteLeft dl.menu li a:hover {
+	background: url(/resources/img/message/arrow.gif) right 3px no-repeat;
+}
+
+#noteLeft dl.menu li a img.new {
+	border: none;
+	width: 9px;
+	height: 9px;
+	vertical-align: middle;
+	margin-bottom: 2px;
+}
+
+#noteLogo {
+	border: none;
+}
+
+#noteLogo img {
+	width: 134px;
+	height: 68px;
+	margin-top: 120px;
+}
+
+#noteMain {
+	width: 541px;
+	height: auto;
+	float: left;
+	display: inline;
+	margin: 0 0 0 33px;
+}
+
+#noteMain h1.note {
+	height: auto;
+	background: url(/resources/img/message/message_icon.png) 6px top
+		no-repeat;
+	background-size: 30px 30px;
+	padding: 2px 0 14px 34px;
+	margin: 0;
+	font-family: gulim, 굴림;
+	font-size: 9pt;
+	color: #000000;
+	font-weight: normal;
+	float: left;
+	clear: both;
+	display: inline;
+}
+
+#noteMain h1.note strong.nick {
+	font-weight: bold;
+	font-style: normal;
+}
+
+#noteMain h1.note strong.page {
+	color: #DD5020;
+	font-style: normal;
+	font-weight: normal;
+	letter-spacing: 0px;
+}
+
+#noteMain a:link.bttn46, #noteMain a:visited.bttn46, #noteMain a:active.bttn46,
+	#noteMain a:hover.bttn46 {
+	width: 46px;
+	height: 16px;
+	_height: 21px;
+	padding-top: 5px;
+	overflow: hidden;
 	float: right;
+	text-align: center;
+	display: inline;
+	background: url(/resources/img/message/smallBtn.gif) left top no-repeat;
+}
+
+#noteMain a:link.bttn92w, #noteMain a:visited.bttn92w, #noteMain a:active.bttn92w,
+	#noteMain a:hover.bttn92w {
+	width: 67px;
+	_width: 92px;
+	height: 16px;
+	_height: 21px;
+	padding: 5px 0 0 25px;
+	overflow: hidden;
+	float: left;
+	text-align: center;
+	display: inline;
+	background: url(/resources/img/message/sendBtn.gif) left top no-repeat;
+}
+
+#noteMain a:link.bttn65, #noteMain a:visited.bttn65, #noteMain a:active.bttn65,
+	#noteMain a:hover.bttn65 {
+	width: 65px;
+	height: 16px;
+	_height: 21px;
+	padding-top: 5px;
+	overflow: hidden;
+	float: left;
+	text-align: center;
+	display: inline;
+	background: url(/resources/img/message/bigBtn.gif) left top no-repeat;
+}
+
+#noteMain a:link.bttn75, #noteMain a:visited.bttn75, #noteMain a:active.bttn75,
+	#noteMain a:hover.bttn75 {
+	width: 75px;
+	height: 16px;
+	_height: 21px;
+	padding-top: 5px;
+	overflow: hidden;
+	float: left;
+	text-align: center;
+	text-indent: 18px;
+	display: inline;
+	background: url(/resources/img/message/deleteBtn.gif) left top no-repeat;
+}
+
+#noteMain a:link.bttn76l, #noteMain a:visited.bttn76l, #noteMain a:active.bttn76l,
+	#noteMain a:hover.bttn76l {
+	width: 50px;
+	_width: 76px;
+	height: 16px;
+	_height: 21px;
+	padding: 5px 0 0 26px;
+	overflow: hidden;
+	float: left;
+	text-align: center;
+	display: inline;
+	background: url(/resources/img/message/listBtn.gif) left top no-repeat;
+}
+
+.IEFix {
+	width: 1px !important;
+	height: 0px !important;
+	_height: 1px !important;
+	margin: -1 0 0 0 !important;
+	clear: both !important;
+	display: inline !important;
+	overflow: hidden !important;
+	padding: 1 0 0 0 !important;
+	font-size: 1pt !important;
+}
+
+#noteWrite {
+	width: 538px;
+	_width: 540px;
+	height: auto;
+	margin: 10px 0 0 0;
+	float: left;
+	clear: both;
+	display: inline;
+	border: solid 1px #B5B6B5;
+}
+
+#noteWrite div, #noteWrite table, #noteWrite form {
+	float: left;
+	display: inline;
+	margin: 0;
+	padding: 0;
+}
+
+#noteWrite table {
+	width: 538px;
+	table-layout: fixed;
+}
+
+#noteWrite table col.th {
+	width: 147px;
+}
+
+#noteWrite table col.td {
+	width: 391px;
+}
+
+#noteWrite table.content {
+	width: 100%;
+	height: auto;
+	margin-top: -2px;
+}
+
+#noteWrite table.content td {
+	background: url(/resources/img/message/dot2.gif) left top repeat-x;
+	vertical-align: top;
+	line-height: 150%;
+}
+
+#noteWrite table.content td.label {
+	padding: 9px 0 0px 0;
+	width: 147px;
+	text-align: center;
+	background-color: #F2F2F2;
+}
+
+#noteWrite table.content td.value {
+	padding: 7px 2px 4px 19px;
+}
+
+#noteWrite table.content input {
+	font-family: gulim, 굴림;
+	font-size: 9pt;
+	border: solid 1px #C4CAD1;
+}
+
+#noteWrite table.content input.nick {
+	width: 150px;
+}
+
+#noteWrite table.content input.title {
+	width: 362px;
+}
+
+#noteWrite table.content textarea.content {
+	width: 358px;
+	height: 290px;
+	font-family: gulim, 굴림;
+	font-size: 9pt;
+	border: solid 1px #C4CAD1;
+}
+
+/* 버튼 */
+#noteWrite div.command {
+	width: 100%;
+	height: auto;
+	padding: 9px 0 8px 0;
+	background: url(/resources/img/message/dot3.gif) left top repeat-x;
+	border-bottom: solid 1px #B5B6B5;
+}
+
+#noteWrite div.command #aNoteCancel {
+	margin-left: 13px;
+	float: left;
+}
+
+#noteWrite div.command #aNoteSave {
+	margin-right: 13px;
+	float: right;
+}
+
+#noteMain {
+	margin-top: 24px;
+}
+
+#noteMain a:link.allread, #noteMain a:visited.allread, #noteMain a:active.allread,
+	#noteMain a:hover.allread {
+	width: 48px;
+	height: 16px;
+	margin: 0 0 0 5px;
+	text-indent: -999px;
+	overflow: hidden;
+	display: inline-block;
+	background: url(/resources/img/message/allRead.gif) left top no-repeat;
+}
+
+#noteMain .selectWrap {
+	float: right;
+}
+
+#noteList {
+	width: 100%;
+	height: auto;
+	display: inline;
+	margin: 9px 0 0 0;
+	height: 0px;
+	float: left;
+	clear: both;
+}
+
+#noteList div, #noteList table, #noteList form {
+	float: left;
+	display: inline;
+	margin: 0;
+	padding: 0;
+}
+
+#noteList div.cmdWrap {
+	width: 535px;
+	height: auto;
+	clear: both;
+	padding-top: 8px;
+	background: url(/resources/img/message/dot4.gif) left top repeat-x;
+}
+
+#noteList div.cmdWrap #cmdDelete {
+	float: left;
 	margin-left: 7px;
 }
-.blockcnt {padding: 4px 0 2px 14px;}
-.listB table th {border-top: 2px solid #bebebe;}
-.listB table .chk {width: 20px;}
-.listB table .blocknick {width: 80px;}
-.listB table .blockdate {width: 80px;}
-.listB table .comment {}
-.listB table th {background-color:#F7F7F7;}
-.listB table th,
-.listB table td {padding: 4px 8px 2px 8px; text-align: center; border-bottom: 1px solid #bebebe;}
-.listB table td.comment {text-align: left; white-space: nowrap;}
+
+#noteList div.cmdWrap #cmdStore {
+	float: left;
+	margin-left: 5px;
+}
+
+#noteList div.cmdWrap #cmdWrite {
+	float: right;
+	margin-right
+	1px;
+}
+
+#noteList div.list {
+	width: 541px;
+	height: auto;
+	border-top: solid 1px #CCCCCC;
+	border-bottom: solid 1px #CCCCCC;
+	padding-bottom: 1px;
+	overflow: hidden;
+	margin: 6px 0 0 0;
+}
+
+#noteList div.list table {
+	width: 541px;
+	margin-top: -3px;
+	border-top: solid 1px #BBBBBB;
+}
+
+#noteList div.list table td, #noteList div.list table th {
+	font-family: gulim, 굴림;
+	font-size: 9pt;
+	background: url(/resources/img/message/dot5.gif) left top repeat-x;
+}
+
+#noteList div.list table th {
+	padding: 13px 0 6px;
+	font-weight: normal;
+	background-color: #F7F7F7;
+	text-align: center;
+}
+
+#noteList div.list table td {
+	padding: 10px 0 3px 0;
+	line-height: 15px;
+	text-align: center;
+	color: #000000;
+}
+
+#noteList div.list table td a {
+	color: #000000;
+}
+
+#noteList div.list table .chk {
+	width: 49px;
+	padding: 5px 0 0 0;
+}
+
+#noteList div.list table .title {
+	width: 312px;
+}
+
+#noteList div.list table .nickname {
+	width: 90px;
+}
+
+#noteList div.list table .date {
+	width: 90px;
+}
+
+#noteList div.list table td.title {
+	text-align: left;
+	padding-left: 7px;
+}
+
+#noteList div.list table tr.unread td {
+	background-color: #F4FFFF;
+	color: #1376AD;
+}
+
+#noteList div.list table tr.unread td a {
+	color: #1376AD;
+}
+
+/* 하단 페이징 / 검색 */
+#noteList div.tools {
+	width: 100%;
+	height: auto;
+	margin: 2px 0 0 0;
+	background: #F2F2F2;
+}
+
+#noteList #notePaging {
+	width: 527px;
+	height: auto;
+	padding: 10px 0 7px 0;
+	text-align: center;
+	border-bottom: solid 1px #D0D0D0;
+	margin: 0 0 0 6px;
+	font-family: dotum, 돋움;
+	font-size: 8pt;
+	list-style: none;
+}
+
+#noteList #noteSearch {
+	width: 527px;
+	height: auto;
+	padding: 6px 0 9px 0;
+	text-align: center;
+	border-top: solid 1px #FFFFFF;
+	margin: 0 0 0 6px;
+}
+
+#noteList #noteSearch input, #noteList #noteSearch select {
+	float: left;
+	display: inline;
+}
+
+#noteList #noteSearch select {
+	width: 86px;
+	font-family: gulim, 굴림;
+	font-size: 9pt;
+	margin: 0px 0 0 114px;
+}
+
+#noteList #noteSearch input.word {
+	width: 132px;
+	font-family: gulim, 굴림;
+	font-size: 9pt;
+	border: solid 1px #808080;
+	margin: 2px 0 0 8px;
+}
+
+#noteList #noteSearch input.submit {
+	width: 56px;
+	height: 21px;
+	border: none;
+	margin: 0 0 0 5px;
+}
+/* classes : leftarrow, rightarrow, pg, currentpg, basetext, prevtext, nexttext */
+#noteList #notePaging * {
+	float: none;
+	font-size: 8pt;
+}
+
+#noteList #notePaging .leftarrow, #noteList #notePaging .rightarrow {
+	width: 3px;
+	height: 5px;
+	border: none;
+	margin-bottom: 2px;
+}
+
+#noteList #notePaging .pg, #noteList #notePaging A.pg {
+	text-decoration: none;
+}
+
+#noteList #notePaging .currentpg {
+	font-weight: bold;
+}
+
+#noteList #notePaging .basetext {
+	
+}
+
+#noteList #notePaging .prevtext, #noteList #notePaging .nexttext,
+	#noteList #notePaging A.prevtext, #noteList #notePaging A.nexttext {
+	text-decoration: none;
+}
+
+#noteView {
+	width: 540px;
+	height: auto;
+	margin: 10px 0 0 0;
+	float: left;
+	clear: both;
+	display: inline;
+	border-top: solid 1px #B5B6B5;
+	border-bottom: solid 1px #B5B6B5;
+}
+
+#noteView div, #noteView table, #noteView dl, #noteView dt, #noteView dd
+	{
+	float: left;
+	display: inline;
+	margin: 0;
+	padding: 0;
+}
+
+#noteView dl.topInfo {
+	width: 100%;
+	height: auto;
+	padding: 10px 0 6px 0;
+}
+
+#noteView dl.topInfo dt {
+	display: none;
+}
+
+#noteView dl.topInfo dd {
+	color: #000000;
+}
+
+#noteView dl.topInfo dd.sender {
+	margin-left: 25px;
+}
+
+#noteView dl.topInfo dd.cancel {
+	margin: -4px 0 0 5px;
+}
+
+#noteView dl.topInfo dd.date {
+	float: right;
+	margin-right: 15px;
+}
+
+#noteView table.content {
+	width: 100%;
+	height: auto;
+}
+
+#noteView table.content td {
+	background: url(/resources/img/message/dot6.gif) left top repeat-x;
+	padding: 9px 0 3px 0;
+	vertical-align: top;
+	line-height: 150%;
+}
+
+#noteView table.content td.label {
+	width: 147px;
+	text-align: center;
+	background-color: #F2F2F2;
+}
+
+#noteView table.content td.value {
+	width: 393px;
+	padding-left: 19px;
+	padding-right: 2px
+}
+
+#noteView table.content tr.content td.value {
+	padding-top: 2px;
+	padding-bottom: 2px;
+}
+
+#noteView table.content div.content {
+	position: relative;
+	width: 100%;
+	height: 294px;
+	_height: 300px;
+	overflow: auto;
+	overflow-x: hidden;
+	overflow-y: scroll;
+	padding-top: 6px;
+}
+
+#noteView table.content div.content #contentBody {
+	width: 350px;
+	height: auto;
+	overflow-x: hidden;
+	word-wrap: break-word;
+	text-align: justify;
+}
+/* 버튼 */
+#noteView div.command {
+	width: 100%;
+	height: auto;
+	padding: 9px 0 8px 0;
+	background: url(/resources/img/message/dot7.gif) left top repeat-x;
+	border-bottom: solid 1px #B5B6B5;
+}
+
+#noteView div.command #aNoteList {
+	margin-left: 26px;
+	float: left;
+}
+
+#noteView div.command #aNoteStore, #noteView div.command #aNoteRpl,
+	#noteView div.command #aNoteReport, #noteView div.command #aNoteDelete,
+	#noteView div.command #aNoteSendDelete, #noteView div.command #aNoteDelivery
+	{
+	margin-right: 5px;
+	float: right;
+}
+
+#noteView div.command #aNoteReply {
+	margin-right: 21px;
+	float: right;
+}
+
+.hidden {
+	display: none;
+}
+
+.hide {
+	text-indent: -1000em;
+}
+
+.wh0 {
+	display: inline;
+	float: left;
+	width: 1px;
+	height: 1px;
+	margin: -1px 0 0 -1px;
+	overflow: hidden;
+}
+
+.iefix {
+	width: 1px !important;
+	height: 0px !important;
+	_height: 1px !important;
+	margin: -1px 0 0 0 !important;
+	clear: both !important;;
+	display: none !important;
+	_display: inline !important;
+	overflow: hidden !important;
+	padding: 1px 0 0 0 !important;
+	font-size: 1pt !important;
+}
+
+.guide {
+	display: none;
+	font-size: 12px;
+	position: relative;
+	right: 16px;
+}
+
+.ok {
+	font-weight: bolder;
+	color: green;
+}
+
+.error {
+	font-weight: bolder;
+	color: red;
+}
+
+.page-item {
+	display: inline;
+	margin: 3px;
+}
+
+#noteLogoBlock{
+	border:none;
+}
+
+#noteLogoBlock img{
+	width: 134px;
+	height: 68px;
+	margin-top:120px;
+}
+
+#blockList div.cmdWrap {
+	width: 535px;
+	height: auto;
+	clear: both;
+	padding-top: 8px;
+	background: url(/resources/img/message/dot1.gif) left top repeat-x;
+}
+
+#blockList div.listB {
+	margin-top: 8px;
+}
+
+#blockList div.tbodyscroll {
+	overflow-y: scroll;
+	height: 367px;
+	clear: both;
+	padding-right: 3px;
+}
+
+#blockList div.listB table {
+	width: 521px;
+	overflow: hidden;
+}
+
+#blockList div.cmdWrap #cmdDelete, #blockList div.cmdWrap #cmdStore {
+	float: right;
+	margin-left: 7px;
+	margin-top:-20px;
+	margin-bottom:10px;
+}
+
+.blockcnt {
+	padding: 4px 0 2px 14px;
+}
+
+.listB table th {
+	border-top: 2px solid #bebebe;
+}
+
+.listB table .chk {
+	width: 20px;
+}
+
+.listB table .blocknick {
+	width: 80px;
+}
+
+.listB table .blockdate {
+	width: 80px;
+}
+
+.listB table .comment {
+	
+}
+
+.listB table th {
+	background-color: #F7F7F7;
+}
+
+.listB table th, .listB table td {
+	padding: 4px 8px 2px 8px;
+	text-align: center;
+	border-bottom: 1px solid #bebebe;
+}
+
+.listB table td.comment {
+	text-align: left;
+	white-space: nowrap;
+}
+
+#reportsWrap {
+	width: 100%;
+	height: auto;
+	display: block;
+}
+
+#reportsWrap form {
+	display: inline;
+}
+
+#reportsWrap form .hiddenFields {
+	display: none;
+}
+
+#reportsBody {
+	float: left;
+	display: inline;
+	margin-top: 4px;
+	width: 100%;
+	height: auto;
+	font-size: 9pt;
+	border-top: 1px solid #CACACA;
+	padding-bottom: 15px;
+}
+
+#reportsDotline {
+	margin: 1 0 1 0;
+	width: 100%;
+	height: 1px;
+	overflow: hidden;
+	background: url(/resources/img/message/dot8.gif) repeat-x left top;
+}
+
+#reportsBody dl {
+	width: 100%;
+	margin: 0;
+	padding: 8px 0 6px;
+	float: left;
+	display: inline;
+	background: url(/resources/img/message/dot8.gif) repeat-x left bottom;
+}
+
+#reportsBody dt {
+	float: left;
+	display: inline;
+	margin-left: 7px;
+	text-indent: 8px;
+	width: 112px;
+	_width: 132px;
+	padding: 4px 0 2px 0;
+	background: url(/resources/img/message/dot9.gif) no-repeat left 9px;
+	font-weight: bold;
+}
+
+#reportsBody dd {
+	float: left;
+	display: inline;
+}
+
+#reportsBody dd span {
+	padding: 0;
+	float: left;
+	display: inline;
+}
+
+#reportsBody dd ul {
+	margin: 0;
+	padding: 0;
+	float: left;
+	display: inline;
+}
+
+#reportsBody dd li {
+	display: inline;
+	float: left;
+	line-height: 1.5;
+}
+
+#reportsBody dd li span {
+	margin-left: 5px;
+}
+
+#reportsBody dd li label {
+	margin-right: 10px;
+}
+
+#reportsBody textarea {
+	margin: 5px 0 0 6px;
+	width: 97%;
+	height: 132px;
+	float: left;
+	display: inline;
+	border: 1px solid #C4CAD1;
+}
+
+#reportsHelp {
+	margin: 5px 0 0 6px;
+	width: 97%;
+	height: auto;
+	float: left;
+	display: inline;
+	background: #F2F2F2;
+}
+
+#reportsHelpMid {
+	padding: 10px;
+	height: auto;
+	float: left;
+	display: block;
+	line-height: 20px;
+	color: #555;
+}
+
+#btnReportsSubmit {
+	margin: 19px 0 0 10px;
+	width: 93px;
+	height: 25px;
+	background: url(/resources/img/message/btnB.gif) no-repeat left top;
+	float: left;
+	display: inline;
+}
+
+#btnReportsSubmit a {
+	width: 58px;
+	height: 19px;
+	_width: 93px;
+	_height: 25px;
+	padding-left: 35px;
+	padding-top: 6px;
+	color: #000;
+	font-weight: normal;
+	font-size: 9pt;
+	background: url(/resources/img/message/ban.png) no-repeat 10px 4px;
+	background-size: 17px 17px;
+	float: left;
+	display: inline;
+	text-decoration: none;
+}
+
+#btnReportsClose {
+	display: inline;
+	float: right;
+	margin: 19px 10px 0;
+	width: 93px;
+	height: 25px;
+}
+
+#btnReportsClose a {
+	display: inline;
+	float: left;
+	width: 93px;
+	height: 19px;
+	_height: 25px;
+	background: url(/resources/img/message/btnB.gif) no-repeat left top;
+	text-align: center;
+	padding-top: 6px;
+	color: #000;
+	font-weight: normal;
+	font-size: 9pt;
+	text-decoration: none;
+}
+
+.remaining {
+	position: absolute;
+	right: 25px;
+	top: 50px;
+}
+
+.checkNick {
+	position: absolute;
+	right: 27px;
+	top: 15px;
+	font-size: 12px;
+}
+
+.cover {
+	position: absolute;
+	right: 25px;
+	top: 15px;
+	width: 15px;
+	height: 15px;
+	background: white;
+	z-index: 10;
+}
+
+.toolsBlock{
+	position:absolute;
+	bottom:20px;
+	left:50%;
+}

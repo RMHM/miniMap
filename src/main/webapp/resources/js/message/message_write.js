@@ -14,8 +14,14 @@
 		    	'content':fmObj.content.value.trim()
 		    },
 		    success : function(data) {
-		    	alert('쪽지를 성공적으로 전송했습니다!');
-		    	window.location.href ="/popUp.sent";
+		    	if(data=='common/redirect'){
+		    		alert('차단한 회원에게는 쪽지를 보낼 수 없습니다.');
+			    	window.location.href ="/popUp.write";
+		    	}else{
+		    		alert('성공적으로 쪽지를 전송했습니다!');
+		    		window.location.href ="/popUp.inbox";
+		    	}
+		    	
 		    },
 		    error : function() { 
 		    	alert('존재하지 않는 회원입니다.');
