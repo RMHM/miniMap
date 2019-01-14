@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.kh.mhm.message.model.vo.Message;
+import com.kh.mhm.message.model.vo.MessageBlock;
 import com.kh.mhm.message.model.vo.MessageSmpl;
 
 @Repository
@@ -133,10 +134,22 @@ public class MessageDaoImpl implements MessageDao {
 	}
 
 	@Override
-	public int unblockMessage(String[] arr, int mId) {
-		Map<Integer,String[]> map=new HashMap<Integer,String[]>();
-		map.put(mId, arr);
+	public int unblockMessage(String[] arr, int mNo) {
+		Map<String,Object> map=new HashMap<String,Object>();
+		map.put("arr", arr);
+		map.put("mNo", mNo);
+		System.out.println(map.toString());
 		return sqlSession.delete("Message.unblockMessage",map);
+	}
+
+	@Override
+	public int banMessage(MessageBlock mb) {
+		return sqlSession.insert("Message.banMessage",mb);
+	}
+
+	@Override
+	public int checkBlock(Map<String,Object> map) {
+		return sqlSession.selectOne("Message.checkBlock",map);
 	}
 
 

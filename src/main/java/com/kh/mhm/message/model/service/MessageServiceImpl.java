@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import com.kh.mhm.message.model.dao.MessageDao;
 import com.kh.mhm.message.model.vo.Message;
+import com.kh.mhm.message.model.vo.MessageBlock;
 import com.kh.mhm.message.model.vo.MessageSmpl;
 
 @Service
@@ -136,6 +137,16 @@ public class MessageServiceImpl implements MessageService {
 	@Override
 	public int unblockMessage(String[] arr, int mId) {
 		return mdi.unblockMessage(arr,mId);
+	}
+
+	@Override
+	public int banMessage(MessageBlock mb) {
+		return mdi.banMessage(mb);
+	}
+
+	@Override
+	public int checkBlock(Map<String,Object> map) {
+		return mdi.checkBlock(map);
 	}
 
 

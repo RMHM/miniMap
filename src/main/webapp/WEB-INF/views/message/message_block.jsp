@@ -32,7 +32,7 @@
 		</ul>
 	</dd>
 </dl>
-<div id="noteLogo">
+<div id="noteLogoBlock">
 	<img src="/resources/img/mhm_logo.png" alt="" />
 </div>
 </div>
@@ -40,17 +40,13 @@
 
 <h1 class="note">　쪽지 차단 목록입니다.</h1>
 <div id="blockList">
+	<div id="mid" style="display:none;">${member.mno}</div>
 	<div class="cmdWrap">
 		<div class="blockcnt">${totalContents} 명 차단중 </div>
-		<div id="mid" style="display:none">${i.mId}</div>
 		<a id="cmdDelete" class="bttn46" href="#" onclick="deleteBlock();" onfocus="this.blur();">삭제</a>
 		<a id="cmdStore" class="bttn46" href="#" onclick="blockMessage();" onfocus="this.blur();">추가</a>
 	</div>
 	<div class="listB">
-	<form id="fmNoteData" name="fmNoteData" action="" method="POST">
-		<input type="hidden" name="rurl" value="Qi80RXlXSVdHcnE3NTVSSVVkdXJUdkVkTVFXQ210MHlaOWNrTUZXVE5BT0JwSXQ5azIzakNQSmRBcFg1Q2ZNSktSWEIyVzI3clV4TUFVYUhGOEhzeVZsR0hTOGhZd29leEhWK3pJTGNjc1E9"/>
-		<input type="hidden" name="set" value=""/>
-		<input type="hidden" name="folder" value="block"/>
 		<table border="0" cellpadding="0" cellspacing="0">
 			<thead>
 			<tr>
@@ -67,7 +63,7 @@
 				<c:forEach var="i" items="${block}">
 					<tr>
 						<td class="chk"><input type="checkbox" id="index_" name="index_" onfocus="this.blur();"/></td>
-						<td class="blocknick" >${i.mNick}</td>
+						<td class="blocknick">${i.block_mNick}</td>
 						<td class="blockdate">${i.block_date}</td>
 						<td class="comment">${i.block_note}</td>
 					</tr>
@@ -75,12 +71,9 @@
 						
 			</tbody>
 		</table>
-		</div>
-		<div class="IEFix">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
-	</form>
 	</div>
 	
-	<div class="tools">
+	<div class="toolsBlock">
 		<c:out value="${pageBar}" escapeXml="false"/>
 	</div>
 </div>

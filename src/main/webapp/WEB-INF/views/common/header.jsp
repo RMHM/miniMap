@@ -71,7 +71,7 @@
 		function message() {
 			var popUrl = "/popUp.inbox";
 
-			var popOption = "width=765, height=485, resizable=no, scrollbars=no, status=no;";
+			var popOption = "width=765, height=485, resizable=no, scrollbars=no, status=no; fullscreen=no; tollbar=no; menubar=no;";
 
 			window.open(popUrl, "", popOption);
 		}

@@ -177,7 +177,8 @@ text-align:center;
 					
 					$("tr[id]").on("click", function() {
 						var bId = $(this).attr("id");
-					 	if($(this).children('td:eq(1)').text()==5) location.href = "${pageContext.request.contextPath}/board/adBoardView.do?bid="+bId; 
+				/* 		alert($(this).children('td:eq(1)').value); */
+					 	if($(this).children('td:eq(1)').text()=="광고") location.href = "${pageContext.request.contextPath}/board/adBoardView.do?bid="+bId; 
 						else  location.href = "${pageContext.request.contextPath}/board/boardview.do?BId="+bId; 
 					
 						   
