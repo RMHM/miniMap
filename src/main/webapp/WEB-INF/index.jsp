@@ -39,9 +39,10 @@
 							<ul class="slides">
 								<li><img src="resources/img/member/3.jpg" alt="" />
 									</li>
-								<li><img src="" alt="" />
+								<li><img src="resources/img/index_sketch.png" alt="" />
 									</li>
 								<li>
+									<img src="resources/img/member/2.jpg" alt="" />
 								</li>
 							</ul>
 						</div>
