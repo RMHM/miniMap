@@ -98,17 +98,22 @@ function reComment(obj, bid, bcode, mnick, mno, cid, clevel) {
 }
 
 function reConfirm(obj, bid, mno, bcode) {
-	// 댓글의 내용 가져오기
-
-	// 참조할 댓글의 번호 가져오기
-	var cref = $(obj).siblings('input[name="recref"]').val();
-	var level = Number($(obj).siblings('input[name="clevel"]').val()) + 1;
-
 	var parent = $(obj).parent();
 	var grandparent = parent.parent();
 	var siblingsTR = grandparent.siblings().last();
-
-  var content = grandparent.siblings().find('textarea[name="recontent"]').val().replace(/\n/gim, '<br>');
+  // 댓글의 내용 가져오기
+	var content = grandparent.siblings().find('textarea[name="recontent"]').val().replace(/\n/gim, '<br>');
+	
+	if(content.trim()==""){
+		alert("댓글 내용을 입력해주세요.");
+		grandparent.siblings().find('textarea[name="recontent"]').val('');
+		grandparent.siblings().find('textarea[name="recontent"]').focus();
+		return false;
+	}
+	
+	// 참조할 댓글의 번호 가져오기
+	var cref = $(obj).siblings('input[name="recref"]').val();
+	var level = Number($(obj).siblings('input[name="clevel"]').val()) + 1;
   
 	location.href = '/coment/comentAdd2.do' + '?BId=' + bid
 	+'&ccontent=' + content + '&mno=' + mno + '&cref=' + cref
