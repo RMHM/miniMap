@@ -1,3 +1,4 @@
+
 var category = new Object;
 var event = new Object;
 var weather;
