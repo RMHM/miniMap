@@ -317,8 +317,9 @@ public class BoardDaoImpl implements BoardDao {
 		return sqlSession.selectList("board.selectRecentBoard", param);
 	}
 
-	
+	@Override
+	public String selectBoardMemberType(int mno) {
+		return sqlSession.selectOne("board.selectBoardMemberType", mno);
+	}
 
-	
-	
 }

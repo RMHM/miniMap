@@ -114,7 +114,6 @@ body {
 			</div>
 		</div>
 	</div>
-	</div>
 	<c:import url="../common/footer.jsp" />
 	<script src="/resources/js/myPage/myPageSchedule.js"></script>
 </body>

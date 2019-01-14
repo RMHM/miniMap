@@ -289,4 +289,8 @@
 		<![CDATA[where rn>=1 and rn<=#{maxNum}]]>
 	</select>
 	
+	<select id="selectBoardMemberType" parameterType="_int" resultType="string">
+		select mtype from member where mno = #{mno}
+	</select>
+	
 </mapper>

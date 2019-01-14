@@ -245,6 +245,10 @@ public class BoardServiceImpl implements BoardService {
 	public List<Board> selectRecentBoard(Map<String, Integer> param) {
 		return boardDao.selectRecentBoard(param);
 	}
+	@Override
+	public String selectBoardMemberType(int mno) {
+		return boardDao.selectBoardMemberType(mno);
+	}
 	
 	
 }

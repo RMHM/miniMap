@@ -98,4 +98,6 @@ public interface BoardService {
 	int selectAuthority(int mno);
 	
 	List<Board> selectRecentBoard(Map<String, Integer> param);
+	
+	String selectBoardMemberType(int mno);
 }
