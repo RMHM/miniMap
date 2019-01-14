@@ -129,6 +129,7 @@ function report(mno, tid){
 	} else {
 		if(re[2].name == 'target_type' && re[2].value == 'M') re[0].value = mno;
 		else if(re[2].name == 'target_type' && (re[2].value == 'B' || re[2].value == 'C')) re[0].value = tid;	
+		if(re[4].value.trim()=="") re[4].value = '내용없음';
 		$.ajax({
 			url : "/report/insertReport.do",
 			data :re,
@@ -141,11 +142,10 @@ function report(mno, tid){
 				alert("신고 실패");
 			},
 			complete : function(){
-        $('#insertReport')[0].reset();
+				$('#insertReport')[0].reset();
 				$('#btnCancel').click();
 			}
 		});
-		
 	}
 }
 /*
@@ -162,7 +162,7 @@ $(function(){
 
 // modal 생성 및 띄워주기
 function reportModal(mno, tid, type){
-	/*$('#insertReport').remove();*/
+	$('#insertReport').remove();
 	
 	$form = $('<form>').attr({'method' : 'post', 'id' : 'insertReport'});
 	$divFade = $('<div>').attr({

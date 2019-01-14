@@ -98,6 +98,6 @@ public interface BoardDao {
 	
 	List<Board> selectRecentBoard(Map<String, Integer> param);
 
-	
+	String selectBoardMemberType(int mno);
 
 }

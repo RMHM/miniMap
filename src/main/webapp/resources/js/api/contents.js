@@ -6,7 +6,8 @@ var weather;
 $(function(){
 	
 	// 날씨 가져오기
-	$.ajax({
+	// 이전에 사용하던거
+	/*$.ajax({
 		url : "/jeju/jejuWeather.do",
 		type : "GET",
 		success : function(result){
@@ -22,12 +23,11 @@ $(function(){
 		error : function(result){
 			console.log(result)
 		}
-	})
+	})*/
 	
 	// 제주도 공연전시 api 가져오기
 	$.ajax({
 		url : "/jeju/jejuContent.do",
-		type : "GET",
 		success : function(result){
 			console.log(result)
 
@@ -82,6 +82,8 @@ $(function(){
 				category[i] = tmpList;
 			}
 			console.log(category)
+			
+			
 		},
 		error : function(result){
 			console.log(result);
@@ -100,6 +102,13 @@ $(function(){
 			$('#loading').hide();
 			getFullcalendar(allList)
 			
+			// 기온 api
+			getTemp();
+			$('#calendar .fc-next-button, #calendar .fc-prev-button, #calendar .fc-today-button').click(function(){
+				$('#calendar').hide();
+				$('#loading').show();
+				getTemp();
+			});
 		}
 	})
 
@@ -193,4 +202,34 @@ function getFullcalendar(evt){
 		eventLimit: true,
 		events : evt
 	});
+}
+
+function getTemp(){
+	var date = $("#calendar").fullCalendar("getDate");
+	var year = new Date(date).getFullYear();
+	var month = new Date(date).getMonth()+1;
+	var baseForm = year + "-" + ((month<10)?"0"+month:month) + "-";
+	
+	$.ajax({
+		url : "/myPage/temper.do",
+		type : "get",
+		data : {
+			"num" : month
+		},
+		dataType : "json",
+		success : function(result){
+			for(var i=0; i<result.length; i++){
+				var tmp = baseForm + ((i<9)?"0"+(i+1):(i+1));
+				$('#calendar thead td[data-date="' + tmp + '"] span')
+				.before("<font color=red>" + result[i].high + "</font>/<font color=blue>" + result[i].low + "</font>");
+			}
+		},
+		error : function(result){
+			console.log(result);
+		},
+		complete : function(){
+			$('#loading').hide();
+			$('#calendar').show();
+		}
+	})
 }

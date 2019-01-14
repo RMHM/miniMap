@@ -181,7 +181,7 @@ $(function(){
 
 // modal 생성 및 띄워주기
 function reportModal(mno, tid, type){
-	/*$('#insertReport').remove();*/
+	$('#insertReport').remove();
 	
 	$form = $('<form>').attr({'method' : 'post', 'id' : 'insertReport'});
 	$divFade = $('<div>').attr({

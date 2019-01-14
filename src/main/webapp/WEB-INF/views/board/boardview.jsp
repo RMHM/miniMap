@@ -110,10 +110,9 @@
 				<b>&nbsp; 추천수 : &nbsp;${b.likes }</b> <br>		
 				<!-- <a id="likes" href="" onclick="likesupdate()" 
 				role="button" class="btn btn-success"> 추천하기</a> -->
-				<input type="button" class="btn btn-theme" onclick="likesEvent();" 
-					name="likes" value="추천하기">
+				<input type="button" class="btn btn-theme" onclick="likesEvent();" name="likes" value="추천하기">
 				<c:if test="${b.isNotice eq 'N' }">				
-				<a id="report-modal" href="#report-modal-container" role="button" class="btn btn-danger" data-toggle="modal">신고하기</a>
+					<a id="report-modal" href="#report-modal-container" role="button" class="btn btn-danger btn-large" data-toggle="modal">신고하기</a>
 				</c:if>
 				<c:if test="${b.RFlag eq 'Y' }">
 				<input type="button" class="btn btn-warning"
@@ -153,8 +152,7 @@
              						            </c:if>
 												&nbsp;<b>${Coment.mnick }</b><br>												 
 												&nbsp;<font size="2" color="lightgray">${Coment.cdate }</font>
-												<a id="report-modal" href="javascript:reportModal(${Coment.mno}, ${Coment.cid}, 'C')" 
-												style="color:red;font-size:2">신고</a>
+												<a id="report-modal" href="javascript:reportModal(${Coment.mno}, ${Coment.cid}, 'C')" style="color:red;font-size:2">신고</a>
 											</div>
 										</td>
 										<!-- 본문내용 -->
