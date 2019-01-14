@@ -55,7 +55,7 @@
 		SELECT A.*, B.*, (SELECT
 		COUNT(*) FROM FILEREF WHERE BID = A.BID) FILECOUNT
 		FROM BOARD A, MEMBER B		
-		WHERE BCODE='2'	AND ISNOTICE='N' AND DELFLAG='N' AND RFLAG='N'
+		WHERE BCODE='2'	AND ISNOTICE='N' AND DELFLAG='N'<!--  AND RFLAG='N' -->
 		AND A.MNO = B.MNO
 		ORDER BY BDATE DESC, BNO DESC		
 	</select>
@@ -88,7 +88,7 @@
 		SELECT A.*, B.*, (SELECT
 		COUNT(*) FROM FILEREF WHERE BID = A.BID) FILECOUNT
 		FROM BOARD A, MEMBER B		
-		WHERE BCODE='3'	AND ISNOTICE='N' AND DELFLAG='N' AND RFLAG='N'
+		WHERE BCODE='3'	AND ISNOTICE='N' AND DELFLAG='N' <!-- AND RFLAG='N' -->
 		AND A.MNO = B.MNO
 		ORDER BY BDATE DESC, BNO DESC		
 	</select>
@@ -120,7 +120,7 @@
 		SELECT A.*, B.*, (SELECT
 		COUNT(*) FROM FILEREF WHERE BID = A.BID) FILECOUNT
 		FROM BOARD A, MEMBER B		
-		WHERE BCODE='4'	AND ISNOTICE='N' AND DELFLAG='N' AND RFLAG='N'
+		WHERE BCODE='4'	AND ISNOTICE='N' AND DELFLAG='N'<!--  AND RFLAG='N' -->
 		AND A.MNO = B.MNO
 		ORDER BY BDATE DESC, BNO DESC		
 	</select>
@@ -146,8 +146,7 @@
 		SELECT COUNT(*)
 		FROM BOARD WHERE BCODE='4'
 	</select>
-	
-	
+		
 	
 	<select id="selectOneBoard" parameterType="_int"
 		resultType="Board">
@@ -156,6 +155,14 @@
 	</select>
 	<update id="updateOneCount" parameterType="Board">
 		UPDATE BOARD SET BCOUNT = BCOUNT+1  WHERE BID= #{bId}
+	</update>
+	
+	<update id="updateLikes" parameterType="Board">
+		UPDATE BOARD SET LIKES = LIKES+1  WHERE BID= #{bId}
+	</update>
+	
+	<update id="updateBlindOff" parameterType="Board">
+		UPDATE BOARD SET RFLAG = 'N' WHERE BID= #{bId}
 	</update>
 	
 	<insert id="insertBoard" parameterType="Board">
@@ -217,11 +224,24 @@
 	</update>
 	
 	<select id="selectBoardCnt" parameterType="_int" resultType="_int">
-		select count(*) from board where bcode = #{bCode} and delflag = 'N' and rflag = 'N'
+		select count(*) from board where bcode = #{bCode} and delflag = 'N'
+		<if test="type eq 'nick'">
+			and mno in (select mno from member where mnick like '%'|| #{keyword} ||'%')
+		</if>
+		<if test="type eq 'title'">
+			and btitle like '%'|| #{keyword} ||'%'
+		</if>
 	</select>
 	
 	<select id="selectBoardListPart" parameterType="hashmap" resultType="Board">
-		select * from (select rownum rn, sub.* from (select b.*, m.mnick from board b, member m where bcode = #{bCode} and delflag='N' and rflag='N' and b.mno=m.mno order by bid desc) sub)
+		select * from (select rownum rn, sub.* from (select b.*, m.mnick from board b, member m where bcode = #{bCode} and delflag='N'
+		<if test="type eq 'nick'">
+			and m.mno in (select tmp.mno from member tmp where tmp.mnick like '%'|| #{keyword} ||'%')
+		</if>
+		<if test="type eq 'title'">
+			and btitle like '%'|| #{keyword} ||'%'
+		</if>
+		and b.mno=m.mno order by bid desc) sub)
 		<![CDATA[ where rn >= (#{cPage}-1)*#{num}+1 and rn <= #{cPage}*#{num} ]]>
 	</select>
 	

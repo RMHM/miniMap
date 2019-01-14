@@ -187,6 +187,20 @@ public class BoardDaoImpl implements BoardDao {
 		// TODO Auto-generated method stub
 		return sqlSession.update("board.updateOneCount", BId);
 	}
+	
+	@Override
+	public int updateLikes(int BId) {
+		// TODO Auto-generated method stub
+		return sqlSession.update("board.updateLikes",BId);
+	}
+
+	
+	@Override
+	public int updateBlindOff(int BId) {
+		// TODO Auto-generated method stub
+		return sqlSession.update("board.updateBlindOff", BId);
+	}
+	
 
 	@Override
 	public List<Fileref> selectFilerefList(int boardNo) {
@@ -260,12 +274,12 @@ public class BoardDaoImpl implements BoardDao {
 	}
 
 	@Override
-	public int selectBoardCnt(int bCode) {
-		return sqlSession.selectOne("board.selectBoardCnt", bCode);
+	public int selectBoardCnt(Map<String, Object> param) {
+		return sqlSession.selectOne("board.selectBoardCnt", param);
 	}
 
 	@Override
-	public List<Board> selectBoardListPart(Map<String, Integer> param) {
+	public List<Board> selectBoardListPart(Map<String, Object> param) {
 		return sqlSession.selectList("board.selectBoardListPart", param);
 	}
 
@@ -278,4 +292,7 @@ public class BoardDaoImpl implements BoardDao {
 	public List<Board> selectRecentBoard(Map<String, Integer> param) {
 		return sqlSession.selectList("board.selectRecentBoard", param);
 	}
+
+	
+	
 }

@@ -18,16 +18,16 @@
 	}
 	
 	.replyArea textarea {
-		border-radius: 5px;
+		border: none;
 		resize: none;
 		width: 100%;
-		height: 100%;	
+		height: 100%;
+		background-color: white;	
 	}
 	img {
 		max-width : 100%;
 		height : auto;
 	}
-
 </style>
 
 <body>
@@ -69,7 +69,7 @@
 							<%-- <input type="button" id="btnReport" value="신고" class="btn btn-danger btn-large" onclick="report(${b.BId});"> --%>
 							<a id="report-modal" href="#report-modal-container" role="button" class="btn btn-danger btn-large" data-toggle="modal">신고하기</a>
 						</c:if>
-						<input type="button" class="btn btn-theme btn-large" onclick="location.href='${pageContext.request.contextPath}/board/adBoard.go'" value="이전 항목으로" />
+            <input type="button" class="btn btn-theme btn-large" onclick="history.back();" value="이전 항목으로" />
 					</div>
 				</div>
 				
@@ -90,37 +90,41 @@
 											<!-- 아이디, 작성날짜 -->
 											<td width="10%">
 												<div>
-													<c:if test="${Coment.clevel >1 }">
+                          <c:if test="${Coment.clevel > 1}">
 													&nbsp;&nbsp;&nbsp;&nbsp; <!-- 답변글일경우 아이디 앞에 공백을 준다. -->                            
 	                         						<img alt="" src="/resources/img/re-reply.png">
 	             						            </c:if>
 													<b>${Coment.mnick }</b><br>												 
-													<font size="2" color="lightgray">${Coment.cdate }</font>
+                          <font size="2" color="gray">${Coment.cdate }</font>
+													<a id="report-modal" href="javascript:reportModal(${Coment.mno}, ${Coment.cid}, 'C')" style="color:red;font-size:2">신고</a>
+													<!-- data-toggle="modal" role="button" -->
 												</div>
 											</td>
 											<!-- 본문내용 -->
-											
-											<td width="50%" <c:if test="${empty member or Coment.delFlag eq 'Y'}">colspan=2</c:if>>
+											<td width="65%" <c:if test="${empty member or Coment.delFlag eq 'Y' or Coment.rflag eq 'Y' or member.mno ne Coment.mno}">colspan=2</c:if>>
 												<div class="text_wrapper">
-													<%-- <textarea class="reply-content" readonly="readonly" id="replycontent" name="replycontent" style="background-color: aliceblue"><c:choose><c:when test="${Coment.delFlag eq 'Y'}"><c:out value="삭제된 댓글입니다."/></c:when><c:otherwise><c:out value="${Coment.ccontent}"/></c:otherwise></c:choose></textarea> --%>
-														<p>
-															<c:choose>
-																<c:when test="${Coment.delFlag eq 'Y'}">
-																	<c:out value="삭제된 댓글입니다."/></c:when>
-																<c:otherwise>
-																	${Coment.ccontent}
-																</c:otherwise>
-															</c:choose>
-														</p>
-													 	<input type="hidden" name="writer" value="${member.mno }" />
-														<input type="hidden" name="cref" value="${Coment.cid }" />
-														<input type="hidden" name="clevel" value="${Coment.clevel }" />
-														<input type="hidden" name="BId" value="${b.BId }" />												
+													<p>
+														<c:choose>
+															<c:when test="${Coment.delFlag eq 'Y'}">
+																<c:out value="<font color='blue'>삭제된 댓글입니다.</font>" escapeXml="false"/>
+															</c:when>
+															<c:when test="${Coment.rflag eq 'Y'}">
+																<c:out value="<font color='red'>신고당한 댓글입니다.</font>" escapeXml="false"/>
+															</c:when>
+															<c:otherwise>
+																${Coment.ccontent}
+															</c:otherwise>
+														</c:choose>
+													</p>
+												 	<input type="hidden" name="writer" value="${member.mno }" />
+													<input type="hidden" name="cref" value="${Coment.cid }" />
+													<input type="hidden" name="clevel" value="${Coment.clevel }" />
+													<input type="hidden" name="BId" value="${b.BId }" />												
 												</div>
 											</td>
 											<!-- 버튼 -->
-											<c:if test="${not empty member and Coment.delFlag ne 'Y'}">
-												<td width="40%" align="center">
+											<c:if test="${not empty member and Coment.delFlag ne 'Y' and Coment.rflag ne 'Y' and Coment.mno eq member.mno}">
+												<td width="" align="center">
 													<div id="btn" style="text-align: center;" class='btn-group'>
 														<c:if test="${Coment.mno eq member.mno }">
 															<input type="hidden" name="cid" value="${Coment.cid }" />
@@ -133,7 +137,6 @@
 															<input type="hidden" name="recref" value="${Coment.cid }" />
 															<input type="hidden" name="clevel" value="${Coment.clevel }" />
 															<input type="hidden" name="BId" value="${b.BId }" />
-															<c:if test="${Coment.mno eq member.mno}"><br></c:if>
 															<input type="button" value="댓글등록" class="btn btn-theme" onclick="reComment(this, ${b.BId}, ${b.BCode},'${member.mnick}', ${member.mno}, ${Coment.cid}, ${Coment.clevel});">
 														</c:if>
 		
@@ -170,13 +173,13 @@
 													</div>
 												</td>
 												<!-- 본문 작성-->
-												<td width="70%">
+                        <td width="60%">
 													<div>
 														<textarea id="cContent" name="cContent"></textarea>
 													</div>
 												</td>
 												<!-- 댓글 등록 버튼 -->
-												<td width="15%">
+                        <td width="">
 													<div id="btn" style="text-align: center;">
 														<input type="submit" class='btn btn-submit' value="댓글등록" id="addReply">
 														

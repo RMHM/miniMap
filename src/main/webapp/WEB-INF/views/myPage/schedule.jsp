@@ -22,22 +22,26 @@
 <script>
 
 	$(document).ready(function() {
-    /* 	console.log("${temper}"); */
-		var today = new Date();
-		/* console.log(today); */
-	  var event = [
+
+	var today = new Date();
+
+	var event = [
  	<c:forEach items="${list}" var="list"  varStatus="i"> 
  	{
+ 	
         "title":'<c:out value="${list.title}" />'
         ,"start":'<c:out value="${list.start}" />'
-        ,"end":'<c:out value="${list.end}" />'
+        ,"end":'<c:out value="${list.end}" />T23:59:59'
         ,"color":'<c:out value="${list.color}" />'
         ,"content":'<c:out value="${list.content}" />'
-         ,"sId":'<c:out value="${list.sId}" />' 
+          ,"sId":'<c:out value="${list.sId}" />' 
+          
     } <c:if test="${!status.last}">,</c:if>
  	</c:forEach>
  	];
-	/*   console.log(event); */
+	
+	
+	
 		$('#calendar').fullCalendar({
 			header : {
 				left : 'prev,next today',
@@ -53,7 +57,7 @@
 		          });
 		        }, 
 		         eventAfterRender: function(event, element, view) { 
-                var new_description ='<a href="#">' 
+                var new_description ='<a href="${pageContext.request.contextPath}/board/boardwrite.do?BCode=3">' 
 		            + '<strong>후기작성</strong>' + '</a>' 
 		            
 					if(event.end==null){
@@ -64,7 +68,7 @@
           
 		        } , 
 		        eventClick: function(calEvent, jsEvent, view) {
-		
+	
 		    	if(calEvent.end==null){
 		    		calEvent.end=calEvent.start
 		    	}
@@ -73,7 +77,7 @@
 		    	 	$('#sTitle').val(calEvent.title);
 		    		$('#sContent').val(calEvent.content);
 		    		$('#startDateT').val(calEvent.start.format());
-		    		$('#endDateT').val(calEvent.end.format());
+		    		$('#endDateT').val(calEvent.end.format("YYYY-MM-DD"));
 		    		$('#sColor').val(calEvent.color);
 		    		$('#result').attr("style","display:none");
 		    		$('#updateresult').attr("style","display:block");
@@ -99,7 +103,7 @@
 	
 			},
 			defaultDate : new Date(),
-		
+			
 			navLinks : true, // can click day/week names to navigate views
 			businessHours : true, // display business hours
 			editable : false,
@@ -107,9 +111,17 @@
 			events :event
 		});
 	
+	
+	
+	
+	
+	
 	$('.fc-prev-button, .fc-next-button, .fc-today-button').click(function() {	
 		var date = $("#calendar").fullCalendar("getDate");
 		var month = new Date(date).getMonth()+1;
+		var lastToday = new Date();
+	
+		
 		$.ajax({
 			url : "${pageContext.request.contextPath}/myPage/temper.do",
 			async : false,
@@ -122,8 +134,8 @@
 				for(var i = 0; i<data.length;i++){
 					arr[i] = data[i].low + "/" + data[i].high;
 				}
-				
 				temperarr(month,arr); 
+				if((lastToday.getMonth()+1)==month)weaderToday();
 			},
 			error : function(e) {
 				console.log("error" + data);
@@ -142,26 +154,15 @@
  	 todayArr[${i.index}] =${list.low}+"/"+${list.high}; 
  	</c:forEach>
 	temperarr(d,todayArr);
-	function temperarr(month,arr){
-	var arrdate = new Date();
-	arrdate.setMonth(month-1);
-		 for(var i =0; i < arr.length; i++){
-			arrdate.setDate(i+1);	
-			var re = arrdate.toISOString().slice(0, 10);
-			var tem = arr[i];
-			 $('#calendar').find('td[data-date='+re+']').prepend(tem).attr('style','font-size:x-small');
-		} 
-	}
+	weaderToday();
 	
-	var trS = $('thead tr td');
-	var tdS = $('#calendar').find('td[data-date]');
-
-	var arr = "${weather}";
-
-	var result = arr.split(",");
-	var today = new Date();
-
-	for(var i = 1; i<result.length; i++){
+	
+	function weaderToday(){
+		var trS = $('thead tr td');
+		var tdS = $('#calendar').find('td[data-date]');
+		var arr = "${weather}";
+		var result = arr.split(",");
+		for(var i = 1; i<result.length; i++){
 		var date = new Date(); 
 		date.setDate(date.getDate()+(i+2));
 		var re = (date.toISOString().slice(0, 10));
@@ -177,6 +178,31 @@
 		
 		$('#calendar').find('td[data-date='+re+']').prepend(sr);
 	 }
+	}
+	
+	
+	
+	function temperarr(month,arr){
+		
+	var arrdate = new Date();
+	
+	
+	arrdate.setMonth(month-1);
+	
+		for(var i =0; i < arr.length; i++){
+			arrdate.setDate(i+1);	
+			var re = arrdate.toISOString().slice(0, 10);
+			var tem = arr[i];
+			 $('#calendar').find('td[data-date='+re+']').prepend(tem).attr('style','font-size:x-small');
+		}
+		 
+		if(arrdate.getMonth()==month-1 ){
+				
+				
+		}
+	}
+	
+	
 	});
 	
 	
@@ -212,7 +238,7 @@ body {
 
 				<div id='calendar'></div>
 
-				<form id="formAction" action="insertSchedule.do" method="post">
+				<form id="formAction" action="insertSchedule.do" method="post" onsubmit="return scheduleTest();">
 					<div class="modal fade" id="test" role="dialog"
 						aria-labelledby="myModalLabel" aria-hidden="true" >
 						<div class="modal-dialog" role="document" >
@@ -245,7 +271,7 @@ body {
 										<label>날짜</label> <input type="date" id="startDateT"
 											name="startDateT" style="width: auto;"
 											class="ed hasDatepicker">~<input type="date"
-											id="endDateT" name="endDateT"
+											id="endDateT" name="endDateT" min="2019-01-05"
 											style="width: auto; margin-bottom: 4px;"
 											class="ed hasDatepicker">
 									</div>
@@ -274,6 +300,22 @@ body {
 						</div>
 					</div>
 					<script>
+				/* 		$('#endDateT').click(function(){
+				
+						 $('#endDateT').attr('min',$('#startDateT').val());
+
+						 });  */
+						 
+					function scheduleTest(){
+							 if($('#sTitle').val()==""){
+								 alert('내용을 입력하세요');
+								 return false;
+							 }else if($('#sContent').val()==""){
+								 alert('세부내용을 입력하세요');
+								 return false;
+							 }
+							 return true;
+					}
 					function updateS(){
 						console.log("update실행");
 						$('#formAction').attr("action","updateSchedule.do");

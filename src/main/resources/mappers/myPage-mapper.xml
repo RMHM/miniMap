@@ -50,12 +50,15 @@
 
 	<select id="selectMyBoard" parameterType="_int"
 		resultType="Board">
-		SELECT * FROM BOARD WHERE MNO=#{mNo} ORDER BY BDATE
+		select * from board join BOARD_TYPE using(bcode) where mno =#{mNo} ORDER BY BDATE
 		DESC,BNO DESC
 	</select>
 	<select id="selectMyComment" parameterType="_int"
 		resultType="Coment">
-		SELECT * FROM COMENT WHERE MNO=#{mNo} ORDER BY CDATE
+		SELECT C.CID,C.BID,C.MNO,CCONTENT,CDATE,CLEVEL,CREF,C.RFLAG,C.DELFLAG,BNAME FROM COMENT C
+JOIN BOARD B ON(C.BID=B.BID)
+JOIN BOARD_TYPE T ON(B.BCODE=T.BCODE)
+ WHERE C.MNO=#{mNo} ORDER BY CDATE
 		DESC,CID DESC
 	</select>
 

@@ -134,17 +134,19 @@ button:hover {
 								<div class="form-group">
 									<label class="col-sm-3 control-label" for="img">대표 이미지</label>
 									<div class="col-sm-6">
-										<img id="mainImg" src="" alt="">
+									<div class="mainImg"></div>
+										<img id="mainImg" src="" alt=""/>
 									</div>
 								</div>
 								
 								<div class="form-group">
-									<label class="col-sm-3 control-label" for="mName">URL</label>
+									<label class="col-sm-3 control-label" for="url">URL</label>
 									<div class="col-sm-6">
-										<a href="" id="siteUrl"></a>
+										<a href="" id="siteUrl" target="_blank"></a>
 									</div>
 								</div>
 							</div>
+							<br>
 							<div class="form-group">
 
 								<button id="grantBtn" onclick="grant();">승인</button> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -210,11 +212,6 @@ button:hover {
 			},
 			success : function(data){
 				
-				console.log(data);
-				console.log($('#mainImg').html());
-				console.log($('#siteUrl').html());
-				console.log(data.img_file);
-				
 				var imgFile = data.img_file;
 				var siteUrl = data.site_url;
 				
@@ -222,10 +219,16 @@ button:hover {
 					$('#aCode1').attr('checked', 'true');
 					$('#aCode2').attr('disabled', 'true');
 				} else {
+					$('#aCode2Div').show();
 					$('#aCode1').attr('disabled', 'true');
 					$('#aCode2').attr('checked', 'true');
-					$('#mainImg').attr('src', '${pageContext.request.contextPath}/resources/img/' + imgFile);
-					$('#siteUrl').attr('href', siteUrl);
+					
+					if(imgFile != null){
+						$('#mainImg').attr('src', '/resources/img/' + imgFile).css('border', '1px solid lightgray');
+					} else {
+						$('.mainImg').append('대표 이미지가 없습니다.');
+					}
+					$('#siteUrl').attr('href', siteUrl).text(siteUrl).css('color', 'black');
 				}
 				
 				console.log();				
