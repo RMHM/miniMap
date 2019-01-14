@@ -35,7 +35,7 @@ public class ReportController {
 		String msg = null;
 		Member m = null;
 		
-		try {
+    try {
 			map = new HashMap<String, Object>();
 			System.out.println(report);
 			msg="이미 신고하셨습니다.";
@@ -52,6 +52,7 @@ public class ReportController {
 		} catch(Exception e) {
 			e.getStackTrace();
 		}
+    
 		map.put("msg",msg);
 		return map;
 	}
