@@ -28,20 +28,28 @@ import com.kh.mhm.member.model.vo.Member;
 public class LikesController {
 	@Autowired
 	private LikesService ls;
+	@Autowired
+	private BoardService bs;
 	
 	@RequestMapping(value ="/likes/insertLikes.do")
-	public ModelAndView likesinsert(Board board, Likes likes, Model model, HttpSession session, HttpServletRequest req) {
-		System.out.println(likes);
-		ModelAndView mv = new ModelAndView();
-		Member m = (Member) session.getAttribute("member");
+	@ResponseBody
+	public Map<String, Object> likesinsert(@RequestParam Map<String,Object> li, HttpSession session, HttpServletRequest req, Model model) {
+		Gson gson = new Gson();
+		Likes likes = gson.fromJson(li.toString(), Likes.class);
+		int result = ls.insertLikes(likes);
+		String msg = "";
 		
-		ls.insertLikes(likes);
-		System.out.println(likes);
-		
-		mv.addObject("loc", "/board/boardview.do?BId=" + board.getBId());
-		mv.setViewName("common/msg");
+		if(result ==0) {
+			msg="이미 추천하셨습니다.";
+		}else {
+			bs.updateLikes(likes.getTarget_bid());
+			msg="게시물을 추천하였습니다";
+		}
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("msg",msg);
+		return map;		
 
-		return mv;
+		
 	}
 	
 

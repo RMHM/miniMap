@@ -54,14 +54,14 @@ public class BoardController {
 		int totalContents = boardService.selectBoardTotalContents1();
 
 		String pageBar = Utils.getPageBar(totalContents, cPage, numPerPage, "boardlist1.do");
-		List<Board> list2 = boardService.selectNoticeList1(board);
-
+		List<Board> list2 = boardService.selectNoticeList1(board);				
+		List<Board> list3 = boardService.selectBestList1(board);
 		System.out.println(pageBar);
 		
 
 		model.addAttribute("list", list).addAttribute("totalContents", totalContents)
 				.addAttribute("numPerPage", numPerPage).addAttribute("pageBar", pageBar)
-				.addAttribute("list2", list2);
+				.addAttribute("list2", list2).addAttribute("list3", list3);
 
 		return "board/freeBoardList";
 	}
@@ -89,11 +89,13 @@ public class BoardController {
 
 		String pageBar = Utils.getPageBar(totalContents, cPage, numPerPage, "boardlist2.do");
 		List<Board> list2 = boardService.selectNoticeList2(board);
+		List<Board> list3 = boardService.selectBestList2(board);
 
 		System.out.println(pageBar);
 
 		model.addAttribute("list", list).addAttribute("totalContents", totalContents)
-				.addAttribute("numPerPage", numPerPage).addAttribute("pageBar", pageBar).addAttribute("list2", list2);
+				.addAttribute("numPerPage", numPerPage).addAttribute("pageBar", pageBar)
+				.addAttribute("list2", list2).addAttribute("list3", list3);
 		
 		return "board/infoBoardList";
 	}
@@ -121,6 +123,7 @@ public class BoardController {
 
 		String pageBar = Utils.getPageBar(totalContents, cPage, numPerPage, "boardlist3.do");
 		List<Board> list2 = boardService.selectNoticeList3(board);
+		List<Board> list3 = boardService.selectBestList3(board);
 
 		System.out.println(pageBar);
 
@@ -128,7 +131,7 @@ public class BoardController {
 			 .addAttribute("totalContents", totalContents)
 			 .addAttribute("numPerPage", numPerPage)
 			 .addAttribute("pageBar", pageBar)
-			 .addAttribute("list2", list2);
+			 .addAttribute("list2", list2).addAttribute("list3", list3);
 		
 		System.out.println("list : " + list);
 		
@@ -158,11 +161,13 @@ public class BoardController {
 
 		String pageBar = Utils.getPageBar(totalContents, cPage, numPerPage, "boardlist2.do");
 		List<Board> list2 = boardService.selectNoticeList4(board);
+		List<Board> list3 = boardService.selectBestList4(board);
 
 		System.out.println(pageBar);
 
 		model.addAttribute("list", list).addAttribute("totalContents", totalContents)
-				.addAttribute("numPerPage", numPerPage).addAttribute("pageBar", pageBar).addAttribute("list2", list2);
+				.addAttribute("numPerPage", numPerPage).addAttribute("pageBar", pageBar)
+				.addAttribute("list2", list2).addAttribute("list3", list3);
 		
 		return "board/qaBoardList";
 	}
@@ -264,12 +269,10 @@ public class BoardController {
 			HttpServletRequest request, HttpServletResponse response) {
 		// 게시물 볼대 비로그인시 로그인페이지로 이동.
 		if(request.getSession().getAttribute("member") ==null) {
-			try {
-				response.sendRedirect("/member/loginPage.go");
-			} catch (IOException e) {
-				
-				e.printStackTrace();
-			}			
+			model.addAttribute("msg", "로그인이 필요합니다."); 
+			model.addAttribute("url", "/member/loginPage.go"); 
+			return "common/redirect";
+			/*response.sendRedirect("/member/loginPage.go");*/			
 		}else {
 			List<Coment> clist = comentService.selectCometList(BId);
 			System.out.println(clist);
@@ -281,7 +284,7 @@ public class BoardController {
 			boardService.updateOneCount(BId);
 			return "board/boardview";
 		}
-		return "board/boardview";
+		
 
 		
 	}
