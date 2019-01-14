@@ -37,13 +37,11 @@
 						<!-- Slider -->
 						<div id="main-slider" class="flexslider">
 							<ul class="slides">
-								<li><img src="resources/img/member/3.jpg" alt="" />
-									</li>
-								<li><img src="resources/img/index_sketch.png" alt="" />
-									</li>
-								<li>
-									<img src="resources/img/member/2.jpg" alt="" />
-								</li>
+								<li><img src="/resources/img/index/3.jpg" alt="" /></li>
+								<li><img src="/resources/img/index/index_sketch.png" alt="" /></li>
+								<li><img src="/resources/img/index/2.jpg" alt="" /></li>
+								<li><img src="/resources/img/index/index_horse.png" alt="" /></li>
+								<li><img src="/resources/img/index/1.jpg" alt="" /></li>
 							</ul>
 						</div>
 						<!-- end slider -->
