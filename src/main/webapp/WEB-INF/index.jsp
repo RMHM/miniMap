@@ -42,12 +42,12 @@
 								천해의 신비를 간직한 제주의 용암동굴을 세계자연유산의 대표 모티브로 이미지화하고 제주의 현무암 화산섬의 질감을 켈리그라피로 표현하였다.
 								제주특별자치도의 아름다움을 부드러운 서체와 컬러로 함께 나타냄으로써 강함과 부드러움이 공존하는 제주의 특별함을 표현하고 있으며 생태도시, 
 								관광 휴양도시, 국제 자유도시, 평화의 도시, 세계 지식자유중심도시 등 다양한 수식어를 가진 특별함이 하나로 함축되어 모여있는 곳 'Only Jeju Island'를 지향한다.
-								</h4>
-									</li>
-								<li><img src="resources/img/index_sketch.png" alt="" />
-									</li>
-								<li><img src="resources/img/member/ee.jpg" alt="" />
-									</li>
+								</h5></li>
+								<li><img src="/resources/img/index/index_sketch.png" alt="" /></li>
+								<li><img src="/resources/img/index/2.jpg" alt="" /></li>
+								<li><img src="/resources/img/index/index_horse.png" alt="" /></li>
+								<li><img src="/resources/img/index/1.jpg" alt="" /></li>
+								<li><img src="/resources/img/index/3.jpg" alt="" /></li>
 							</ul>
 						</div>
 						<!-- end slider -->
