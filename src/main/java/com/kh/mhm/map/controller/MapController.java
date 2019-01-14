@@ -40,23 +40,26 @@ public class MapController {
 
 	@RequestMapping(value = "/map/hoji.do")
 	@ResponseBody
-	public static void CreateFile(@RequestParam String tLat, @RequestParam String tLng,
-			@RequestParam String tInText, @RequestParam String tInSubject)
+	public static String CreateFile(@RequestParam String [] tLat, @RequestParam String [] tLng,
+			@RequestParam String [] tInText, @RequestParam String [] tInSubject)
 	
 	{
-		System.out.println("tLat : "+tLat + "  tLng : "+ tLng + " tInText : " + tInText + " tInSubject : " + tInSubject);
+		String alphago = "Succes hoji";
+		System.out.println("전송이왔다 마리다");
+	//	System.out.println("tLat : "+tLat[0] + "  tLng : "+ tLng[0] + " tInText : " + tInText[0] + " tInSubject : " + tInSubject[0]);
+	//	System.out.println("tLat : "+tLat + "  tLng : "+ tLng + " tInText : " + tInText + " tInSubject : " + tInSubject);
 		// 저장을 list outp fie read r List 단위로 불러와서 
 		
 		try{
 	            //파일 객체 생성
-	            File file = new File("C:\\test\\hoji.txt");
+	            File file = new File("C:\\test\\"+2+".txt");
 	            BufferedWriter bw = new BufferedWriter(new FileWriter(file));
 	            // ObjectFilestream 사용하기
 	            if(file.isFile() && file.canWrite()){
 	                //쓰기
-	                bw.write("문자열 추가1");
+	                bw.write(tLat[0]);
 	                //개행문자쓰기
-	                bw.write(tLat+tLng+tInText+tInSubject);
+	              //  bw.write(tLat+tLng+tInText+tInSubject);
 	                bw.newLine();
 	                bw.write("문자열 추가2");
 	                
@@ -66,8 +69,9 @@ public class MapController {
 	        }catch (IOException e) {
 	            System.out.println(e);
 	        }
-
-
+		System.out.println("알파고봐보자"+alphago);
+		
+		return alphago;
 	}
 	
 	static void readFile()

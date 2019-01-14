@@ -8,7 +8,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>게시글 작성 페이지</title>
 
 
 <script type="text/javascript"
@@ -47,9 +47,9 @@
 						<!-- 작성자 회원번호  -->
 						
 						<br>						
-						<select name="bCode" id="bCode">
+						<select name="bCode" id="bCode" class="bCode" data-bCode="0">
 							<option value="0">게시판 선택</option>
-  							<option value="1">자유</option>
+  							<option value="1">자유</option> 
   							<option value="2">정보공유</option>
  							<option value="3">여행후기</option>
  							<option value="4">질문</option> 							
@@ -70,18 +70,19 @@
 						<input type="radio" name="bCode" value="3">후기 
 						<input type="radio" name="bCode" value="4">질문 	 -->
 						
-						<input type="button" class="btn btn-theme" id="insertBoard" value="등록"
-							style="position: absolute; right: 105px;" />
+						<input type="button" class="btn btn-theme" id="insertBoard" value="등록" style="right: 105px;"/>
 						<input type="button" value="취소" onclick="history.back(-1);"
-						class="btn btn-warning" style="position: absolute; right: 160px;"/>								
+						class="btn btn-warning" style="right: 160px;"/>	
 					</form>
 				</c:if>				
 										
 			</div>
-			<div>
+			
+			<%-- <div>
 
 				<div class="container-fluid">
 					<div class="row">
+					&nbsp;&nbsp;&nbsp;
 					<button type="button" class="btn btn-theme" id="viewmap" 
 						onclick="viewmap(this);">지도추가 </button>					
 						<div class="col-md-2"></div>
@@ -91,7 +92,7 @@
 					</div>
 				</div>
 				
-			</div>
+			</div> --%>
 		</div>
 		
 		
@@ -99,6 +100,25 @@
 	</div>
 </body>
 <script type="text/javascript">
+
+function viewmap(obj) {
+	$(obj).css('display', 'none');		
+	
+	$('div[name="jejumap"]').css('visibility', 'visible');	
+	
+}
+
+$(document).ready(function () {
+	var link = document.location.href;
+	console.log("url:" + link);
+	var lastChar = link.substr(link.length - 1);
+	console.log("BCode:" +lastChar);
+	
+	  bCode_val = $('select.bCode').attr('data-type');
+	  $('select.bCode option[value=' + lastChar + ']').attr('selected', 'selected');
+	});
+
+
 
 $(function(){
     $.ajax({
@@ -201,13 +221,6 @@ function setForm(editor) {
     var content = editor.getContent();
     $("#boardcontent").val(content)
     return true;
-}
-
-function viewmap(obj) {
-	$(obj).css('display', 'none');		
-	
-	$('div[name="jejumap"]').css('visibility', 'visible');	
-	
 }
 
 

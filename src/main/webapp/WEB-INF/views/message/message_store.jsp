@@ -28,6 +28,7 @@
 			<li class=" oldstart"><span class="orange"><a href="/popUp.inbox" onfocus="this.blur();">받은 쪽지함</a></span></li>
 			<li class=""><span class="orange"><a href="/popUp.sent" onfocus="this.blur();">보낸 쪽지함</a></span></li>
 			<li class="selected"><span class="orange size3"><a href="/popUp.store" onfocus="this.blur();">쪽지 보관함</a></span></li>
+			<li class="oldstart"><span class="orange size2"><a href="/popUp.block" onfocus="this.blur();">쪽지 차단</a></span></li>
 		</ul>
 	</dd>
 </dl>
@@ -99,63 +100,6 @@
 
 </div>
 
-<script>
-// 전체클릭
-$("#idx_").click(function(){
-	if($(this).prop("checked")){
-		$("input[name^=index_]").prop('checked', true);
-	}else{
-		$("input[name^=index_]").prop('checked', false);
-	}
-});
-
-$("input[name^=index_]").click(function(){
-	if($("#idx_").prop("checked")){
-		$("#idx_").prop("checked",false);
-	}
-});
-
-function deleteNotes() {
-	/* var fmObj = document.getElementById("fmNoteData");
-	if (!anyChecked(fmObj, "idx_")) { alert("삭제할 쪽지를 선택해 주세요"); return; }
-
-	var ans = confirm("선택된 쪽지를 삭제하시겠습니까?");
-	if (!ans) return; */
-
-	var arr=new Array();
-	var idx=0;
-	$("#chk :checked").each(function(){
-		arr[idx++]=($(this).parent().siblings('#meid').text())*1;
-	});
-	
-	console.log(arr);
-	
-	$.ajax({
-		url : '/message.delete',
-	    type : 'post',
-	    traditional:true,
-	    data : {
-	    	'arr':arr
-	    },
-	    success : function(data) {
-	    	alert('쪽지 삭제 성공');
-	    	window.location.href ="/popUp.store";
-	    },
-	    error : function() { 
-	    	// 에러 처리 고민
-	    	console.log('error');
-	   	}
-	});
-}
-
-function selectDetailStore(value){
-	// 메세지 하나 상세보기
-	var meId=value
-	console.log("meId::"+meId);
-	var url="/detail.store?"+meId;
-	console.log("url::"+url);
-	window.location.href=url;
-}
-</script>
+<script src="/resources/js/message/message_store.js"></script>
 </body>
 </html>

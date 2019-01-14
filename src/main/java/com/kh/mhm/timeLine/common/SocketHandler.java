@@ -33,12 +33,10 @@ public class SocketHandler extends TextWebSocketHandler{
 		logger.info("{}연결됨", session.getId());
 
 		System.out.println("타임라인 입장자 :"+session.getId());
-		// super.afterConnectionEstablished(session);
 	}
 
 	@Override
 	protected void handleTextMessage(WebSocketSession session, TextMessage message) throws Exception {
-		//session.sendMessage(new TextMessage(session.getId() + "|" + message.getPayload()));
 		System.out.println("session주소 : "+session.getRemoteAddress());
 		System.out.println(session.getAttributes().get("userName"));
 
@@ -49,7 +47,6 @@ public class SocketHandler extends TextWebSocketHandler{
 
 		System.out.println(member.toString());
     
-    //		int mno=tlsi.selectMno(nick);
 		String text=message.getPayload();
 		StringTokenizer st=new StringTokenizer(text,"|%%|&");
 		String content=st.nextToken();
@@ -61,7 +58,6 @@ public class SocketHandler extends TextWebSocketHandler{
 		System.out.println("content::"+content);
 		System.out.println("tag::"+tag);
     
-		// result 따라서 에러처리해야함
 
 
 		for (WebSocketSession one : sessionList) {
@@ -73,7 +69,7 @@ public class SocketHandler extends TextWebSocketHandler{
 						+tag+"|%%|&"
 						+result));
 		}
-		// super.handleTextMessage(session, message);
+		
 	}
 
 	@Override
@@ -87,8 +83,6 @@ public class SocketHandler extends TextWebSocketHandler{
 			one.sendMessage(new TextMessage(session.getAttributes().get("userName")+"님이 퇴장하셨습니다."));
 		}
 
-
-		//super.afterConnectionClosed(session, status);
 	}
 
 }

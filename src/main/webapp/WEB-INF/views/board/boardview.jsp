@@ -65,6 +65,10 @@
 	max-width: 95%;
 	max-height: auto;
 }
+.jjokjee{
+	width: 15px;
+	height: 15px;
+}
 
 </style>
 <script>
@@ -73,6 +77,7 @@
 });
  */
 </script>
+
 <body>
 	<c:import url="/WEB-INF/views/common/exFile.jsp" />
 	<div id="wrapper">
@@ -98,16 +103,29 @@
 					<img src="/resources/img/profiles/${b.profile_Path }" class="uploder-profile">
 				</div>
 				<div class="col-md-10 uploaderi">
-					<b>&nbsp; 작성자 : &nbsp;${b.mnick}</b> <br>
+				<b>&nbsp; 작성자 : &nbsp;<span>${b.mnick}</span></b>
+				<c:if test="${b.MNo ne member.mno  }">
+				<a href="#" onclick="sendNote($(this).siblings('b').children('span').text());">
+				<img class="jjokjee" src="/resources/img/timeline/jjokjee.png"/>
+				</a></c:if> <br>
 				<b>&nbsp; 작성일 : &nbsp;${b.BDate }</b> <br>
 				<b>&nbsp; 조회수 : &nbsp;${b.BCount }</b> <br>
 				<b>&nbsp; 추천수 : &nbsp;${b.likes }</b> <br>		
-				<a id="" href="" role="button" class="btn btn-success"> 추천하기</a>
+				<!-- <a id="likes" href="" onclick="likesupdate()" 
+				role="button" class="btn btn-success"> 추천하기</a> -->
+				<input type="button" class="btn btn-theme btn-large" onclick="likesEvent();" 
+					name="likes" value="개추">
 				<c:if test="${b.isNotice eq 'N' }">
-				<a id="report-modal" href="#report-modal-container" 
+				<!-- <a id="report-modal" href="#report-modal-container"  -->
+				<a id="report-modal" href="javascript:void(0);" onclick="reportModal(${b.MNo},${b.BId},'B');" 
+
 				role="button" class="btn btn-danger" data-toggle="modal">신고하기</a>
 				</c:if>
-				
+				<c:if test="${b.RFlag eq 'Y' }">
+				<input type="button" class="btn btn-warning"
+						onclick="location.href='${pageContext.request.contextPath}/board/boardBlindOff.do?BId=${b.BId }'" 
+						name="blindoff" value="블라인드해제">
+				</c:if>
 				</div>
 			</div>
 			<div class="row" style="width:90%;">
@@ -126,9 +144,8 @@
 				</c:if>
 				&nbsp;
 				<c:if test="${member.mno eq b.MNo or member.mtype eq 'A'}">
-					<input type="button" class="btn btn-theme btn-large"
-						onclick="location.href='${pageContext.request.contextPath}/board/boardDelete.do?BId=${b.BId }'"
-						name="delete" value="삭제">
+					<input type="button" class="btn btn-theme btn-large" onclick="deleteEvent();" 
+					name="delete" value="삭제">
 				</c:if>				
 				
 				<div class="replyArea">
@@ -149,7 +166,7 @@
              						            </c:if>
 												&nbsp;<b>${Coment.mnick }</b><br>												 
 												&nbsp;<font size="2" color="lightgray">${Coment.cdate }</font>
-												<a id="report-modal" href="#report-modal-container" 
+												<a id="report-modal" href="#report-modal-container" onclick="reportModal(${Coment.mno},${Coment.cid},'C');" 
 												role="button" class="btn" data-toggle="modal">신고</a>
 											</div>
 										</td>
@@ -157,8 +174,8 @@
 										<td width="67%">
 											<div class="text_wrapper" >
 											<p id="cc"><c:choose><c:when test="${Coment.delFlag eq 'Y'}">삭제된 댓글입니다.</c:when><c:otherwise>${Coment.ccontent }</c:otherwise></c:choose></p>
-												<textarea class="reply-content" readonly="readonly" id="replycontent" name="replycontent" style="display:none;"
-												 ><c:choose><c:when test="${Coment.delFlag eq 'Y'}">삭제된 댓글입니다.</c:when><c:otherwise>${Coment.ccontent }</c:otherwise></c:choose></textarea>
+												<%-- <textarea class="reply-content" readonly="readonly" id="replycontent" name="replycontent" style="display:none;"
+												 ><c:choose><c:when test="${Coment.delFlag eq 'Y'}">삭제된 댓글입니다.</c:when><c:otherwise>${Coment.ccontent }</c:otherwise></c:choose></textarea> --%>
 												 												 
 												 	<input type="hidden" name="writer" value="${member.mno }" />
 													<input type="hidden" name="cref" value="${Coment.cid }" />
@@ -180,7 +197,7 @@
 													<input type="hidden" name="recref" value="${Coment.cid }" />
 													<input type="hidden" name="clevel" value="${Coment.clevel }" />
 													<input type="hidden" name="BId" value="${b.BId }" />
-													<button type="button" class="insertBtn"
+													<button type="button" class="insertBtn" id="reinsert"
 														onclick="reComment(this);">댓글 달기</button>
 													<button type="button" class="insertConfirm" onclick="reConfirm(this);" style="display: none;">댓글달기</button>
 												</c:if>
@@ -266,58 +283,73 @@
 	</div>
 
 	<script>	
+				
+	
+		function deleteEvent(){
+			
+			if (confirm("정말 삭제하시겠습니까?") == true){    //확인
+				var bid = ${b.BId};
+				location.href="/board/boardDelete.do?"+"BId="+bid
+			}else{   //취소
+			    return;
+			}
+		}
+		
+		function likesEvent(){
+			
+			if (confirm("게시글을 추천하시겠습니까?") == true){    //확인
+				
+				var bid = ${b.BId};
+				location.href="/likes/insertLikes.do?"+"target_bid="+bid+'&like_mno=' + ${member.mno}
+			}else{   //취소
+			    return;
+			}
+		}
 	
 	
 		function updateReply(obj) {
-			// 현재 위치와 가장 근접한 textarea 접근하기
-			$(obj).parent().parent().prev().find('textarea').removeAttr(
-					'readonly');
-			$(obj).parent().parent().prev().find('textarea').css(
-					'background-color', 'white');
+						
+			// 다른 버튼 숨기기.
+			$(obj).siblings('#delteBtn').css('display', 'none');
+			$(obj).siblings('#reinsert').css('display', 'none');
 			
-			var content = $(obj).parent().parent().prev().find('textarea').val();
-			content = content.replace(/<br>/g,"\r\n");
-			console.log(content);
-			$(obj).parent().parent().prev().find('textarea').css(
-					'display', 'inline');
-			var a = $(obj).parent().parent().prev().find('p');			
-			a.css('display','none');
+			var t = $(obj).parents('tr').find('td').eq(1).find('p').html().trim().replace(/\<br\>/gim, '\n');
+			console.log(t)
+			$(obj).parents('tr').find('td').eq(1).find('p').remove();
+			$(obj).parents('tr').find('td').eq(1).append($('<textarea>').attr({'style':'height:50px; background:white'}).text(t));
 			
 			// 수정 완료 버튼을 화면 보이게 하기
-			$(obj).siblings('.updateConfirm').css('display', 'inline');
+			$(obj).siblings('#updateBtn2').css('display', 'inline');
 
 			// 수정하기 버튼 숨기기
-			$(obj).css('display', 'none');
-			
+			$(obj).css('display', 'none');			
 			
 		}
 
 		function updateConfirm(obj) {
+			
 			// 댓글의 내용 가져오기
-			var content = $(obj).parent().parent().prev().find('textarea').val();
-			console.log(content);
-			content = content.replace(/<br>/g,"\r\n");
-
+			var content = $(obj).parent().parent().prev().find('textarea').val().replace(/\n/gim, '<br>');
+			
 			// 댓글의 번호 가져오기
 			var cid = $(obj).siblings('input').val();
-
 			// 게시글 번호 가져오기
-			var bid = ${b.BId};
-
+			var bid = ${b.BId};			
+			
 			location.href = "/coment/comentUpdate.do?" + "cid=" + cid + "&bid="
-					+ bid + "&ccontent=" + content;
+					+ bid + "&ccontent=" + content;						
+			
 		}
 
-		function deleteReply(obj) {
+		function deleteReply(obj) {			
+			
 			// 댓글의 번호 가져오기
 			var cid = $(obj).siblings('input').val();
 
 			// 게시글 번호 가져오기
-			var bid = ${b.BId}
-			;
+			var bid = ${b.BId};			
 
-			location.href = "/coment/comentDelete.do" + "?cid=" + cid/*  + "&bid="
-								+ bid; */
+			location.href = "/coment/comentDelete.do" + "?cid=" + cid
 		}
 
 		function reComment(obj) {
@@ -328,7 +360,7 @@
 			$(obj).css('display', 'none');
 
 			// 내용 입력 공간 만들기
-			var htmlForm = '<tr class="recomment"><td width="10%"><div><b>${member.mnick }</b></div></td>'
+			/* var htmlForm = '<tr class="recomment"><td width="10%"><div><b>${member.mnick }</b></div></td>'
 					+ '<td style="background : transparent;" width="75%">'
 					+ '<textarea class="reply-content" name="ccontent" style="background : ivory;" ></textarea>'
 					+ '</td>'
@@ -338,7 +370,7 @@
 					+ '<input type="hidden" name="cref" value="${Coment.cid }" />'
 					+ '<input type="hidden" name="clevel" value="${Coment.clevel }" />'
 					+ '<button type="button" class="insertConfirm" onclick="reConfirm(this);" >댓글달기</button>'
-					+ '</div> </td>' + '</tr>';
+					+ '</div> </td>' + '</tr>'; */
 			
 					var htmlForm1 = '<td><div><b>${member.mnick }</b></div></td>'
 					var htmlForm2 = '<textarea class="reply-content" id="recontent" name="recontent" style="background : white " required></textarea>'
@@ -360,12 +392,6 @@
 			var cref = $(obj).siblings('input[name="recref"]').val();
 			var level = Number($(obj).siblings('input[name="clevel"]').val()) + 1;
 
-			console.log($(obj).parent('div').siblings());
-
-			console.log('cref=' + cref);
-
-			console.log('clevel=' + level);
-
 			// 게시글 번호 가져오기
 			var bid = ${b.BId}
 
@@ -373,13 +399,7 @@
 			var grandparent = parent.parent();
 			var siblingsTR = grandparent.siblings().last();
 
-			var content = grandparent.siblings().find('textarea[name="recontent"]').val();
-
-			//console.log(parent.html());
-			//console.log(grandparent.html());
-			//console.log(siblingsTR.html());
-			console.log('bid='+bid);
-			console.log('ccontent='+content);
+			var content = grandparent.siblings().find('textarea[name="recontent"]').val().replace(/\n/gim, '<br>');			
 
 			// writer, replyContent
 			// bid, refcid, clevel	
@@ -396,141 +416,17 @@
 			
 		}
 		
-		
-		
+		function sendNote(nick){
+			var popUrl = "/popUp.write?"+nick;	//팝업창에 출력될 페이지 URL
+
+			var popOption = "width=765, height=485, resizable=no, scrollbars=no, status=no;";    //팝업창 옵션(optoin)
+
+			window.open(popUrl,"",popOption);
+		}	
+	
 		
 	</script>
 	
-	<!--Modal -->
-	<form id ="insertReport"  method="post" >
-	<%-- <form id ="insertReport"  action="${pageContext.request.contextPath}/report/insertReport.do" method="post" > --%>
-	<div class="modal fade" id="report-modal-container" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-				<div class="modal-dialog" role="document">
-					<div class="modal-content">
-						<div class="modal-header">
-              <h5 class="modal-title" id="myModalLabel">
-								게시물을 신고하시겠습니까?
-							</h5> 
-							<button type="button" class="close" data-dismiss="modal">
-								<span aria-hidden="true">×</span>
-							</button>
-						</div>
-						<div class="modal-body">
-						
-							<div>
-							
-							<!-- <input type="hidden" id = "targetType" name = "target_type" value="" /> -->
-							<input type="hidden" id = "targetId" name = "target_id" value="" />
-							<input type="hidden" name = "report_mno" value="${member.mno}"  />
-							
-							</div>
-							<div class="modal-body">
-								<div class = "modal-content">
-								<label >신고  대상  </label></div>
-								<div class = "modal-content">
-								<input type="radio" name="target_type" value = "M" /><label>작성자</label>
-								<input type="radio" name="target_type" value = "B" /><label>게시글</label>
-								</div>
-							</div>
-							<div class="modal-body">
-								<div class = "modal-content">
-								<label >신고  사유 : </label></div>
-								<div class = "modal-content">
-								<input type="radio" name="rcode" value = "1" /><label>욕설</label>
-								<input type="radio" name="rcode" value = "2" /><label>도배</label>
-								<input type="radio" name="rcode" value = "3" /><label>사칭</label>
-								<input type="radio" name="rcode" value = "4" /><label>비방</label>
-								<input type="radio" name="rcode" value = "5" /><label>조작</label>
-								<input type="radio" name="rcode" value = "6" /><label>기타</label>
-								</div>
-							</div>
-							<div class="modal-body">
-									<div class = "modal-content">
-								<label>세부 내용: </label>
-								</div>
-									<div class = "modal-content">
-								<textarea name="rdetail" id="rdetail"  rows="10"style="width:100%; height:100%;"></textarea>
-								</div>
-							</div>
-						</div>
-						<div class="modal-footer">				 
-							<!-- <input id="submit" type="submit" value="신고하기"class="btn btn-primary" > -->
-							<!-- <button class="" id="reportbtn" onclick="insertRe();"> -->
-							<button class="" id="reportbtn"data-dismiss="modal" >
-								신고하기
-							</button> 
-							<button  class="btn btn-secondary" data-dismiss="modal">
-								취소
-							</button>
-						</div>
-					</div>
-					
-				</div>
-				<script>
-				
-				$('#report-modal').click(function(){
-					console.log("${b.BId}");
-					$('#targetType').val("B");
-					$('#targetId').val("${b.BId}");					
-				
-					$('#reportbtn').click(function(){
-						
- 						var re = $('#insertReport').serializeArray(); 
- 						
-	 					$.ajax({
-						url : "${pageContext.request.contextPath}/report/insertReport.do",
-						 data :re, 
-						 
-						 contentType: "application/json", 
-							dataType : "json",
-							success : function() {
-								alert("신고접수 완료");
-								 
-							},
-							error : function(e) {
-								alert("신고 실패");
-							}
-							
-						});	  
-						
-					});
-				
-				});
-				
-			/* 	function insertRe(){
-					/* console.log(this.serialize());
-					console.log($('#insertReport').val());
-					console.log($('#targetType').val()); 
-					alert("test");
-					
-					 	$.ajax({
-							url : "${pageContext.request.contextPath}/report/insertReport.do",
-							data : {kkk:$('#insertReport').serialsize()},
-							dataType : "json",
-							success : function(data) {
-								alert(data);
-								 
-							},
-							error : function(e) {
-								alert("신고 실패");
-							}
-							
-						});	 
-			
-				} */
-				</script>
-	</div>	
-	</form>
-<!-- <script>
- $("#reportbtn").click(function(){
-	 $('#insertReport').attr(("action", "${pageContext.request.contextPath}/report/insertReport.do"});
-}); 
-</script> -->
-
 </body>
+<script src="/resources/js/board/adBoardView.js"></script>
 </html>
-
-	
-		
-		 
-			

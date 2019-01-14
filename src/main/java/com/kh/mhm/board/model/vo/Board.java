@@ -19,6 +19,7 @@ public class Board {
 	private int bCount;
 	private String mnick;
 	private String profile_Path;
+	private String bName;
 
 
 	
@@ -29,7 +30,7 @@ public class Board {
 	
 		
 	public Board(int bId, int mNo, int bNo, int bCode, String bTitle, String bContent, Date bDate, int likes,
-			String rFlag, String delFlag, String hasFile, String isNotice, int bCount) {
+			String rFlag, String delFlag, String hasFile, String isNotice, int bCount,String bName) {
 		super();
 		this.bId = bId;
 		this.mNo = mNo;
@@ -44,6 +45,7 @@ public class Board {
 		this.hasFile = hasFile;
 		this.isNotice = isNotice;
 		this.bCount = bCount;
+	
 	}
 
 
@@ -67,6 +69,30 @@ public class Board {
 		this.profile_Path = profile_Path;
 	}
 	
+	
+	public Board(int bId, int mNo, int bNo, int bCode, String bTitle, String bContent, Date bDate, int likes,
+			String rFlag, String delFlag, String hasFile, String isNotice, int bCount, String mnick,
+			String profile_Path, String bName) {
+		super();
+		this.bId = bId;
+		this.mNo = mNo;
+		this.bNo = bNo;
+		this.bCode = bCode;
+		this.bTitle = bTitle;
+		this.bContent = bContent;
+		this.bDate = bDate;
+		this.likes = likes;
+		this.rFlag = rFlag;
+		this.delFlag = delFlag;
+		this.hasFile = hasFile;
+		this.isNotice = isNotice;
+		this.bCount = bCount;
+		this.mnick = mnick;
+		this.profile_Path = profile_Path;
+		this.bName = bName;
+	}
+
+
 	public int getBId() {
 		return bId;
 	}
@@ -218,13 +244,22 @@ public class Board {
 	}
 
 
+	public String getBName() {
+		return bName;
+	}
+
+
+	public void setBName(String bName) {
+		this.bName = bName;
+	}
+
 
 	@Override
 	public String toString() {
 		return "Board [bId=" + bId + ", mNo=" + mNo + ", bNo=" + bNo + ", bCode=" + bCode + ", bTitle=" + bTitle
 				+ ", bContent=" + bContent + ", bDate=" + bDate + ", likes=" + likes + ", rFlag=" + rFlag + ", delFlag="
 				+ delFlag + ", hasFile=" + hasFile + ", isNotice=" + isNotice + ", bCount=" + bCount + ", mnick="
-				+ mnick + ", profile_Path=" + profile_Path + "]";
+				+ mnick + ", profile_Path=" + profile_Path +", bName=" + bName+ "]";
 	}
 	
 	

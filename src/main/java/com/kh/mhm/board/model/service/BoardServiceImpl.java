@@ -124,6 +124,18 @@ public class BoardServiceImpl implements BoardService {
 		// TODO Auto-generated method stub
 		return boardDao.updateOneCount(BId);
 	}
+	
+	@Override
+	public int updateLikes(int BId) {
+		// TODO Auto-generated method stub
+		return boardDao.updateLikes(BId);
+	}
+	
+	@Override
+	public int updateBlindOff(int BId) {
+		return boardDao.updateBlindOff(BId);
+	}
+	
 
 	@Override
 	public List<Fileref> selectFilerefList(int boardNo) {
@@ -189,12 +201,12 @@ public class BoardServiceImpl implements BoardService {
 	}
 
 	@Override
-	public int selectBoardCnt(int bCode) {
-		return boardDao.selectBoardCnt(bCode);
+	public int selectBoardCnt(Map<String, Object> param) {
+		return boardDao.selectBoardCnt(param);
 	}
 
 	@Override
-	public List<Board> selectBoardListPart(Map<String, Integer> param) {
+	public List<Board> selectBoardListPart(Map<String, Object> param) {
 		return boardDao.selectBoardListPart(param);
 	}
 
@@ -206,4 +218,5 @@ public class BoardServiceImpl implements BoardService {
 	public List<Board> selectRecentBoard(Map<String, Integer> param) {
 		return boardDao.selectRecentBoard(param);
 	}
+	
 }

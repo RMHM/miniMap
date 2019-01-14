@@ -46,5 +46,11 @@ public interface MessageService {
 	int countMessageSent(int mNo);
 	
 	int countMessageStore(int mNo);
+	
+	List<Message> selectMessageBlock(int cPage, int numPerPage, int mNo);
+	
+	int countMessageBlock(int mNo);
+	
+	int unblockMessage(String[] arr, int mId);
 
 }

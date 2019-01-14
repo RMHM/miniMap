@@ -13,7 +13,6 @@
 
 <title>관리자 페이지</title>
 <script src="${pageContext.request.contextPath}/resources/js/jquery-3.3.1.min.js"></script>
-<script src="${pageContext.request.contextPath}/resources/js/moment.min.js"></script>
 <script src="${pageContext.request.contextPath}/resources/js/manager/manager.js"></script>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/manager/manager.css">
 
@@ -28,7 +27,6 @@
 	<p style="font-size: 25px; font-weight: 600;">관리자 페이지</p>
 	
 	<br>
-
 	<div class="searchArea">
 		<select id="searchCondition" name="searchCondition">
 			<option value="mid">ID</option>
@@ -141,7 +139,7 @@
 	</div>
 	</div>
 	<!-- <script>
-	
+		
 	</script> -->
 	<c:import url="/WEB-INF/views/common/footer.jsp"/>
 </body>

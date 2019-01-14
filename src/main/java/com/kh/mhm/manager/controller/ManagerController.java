@@ -1,6 +1,8 @@
 package com.kh.mhm.manager.controller;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -9,9 +11,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.kh.mhm.common.util.Utils;
 import com.kh.mhm.manager.model.service.ManagerService;
 import com.kh.mhm.member.model.vo.BlackList;
 import com.kh.mhm.member.model.vo.CompanyMember;
+import com.kh.mhm.member.model.vo.Member;
+import com.kh.mhm.myPage.model.service.MyPageService;
 import com.kh.mhm.myPage.model.vo.Authority;
 
 @Controller
@@ -22,6 +27,9 @@ public class ManagerController {
   
 	@Autowired
 	private ManagerService mns;
+	
+	@Autowired
+	private MyPageService mps;
 	
 	// 통계
 	@RequestMapping("/manager/visitCount.do")
@@ -80,6 +88,36 @@ public class ManagerController {
     	
     	return list;
     }
+	
+	// 회원이 작성한 게시글/댓글 조회
+	@RequestMapping("manager/selectUsersBoardList.do")
+	public String selectBoardList(@RequestParam(value = "cPage", required = false, defaultValue = "1") int cPage,
+			@RequestParam("mno") int mno
+			/*Member member*/, Model model) {
+		int no = mno;/*member.getMno();*/
+		System.out.println("mno : " + mno);
+		int numPerPage = 5;
+
+		int totalContents = mps.selectBoardTotalContents(no);
+		int totalCoContents = mps.selectCommentTotalContents(no);
+		
+		List<Map<String, Object>> list = new ArrayList<Map<String, Object>>(
+				mps.selectMyBoardList(cPage, numPerPage, no));
+		List<Map<String, Object>> colist = new ArrayList<Map<String, Object>>(
+				mps.selectMyCommentList(cPage, numPerPage, no));
+		
+		String copageBar = Utils.getPageBar(totalCoContents, cPage, numPerPage, "myBoardList.do");
+		String pageBar = Utils.getPageBar(totalContents, cPage, numPerPage, "myBoardList.do");
+		model.addAttribute("list", list)
+				.addAttribute("totalContents", totalContents)
+				.addAttribute("numPerPage", numPerPage)
+				.addAttribute("pageBar", pageBar)
+				.addAttribute("colist", colist)
+				.addAttribute("totalCoContents", totalCoContents)
+				.addAttribute("copageBar", copageBar);
+		
+		return "manager/MemberBoardView";
+	}
 
 	// 권한 승인 (승인 or 거절 시 쪽지 보낼 수 있게 만들기)
 	@RequestMapping("manager/grantAuthority.do")

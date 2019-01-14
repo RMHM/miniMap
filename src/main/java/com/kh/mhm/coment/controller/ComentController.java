@@ -113,7 +113,7 @@ public class ComentController {
 		int cid = coment.getCid();
 		System.out.println("update");
 /*		coment.setCcontent(session.getAttribute("replycontent"));
-*/		System.out.println(session.getAttribute("replycontent"));
+		System.out.println(session.getAttribute("replycontent"));*/
 		
 		System.out.println(coment);
 		
