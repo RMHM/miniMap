@@ -11,7 +11,7 @@
 <title>회원정보를 찾아보아요!</title>
 </head>
 <body>
-	<c:import url="/WEB-INF/views/common/exFile.jsp"/>
+	<c:import url="/WEB-INF/views/common/exFile.jsp"/>]
 	<div id="wrapper">
 		<c:import url="/WEB-INF/views/common/header.jsp"/>
 		

@@ -4,24 +4,25 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
-
 <header>
 	<div class="navbar navbar-default navbar-static-top">
 		<div class="container">
 			<div class="navbar-header">
-
+			
 				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
                       <span class="icon-bar"></span>
                       <span class="icon-bar"></span>
                       <span class="icon-bar"></span>
                   </button>
 				<a class="navbar-brand" href="/">
+				<img src="resources/img/mhm_header2.png" style="width:200; height:200%" alt="" />
 				<img src="/resources/img/mhm_logo.png" style="width:120px;" alt="" /></a>
+				
 
 			</div>
 			<div class="navbar-collapse collapse" style="max-height:500px">
 				<input type="hidden" id="hdnSession" data-value="${member.mno}" />
-				<ul class="nav navbar-nav">
+				<ul class="nav navbar-nav" style="width:auto; position: relative;"  >
 					<li class="active"><a href="/">Home</a></li>
 					<li><a href="/echo.do">타임라인</a></li>
 					<li><a href="/test/testMap.do">지도테스트</a></li>
@@ -48,6 +49,8 @@
 									<li><a href="/manager/managerPage.go">관리자 페이지</a></li>
 								</c:if>
 								<li><a href="/member/memberLogout.do">로그아웃</a></li>
+								<li style="background: resources/img/member/eee.jpg center top no-repeat; float: none; list-style: none; 
+											position: absolute; width: 926px; z-index: 0; display: none;"></li>
 							</ul>
 						</li>
 					</c:if>
@@ -110,5 +113,4 @@ function onClose(evt) {
 	location.href = '${pageContext.request.contextPath};';
 };
 </script> -->
-
 </header>
