@@ -57,10 +57,10 @@
 		</section>
 		
 		<h3 align='center'>실시간 타임라인</h3>
-		<section class="callaction" style="height:250px !important;">
+		<section class="callaction" style="height:270px !important;">
 			<div class="box" id="siltaja" name="siltaja"></div>
 			<div id="letustl" style='position:absolute !important; right:150px !important;'>
-				<h5 id='letTxt' align='left' style='line-height:1.7em;'>
+				<h5 id='letTxt' style='line-height:1.7em;'>
 					타임라인에서 다른 여행객들과 실시간으로 정보를 공유해보세요!<br>
 					고기국수는 어디가 맛있을까요?<br>
 					길이 막히지는 않을까요?<br>
