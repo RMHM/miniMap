@@ -39,4 +39,14 @@ public class TimeLineServiceImpl implements TimeLineService {
 		return tldi.selectPreTimeLine();
 	}
 
+	@Override
+	public List<PreTimeLine> loadMoreLine(int tId) {
+		return tldi.loadMoreLine(tId);
+	}
+
+	@Override
+	public int blockTimeLine(int tId, String mNick) {
+		return tldi.blockTimeLine(tId, mNick);
+	}
+
 }

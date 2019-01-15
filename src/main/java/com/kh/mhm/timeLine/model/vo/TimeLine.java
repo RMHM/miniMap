@@ -13,12 +13,14 @@ public class TimeLine extends TimeLineSmpl implements Serializable {
 		super();
 	}
 
-	public TimeLine(int tId, Timestamp tDate, String delFlag) {
+	public TimeLine(int tId,Timestamp tDate, String delFlag) {
 		super();
-		this.tId = tId;
+		this.tId=tId;
 		this.tDate = tDate;
 		this.delFlag = delFlag;
 	}
+	
+	
 
 	public int gettId() {
 		return tId;
@@ -46,6 +48,6 @@ public class TimeLine extends TimeLineSmpl implements Serializable {
 
 	@Override
 	public String toString() {
-		return "TimeLine [tId=" + tId + ", tDate=" + tDate + ", delFlag=" + delFlag + "]";
+		return "TimeLine [tDate=" + tDate + ", delFlag=" + delFlag + "]";
 	}
 }

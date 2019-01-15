@@ -194,9 +194,21 @@ $(document).ready(function() {
 						var $tdDropDate = $('<td>').text("탈퇴");
 						$tdDropDate.css('color', 'red');
 					}
+					
+					var $tdReqBtn = $('<td>').html("<button name='requestBtn' id='btn'>권한확인</button>");
+					
+					if(data[i].grantCount >= 1){
+						$tdReqBtn = $('<td>').html("<button name='requestBtn' id='btn'>권한확인</button>");
+						$tdReqCheck = null;
+					} else {
+						$tdReqBtn = $('<td>').text('권한 없음').css('color', 'red');
+					}
+						
+					console.log(data);
+					var reqDate = moment(data[i].reqDate).format('YYYY-MM-DD');
 
 					$trBoard.append($tdMno).append($tdMid).append($tdMname).append($tdEmail)
-					/*.append($tdAuthority)*/.append($('<td>').html("<button name='requestBtn' id='btn'>권한확인</button>")).append($tdJoinDate).append($tdDropDate);	
+					.append($tdReqBtn).append($tdJoinDate).append($tdDropDate);	
 					
 					$table.append($trBoard);
 					

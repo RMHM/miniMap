@@ -18,7 +18,14 @@
 
 <body class="bPopup">
 
-<div id="noteWrap">
+<c:choose>
+	<c:when test="${empty member}">
+		<script>
+			window.location.href="common/error.jsp";
+		</script>
+	</c:when>
+	<c:otherwise>
+		<div id="noteWrap">
 <div id="noteLeft">
 <dl class="menu">
 	<dt>쪽지함</dt>
@@ -28,6 +35,7 @@
 			<li class=" oldstart"><span class="orange"><a href="/popUp.inbox" onfocus="this.blur();">받은 쪽지함</a></span></li>
 			<li class=""><span class="orange"><a href="/popUp.sent" onfocus="this.blur();">보낸 쪽지함</a></span></li>
 			<li class=""><span class="orange size3"><a href="/popUp.store" onfocus="this.blur();">쪽지 보관함</a></span></li>
+			<li class="oldstart"><span class="orange size2"><a href="/popUp.block" onfocus="this.blur();">쪽지 차단</a></span></li>
 		</ul>
 	</dd>
 </dl>
@@ -73,32 +81,11 @@
 </div>
 
 </div>
-
-<script>
-function deleteNote() {
-	var ans = confirm("삭제하시겠습니까?");
-	if (!ans) return;
-	var meId="${message.meId}";
-	$.ajax({
-		url : '/sent.deleteOne',
-	    type : 'post',
-	    traditional:true,
-	    data : {
-	    	'meId':meId
-	    },
-	    success : function(data) {
-	    	alert("쪽지 삭제 완료");
-	    	window.location.href ="/popUp.sent";
-	    },
-	    error : function() { 
-	    	// 에러 처리 고민
-	    	console.log('error');
-	   	}
-	});
-}
+	</c:otherwise>
+</c:choose>
 
 
 
-</script>
+<script src="/resources/js/message/detail_sent.js"></script>
 </body>
 </html>

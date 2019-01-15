@@ -15,4 +15,8 @@ public interface TimeLineDao {
 	int insertTimeLine(TimeLineSmpl tls);
 
 	List<PreTimeLine> selectPreTimeLine();
+	
+	List<PreTimeLine> loadMoreLine(int tId);
+	
+	int blockTimeLine(int tId, String mNick);
 }

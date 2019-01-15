@@ -45,4 +45,17 @@
 		<property name="dataSource" ref="dataSource"/>
     </bean> -->
     
+    <!-- Google Social Login Connect -->
+    <!-- <bean id = "googleConnectionFactory" class="org.springframework.social.google.connect.GoogleConnectionFactory">
+		<constructor-arg value="919250358333-6tcbkn54dfekrnsjv762k08dtobul7iv.apps.googleusercontent.com"/>
+		<constructor-arg value="xh60bNEsNNcJAdOkrsUmZQv2"/>    
+	</bean> -->
+	 
+	<!-- <bean id = "googleOAuth2Parameters" class="org.springframework.social.oauth2.OAuth2Parameters">
+		<property name="scope" value="https://www.googleapis.com/auth/plus.login"></property>
+		<property name="redirectUri" value="http://localhost/member/googleSignInCallback"/>
+	</bean> -->
+    
+    <!-- Google Social Login Connect -->
+    
 </beans>

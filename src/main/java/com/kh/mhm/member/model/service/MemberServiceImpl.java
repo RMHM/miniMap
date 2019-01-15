@@ -1,6 +1,5 @@
 package com.kh.mhm.member.model.service;
 
-import java.util.List;
 import java.util.Date;
 import java.util.HashMap;
 
@@ -72,6 +71,11 @@ public class MemberServiceImpl implements MemberService {
 		HashMap<String, Object> hmap = new HashMap<String, Object>();
 		hmap.put("email", email);
 		return mDao.checkEmail(hmap);
+	}
+
+	@Override
+	public Member selectOne(int mno) {
+		return mDao.selectOne(mno);
 	}
 
   

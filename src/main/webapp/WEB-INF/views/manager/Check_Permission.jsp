@@ -73,10 +73,12 @@ button:hover {
 															<td>부여됨</td>
 														</c:when>
 														<c:when test="${fn:contains(atake, 'N') and fn:contains(delflag, 'Y') }">
-															<td style="">거부됨</td>
+															<td style="color:red">거부됨</td>
 														</c:when>
 													</c:choose>
 												</tr>
+												<input type="hidden" value="${list.get(a).getMNick()}" id="mnick">
+												<input type="hidden" value="${list.get(a).getACode()}" id="aCode">
 											</c:forEach>
 									</tbody>
 								</c:if>
@@ -174,8 +176,11 @@ button:hover {
 
 		var checkResult = window.confirm("승인하겠습니까?");
 		
+		var mNick = $('#mnick').val();
+		var aCode = $('input[name^=aCode]:checked').val();
+		
 		if(checkResult){
-			url = "grantAuthority.do?mnick=${autho.getMNick()}";
+			url = "grantAuthority.do?mnick="+mNick+"&acode="+aCode;
 			
 			opener.window.location = url;
 			
@@ -188,8 +193,10 @@ button:hover {
 	function refuse() {
 		// 거절 사유 전달해서 쪽지 내용에 추가하기
 		var content = window.prompt("거절 사유를 작성해 주세요.");
+		var mNick = $('#mnick').val();
+		var aCode = $('input[name^=aCode]:checked').val();
 		
-		url = "refuseAuthority.do?mnick=${autho.getMNick()}&content="+content
+		url = "refuseAuthority.do?mnick="+mNick + "&content="+content+"&acode="+aCode
 		
 		opener.window.location = url;
 		

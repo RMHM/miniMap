@@ -8,6 +8,9 @@
 <html>
 <head>
 <meta charset="UTF-8">
+ <meta name="google-signin-scope" content="profile email">
+ <meta name="google-signin-client_id" content="919250358333-6tcbkn54dfekrnsjv762k08dtobul7iv.apps.googleusercontent.com">
+ <script src="https://apis.google.com/js/platform.js" async defer></script>
 <title>로그인 페이지</title>
 </head>
 <body>
@@ -27,8 +30,9 @@
 								<input type="password" class="form-control" name="mpw" id="mpw" placeholder="비밀번호를 입력하세요">
 							</div>
 							<div class="text-center">
-								<input type="submit" value="로그인" id="btLogin" class="btn btn-theme">
-								<input type="button" value="ID/PW 찾기" id="btFind" class="btn bnt-theme">
+								<input type="submit" value="로그인" id="btLogin" class="btn btn-theme btn-large">
+                            	<div class="g-signin2 btn" data-onsuccess="onSignIn" data-theme="dark">구글구글</div>
+								<input type="button" value="ID/PW 찾기" id="btFind" class="btn bnt-theme btn-large">
 							</div>
 						</form>
 					</div>

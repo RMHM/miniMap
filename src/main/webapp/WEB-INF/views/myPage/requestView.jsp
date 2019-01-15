@@ -306,6 +306,11 @@
 
 		</div>
 		<c:import url="../common/footer.jsp" />
+		<script>
+		$(document).ready(function() {
+			if("${!empty msg}")alert("${msg}");
+		});
+		</script>
 
 
 	</div>

@@ -121,11 +121,9 @@ public class ManagerController {
 
 	// 권한 승인 (승인 or 거절 시 쪽지 보낼 수 있게 만들기)
 	@RequestMapping("manager/grantAuthority.do")
-	public String grantAuthority(Model model, @RequestParam("mnick") String mnick) {
+	public String grantAuthority(Model model, @RequestParam("mnick") String mnick, @RequestParam("acode") int acode) {
 		
-		int result = mns.grantAuthority(mnick);
-		
-		System.out.println("mnick : " + mnick);
+		int result = mns.grantAuthority(mnick, acode);
 		
 		if(result > 0) {
 			msg = "승인이 완료 되었습니다.";
@@ -143,9 +141,10 @@ public class ManagerController {
 	
 	// 권한 요청 거부
 	@RequestMapping("manager/refuseAuthority.do")
-	public String refuseAuthority(Model model, @RequestParam("mnick") String mnick, @RequestParam("content") String content) {
+	public String refuseAuthority(Model model, @RequestParam("mnick") String mnick, @RequestParam("content") String content
+			, @RequestParam("acode") int acode) {
 		
-		int result = mns.refuseAuthority(mnick);
+		int result = mns.refuseAuthority(mnick, acode);
 		
 		if(result > 0) {
 			msg = "요청이 거부 되었습니다.";

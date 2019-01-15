@@ -2,6 +2,7 @@ package com.kh.mhm.message.model.dao;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.RowBounds;
 import org.mybatis.spring.SqlSessionTemplate;
@@ -9,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.kh.mhm.message.model.vo.Message;
+import com.kh.mhm.message.model.vo.MessageBlock;
 import com.kh.mhm.message.model.vo.MessageSmpl;
 
 @Repository
@@ -118,6 +120,36 @@ public class MessageDaoImpl implements MessageDao {
 	@Override
 	public int countMessageStore(int mNo) {
 		return sqlSession.selectOne("Message.countMessageStore",mNo);
+	}
+
+	@Override
+	public List<Message> selectMessageBlock(int cPage, int numPerPage, int mNo) {
+		RowBounds rowBounds = new RowBounds((cPage-1)*numPerPage, numPerPage);
+		return sqlSession.selectList("Message.selectMessageBlock",mNo,rowBounds);
+	}
+
+	@Override
+	public int countMessageBlock(int mNo) {
+		return sqlSession.selectOne("Message.countMessageBlock",mNo);
+	}
+
+	@Override
+	public int unblockMessage(String[] arr, int mNo) {
+		Map<String,Object> map=new HashMap<String,Object>();
+		map.put("arr", arr);
+		map.put("mNo", mNo);
+		System.out.println(map.toString());
+		return sqlSession.delete("Message.unblockMessage",map);
+	}
+
+	@Override
+	public int banMessage(MessageBlock mb) {
+		return sqlSession.insert("Message.banMessage",mb);
+	}
+
+	@Override
+	public int checkBlock(Map<String,Object> map) {
+		return sqlSession.selectOne("Message.checkBlock",map);
 	}
 
 

@@ -2,16 +2,23 @@ package com.kh.mhm.member.controller;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.net.URLEncoder;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 import java.text.SimpleDateFormat;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import javax.activation.CommandMap;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.apache.commons.io.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
@@ -28,7 +35,6 @@ import org.springframework.web.servlet.ModelAndView;
 import com.kh.mhm.common.SendMail;
 import com.kh.mhm.member.model.service.MemberService;
 import com.kh.mhm.member.model.vo.Member;
-import com.kh.mhm.myPage.model.service.MyPageService;
 
 @SessionAttributes(value = { "member" })
 @Controller
@@ -40,12 +46,6 @@ public class MemberController {
 	@Autowired
 	private MemberService ms;
 	
-	@Autowired
-	private MyPageService mps;
-
-//	private String loc = "/";
-//	private String msg = "";
-
 	@RequestMapping("/member/loginPage.go")
 	public String loginGo() {
 		return "member/loginPage";
@@ -205,28 +205,54 @@ public class MemberController {
 
 	@RequestMapping("/member/memberEnrollEnd.do")
 	public ModelAndView memberEnrollEnd(@RequestParam(value="profile", required = false)
-				MultipartFile profile, HttpSession session, HttpServletRequest request, Member m, Model model) {
+				MultipartFile profile, HttpSession session, HttpServletRequest request, Member m, Model model,
+				@RequestParam(value = "path", required = false, defaultValue = "") String path) {
+		
 		String saveDir = session.getServletContext().getRealPath("/resources/img/profiles");
 		File dir = new File(saveDir);
 		
 		ModelAndView mv = new ModelAndView();
 		
 		if(dir.exists() == false) dir.mkdirs();
-		String originName = profile.getOriginalFilename();
-		String ext = originName.substring(originName.lastIndexOf(".")+1);
+		
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd_HHmmss");
 		int rndNum = (int) (Math.random() * 1000);
 		
-		String renamedName = sdf.format(new java.util.Date()) + "_" + rndNum + "." + ext;
 		
-		
-		try {
-			profile.transferTo(new File(saveDir + "/" + renamedName));
-		} catch (IllegalStateException | IOException e) {
-			e.printStackTrace();
-		}	
-		
-		m.setProfilePath(renamedName);
+		if(profile != null) {
+			String originName = profile.getOriginalFilename();
+			String ext = originName.substring(originName.lastIndexOf(".")+1);
+			
+			if (originName == null || originName.trim().equals("")) {
+				m.setProfilePath("default.png");
+				
+				for (int i = 1; i <= 10; i++) {
+					m.setProfilePath("default.png");
+				}
+				
+			} else {
+				String renamedName = sdf.format(new java.util.Date()) + "_" + rndNum + "." + ext;
+				try {
+					profile.transferTo(new File(saveDir + "/" + renamedName));
+				} catch (IllegalStateException | IOException e) {
+					e.printStackTrace();
+				}	
+				
+				m.setProfilePath(renamedName);
+			}
+		} else if(path != null || !path.trim().equals("")) {
+			String ext = path.substring(path.lastIndexOf(".")+1);
+			String renamedName = sdf.format(new java.util.Date()) + "_" + rndNum + "." + ext;
+			System.out.printf("path : %s\n", path);
+			
+			try {
+				FileUtils.copyURLToFile(new URL(path), new File(saveDir + "/" + renamedName));
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			mv.addObject("parent", "/");
+			m.setProfilePath(renamedName);
+		}
 		
 		// m.setMpw(bcpe.encode(m.getMpw()));
 		
@@ -324,32 +350,29 @@ public class MemberController {
 		return map;
 	}
 	
+	@RequestMapping(value = "/member/googleLogin")
+	public Object googleLogin(@RequestParam String gEmail, @RequestParam String gName, @RequestParam String gImg) {
+		ModelAndView mv = new ModelAndView();
+		Member m = null;
+		Object result = null;
+		try {
+			m = ms.selectLogin(gEmail);
+			
+			if(m!=null) {
+				mv.addObject("msg", "로그인 되었습니다.").addObject("loc", "/").addObject("member", m);
+				mv.addObject("parent", "/");
+				mv.setViewName("common/msg");
+			} else {
+				mv.addObject("gEmail", gEmail).addObject("gName", gName).addObject("gImg", gImg);
+				mv.setViewName("member/googleSignUp");
+			}
+			result = mv;
+		} catch(Exception e) {
+			e.getStackTrace();
+		}
+		System.out.println(result);
+		return result;
+	}
 	
-	/*
-	 * @RequestMapping("/member/insertFileEnd.do") public String insertMember(Member
-	 * member, Model model, HttpSession session,
-	 * 
-	 * @RequestParam(value="upFile", required = false) MultipartFile[] upFile) { //
-	 * 저장 경로 생성 String sfile =
-	 * session.getServletContext().getRealPath("/resources/img/profiles");
-	 * List<Member> List = new ArrayList<Member>();
-	 * 
-	 * // 폴더 유무 확인 후 생성 File file = new File(sfile);
-	 * 
-	 * System.out.println("폴더가 있니? " + file.exists());
-	 * 
-	 * if(file.exists() == false) file.mkdirs();
-	 * 
-	 * // 업로드 for(MultipartFile f : upFile) { if(!f.isEmpty()) { // 원본 이름 가져오기
-	 * String originName = f.getOriginalFilename(); String ext =
-	 * originName.substring(originName.lastIndexOf(".")+1); SimpleDateFormat sdf =
-	 * new SimpleDateFormat("yyyyMMdd_HHmmss");
-	 * 
-	 * int rNum = (int) (Math.random() * 1000);
-	 * 
-	 * // 서버에서 저장 후 관리할 파일 명 String renamedName = sdf.format(new Date()) + "_" +
-	 * rNum + "." + ext;
-	 * 
-	 * // } } }
-	 */
+	
 }

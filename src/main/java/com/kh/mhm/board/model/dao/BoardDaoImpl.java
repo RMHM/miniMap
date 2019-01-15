@@ -58,6 +58,12 @@ public class BoardDaoImpl implements BoardDao {
 	public List<Board> selectNoticeList1(Board board) {		
 		return sqlSession.selectList("board.selectNoticeList1");
 	}
+	
+	@Override
+	public List<Board> selectBestList1(Board board) {
+		return sqlSession.selectList("board.selectBestList1");
+	}
+	
 	@Override
 	public int selectBoardTotalContents1() {
 		return sqlSession.selectOne("board.selectBoardTotalContents1");
@@ -91,6 +97,12 @@ public class BoardDaoImpl implements BoardDao {
 	public List<Board> selectNoticeList2(Board board) {		
 		return sqlSession.selectList("board.selectNoticeList2");
 	}
+	
+	@Override
+	public List<Board> selectBestList2(Board board) {
+		return sqlSession.selectList("board.selectBestList2");
+	}
+	
 	@Override
 	public int selectBoardTotalContents2() {
 		return sqlSession.selectOne("board.selectBoardTotalContents2");
@@ -125,6 +137,12 @@ public class BoardDaoImpl implements BoardDao {
 	public List<Board> selectNoticeList3(Board board) {		
 		return sqlSession.selectList("board.selectNoticeList3");
 	}
+	
+	@Override
+	public List<Board> selectBestList3(Board board) {
+		return sqlSession.selectList("board.selectBestList3");
+	}
+	
 	@Override
 	public int selectBoardTotalContents3() {
 		return sqlSession.selectOne("board.selectBoardTotalContents3");
@@ -158,6 +176,12 @@ public class BoardDaoImpl implements BoardDao {
 	public List<Board> selectNoticeList4(Board board) {		
 		return sqlSession.selectList("board.selectNoticeList4");
 	}
+	
+	@Override
+	public List<Board> selectBestList4(Board board) {
+		return sqlSession.selectList("board.selectBestList4");
+	}
+	
 	@Override
 	public int selectBoardTotalContents4() {
 		return sqlSession.selectOne("board.selectBoardTotalContents4");
@@ -187,6 +211,20 @@ public class BoardDaoImpl implements BoardDao {
 		// TODO Auto-generated method stub
 		return sqlSession.update("board.updateOneCount", BId);
 	}
+	
+	@Override
+	public int updateLikes(int BId) {
+		// TODO Auto-generated method stub
+		return sqlSession.update("board.updateLikes",BId);
+	}
+
+	
+	@Override
+	public int updateBlindOff(int BId) {
+		// TODO Auto-generated method stub
+		return sqlSession.update("board.updateBlindOff", BId);
+	}
+	
 
 	@Override
 	public List<Fileref> selectFilerefList(int boardNo) {
@@ -260,12 +298,12 @@ public class BoardDaoImpl implements BoardDao {
 	}
 
 	@Override
-	public int selectBoardCnt(int bCode) {
-		return sqlSession.selectOne("board.selectBoardCnt", bCode);
+	public int selectBoardCnt(Map<String, Object> param) {
+		return sqlSession.selectOne("board.selectBoardCnt", param);
 	}
 
 	@Override
-	public List<Board> selectBoardListPart(Map<String, Integer> param) {
+	public List<Board> selectBoardListPart(Map<String, Object> param) {
 		return sqlSession.selectList("board.selectBoardListPart", param);
 	}
 
@@ -278,4 +316,10 @@ public class BoardDaoImpl implements BoardDao {
 	public List<Board> selectRecentBoard(Map<String, Integer> param) {
 		return sqlSession.selectList("board.selectRecentBoard", param);
 	}
+
+	@Override
+	public String selectBoardMemberType(int mno) {
+		return sqlSession.selectOne("board.selectBoardMemberType", mno);
+	}
+
 }

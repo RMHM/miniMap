@@ -17,10 +17,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.kh.mhm.message.common.util.Paging;
 import com.kh.mhm.member.model.vo.Member;
+import com.kh.mhm.message.common.util.Paging;
 import com.kh.mhm.message.model.service.MessageService;
 import com.kh.mhm.message.model.vo.Message;
+import com.kh.mhm.message.model.vo.MessageBlock;
 import com.kh.mhm.message.model.vo.MessageSmpl;
 
 @Controller
@@ -104,11 +105,6 @@ public class MessageController {
 		session.setAttribute("numPerPage", numPerPage);
 		session.setAttribute("pageBar", pageBar);
 		return "message/message_store";
-	}
-	
-	@RequestMapping("/popUp.block")
-	public String pupUpBlock() {
-		return "message/message_block";
 	}
 	
 	@RequestMapping(value="/message.delete", method = {RequestMethod.POST})
@@ -203,13 +199,25 @@ public class MessageController {
 	
 	@RequestMapping(value="/message.write", method = {RequestMethod.POST})
 	@ResponseBody
-	public int sendMessage(String nick, String title, String content, HttpSession session) {
+	public String sendMessage(String nick, String title, String content, HttpSession session,Model model) {
 		MessageSmpl message=new MessageSmpl(((Member)session.getAttribute("member")).getMno(),nick,title,content);
-		int result=ms.sendMessage(message);
-		if(session.getAttribute("mNick")!=null||session.getAttribute("mNick")!="") {
-			session.removeAttribute("mNick");
+		Map<String,Object> map=new HashMap<String,Object>();
+		map.put("mNo", message.getmNo());
+		map.put("mNick", message.getmNick());
+		int blockChk=ms.checkBlock(map);
+		System.out.println(blockChk);
+		if(blockChk>0) {
+			model.addAttribute("msg", "차단한 회원에게는 쪽지를 보낼 수 없습니다."); 
+			model.addAttribute("url", "/popUp.write"); 
+			return "common/redirect";
+		}else {
+			int result=ms.sendMessage(message);
+			if(session.getAttribute("mNick")!=null||session.getAttribute("mNick")!="") {
+				session.removeAttribute("mNick");
+			}
+			return String.valueOf(result);
 		}
-		return result;
+		
 	}
 	
 	@RequestMapping("/nick.find")
@@ -222,28 +230,13 @@ public class MessageController {
 		return map;
 	}
 	
-	// 회원가입 축하 쪽지 전송
-	// 나중에 회원가입쪽과 연동
-	@RequestMapping("/message.welcome")
-	public String welcomeMHM() {
-		String title="회원가입을 축하드립니다!";
-		String content="회원님의 가입을 진심으로 축하드리며 미니맵에서 즐거운 여행 되시길 바랍니다.";
-		// 사이트 관리자의 회원번호는 1번 고정해야함
-		MessageSmpl message=new MessageSmpl(1, "사이트관리자", title, content);
-		int result=ms.sendMessage(message);
-		// result 결과에 따른 에러처리(추후 진행)
-		return "/";
-	}
-	
 	// 기업회원 승인 허가 쪽지 전송
-@RequestMapping("/message/message.allow")
+	@RequestMapping("/message/message.allow")
 	public String allowMHM(Model model, @RequestParam("mnick") String mnick) {
 		String title="[MHM] 요청해주신 권한이 승인 되었습니다!";
 		String content="요청해주신 권한이 승인 되었습니다.";
-		// 사이트 관리자의 회원번호는 1번 고정해야함
 		MessageSmpl message=new MessageSmpl(1, mnick, title, content);
 		int result=ms.sendMessage(message);
-		// result 결과에 따른 에러처리(추후 진행)
 		
 		String msg = "요청 승인에 대한 쪽지 전송이 완료 되었습니다.";
 		String loc = "/manager/managerPage.go";
@@ -257,16 +250,59 @@ public class MessageController {
 	@RequestMapping("/message/message.reject")
 	public String rejectMHM(@RequestParam("content") String content, @RequestParam("mnick") String mnick, Model model) {
 		String title="[MHM] 요청해주신 권한이 거절 되었습니다.";
-		System.out.println("MSG사유 : " + content);
-		// 사이트 관리자의 회원번호는 1번 고정해야함
 		MessageSmpl message=new MessageSmpl(1, mnick, title, content);
 		int result=ms.sendMessage(message);
-		// result 결과에 따른 에러처리(추후 진행)
 		String msg = "요청 거부에 대한 쪽지 전송이 완료 되었습니다.";
 		String loc = "/manager/managerPage.go";
 		
 		model.addAttribute("msg", msg).addAttribute("loc", loc);
 		
 		return "common/msg";
+	}
+	
+	@RequestMapping("/popUp.block")
+	public String popUpblock(@RequestParam(value="cPage", required=false, defaultValue="1") int cPage, HttpSession session) {
+		Member member=(Member) session.getAttribute("member");
+		int numPerPage = 12;
+		
+		List<Message> block = ms.selectMessageBlock(cPage, numPerPage, member.getMno());
+		
+		
+		int totalContents = ms.countMessageBlock(member.getMno());
+		
+		String pageBar = Paging.getPageBar(totalContents, cPage, numPerPage, "/popUp.block");
+		
+		session.setAttribute("block", block);
+		session.setAttribute("totalContents", totalContents);
+		session.setAttribute("numPerPage", numPerPage);
+		session.setAttribute("pageBar", pageBar);
+		return "message/message_block";
+	}
+	
+	@RequestMapping(value="/message.unblock", method = {RequestMethod.POST})
+	@ResponseBody
+	public int unblockMessage(String[] arr, int mNo) {
+		int result=ms.unblockMessage(arr,mNo);
+		return result;
+	}
+	
+	@RequestMapping("/block.member")
+	public String popUpBlockMessage(HttpSession session) {
+		int mNo=((Member)session.getAttribute("member")).getMno();
+		String mNick=((Member)session.getAttribute("member")).getMnick();
+		session.setAttribute("mNo", mNo);
+		session.setAttribute("mNick", mNick);
+		return "message/askBlock";
+	}
+	
+	@RequestMapping(value="/message.ban", method = {RequestMethod.POST})
+	@ResponseBody
+	public int banMessage(int mNo, String mNick,String content) {
+		MessageBlock mb=new MessageBlock();
+		mb.setmNo(mNo);
+		mb.setBlock_mNick(mNick);
+		mb.setBlock_note(content);
+		int result=ms.banMessage(mb);
+		return result;
 	}
 }

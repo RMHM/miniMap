@@ -8,8 +8,9 @@
 	</resultMap>
 	
 	<insert id="insertAuthority" parameterType="Authority">
-		INSERT INTO AUTHORITY
-		VALUES(SEQ_AID.NEXTVAL,#{mNo},#{mName},SYSDATE,#{address},#{aContent},#{aCode},DEFAULT,DEFAULT,DEFAULT,#{img_file},#{site_url})
+		INSERT INTO AUTHORITY SELECT SEQ_AID.NEXTVAL,#{mNo},#{mName},SYSDATE,#{address},#{aContent},#{aCode},'N',NULL,'N',NULL,NULL FROM DUAL WHERE NOT EXISTS(SELECT * FROM AUTHORITY WHERE ACODE=#{aCode} AND MNO=#{mNo})
+		<!-- INSERT INTO AUTHORITY
+		VALUES(SEQ_AID.NEXTVAL,#{mNo},#{mName},SYSDATE,#{address},#{aContent},#{aCode},DEFAULT,DEFAULT,DEFAULT,#{img_file},#{site_url}) -->
 	</insert>
 	
 	<select id="selectRequest" parameterType="_int" resultType="Authority">
@@ -29,14 +30,14 @@
 		where mno = #{mno} and acode = #{acode} and grant_date is null
 	</select>
 	
-	<update id="grantAuthority" parameterType="string">
+	<update id="grantAuthority" parameterType="hashmap">
 		update authority a set atake = 'Y', grant_date = sysdate
-		where mno = (select mno from member where mnick = #{mnick})
+		where mno = (select mno from member where mnick = #{mnick}) and acode = #{acode}
 	</update>
 	
-	<update id="refuseAuthority" parameterType="string">
+	<update id="refuseAuthority" parameterType="hashmap">
 		update authority set delflag = 'Y'
-		where mno = (select mno from member where mnick = #{mnick})
+		where mno = (select mno from member where mnick = #{mnick}) and acode = #{acode}
 	</update>
 	
 </mapper>

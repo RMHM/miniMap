@@ -21,7 +21,7 @@
 				&nbsp;&nbsp;
 				<h4>--게시판 목록--</h4>
 				<ul class="unstyled">
-					<br><br>
+					<br>
 					<li><a href="/board/boardlist1.do">자유 게시판</a></li><br>
 					<li><a href="/board/boardlist2.do">정보공유 게시판</a></li><br>
 					<li><a href="/board/boardlist3.do">여행후기 게시판</a></li><br>
@@ -67,8 +67,35 @@
                				           <td align="center"><c:out value="${Board.BCount }"/></td>
                 			           <td><c:out value="${Board.BDate}"/></td>
 									</tr>
-								</c:forEach>									
-								<c:forEach var="Board" items="${list }"> <!-- 일반 게시글 페이지 -->														
+								</c:forEach>
+								
+								<c:forEach var="Board" items="${list3 }"> <!-- 베스트 게시글 페이지 -->
+									<tr name="BId" id="${Board.BId }" style="background-color: #E0F8F7;">									
+									   <td align="center"><c:out value="${Board.BNo }"/></td>
+                     				   <td><c:out value="Best"/></td>
+                     				   <td></td>
+                  				       <td><c:out value="${Board.BTitle }"/></td>                  				       
+               				           <td align="center"><c:out value="${Board.mnick}"/></td>
+               				           <td align="center"><c:out value="${Board.BCount }"/></td>
+                			           <td><c:out value="${Board.BDate}"/></td>
+									</tr>
+								</c:forEach>		
+								
+																	
+								<c:forEach var="Board" items="${list }"> <!-- 일반 게시글 페이지 -->
+								<c:choose>	
+								<c:when test="${Board.RFlag eq 'Y' }">
+								<tr <%--  name="BId" id="${Board.BId }" --%> style="background-color: lightgray;">
+                     				   <td align="center"><c:out value="${Board.BNo }"/></td>
+                     				   <td><c:out value="일반"/></td>
+                     				   <td></td>
+                  				       <td>신고된 게시글입니다.</td>                  				       
+               				           <td align="center"><c:out value="${Board.mnick}"/></td>
+               				           <td align="center"><c:out value="${Board.BCount }"/></td>
+                			           <td><c:out value="${Board.BDate}"/></td>
+                    				</tr>								
+								</c:when>
+								<c:otherwise>																				
 									<tr name="BId" id="${Board.BId }" style="background-color: #EFF8FB;">
                      				   <td align="center"><c:out value="${Board.BNo }"/></td>
                      				   <td><c:out value="일반"/></td>
@@ -78,21 +105,23 @@
                				           <td align="center"><c:out value="${Board.BCount }"/></td>
                 			           <td><c:out value="${Board.BDate}"/></td>
                     				</tr>
+                    			</c:otherwise>		
+                    			</c:choose>	
 								</c:forEach>
 							</tbody>
 						</table>
-						<c:if test="${list.size() eq 0}">
+						<%-- <c:if test="${list.size() eq 0}">
 							<article>
 								<div>
 									<h2>등록된 게시물이 없습니다.</h2>
 								</div>
 							</article>
-						</c:if>
+						</c:if> --%>
 						<!-- 페이지 처리 해야됨. -->
 						<c:out value="${pageBar}" escapeXml="false"/>
 						<c:if test="${not empty member and member.mtype ne 'C'}">
 						<input type="button" value="글쓰기" id=""
-							class="btn btn-theme" onclick="location.href='${pageContext.request.contextPath}/board/boardwrite.do'" 
+							class="btn btn-theme" onclick="location.href='${pageContext.request.contextPath}/board/boardwrite.do?BCode=4'" 
 							style="position: absolute; right: 30px;" />
 						</c:if>	
 						<div class="s-area" id="s-area"

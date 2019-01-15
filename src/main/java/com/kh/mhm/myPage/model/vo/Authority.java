@@ -17,7 +17,7 @@ public class Authority {
 	private char delflag		;//	삭제 여부
 	private String img_file 	;
 	private String site_url		;
-	private String aname	;
+	
 	public Authority() {
 		super();
 		// TODO Auto-generated constructor stub
@@ -25,7 +25,7 @@ public class Authority {
 	
 	
 	public Authority(int aId, int mNo, String mName, String mNick, Date request_date, String address, String aContent,
-			int aCode, char aTake, Date grant_date, char delflag, String img_file, String site_url, String aname) {
+			int aCode, char aTake, Date grant_date, char delflag, String img_file, String site_url, String aName) {
 		super();
 		this.aId = aId;
 		this.mNo = mNo;
@@ -40,12 +40,12 @@ public class Authority {
 		this.delflag = delflag;
 		this.img_file = img_file;
 		this.site_url = site_url;
-		this.aname = aname;
+		this.aName = aName;
 	}
 
 
 	public Authority(int mNo, String mName, Date request_date, String address, String aContent, int aCode, char aTake,
-			Date grant_date, char delflag, String img_file, String site_url, String aname) {
+			Date grant_date, char delflag, String img_file, String site_url, String aName) {
 		super();
 		this.mNo = mNo;
 		this.mName = mName;
@@ -58,7 +58,7 @@ public class Authority {
 		this.delflag = delflag;
 		this.img_file = img_file;
 		this.site_url = site_url;
-		this.aname = aname;
+		this.aName = aName;
 	}
 
 
@@ -202,6 +202,6 @@ public class Authority {
 		return "Authority [aId=" + aId + ", mNo=" + mNo + ", mName=" + mName + ", mNick=" + mNick + ", request_date="
 				+ request_date + ", address=" + address + ", aContent=" + aContent + ", aCode=" + aCode + ", aTake="
 				+ aTake + ", grant_date=" + grant_date + ", delflag=" + delflag + ", img_file=" + img_file
-				+ ", site_url=" + site_url + ", aname=" + aname + "]";
+				+ ", site_url=" + site_url + ", aName=" + aName + "]";
 	}
 }

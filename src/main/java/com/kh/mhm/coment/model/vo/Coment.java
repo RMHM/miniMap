@@ -14,7 +14,7 @@ public class Coment {
 	private String rflag;
 	private String delFlag;
 	private String mnick;
-	
+	private String bname;
 	
 
 
@@ -36,6 +36,24 @@ public class Coment {
 		this.rflag = rflag;
 		this.delFlag = delFlag;
 		this.mnick = mnick;
+	}
+
+
+
+	public Coment(int cid, int bid, int mno, String ccontent, Date cdate, int clevel, int cref, String rflag,
+			String delFlag, String mnick, String bname) {
+		super();
+		this.cid = cid;
+		this.bid = bid;
+		this.mno = mno;
+		this.ccontent = ccontent;
+		this.cdate = cdate;
+		this.clevel = clevel;
+		this.cref = cref;
+		this.rflag = rflag;
+		this.delFlag = delFlag;
+		this.mnick = mnick;
+		this.bname = bname;
 	}
 
 
@@ -124,12 +142,28 @@ public class Coment {
 
 
 
+	public String getBname() {
+		return bname;
+	}
+
+
+
+	public void setBname(String bname) {
+		this.bname = bname;
+	}
+
+
+
 	@Override
 	public String toString() {
 		return "Coment [cid=" + cid + ", bid=" + bid + ", mno=" + mno + ", ccontent=" + ccontent + ", cdate=" + cdate
 				+ ", clevel=" + clevel + ", cref=" + cref + ", rflag=" + rflag + ", delFlag=" + delFlag + ", mnick="
-				+ mnick + "]";
+				+ mnick + ", bname=" + bname + "]";
 	}
+
+
+
+	
 
 	
 	

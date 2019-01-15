@@ -20,7 +20,9 @@ public interface BoardService {
 	
 	List<Board> selectSearchList1(String keyfield, String keyword);	
 	
-	List<Board> selectNoticeList1(Board board);		
+	List<Board> selectNoticeList1(Board board);	
+	
+	List<Board> selectBestList1(Board board);
 
 	int selectBoardTotalContents1();
 	
@@ -29,6 +31,8 @@ public interface BoardService {
 	List<Board> selectSearchList2(String keyfield, String keyword);	
 	
 	List<Board> selectNoticeList2(Board board);		
+	
+	List<Board> selectBestList2(Board board);
 
 	int selectBoardTotalContents2();
 	
@@ -37,6 +41,8 @@ public interface BoardService {
 	List<Board> selectSearchList3(String keyfield, String keyword);	
 	
 	List<Board> selectNoticeList3(Board board);		
+	
+	List<Board> selectBestList3(Board board);
 
 	int selectBoardTotalContents3();
 	
@@ -45,6 +51,8 @@ public interface BoardService {
 	List<Board> selectSearchList4(String keyfield, String keyword);	
 	
 	List<Board> selectNoticeList4(Board board);		
+	
+	List<Board> selectBestList4(Board board);
 
 	int selectBoardTotalContents4();
 	
@@ -56,6 +64,10 @@ public interface BoardService {
 	Board selectOneBoard(int bId);
 	
 	int updateOneCount(int bId);
+	
+	int updateLikes(int bId);
+	
+	int updateBlindOff(int bId);
 
 	List<Fileref> selectFilerefList(int boardNo);
 
@@ -79,11 +91,13 @@ public interface BoardService {
 	
 	int updateImgBoard(Board b);
 	
-	int selectBoardCnt(int bCode);
+	int selectBoardCnt(Map<String, Object> param);
 	
-	List<Board> selectBoardListPart(Map<String, Integer> param);
+	List<Board> selectBoardListPart(Map<String, Object> param);
 	
 	int selectAuthority(int mno);
 	
 	List<Board> selectRecentBoard(Map<String, Integer> param);
+	
+	String selectBoardMemberType(int mno);
 }

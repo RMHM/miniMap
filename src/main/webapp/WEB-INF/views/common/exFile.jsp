@@ -20,7 +20,6 @@
 <link rel="stylesheet" href="/resources/css/billboard.css">
 <!-- Or load different theme style -->
 <link rel="stylesheet" href="/resources/css/theme/insight.css">
-
 <!-- Theme skin -->
 <link href="/resources/skins/default.css" rel="stylesheet" />
 
@@ -45,66 +44,9 @@
 
 <script src="http://cdn.jsdelivr.net/sockjs/1/sockjs.min.js"></script>
 
-<script>
-
-var sock = new SockJS("<c:url value='/notice'/>");
-sock.onmessage = onMessage;
-sock.onclose = onClose;
-
-sock.onopen=function(){
-	console.log("open");
-	sendMessage();
-}
-
-function sendMessage() {
-	
-	if(sock.readyState===1){
-		setInterval(
-			function() {
-				sock.send("hdn")
-				
-		},1000);
-	}else{
-		console.log("wait...");
-		sendMessage();
-	}
-};
-
-/* function waitForSocketConnection(sock){
-	setTimeout(
-		function(){
-			if(sock.readyState===1){
-				console.log("success");
-				sendMessage();
-			}else{
-				console.log("wait...");
-				waitForSocketConnection(sock);
-			}
-		},1000);
-	
-}; */
-
-
-	
-function onMessage(evt) {
-	var data = evt.data;
-	
-	console.log("data::"+data);
-	
-	$("#test").text(data);
-	/* $('.dropdown-toggle').append(data);
-	$('.note').append(data); */
-
-};
-
-function onClose(evt){
-	
-}
-
-</script>
-
 <!-- Step 1) Load D3.js -->
 <script src="https://d3js.org/d3.v5.min.js"></script>
 <!-- Step 2) Load billboard.js with style -->
 <script src="/resources/js/billboard.js"></script>
-
+<!-- message notice js -->
+<script src="/resources/js/message/notice.js"></script>

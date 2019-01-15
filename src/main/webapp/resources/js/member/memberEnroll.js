@@ -1,18 +1,52 @@
 $(function(){
-				// 비밀번호 유효성 검사
-				$("#mpw2").blur(function(){
-					var p1=$("#mpw_").val(), p2=$("#mpw2").val();
-					if(p1!=p2){
-						alert("패스워드가 일치하지 않습니다.");
-						$("#mpw_").focus();
+		
+	/* 유효성 검사 시작 */
+	
+	/* 비밀번호 유효성 검사 */
+	$("#mpw2").blur(function(){
+		var p1=$("#mpw_").val(), p2=$("#mpw2").val();
+		if(p1!=p2){
+		alert("패스워드가 일치하지 않습니다.");
+		$("#mpw_").focus();
+	}
+});
+	/* 닉네임 정규식, 유효성 검사 
+				
+	var nick = /^[가-힣]{2,6}$/;
+				
+	$("#mnick_").blur(function(){
+		if (nick.test($('#mnick_').val())){
+		console.log('true');
+		$('nick_check').text('');
+		} else {
+		console.log('false');	
+		$('#nick_check').text('한글 2자리 이상 6자리 이하 입력해주세요.');
+		$('#nick_check').css('color', 'red');
+	} 
+}); */
+				
+				/* 아이디 중복 검사  */
+				var id = /^[A-Za-z0-9]{6,12}$/;
+				
+				$("#mid_").blur(function(){
+					console.log(id);
+					console.log($('#mid_').val());
+					if(id.test($('#mid_').val())){
+						console.log('true');
+						$('#id_check').text('');
+
+					} else {
+						console.log('false');
+						$('#id_check').attr("required","문자열");
+						//$('#id_check').text('숫자, 대소문자 혼용 6자이상 입력바랍니다.');
+						//$('#id_check').css('color', 'green');
 					}
 				});
 				
-				/* 아이디 중복검사 이벤트 추가 */
 				$("#mid_").on("keyup", function(){
 			        var mid = $(this).val().trim();
 			        
-			        if(mid.length<4) {
+			        if(mid.length < 6) {
 			        	$(".guide.error").hide();
 			        	$(".guide.ok").hide();
 			        	$(".guide.invalid").show();

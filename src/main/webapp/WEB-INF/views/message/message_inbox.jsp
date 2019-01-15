@@ -28,6 +28,7 @@
 			<li class="selected oldstart"><span class="orange"><a href="/popUp.inbox" onfocus="this.blur();">받은 쪽지함</a></span></li>
 			<li class=""><span class="orange"><a href="/popUp.sent" onfocus="this.blur();">보낸 쪽지함</a></span></li>
 			<li class=""><span class="orange size3"><a href="/popUp.store" onfocus="this.blur();">쪽지 보관함</a></span></li>
+			<li class="oldstart"><span class="orange size2"><a href="/popUp.block" onfocus="this.blur();">쪽지 차단</a></span></li>
 		</ul>
 	</dd>
 </dl>
@@ -92,7 +93,6 @@
 	</div>
 
 	<div class="tools">
-	<!-- 페이징처리 해야함 -->
 		<c:out value="${pageBar}" escapeXml="false"/>
 	</div>
 </div>
@@ -100,109 +100,6 @@
 
 </div>
 
-<script>
-// 올체크
-
-$("#idx_").click(function(){
-	if($(this).prop("checked")){
-		$("input[name^=index_]").prop('checked', true);
-	}else{
-		$("input[name^=index_]").prop('checked', false);
-	}
-});
-
-$("input[name^=index_]").click(function(){
-	if($("#idx_").prop("checked")){
-		$("#idx_").prop("checked",false);
-	}
-});
-// 페이징
-
-function deleteMessage(){
-	// 선택한 메세지 삭제
-	var arr=new Array();
-	var idx=0;
-	$("#chk :checked").each(function(){
-		arr[idx++]=($(this).parent().siblings('#meid').text())*1;
-	});
-	
-	console.log(arr);
-	
-	$.ajax({
-		url : '/message.delete',
-	    type : 'post',
-	    traditional:true,
-	    data : {
-	    	'arr':arr
-	    },
-	    success : function(data) {
-	    	alert('쪽지 삭제 성공');
-	    	window.location.href ="/popUp.inbox";
-	    },
-	    error : function() { 
-	    	// 에러 처리 고민
-	    	console.log('error');
-	   	}
-	});
-}
-
-function storeMessage(){
-	// 선택한 메세지 보관함으로 이동
-	var arr=new Array();
-	var idx=0;
-	$("#chk :checked").each(function(){
-		arr[idx++]=($(this).parent().siblings("#meid").text())*1;
-	});
-	
-	console.log(arr);
-	
-	$.ajax({
-		url : '/message.store',
-	    type : 'post',
-	    traditional:true,
-	    data : {
-	    	'arr':arr
-	    },
-	    success : function(data) {
-	    	alert('쪽지 보관 성공');
-	    	window.location.href ="/popUp.inbox";
-	    },
-	    error : function() { 
-	    	// 에러 처리 고민
-	    	console.log('error');
-	   	}
-	});
-}
-
-function readAllMessage(){
-	// 모든 메세지 읽음 확인
-	var nick="${member.mnick}";
-	$.ajax({
-		url : '/message.allread',
-	    type : 'post',
-	    traditional:true,
-	    data : {
-	    	'nick':nick
-	    },
-	    success : function(data) {
-	    	window.location.href ="/popUp.inbox";
-	    },
-	    error : function() { 
-	    	// 에러 처리 고민
-	    	console.log('error');
-	   	}
-	});
-}
-
-function selectDetailInbox(value){
-	// 메세지 하나 상세보기
-	var meId=value
-	console.log("meId::"+meId);
-	var url="/detail.inbox?"+meId;
-	console.log("url::"+url);
-	window.location.href=url;
-}
-
-</script>
+<script src="/resources/js/message/message_inbox.js"></script>
 </body>
 </html>
