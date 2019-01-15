@@ -284,7 +284,6 @@ public class MemberController {
 		return mv;
 	}
   
-
 	@RequestMapping("/member/memberView.do")
 	public String memberView(@RequestParam String mid) {
 
@@ -316,8 +315,7 @@ public class MemberController {
 				
 		return map;
 	}
-		
-	
+			
 	@ResponseBody
 	@RequestMapping(value = "/member/checkNick.do")
 	public Map<String, Object> checkNick(@RequestParam String mnick) {
