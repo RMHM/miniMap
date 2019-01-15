@@ -11,6 +11,18 @@
 <title>miniMap에 오신걸 환영합니다.</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <meta name="description" content="" />
+<style>
+span.guide { font-size: 11px; position:absolute; top:20%; right:5%;}
+.ok{
+display : none;
+color:#0431B4;
+}
+.error{
+display : none;
+color:#FF8000;
+}
+}
+</style>
 </head>
 
 <body>
@@ -64,8 +76,9 @@
 								<label class="col-sm-3 control-label" for="mnick">닉네임</label> 
 								<div class="col-sm-6">
 									<input class="form-control" id="mnick" name="mnick" type="text"
-										value="${member.mnick}"placeholder="닉네임을 입력하세요">
-										
+										value="${member.mnick}"placeholder="닉네임을 입력하세요" required>
+										<span id = "nickx"class="guide error nick" >사용불가</span>
+										<span id="nicko"class="guide ok nick" >사용가능</span>
 								</div>
 								<label id="checkNick"></label>
 							</div>
@@ -74,7 +87,10 @@
 								<label class="col-sm-3 control-label" for="email">이메일</label>
 								<div class="col-sm-6">
 									<input class="form-control" id="email" name="email"
-										type="email" value="${member.email}"placeholder="이메일을 입력하세요">
+										type="email" value="${member.email}"placeholder="이메일을 입력하세요" required>
+										<span id = "emailx" class="guide error email" >사용불가</span>
+										<span id= "emailo"class="guide ok email" >사용가능</span>
+										
 								</div>
 								<label id="checkemail"></label>
 							</div>
@@ -108,9 +124,14 @@
 								
 								<div class="col-sm-6">
 								
-									<img id = "imc" src="/resources/img/profiles/${member.profilePath}">
+                  <img id = "imc" src="/resources/img/profiles/${member.profilePath}" width="10%" heigh="10%">
 									<input class="form-check-input" id="profile" name="profile" onchange="readURL(this);"
-										type="file" value="${member.profilePath}">
+										type="file" value="${member.profilePath}">	
+								</div>
+								<div class="form-group">
+								
+								<div class="col-sm-6">
+								
 								</div>
 								<div class="form-group">
 								
@@ -120,14 +141,13 @@
 							</div>
 						<script> 
 						$('#defa').click(function(){
-							/* console.log($('#profile').val());
-							console.log("클릭"); */
-							$('#imc').attr('src','/resources/img/profiles/default.png');
-							/* $('#profile').attr('value','default.PNG'); */
-							/* console.log($('#imc').attr('src').value); */
-						
+              $('#imc').attr('src','/resources/img/profiles/default.png');
 						});
 						$("#mnick").blur(function(){
+							if($('#mnick').val()==""){
+								$('#nicko').hide();
+								$('#nickx').show();	
+							}else{
 							$.ajax({
 								url : "${pageContext.request.contextPath}/myPage/nickCheck.do",
 
@@ -139,61 +159,74 @@
 								success : function(data) {
 									
 									if(data.result==1){
-										if(mnick.value == "${member.mnick}"){
-											$('#checkNick').text("사용가능");	
-										}else{
-											$('#checkNick').text("사용불가");	
+									 	if(mnick.value == "${member.mnick}"){
+											$('#nickx').hide();
+											$('#nicko').show();
+										
+									 	
+									 	}else{
+											$('#nicko').hide();
+											$('#nickx').show();	
 										}
 									}else{
-										if(mnick.value == ""){
-											$('#checkNick').text("사용불가");
-										}else{
-											$('#checkNick').text("사용가능");	
-										}
-										
+										$('#nickx').hide();
+										$('#nicko').show();
 									}
-									
-
+								
 								},
 								error : function(e) {
 									console.log("error" + data);
 								}
 
 							});
+							}
 						});
-						
+					
 						$("#email").blur(function(){
-							$.ajax({
-								url : "${pageContext.request.contextPath}/myPage/emailCheck.do",
+							
+							var eref = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]{3,9}.[a-zA-Z]{2,3}$/i;
+							
+							if($('#email').val()==""){
+								$('#emailo').hide(); 
+								$('#emailx').show();
+								
+							}else{
+							
+								
+								if(eref.test($("#email").val())){
+									$.ajax({
+										url : "${pageContext.request.contextPath}/myPage/emailCheck.do",
 
-								data : {
-									
-									email : $('#email').val()
-								},
-								dataType : "json",
-								success : function(data) {
-									if(data.result==1){
-										if(email.value == "${member.email}"){
-											$('#checkemail').text("사용가능");	
-										}else{
-											$('#checkemail').text("사용불가");	
+										data : {
+											
+											email : $('#email').val()
+										},
+										dataType : "json",
+										success : function(data) {
+											if(data.result==1){
+												if(email.value == "${member.email}"){
+													$('#emailx').hide();
+													$('#emailo').show();
+												}else{
+											 	$('#emailo').hide(); 
+												$('#emailx').show();
+												}
+											}else{
+												$('#emailx').hide();
+												$('#emailo').show();
+											}
+										},
+										error : function(e) {
+											console.log("error" + data);
 										}
-									}else{
-										if(email.value == ""){
-											$('#checkemail').text("사용불가");
-										}else{
-											$('#checkemail').text("사용가능");	
-										}
-										
-									}
-									
 
-								},
-								error : function(e) {
-									console.log("error" + data);
+									});
+								}else{
+									$('#emailo').hide(); 
+									$('#emailx').show();
 								}
-
-							});
+							
+							}
 						});
 						
 						
@@ -206,52 +239,6 @@
 								reader.readAsDataURL(input.files[0]); 
 							console.log("read : " + reader.readAsDataURL(input.files[0]));		
 						} 
-								
-						
-						function check(){
-							$('#mUpdateMember').click(function(){
-								var regNum = /[0-9]/g;
-						     	var regEng = /[a-z]/ig;
-						     	var pass= $('#mpw').val(); 
-						   		var r = "";
-						   		console.log("val : " + $('#mpw').val());
-						   		
-							   		if($('#mpw').val()!=""){
-						
-								     	if(!regNum.test(pass)||!regEng.test(pass)) {
-								     		alert("숫자와 영문자를 입력하세요");
-								     		return false
-								     	}
-								     	else if(pass.length<4||pass.length>16){
-								     		alert("비밀번호 4~16자리를 입력하세요");
-								     		return false
-								     	}
-							   		}else if(($('#checkNick').text()=="")||($('#checkemail').text()=="")){
-							     		alert("값을 입력하세요");
-							     		return false
-							     	}
-							   		
-							     	else if($('#checkNick').text()=="사용불가"){
-							     		alert("닉네임을 다시 설정하세요.");
-							     		return false
-							     	}else if($('#checkemail').text()=="사용불가"){
-							     		alert("이메일을 다시 설정하세요.");
-							     		return false
-							     	}
-						   				
-						     			
-						     			
-						     	return true;
-							
-							
-							
-							
-							
-							});
-						
-							
-							
-						}
 						</script>
 
 						<div class="form-group">
@@ -280,18 +267,64 @@
 	<c:import url="../common/footer.jsp" />
 	</div>
 	<script>
+	  function check(){
 		
+			var regNum = /[0-9]/g;
+	     	var regEng = /[a-z]/ig;
+	     	var pass= $('#mpw').val(); 
+	     
+	   		var r = "";
+		   		if($('#mpw').val()!=""){
+	
+			     	if(!regNum.test(pass)||!regEng.test(pass)) {
+			     		alert("숫자와 영문자를 입력하세요");
+			     		return false
+			     	}
+			     	else if(pass.length<4||pass.length>16){
+			     		alert("비밀번호 4~16자리를 입력하세요");
+			     		return false
+			     	}
+		   		}else if($('#checkNick').text()=="사용불가"){
+		     		alert("닉네임을 다시 설정하세요.");
+		     		return false
+		     	}else if($('#checkemail').text()=="사용불가"){
+		     		alert("이메일을 다시 설정하세요.");
+		     		return false
+		     	}
+
+	     	
+				return true;
+		
+	
+		
+		
+	}
 		function memberDelete(){
 		console.log("delete 클릭");
-    		$('#updateForm').attr("action", "${pageContext.request.contextPath}/myPage/deleteMember.do"); 
+		if(confirm("탈퇴 하시겠습니까?")) {
+			$('#updateForm').attr("action", "${pageContext.request.contextPath}/myPage/deleteMember.do"); 
+         }else{
+        	 return false;
+         }
+			
      	}
      	function memberUpdate() {
-   
-     	   $('#updateForm').attr("action", "${pageContext.request.contextPath}/myPage/updateMember.do");
+     		 
+     		if(confirm("수정 하시겠습니까?")) {
+     			$('#updateForm').attr("action", "${pageContext.request.contextPath}/myPage/updateMember.do");
+             }else{
+            	 return false;
+            }
+     	   
  
 		}
     	function memberMain(){
+    		if(confirm("수정을 취소하시겠습니까?")) {
     			$('#updateForm').attr("action", "/myPage/myPageMain.do");
+             }else{
+            	 return false;
+            }
+    			
     	}
       </script>
 </body>

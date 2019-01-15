@@ -112,7 +112,9 @@ public class MyPageController {
 	/* 총 일정 확인 */
 	@RequestMapping("/myPage/selectSchedule.do")
 	@ResponseBody
-	public Map<String,Object> selectSchedule(Member member, Model model) throws IOException {
+  public Map<String,Object> selectSchedule(Member member, Model model,
+			@RequestParam(value = "type", required = false, defaultValue = "1") int cPage
+			) throws IOException {
 		Map<String, Object> map = new HashMap<String, Object>();
 		System.out.println("insert 이후");
 		model.addAttribute("list", mps.selectSchedule(member.getMno()));
@@ -164,6 +166,7 @@ public class MyPageController {
 		System.out.println(t);
 		return t.temperature(num);
 	}
+	
 	/*ajax 실시간 문자수 ==> 소켓 활용하기로 했음*/
 	/*@RequestMapping(value = "/myPage/message.do")
 	@ResponseBody

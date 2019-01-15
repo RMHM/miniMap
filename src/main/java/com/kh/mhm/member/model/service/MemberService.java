@@ -28,6 +28,6 @@ public interface MemberService {
 
 	int checkEmail(String email);
 
-	
+	int selectCheckLogin(String gEmail);
   
 }

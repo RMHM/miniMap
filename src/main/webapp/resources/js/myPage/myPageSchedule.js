@@ -2,6 +2,7 @@ var today = new Date();
 var event = new Object;
 var temper;
 var weather;
+var todayArr = new Array();
 $(function(){
 $.ajax({
 		url : "/myPage/selectSchedule.do",
@@ -27,32 +28,60 @@ $.ajax({
 			
 			}
 			event = tmpList;
-			getFullcalendar();
-			
-			var todayArr = new Array();
-			for(var i =0; i<temper.length;i++){
+      for(var i =0; i<temper.length;i++){
 				todayArr[i] = temper[i].low+"/"+temper[i].high;
 			}
-
-			temperarr(today.getMonth()+1,todayArr);
-			weaderToday();
-			nextTemper();
 		},
 		error : function(e){
 			console.log(e)
 		},
 		complete : function(){
 			$('#loading').hide();
-			
-			
+        getFullcalendar();
+			temperarr(today.getMonth()+1,todayArr);
+			weaderToday();
+			$('.fc-next-button,  .fc-prev-button,  .fc-today-button').click(function(){
+				$('#calendar').hide();
+				$('#loading').show();
+				nextTemper();
+			});
 		}
 	})
 
 })
 
+function nextTemper(){	
+		var date = $("#calendar").fullCalendar("getDate");
+		var month = new Date(date).getMonth()+1;
+		var lastToday = new Date();
 	
+		$.ajax({
+			url : "/myPage/temper.do",
+			data : {
+				num : month,
+			},
+			dataType : "json",
+			success : function(data) {
+				var arrTemper = new Array();
+				for(var i = 0; i<data.length;i++){
+					arrTemper[i] = data[i].low + "/" + data[i].high;
+				}
+				console.log("버튼" + arrTemper);
+				temperarr(month,arrTemper); 
 				
+				if((lastToday.getMonth()+1)==month)weaderToday();
+			},
+			error : function(e) {
+				console.log("error" + data);
+			},complete : function(){
+				$('#loading').hide();
+				$('#calendar').show();
+			}
+			
+		});
 
+
+} 
 
 function getFullcalendar(){
 	$('#calendar').fullCalendar({
@@ -130,60 +159,22 @@ function weaderToday(){
 	var tdS = $('#calendar').find('td[data-date]');
 	var arr = weather;
 	for(var i = 1; i<arr.length; i++){
-	var date = new Date(); 
-	date.setDate(date.getDate()+(i+2));
-	var re = (date.toISOString().slice(0, 10));
-	var we = arr[i]; 
-	 var sr = "";
-
-	if(we.match(/맑음/))sr = "<img src='/resources/img/weather/sun1.PNG' width='15px';height='15px'>";
-	else if(we.match(/흐림/))sr = "<img src='/resources/img/weather/cloud1.PNG' width='15px';height='15px'>";
-	else if(we.match(/구름많음/))sr = "<img src='/resources/img/weather/cloud1.PNG' width='15px';height='15px'>";
-	else if(we.match(/비/))sr = "<img src='/resources/img/weather/rain1.PNG' width='15px';height='15px'>";
-	else if(we.match(/눈/)) sr = "<img src='/resources/img/weather/snow1.PNG' width='15px';height='15px'>"; 
-	else sr = "<img src='/resources/img/weather/sunCloud1.PNG' width='15px';height='15px'>";
-	console.log(re);
-	$('#calendar').find('td[data-date='+re+']').prepend(sr);
- }
-}
-
-function nextTemper(){	
-	$('.fc-prev-button, .fc-next-button, .fc-today-button').click(function() {	
-		$('#loading').show();
-		var date = $("#calendar").fullCalendar("getDate");
-		var month = new Date(date).getMonth()+1;
-		var lastToday = new Date();
-		
-		
-		$.ajax({
-			url : "/myPage/temper.do",
-			async : false,
-			data : {
-				num : month,
-			},
-			dataType : "json",
-			success : function(data) {
-				var arrTemper = new Array();
-				for(var i = 0; i<data.length;i++){
-					arrTemper[i] = data[i].low + "/" + data[i].high;
-				}
-				console.log("버튼" + arrTemper);
-				temperarr(month,arrTemper); 
-				
-				if((lastToday.getMonth()+1)==month)weaderToday();
-			},
-			error : function(e) {
-				console.log("error" + data);
-				alert("ajax 실패");
+  var date = new Date();
+		date.setDate(date.getDate()+(i+2));
+		var re = (date.toISOString().slice(0, 10));
+		var we = arr[i]; 
+		 var sr = "";
 	
-			},complete : function(){
-				$('#loading').hide();
-			}
-			
-		});
-	});
+		if(we.match(/맑음/))sr = "<img src='/resources/img/weather/sun1.PNG' width='15px';height='15px'>";
+		else if(we.match(/흐림/))sr = "<img src='/resources/img/weather/cloud1.PNG' width='15px';height='15px'>";
+		else if(we.match(/구름많음/))sr = "<img src='/resources/img/weather/cloud1.PNG' width='15px';height='15px'>";
+		else if(we.match(/비/))sr = "<img src='/resources/img/weather/rain1.PNG' width='15px';height='15px'>";
+		else if(we.match(/눈/)) sr = "<img src='/resources/img/weather/snow1.PNG' width='15px';height='15px'>"; 
+		else sr = "<img src='/resources/img/weather/sunCloud1.PNG' width='15px';height='15px'>";
+		console.log(re);
+		$('#calendar').find('td[data-date='+re+']').prepend(sr);
+	}
 }
-
 
 function temperarr(month,arrT){
 	

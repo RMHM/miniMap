@@ -26,7 +26,7 @@
 					<br>
 					<li><a href="/board/boardlist1.do">자유 게시판</a></li><br>
 					<li><a href="/board/boardlist2.do">정보공유 게시판</a></li><br>
-					<li><a href="/board/boardlist3.do">여행후기 게시판</a></li><br>
+					<li><a href="/board/boardlist3.do" style="color:#8A0829">여행후기 게시판</a></li><br>
 					<li><a href="/board/boardlist4.do">질문 게시판</a></li>
 				</ul>
 			</div>
@@ -59,7 +59,7 @@
 								<tbody>							
 					
 								<c:forEach var="Board" items="${list2 }"> <!-- 공지 게시글 페이지 -->
-									<tr name="BId" id="${Board.BId }" style="background-color: #CEECF5;">									
+									<tr name="BId" id="${Board.BId }" style="background-color: #CEECF5; cursor:pointer">									
 									   <td align="center"><c:out value="${Board.BNo }"/></td>
                      				   <td><c:out value="공지"/></td>
                      				   <td></td>
@@ -68,9 +68,9 @@
                				           <td align="center"><c:out value="${Board.BCount }"/></td>
                 			           <td><c:out value="${Board.BDate}"/></td>
 									</tr>
-								</c:forEach>
-								<c:forEach var="Board" items="${list3 }"> <!-- 베스트 게시글 페이지 -->
-									<tr name="BId" id="${Board.BId }" style="background-color: #E0F8F7;">									
+                  </c:forEach>								
+								  <c:forEach var="Board" items="${list3 }"> <!-- 베스트 게시글 페이지 -->
+									  <tr name="BId" id="${Board.BId }" style="background-color: #E0F8F7; cursor:pointer">									
 									   <td align="center"><c:out value="${Board.BNo }"/></td>
                      				   <td><c:out value="Best"/></td>
                      				   <td></td>
@@ -83,6 +83,17 @@
 																	
 								<c:forEach var="Board" items="${list }"> <!-- 일반 게시글 페이지 -->
 								<c:choose>	
+                <c:when test="${Board.RFlag eq 'Y' and member.mtype eq 'A' }">
+								<tr name="BId" id="${Board.BId }" style="background-color: lightgray; cursor:pointer">
+                     				   <td align="center"><c:out value="${Board.BNo }"/></td>
+                     				   <td><c:out value="일반"/></td>
+                     				   <td></td>
+                  				       <td>신고된 게시글입니다.</td>                  				       
+               				           <td align="center"><c:out value="${Board.mnick}"/></td>
+               				           <td align="center"><c:out value="${Board.BCount }"/></td>
+                			           <td><c:out value="${Board.BDate}"/></td>
+                    				</tr>								
+								</c:when>
 								<c:when test="${Board.RFlag eq 'Y' }">
 								<tr <%--  name="BId" id="${Board.BId }" --%> style="background-color: lightgray;">
                      				   <td align="center"><c:out value="${Board.BNo }"/></td>
@@ -94,20 +105,19 @@
                 			           <td><c:out value="${Board.BDate}"/></td>
                     				</tr>								
 								</c:when>
-								<c:otherwise>																				
-									<tr name="BId" id="${Board.BId }" style="background-color: #EFF8FB;">
-                     				   <td align="center"><c:out value="${Board.BNo }"/></td>
-                     				   <td><c:out value="일반"/></td>
-                     				   <td></td>
-                  				       <td><c:out value="${Board.BTitle }"/></td>                  				       
-               				           <td align="center"><c:out value="${Board.mnick}"/></td>
-               				           <td align="center"><c:out value="${Board.BCount }"/></td>
-                			           <td><c:out value="${Board.BDate}"/></td>
-                    				</tr>
-                    			</c:otherwise>		
-                    			</c:choose>	
+                <c:otherwise>																				
+									<tr name="BId" id="${Board.BId }" style="background-color: #EFF8FB; cursor:pointer">
+                       <td align="center"><c:out value="${Board.BNo }"/></td>
+                       <td><c:out value="일반"/></td>
+                       <td></td>
+                         <td><c:out value="${Board.BTitle }"/></td>                  				       
+                         <td align="center"><c:out value="${Board.mnick}"/></td>
+                         <td align="center"><c:out value="${Board.BCount }"/></td>
+                         <td><c:out value="${Board.BDate}"/></td>
+                    </tr>
+                  </c:otherwise>		
+                  </c:choose>	
 								</c:forEach>
-														
 								</tbody>
 								
 							</table>

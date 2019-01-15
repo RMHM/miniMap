@@ -28,5 +28,6 @@ public interface MemberDao {
 	int checkNick(HashMap<String, Object> hmap);
 
 	int checkEmail(HashMap<String, Object> hmap);
-
+  
+  int selectCheckLogin(String gEmail);
 }

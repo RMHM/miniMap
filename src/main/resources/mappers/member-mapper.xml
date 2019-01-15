@@ -159,4 +159,8 @@
 	<select id="selectOneMno" parameterType="_int" resultMap="memberMap">
 		select * from member where mno = #{mno}
 	</select>
+  
+  <select id="selectCheckLogin" parameterType="string" resultType="_int">
+		select count(*) from member where email like #{gEmail} and mid not like #{gEmail}
+	</select>
 </mapper>
