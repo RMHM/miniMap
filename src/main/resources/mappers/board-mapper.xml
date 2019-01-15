@@ -46,7 +46,7 @@
 	
 	<select id="selectBoardTotalContents1" resultType="_int">
 		SELECT COUNT(*)
-		FROM BOARD WHERE BCODE='1'
+		FROM BOARD WHERE BCODE='1' AND ISNOTICE='N' AND DELFLAG='N'
 	</select>
 	
 	<select id="selectBestList1" resultType="Board">
@@ -88,7 +88,7 @@
 	
 	<select id="selectBoardTotalContents2" resultType="_int">
 		SELECT COUNT(*)
-		FROM BOARD WHERE BCODE='2'
+		FROM BOARD WHERE BCODE='2' AND ISNOTICE='N' AND DELFLAG='N'
 	</select>
 	
 	<select id="selectBestList2" resultType="Board">
@@ -130,7 +130,7 @@
 	
 	<select id="selectBoardTotalContents3" resultType="_int">
 		SELECT COUNT(*)
-		FROM BOARD WHERE BCODE='3'
+		FROM BOARD WHERE BCODE='3' AND ISNOTICE='N' AND DELFLAG='N'
 	</select>
 	
 	<select id="selectBestList3" resultType="Board">
@@ -171,7 +171,7 @@
 	
 	<select id="selectBoardTotalContents4" resultType="_int">
 		SELECT COUNT(*)
-		FROM BOARD WHERE BCODE='4'
+		FROM BOARD WHERE BCODE='4' AND ISNOTICE='N' AND DELFLAG='N'
 	</select>
 	
 	<select id="selectBestList4" resultType="Board">

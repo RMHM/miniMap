@@ -93,7 +93,7 @@
 				</div>
 				
 			</div> --%>
-		</div>
+		</div> <br><br>
 		
 		
 		<c:import url="/WEB-INF/views/common/footer.jsp" />
