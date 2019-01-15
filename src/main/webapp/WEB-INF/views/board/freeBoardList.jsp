@@ -24,7 +24,8 @@
 				<h4>--게시판 목록--</h4>
 				<ul class="unstyled">
 					<br>
-          <li><a href="/board/boardlist1.do" style="color:#8A0829">자유 게시판</a></li><br>
+					<!-- <li><a href="/board/boardtest.do" style="color:#8A0829">테스트 게시판</a></li><br> -->
+         			<li><a href="/board/boardlist1.do" style="color:#8A0829">자유 게시판</a></li><br>
 					<li><a href="/board/boardlist2.do">정보공유 게시판</a></li><br>
 					<li><a href="/board/boardlist3.do">여행후기 게시판</a></li><br>
 					<li><a href="/board/boardlist4.do">질문 게시판</a></li>
@@ -33,9 +34,8 @@
 			<div class="col-md-10">
 				<div class="ad">
 					<div class="ad">						
-						<div class="ad caption">
-             <h4>광-고</h4>
-						<p>광고좀 넣어주세요 현기증 난단 말이에요. 빨리 하야끄</p>
+						<div class="ad caption">            		 
+						<img src="/resources/img/boardlistad.png" style="" alt="" /></a>
 						</div>
 					</div>
 				</div>
@@ -141,7 +141,7 @@
               						 <option value="BContent" <c:if test="${'BContent'==keyField }"> selected</c:if>> 내용 </option>
            						 </select>
                 					 <input type="text" size="16" name="keyWord" value="${keyWord }">
-                					 <input type="submit" class="btn btn-info" value="검색" onClick="check()">           						
+                					 <input type="button" class="btn btn-info" value="검색" onClick="check()">           						
 
 								</form>
 							</div>
@@ -168,10 +168,13 @@ $(function(){
 function check() {
     if (document.search.keyWord.value == "") {
         alert("검색어를 입력하세요.");
-        document.search.keyWord.focus();
         return;
+        document.search.keyWord.focus();
+        
+    }else {
+    	document.search.submit();
     }
-    document.search.submit();
+    
 }
 
 

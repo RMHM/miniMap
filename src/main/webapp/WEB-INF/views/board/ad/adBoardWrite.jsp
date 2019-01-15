@@ -34,7 +34,8 @@
 				</c:if>
 				<input type="button" value="작성하기" id="btnAdd" class="btn btn-theme" onclick="javascript:Editor.save()">
 				<input type="button" value="돌아가기" id="btnBack" class="btn btn-theme" onclick="javascript:location.href='/board/adBoard.go'">
-			</div>
+				
+			</div><br><br>
 		</div>
 		<br>
 		
