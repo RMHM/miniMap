@@ -118,9 +118,9 @@ color:#FF8000;
 							</div>
 								<div class="form-group">
 								<label class="col-sm-3 control-label" for="">프로필</label>
-								<div class=" col-sm-6">
+								<!-- <div class=" col-sm-6">
 								<button type="button" id="defa" >기본이미지</button>
-								</div>
+								</div> -->
 								
 								<div class="col-sm-6">
 								
@@ -231,6 +231,8 @@ color:#FF8000;
 						
 						
 						function readURL(input) { 
+							console.log("input"+input);
+								console.log($('#defa').click);
 							
 								var reader = new FileReader(); 
 								reader.onload = function (e) {
@@ -260,11 +262,11 @@ color:#FF8000;
 			</div>
 		</div>
 
+</div></div>
 
 
-
-	</div>
-	<c:import url="../common/footer.jsp" />
+	
+	<c:import url="/WEB-INF/views/common/footer.jsp" />
 	</div>
 	<script>
 	  function check(){
