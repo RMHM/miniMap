@@ -19,4 +19,6 @@ public interface TimeLineDao {
 	List<PreTimeLine> loadMoreLine(int tId);
 	
 	int blockTimeLine(int tId, String mNick);
+	
+	List<PreTimeLine> mainTimeLine();
 }

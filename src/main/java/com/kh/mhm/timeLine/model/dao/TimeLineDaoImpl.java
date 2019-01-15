@@ -53,4 +53,9 @@ public class TimeLineDaoImpl implements TimeLineDao {
 		return sqlSession.insert("TimeLine.blockTimeLine",map);
 	}
 
+	@Override
+	public List<PreTimeLine> mainTimeLine() {
+		return sqlSession.selectList("TimeLine.mainTimeLine");
+	}
+
 }

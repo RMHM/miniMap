@@ -33,7 +33,7 @@
 	<div id="wrapper">
 		<!-- header 선언 -->
 		<c:import url="views/common/header.jsp" />
-		
+
 		<section id="featured">
 			<!-- start slider -->
 			<div class="container">
@@ -56,20 +56,18 @@
 			</div>
 		</section>
 		
-		<section class="callaction">
-			<div class="container">
-				<div class="row">
-					<div class="col-lg-12">
-						<div class="big-cta">
-							<div class="cta-text">
-								<h2>
-									<span>실타자</span>
-								</h2>
-								<h6>(실시간 타임라인 들어갈 자리라는 뜻 ㅎ)</h6>
-							</div>
-						</div>
-					</div>
-				</div>
+		<h3 align='center'>실시간 타임라인</h3>
+		<section class="callaction" style="height:250px !important;">
+			<div class="box" id="siltaja" name="siltaja"></div>
+			<div id="letustl" style='position:absolute !important; right:150px !important;'>
+				<h5 id='letTxt' align='left' style='line-height:1.7em;'>
+					타임라인에서 다른 여행객들과 실시간으로 정보를 공유해보세요!<br>
+					고기국수는 어디가 맛있을까요?<br>
+					길이 막히지는 않을까요?<br>
+					같이 올레길을 걸을 친구가 필요하지 않으세요?<br>
+					지금 타임라인을 이욯하세요!<br>
+				</h5>			
+				<button id="tlBtn" onclick="window.location.href='/echo.do'">타임라인 이용하기</button>
 			</div>
 		</section>
 		
@@ -78,7 +76,7 @@
 		<!-- counter section -->
 		<section class="content">
 			<div class="container">
-			<div class="row">
+				<div class="row">
 					<div class="col-lg-12">
 						<div class="row">
 							<div class="col-lg-4">
@@ -106,7 +104,7 @@
 									</div>
 								</div>
 							</div>
-							
+
 							<div class="col-lg-4">
 								<div class="box">
 									<div class="box-gray aligncenter">
@@ -122,9 +120,10 @@
 						</div>
 					</div>
 				</div>
-				</div>
+			</div>
 		</section>
 		<!-- end counter -->
+		<br>
 		
 		<section id="content">
 			<div class="container">
@@ -152,7 +151,7 @@
 		</section>
 	</div>
 	<!-- footer 선언 -->
-	<c:import url="views/common/footer.jsp"/>
+	<c:import url="views/common/footer.jsp" />
 	<a href="#" class="scrollup"><i class="fa fa-angle-up active"></i></a>
 </body>
 <script src="/resources/js/counter.js"></script>
