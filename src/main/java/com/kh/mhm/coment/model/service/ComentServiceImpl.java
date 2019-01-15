@@ -51,4 +51,10 @@ public class ComentServiceImpl implements ComentService {
 		return cDao.insertComentContent2(coment);
 	}
 
+	@Override
+	public int countTotalComent(int bid) {
+		// TODO Auto-generated method stub
+		return cDao.countTotalComent(bid);
+	}
+
 }
