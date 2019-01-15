@@ -12,7 +12,7 @@ public interface MyPageService {
 
 	int insertSchedule(Schedule schedule);
   
-  List<Map<String,Object>> selectSchedule(int mno);
+	List<Map<String,Object>> selectSchedule(int mno);
 
 	int updateMember(Member member);
 
