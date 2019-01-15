@@ -49,4 +49,9 @@ public class TimeLineServiceImpl implements TimeLineService {
 		return tldi.blockTimeLine(tId, mNick);
 	}
 
+	@Override
+	public List<PreTimeLine> mainTimeLine() {
+		return tldi.mainTimeLine();
+	}
+
 }

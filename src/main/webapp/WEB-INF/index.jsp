@@ -8,19 +8,19 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<meta charset="UTF-8">
-	<title>miniMap에 오신걸 환영합니다.</title>
-	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-	<meta name="description" content="" />
-	<style>
-		.fancybox-overlay [class^="fancybox-"] {
-			max-width : width;
-		}
-		
-		.fancybox-close {
-			
-		}
-	</style>
+<meta charset="UTF-8">
+<title>miniMap에 오신걸 환영합니다.</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="description" content="" />
+<style>
+.fancybox-overlay [class^="fancybox-"] {
+	max-width: width;
+}
+
+.fancybox-close {
+	
+}
+</style>
 </head>
 <body>
 	<!-- 외부파일 선언 -->
@@ -28,7 +28,7 @@
 	<div id="wrapper">
 		<!-- header 선언 -->
 		<c:import url="views/common/header.jsp" />
-		
+
 		<section id="featured">
 			<!-- start slider -->
 			<div class="container">
@@ -38,11 +38,12 @@
 						<div id="main-slider" class="flexslider">
 							<ul class="slides">
 								<li><img src="resources/img/member/e.jpg" alt="" />
-								<h5>세계자연유산 제주특별자치도의 도시브랜드는 국내 유일의 특별 자치행정을 구현하여 아시아 최고 수준의 국제자유도시를 지향하는 제주특별자치도의 미래를 상징한다.
-								천해의 신비를 간직한 제주의 용암동굴을 세계자연유산의 대표 모티브로 이미지화하고 제주의 현무암 화산섬의 질감을 켈리그라피로 표현하였다.
-								제주특별자치도의 아름다움을 부드러운 서체와 컬러로 함께 나타냄으로써 강함과 부드러움이 공존하는 제주의 특별함을 표현하고 있으며 생태도시, 
-								관광 휴양도시, 국제 자유도시, 평화의 도시, 세계 지식자유중심도시 등 다양한 수식어를 가진 특별함이 하나로 함축되어 모여있는 곳 'Only Jeju Island'를 지향한다.
-								</h5></li>
+									<h5>세계자연유산 제주특별자치도의 도시브랜드는 국내 유일의 특별 자치행정을 구현하여 아시아 최고 수준의
+										국제자유도시를 지향하는 제주특별자치도의 미래를 상징한다. 천해의 신비를 간직한 제주의 용암동굴을 세계자연유산의
+										대표 모티브로 이미지화하고 제주의 현무암 화산섬의 질감을 켈리그라피로 표현하였다. 제주특별자치도의 아름다움을
+										부드러운 서체와 컬러로 함께 나타냄으로써 강함과 부드러움이 공존하는 제주의 특별함을 표현하고 있으며 생태도시,
+										관광 휴양도시, 국제 자유도시, 평화의 도시, 세계 지식자유중심도시 등 다양한 수식어를 가진 특별함이 하나로
+										함축되어 모여있는 곳 'Only Jeju Island'를 지향한다.</h5></li>
 								<li><img src="/resources/img/index/index_sketch.png" alt="" /></li>
 								<li><img src="/resources/img/index/2.jpg" alt="" /></li>
 								<li><img src="/resources/img/index/index_horse.png" alt="" /></li>
@@ -58,7 +59,7 @@
 		<!-- counter section -->
 		<section class="content">
 			<div class="container">
-			<div class="row">
+				<div class="row">
 					<div class="col-lg-12">
 						<div class="row">
 							<div class="col-lg-4">
@@ -86,7 +87,7 @@
 									</div>
 								</div>
 							</div>
-							
+
 							<div class="col-lg-4">
 								<div class="box">
 									<div class="box-gray aligncenter">
@@ -102,28 +103,25 @@
 						</div>
 					</div>
 				</div>
-				</div>
+			</div>
 		</section>
 		<!-- end counter -->
 		<br>
-		
-		<section class="callaction">
-			<div class="container">
-				<div class="row">
-					<div class="col-lg-12">
-						<div class="big-cta">
-							<div class="cta-text">
-								<h2>
-									<span>실타자</span>
-								</h2>
-								<h6>(실시간 타임라인 들어갈 자리라는 뜻 ㅎ)</h6>
-							</div>
-						</div>
-					</div>
-				</div>
+		<h3 align='center'>실시간 타임라인</h3>
+		<section class="callaction" style="height:250px !important;">
+			<div class="box" id="siltaja" name="siltaja"></div>
+			<div id="letustl" style='position:absolute !important; right:150px !important;'>
+				<h5 id='letTxt' align='left' style='line-height:1.7em;'>
+					타임라인에서 다른 여행객들과 실시간으로 정보를 공유해보세요!<br>
+					고기국수는 어디가 맛있을까요?<br>
+					길이 막히지는 않을까요?<br>
+					같이 올레길을 걸을 친구가 필요하지 않으세요?<br>
+					지금 타임라인을 이욯하세요!<br>
+				</h5>			
+				<button id="tlBtn" onclick="window.location.href='/echo.do'">타임라인 이용하기</button>
 			</div>
 		</section>
-		
+
 		<section id="content">
 			<div class="container">
 				<!-- divider -->
@@ -150,7 +148,7 @@
 		</section>
 	</div>
 	<!-- footer 선언 -->
-	<c:import url="views/common/footer.jsp"/>
+	<c:import url="views/common/footer.jsp" />
 	<a href="#" class="scrollup"><i class="fa fa-angle-up active"></i></a>
 </body>
 <script src="/resources/js/counter.js"></script>
