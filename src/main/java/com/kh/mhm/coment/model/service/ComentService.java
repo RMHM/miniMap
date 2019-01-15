@@ -10,6 +10,9 @@ public interface ComentService {
 	int insertComentContent(Coment coment);
 	int insertComentContent2(Coment coment);
 	int insertComentReport(int cid);
+	
+	int countTotalComent(int bid);
+	
 	int deleteComent(int cid);
 	int updateComent(Coment coment);
 	

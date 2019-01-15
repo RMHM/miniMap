@@ -51,4 +51,10 @@ public class ComentDaoImpl implements ComentDao {
 		return sst.insert("coment.insertComent2", coment);
 	}
 
+	@Override
+	public int countTotalComent(int bid) {
+		// TODO Auto-generated method stub
+		return sst.selectOne("coment.selectTotalComent");
+	}
+
 }
