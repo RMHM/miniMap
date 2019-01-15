@@ -20,7 +20,7 @@
 		div#userId-container span.ok {color:#0431B4;}
 		div#userId-container span.error {color:#FF8000;}
 		div#userId-container span.invalid {color:#FF0000;}
-		div#userPw-container span.pw {display:none; font-size: 12px; position:absolute; top:12px; right:10px;}
+    div#userPw-container span.pw {display:none; font-size: 12px; position:absolute; top:12px; right:10px;}
 		div#userPw-container span.o {color:#0431B4;}
 		div#userPw-container span.e {color:#FF8000;}
 		div#userPw-container span.i {color:#FF0000;}
@@ -45,7 +45,6 @@
 		div#email-container span.e {color:#FF8000;}
 		div#email-container span.i {color:#FF0000;}
 		div#userPw-container {position:relative; padding:0px;}
-
 	</style>
 </head>
 <body>
@@ -54,23 +53,20 @@
 		<section id="content">
 		<div>
 			<div id="enroll-container">
-			<div>
+        <div>
 			<h1 align="left" style="font-size:60px; margin:-50px 0px 0px 0px"><font color="skyblue"><b>SIGN UP</b></font></h1>
 			<p>가입에 필요한 회원정보를 입력해 주세요. <img src="/resources/img/member/ico_required.png" alt="필수" /><b> 필수 입력</b></p>
 			<b><hr /></b>
 			</div>
-				<form name="memberEnrollFrm" action="memberEnrollEnd.do" method="post" enctype = multipart/form-data onsubmit="return false;"
-							onkeydown="return captureReturnKey(event)">
+				<form name="memberEnrollFrm" action="memberEnrollEnd.do" method="post" enctype = multipart/form-data onsubmit="return false;" onkeydown="return captureReturnKey(event)">
 							
 					<table width="500px" height="400px" border="1" align="left">
-					
 						<tr>
 							<th style = "text-align:center;">아이디 <img src="/resources/img/member/ico_required.png" alt="필수" /></th>
 							
 							<td>
 								<div id="userId-container">
-								
-									<input type="text" autofocus class="form-control" placeholder="사용할 아이디 입력" name="mid" id="mid_" required oninvalid="this.setCustomValidity('숫자, 대소문자 혼용 6자이상 입력바랍니다.')" oninput="setCustomValidity('')" >
+                  <input type="text" autofocus class="form-control" placeholder="사용할 아이디 입력" name="mid" id="mid_" required oninvalid="this.setCustomValidity('숫자, 대소문자 혼용 6자이상 입력바랍니다.')" oninput="setCustomValidity('')" >
 									<div class="check_font" id="id_check" ></div>
 									<!-- 아이디중복검사 코멘트추가 -->
 									<span class="guide ok">사용 가능한 아이디</span>
@@ -90,12 +86,12 @@
 								<span class="pw o">사용 가능한 비밀번호</span>
 				            	<span class="pw e">이미 사용중인 비밀번호</span>
 				            	<span class="pw i">6글자 이상 입력</span>
-				            	<input type="hidden" name="pwCheck" id="pwCheck" value="0"/>
+				            	<input type="hidden" name="pwCheck" id="pwCheck" value="0" required/>
 				            	</div>
 							</td>
 						</tr>
 						<tr>
-							<th style = "text-align:center;">패스워드확인 <img src="/resources/img/member/ico_required.png" alt="필수" /></th>
+              <th style = "text-align:center;">패스워드확인 <img src="/resources/img/member/ico_required.png" alt="필수" /></th>
 							<td>
 								<div id="userPw2-container">	
 								<input type="password" class="form-control" id="mpw2" required>
@@ -183,7 +179,7 @@
 						<tr>
 							<th style = "text-align:center;">업로드</th>
 							<td>
-							<img id="imc" src="" style="height:50%"/>
+              <img id="imc" src="" style="height:50%"/>
 							<input type="file" class="form-check-input" name="profile" id="profilePath_" 
 								   value="/resources/img/profiles/default.png" accept=".gif, .jpg, .png .jpeg">
 							</td>
@@ -194,7 +190,7 @@
 					<input type="reset"  class="btn btn-success" value="취소" onclick="loginForm()" style="border-radius:155px;">
 				</form>
 			</div>
-			<script src="/resources/js/member/memberEnroll.js"></script>			
+      <script src="/resources/js/member/memberEnroll.js"></script>			
 		</section>
 		
 	</div>

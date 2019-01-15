@@ -112,7 +112,7 @@
 				role="button" class="btn btn-success"> 추천하기</a> -->
 				<input type="button" class="btn btn-theme" onclick="likesEvent();" name="likes" value="추천하기">
 				<c:if test="${b.isNotice eq 'N' }">				
-					<a id="report-modal" href="#report-modal-container" role="button" class="btn btn-danger" data-toggle="modal">신고하기</a>
+          <a id="report-modal" href="#report-modal-container" role="button" class="btn btn-danger" data-toggle="modal">신고하기</a>
 				</c:if>
 				<c:if test="${b.RFlag eq 'Y' }">
 				<input type="button" class="btn btn-warning"

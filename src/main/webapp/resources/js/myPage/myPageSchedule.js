@@ -28,22 +28,16 @@ $.ajax({
 			
 			}
 			event = tmpList;
-		
-			
-		
-			for(var i =0; i<temper.length;i++){
+      for(var i =0; i<temper.length;i++){
 				todayArr[i] = temper[i].low+"/"+temper[i].high;
 			}
-			
-			
-			
 		},
 		error : function(e){
 			console.log(e)
 		},
 		complete : function(){
 			$('#loading').hide();
-			getFullcalendar();
+        getFullcalendar();
 			temperarr(today.getMonth()+1,todayArr);
 			weaderToday();
 			$('.fc-next-button,  .fc-prev-button,  .fc-today-button').click(function(){
@@ -51,7 +45,6 @@ $.ajax({
 				$('#loading').show();
 				nextTemper();
 			});
-
 		}
 	})
 
@@ -88,7 +81,7 @@ function nextTemper(){
 		});
 
 
-}
+} 
 
 function getFullcalendar(){
 	$('#calendar').fullCalendar({
@@ -166,7 +159,7 @@ function weaderToday(){
 	var tdS = $('#calendar').find('td[data-date]');
 	var arr = weather;
 	for(var i = 1; i<arr.length; i++){
-		var date = new Date();
+  var date = new Date();
 		date.setDate(date.getDate()+(i+2));
 		var re = (date.toISOString().slice(0, 10));
 		var we = arr[i]; 

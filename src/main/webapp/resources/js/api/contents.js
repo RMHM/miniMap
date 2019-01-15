@@ -212,11 +212,6 @@ function getTemp(){
 	var baseForm = year + "-" + ((month<10)?"0"+month:month) + "-";
 	
 	$.ajax({
-		url : "",
-		type : "get"
-	})
-	
-	$.ajax({
 		url : "/myPage/temper.do",
 		type : "get",
 		data : {

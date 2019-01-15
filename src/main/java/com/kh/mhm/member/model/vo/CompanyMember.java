@@ -6,10 +6,10 @@ import com.kh.mhm.member.model.vo.Member;
 
 public class CompanyMember extends Member{
 	
-	private String address; // 주소
-	private String aname; // 권한명
+	/*private String address; // 주소
+	private String aname; // 권한명*/
+	private int grantCount; // 권한 부여수
 	private Date reqDate; // 요청 날짜
-	private Date grantDate; // 권한 부여일
 	private String atake;   // 권한 부여 여부
 	private char delflag; // 삭제 여부
 	
@@ -30,7 +30,7 @@ public class CompanyMember extends Member{
 	public CompanyMember(String mid, String mpw) {
 		super(mid, mpw);
 	}
-	public String getAddress() {
+	/*public String getAddress() {
 		return address;
 	}
 	public void setAddress(String address) {
@@ -41,24 +41,31 @@ public class CompanyMember extends Member{
 	}
 	public void setAname(String aname) {
 		this.aname = aname;
-	}
+	}*/
 
+	/*@Override
+	public String toString() {
+		return "CompanyMember [address=" + address + ", aname=" + aname + ", reqDate=" + reqDate + ", grantCount="
+				+ grantDate + ", atake=" + atake + ", delflag= " + delflag + super.toString() + "]";
+	}*/
+	
 	@Override
 	public String toString() {
-		return "CompanyMember [address=" + address + ", aname=" + aname + ", reqDate=" + reqDate + ", grantDate="
-				+ grantDate + ", atake=" + atake + ", delflag= " + delflag + super.toString() + "]";
+		return "CompanyMember [grantCount=" + grantCount + ", reqDate=" + reqDate + ", atake=" + atake + ", delflag="
+				+ delflag + "]";
 	}
+	
 	public Date getReqDate() {
 		return reqDate;
 	}
 	public void setReqDate(Date reqDate) {
 		this.reqDate = reqDate;
 	}
-	public Date getGrantDate() {
-		return grantDate;
+	public int getGrantCount() {
+		return grantCount;
 	}
-	public void setGrantDate(Date grantDate) {
-		this.grantDate = grantDate;
+	public void setGrantCount(int grantCount) {
+		this.grantCount = grantCount;
 	}
 	public String getAtake() {
 		return atake;

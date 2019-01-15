@@ -344,7 +344,7 @@ public class MemberController {
 		return map;
 	}
 	
-	/*@RequestMapping(value = "/member/googleLogin", method = RequestMethod.POST)
+  /*@RequestMapping(value = "/member/googleLogin", method = RequestMethod.POST)
 	public Object googleLogin(@RequestParam String name, @RequestParam String img, @RequestParam String email) {
 		ModelAndView mv = new ModelAndView();
 		Member m = null;
@@ -375,12 +375,12 @@ public class MemberController {
 					mv.setViewName("member/googleSignUp");
 				}
 			}
-			
 			result = mv;
 		} catch(Exception e) {
 			e.getStackTrace();
 		}
-		
+  
+  
 		return result;
 	}*/
 	

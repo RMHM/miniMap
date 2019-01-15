@@ -56,12 +56,11 @@ public class BoardController {
 		List<Board> list2 = boardService.selectNoticeList1(board);				
 		List<Board> list3 = boardService.selectBestList1(board);
 		System.out.println(pageBar);
-		System.out.println("bid : "+list2.get(board.getBId()).getBId());		
+    System.out.println("bid : "+list2.get(board.getBId()).getBId());		
 		
 		
 		/*int cc = comentService.countTotalComent();
 		System.out.println("c갯수 : "+ cc);*/
-		
 
 		model.addAttribute("list", list).addAttribute("totalContents", totalContents)
 				.addAttribute("numPerPage", numPerPage).addAttribute("pageBar", pageBar)
@@ -270,18 +269,18 @@ public class BoardController {
 	@RequestMapping("/board/boardview.do")
 	public ModelAndView boardview(@RequestParam int BId, Model model,
 			HttpServletRequest request, HttpServletResponse response) {
-		Member m = (Member)request.getSession().getAttribute("member");		
-		ModelAndView mv = new ModelAndView();
-		// 게시물 볼대 비로그인시 로그인페이지로 이동.
-		if(request.getSession().getAttribute("member") == null) {
+      Member m = (Member)request.getSession().getAttribute("member");		
+      ModelAndView mv = new ModelAndView();
+      // 게시물 볼대 비로그인시 로그인페이지로 이동.
+      if(request.getSession().getAttribute("member") == null) {
 			mv.addObject("msg", "로그인이 필요합니다.");
 			mv.addObject("url", "/member/loginPage.go"); 
 			mv.setViewName("common/redirect");
 			/*response.sendRedirect("/member/loginPage.go");*/			
 		}else {
-			Board b = boardService.selectOneBoard(BId);	
-			System.out.println("Board:" + b);
-			if(b.getBCode() != 5 && b.getDelFlag().equals("N")) {
+        Board b = boardService.selectOneBoard(BId);	
+        System.out.println("Board:" + b);
+        if(b.getBCode() != 5 && b.getDelFlag().equals("N")) {
 				List<Coment> clist = comentService.selectCometList(BId);
 				boardService.updateOneCount(BId);
 				mv.addObject("b", b).addObject("clist", clist);
@@ -290,21 +289,17 @@ public class BoardController {
 				mv.addObject("msg", "잘못된 게시물 요청입니다.").addObject("url", "/board/boardlist1.do");
 				mv.setViewName("common/redirect");
 			}
-						
-		if(b.getRFlag().equals("Y")) {
-			if(m.getMtype().equals("A")){
-				List<Coment> clist = comentService.selectCometList(BId);
-				boardService.updateOneCount(BId);
-				mv.addObject("b", b).addObject("clist", clist);
-				mv.setViewName("board/boardview");
-			} else {
-				mv.addObject("msg", "관리자만 접근가능합니다.").addObject("url", "/board/boardlist1.do");
-				mv.setViewName("common/redirect");
-			}			
-		}
-		
-			
-			
+      if(b.getRFlag().equals("Y")) {
+        if(m.getMtype().equals("A")){
+          List<Coment> clist = comentService.selectCometList(BId);
+          boardService.updateOneCount(BId);
+          mv.addObject("b", b).addObject("clist", clist);
+          mv.setViewName("board/boardview");
+        } else {
+          mv.addObject("msg", "관리자만 접근가능합니다.").addObject("url", "/board/boardlist1.do");
+          mv.setViewName("common/redirect");
+        }			
+      }
 		}
 		return mv;
 	}

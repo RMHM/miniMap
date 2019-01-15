@@ -78,7 +78,7 @@ public class MemberServiceImpl implements MemberService {
 		return mDao.selectOne(mno);
 	}
 
-	@Override
+  @Override
 	public int selectCheckLogin(String gEmail) {
 		return mDao.selectCheckLogin(gEmail);
 	}

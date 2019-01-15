@@ -43,7 +43,7 @@ body {
 		<div class="container">
 			<c:import url="../common/myPageNav.jsp" />
 			<div class="col-md-10">
-				<div align="center" id= "loadingdiv">
+        <div align="center" id= "loadingdiv">
 				<img src="/resources/img/loading.gif" id="loading" style="width : 250px;height : 250px;">
 				</div>
 				<div id='calendar'></div>

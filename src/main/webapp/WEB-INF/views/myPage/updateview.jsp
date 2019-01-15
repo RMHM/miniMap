@@ -124,9 +124,14 @@ color:#FF8000;
 								
 								<div class="col-sm-6">
 								
-									<img id = "imc" src="/resources/img/profiles/${member.profilePath}" width="10%" heigh="10%">
+                  <img id = "imc" src="/resources/img/profiles/${member.profilePath}" width="10%" heigh="10%">
 									<input class="form-check-input" id="profile" name="profile" onchange="readURL(this);"
 										type="file" value="${member.profilePath}">	
+								</div>
+								<div class="form-group">
+								
+								<div class="col-sm-6">
+								
 								</div>
 								<div class="form-group">
 								
@@ -136,9 +141,7 @@ color:#FF8000;
 							</div>
 						<script> 
 						$('#defa').click(function(){
-							
-							$('#imc').attr('src','/resources/img/profiles/default.png');
-			
+              $('#imc').attr('src','/resources/img/profiles/default.png');
 						});
 						$("#mnick").blur(function(){
 							if($('#mnick').val()==""){
@@ -236,7 +239,6 @@ color:#FF8000;
 								reader.readAsDataURL(input.files[0]); 
 							console.log("read : " + reader.readAsDataURL(input.files[0]));		
 						} 
-						
 						</script>
 
 						<div class="form-group">
@@ -265,9 +267,7 @@ color:#FF8000;
 	<c:import url="../common/footer.jsp" />
 	</div>
 	<script>
-	
-	
-	function check(){
+	  function check(){
 		
 			var regNum = /[0-9]/g;
 	     	var regEng = /[a-z]/ig;

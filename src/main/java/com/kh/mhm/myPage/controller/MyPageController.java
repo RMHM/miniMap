@@ -112,7 +112,7 @@ public class MyPageController {
 	/* 총 일정 확인 */
 	@RequestMapping("/myPage/selectSchedule.do")
 	@ResponseBody
-	public Map<String,Object> selectSchedule(Member member, Model model,
+  public Map<String,Object> selectSchedule(Member member, Model model,
 			@RequestParam(value = "type", required = false, defaultValue = "1") int cPage
 			) throws IOException {
 		Map<String, Object> map = new HashMap<String, Object>();
