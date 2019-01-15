@@ -74,4 +74,8 @@ public class MemberDaoImpl implements MemberDao {
 		return sst.selectOne("member.selectOneMno", mno);
 	}
 
+	@Override
+	public int selectCheckLogin(String gEmail) {
+		return sst.selectOne("member.selectCheckLogin", gEmail);
+	}
 }
