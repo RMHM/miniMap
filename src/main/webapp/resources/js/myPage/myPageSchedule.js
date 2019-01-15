@@ -130,21 +130,21 @@ function weaderToday(){
 	var tdS = $('#calendar').find('td[data-date]');
 	var arr = weather;
 	for(var i = 1; i<arr.length; i++){
-	var date = new Date(); 
-	date.setDate(date.getDate()+(i+2));
-	var re = (date.toISOString().slice(0, 10));
-	var we = arr[i]; 
-	 var sr = "";
-
-	if(we.match(/맑음/))sr = "<img src='/resources/img/weather/sun1.PNG' width='15px';height='15px'>";
-	else if(we.match(/흐림/))sr = "<img src='/resources/img/weather/cloud1.PNG' width='15px';height='15px'>";
-	else if(we.match(/구름많음/))sr = "<img src='/resources/img/weather/cloud1.PNG' width='15px';height='15px'>";
-	else if(we.match(/비/))sr = "<img src='/resources/img/weather/rain1.PNG' width='15px';height='15px'>";
-	else if(we.match(/눈/)) sr = "<img src='/resources/img/weather/snow1.PNG' width='15px';height='15px'>"; 
-	else sr = "<img src='/resources/img/weather/sunCloud1.PNG' width='15px';height='15px'>";
-	console.log(re);
-	$('#calendar').find('td[data-date='+re+']').prepend(sr);
- }
+		var date = new Date();
+		date.setDate(date.getDate()+(i+2));
+		var re = (date.toISOString().slice(0, 10));
+		var we = arr[i]; 
+		 var sr = "";
+	
+		if(we.match(/맑음/))sr = "<img src='/resources/img/weather/sun1.PNG' width='15px';height='15px'>";
+		else if(we.match(/흐림/))sr = "<img src='/resources/img/weather/cloud1.PNG' width='15px';height='15px'>";
+		else if(we.match(/구름많음/))sr = "<img src='/resources/img/weather/cloud1.PNG' width='15px';height='15px'>";
+		else if(we.match(/비/))sr = "<img src='/resources/img/weather/rain1.PNG' width='15px';height='15px'>";
+		else if(we.match(/눈/)) sr = "<img src='/resources/img/weather/snow1.PNG' width='15px';height='15px'>"; 
+		else sr = "<img src='/resources/img/weather/sunCloud1.PNG' width='15px';height='15px'>";
+		console.log(re);
+		$('#calendar').find('td[data-date='+re+']').prepend(sr);
+	}
 }
 
 function nextTemper(){	
