@@ -1,6 +1,5 @@
 package com.kh.mhm.member.model.dao;
 
-import java.util.List;
 import java.util.Date;
 import java.util.HashMap;
 
@@ -70,4 +69,13 @@ public class MemberDaoImpl implements MemberDao {
 		return (Integer) hmap.get("result");
 	}
 
+	@Override
+	public Member selectOne(int mno) {
+		return sst.selectOne("member.selectOneMno", mno);
+	}
+
+  @Override
+	public int selectCheckLogin(String gEmail) {
+		return sst.selectOne("member.selectCheckLogin", gEmail);
+	}
 }

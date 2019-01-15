@@ -1,0 +1,1550 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<class-diagram version="1.2.2" icons="true" always-add-relationships="false" generalizations="true" realizations="true" 
+  associations="true" dependencies="false" nesting-relationships="true" router="FAN">  
+  <class id="1" language="java" name="com.kh.mhm.member.controller.MemberController" project="miniMap" 
+    file="/miniMap/src/main/java/com/kh/mhm/member/controller/MemberController.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="351" width="508" x="6779" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <interface id="2" language="java" name="com.kh.mhm.member.model.dao.MemberDao" project="miniMap" 
+    file="/miniMap/src/main/java/com/kh/mhm/member/model/dao/MemberDao.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="279" width="248" x="7261" y="986"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <class id="3" language="java" name="com.kh.mhm.member.model.dao.MemberDaoImpl" project="miniMap" 
+    file="/miniMap/src/main/java/com/kh/mhm/member/model/dao/MemberDaoImpl.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="315" width="248" x="7327" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="4" language="java" name="com.kh.mhm.member.model.exception.MemberException" project="miniMap" 
+    file="/miniMap/src/main/java/com/kh/mhm/member/model/exception/MemberException.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="99" width="173" x="818" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <interface id="5" language="java" name="com.kh.mhm.member.model.service.MemberService" project="miniMap" 
+    file="/miniMap/src/main/java/com/kh/mhm/member/model/service/MemberService.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="279" width="173" x="7027" y="986"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <class id="6" language="java" name="com.kh.mhm.member.model.service.MemberServiceImpl" project="miniMap" 
+    file="/miniMap/src/main/java/com/kh/mhm/member/model/service/MemberServiceImpl.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="297" width="173" x="7615" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="7" language="java" name="com.kh.mhm.member.model.vo.BlackList" project="miniMap" 
+    file="/miniMap/src/main/java/com/kh/mhm/member/model/vo/BlackList.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="441" width="400" x="7267" y="2938"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="8" language="java" name="com.kh.mhm.member.model.vo.CompanyMember" project="miniMap" 
+    file="/miniMap/src/main/java/com/kh/mhm/member/model/vo/CompanyMember.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="495" width="440" x="6787" y="2938"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="9" language="java" name="com.kh.mhm.member.model.vo.Member" project="miniMap" 
+    file="/miniMap/src/main/java/com/kh/mhm/member/model/vo/Member.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="837" width="395" x="7027" y="1881"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="10" language="java" name="com.kh.mhm.message.common.util.Paging" project="miniMap" 
+    file="/miniMap/src/main/java/com/kh/mhm/message/common/util/Paging.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="99" width="191" x="2829" y="1881"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="11" language="java" name="com.kh.mhm.message.common.NoticeHandler" project="miniMap" 
+    file="/miniMap/src/main/java/com/kh/mhm/message/common/NoticeHandler.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="171" width="322" x="3443" y="986"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="12" language="java" name="com.kh.mhm.message.controller.MessageController" project="miniMap" 
+    file="/miniMap/src/main/java/com/kh/mhm/message/controller/MessageController.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="477" width="315" x="2663" y="986"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <interface id="13" language="java" name="com.kh.mhm.message.model.dao.MessageDao" project="miniMap" 
+    file="/miniMap/src/main/java/com/kh/mhm/message/model/dao/MessageDao.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="513" width="248" x="2127" y="1881"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <class id="14" language="java" name="com.kh.mhm.message.model.dao.MessageDaoImpl" project="miniMap" 
+    file="/miniMap/src/main/java/com/kh/mhm/message/model/dao/MessageDaoImpl.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="549" width="248" x="2375" y="986"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <interface id="15" language="java" name="com.kh.mhm.message.model.service.MessageService" project="miniMap" 
+    file="/miniMap/src/main/java/com/kh/mhm/message/model/service/MessageService.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="513" width="248" x="2499" y="1881"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <class id="16" language="java" name="com.kh.mhm.message.model.service.MessageServiceImpl" project="miniMap" 
+    file="/miniMap/src/main/java/com/kh/mhm/message/model/service/MessageServiceImpl.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="531" width="248" x="2087" y="986"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="17" language="java" name="com.kh.mhm.message.model.vo.Message" project="miniMap" 
+    file="/miniMap/src/main/java/com/kh/mhm/message/model/vo/Message.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="711" width="359" x="2369" y="2938"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="18" language="java" name="com.kh.mhm.message.model.vo.MessageBlock" project="miniMap" 
+    file="/miniMap/src/main/java/com/kh/mhm/message/model/vo/MessageBlock.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="333" width="202" x="2127" y="2938"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="19" language="java" name="com.kh.mhm.message.model.vo.MessageSmpl" project="miniMap" 
+    file="/miniMap/src/main/java/com/kh/mhm/message/model/vo/MessageSmpl.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="333" width="205" x="2768" y="2938"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="20" language="java" name="com.kh.mhm.myPage.model.vo.Schedule" project="miniMap" 
+    file="/miniMap/src/main/java/com/kh/mhm/myPage/model/vo/Schedule.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="585" width="272" x="8646" y="1881"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="21" language="java" name="com.kh.mhm.myPage.model.vo.Authority" project="miniMap" 
+    file="/miniMap/src/main/java/com/kh/mhm/myPage/model/vo/Authority.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="963" width="432" x="9399" y="1881"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="22" language="java" name="com.kh.mhm.myPage.model.service.MyPageServiceImpl" project="miniMap" 
+    file="/miniMap/src/main/java/com/kh/mhm/myPage/model/service/MyPageServiceImpl.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="405" width="303" x="9035" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <interface id="23" language="java" name="com.kh.mhm.myPage.model.service.MyPageService" project="miniMap" 
+    file="/miniMap/src/main/java/com/kh/mhm/myPage/model/service/MyPageService.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="387" width="303" x="9075" y="986"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <class id="24" language="java" name="com.kh.mhm.myPage.model.dao.MyPageDaoImpl" project="miniMap" 
+    file="/miniMap/src/main/java/com/kh/mhm/myPage/model/dao/MyPageDaoImpl.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="423" width="286" x="8709" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <interface id="25" language="java" name="com.kh.mhm.myPage.model.dao.MyPageDao" project="miniMap" 
+    file="/miniMap/src/main/java/com/kh/mhm/myPage/model/dao/MyPageDao.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="387" width="286" x="8707" y="986"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <class id="26" language="java" name="com.kh.mhm.myPage.controller.MyPageController" project="miniMap" 
+    file="/miniMap/src/main/java/com/kh/mhm/myPage/controller/MyPageController.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="513" width="457" x="7828" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="27" language="java" name="com.kh.mhm.board.model.vo.Fileref" project="miniMap" 
+    file="/miniMap/src/main/java/com/kh/mhm/board/model/vo/Fileref.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="441" width="213" x="5381" y="1881"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="28" language="java" name="com.kh.mhm.board.model.vo.BoardType" project="miniMap" 
+    file="/miniMap/src/main/java/com/kh/mhm/board/model/vo/BoardType.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="225" width="133" x="4893" y="2938"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="29" language="java" name="com.kh.mhm.board.model.vo.Board" project="miniMap" 
+    file="/miniMap/src/main/java/com/kh/mhm/board/model/vo/Board.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="1017" width="448" x="4893" y="1881"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="30" language="java" name="com.kh.mhm.board.model.service.BoardServiceImpl" project="miniMap" 
+    file="/miniMap/src/main/java/com/kh/mhm/board/model/service/BoardServiceImpl.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="837" width="283" x="5323" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <interface id="31" language="java" name="com.kh.mhm.board.model.service.BoardService" project="miniMap" 
+    file="/miniMap/src/main/java/com/kh/mhm/board/model/service/BoardService.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="837" width="283" x="4893" y="986"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <class id="32" language="java" name="com.kh.mhm.board.model.dao.BoardDaoImpl" project="miniMap" 
+    file="/miniMap/src/main/java/com/kh/mhm/board/model/dao/BoardDaoImpl.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="909" width="283" x="5646" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <interface id="33" language="java" name="com.kh.mhm.board.model.dao.BoardDao" project="miniMap" 
+    file="/miniMap/src/main/java/com/kh/mhm/board/model/dao/BoardDao.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="855" width="283" x="5342" y="986"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <class id="34" language="java" name="com.kh.mhm.board.controller.BoardController" project="miniMap" 
+    file="/miniMap/src/main/java/com/kh/mhm/board/controller/BoardController.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="513" width="406" x="4877" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="35" language="java" name="com.kh.mhm.coment.controller.ComentController" project="miniMap" 
+    file="/miniMap/src/main/java/com/kh/mhm/coment/controller/ComentController.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="189" width="409" x="1577" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <interface id="36" language="java" name="com.kh.mhm.coment.model.dao.ComentDao" project="miniMap" 
+    file="/miniMap/src/main/java/com/kh/mhm/coment/model/dao/ComentDao.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="189" width="190" x="1585" y="986"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <class id="37" language="java" name="com.kh.mhm.coment.model.dao.ComentDaoImpl" project="miniMap" 
+    file="/miniMap/src/main/java/com/kh/mhm/coment/model/dao/ComentDaoImpl.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="225" width="190" x="1347" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <interface id="38" language="java" name="com.kh.mhm.coment.model.service.ComentService" project="miniMap" 
+    file="/miniMap/src/main/java/com/kh/mhm/coment/model/service/ComentService.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="189" width="190" x="1815" y="986"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <class id="39" language="java" name="com.kh.mhm.coment.model.service.ComentServiceImpl" project="miniMap" 
+    file="/miniMap/src/main/java/com/kh/mhm/coment/model/service/ComentServiceImpl.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="207" width="190" x="2026" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="40" language="java" name="com.kh.mhm.coment.model.vo.Coment" project="miniMap" 
+    file="/miniMap/src/main/java/com/kh/mhm/coment/model/vo/Coment.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="729" width="317" x="1707" y="1881"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="41" language="java" name="com.kh.mhm.common.VisitorHitCount" project="miniMap" 
+    file="/miniMap/src/main/java/com/kh/mhm/common/VisitorHitCount.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="117" width="230" x="10146" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="42" language="java" name="com.kh.mhm.common.SendMail" project="miniMap" 
+    file="/miniMap/src/main/java/com/kh/mhm/common/SendMail.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="99" width="189" x="6798" y="986"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="43" language="java" name="com.kh.mhm.common.Policy" project="miniMap" 
+    file="/miniMap/src/main/java/com/kh/mhm/common/Policy.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="117" width="161" x="319" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="44" language="java" name="com.kh.mhm.common.CommonDao" project="miniMap" 
+    file="/miniMap/src/main/java/com/kh/mhm/common/CommonDao.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="153" width="143" x="10146" y="986"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="45" language="java" name="com.kh.mhm.common.util.Utils" project="miniMap" 
+    file="/miniMap/src/main/java/com/kh/mhm/common/util/Utils.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="99" width="191" x="7612" y="986"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="46" language="java" name="com.kh.mhm.likes.model.vo.Likes" project="miniMap" 
+    file="/miniMap/src/main/java/com/kh/mhm/likes/model/vo/Likes.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="333" width="133" x="3060" y="1881"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="47" language="java" name="com.kh.mhm.likes.model.service.LikesServiceImpl" project="miniMap" 
+    file="/miniMap/src/main/java/com/kh/mhm/likes/model/service/LikesServiceImpl.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="99" width="149" x="3430" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <interface id="48" language="java" name="com.kh.mhm.likes.model.service.LikesService" project="miniMap" 
+    file="/miniMap/src/main/java/com/kh/mhm/likes/model/service/LikesService.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="81" width="149" x="3233" y="986"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <class id="49" language="java" name="com.kh.mhm.likes.model.dao.LikesDaoImpl" project="miniMap" 
+    file="/miniMap/src/main/java/com/kh/mhm/likes/model/dao/LikesDaoImpl.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="117" width="181" x="2708" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <interface id="50" language="java" name="com.kh.mhm.likes.model.dao.LikesDao" project="miniMap" 
+    file="/miniMap/src/main/java/com/kh/mhm/likes/model/dao/LikesDao.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="81" width="133" x="3060" y="986"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <class id="51" language="java" name="com.kh.mhm.likes.controller.LikesController" project="miniMap" 
+    file="/miniMap/src/main/java/com/kh/mhm/likes/controller/LikesController.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="99" width="461" x="2929" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="52" language="java" name="com.kh.mhm.api.Temperatures" project="miniMap" 
+    file="/miniMap/src/main/java/com/kh/mhm/api/Temperatures.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="99" width="151" x="8027" y="986"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="53" language="java" name="com.kh.mhm.api.JejuApi" project="miniMap" 
+    file="/miniMap/src/main/java/com/kh/mhm/api/JejuApi.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="99" width="382" x="1121" y="986"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="54" language="java" name="com.kh.mhm.api.AfterWeather" project="miniMap" 
+    file="/miniMap/src/main/java/com/kh/mhm/api/AfterWeather.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="99" width="123" x="7864" y="986"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="55" language="java" name="com.kh.mhm.api.controller.ApiController" project="miniMap" 
+    file="/miniMap/src/main/java/com/kh/mhm/api/controller/ApiController.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="171" width="276" x="1031" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="56" language="java" name="com.kh.mhm.api.common.ConvLonLatToXY" project="miniMap" 
+    file="/miniMap/src/main/java/com/kh/mhm/api/common/ConvLonLatToXY.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="117" width="713" x="368" y="986"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="57" language="java" name="com.kh.mhm.manager.model.service.ManagerServiceImpl" project="miniMap" 
+    file="/miniMap/src/main/java/com/kh/mhm/manager/model/service/ManagerServiceImpl.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="261" width="195" x="9676" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <interface id="58" language="java" name="com.kh.mhm.manager.model.service.ManagerService" project="miniMap" 
+    file="/miniMap/src/main/java/com/kh/mhm/manager/model/service/ManagerService.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="243" width="195" x="9460" y="986"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <class id="59" language="java" name="com.kh.mhm.manager.model.dao.ManagerDaoImpl" project="miniMap" 
+    file="/miniMap/src/main/java/com/kh/mhm/manager/model/dao/ManagerDaoImpl.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="279" width="195" x="9911" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <interface id="60" language="java" name="com.kh.mhm.manager.model.dao.ManagerDao" project="miniMap" 
+    file="/miniMap/src/main/java/com/kh/mhm/manager/model/dao/ManagerDao.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="243" width="195" x="9716" y="986"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <class id="61" language="java" name="com.kh.mhm.manager.controller.ManagerController" project="miniMap" 
+    file="/miniMap/src/main/java/com/kh/mhm/manager/controller/ManagerController.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="333" width="231" x="9405" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="62" language="java" name="com.kh.mhm.map.model.vo.Map" project="miniMap" 
+    file="/miniMap/src/main/java/com/kh/mhm/map/model/vo/Map.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="171" width="236" x="43" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="63" language="java" name="com.kh.mhm.map.model.service.MapServiceImpl" project="miniMap" 
+    file="/miniMap/src/main/java/com/kh/mhm/map/model/service/MapServiceImpl.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="99" width="152" x="8517" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <interface id="64" language="java" name="com.kh.mhm.map.model.service.MapService" project="miniMap" 
+    file="/miniMap/src/main/java/com/kh/mhm/map/model/service/MapService.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="81" width="152" x="8431" y="986"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <class id="65" language="java" name="com.kh.mhm.map.model.dao.MapDaoImpl" project="miniMap" 
+    file="/miniMap/src/main/java/com/kh/mhm/map/model/dao/MapDaoImpl.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="117" width="152" x="8325" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <interface id="66" language="java" name="com.kh.mhm.map.model.dao.MapDao" project="miniMap" 
+    file="/miniMap/src/main/java/com/kh/mhm/map/model/dao/MapDao.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="81" width="152" x="8239" y="986"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <class id="67" language="java" name="com.kh.mhm.map.controller.MapController" project="miniMap" 
+    file="/miniMap/src/main/java/com/kh/mhm/map/controller/MapController.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="117" width="258" x="520" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="68" language="java" name="com.kh.mhm.report.model.vo.Report" project="miniMap" 
+    file="/miniMap/src/main/java/com/kh/mhm/report/model/vo/Report.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="567" width="223" x="6169" y="1881"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="69" language="java" name="com.kh.mhm.report.model.service.ReportServiceImpl" project="miniMap" 
+    file="/miniMap/src/main/java/com/kh/mhm/report/model/service/ReportServiceImpl.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="99" width="154" x="6190" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <interface id="70" language="java" name="com.kh.mhm.report.model.service.ReportService" project="miniMap" 
+    file="/miniMap/src/main/java/com/kh/mhm/report/model/service/ReportService.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="81" width="154" x="6209" y="986"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <class id="71" language="java" name="com.kh.mhm.report.model.dao.ReportDaoImpl" project="miniMap" 
+    file="/miniMap/src/main/java/com/kh/mhm/report/model/dao/ReportDaoImpl.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="117" width="181" x="5969" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <interface id="72" language="java" name="com.kh.mhm.report.model.dao.ReportDao" project="miniMap" 
+    file="/miniMap/src/main/java/com/kh/mhm/report/model/dao/ReportDao.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="81" width="139" x="6009" y="986"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <class id="73" language="java" name="com.kh.mhm.report.controller.ReportController" project="miniMap" 
+    file="/miniMap/src/main/java/com/kh/mhm/report/controller/ReportController.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="99" width="355" x="6384" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="74" language="java" name="com.kh.mhm.timeLine.model.vo.TimeLineSmpl" project="miniMap" 
+    file="/miniMap/src/main/java/com/kh/mhm/timeLine/model/vo/TimeLineSmpl.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="279" width="172" x="3870" y="1881"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="75" language="java" name="com.kh.mhm.timeLine.model.vo.TimeLine" project="miniMap" 
+    file="/miniMap/src/main/java/com/kh/mhm/timeLine/model/vo/TimeLine.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="279" width="172" x="3870" y="2938"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="76" language="java" name="com.kh.mhm.timeLine.model.vo.PreTimeLine" project="miniMap" 
+    file="/miniMap/src/main/java/com/kh/mhm/timeLine/model/vo/PreTimeLine.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="441" width="281" x="4142" y="1881"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="77" language="java" name="com.kh.mhm.timeLine.model.service.TimeLineServiceImpl" project="miniMap" 
+    file="/miniMap/src/main/java/com/kh/mhm/timeLine/model/service/TimeLineServiceImpl.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="171" width="211" x="3619" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <interface id="78" language="java" name="com.kh.mhm.timeLine.model.service.TimeLineService" project="miniMap" 
+    file="/miniMap/src/main/java/com/kh/mhm/timeLine/model/service/TimeLineService.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="153" width="211" x="4182" y="986"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <class id="79" language="java" name="com.kh.mhm.timeLine.model.dao.TimeLineDaoImpl" project="miniMap" 
+    file="/miniMap/src/main/java/com/kh/mhm/timeLine/model/dao/TimeLineDaoImpl.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="189" width="211" x="3870" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <interface id="80" language="java" name="com.kh.mhm.timeLine.model.dao.TimeLineDao" project="miniMap" 
+    file="/miniMap/src/main/java/com/kh/mhm/timeLine/model/dao/TimeLineDao.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="153" width="211" x="3910" y="986"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <class id="81" language="java" name="com.kh.mhm.timeLine.controller.WebSocketChattingController" project="miniMap" 
+    file="/miniMap/src/main/java/com/kh/mhm/timeLine/controller/WebSocketChattingController.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="135" width="354" x="4121" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="82" language="java" name="com.kh.mhm.timeLine.common.SocketHandler" project="miniMap" 
+    file="/miniMap/src/main/java/com/kh/mhm/timeLine/common/SocketHandler.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="171" width="322" x="4515" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <dependency id="83">    
+    <bendpoint x="8676" y="986"/>    
+    <end type="SOURCE" refId="22"/>    
+    <end type="TARGET" refId="9"/>  
+  </dependency>  
+  <dependency id="84">    
+    <end type="SOURCE" refId="34"/>    
+    <end type="TARGET" refId="45"/>  
+  </dependency>  
+  <dependency id="85">    
+    <end type="SOURCE" refId="33"/>    
+    <end type="TARGET" refId="27"/>  
+  </dependency>  
+  <association id="86">    
+    <end type="SOURCE" refId="30" navigable="false">      
+      <attribute id="87" name="boardDao"/>      
+      <multiplicity id="88" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="33" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <dependency id="89">    
+    <end type="SOURCE" refId="12"/>    
+    <end type="TARGET" refId="9"/>  
+  </dependency>  
+  <dependency id="90">    
+    <end type="SOURCE" refId="31"/>    
+    <end type="TARGET" refId="29"/>  
+  </dependency>  
+  <dependency id="91">    
+    <bendpoint x="4841" y="986"/>    
+    <end type="SOURCE" refId="79"/>    
+    <end type="TARGET" refId="9"/>  
+  </dependency>  
+  <dependency id="92">    
+    <end type="SOURCE" refId="13"/>    
+    <end type="TARGET" refId="18"/>  
+  </dependency>  
+  <dependency id="93">    
+    <bendpoint x="5290" y="986"/>    
+    <end type="SOURCE" refId="30"/>    
+    <end type="TARGET" refId="29"/>  
+  </dependency>  
+  <dependency id="94">    
+    <bendpoint x="5311" y="986"/>    
+    <end type="SOURCE" refId="82"/>    
+    <end type="TARGET" refId="9"/>  
+  </dependency>  
+  <realization id="95">    
+    <end type="SOURCE" refId="6"/>    
+    <end type="TARGET" refId="5"/>  
+  </realization>  
+  <dependency id="96">    
+    <end type="SOURCE" refId="15"/>    
+    <end type="TARGET" refId="19"/>  
+  </dependency>  
+  <association id="97">    
+    <end type="SOURCE" refId="61" navigable="false">      
+      <attribute id="98" name="mns"/>      
+      <multiplicity id="99" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="58" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <realization id="100">    
+    <end type="SOURCE" refId="49"/>    
+    <end type="TARGET" refId="50"/>  
+  </realization>  
+  <dependency id="101">    
+    <bendpoint x="2054" y="1881"/>    
+    <end type="SOURCE" refId="16"/>    
+    <end type="TARGET" refId="18"/>  
+  </dependency>  
+  <dependency id="102">    
+    <bendpoint x="5676" y="986"/>    
+    <end type="SOURCE" refId="34"/>    
+    <end type="TARGET" refId="9"/>  
+  </dependency>  
+  <dependency id="103">    
+    <bendpoint x="9685" y="986"/>    
+    <end type="SOURCE" refId="57"/>    
+    <end type="TARGET" refId="21"/>  
+  </dependency>  
+  <dependency id="104">    
+    <end type="SOURCE" refId="78"/>    
+    <end type="TARGET" refId="74"/>  
+  </dependency>  
+  <dependency id="105">    
+    <end type="SOURCE" refId="1"/>    
+    <end type="TARGET" refId="42"/>  
+  </dependency>  
+  <association id="106">    
+    <end type="SOURCE" refId="34" navigable="false">      
+      <attribute id="107" name="comentService"/>      
+      <multiplicity id="108" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="38" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <dependency id="109">    
+    <end type="SOURCE" refId="11"/>    
+    <end type="TARGET" refId="9"/>  
+  </dependency>  
+  <association id="110">    
+    <end type="SOURCE" refId="47" navigable="false">      
+      <attribute id="111" name="ld"/>      
+      <multiplicity id="112" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="50" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <dependency id="113">    
+    <end type="SOURCE" refId="66"/>    
+    <end type="TARGET" refId="9"/>  
+  </dependency>  
+  <realization id="114">    
+    <end type="SOURCE" refId="24"/>    
+    <end type="TARGET" refId="25"/>  
+  </realization>  
+  <dependency id="115">    
+    <bendpoint x="7539" y="986"/>    
+    <end type="SOURCE" refId="6"/>    
+    <end type="TARGET" refId="9"/>  
+  </dependency>  
+  <dependency id="116">    
+    <bendpoint x="4820" y="986"/>    
+    <end type="SOURCE" refId="77"/>    
+    <end type="TARGET" refId="9"/>  
+  </dependency>  
+  <dependency id="117">    
+    <end type="SOURCE" refId="25"/>    
+    <end type="TARGET" refId="20"/>  
+  </dependency>  
+  <dependency id="118">    
+    <bendpoint x="3412" y="986"/>    
+    <end type="SOURCE" refId="47"/>    
+    <end type="TARGET" refId="46"/>  
+  </dependency>  
+  <association id="119">    
+    <end type="SOURCE" refId="39" navigable="false">      
+      <attribute id="120" name="cDao"/>      
+      <multiplicity id="121" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="36" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <dependency id="122">    
+    <end type="SOURCE" refId="78"/>    
+    <end type="TARGET" refId="76"/>  
+  </dependency>  
+  <dependency id="123">    
+    <bendpoint x="6767" y="986"/>    
+    <end type="SOURCE" refId="1"/>    
+    <end type="TARGET" refId="9"/>  
+  </dependency>  
+  <realization id="124">    
+    <end type="SOURCE" refId="79"/>    
+    <end type="TARGET" refId="80"/>  
+  </realization>  
+  <dependency id="125">    
+    <bendpoint x="3879" y="986"/>    
+    <end type="SOURCE" refId="79"/>    
+    <end type="TARGET" refId="74"/>  
+  </dependency>  
+  <dependency id="126">    
+    <bendpoint x="5227" y="986"/>    
+    <end type="SOURCE" refId="30"/>    
+    <end type="TARGET" refId="27"/>  
+  </dependency>  
+  <dependency id="127">    
+    <end type="SOURCE" refId="70"/>    
+    <end type="TARGET" refId="68"/>  
+  </dependency>  
+  <dependency id="128">    
+    <end type="SOURCE" refId="26"/>    
+    <end type="TARGET" refId="45"/>  
+  </dependency>  
+  <realization id="129">    
+    <end type="SOURCE" refId="59"/>    
+    <end type="TARGET" refId="60"/>  
+  </realization>  
+  <dependency id="130">    
+    <end type="SOURCE" refId="48"/>    
+    <end type="TARGET" refId="46"/>  
+  </dependency>  
+  <realization id="131">    
+    <end type="SOURCE" refId="30"/>    
+    <end type="TARGET" refId="31"/>  
+  </realization>  
+  <dependency id="132">    
+    <bendpoint x="5655" y="986"/>    
+    <end type="SOURCE" refId="32"/>    
+    <end type="TARGET" refId="29"/>  
+  </dependency>  
+  <association id="133">    
+    <end type="SOURCE" refId="81" navigable="false">      
+      <attribute id="134" name="tls"/>      
+      <multiplicity id="135" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="78" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <dependency id="136">    
+    <end type="SOURCE" refId="33"/>    
+    <end type="TARGET" refId="29"/>  
+  </dependency>  
+  <dependency id="137">    
+    <end type="SOURCE" refId="38"/>    
+    <end type="TARGET" refId="40"/>  
+  </dependency>  
+  <dependency id="138">    
+    <end type="SOURCE" refId="80"/>    
+    <end type="TARGET" refId="74"/>  
+  </dependency>  
+  <dependency id="139">    
+    <end type="SOURCE" refId="5"/>    
+    <end type="TARGET" refId="9"/>  
+  </dependency>  
+  <association id="140">    
+    <end type="SOURCE" refId="16" navigable="false">      
+      <attribute id="141" name="mdi"/>      
+      <multiplicity id="142" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="13" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <dependency id="143">    
+    <bendpoint x="2777" y="1881"/>    
+    <end type="SOURCE" refId="14"/>    
+    <end type="TARGET" refId="19"/>  
+  </dependency>  
+  <dependency id="144">    
+    <bendpoint x="1554" y="986"/>    
+    <end type="SOURCE" refId="35"/>    
+    <end type="TARGET" refId="40"/>  
+  </dependency>  
+  <association id="145">    
+    <end type="SOURCE" refId="11" navigable="false">      
+      <attribute id="146" name="ms"/>      
+      <multiplicity id="147" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="15" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="148">    
+    <end type="SOURCE" refId="51" navigable="false">      
+      <attribute id="149" name="ls"/>      
+      <multiplicity id="150" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="48" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <dependency id="151">    
+    <bendpoint x="5978" y="986"/>    
+    <end type="SOURCE" refId="71"/>    
+    <end type="TARGET" refId="68"/>  
+  </dependency>  
+  <dependency id="152">    
+    <bendpoint x="4423" y="986"/>    
+    <end type="SOURCE" refId="81"/>    
+    <end type="TARGET" refId="76"/>  
+  </dependency>  
+  <dependency id="153">    
+    <end type="SOURCE" refId="26"/>    
+    <end type="TARGET" refId="54"/>  
+  </dependency>  
+  <dependency id="154">    
+    <end type="SOURCE" refId="36"/>    
+    <end type="TARGET" refId="40"/>  
+  </dependency>  
+  <dependency id="155">    
+    <bendpoint x="9023" y="986"/>    
+    <end type="SOURCE" refId="24"/>    
+    <end type="TARGET" refId="21"/>  
+  </dependency>  
+  <dependency id="156">    
+    <end type="SOURCE" refId="60"/>    
+    <end type="TARGET" refId="21"/>  
+  </dependency>  
+  <realization id="157">    
+    <end type="SOURCE" refId="16"/>    
+    <end type="TARGET" refId="15"/>  
+  </realization>  
+  <dependency id="158">    
+    <bendpoint x="9429" y="986"/>    
+    <end type="SOURCE" refId="61"/>    
+    <end type="TARGET" refId="21"/>  
+  </dependency>  
+  <dependency id="159">    
+    <end type="SOURCE" refId="26"/>    
+    <end type="TARGET" refId="52"/>  
+  </dependency>  
+  <dependency id="160">    
+    <bendpoint x="3795" y="986"/>    
+    <end type="SOURCE" refId="77"/>    
+    <end type="TARGET" refId="74"/>  
+  </dependency>  
+  <association id="161">    
+    <end type="SOURCE" refId="73" navigable="false">      
+      <attribute id="162" name="rs"/>      
+      <multiplicity id="163" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="70" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <dependency id="164">    
+    <bendpoint x="2447" y="1881"/>    
+    <end type="SOURCE" refId="16"/>    
+    <end type="TARGET" refId="19"/>  
+  </dependency>  
+  <dependency id="165">    
+    <end type="SOURCE" refId="31"/>    
+    <end type="TARGET" refId="27"/>  
+  </dependency>  
+  <realization id="166">    
+    <end type="SOURCE" refId="32"/>    
+    <end type="TARGET" refId="33"/>  
+  </realization>  
+  <dependency id="167">    
+    <end type="SOURCE" refId="80"/>    
+    <end type="TARGET" refId="9"/>  
+  </dependency>  
+  <association id="168">    
+    <end type="SOURCE" refId="1" navigable="false">      
+      <attribute id="169" name="ms"/>      
+      <multiplicity id="170" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="5" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="171">    
+    <end type="SOURCE" refId="73" navigable="false">      
+      <attribute id="172" name="ms"/>      
+      <multiplicity id="173" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="5" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <dependency id="174">    
+    <end type="SOURCE" refId="25"/>    
+    <end type="TARGET" refId="21"/>  
+  </dependency>  
+  <dependency id="175">    
+    <bendpoint x="5206" y="986"/>    
+    <end type="SOURCE" refId="34"/>    
+    <end type="TARGET" refId="27"/>  
+  </dependency>  
+  <generalization id="176">    
+    <end type="SOURCE" refId="75"/>    
+    <end type="TARGET" refId="74"/>  
+  </generalization>  
+  <association id="177">    
+    <end type="SOURCE" refId="51" navigable="false">      
+      <attribute id="178" name="bs"/>      
+      <multiplicity id="179" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="31" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <dependency id="180">    
+    <bendpoint x="8613" y="986"/>    
+    <end type="SOURCE" refId="63"/>    
+    <end type="TARGET" refId="9"/>  
+  </dependency>  
+  <association id="181">    
+    <end type="SOURCE" refId="26" navigable="false">      
+      <attribute id="182" name="ms"/>      
+      <multiplicity id="183" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="5" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <dependency id="184">    
+    <bendpoint x="4151" y="986"/>    
+    <end type="SOURCE" refId="79"/>    
+    <end type="TARGET" refId="76"/>  
+  </dependency>  
+  <association id="185">    
+    <bendpoint x="5248" y="986"/>    
+    <end type="SOURCE" refId="26" navigable="false">      
+      <attribute id="186" name="mss"/>      
+      <multiplicity id="187" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="15" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="188">    
+    <end type="SOURCE" refId="22" navigable="false">      
+      <attribute id="189" name="md"/>      
+      <multiplicity id="190" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="25" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="191">    
+    <end type="SOURCE" refId="34" navigable="false">      
+      <attribute id="192" name="boardService"/>      
+      <multiplicity id="193" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="31" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="194">    
+    <end type="SOURCE" refId="35" navigable="false">      
+      <attribute id="195" name="cs"/>      
+      <multiplicity id="196" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="38" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <dependency id="197">    
+    <bendpoint x="3029" y="986"/>    
+    <end type="SOURCE" refId="51"/>    
+    <end type="TARGET" refId="46"/>  
+  </dependency>  
+  <dependency id="198">    
+    <bendpoint x="7560" y="986"/>    
+    <end type="SOURCE" refId="26"/>    
+    <end type="TARGET" refId="9"/>  
+  </dependency>  
+  <dependency id="199">    
+    <end type="SOURCE" refId="15"/>    
+    <end type="TARGET" refId="18"/>  
+  </dependency>  
+  <realization id="200">    
+    <end type="SOURCE" refId="65"/>    
+    <end type="TARGET" refId="66"/>  
+  </realization>  
+  <realization id="201">    
+    <end type="SOURCE" refId="3"/>    
+    <end type="TARGET" refId="2"/>  
+  </realization>  
+  <dependency id="202">    
+    <bendpoint x="4444" y="986"/>    
+    <end type="SOURCE" refId="82"/>    
+    <end type="TARGET" refId="74"/>  
+  </dependency>  
+  <realization id="203">    
+    <end type="SOURCE" refId="47"/>    
+    <end type="TARGET" refId="48"/>  
+  </realization>  
+  <dependency id="204">    
+    <bendpoint x="4862" y="986"/>    
+    <end type="SOURCE" refId="34"/>    
+    <end type="TARGET" refId="29"/>  
+  </dependency>  
+  <dependency id="205">    
+    <end type="SOURCE" refId="50"/>    
+    <end type="TARGET" refId="46"/>  
+  </dependency>  
+  <association id="206">    
+    <end type="SOURCE" refId="6" navigable="false">      
+      <attribute id="207" name="mDao"/>      
+      <multiplicity id="208" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="2" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <dependency id="209">    
+    <end type="SOURCE" refId="25"/>    
+    <end type="TARGET" refId="9"/>  
+  </dependency>  
+  <dependency id="210">    
+    <bendpoint x="3008" y="986"/>    
+    <end type="SOURCE" refId="49"/>    
+    <end type="TARGET" refId="46"/>  
+  </dependency>  
+  <dependency id="211">    
+    <bendpoint x="2075" y="1881"/>    
+    <end type="SOURCE" refId="14"/>    
+    <end type="TARGET" refId="18"/>  
+  </dependency>  
+  <dependency id="212">    
+    <bendpoint x="7581" y="986"/>    
+    <end type="SOURCE" refId="26"/>    
+    <end type="TARGET" refId="20"/>  
+  </dependency>  
+  <dependency id="213">    
+    <bendpoint x="8655" y="986"/>    
+    <end type="SOURCE" refId="24"/>    
+    <end type="TARGET" refId="20"/>  
+  </dependency>  
+  <dependency id="214">    
+    <bendpoint x="3858" y="986"/>    
+    <end type="SOURCE" refId="79"/>    
+    <end type="TARGET" refId="74"/>  
+  </dependency>  
+  <dependency id="215">    
+    <end type="SOURCE" refId="64"/>    
+    <end type="TARGET" refId="9"/>  
+  </dependency>  
+  <dependency id="216">    
+    <end type="SOURCE" refId="15"/>    
+    <end type="TARGET" refId="17"/>  
+  </dependency>  
+  <dependency id="217">    
+    <bendpoint x="6393" y="986"/>    
+    <end type="SOURCE" refId="73"/>    
+    <end type="TARGET" refId="68"/>  
+  </dependency>  
+  <dependency id="218">    
+    <end type="SOURCE" refId="12"/>    
+    <end type="TARGET" refId="10"/>  
+  </dependency>  
+  <dependency id="219">    
+    <bendpoint x="2096" y="1881"/>    
+    <end type="SOURCE" refId="16"/>    
+    <end type="TARGET" refId="17"/>  
+  </dependency>  
+  <realization id="220">    
+    <end type="SOURCE" refId="39"/>    
+    <end type="TARGET" refId="38"/>  
+  </realization>  
+  <dependency id="221">    
+    <bendpoint x="1533" y="986"/>    
+    <end type="SOURCE" refId="37"/>    
+    <end type="TARGET" refId="40"/>  
+  </dependency>  
+  <dependency id="222">    
+    <bendpoint x="5697" y="986"/>    
+    <end type="SOURCE" refId="32"/>    
+    <end type="TARGET" refId="27"/>  
+  </dependency>  
+  <dependency id="223">    
+    <end type="SOURCE" refId="80"/>    
+    <end type="TARGET" refId="76"/>  
+  </dependency>  
+  <dependency id="224">    
+    <end type="SOURCE" refId="23"/>    
+    <end type="TARGET" refId="20"/>  
+  </dependency>  
+  <dependency id="225">    
+    <bendpoint x="9408" y="986"/>    
+    <end type="SOURCE" refId="22"/>    
+    <end type="TARGET" refId="21"/>  
+  </dependency>  
+  <realization id="226">    
+    <end type="SOURCE" refId="63"/>    
+    <end type="TARGET" refId="64"/>  
+  </realization>  
+  <dependency id="227">    
+    <end type="SOURCE" refId="78"/>    
+    <end type="TARGET" refId="9"/>  
+  </dependency>  
+  <dependency id="228">    
+    <end type="SOURCE" refId="41"/>    
+    <end type="TARGET" refId="44"/>  
+  </dependency>  
+  <realization id="229">    
+    <end type="SOURCE" refId="77"/>    
+    <end type="TARGET" refId="78"/>  
+  </realization>  
+  <dependency id="230">    
+    <bendpoint x="2035" y="986"/>    
+    <end type="SOURCE" refId="39"/>    
+    <end type="TARGET" refId="40"/>  
+  </dependency>  
+  <dependency id="231">    
+    <end type="SOURCE" refId="55"/>    
+    <end type="TARGET" refId="56"/>  
+  </dependency>  
+  <dependency id="232">    
+    <bendpoint x="2798" y="1881"/>    
+    <end type="SOURCE" refId="12"/>    
+    <end type="TARGET" refId="19"/>  
+  </dependency>  
+  <dependency id="233">    
+    <bendpoint x="6178" y="986"/>    
+    <end type="SOURCE" refId="69"/>    
+    <end type="TARGET" refId="68"/>  
+  </dependency>  
+  <association id="234">    
+    <end type="SOURCE" refId="69" navigable="false">      
+      <attribute id="235" name="rd"/>      
+      <multiplicity id="236" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="72" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <dependency id="237">    
+    <bendpoint x="8208" y="986"/>    
+    <end type="SOURCE" refId="65"/>    
+    <end type="TARGET" refId="9"/>  
+  </dependency>  
+  <realization id="238">    
+    <end type="SOURCE" refId="14"/>    
+    <end type="TARGET" refId="13"/>  
+  </realization>  
+  <association id="239">    
+    <end type="SOURCE" refId="26" navigable="false">      
+      <attribute id="240" name="mps"/>      
+      <multiplicity id="241" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="23" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <dependency id="242">    
+    <end type="SOURCE" refId="2"/>    
+    <end type="TARGET" refId="9"/>  
+  </dependency>  
+  <dependency id="243">    
+    <end type="SOURCE" refId="61"/>    
+    <end type="TARGET" refId="45"/>  
+  </dependency>  
+  <association id="244">    
+    <end type="SOURCE" refId="61" navigable="false">      
+      <attribute id="245" name="mps"/>      
+      <multiplicity id="246" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="23" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <dependency id="247">    
+    <bendpoint x="3816" y="986"/>    
+    <end type="SOURCE" refId="77"/>    
+    <end type="TARGET" refId="74"/>  
+  </dependency>  
+  <dependency id="248">    
+    <bendpoint x="2405" y="1881"/>    
+    <end type="SOURCE" refId="12"/>    
+    <end type="TARGET" refId="18"/>  
+  </dependency>  
+  <association id="249">    
+    <end type="SOURCE" refId="82" navigable="false">      
+      <attribute id="250" name="tlsi"/>      
+      <multiplicity id="251" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="78" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <realization id="252">    
+    <end type="SOURCE" refId="71"/>    
+    <end type="TARGET" refId="72"/>  
+  </realization>  
+  <association id="253">    
+    <end type="SOURCE" refId="77" navigable="false">      
+      <attribute id="254" name="tldi"/>      
+      <multiplicity id="255" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="80" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <dependency id="256">    
+    <bendpoint x="2426" y="1881"/>    
+    <end type="SOURCE" refId="14"/>    
+    <end type="TARGET" refId="17"/>  
+  </dependency>  
+  <association id="257">    
+    <end type="SOURCE" refId="57" navigable="false">      
+      <attribute id="258" name="mnDao"/>      
+      <multiplicity id="259" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="60" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <generalization id="260">    
+    <end type="SOURCE" refId="28"/>    
+    <end type="TARGET" refId="29"/>  
+  </generalization>  
+  <dependency id="261">    
+    <bendpoint x="5269" y="986"/>    
+    <end type="SOURCE" refId="81"/>    
+    <end type="TARGET" refId="9"/>  
+  </dependency>  
+  <dependency id="262">    
+    <bendpoint x="8634" y="986"/>    
+    <end type="SOURCE" refId="24"/>    
+    <end type="TARGET" refId="9"/>  
+  </dependency>  
+  <dependency id="263">    
+    <end type="SOURCE" refId="58"/>    
+    <end type="TARGET" refId="21"/>  
+  </dependency>  
+  <realization id="264">    
+    <end type="SOURCE" refId="37"/>    
+    <end type="TARGET" refId="36"/>  
+  </realization>  
+  <dependency id="265">    
+    <end type="SOURCE" refId="72"/>    
+    <end type="TARGET" refId="68"/>  
+  </dependency>  
+  <association id="266">    
+    <end type="SOURCE" refId="12" navigable="false">      
+      <attribute id="267" name="ms"/>      
+      <multiplicity id="268" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="15" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <dependency id="269">    
+    <bendpoint x="2468" y="1881"/>    
+    <end type="SOURCE" refId="12"/>    
+    <end type="TARGET" refId="17"/>  
+  </dependency>  
+  <generalization id="270">    
+    <end type="SOURCE" refId="7"/>    
+    <end type="TARGET" refId="9"/>  
+  </generalization>  
+  <dependency id="271">    
+    <bendpoint x="9941" y="986"/>    
+    <end type="SOURCE" refId="59"/>    
+    <end type="TARGET" refId="21"/>  
+  </dependency>  
+  <dependency id="272">    
+    <bendpoint x="3837" y="986"/>    
+    <end type="SOURCE" refId="77"/>    
+    <end type="TARGET" refId="76"/>  
+  </dependency>  
+  <generalization id="273">    
+    <end type="SOURCE" refId="8"/>    
+    <end type="TARGET" refId="9"/>  
+  </generalization>  
+  <realization id="274">    
+    <end type="SOURCE" refId="57"/>    
+    <end type="TARGET" refId="58"/>  
+  </realization>  
+  <realization id="275">    
+    <end type="SOURCE" refId="22"/>    
+    <end type="TARGET" refId="23"/>  
+  </realization>  
+  <dependency id="276">    
+    <bendpoint x="6715" y="986"/>    
+    <end type="SOURCE" refId="73"/>    
+    <end type="TARGET" refId="9"/>  
+  </dependency>  
+  <dependency id="277">    
+    <end type="SOURCE" refId="23"/>    
+    <end type="TARGET" refId="21"/>  
+  </dependency>  
+  <dependency id="278">    
+    <bendpoint x="7230" y="986"/>    
+    <end type="SOURCE" refId="3"/>    
+    <end type="TARGET" refId="9"/>  
+  </dependency>  
+  <dependency id="279">    
+    <bendpoint x="7833" y="986"/>    
+    <end type="SOURCE" refId="26"/>    
+    <end type="TARGET" refId="21"/>  
+  </dependency>  
+  <dependency id="280">    
+    <end type="SOURCE" refId="13"/>    
+    <end type="TARGET" refId="19"/>  
+  </dependency>  
+  <dependency id="281">    
+    <bendpoint x="9044" y="986"/>    
+    <end type="SOURCE" refId="22"/>    
+    <end type="TARGET" refId="20"/>  
+  </dependency>  
+  <association id="282">    
+    <end type="SOURCE" refId="63" navigable="false">      
+      <attribute id="283" name="mDao"/>      
+      <multiplicity id="284" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="66" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <realization id="285">    
+    <end type="SOURCE" refId="69"/>    
+    <end type="TARGET" refId="70"/>  
+  </realization>  
+  <dependency id="286">    
+    <end type="SOURCE" refId="23"/>    
+    <end type="TARGET" refId="9"/>  
+  </dependency>  
+  <dependency id="287">    
+    <bendpoint x="2056" y="986"/>    
+    <end type="SOURCE" refId="34"/>    
+    <end type="TARGET" refId="40"/>  
+  </dependency>  
+  <dependency id="288">    
+    <end type="SOURCE" refId="55"/>    
+    <end type="TARGET" refId="53"/>  
+  </dependency>  
+  <dependency id="289">    
+    <end type="SOURCE" refId="13"/>    
+    <end type="TARGET" refId="17"/>  
+  </dependency>  
+  <classifier-display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+    sort-features="false" accessors="true" visibility="true">    
+    <attributes public="true" package="true" protected="true" private="true" static="true"/>    
+    <operations public="true" package="true" protected="true" private="true" static="true"/>  
+  </classifier-display>  
+  <association-display labels="true" multiplicity="true"/>
+</class-diagram>

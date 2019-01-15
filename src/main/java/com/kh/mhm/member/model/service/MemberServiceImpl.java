@@ -1,6 +1,5 @@
 package com.kh.mhm.member.model.service;
 
-import java.util.List;
 import java.util.Date;
 import java.util.HashMap;
 
@@ -74,5 +73,13 @@ public class MemberServiceImpl implements MemberService {
 		return mDao.checkEmail(hmap);
 	}
 
-  
+	@Override
+	public Member selectOne(int mno) {
+		return mDao.selectOne(mno);
+	}
+
+  @Override
+	public int selectCheckLogin(String gEmail) {
+		return mDao.selectCheckLogin(gEmail);
+	}
 }

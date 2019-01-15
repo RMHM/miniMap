@@ -1,6 +1,5 @@
 package com.kh.mhm.member.model.dao;
 
-import java.util.List;
 import java.util.Date;
 import java.util.HashMap;
 
@@ -11,6 +10,8 @@ public interface MemberDao {
 	Member selectLogin(String mid);
 	
 	Member selectOne(String mid);
+	
+	Member selectOne(int mno);
 
 	int insertMember(Member member);
 
@@ -27,7 +28,6 @@ public interface MemberDao {
 	int checkNick(HashMap<String, Object> hmap);
 
 	int checkEmail(HashMap<String, Object> hmap);
-
-	
   
+  int selectCheckLogin(String gEmail);
 }

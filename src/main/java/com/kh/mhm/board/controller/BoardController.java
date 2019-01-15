@@ -1,7 +1,6 @@
 package com.kh.mhm.board.controller;
 
 import java.io.File;
-import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -46,22 +45,26 @@ public class BoardController {
 	@RequestMapping("/board/boardlist1.do")
 	public String freeboard(@RequestParam(value = "cPage", required = false, defaultValue = "1") int cPage, Model model,
 			Board board) {
-		int numPerPage = 10;
+		int numPerPage = 10;					
 
-		ArrayList<Map<String, String>> list = new ArrayList<Map<String, String>>(
-				boardService.selectBoardList1(cPage, numPerPage));
+		ArrayList<Map<String, String>> list = 
+				new ArrayList<Map<String, String>>(boardService.selectBoardList1(cPage, numPerPage));		
 
-		int totalContents = boardService.selectBoardTotalContents1();
+		int totalContents = boardService.selectBoardTotalContents1();		
 
 		String pageBar = Utils.getPageBar(totalContents, cPage, numPerPage, "boardlist1.do");
-		List<Board> list2 = boardService.selectNoticeList1(board);
-
+		List<Board> list2 = boardService.selectNoticeList1(board);				
+		List<Board> list3 = boardService.selectBestList1(board);
 		System.out.println(pageBar);
+    System.out.println("bid : "+list2.get(board.getBId()).getBId());		
 		
+		
+		/*int cc = comentService.countTotalComent();
+		System.out.println("c갯수 : "+ cc);*/
 
 		model.addAttribute("list", list).addAttribute("totalContents", totalContents)
 				.addAttribute("numPerPage", numPerPage).addAttribute("pageBar", pageBar)
-				.addAttribute("list2", list2);
+				.addAttribute("list2", list2).addAttribute("list3", list3);
 
 		return "board/freeBoardList";
 	}
@@ -89,11 +92,13 @@ public class BoardController {
 
 		String pageBar = Utils.getPageBar(totalContents, cPage, numPerPage, "boardlist2.do");
 		List<Board> list2 = boardService.selectNoticeList2(board);
+		List<Board> list3 = boardService.selectBestList2(board);
 
 		System.out.println(pageBar);
 
 		model.addAttribute("list", list).addAttribute("totalContents", totalContents)
-				.addAttribute("numPerPage", numPerPage).addAttribute("pageBar", pageBar).addAttribute("list2", list2);
+				.addAttribute("numPerPage", numPerPage).addAttribute("pageBar", pageBar)
+				.addAttribute("list2", list2).addAttribute("list3", list3);
 		
 		return "board/infoBoardList";
 	}
@@ -121,6 +126,7 @@ public class BoardController {
 
 		String pageBar = Utils.getPageBar(totalContents, cPage, numPerPage, "boardlist3.do");
 		List<Board> list2 = boardService.selectNoticeList3(board);
+		List<Board> list3 = boardService.selectBestList3(board);
 
 		System.out.println(pageBar);
 
@@ -128,7 +134,7 @@ public class BoardController {
 			 .addAttribute("totalContents", totalContents)
 			 .addAttribute("numPerPage", numPerPage)
 			 .addAttribute("pageBar", pageBar)
-			 .addAttribute("list2", list2);
+			 .addAttribute("list2", list2).addAttribute("list3", list3);
 		
 		System.out.println("list : " + list);
 		
@@ -158,11 +164,13 @@ public class BoardController {
 
 		String pageBar = Utils.getPageBar(totalContents, cPage, numPerPage, "boardlist2.do");
 		List<Board> list2 = boardService.selectNoticeList4(board);
+		List<Board> list3 = boardService.selectBestList4(board);
 
 		System.out.println(pageBar);
 
 		model.addAttribute("list", list).addAttribute("totalContents", totalContents)
-				.addAttribute("numPerPage", numPerPage).addAttribute("pageBar", pageBar).addAttribute("list2", list2);
+				.addAttribute("numPerPage", numPerPage).addAttribute("pageBar", pageBar)
+				.addAttribute("list2", list2).addAttribute("list3", list3);
 		
 		return "board/qaBoardList";
 	}
@@ -190,7 +198,6 @@ public class BoardController {
 	public ModelAndView boardinsert(Board board, Model model, HttpSession session, HttpServletRequest req) {
 
 		ModelAndView mv = new ModelAndView();
-		Member m = (Member) session.getAttribute("member");
 
 		List<String> imgList = new ArrayList<String>();
 		String str = "upload/";
@@ -260,30 +267,41 @@ public class BoardController {
 	}
 
 	@RequestMapping("/board/boardview.do")
-	public String boardview(@RequestParam int BId, Model model,
+	public ModelAndView boardview(@RequestParam int BId, Model model,
 			HttpServletRequest request, HttpServletResponse response) {
-		// 게시물 볼대 비로그인시 로그인페이지로 이동.
-		if(request.getSession().getAttribute("member") ==null) {
-			try {
-				response.sendRedirect("/member/loginPage.go");
-			} catch (IOException e) {
-				
-				e.printStackTrace();
-			}			
+      Member m = (Member)request.getSession().getAttribute("member");		
+      ModelAndView mv = new ModelAndView();
+      // 게시물 볼대 비로그인시 로그인페이지로 이동.
+      if(request.getSession().getAttribute("member") == null) {
+			mv.addObject("msg", "로그인이 필요합니다.");
+			mv.addObject("url", "/member/loginPage.go"); 
+			mv.setViewName("common/redirect");
+			/*response.sendRedirect("/member/loginPage.go");*/			
 		}else {
-			List<Coment> clist = comentService.selectCometList(BId);
-			System.out.println(clist);
-			model.addAttribute("b", boardService.selectOneBoard(BId)).addAttribute("clist", clist);
-
-			System.out.println(BId);
-			System.out.println(boardService.selectOneBoard(BId));
-			System.out.println(model);
-			boardService.updateOneCount(BId);
-			return "board/boardview";
+        Board b = boardService.selectOneBoard(BId);	
+        System.out.println("Board:" + b);
+        if(b.getBCode() != 5 && b.getDelFlag().equals("N")) {
+				List<Coment> clist = comentService.selectCometList(BId);
+				boardService.updateOneCount(BId);
+				mv.addObject("b", b).addObject("clist", clist);
+				mv.setViewName("board/boardview");
+			} else {
+				mv.addObject("msg", "잘못된 게시물 요청입니다.").addObject("url", "/board/boardlist1.do");
+				mv.setViewName("common/redirect");
+			}
+      if(b.getRFlag().equals("Y")) {
+        if(m.getMtype().equals("A")){
+          List<Coment> clist = comentService.selectCometList(BId);
+          boardService.updateOneCount(BId);
+          mv.addObject("b", b).addObject("clist", clist);
+          mv.setViewName("board/boardview");
+        } else {
+          mv.addObject("msg", "관리자만 접근가능합니다.").addObject("url", "/board/boardlist1.do");
+          mv.setViewName("common/redirect");
+        }			
+      }
 		}
-		return "board/boardview";
-
-		
+		return mv;
 	}
 
 	/*
@@ -404,7 +422,7 @@ public class BoardController {
 			thumbnail = new ArrayList<String>();
 			comment = new ArrayList<Integer>();
       
-      param = new HashMap<String, Object>();
+			param = new HashMap<String, Object>();
 			param.put("bCode", 5);
 			param.put("type", type);
 			param.put("keyword", keyword);
@@ -570,29 +588,44 @@ public class BoardController {
 
 	// 이미지 게시물 불러오기
 	@RequestMapping("/board/adBoardView.do")
-	public ModelAndView adBoradView(@RequestParam int bid) {
+	public ModelAndView adBoradView(@RequestParam int bid, HttpSession session) {
 		ModelAndView mv = new ModelAndView();
-
-		try {
-			Board b = boardService.selectOneBoard(bid);
-			if(b.getRFlag().equals("N")) {
-				boardService.updateOneCount(bid);
-				List<Coment> clist = comentService.selectCometList(bid);
-				System.out.println(clist);
-				mv.addObject("b", b);
-				mv.addObject("clist", clist);
-				mv.setViewName("board/ad/adBoardView");
-			} else {
-				mv.addObject("loc", "/board/adBoard.go");
-				mv.addObject("msg", "신고된 게시물은 열람하실수 없습니다.");
+		Member m = (Member)session.getAttribute("member");
+		
+		if(m != null) {
+			try {
+				Board b = boardService.selectOneBoard(bid);
+				
+				if(b.getRFlag().equals("N") && b.getBCode()==5) {
+					boardService.updateOneCount(bid);
+					List<Coment> clist = comentService.selectCometList(bid);
+					String mtype = boardService.selectBoardMemberType(b.getMNo());
+					
+					System.out.println(clist);
+					mv.addObject("b", b);
+					mv.addObject("mtype", mtype);
+					mv.addObject("clist", clist);
+					mv.setViewName("board/ad/adBoardView");
+				} else if(b.getBCode()!=5) {
+					mv.addObject("loc", "/board/adBoard.go");
+					mv.addObject("msg", "잘못된 게시물 요청입니다.");
+					mv.setViewName("common/msg");
+				} else {
+					mv.addObject("loc", "/board/adBoard.go");
+					mv.addObject("msg", "신고된 게시물은 열람하실수 없습니다.");
+					mv.setViewName("common/msg");
+				}
+			} catch (Exception e) {
+				e.getStackTrace();
+				mv.addObject("msg", "게시물 불러오기에 실패하였습니다.");
+				mv.addObject("loc", "/");
 				mv.setViewName("common/msg");
 			}
-		} catch (Exception e) {
-			e.getStackTrace();
-			mv.addObject("msg", "게시물 불러오기에 실패하였습니다.");
-			mv.addObject("loc", "/");
+		} else {
+			mv.addObject("msg", "로그인 후 이용바랍니다.").addObject("loc", "/member/loginPage.go");
 			mv.setViewName("common/msg");
 		}
+		
 		return mv;
 	}
 

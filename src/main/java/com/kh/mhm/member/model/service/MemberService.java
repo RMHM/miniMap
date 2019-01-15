@@ -1,7 +1,6 @@
 package com.kh.mhm.member.model.service;
 
 import java.util.Date;
-import java.util.List;
 
 import com.kh.mhm.member.model.vo.Member;
 
@@ -10,6 +9,8 @@ public interface MemberService {
 	Member selectLogin(String mid);
 	
 	Member selectOne(String mid);
+	
+	Member selectOne(int mno);
 
 	int insertMember(Member member);
 
@@ -27,6 +28,6 @@ public interface MemberService {
 
 	int checkEmail(String email);
 
-	
+	int selectCheckLogin(String gEmail);
   
 }

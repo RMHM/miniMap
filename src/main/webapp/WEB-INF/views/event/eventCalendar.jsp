@@ -25,7 +25,9 @@
 		<div class="container">
 			<div class="col-md-10 col-md-offset-1" id='calDiv'>
 				<br>
-				<img src="/resources/img/loading.gif" id="loading" style="width : 250px;height : 250px;">
+				<div align=center>
+					<img src="/resources/img/loading.gif" id="loading" style="width : 250px;height : 250px;">
+				</div>
 				<div id='calendar'></div>
 			</div>
 		</div>

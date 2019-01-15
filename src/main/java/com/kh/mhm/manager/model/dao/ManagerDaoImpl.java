@@ -58,8 +58,13 @@ public class ManagerDaoImpl implements ManagerDao {
 	}
 
 	@Override
-	public int grantAuthority(String mnick) {
-		return sst.update("authority.grantAuthority", mnick);
+	public int grantAuthority(String mnick, int acode) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		
+		map.put("mnick", mnick);
+		map.put("acode", acode);
+		
+		return sst.update("authority.grantAuthority", map);
 	}
 
 	@Override
@@ -68,8 +73,14 @@ public class ManagerDaoImpl implements ManagerDao {
 	}
 
 	@Override
-	public int refuseAuthority(String mnick) {
-		return sst.update("authority.refuseAuthority", mnick);
+	public int refuseAuthority(String mnick, int acode) {
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		
+		map.put("mnick", mnick);
+		map.put("acode", acode);
+		
+		return sst.update("authority.refuseAuthority", map);
 	}
 
 	@Override

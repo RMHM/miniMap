@@ -16,6 +16,7 @@
 <link rel="stylesheet"
 	href="http://code.jquery.com/ui/1.10.2/themes/smoothness/jquery-ui.css">
 
+
 <style>
 body {
 	margin: 40px 10px;
@@ -42,8 +43,8 @@ body {
 		<div class="container">
 			<c:import url="../common/myPageNav.jsp" />
 			<div class="col-md-10">
-				<div style="position: relative; " id= "loadingdiv">
-				<img src="/resources/img/loading.gif" id="loading" style="width : 250px;height : 250px; align:center">
+        <div align="center" id= "loadingdiv">
+				<img src="/resources/img/loading.gif" id="loading" style="width : 250px;height : 250px;">
 				</div>
 				<div id='calendar'></div>
 
@@ -112,7 +113,6 @@ body {
 				</form>
 			</div>
 		</div>
-	</div>
 	</div>
 	<c:import url="../common/footer.jsp" />
 	<script src="/resources/js/myPage/myPageSchedule.js"></script>

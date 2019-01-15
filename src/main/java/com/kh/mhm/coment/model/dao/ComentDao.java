@@ -11,6 +11,7 @@ public interface ComentDao {
 	int insertComentReport(int cid);
 	int deleteComent(int cid);
 	int updateComent(Coment coment);
+	int countTotalComent(int bid);
 	Coment selectOneComent(int cid);
 	int insertComentContent2(Coment coment);
 	
