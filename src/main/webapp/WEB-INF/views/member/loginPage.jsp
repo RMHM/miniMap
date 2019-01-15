@@ -30,9 +30,9 @@
 								<input type="password" class="form-control" name="mpw" id="mpw" placeholder="비밀번호를 입력하세요">
 							</div>
 							<div class="text-center">
-								<input type="submit" value="로그인" id="btLogin" class="btn btn-theme">
+								<input type="submit" value="로그인" id="btLogin" class="btn btn-theme btn-large">
                             	<div class="g-signin2 btn" data-onsuccess="onSignIn" data-theme="dark">구글구글</div>
-								<input type="button" value="ID/PW 찾기" id="btFind" class="btn bnt-theme">
+								<input type="button" value="ID/PW 찾기" id="btFind" class="btn bnt-theme btn-large">
 							</div>
 						</form>
 					</div>

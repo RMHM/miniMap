@@ -66,8 +66,9 @@
 								onclick="location.href='${pageContext.request.contextPath}/board/adBoardRemove.do?bid=${b.BId }'">
 						</c:if>
 						<c:if test="${not empty member and member.mno ne b.MNo}">
-							<%-- <input type="button" id="btnReport" value="신고" class="btn btn-danger btn-large" onclick="report(${b.BId});"> --%>
-							<a id="report-modal" href="#report-modal-container" role="button" class="btn btn-danger btn-large" data-toggle="modal">신고하기</a>
+							<c:if test="${mtype ne 'A'}">
+								<a id="report-modal" href="#report-modal-container" role="button" class="btn btn-danger btn-large" data-toggle="modal">신고하기</a>
+							</c:if>
 						</c:if>
             <input type="button" class="btn btn-theme btn-large" onclick="history.back();" value="이전 항목으로" />
 					</div>
@@ -90,18 +91,20 @@
 											<!-- 아이디, 작성날짜 -->
 											<td width="10%">
 												<div>
-                          <c:if test="${Coment.clevel > 1}">
+                          						<c:if test="${Coment.clevel > 1}">
 													&nbsp;&nbsp;&nbsp;&nbsp; <!-- 답변글일경우 아이디 앞에 공백을 준다. -->                            
 	                         						<img alt="" src="/resources/img/re-reply.png">
-	             						            </c:if>
+             						            </c:if>
 													<b>${Coment.mnick }</b><br>												 
-                          <font size="2" color="gray">${Coment.cdate }</font>
-													<a id="report-modal" href="javascript:reportModal(${Coment.mno}, ${Coment.cid}, 'C')" style="color:red;font-size:2">신고</a>
+                          							<font size="2" color="gray">${Coment.cdate }</font>
+                          							<c:if test="${Coment.delFlag eq 'N' and Coment.rflag eq 'N' and Coment.mno ne member.mno}">
+                          								<a id="report-modal" href="javascript:reportModal(${Coment.mno}, ${Coment.cid}, 'C')" style="color:red;font-size:2">신고</a>
+                          							</c:if>
 													<!-- data-toggle="modal" role="button" -->
 												</div>
 											</td>
 											<!-- 본문내용 -->
-                      <td width="65%" <c:if test="${empty member or Coment.delFlag eq 'Y' or Coment.rflag eq 'Y'}">colspan=2</c:if><c:if test="${Coment.mno ne member.mno and Coment.clevel ne 1}">colspan=2</c:if>>
+                      						<td width="65%" <c:if test="${empty member or Coment.delFlag eq 'Y' or Coment.rflag eq 'Y'}">colspan=2</c:if><c:if test="${Coment.mno ne member.mno and Coment.clevel ne 1}">colspan=2</c:if>>
 												<div class="text_wrapper">
 													<p>
 														<c:choose>
@@ -173,13 +176,13 @@
 													</div>
 												</td>
 												<!-- 본문 작성-->
-                        <td width="60%">
+                        						<td width="60%">
 													<div>
 														<textarea id="cContent" name="cContent"></textarea>
 													</div>
 												</td>
 												<!-- 댓글 등록 버튼 -->
-                        <td width="">
+                        						<td width="">
 													<div id="btn" style="text-align: center;">
 														<input type="submit" class='btn btn-submit' value="댓글등록" id="addReply">
 														
@@ -206,63 +209,6 @@
 		
 		<c:import url="/WEB-INF/views/common/footer.jsp"/>
 	</div>
-	
-	<!--Modal -->
-	<form id ="insertReport"  method="post" >
-	<%-- <form id ="insertReport"  action="${pageContext.request.contextPath}/report/insertReport.do" method="post" > --%>
-		<div class="modal fade" id="report-modal-container" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-			<div class="modal-dialog" role="document">
-				<div class="modal-content">
-					<div class="modal-header">
-						<h5 class="modal-title" id="myModalLabel">게시물을 신고하시겠습니까?</h5> 
-						<button type="button" class="close" data-dismiss="modal">
-							<span aria-hidden="true">×</span>
-						</button>
-					</div>
-					
-					<div class="modal-body">
-						<div>
-							<input type="hidden" id = "targetId" name = "target_id" value="" />
-							<input type="hidden" name = "report_mno" value="${member.mno}"  />
-						</div>
-						<div class="modal-body">
-							<div class = "modal-content">
-							<label >신고  대상  </label></div>
-							<div class = "modal-content">
-							<input type="radio" name="target_type" value = "M" /><label>&nbsp;작성자</label>&nbsp;
-							<input type="radio" name="target_type" value = "B" /><label>&nbsp;게시글</label>
-							</div>
-						</div>
-						<div class="modal-body">
-							<div class = "modal-content">
-							<label >신고  사유 : </label></div>
-							<div class = "modal-content">
-							<input type="radio" name="rcode" value = "1" /><label>욕설</label>
-							<input type="radio" name="rcode" value = "2" /><label>도배</label>
-							<input type="radio" name="rcode" value = "3" /><label>사칭</label>
-							<input type="radio" name="rcode" value = "4" /><label>비방</label>
-							<input type="radio" name="rcode" value = "5" /><label>조작</label>
-							<input type="radio" name="rcode" value = "6" /><label>기타</label>
-							</div>
-						</div>
-						<div class="modal-body">
-							<div class = "modal-content">
-								<label>세부 내용: </label>
-							</div>
-							<div class = "modal-content">
-								<textarea name="rdetail" id="rdetail"  rows="10"style="width:100%; height:100%;"></textarea>
-							</div>
-						</div>
-					</div>
-					<div class="modal-footer">				 
-						<input type="button" value="신고하기" class="btn" id="reportbtn" data-dismiss="" onclick="report(${b.MNo}, ${b.BId});">
-						<input type="button" id="btnCancel" value="취소" class="btn btn-secondary" data-dismiss="modal">
-					</div>
-				</div>
-			</div>
-		</div>	
-	</form>
-	
 </body>
 <script src="/resources/js/board/adBoardView.js"></script>
 </html>

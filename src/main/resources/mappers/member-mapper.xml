@@ -141,4 +141,7 @@
 		where mno = #{mno}
 	</update>
 	
+	<select id="selectOneMno" parameterType="_int" resultMap="memberMap">
+		select * from member where mno = #{mno}
+	</select>
 </mapper>

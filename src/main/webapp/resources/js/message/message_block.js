@@ -15,10 +15,10 @@ $("input[name^=index_]").click(function(){
 function deleteBlock(){
 	var arr=new Array();
 	var idx=0;
-	$("#chk :checked").each(function(){
+	$(".chk :checked").each(function(){
 		arr[idx++]=($(this).parent().siblings('.blocknick').text());
 	});
-	var mId=$('#mid').text()*1;
+	var mNo=$('#mid').text()*1;
 	
 	$.ajax({
 		url : '/message.unblock',
@@ -26,10 +26,10 @@ function deleteBlock(){
 	    traditional:true,
 	    data : {
 	    	'arr':arr,
-	    	'mId':mId
+	    	'mNo':mNo
 	    },
 	    success : function(data) {
-	    	alert('쪽지를 성공적으로 삭제했습니다!');
+	    	alert('차단을 해제했습니다.');
 	    	window.location.href ="/popUp.inbox";
 	    },
 	    error : function() {
@@ -38,22 +38,10 @@ function deleteBlock(){
 	});
 }
 
-function deleteBlock() {
-	var fmObj = document.getElementById("fmNoteData");
-	if (!anyChecked(fmObj, "idx_")) { alert("차단 해제할 유저를 선택해 주세요"); return; }
-
-	var ans = confirm("선택된 유저를 차단 해제하시겠습니까?");
-	if (!ans) return;
-
-	fmObj.action = 'http://www.inven.co.kr/member/note/block_delete.php';
-	fmObj.set.value = 'delete';
-	fmObj.submit();
-}
-
 function blockMessage(){
 	var popUrl = "/block.member";
 
-	var popOption = "width=375, height=265, resizable=no, scrollbars=no, status=no;";
+	var popOption = "width=375, height=185, resizable=no, scrollbars=no, status=no; fullscreen=no; tollbar=no; menubar=no;";
 
 	window.open(popUrl, "", popOption);
 }

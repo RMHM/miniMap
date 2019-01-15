@@ -39,11 +39,14 @@
 	<div id="wrapper">
 		<!-- header 선언 -->
 		<c:import url="../common/header.jsp" />
+		<img src="/resources/img/weather/sun.PNG" alt="" width="10px" height="10px" id="sun"/>마이페이지
+		<hr/>
 		<div class="container">
+		
 			<c:import url="../common/myPageNav.jsp" />
-<hr/>
 
-<img src="/resources/img/weather/sun.PNG" alt="" width="10px" height="10px" id="sun"/>
+
+
 
 
 			<div class="col-md-10">

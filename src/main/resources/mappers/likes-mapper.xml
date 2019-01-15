@@ -12,7 +12,7 @@ INSERT INTO LIKES
 SELECT SEQ_LID.NEXTVAL,#{target_bid},#{like_mno},SYSDATE
 FROM DUAL 
 WHERE NOT EXISTS(
-SELECT * FROM REPORT WHERE TARGET_ID=#{target_bid} AND REPORT_MNO=#{like_mno})
+SELECT * FROM LIKES WHERE TARGET_BID=#{target_bid} AND LIKE_MNO=#{like_mno})
 	</insert>
 	
 </mapper>
