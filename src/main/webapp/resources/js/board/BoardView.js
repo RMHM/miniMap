@@ -33,10 +33,14 @@ function updateConfirm(obj, bid, bCode) {
 
 
 function deleteReply(obj, bid, bCode) {
-	// 댓글의 번호 가져오기
-	var cid = $(obj).siblings('input').val();
+	// 댓글의 번호 가져오기	
+	if (confirm("정말 삭제하시겠습니까?") == true){    //확인
+		var cid = $(obj).siblings('input').val();
 
-	location.href = "/coment/comentDelete.do" + "?cid=" + cid + "&bCode=" + bCode
+		location.href = "/coment/comentDelete.do" + "?cid=" + cid + "&bCode=" + bCode
+	}else{   //취소
+	    return;
+	}
 }
 
 function reComment(obj, bid, bcode, mnick, mno, cid, clevel) {	

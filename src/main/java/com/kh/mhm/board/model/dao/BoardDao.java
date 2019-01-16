@@ -12,7 +12,7 @@ public interface BoardDao {
 	
 	// 1= 자유 2= 정보 3= 질문 4= 후기 게시판 리스트 출력
 	
-	List<Map<String, String>> selectBoardList1(int cPage, int numPerPage);
+	List<Board> selectBoardList1(int cPage, int numPerPage);
 	
 	List<Board> selectSearchList1(String keyfield, String keyword);
 	
@@ -22,7 +22,7 @@ public interface BoardDao {
 
 	int selectBoardTotalContents1();
 	
-	List<Map<String, String>> selectBoardList2(int cPage, int numPerPage);
+	List<Board> selectBoardList2(int cPage, int numPerPage);
 	
 	List<Board> selectSearchList2(String keyfield, String keyword);
 	
@@ -32,7 +32,7 @@ public interface BoardDao {
 
 	int selectBoardTotalContents2();
 	
-	List<Map<String, String>> selectBoardList3(int cPage, int numPerPage);
+	List<Board> selectBoardList3(int cPage, int numPerPage);
 	
 	List<Board> selectSearchList3(String keyfield, String keyword);
 	
@@ -42,7 +42,7 @@ public interface BoardDao {
 
 	int selectBoardTotalContents3();
 	
-	List<Map<String, String>> selectBoardList4(int cPage, int numPerPage);
+	List<Board> selectBoardList4(int cPage, int numPerPage);
 	
 	List<Board> selectSearchList4(String keyfield, String keyword);
 	
