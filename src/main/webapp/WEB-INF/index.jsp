@@ -58,8 +58,11 @@
 		
 		<h3 align='center'>실시간 타임라인</h3>
 		<section class="callaction" style="height:270px !important;">
-			<div class="box" id="siltaja" name="siltaja"></div>
-			<div id="letustl" style='position:absolute !important; right:150px !important;'>
+			<div class='col-lg-6'>
+				<div class="box" id="siltaja" name="siltaja"></div>
+			</div>
+			<div class='col-lg-6'>
+				<div id="letustl" style='position:absolute !important; right:30% !important;'>
 				<h5 id='letTxt' style='line-height:1.7em;'>
 					타임라인에서 다른 여행객들과 실시간으로 정보를 공유해보세요!<br>
 					고기국수는 어디가 맛있을까요?<br>
@@ -68,6 +71,7 @@
 					지금 타임라인을 이욯하세요!<br>
 				</h5>			
 				<button id="tlBtn" onclick="window.location.href='/echo.do'">타임라인 이용하기</button>
+				</div>
 			</div>
 		</section>
 		
