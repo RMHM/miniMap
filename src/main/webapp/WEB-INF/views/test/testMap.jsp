@@ -785,10 +785,10 @@
 		setInfowidow(null);
 		//infowindow2.close();   
 	}
-	var userId = ${member.mid};
+	//var userId = ${member.mid};
 	// 되돌리기
 	$('#btBack').click(function() {
-		console.log(userId);
+		//console.log(userId);
 		hideMarkers();
 		markersPersonal.pop();
 		infowPersonal.pop();

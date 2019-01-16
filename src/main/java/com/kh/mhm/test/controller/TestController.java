@@ -8,7 +8,13 @@ public class TestController {
 
 	@RequestMapping("/test/testMap.do")
 	public String map() {
+	//	return "test/NewFile";
 		return "test/testMap";
+	}
+	@RequestMapping("/test/NewFile.do")
+	public String NewFile() {
+		//	return "test/NewFile";
+		return "test/NewFile";
 	}
 
 	
