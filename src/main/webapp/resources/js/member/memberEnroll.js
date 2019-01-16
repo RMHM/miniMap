@@ -14,7 +14,7 @@ $(function() {
 
 		} else {
 			console.log('false');
-			$('#id_check').text('숫자, 영문 혼용 6자이상 입력');
+			$('#id_check').text('숫자, 대소문자 사용 가능');
 			$('#id_check').css('color', 'green');
 		}
 	});
@@ -64,7 +64,7 @@ $(function() {
 });
 
 	/* 비밀번호 유효성 검사 */
-	var pw = /(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[~!@#$%^&*()-_=+]).{6,15}/
+	var pw = "/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&]{6,}"
 	
 	$("#mpw_").blur(function() {
 		console.log(pw);
@@ -74,7 +74,7 @@ $(function() {
 			$('#pw_check').text('');
 		} else {
 			console.log('false');
-			$('#pw_check').text('최소 1개씩의 숫자,영문 특수문자를 포함.');
+			$('#pw_check').text('최소 1개씩의 숫자, 대소문자 구분 입력');
 			$('#pw_check').css('color', 'green');
 		}
 	});
@@ -116,7 +116,7 @@ $(function() {
 		console.log(mpw);
 	});
 
-	var pw = /(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,15}/
+	var pw = /(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}/
 	
 	$("#mpw2").blur(function() {
 		console.log(pw);
@@ -126,7 +126,7 @@ $(function() {
 			$('#pw2_check').text('');
 		} else {
 			console.log('false');
-			$('#pw2_check').text('위에 입력한 비밀번호와 일치하여 입력.');
+			$('#pw2_check').text('위에 입력한 비밀번호와 일치하여 입력');
 			$('#pw2_check').css('color', 'green');
 		}
 	});
@@ -240,7 +240,7 @@ $(function() {
 			$('#nick_check').text('');
 		} else {
 			console.log('false');
-			$('#nick_check').text('최소 1개의 숫자, 알파벳, 한글만 포함.');
+			$('#nick_check').text('최소 1개의 숫자, 영문, 한글 입력');
 			$('#nick_check').css('color', 'green');
 		}
 	});
@@ -295,7 +295,7 @@ $(function() {
 			$('#email_check').text('');
 		} else {
 			console.log('false');
-			$('#email_check').text("특수문자, 한글 제외 입력.");
+			$('#email_check').text("특수문자, 한글 제외 입력");
 			$('#email_check').css('color', 'green');
 		}
 	});

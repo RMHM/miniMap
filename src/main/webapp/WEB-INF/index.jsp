@@ -45,31 +45,31 @@
 								<li><img src="resources/img/index/jeju5.jpg" alt="" height="380" />
 								<div class="flex-caption"><h4>제주도 여행 준비하기</h4>
 								<p>사전 준비와 계획을 안내 해드립니다.</p>
-								<a href="board/boardlist2.do" class="btn btn-theme">더 자세한 정보를 알고 싶다면?</a>
+								<a href="board/boardlist3.do" class="btn btn-theme">더 자세한 정보를 알고 싶다면?</a>
 								</div>
 								</li>
 								<li><img src="resources/img/index/jeju3.gif" alt="" height="380" />
 								<div class="flex-caption"><h4>일별 여행 코스는?</h4>
 								<p>일별로 일정을 안내 해드립니다.</p>
-								<a href="#" class="btn btn-theme">더 자세한 정보를 알고 싶다면?</a>
+								<a href="board/boardlist2.do" class="btn btn-theme">더 자세한 정보를 알고 싶다면?</a>
 								</div>
 								</li>
 								<li><img src="resources/img/index/jeju4.jpg" alt="" height="380" />
 								<div class="flex-caption"><h4>제주도에도 사파리가 있나?</h4>
 								<p>관련 여행지를 안내 해드립니다.</p>
-								<a href="#" class="btn btn-theme">더 자세한 정보를 알고 싶다면?</a>
+								<a href="board/boardlist2.do" class="btn btn-theme">더 자세한 정보를 알고 싶다면?</a>
 								</div>
 								</li>
 								<li><img src="resources/img/index/jeju.jpg" alt="" height="380" />
 								<div class="flex-caption"><h4>제주도엔 뭐가 있지?</h4>
 								<p>추천 여행지를 안내 해드립니다.</p>
-								<a href="#" class="btn btn-theme">더 자세한 정보를 알고 싶다면?</a>
+								<a href="board/boardlist2.do" class="btn btn-theme">더 자세한 정보를 알고 싶다면?</a>
 								</div>
 								</li>
 								<li><img src="resources/img/index/jeju6.jpg" alt="" height="380" />
 								<div class="flex-caption"><h4>박물관은 살아있다</h4>
 								<p>살아 있을까요 죽었을까요?</p>
-								<a href="#" class="btn btn-theme">더 자세한 정보를 알고 싶다면?</a>
+								<a href="board/boardlist2.do" class="btn btn-theme">더 자세한 정보를 알고 싶다면?</a>
 								</div>
 								</li>
 								
