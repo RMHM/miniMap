@@ -22,7 +22,7 @@ public class BoardServiceImpl implements BoardService {
 	BoardDao boardDao;
 
 	@Override
-	public List<Map<String, String>> selectBoardList1(int cPage, int numPerPage) {		
+	public List<Board> selectBoardList1(int cPage, int numPerPage) {		
 		return boardDao.selectBoardList1(cPage, numPerPage);
 	}	
 	@Override
@@ -50,7 +50,7 @@ public class BoardServiceImpl implements BoardService {
 	
 	
 	@Override
-	public List<Map<String, String>> selectBoardList2(int cPage, int numPerPage) {		
+	public  List<Board> selectBoardList2(int cPage, int numPerPage) {		
 		return boardDao.selectBoardList2(cPage, numPerPage);
 	}	
 	@Override
@@ -78,7 +78,7 @@ public class BoardServiceImpl implements BoardService {
 	}
 	
 	@Override
-	public List<Map<String, String>> selectBoardList3(int cPage, int numPerPage) {		
+	public  List<Board> selectBoardList3(int cPage, int numPerPage) {		
 		return boardDao.selectBoardList3(cPage, numPerPage);
 	}	
 	@Override
@@ -105,7 +105,7 @@ public class BoardServiceImpl implements BoardService {
 	}	
 	
 	@Override
-	public List<Map<String, String>> selectBoardList4(int cPage, int numPerPage) {		
+	public  List<Board> selectBoardList4(int cPage, int numPerPage) {		
 		return boardDao.selectBoardList4(cPage, numPerPage);
 	}	
 	@Override

@@ -31,7 +31,7 @@ public class BoardDaoImpl implements BoardDao {
 	}*/
 	
 	@Override
-	public List<Map<String, String>> selectBoardList1(int cPage, int numPerPage) {
+	public List<Board> selectBoardList1(int cPage, int numPerPage) {
 		RowBounds rowBounds = new RowBounds((cPage-1)*numPerPage, numPerPage);	
 		return sqlSession.selectList("board.selectBoardList1",null,rowBounds);
 	}
@@ -70,7 +70,7 @@ public class BoardDaoImpl implements BoardDao {
 	}
 	
 	@Override
-	public List<Map<String, String>> selectBoardList2(int cPage, int numPerPage) {
+	public List<Board> selectBoardList2(int cPage, int numPerPage) {
 		RowBounds rowBounds = new RowBounds((cPage-1)*numPerPage, numPerPage);	
 		return sqlSession.selectList("board.selectBoardList2",null,rowBounds);
 	}
@@ -110,7 +110,7 @@ public class BoardDaoImpl implements BoardDao {
 	
 	
 	@Override
-	public List<Map<String, String>> selectBoardList3(int cPage, int numPerPage) {
+	public List<Board> selectBoardList3(int cPage, int numPerPage) {
 		RowBounds rowBounds = new RowBounds((cPage-1)*numPerPage, numPerPage);	
 		return sqlSession.selectList("board.selectBoardList3",null,rowBounds);
 	}
@@ -149,7 +149,7 @@ public class BoardDaoImpl implements BoardDao {
 	}
 	
 	@Override
-	public List<Map<String, String>> selectBoardList4(int cPage, int numPerPage) {
+	public List<Board> selectBoardList4(int cPage, int numPerPage) {
 		RowBounds rowBounds = new RowBounds((cPage-1)*numPerPage, numPerPage);	
 		return sqlSession.selectList("board.selectBoardList4",null,rowBounds);
 	}
