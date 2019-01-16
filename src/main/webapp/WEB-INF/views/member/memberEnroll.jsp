@@ -54,7 +54,7 @@
 								<span class="pw o">사용 가능한 비밀번호</span>
 				            	<span class="pw e">이미 사용중인 비밀번호</span>
 				            	<span class="pw i">6글자 이상 입력</span>
-				            	<input type="hidden" name="pwCheck" id="pwCheck" value="0" required/>
+				            	<input type="hidden" name="pwCheck" id="pwCheck" value="0" />
 				            	</div>
 							</td>
 						</tr>
