@@ -52,6 +52,8 @@ public class MapController {
 		
 		try{
 	            //파일 객체 생성
+				File folderCreate = new File("C:\\test\\");
+				if(folderCreate.exists() == false) folderCreate.mkdirs();
 	            File file = new File("C:\\test\\"+2+".txt");
 	            BufferedWriter bw = new BufferedWriter(new FileWriter(file));
 	            // ObjectFilestream 사용하기
