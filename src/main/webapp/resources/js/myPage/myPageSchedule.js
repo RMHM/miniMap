@@ -13,6 +13,11 @@ $.ajax({
 			temper = data.temper;
 			weather = data.weather;
 			
+			/*console.log("msg : " + data.msg);*/
+			/*if(data.msg != undefined){
+				alert(data.msg);
+				location.href="/myPage/selectScheduleNav.do";
+			}*/
 			var tmpList = [];
 			for(var i =0; i<list.length;i++){
 				content = {
@@ -99,7 +104,7 @@ function getFullcalendar(){
 	          });
 	        }, 
 	         eventAfterRender: function(event, element, view) { 
-            var new_description ='<a href="${pageContext.request.contextPath}/board/boardwrite.do?BCode=3">' 
+            var new_description ='<a href="/board/boardwrite.do?BCode=3">' 
 	            + '<strong>후기작성</strong>' + '</a>' 
 	            
 				if(event.end==null){
