@@ -50,3 +50,6 @@
 <script src="/resources/js/billboard.js"></script>
 <!-- message notice js -->
 <script src="/resources/js/message/notice.js"></script>
+<link rel="stylesheet" href="/resources/css/jquery.flipbox.css">
+<script src="/resources/js/jquery.flipbox.js"></script>
+

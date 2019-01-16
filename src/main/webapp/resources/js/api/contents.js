@@ -204,6 +204,7 @@ function getFullcalendar(evt){
 	});
 }
 
+// 기온 가져오기
 function getTemp(){
 	var date = $("#calendar").fullCalendar("getDate");
 	var year = new Date(date).getFullYear();

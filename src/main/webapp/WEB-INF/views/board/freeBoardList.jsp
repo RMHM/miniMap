@@ -24,7 +24,8 @@
 				<h4>--게시판 목록--</h4>
 				<ul class="unstyled">
 					<br>
-					<li><a href="/board/boardlist1.do">자유 게시판</a></li><br>
+					<!-- <li><a href="/board/boardtest.do" style="color:#8A0829">테스트 게시판</a></li><br> -->
+         			<li><a href="/board/boardlist1.do" style="color:#8A0829">자유 게시판</a></li><br>
 					<li><a href="/board/boardlist2.do">정보공유 게시판</a></li><br>
 					<li><a href="/board/boardlist3.do">여행후기 게시판</a></li><br>
 					<li><a href="/board/boardlist4.do">질문 게시판</a></li>
@@ -33,8 +34,8 @@
 			<div class="col-md-10">
 				<div class="ad">
 					<div class="ad">						
-						<div class="ad caption">
-						<!-- <img src="/resources/img/adtest.png" style='max-width:100%; max-height:100%; margin:auto; display:block;' alt=""> -->							
+						<div class="ad caption">            		 
+						<img src="/resources/img/boardlistad.png" style="" alt="" /></a>
 						</div>
 					</div>
 				</div>
@@ -57,7 +58,7 @@
 								<tbody>							
 					
 								<c:forEach var="Board" items="${list2 }"> <!-- 공지 게시글 페이지 -->
-									<tr name="BId" id="${Board.BId }" style="background-color: #CEECF5;">									
+									<tr name="BId" id="${Board.BId }" style="background-color: #CEECF5; cursor:pointer">									
 									   <td align="center"><c:out value="${Board.BNo }"/></td>
                      				   <td><c:out value="공지"/></td>
                      				   <td></td>
@@ -68,7 +69,7 @@
 									</tr>
 								</c:forEach>								
 								<c:forEach var="Board" items="${list3 }"> <!-- 베스트 게시글 페이지 -->
-									<tr name="BId" id="${Board.BId }" style="background-color: #E0F8F7;">									
+                  <tr name="BId" id="${Board.BId }" style="background-color: #E0F8F7; cursor:pointer">
 									   <td align="center"><c:out value="${Board.BNo }"/></td>
                      				   <td><c:out value="Best"/></td>
                      				   <td></td>
@@ -82,15 +83,15 @@
 								<c:forEach var="Board" items="${list }"> <!-- 일반 게시글 페이지 -->
 								<c:choose>	
 								<c:when test="${Board.RFlag eq 'Y' and member.mtype eq 'A' }">
-								<tr name="BId" id="${Board.BId }" style="background-color: lightgray;">
-                     				   <td align="center"><c:out value="${Board.BNo }"/></td>
-                     				   <td><c:out value="일반"/></td>
-                     				   <td></td>
-                  				       <td>신고된 게시글입니다.</td>                  				       
-               				           <td align="center"><c:out value="${Board.mnick}"/></td>
-               				           <td align="center"><c:out value="${Board.BCount }"/></td>
-                			           <td><c:out value="${Board.BDate}"/></td>
-                    				</tr>								
+                  <tr name="BId" id="${Board.BId }" style="background-color: lightgray; cursor:pointer">
+                     <td align="center"><c:out value="${Board.BNo }"/></td>
+                     <td><c:out value="일반"/></td>
+                     <td></td>
+                       <td>신고된 게시글입니다.</td>                  				       
+                       <td align="center"><c:out value="${Board.mnick}"/></td>
+                       <td align="center"><c:out value="${Board.BCount }"/></td>
+                       <td><c:out value="${Board.BDate}"/></td>
+                  </tr>								
 								</c:when>
 								<c:when test="${Board.RFlag eq 'Y' }">
 								<tr <%--  name="BId" id="${Board.BId }" --%> style="background-color: lightgray;">
@@ -105,17 +106,17 @@
 								</c:when>
 								
 								<c:otherwise>																				
-									<tr name="BId" id="${Board.BId }" style="background-color: #EFF8FB;">
-                     				   <td align="center"><c:out value="${Board.BNo }"/></td>
-                     				   <td><c:out value="일반"/></td>
-                     				   <td></td>
-                  				       <td><c:out value="${Board.BTitle }"/></td>                  				       
-               				           <td align="center"><c:out value="${Board.mnick}"/></td>
-               				           <td align="center"><c:out value="${Board.BCount }"/></td>
-                			           <td><c:out value="${Board.BDate}"/></td>
-                    				</tr>
-                    			</c:otherwise>		
-                    			</c:choose>	
+                  <tr name="BId" id="${Board.BId }" style="background-color: #EFF8FB; cursor:pointer">
+                       <td align="center"><c:out value="${Board.BNo }"/></td>
+                       <td><c:out value="일반"/></td>
+                       <td></td>
+                         <td><c:out value="${Board.BTitle }"/></td>                  				       
+                         <td align="center"><c:out value="${Board.mnick}"/></td>
+                         <td align="center"><c:out value="${Board.BCount }"/></td>
+                         <td><c:out value="${Board.BDate}"/></td>
+                    </tr>
+                  </c:otherwise>		
+                  </c:choose>	
 								</c:forEach>
 														
 								</tbody>
@@ -140,7 +141,7 @@
               						 <option value="BContent" <c:if test="${'BContent'==keyField }"> selected</c:if>> 내용 </option>
            						 </select>
                 					 <input type="text" size="16" name="keyWord" value="${keyWord }">
-                					 <input type="submit" class="btn btn-info" value="검색" onClick="check()">           						
+                					 <input type="button" class="btn btn-info" value="검색" onClick="check()">           						
 
 								</form>
 							</div>
@@ -167,10 +168,13 @@ $(function(){
 function check() {
     if (document.search.keyWord.value == "") {
         alert("검색어를 입력하세요.");
-        document.search.keyWord.focus();
         return;
+        document.search.keyWord.focus();
+        
+    }else {
+    	document.search.submit();
     }
-    document.search.submit();
+    
 }
 
 

@@ -250,7 +250,7 @@ public class MessageController {
 	@RequestMapping("/message/message.reject")
 	public String rejectMHM(@RequestParam("content") String content, @RequestParam("mnick") String mnick, Model model) {
 		String title="[MHM] 요청해주신 권한이 거절 되었습니다.";
-		System.out.println("MSG사유 : " + content);
+    System.out.println("MSG사유 : " + content);
 		MessageSmpl message=new MessageSmpl(1, mnick, title, content);
 		int result=ms.sendMessage(message);
 		String msg = "요청 거부에 대한 쪽지 전송이 완료 되었습니다.";

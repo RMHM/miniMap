@@ -34,6 +34,12 @@
 		<result column="JOIN_DATE" property="joinDate" javaType="java.sql.Date" jdbcType="DATE" />
 		<result column="DROP_DATE" property="dropDate" javaType="java.sql.Date" jdbcType="DATE" />
 	</resultMap>
+	
+	<resultMap type="CompanyMember" id="compMemberMap">
+		<result column="JOIN_DATE" property="joinDate" javaType="java.sql.Date" jdbcType="DATE" />
+		<result column="DROP_DATE" property="dropDate" javaType="java.sql.Date" jdbcType="DATE" />
+		<result column="GRANT_COUNT" property="grantCount" />
+	</resultMap>
 
 	<insert id="insertMember" parameterType="Member">
 		insert into member
@@ -103,10 +109,19 @@
 		order by mno
 	</select>
 
-	<select id="selectCompanyMember" resultMap="memberMap">
-		select mno, mid, mname, email, gender, age, join_date, drop_date from member
+	<select id="selectCompanyMember" resultMap="compMemberMap">
+		<!-- select mno, mid, mname, email, gender, age, join_date, drop_date from member
 		where mtype = 'C'
-		order by mno
+		order by mno -->
+		select m.mno, m.mid, m.mname, m.email, m.gender, m.age, m.join_date, m.drop_date, 
+        delflag, count(grant_date) grant_count
+		from member m
+		full outer join authority a on (m.mno = a.mno)
+		where mtype = 'C'
+		group by m.mno, m.mid, m.mname, m.email, m.gender, 
+		m.age, m.join_date, m.drop_date, delflag
+		order by m.mno
+		
 	</select>
 
 	<select id="selectBlackMember" resultMap="BlackListMap">
@@ -143,5 +158,9 @@
 	
 	<select id="selectOneMno" parameterType="_int" resultMap="memberMap">
 		select * from member where mno = #{mno}
+	</select>
+  
+  <select id="selectCheckLogin" parameterType="string" resultType="_int">
+		select count(*) from member where email like #{gEmail} and mid not like #{gEmail}
 	</select>
 </mapper>

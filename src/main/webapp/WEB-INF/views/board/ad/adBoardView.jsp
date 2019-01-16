@@ -75,7 +75,7 @@
 				</div>
 				
 				<textarea id="content" style="display: none;">${b.BContent}</textarea>
-				<div id="BContent" style="width: 100%; height: auto; background-color: aliceblue; overflow:hidden"> ${b.BContent}</div>
+				<div id="BContent" style="width: 100%; height: auto; min-height: 500px; background-color: aliceblue; overflow:hidden"> ${b.BContent}</div>
 				&nbsp;&nbsp;&nbsp;
 								
 				<div class="replyArea">

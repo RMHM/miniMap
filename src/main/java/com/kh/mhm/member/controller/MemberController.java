@@ -2,13 +2,7 @@ package com.kh.mhm.member.controller;
 
 import java.io.File;
 import java.io.IOException;
-import java.io.InputStream;
-import java.net.MalformedURLException;
 import java.net.URL;
-import java.net.URLEncoder;
-import java.nio.file.Files;
-import java.nio.file.Paths;
-import java.nio.file.StandardCopyOption;
 import java.text.SimpleDateFormat;
 import java.util.HashMap;
 import java.util.Map;
@@ -290,7 +284,6 @@ public class MemberController {
 		return mv;
 	}
   
-
 	@RequestMapping("/member/memberView.do")
 	public String memberView(@RequestParam String mid) {
 
@@ -322,8 +315,7 @@ public class MemberController {
 				
 		return map;
 	}
-		
-	
+			
 	@ResponseBody
 	@RequestMapping(value = "/member/checkNick.do")
 	public Map<String, Object> checkNick(@RequestParam String mnick) {
@@ -350,29 +342,45 @@ public class MemberController {
 		return map;
 	}
 	
-	@RequestMapping(value = "/member/googleLogin")
-	public Object googleLogin(@RequestParam String gEmail, @RequestParam String gName, @RequestParam String gImg) {
+  /*@RequestMapping(value = "/member/googleLogin", method = RequestMethod.POST)
+	public Object googleLogin(@RequestParam String name, @RequestParam String img, @RequestParam String email) {
 		ModelAndView mv = new ModelAndView();
 		Member m = null;
 		Object result = null;
+		
 		try {
-			m = ms.selectLogin(gEmail);
-			
-			if(m!=null) {
-				mv.addObject("msg", "로그인 되었습니다.").addObject("loc", "/").addObject("member", m);
-				mv.addObject("parent", "/");
+			if(ms.selectCheckLogin(email) != 0) {
+				mv.addObject("msg", "해당 이메일은 이미 가입되어있습니다.").addObject("loc", "/member/loginPage.go");
 				mv.setViewName("common/msg");
 			} else {
-				mv.addObject("gEmail", gEmail).addObject("gName", gName).addObject("gImg", gImg);
-				mv.setViewName("member/googleSignUp");
+				m = ms.selectLogin(email);
+				
+				if(m!=null) {
+					mv.addObject("msg", "로그인 되었습니다.").addObject("loc", "/").addObject("member", m);
+					mv.setViewName("common/msg");
+				} else {
+					mv.addObject("gEmail", email).addObject("gName", name).addObject("gImg", img);
+					Member signup = new Member();
+					signup.setMid(email);
+					signup.setMpw("임시");
+					signup.setMname(name);
+					signup.setMnick("임시");
+					signup.setMtype("M");
+					signup.setEmail(email);
+					signup.setGender("M");
+					signup.setAge(10);
+					signup.setProfilePath("");
+					mv.setViewName("member/googleSignUp");
+				}
 			}
 			result = mv;
 		} catch(Exception e) {
 			e.getStackTrace();
 		}
-		System.out.println(result);
+  
+  
 		return result;
-	}
+	}*/
 	
 	
 }

@@ -30,14 +30,14 @@
 		where mno = #{mno} and acode = #{acode} and grant_date is null
 	</select>
 	
-	<update id="grantAuthority" parameterType="string">
+	<update id="grantAuthority" parameterType="hashmap">
 		update authority a set atake = 'Y', grant_date = sysdate
-		where mno = (select mno from member where mnick = #{mnick})
+		where mno = (select mno from member where mnick = #{mnick}) and acode = #{acode}
 	</update>
 	
-	<update id="refuseAuthority" parameterType="string">
+	<update id="refuseAuthority" parameterType="hashmap">
 		update authority set delflag = 'Y'
-		where mno = (select mno from member where mnick = #{mnick})
+		where mno = (select mno from member where mnick = #{mnick}) and acode = #{acode}
 	</update>
 	
 </mapper>

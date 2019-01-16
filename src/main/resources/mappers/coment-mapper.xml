@@ -14,6 +14,11 @@
 		SELECT * FROM COMENT WHERE CID = #{cId}  
 	</select>
 	
+	<select id="selectTotalComent" resultType="_int">
+		SELECT COUNT(*)
+		FROM COMENT WHERE BID=#{bid}
+	</select>
+	
 	<insert id="insertComent" parameterType="Coment">
 		INSERT INTO COMENT VALUES 
 		(SEQ_CID.NEXTVAL, #{bid}, #{mno}, #{ccontent}, SYSDATE, #{clevel}, DEFAULT, DEFAULT, DEFAULT )
