@@ -84,7 +84,7 @@
 	<div class="row">
 		<div class="col-md-2"align="center">
 				<br><br>
-				<h4>--게시판 목록--</h4>
+				<h4>게시판 목록</h4>
 				<ul class="unstyled">
 					<br>
 					<li><a href="/board/boardlist1.do">자유 게시판</a></li><br>

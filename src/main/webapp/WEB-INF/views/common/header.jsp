@@ -15,10 +15,7 @@
                       <span class="icon-bar"></span>
                   </button>
 				<a class="navbar-brand" href="/">
-				<img src="resources/img/mhm_header2.png" style="width:200; height:200%" alt="" />
-				<img src="/resources/img/mhm_logo.png" style="width:120px;" alt="" /></a>
-				
-
+				<img src="/resources/img/mhm_logo.png" style="width:120px;" alt="" /></a>			
 			</div>
 			<div class="navbar-collapse collapse" style="max-height:500px">
 				<input type="hidden" id="hdnSession" data-value="${member.mno}" />
