@@ -88,13 +88,12 @@ $(document).ready(function() {
 		success : function(data) {
 			$.each(data, function(i) {
 				var dataList = data[i];
-				console.log(dataList);
-				var showTL = "<div class='side side'>";
+				var showTL = "<div class='col-lg-12'>";
 				showTL += "<img src='/resources/img/profiles/"
 							+ dataList.profile_path + "' style='position:absolute; width:150px; height:150px; left:30px; top:20px;'/>";
 				showTL += "<div style='position:absolute; left:100px; bottom:0px;'><strong>" + dataList.mnick + "</strong></div>";
 				showTL += "<div style='position:absolute; left:198px; bottom:-55px;'><img src='/resources/img/timeline/dlgTail.png' style='width:40x; height:40px;'/></div>";
-				showTL += "<div style='background:white; width:450px; height:150px; position:absolute; left:230px; bottom:-170px;'><span style='margin-top:10px; margin-bottom:10px;'>" + dataList.tcontent + "</span></div>";
+				showTL += "<div style='background:white; width:50%; height:150px; position:absolute; left:230px; bottom:-170px;'><span style='margin-top:10px; margin-bottom:10px;'>" + dataList.tcontent + "</span></div>";
 				showTL += "</div>";
 				$('#siltaja').append(showTL);
 			});
