@@ -1,0 +1,39 @@
+@charset "UTF-8";
+
+/* member page 용 */
+div#enroll-container {width:400px; margin:0 auto; text-align:center;}
+div#enroll-container input, div#enroll-container select {margin-bottom:10px;}
+div#enroll-container table th {text-align: right; padding-right:10px;}
+div#enroll-container table td {text-align: left;}
+		
+/*중복아이디체크관련*/
+div#userId-container {position:relative; padding:0px;}
+div#userId-container span.guide {display:none; font-size: 12px; position:absolute; top:12px; right:10px;}
+div#userId-container span.ok {color:#0431B4;}
+div#userId-container span.error {color:#FF8000;}
+div#userId-container span.invalid {color:#FF0000;}
+div#userPw-container span.pw {display:none; font-size: 12px; position:absolute; top:12px; right:10px;}
+div#userPw-container span.o {color:#0431B4;}
+div#userPw-container span.e {color:#FF8000;}
+div#userPw-container span.i {color:#FF0000;}
+div#userPw2-container {position:relative; padding:0px;}
+div#userPw2-container span.pw2 {display:none; font-size: 12px; position:absolute; top:12px; right:10px;}
+div#userPw2-container span.o {color:#0431B4;}
+div#userPw2-container span.e {color:#FF8000;}
+div#userPw2-container span.i {color:#FF0000;} 
+div#userName-container {position:relative; padding:0px;}
+div#userName-container span.name {display:none; font-size: 12px; position:absolute; top:12px; right:10px;}
+div#userName-container span.o {color:#0431B4;}
+div#userName-container span.e {color:#FF8000;}
+div#userName-container span.i {color:#FF0000;}
+div#userNick-container {position:relative; padding:0px;}
+div#userNick-container span.nick {display:none; font-size: 12px; position:absolute; top:12px; right:10px;}
+div#userNick-container span.o {color:#0431B4;}
+div#userNick-container span.e {color:#FF8000;}
+div#userNick-container span.i {color:#FF0000;}
+div#email-container {position:relative; padding:0px;}
+div#email-container span.email {display:none; font-size: 12px; position:absolute; top:12px; right:10px;}
+div#email-container span.o {color:#0431B4;}
+div#email-container span.e {color:#FF8000;}
+div#email-container span.i {color:#FF0000;}
+div#userPw-container {position:relative; padding:0px;}

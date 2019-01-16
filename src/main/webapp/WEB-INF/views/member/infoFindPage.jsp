@@ -8,7 +8,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>회원정보를 찾아보아요!</title>
+<title>회원정보 페이지</title>
 </head>
 <body>
 	<c:import url="/WEB-INF/views/common/exFile.jsp"/>]
@@ -18,16 +18,16 @@
 		<section id="find">
 			<div class="container">
 				<div class="raw">
-					<div class="col-lg-4 col-md-offset-4">
+					<div class="col-lg-11 col-md-offset-10">
 						<div class="btn-group">
 							<input type="button" value="ID 찾기" id="idTap" class="btn btn-theme" >
 							<input type="button" value="PW 찾기" id="pwTap" class="btn btn-theme" >
 						</div>
 					</div>
+					
 					<div id="findDiv"  class="col-lg-4 col-md-offset-4">
 					</div>
 				</div>
-			</div>
 		</section>
 		
 		<c:import url="/WEB-INF/views/common/footer.jsp"/>

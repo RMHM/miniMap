@@ -7,63 +7,27 @@
 <html>
 <head>
 	<meta charset="UTF-8">
-	<title>회원 가입 페이지</title>
+	<title>회원가입 페이지</title>
 	<c:import url="../common/header.jsp"/>
-	<style>
-		div#enroll-container {width:400px; margin:0 auto; text-align:center;}
-		div#enroll-container input, div#enroll-container select {margin-bottom:10px;}
-		div#enroll-container table th {text-align: right; padding-right:10px;}
-		div#enroll-container table td {text-align: left;}
-		/*중복아이디체크관련*/
-		div#userId-container {position:relative; padding:0px;}
-		div#userId-container span.guide {display:none; font-size: 12px; position:absolute; top:12px; right:10px;}
-		div#userId-container span.ok {color:#0431B4;}
-		div#userId-container span.error {color:#FF8000;}
-		div#userId-container span.invalid {color:#FF0000;}
-		div#userPw-container span.pw {display:none; font-size: 12px; position:absolute; top:12px; right:10px;}
-		div#userPw-container span.o {color:#0431B4;}
-		div#userPw-container span.e {color:#FF8000;}
-		div#userPw-container span.i {color:#FF0000;}
-		div#userPw2-container {position:relative; padding:0px;}
-		div#userPw2-container span.pw2 {display:none; font-size: 12px; position:absolute; top:12px; right:10px;}
-		div#userPw2-container span.o {color:#0431B4;}
-		div#userPw2-container span.e {color:#FF8000;}
-		div#userPw2-container span.i {color:#FF0000;} 
-		div#userName-container {position:relative; padding:0px;}
-		div#userName-container span.name {display:none; font-size: 12px; position:absolute; top:12px; right:10px;}
-		div#userName-container span.o {color:#0431B4;}
-		div#userName-container span.e {color:#FF8000;}
-		div#userName-container span.i {color:#FF0000;}
-		div#userNick-container {position:relative; padding:0px;}
-		div#userNick-container span.nick {display:none; font-size: 12px; position:absolute; top:12px; right:10px;}
-		div#userNick-container span.o {color:#0431B4;}
-		div#userNick-container span.e {color:#FF8000;}
-		div#userNick-container span.i {color:#FF0000;}
-		div#email-container {position:relative; padding:0px;}
-		div#email-container span.email {display:none; font-size: 12px; position:absolute; top:12px; right:10px;}
-		div#email-container span.o {color:#0431B4;}
-		div#email-container span.e {color:#FF8000;}
-		div#email-container span.i {color:#FF0000;}
-		div#userPw-container {position:relative; padding:0px;}
-
-	</style>
+	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/member/member.css">
 </head>
 <body>
 	<div id="container">
 		 <c:import url="/WEB-INF/views/common/exFile.jsp"/>
 		<section id="content">
-		<div>
 			<div id="enroll-container">
 			<div>
 			<h1 align="left" style="font-size:60px; margin:-50px 0px 0px 0px"><font color="skyblue"><b>SIGN UP</b></font></h1>
-			<p>가입에 필요한 회원정보를 입력해 주세요. <img src="/resources/img/member/ico_required.png" alt="필수" /><b> 필수 입력</b></p>
-			<b><hr /></b>
+			<p align="left">가입에 필요한 회원정보를 입력해 주세요. <img src="/resources/img/member/ico_required.png" alt="필수" /><b> 필수 입력</b></p>
+			<hr />
 			</div>
-				<form name="memberEnrollFrm" action="memberEnrollEnd.do" method="post" enctype = multipart/form-data onsubmit="return false;"
+				<form name="memberEnrollFrm" action="memberEnrollEnd.do" method="post" enctype = multipart/form-data onsubmit="return check();"
 							onkeydown="return captureReturnKey(event)">
 							
-					<table width="500px" height="400px" border="1" align="left">
-					
+					<table height="50" border="1" >
+					<colsgroup><col style="width:250px;"><col style="width:auto;">
+					</colsgroup>
+					<tbody>
 						<tr>
 							<th style = "text-align:center;">아이디 <img src="/resources/img/member/ico_required.png" alt="필수" /></th>
 							
@@ -95,7 +59,7 @@
 							</td>
 						</tr>
 						<tr>
-							<th style = "text-align:center;">패스워드확인 <img src="/resources/img/member/ico_required.png" alt="필수" /></th>
+							<th style = "text-align:center;">패스워드 확인 <img src="/resources/img/member/ico_required.png" alt="필수" /></th>
 							<td>
 								<div id="userPw2-container">	
 								<input type="password" class="form-control" id="mpw2" required>
@@ -112,11 +76,12 @@
 							<td>	
 							<div id="userName-container">
 							<input type="text" class="form-control" name="mname" id="mname_" required>
+							<div class="check_font" id="name_check"></div>
 							<span class="name o"></span>
 							<span class="name e"></span>
 							<span class="name i"></span>
 							<input type="hidden" name="nameCheck" id="nameCheck" value="0"/>
-							<div class="check_font" id="name_check"></div>
+							
 							</div>
 							</td>
 						</tr>
@@ -183,20 +148,22 @@
 						<tr>
 							<th style = "text-align:center;">업로드</th>
 							<td>
-							<img id="imc" src="" style="height:50%"/>
+							<img id="imc" src="" style="height:50"/>
 							<input type="file" class="form-check-input" name="profile" id="profilePath_" 
 								   value="/resources/img/profiles/default.png" accept=".gif, .jpg, .png .jpeg">
 							</td>
 						</tr>
+						</tbody>
 					</table>
-					
-					<input type="submit" class="btn btn-success" value="가입" onclick="check()" style="border-radius:155px; font-s">
-					<input type="reset"  class="btn btn-success" value="취소" onclick="loginForm()" style="border-radius:155px;">
+					<br />
+				<input type="submit" class="btn btn-dark" value="가입" onclick="check()" style= "width: 80px; "border-radius:100px; font-s" ">
+				<input type="reset"  class="btn btn-dark" value="취소" onclick="loginForm()" style= "width: 80px; "border-radius:100px;">	
 				</form>
+				
 			</div>
 			<script src="/resources/js/member/memberEnroll.js"></script>			
 		</section>
-		
+		<c:import url="/WEB-INF/views/common/footer.jsp"/>
 	</div>
 </body>
 </html>

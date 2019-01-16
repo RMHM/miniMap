@@ -37,17 +37,38 @@
 						<!-- Slider -->
 						<div id="main-slider" class="flexslider">
 							<ul class="slides">
-								<li><img src="resources/img/member/e.jpg" alt="" />
-								<h5>세계자연유산 제주특별자치도의 도시브랜드는 국내 유일의 특별 자치행정을 구현하여 아시아 최고 수준의 국제자유도시를 지향하는 제주특별자치도의 미래를 상징한다.
-								천해의 신비를 간직한 제주의 용암동굴을 세계자연유산의 대표 모티브로 이미지화하고 제주의 현무암 화산섬의 질감을 켈리그라피로 표현하였다.
-								제주특별자치도의 아름다움을 부드러운 서체와 컬러로 함께 나타냄으로써 강함과 부드러움이 공존하는 제주의 특별함을 표현하고 있으며 생태도시, 
-								관광 휴양도시, 국제 자유도시, 평화의 도시, 세계 지식자유중심도시 등 다양한 수식어를 가진 특별함이 하나로 함축되어 모여있는 곳 'Only Jeju Island'를 지향한다.
-								</h5></li>
-								<li><img src="/resources/img/index/index_sketch.png" alt="" /></li>
-								<li><img src="/resources/img/index/2.jpg" alt="" /></li>
-								<li><img src="/resources/img/index/index_horse.png" alt="" /></li>
-								<li><img src="/resources/img/index/1.jpg" alt="" /></li>
-								<li><img src="/resources/img/index/3.jpg" alt="" /></li>
+								<li><img src="resources/img/index/jeju5.jpg" alt="" height="380" />
+								<div class="flex-caption"><h4>제주도 여행 준비하기</h4>
+								<p>사전 준비와 계획을 안내 해드립니다.</p>
+								<a href="board/boardlist2.do" class="btn btn-theme">더 자세한 정보를 알고 싶다면?</a>
+								</div>
+								</li>
+								<li><img src="resources/img/index/jeju3.gif" alt="" height="380" />
+								<div class="flex-caption"><h4>일별 여행 코스는?</h4>
+								<p>일별로 일정을 안내 해드립니다.</p>
+								<a href="#" class="btn btn-theme">더 자세한 정보를 알고 싶다면?</a>
+								</div>
+								</li>
+								<li><img src="resources/img/index/jeju4.jpg" alt="" height="380" />
+								<div class="flex-caption"><h4>제주도에도 사파리가 있나?</h4>
+								<p>관련 여행지를 안내 해드립니다.</p>
+								<a href="#" class="btn btn-theme">더 자세한 정보를 알고 싶다면?</a>
+								</div>
+								</li>
+								<li><img src="resources/img/index/jeju.jpg" alt="" height="380" />
+								<div class="flex-caption"><h4>제주도엔 뭐가 있지?</h4>
+								<p>추천 여행지를 안내 해드립니다.</p>
+								<a href="#" class="btn btn-theme">더 자세한 정보를 알고 싶다면?</a>
+								</div>
+								</li>
+								<li><img src="resources/img/index/jeju6.jpg" alt="" height="380" />
+								<div class="flex-caption"><h4>박물관은 살아있다</h4>
+								<p>살아 있을까요 죽었을까요?</p>
+								<a href="#" class="btn btn-theme">더 자세한 정보를 알고 싶다면?</a>
+								</div>
+								</li>
+								
+								
 							</ul>
 						</div>
 						<!-- end slider -->

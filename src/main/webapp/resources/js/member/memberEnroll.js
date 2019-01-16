@@ -177,7 +177,7 @@ $(function() {
 	});
 
 	/* 이름 유효성 검사 */
-	var name = /^[가-힣a-zA-Z]+$/;
+	var name = /^[가-힣]+$/;
 	
 	$("#mname_").blur(function() {
 		console.log(name);
@@ -187,11 +187,47 @@ $(function() {
 			$('#name_check').text('');
 		} else {
 			console.log('false');
-			$('#name_check').text('최소 1개의 한글 혹은 대소문자만 포함');
+			$('#name_check').text('최소 1개의 한글만 포함');
 			$('#name_check').css('color', 'green');
 		}
 	});
-
+	
+	$("#mname_").on("keyup", function(){
+		var mname = $(this).val().trim();
+		
+		if (mname.length < 3){
+			$(".name.e").hide();
+			$(".name.o").hide();
+			$(".name.i").show();
+			return;
+		} else {
+			
+			$.ajax({
+				url : "/member/checkName.do",
+				data : {
+					mname : mname
+				},
+				dataType : "json",
+				success : function(data){
+					console.log(data);
+					if (data.isUsable == true){
+						$(".name.e").hide();
+						$(".name.i").hide();
+						$(".name.o").show();
+						$("#nameCheck").val(1);
+					} else {
+						$(".name.e").show();
+						$(".name.i").hide();
+						$(".name.o").hide();
+						$("#nameCheck").val(0);
+					}
+				},
+				error : function(jqxhr, testStatus, errorThrown) {
+					console.log("ajax 처리 실패");
+				}
+			});
+		}
+	});
 	/* 닉네임 유효성 검사 */
 	var nick = /^[가-힣a-zA-Z0-9]+$/;
 	
@@ -240,8 +276,6 @@ $(function() {
 				},
 				error : function(jqxhr, testStatus, errorThrown) {
 					console.log("ajax 처리 실패");
-	
-					console.log(jqxhr);
 				}
 			});
 		}
