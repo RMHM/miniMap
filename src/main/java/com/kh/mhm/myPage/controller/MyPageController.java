@@ -15,6 +15,9 @@ import javax.servlet.http.HttpSession;
 import java.io.File;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
+import java.net.ConnectException;
+import java.net.SocketTimeoutException;
+import java.net.UnknownHostException;
 import java.sql.Date;
 
 import org.json.simple.JSONArray;
@@ -147,12 +150,16 @@ public class MyPageController {
 		int num = today.getMonth()+1;
 	
 		
-		/*model.addAttribute("list", list);
-		model.addAttribute("temper",t.temperature(num));
-		model.addAttribute("weather",a.weather());*/
+		String times = "";
 		map.put("list", list);
-		map.put("temper",t.temperature(num));
-		map.put("weather",a.weather());
+		/*try{*/
+			map.put("temper",t.temperature(num));
+			map.put("weather",a.weather());
+		/*}catch(SocketTimeoutException| ConnectException|UnknownHostException e) {
+			msg="날씨 정보를 갖고오는 중 오류가 발생했습니다.";
+			map.put("msg", times);
+		}*/
+	
 		/*return "myPage/schedule";*/
 		return map;
 	}
