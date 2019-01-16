@@ -14,7 +14,7 @@ $(function() {
 
 		} else {
 			console.log('false');
-			$('#id_check').text('최소 1개의 숫자 혹은 대소문자를 포함.');
+			$('#id_check').text('숫자, 영문 혼용 6자이상 입력');
 			$('#id_check').css('color', 'green');
 		}
 	});
@@ -74,7 +74,7 @@ $(function() {
 			$('#pw_check').text('');
 		} else {
 			console.log('false');
-			$('#pw_check').text('최소 1개의 대소문자, 숫자, 특수문자를 포함.');
+			$('#pw_check').text('최소 1개씩의 숫자,영문 특수문자를 포함.');
 			$('#pw_check').css('color', 'green');
 		}
 	});
@@ -187,7 +187,7 @@ $(function() {
 			$('#name_check').text('');
 		} else {
 			console.log('false');
-			$('#name_check').text('최소 1개의 한글만 포함');
+			$('#name_check').text('한글만 입력');
 			$('#name_check').css('color', 'green');
 		}
 	});
@@ -228,6 +228,7 @@ $(function() {
 			});
 		}
 	});
+	
 	/* 닉네임 유효성 검사 */
 	var nick = /^[가-힣a-zA-Z0-9]+$/;
 	
@@ -239,7 +240,7 @@ $(function() {
 			$('#nick_check').text('');
 		} else {
 			console.log('false');
-			$('#nick_check').text('최소 1개의 숫자 혹은 대소문자와 한글만 포함.');
+			$('#nick_check').text('최소 1개의 숫자, 알파벳, 한글만 포함.');
 			$('#nick_check').css('color', 'green');
 		}
 	});
@@ -294,7 +295,7 @@ $(function() {
 			$('#email_check').text('');
 		} else {
 			console.log('false');
-			$('#email_check').text("특수문자 한글을 포함하지 않는 이메일 형식.");
+			$('#email_check').text("특수문자, 한글 제외 입력.");
 			$('#email_check').css('color', 'green');
 		}
 	});

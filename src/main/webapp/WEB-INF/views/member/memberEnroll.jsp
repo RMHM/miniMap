@@ -60,9 +60,6 @@
 						</tr>
 						<tr>
 							<th style = "text-align:center;">패스워드 확인 <img src="/resources/img/member/ico_required.png" alt="필수" /></th>
-
-              <th style = "text-align:center;">패스워드확인 <img src="/resources/img/member/ico_required.png" alt="필수" /></th>
-
 							<td>
 								<div id="userPw2-container">	
 								<input type="password" class="form-control" id="mpw2" required>
