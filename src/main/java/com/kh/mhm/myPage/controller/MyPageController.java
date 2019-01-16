@@ -76,7 +76,7 @@ public class MyPageController {
 
 		int result = mps.insertSchedule(schedule);
 		/*return selectSchedule(member, model);*/
-		return "myPage/schedule";
+		return "redirect:/myPage/selectScheduleNav.do";
 
 	}
 
@@ -90,7 +90,7 @@ public class MyPageController {
 		mps.deleteSchedule(sId);
 
 		/*return selectSchedule(member, model);*/
-		return "myPage/schedule";
+		return "redirect:/myPage/selectScheduleNav.do";
 
 	}
 
