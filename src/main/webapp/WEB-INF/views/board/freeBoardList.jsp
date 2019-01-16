@@ -35,7 +35,7 @@
 				<div class="ad">
 					<div class="ad">						
 						<div class="ad caption">            		 
-						<img src="/resources/img/boardlistad.png" style="" alt="" /></a>
+						<img src="/resources/img/boardlistad.png" style="width:100%" alt="" />
 						</div>
 					</div>
 				</div>
@@ -57,30 +57,32 @@
 								</thead>
 								<tbody>							
 					
-								<c:forEach var="Board" items="${list2 }"> <!-- 공지 게시글 페이지 -->
+								<c:forEach var="Board" items="${list2 }" varStatus="idx"> <!-- 공지 게시글 페이지 -->
 									<tr name="BId" id="${Board.BId }" style="background-color: #CEECF5; cursor:pointer">									
 									   <td align="center"><c:out value="${Board.BNo }"/></td>
                      				   <td><c:out value="공지"/></td>
                      				   <td></td>
-                  				       <td><c:out value="${Board.BTitle }"/></td>                  				       
+                  				       <td><c:out value="${Board.BTitle }"/> 
+                  				       <span style="color: #8A0829;"> [${cc2[idx.index]}]</span> </td>                  				       
                				           <td align="center"><c:out value="${Board.mnick}"/></td>
                				           <td align="center"><c:out value="${Board.BCount }"/></td>
                 			           <td><c:out value="${Board.BDate}"/></td>
 									</tr>
 								</c:forEach>								
-								<c:forEach var="Board" items="${list3 }"> <!-- 베스트 게시글 페이지 -->
+								<c:forEach var="Board" items="${list3 }" varStatus="idx"> <!-- 베스트 게시글 페이지 -->
                   <tr name="BId" id="${Board.BId }" style="background-color: #E0F8F7; cursor:pointer">
 									   <td align="center"><c:out value="${Board.BNo }"/></td>
                      				   <td><c:out value="Best"/></td>
                      				   <td></td>
-                  				       <td><c:out value="${Board.BTitle }"/></td>                  				       
+                  				       <td><c:out value="${Board.BTitle }"/> 
+                  				      <span style="color: #8A0829;"> [${cc3[idx.index]}]</span></td>                  				       
                				           <td align="center"><c:out value="${Board.mnick}"/></td>
                				           <td align="center"><c:out value="${Board.BCount }"/></td>
                 			           <td><c:out value="${Board.BDate}"/></td>
 									</tr>
 								</c:forEach>		
 																	
-								<c:forEach var="Board" items="${list }"> <!-- 일반 게시글 페이지 -->
+								<c:forEach var="Board" items="${list}" varStatus="idx"> <!-- 일반 게시글 페이지 -->
 								<c:choose>	
 								<c:when test="${Board.RFlag eq 'Y' and member.mtype eq 'A' }">
                   <tr name="BId" id="${Board.BId }" style="background-color: lightgray; cursor:pointer">
@@ -110,7 +112,9 @@
                        <td align="center"><c:out value="${Board.BNo }"/></td>
                        <td><c:out value="일반"/></td>
                        <td></td>
-                         <td><c:out value="${Board.BTitle }"/></td>                  				       
+                  
+                         <td><c:out value="${Board.BTitle }"/>
+                        <span style="color: #8A0829;">[${cc[idx.index]}]</span> </td>                  				       
                          <td align="center"><c:out value="${Board.mnick}"/></td>
                          <td align="center"><c:out value="${Board.BCount }"/></td>
                          <td><c:out value="${Board.BDate}"/></td>

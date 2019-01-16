@@ -3,6 +3,7 @@ package com.kh.mhm.board.controller;
 import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -47,24 +48,41 @@ public class BoardController {
 			Board board) {
 		int numPerPage = 10;					
 
-		ArrayList<Map<String, String>> list = 
-				new ArrayList<Map<String, String>>(boardService.selectBoardList1(cPage, numPerPage));		
-
+		ArrayList<Board/*Map<String, Object String>*/> list = 
+				new ArrayList<Board/*Map<String, ObjectString>*/>(boardService.selectBoardList1(cPage, numPerPage));		
 		int totalContents = boardService.selectBoardTotalContents1();		
 
 		String pageBar = Utils.getPageBar(totalContents, cPage, numPerPage, "boardlist1.do");
 		List<Board> list2 = boardService.selectNoticeList1(board);				
 		List<Board> list3 = boardService.selectBestList1(board);
-		System.out.println(pageBar);
-    System.out.println("bid : "+list2.get(board.getBId()).getBId());		
+			
+		List<Integer> cc = new ArrayList<Integer>();
+		List<Integer> cc2 = new ArrayList<Integer>();
+		List<Integer> cc3 = new ArrayList<Integer>();
 		
+		for(int i=0; i<list.size(); i++) {
+			System.out.println(list.get(i).getBId());
+			cc.add(boardService.selectCommentCnt(list.get(i).getBId()));			
+		}
 		
+		for(int i=0; i<list2.size(); i++) {
+			System.out.println(list2.get(i).getBId());
+			cc2.add(boardService.selectCommentCnt(list2.get(i).getBId()));			
+		}
+		
+		for(int i=0; i<list3.size(); i++) {
+			System.out.println(list3.get(i).getBId());
+			cc3.add(boardService.selectCommentCnt(list3.get(i).getBId()));			
+		}
+		
+		System.out.println(cc);
 		/*int cc = comentService.countTotalComent();
 		System.out.println("c갯수 : "+ cc);*/
 
 		model.addAttribute("list", list).addAttribute("totalContents", totalContents)
 				.addAttribute("numPerPage", numPerPage).addAttribute("pageBar", pageBar)
-				.addAttribute("list2", list2).addAttribute("list3", list3);
+				.addAttribute("list2", list2).addAttribute("list3", list3)
+				.addAttribute("cc", cc).addAttribute("cc2", cc2).addAttribute("cc3", cc3);
 
 		return "board/freeBoardList";
 	}
@@ -74,8 +92,15 @@ public class BoardController {
 			@RequestParam(required = false) String keyWord, Model model, Board board) {
 
 		List<Board> list = boardService.selectSearchList1(keyField, keyWord);
+		
+		List<Integer> cc = new ArrayList<Integer>();
+		for(int i=0; i<list.size(); i++) {
+			System.out.println(list.get(i).getBId());
+			cc.add(boardService.selectCommentCnt(list.get(i).getBId()));			
+		}
 
-		model.addAttribute("list", list).addAttribute("keyWord", keyWord).addAttribute("keyField", keyField);
+		model.addAttribute("list", list).addAttribute("keyWord", keyWord).addAttribute("keyField", keyField)
+		.addAttribute("cc",cc);
 
 		return "board/freeBoardList";
 	}
@@ -85,8 +110,7 @@ public class BoardController {
 			Board board) {
 		int numPerPage = 10;
 
-		ArrayList<Map<String, String>> list = new ArrayList<Map<String, String>>(
-				boardService.selectBoardList2(cPage, numPerPage));
+		ArrayList<Board> list = new ArrayList<Board>(boardService.selectBoardList2(cPage, numPerPage));
 
 		int totalContents = boardService.selectBoardTotalContents2();
 
@@ -95,10 +119,30 @@ public class BoardController {
 		List<Board> list3 = boardService.selectBestList2(board);
 
 		System.out.println(pageBar);
+		
+		List<Integer> cc = new ArrayList<Integer>();
+		List<Integer> cc2 = new ArrayList<Integer>();
+		List<Integer> cc3 = new ArrayList<Integer>();
+		
+		for(int i=0; i<list.size(); i++) {
+			System.out.println(list.get(i).getBId());
+			cc.add(boardService.selectCommentCnt(list.get(i).getBId()));			
+		}
+		
+		for(int i=0; i<list2.size(); i++) {
+			System.out.println(list2.get(i).getBId());
+			cc2.add(boardService.selectCommentCnt(list2.get(i).getBId()));			
+		}
+		
+		for(int i=0; i<list3.size(); i++) {
+			System.out.println(list3.get(i).getBId());
+			cc3.add(boardService.selectCommentCnt(list3.get(i).getBId()));			
+		}
 
 		model.addAttribute("list", list).addAttribute("totalContents", totalContents)
 				.addAttribute("numPerPage", numPerPage).addAttribute("pageBar", pageBar)
-				.addAttribute("list2", list2).addAttribute("list3", list3);
+				.addAttribute("list2", list2).addAttribute("list3", list3)
+				.addAttribute("cc", cc).addAttribute("cc2", cc2).addAttribute("cc3", cc3);
 		
 		return "board/infoBoardList";
 	}
@@ -107,10 +151,16 @@ public class BoardController {
 	public String infoSearchBoard(@RequestParam(required = false) String keyField,
 			@RequestParam(required = false) String keyWord, Model model, Board board) {
 
-		List<Board> list = boardService.selectSearchList2(keyField, keyWord);
+		List<Board> list = boardService.selectSearchList1(keyField, keyWord);
+		
+		List<Integer> cc = new ArrayList<Integer>();
+		for(int i=0; i<list.size(); i++) {
+			System.out.println(list.get(i).getBId());
+			cc.add(boardService.selectCommentCnt(list.get(i).getBId()));			
+		}
 
-		model.addAttribute("list", list).addAttribute("keyWord", keyWord).addAttribute("keyField", keyField);
-
+		model.addAttribute("list", list).addAttribute("keyWord", keyWord).addAttribute("keyField", keyField)
+		.addAttribute("cc",cc);
 		return "board/infoBoardList";
 	}
 	
@@ -119,7 +169,7 @@ public class BoardController {
 			Board board) {
 		int numPerPage = 10;
 
-		ArrayList<Map<String, String>> list = new ArrayList<Map<String, String>>(
+		ArrayList<Board> list = new ArrayList<Board>(
 				boardService.selectBoardList3(cPage, numPerPage));
 
 		int totalContents = boardService.selectBoardTotalContents3();
@@ -129,12 +179,32 @@ public class BoardController {
 		List<Board> list3 = boardService.selectBestList3(board);
 
 		System.out.println(pageBar);
+		
+		List<Integer> cc = new ArrayList<Integer>();
+		List<Integer> cc2 = new ArrayList<Integer>();
+		List<Integer> cc3 = new ArrayList<Integer>();
+		
+		for(int i=0; i<list.size(); i++) {
+			System.out.println(list.get(i).getBId());
+			cc.add(boardService.selectCommentCnt(list.get(i).getBId()));			
+		}
+		
+		for(int i=0; i<list2.size(); i++) {
+			System.out.println(list2.get(i).getBId());
+			cc2.add(boardService.selectCommentCnt(list2.get(i).getBId()));			
+		}
+		
+		for(int i=0; i<list3.size(); i++) {
+			System.out.println(list3.get(i).getBId());
+			cc3.add(boardService.selectCommentCnt(list3.get(i).getBId()));			
+		}
 
 		model.addAttribute("list", list)
 			 .addAttribute("totalContents", totalContents)
 			 .addAttribute("numPerPage", numPerPage)
 			 .addAttribute("pageBar", pageBar)
-			 .addAttribute("list2", list2).addAttribute("list3", list3);
+			 .addAttribute("list2", list2).addAttribute("list3", list3)
+			 .addAttribute("cc", cc).addAttribute("cc2", cc2).addAttribute("cc3", cc3);
 		
 		System.out.println("list : " + list);
 		
@@ -145,9 +215,16 @@ public class BoardController {
 	public String reviewSearchBoard(@RequestParam(required = false) String keyField,
 			@RequestParam(required = false) String keyWord, Model model, Board board) {
 
-		List<Board> list = boardService.selectSearchList3(keyField, keyWord);
+		List<Board> list = boardService.selectSearchList1(keyField, keyWord);
+		
+		List<Integer> cc = new ArrayList<Integer>();
+		for(int i=0; i<list.size(); i++) {
+			System.out.println(list.get(i).getBId());
+			cc.add(boardService.selectCommentCnt(list.get(i).getBId()));			
+		}
 
-		model.addAttribute("list", list).addAttribute("keyWord", keyWord).addAttribute("keyField", keyField);
+		model.addAttribute("list", list).addAttribute("keyWord", keyWord).addAttribute("keyField", keyField)
+		.addAttribute("cc",cc);
 
 		return "board/reviewBoardList";
 	}
@@ -157,7 +234,7 @@ public class BoardController {
 			Board board) {
 		int numPerPage = 10;
 
-		ArrayList<Map<String, String>> list = new ArrayList<Map<String, String>>(
+		ArrayList<Board> list = new ArrayList<Board>(
 				boardService.selectBoardList4(cPage, numPerPage));
 
 		int totalContents = boardService.selectBoardTotalContents2();
@@ -167,10 +244,30 @@ public class BoardController {
 		List<Board> list3 = boardService.selectBestList4(board);
 
 		System.out.println(pageBar);
+		
+		List<Integer> cc = new ArrayList<Integer>();
+		List<Integer> cc2 = new ArrayList<Integer>();
+		List<Integer> cc3 = new ArrayList<Integer>();
+		
+		for(int i=0; i<list.size(); i++) {
+			System.out.println(list.get(i).getBId());
+			cc.add(boardService.selectCommentCnt(list.get(i).getBId()));			
+		}
+		
+		for(int i=0; i<list2.size(); i++) {
+			System.out.println(list2.get(i).getBId());
+			cc2.add(boardService.selectCommentCnt(list2.get(i).getBId()));			
+		}
+		
+		for(int i=0; i<list3.size(); i++) {
+			System.out.println(list3.get(i).getBId());
+			cc3.add(boardService.selectCommentCnt(list3.get(i).getBId()));			
+		}
 
 		model.addAttribute("list", list).addAttribute("totalContents", totalContents)
 				.addAttribute("numPerPage", numPerPage).addAttribute("pageBar", pageBar)
-				.addAttribute("list2", list2).addAttribute("list3", list3);
+				.addAttribute("list2", list2).addAttribute("list3", list3)
+				.addAttribute("cc", cc).addAttribute("cc2", cc2).addAttribute("cc3", cc3);
 		
 		return "board/qaBoardList";
 	}
@@ -179,9 +276,16 @@ public class BoardController {
 	public String qaSearchBoard(@RequestParam(required = false) String keyField,
 			@RequestParam(required = false) String keyWord, Model model, Board board) {
 
-		List<Board> list = boardService.selectSearchList4(keyField, keyWord);
+		List<Board> list = boardService.selectSearchList1(keyField, keyWord);
+		
+		List<Integer> cc = new ArrayList<Integer>();
+		for(int i=0; i<list.size(); i++) {
+			System.out.println(list.get(i).getBId());
+			cc.add(boardService.selectCommentCnt(list.get(i).getBId()));			
+		}
 
-		model.addAttribute("list", list).addAttribute("keyWord", keyWord).addAttribute("keyField", keyField);
+		model.addAttribute("list", list).addAttribute("keyWord", keyWord).addAttribute("keyField", keyField)
+		.addAttribute("cc",cc);
 
 		return "board/qaBoardList";
 	}
