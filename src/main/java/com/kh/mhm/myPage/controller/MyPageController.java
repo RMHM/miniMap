@@ -360,6 +360,15 @@ public class MyPageController {
 	@RequestMapping("/myPage/rePermissionPage.do")
 	public String requestViewPage(Member member, Model model) {
 		List<Authority> list = mps.selectRequest(member.getMno());
+		/*try {
+		Map<String, Object> map = model.asMap();
+		System.out.println("asdasd"+(map.get("msg").toString()));
+			
+		
+		
+		}catch(NullPointerException e) {
+			e.getMessage();
+		}*/
 		model.addAttribute("list", list);
 		return "myPage/requestView";
 	}
@@ -367,14 +376,22 @@ public class MyPageController {
 	/* 요청페이지로이동 */
 	@RequestMapping("/myPage/rePermissionClick.do")
 	public String requestPage(Member member) {
+		
 		return "myPage/requestPermission";
 	}
 
 	/* 권한 요청 */
 	@RequestMapping("/myPage/rePermission.do")
 	public String rePermission(@RequestParam(value="reImg", required = false) MultipartFile reImg,Member member, Model model, Authority authority,HttpSession session, HttpServletRequest request) {
-
-		if(reImg.getSize()!=0) {
+		System.out.println("----");
+		System.out.println("요청 추가" + reImg);
+		System.out.println("사이즈"+reImg.getSize());
+		if(reImg.getSize()==0) {
+			
+			System.out.println("원본" + authority.getImg_file());
+			
+			
+		}else {
 		String saveDir = session.getServletContext().getRealPath("/resources/img/authority");
 		File dir = new File(saveDir);
 		
@@ -393,9 +410,9 @@ public class MyPageController {
 		}
 		authority.setImg_file(renamedName);
 		
-		}else authority.setImg_file(null);
+		}
 		authority.setMNo(member.getMno());
-		
+		authority.setMName(member.getMname());
 		int result = mps.insertAuthority(authority);
 		if (result==0) model.addAttribute("msg","이미 요청하셨습니다.");
 		else model.addAttribute("msg","요청되셨습니다.");
@@ -411,10 +428,33 @@ public class MyPageController {
 
 	/* 요청 수정 */
 	@RequestMapping("/myPage/updateRePermission.do")
-	public String updateRePermission(Authority authority, Member member, Model model) {
+	public String updateRePermission(Authority authority,@RequestParam(value="reImg", required = false) MultipartFile reImg, Member member, Model model,HttpSession session, HttpServletRequest request) {
 		System.out.println("수정 하기시작");
 		System.out.println(authority);
-
+		
+		
+		
+		if(reImg.getSize()!=0) {
+			String saveDir = session.getServletContext().getRealPath("/resources/img/authority");
+			File dir = new File(saveDir);
+			
+			if(dir.exists() == false) dir.mkdirs();
+			String originName = reImg.getOriginalFilename();
+			String ext = originName.substring(originName.lastIndexOf(".")+1);
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd_HHmmss");
+			int rndNum = (int)(Math.random() * 1000);
+			String renamedName = sdf.format(new java.util.Date()) + "_" + rndNum + "." + ext;
+			// 실제 파일을 지정한 파일명으로 변환하며 데이터를 저장한다.
+			try {
+				reImg.transferTo(new File(saveDir + "/" + renamedName));
+			
+			} catch (IllegalStateException | IOException e) {
+				e.printStackTrace();
+			}
+			authority.setImg_file(renamedName);
+			
+			}
+		
 		int result = mps.updateAuthority(authority);
 
 		return requestViewPage(member, model);
