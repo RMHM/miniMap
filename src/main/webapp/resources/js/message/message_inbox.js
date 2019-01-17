@@ -1,4 +1,5 @@
 
+
 $("#idx_").click(function(){
 	if($(this).prop("checked")){
 		$("input[name^=index_]").prop('checked', true);
@@ -63,6 +64,7 @@ function storeMessage(){
 
 function readAllMessage(){
 	var nick="${member.mnick}";
+	console.log(nick);
 	$.ajax({
 		url : '/message.allread',
 	    type : 'post',

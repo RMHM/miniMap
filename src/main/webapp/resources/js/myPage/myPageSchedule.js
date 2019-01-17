@@ -146,7 +146,7 @@ function getFullcalendar(){
 			$('#result').attr("style","display:block");
     		$('#updateresult').attr("style","display:none");
     		$('#test').modal('show');
-    		 $('#insertC').dialog({}); 
+    		$('#insertC').dialog({}); 
 
 		},
 		defaultDate : new Date(),
