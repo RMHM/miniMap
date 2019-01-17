@@ -26,7 +26,7 @@
 						<a href="#" class="dropdown-toggle " data-toggle="dropdown" data-hover="dropdown" data-delay="0" data-close-others="false">지도 <b class=" icon-angle-down"></b></a>
 						<ul class="dropdown-menu">
 							<li><a href="/test/testMap.do">제주도 지도</a></li>
-							<li><a href="/test/NewFile.do">지도테스트</a></li>
+							<li><a href="/test/NewFile.do">개인 지도</a></li>
 						</ul></li>
 					<li class="dropdown active">
 						<a href="#" class="dropdown-toggle " data-toggle="dropdown" data-hover="dropdown" data-delay="0" data-close-others="false">게시판 <b class=" icon-angle-down"></b></a>

@@ -78,7 +78,7 @@
 										
 			</div>
 			
-			<%-- <div>
+		 <div>
 
 				<div class="container-fluid">
 					<div class="row">
@@ -87,12 +87,12 @@
 						onclick="viewmap(this);">지도추가 </button>					
 						<div class="col-md-2"></div>
 						<div class="col-md-10" name="jejumap" style="visibility:hidden;">
-						<c:import url="/WEB-INF/views/test/testMap2.jsp"/>
+						<c:import url="/WEB-INF/views/test/testMap3.jsp"/>
 						</div>
 					</div>
 				</div>
 				
-			</div> --%>
+			</div> 
 		</div> <br><br>
 		
 		

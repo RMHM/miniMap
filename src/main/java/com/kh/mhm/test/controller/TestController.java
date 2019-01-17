@@ -14,7 +14,7 @@ public class TestController {
 	@RequestMapping("/test/NewFile.do")
 	public String NewFile() {
 		//	return "test/NewFile";
-		return "test/NewFile";
+		return "test/testMap2";
 	}
 
 	
