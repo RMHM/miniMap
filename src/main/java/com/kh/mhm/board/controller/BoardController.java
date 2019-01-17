@@ -3,7 +3,6 @@ package com.kh.mhm.board.controller;
 import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -31,6 +30,7 @@ import com.kh.mhm.board.model.vo.Fileref;
 import com.kh.mhm.coment.model.service.ComentService;
 import com.kh.mhm.coment.model.vo.Coment;
 import com.kh.mhm.common.util.Utils;
+import com.kh.mhm.member.model.service.MemberService;
 import com.kh.mhm.member.model.vo.Member;
 
 @SessionAttributes(value = { "member" })
@@ -39,10 +39,12 @@ public class BoardController {
 
 	@Autowired
 	private BoardService boardService;
-
 	@Autowired
 	private ComentService comentService;
-
+	@Autowired
+	private MemberService ms;
+	
+	
 	@RequestMapping("/board/boardlist1.do")
 	public String freeboard(@RequestParam(value = "cPage", required = false, defaultValue = "1") int cPage, Model model,
 			Board board) {
@@ -703,20 +705,25 @@ public class BoardController {
 				if(b.getRFlag().equals("N") && b.getBCode()==5) {
 					boardService.updateOneCount(bid);
 					List<Coment> clist = comentService.selectCometList(bid);
-					String mtype = boardService.selectBoardMemberType(b.getMNo());
 					
-					System.out.println(clist);
+					Member writer = ms.selectOne(b.getMNo());
+					
 					mv.addObject("b", b);
-					mv.addObject("mtype", mtype);
+					mv.addObject("mtype", writer.getMtype());
+					mv.addObject("profile", writer.getProfilePath());
 					mv.addObject("clist", clist);
 					mv.setViewName("board/ad/adBoardView");
 				} else if(b.getBCode()!=5) {
 					mv.addObject("loc", "/board/adBoard.go");
 					mv.addObject("msg", "잘못된 게시물 요청입니다.");
 					mv.setViewName("common/msg");
-				} else {
+				} else if(b.getRFlag().equals("Y")) {
 					mv.addObject("loc", "/board/adBoard.go");
 					mv.addObject("msg", "신고된 게시물은 열람하실수 없습니다.");
+					mv.setViewName("common/msg");
+				} else if(b.getDelFlag().equals("Y")) {
+					mv.addObject("loc", "/board/adBoard.go");
+					mv.addObject("msg", "삭제된 게시물은 열람하실수 없습니다.");
 					mv.setViewName("common/msg");
 				}
 			} catch (Exception e) {
@@ -834,15 +841,15 @@ public class BoardController {
 	// 최근 후기 게시물 가져오기
 	@RequestMapping("/board/recentBoard.do")
 	@ResponseBody
-	public List<Board> recentBaord(){
+	public List<Board> recentBaord(@RequestParam int bCode, @RequestParam int maxNum){
 		List<Board> result = null;
 		Map<String, Integer> param = null;
 		
 		try {
 			result = new ArrayList<Board>();
 			param = new HashMap<String, Integer>();
-			param.put("bCode", 3);
-			param.put("maxNum", 4);
+			param.put("bCode", bCode);
+			param.put("maxNum", maxNum);
 			
 			result = boardService.selectRecentBoard(param);
 			
@@ -852,4 +859,5 @@ public class BoardController {
 		
 		return result;
 	}
+	
 }

@@ -179,4 +179,6 @@ public class ApiController {
 		return gapToDiff;
 	}
 	
+	// 팝업창 보내기 임시
+	
 }
