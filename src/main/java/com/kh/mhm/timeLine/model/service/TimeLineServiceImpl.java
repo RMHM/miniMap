@@ -1,6 +1,7 @@
 package com.kh.mhm.timeLine.model.service;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -57,6 +58,16 @@ public class TimeLineServiceImpl implements TimeLineService {
 	@Override
 	public List<PreTimeLine> searchTimeLine(String text) {
 		return tldi.searchTimeLine(text);
+	}
+
+	@Override
+	public List<PreTimeLine> classifyTimeLine(String tType) {
+		return tldi.classifyTimeLine(tType);
+	}
+
+	@Override
+	public List<PreTimeLine> loadMoreClassify(Map<String, Object> map) {
+		return tldi.loadMoreClassify(map);
 	}
 
 }

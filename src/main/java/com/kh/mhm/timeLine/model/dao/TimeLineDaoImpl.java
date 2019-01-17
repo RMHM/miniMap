@@ -63,4 +63,14 @@ public class TimeLineDaoImpl implements TimeLineDao {
 		return sqlSession.selectList("TimeLine.searchTimeLine",text);
 	}
 
+	@Override
+	public List<PreTimeLine> classifyTimeLine(String tType) {
+		return sqlSession.selectList("TimeLine.classifyTimeLine",tType);
+	}
+
+	@Override
+	public List<PreTimeLine> loadMoreClassify(Map<String, Object> map) {
+		return sqlSession.selectList("TimeLine.loadMoreClassify",map);
+	}
+
 }

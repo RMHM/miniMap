@@ -1,6 +1,7 @@
 package com.kh.mhm.timeLine.model.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import com.kh.mhm.member.model.vo.Member;
 import com.kh.mhm.timeLine.model.vo.PreTimeLine;
@@ -23,4 +24,8 @@ public interface TimeLineDao {
 	List<PreTimeLine> mainTimeLine();
 	
 	List<PreTimeLine> searchTimeLine(String text);
+	
+	List<PreTimeLine> classifyTimeLine(String tType);
+	
+	List<PreTimeLine> loadMoreClassify(Map<String,Object> map);
 }

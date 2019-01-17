@@ -51,12 +51,21 @@ public class SocketHandler extends TextWebSocketHandler{
 		StringTokenizer st=new StringTokenizer(text,"|%%|&");
 		String content=st.nextToken();
 		String tag=st.nextToken();
-		TimeLineSmpl tls=new TimeLineSmpl(member.getMno(),content,tag);
+		String type=st.nextToken();
+		TimeLineSmpl tls=new TimeLineSmpl(type,member.getMno(),content,tag);
+		System.out.println(tls.toString());
 		int result=tlsi.insertTimeLine(tls);
 		String profPath=member.getProfilePath();
 		System.out.println("profPath::"+profPath);
 		System.out.println("content::"+content);
 		System.out.println("tag::"+tag);
+		switch(type) {
+		case "S":type="교통"; break;
+		case "W":type="날씨"; break;
+		case "F":type="먹거리"; break;
+		case "T":type="볼거리"; break;
+		case "E":type="기타";
+		}
     
 
 
@@ -67,7 +76,8 @@ public class SocketHandler extends TextWebSocketHandler{
 						+session.getAttributes().get("userName")+"|%%|&"
 						+profPath+"|%%|&"
 						+tag+"|%%|&"
-						+result));
+						+result+"|%%|&"
+						+type));
 		}
 		
 	}

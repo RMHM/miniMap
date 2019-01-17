@@ -3,7 +3,8 @@ package com.kh.mhm.timeLine.model.vo;
 import java.io.Serializable;
 
 public class TimeLineSmpl implements Serializable {
-
+	
+	private String tType;
 	private int mNo;
 	private String tContent;
 	private String hashTag;
@@ -12,11 +13,20 @@ public class TimeLineSmpl implements Serializable {
 		super();
 	}
 
-	public TimeLineSmpl(int mNo, String tContent, String hashTag) {
+	public TimeLineSmpl(String tType, int mNo, String tContent, String hashTag) {
 		super();
+		this.tType=tType;
 		this.mNo = mNo;
 		this.tContent = tContent;
 		this.hashTag = hashTag;
+	}
+
+	public String gettType() {
+		return tType;
+	}
+
+	public void settType(String tType) {
+		this.tType = tType;
 	}
 
 	public int getmNo() {
@@ -42,10 +52,13 @@ public class TimeLineSmpl implements Serializable {
 	public void setHashTag(String hashTag) {
 		this.hashTag = hashTag;
 	}
-	
+
 	@Override
 	public String toString() {
-		return "TimeLineSmpl [mNo=" + mNo + ", tContent=" + tContent + ", hashTag=" + hashTag + "]";
+		return "TimeLineSmpl [tType=" + tType + ", mNo=" + mNo + ", tContent=" + tContent + ", hashTag=" + hashTag
+				+ "]";
 	}
+	
+	
 	
 }

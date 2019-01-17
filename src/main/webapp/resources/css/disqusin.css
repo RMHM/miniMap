@@ -514,4 +514,17 @@
   	text-decoration: none;
   	border-style:none;
 }
-
+.tTypeUp{
+	width:65px;
+	height:10px;
+	margin-top:20px;
+}
+.comment-type{
+	padding:10px 10px 10px 10px;
+}
+.tTypeDown{
+	width:100px;
+	height:10px;
+	margin-top:40px;
+	margin-bottom:8px;
+}
