@@ -9,7 +9,6 @@
 
 <head>
 <meta charset="UTF-8">
-<title>지도테스트</title>
 <!-- services와 clusterer, drawing 라이브러리 불러오기 -->
 <script type="text/javascript"
 	src="//dapi.kakao.com/v2/maps/sdk.js?appkey=c36204e30027f76eb155fbd17afedf52&libraries=services,clusterer,drawing"></script>
@@ -200,46 +199,10 @@
 
 </head>
 <body>
-	<c:import url="/WEB-INF/views/common/exFile.jsp" />
 	<div id="wrapper">
-		<c:import url="/WEB-INF/views/common/header.jsp" />
-		<p>
-			제주도 검색 란 <input type="text" id="search"> <input type="button"
-				value="검색" id="btSearth" onclick="jejuSearch();">
-		</p>
+		
 
-
-		<!-- 지도  -->
-
-		<div class="map_wrap">
-			<!-- <div id="map" style="width: 1024px; height: 720px;"></div>  -->
-			<div id="map"
-				style="width: 100%; height: 100%; position: relative; overflow: hidden;"></div>
-			<ul id="category">
-				<li id="BK9" data-order="0"><span class="category_bg bank"></span>
-					은행</li>
-				<li id="MT1" data-order="1"><span class="category_bg mart"></span>
-					마트</li>
-				<li id="PM9" data-order="2"><span class="category_bg pharmacy"></span>
-					약국</li>
-				<li id="OL7" data-order="3"><span class="category_bg oil"></span>
-					주유소</li>
-				<li id="CE7" data-order="4"><span class="category_bg cafe"></span>
-					카페</li>
-				<li id="CS2" data-order="5"><span class="category_bg store"></span>
-					편의점</li>
-			</ul>
-		</div>
-
-
-
-		<p>
-			<button onclick="zoomIn()">지도레벨 - 1</button>
-			<button onclick="zoomOut()">지도레벨 + 1</button>
-			<span id="maplevel"></span>
-		</p>
-
-
+	<div id="map" style="width:100%;height:350px;"></div>
 
 
 		<form>
@@ -279,15 +242,13 @@
 
 
 			<input type="button" value="저장하기" id="btn-add"
-				onclick="transferSave();" /> <input type="button" value="불러오기"
-				id="btn-load" onclick="transferLoad();" />
+				onclick="transferSave();" /> 
 		</p>
 
 
 		<input type="hidden" value=${member.mid } id="userId" />
 
 
-		<c:import url="/WEB-INF/views/common/footer.jsp" />
 	</div>
 
 
@@ -340,297 +301,7 @@
 	// 장소 검색 객체를 생성합니다
 	var ps = new daum.maps.services.Places(map);
 
-	///////////////////////////////////////////
-	//                                //
-	//                               //
-	//            사용자 검색                 //
-	//                               //
-	//                               //
-	///////////////////////////////////////////
-var infowindow = new daum.maps.InfoWindow({zIndex:1})
-	function jejuSearch() {
-		var searchId = $('#search').val();
-		console.log(searchId);
-
-		// 처음시작할시 맵에 있는 마커삭제
-
-		removeMarker();
-		removeSearchMarker();
-		// 키워드로 장소를 검색합니다 // 기본 설정 앞에 제주도 첨부함
-		ps.keywordSearch('제주도' + searchId, placesSearchCB);
-
-		// 키워드 검색 완료 시 호출되는 콜백함수 입니다
-		function placesSearchCB(data, status, pagination) {
-			if (status === daum.maps.services.Status.OK) {
-
-				// 검색된 장소 위치를 기준으로 지도 범위를 재설정하기위해
-				// LatLngBounds 객체에 좌표를 추가합니다
-				var bounds = new daum.maps.LatLngBounds();
-
-				for (var i = 0; i < data.length; i++) {
-					displayMarker(data[i]);
-					bounds.extend(new daum.maps.LatLng(data[i].y, data[i].x));
-				}
-
-				// 검색된 장소 위치를 기준으로 지도 범위를 재설정합니다
-				map.setBounds(bounds);
-			}
-		}
-
-		// 지도에 마커를 표시하는 함수입니다
-		function displayMarker(placeSearch) {
-
-			// 마커를 생성하고 지도에 표시합니다
-			var marker = new daum.maps.Marker({
-				map : map,
-				position : new daum.maps.LatLng(placeSearch.y, placeSearch.x)
-			});
-			// 매번들어오는 마커를 markers라는 배열에 삽입한다. 
-			markersSearch.push(marker);
-
-			// 마커에 클릭이벤트를 등록합니다
-			daum.maps.event.addListener(marker, 'click', function() {
-				// 마커를 클릭하면 장소명이 인포윈도우에 표출됩니다
-				infowindow
-						.setContent('<div style="padding:5px;font-size:12px;">'
-								+ placeSearch.place_name + '</div>');
-				infowindow.open(map, marker);
-			});
-		}
-
-		// 마커 지워주기 
-		function removeSearchMarker() {
-			for (var i = 0; i < markersSearch.length; i++) {
-				markersSearch[i].setMap(null);
-			}
-			markersSearch = [];
-		}
-
-	}
-
-	///////////////////////////////////////////
-	//                              ///
-	//                              ///
-	//              지도 레벨 관련             ///
-	//                              ///
-	//                              ///
-	///////////////////////////////////////////
-
-	// 지도 레벨을 표시합니다
-	displayLevel();
-
-	// 지도 레벨은 지도의 확대 수준을 의미합니다
-	// 지도 레벨은 1부터 14레벨이 있으며 숫자가 작을수록 지도 확대 수준이 높습니다
-	function zoomIn() {
-		// 현재 지도의 레벨을 얻어옵니다
-		var level = map.getLevel();
-
-		// 지도를 1레벨 내립니다 (지도가 확대됩니다)
-		map.setLevel(level - 1);
-
-		// 지도 레벨을 표시합니다
-		displayLevel();
-	}
-
-	function zoomOut() {
-		// 현재 지도의 레벨을 얻어옵니다
-		var level = map.getLevel();
-
-		// 지도를 1레벨 올립니다 (지도가 축소됩니다)
-		map.setLevel(level + 1);
-
-		// 지도 레벨을 표시합니다
-		displayLevel();
-	}
-
-	function displayLevel() {
-		var levelEl = document.getElementById('maplevel');
-		levelEl.innerHTML = '현재 지도 레벨은 ' + map.getLevel() + ' 레벨 입니다.';
-	}
-
-	///////////////////////////////////////////
-	//                                //
-	//                               //
-	//            카테고리별  장소 검색           //
-	//                               //
-	//                               //
-	///////////////////////////////////////////
-
-	// 지도에 idle 이벤트를 등록합니다
-	daum.maps.event.addListener(map, 'idle', searchPlaces);
-
-	// 커스텀 오버레이의 컨텐츠 노드에 css class를 추가합니다 
-	contentNode.className = 'placeinfo_wrap';
-
-	// 커스텀 오버레이의 컨텐츠 노드에 mousedown, touchstart 이벤트가 발생했을때
-	// 지도 객체에 이벤트가 전달되지 않도록 이벤트 핸들러로 daum.maps.event.preventMap 메소드를 등록합니다 
-	addEventHandle(contentNode, 'mousedown', daum.maps.event.preventMap);
-	addEventHandle(contentNode, 'touchstart', daum.maps.event.preventMap);
-
-	// 커스텀 오버레이 컨텐츠를 설정합니다
-	placeOverlay.setContent(contentNode);
-
-	// 각 카테고리에 클릭 이벤트를 등록합니다
-	addCategoryClickEvent();
-
-	// 엘리먼트에 이벤트 핸들러를 등록하는 함수입니다
-	function addEventHandle(target, type, callback) {
-		if (target.addEventListener) {
-			target.addEventListener(type, callback);
-		} else {
-			target.attachEvent('on' + type, callback);
-		}
-	}
-
-	// 카테고리 검색을 요청하는 함수입니다
-	function searchPlaces() {
-		if (!currCategory) {
-			return;
-		}
-
-		// 커스텀 오버레이를 숨깁니다 
-		placeOverlay.setMap(null);
-
-		// 지도에 표시되고 있는 마커를 제거합니다
-		removeMarker();
-
-		ps.categorySearch(currCategory, placesSearchCB, {
-			useMapBounds : true
-		});
-	}
-
-	// 장소검색이 완료됐을 때 호출되는 콜백함수 입니다
-	function placesSearchCB(data, status, pagination) {
-		if (status === daum.maps.services.Status.OK) {
-
-			// 정상적으로 검색이 완료됐으면 지도에 마커를 표출합니다
-			displayPlaces(data);
-		} else if (status === daum.maps.services.Status.ZERO_RESULT) {
-			// 검색결과가 없는경우 해야할 처리가 있다면 이곳에 작성해 주세요
-
-		} else if (status === daum.maps.services.Status.ERROR) {
-			// 에러로 인해 검색결과가 나오지 않은 경우 해야할 처리가 있다면 이곳에 작성해 주세요
-
-		}
-	}
-
-	// 지도에 마커를 표출하는 함수입니다
-	function displayPlaces(places) {
-
-		// 몇번째 카테고리가 선택되어 있는지 얻어옵니다
-		// 이 순서는 스프라이트 이미지에서의 위치를 계산하는데 사용됩니다
-		var order = document.getElementById(currCategory).getAttribute(
-				'data-order');
-
-		for (var i = 0; i < places.length; i++) {
-
-			// 마커를 생성하고 지도에 표시합니다
-			var marker = addMarker(new daum.maps.LatLng(places[i].y,
-					places[i].x), order);
-
-			// 마커와 검색결과 항목을 클릭 했을 때
-			// 장소정보를 표출하도록 클릭 이벤트를 등록합니다
-			(function(marker, place) {
-				daum.maps.event.addListener(marker, 'click', function() {
-					displayPlaceInfo(place);
-				});
-			})(marker, places[i]);
-		}
-	}
-
-	// 마커를 생성하고 지도 위에 마커를 표시하는 함수입니다
-	function addMarker(position, order) {
-		var imageSrc = 'http://t1.daumcdn.net/localimg/localimages/07/mapapidoc/places_category.png', // 마커 이미지 url, 스프라이트 이미지를 씁니다
-		imageSize = new daum.maps.Size(27, 28), // 마커 이미지의 크기
-		imgOptions = {
-			spriteSize : new daum.maps.Size(72, 208), // 스프라이트 이미지의 크기
-			spriteOrigin : new daum.maps.Point(46, (order * 36)), // 스프라이트 이미지 중 사용할 영역의 좌상단 좌표
-			offset : new daum.maps.Point(11, 28)
-		// 마커 좌표에 일치시킬 이미지 내에서의 좌표
-		}, markerImage = new daum.maps.MarkerImage(imageSrc, imageSize,
-				imgOptions), marker = new daum.maps.Marker({
-			position : position, // 마커의 위치
-			image : markerImage
-		});
-
-		marker.setMap(map); // 지도 위에 마커를 표출합니다
-		markers.push(marker); // 배열에 생성된 마커를 추가합니다
-
-		return marker;
-	}
-
-	// 지도 위에 표시되고 있는 마커를 모두 제거합니다
-	function removeMarker() {
-		for (var i = 0; i < markers.length; i++) {
-			markers[i].setMap(null);
-		}
-		markers = [];
-	}
-
-	// 클릭한 마커에 대한 장소 상세정보를 커스텀 오버레이로 표시하는 함수입니다
-	function displayPlaceInfo(place) {
-		var content = '<div class="placeinfo">'
-				+ '   <a class="title" href="' + place.place_url + '" target="_blank" title="' + place.place_name + '">'
-				+ place.place_name + '</a>';
-
-		if (place.road_address_name) {
-			content += '    <span title="' + place.road_address_name + '">'
-					+ place.road_address_name
-					+ '</span>'
-					+ '  <span class="jibun" title="' + place.address_name + '">(지번 : '
-					+ place.address_name + ')</span>';
-		} else {
-			content += '    <span title="' + place.address_name + '">'
-					+ place.address_name + '</span>';
-		}
-
-		content += '    <span class="tel">' + place.phone + '</span>'
-				+ '</div>' + '<div class="after"></div>';
-
-		contentNode.innerHTML = content;
-		placeOverlay.setPosition(new daum.maps.LatLng(place.y, place.x));
-		placeOverlay.setMap(map);
-	}
-
-	// 각 카테고리에 클릭 이벤트를 등록합니다
-	function addCategoryClickEvent() {
-		var category = document.getElementById('category'), children = category.children;
-
-		for (var i = 0; i < children.length; i++) {
-			children[i].onclick = onClickCategory;
-		}
-	}
-
-	// 카테고리를 클릭했을 때 호출되는 함수입니다
-	function onClickCategory() {
-		var id = this.id, className = this.className;
-
-		placeOverlay.setMap(null);
-
-		if (className === 'on') {
-			currCategory = '';
-			changeCategoryClass();
-			removeMarker();
-		} else {
-			currCategory = id;
-			changeCategoryClass(this);
-			searchPlaces();
-		}
-	}
-
-	// 클릭된 카테고리에만 클릭된 스타일을 적용하는 함수입니다
-	function changeCategoryClass(el) {
-		var category = document.getElementById('category'), children = category.children, i;
-
-		for (i = 0; i < children.length; i++) {
-			children[i].className = '';
-		}
-
-		if (el) {
-			el.className = 'on';
-		}
-	}
-
+	
 	///////////////////////////////////////////
 	//                                //
 	//                               //
