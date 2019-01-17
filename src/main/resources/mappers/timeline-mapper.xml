@@ -64,4 +64,11 @@
 		<![CDATA[ROWNUM<=10]]>
 	</select>
 	
+	<select id="searchTimeLine" resultType="PreTimeLine">
+		SELECT T.TID, M.PROFILE_PATH, M.MNICK, T.TDATE, T.TCONTENT, T.HASHTAG 
+		FROM MEMBER M JOIN TIMELINE T ON(M.MNO=T.MNO)
+		WHERE T.HASHTAG LIKE '%'||#{text}||'%' 
+	</select>
+	
+	
 </mapper>

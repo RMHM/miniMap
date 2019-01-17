@@ -216,6 +216,7 @@
 		<c:import url="../common/footer.jsp" />
 		<script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
 		<script>
+		$('tbody').attr('align','center');
 		function readURL(input) { 
 		
 				var reader = new FileReader(); 

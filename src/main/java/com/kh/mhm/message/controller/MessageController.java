@@ -152,8 +152,9 @@ public class MessageController {
 	
 	@RequestMapping(value="/message.storeOne", method = {RequestMethod.POST})
 	@ResponseBody
-	public int storeMessageOne(int meId) {
-		int result=ms.storeMessageOne(meId);
+	public int storeMessageOne(String meId) {
+		System.out.println(meId);
+		int result=ms.storeMessageOne(Integer.valueOf(meId));
 		return result;
 	}
 	
