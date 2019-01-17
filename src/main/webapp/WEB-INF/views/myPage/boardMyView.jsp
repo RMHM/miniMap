@@ -51,7 +51,7 @@ text-align:center;
 						</div>
 					</div>
 					<c:if test="${myType eq 'board' }">
-						<div id = "boTable" class="list">
+						<div id = "boTable" class="list" align ="center">
 
 							<table  class="table table-hover">
 								<thead>
@@ -180,28 +180,22 @@ text-align:center;
 				/* 		alert($(this).children('td:eq(1)').value); */
 					 	if($(this).children('td:eq(1)').text()=="광고") location.href = "${pageContext.request.contextPath}/board/adBoardView.do?bid="+bId; 
 						else  location.href = "${pageContext.request.contextPath}/board/boardview.do?BId="+bId; 
-					
+						
 						   
 					});
 					var def ="";
-					/* $('tr[name=rflag]').hover(function(){
-						$(this).append('삭제됨')});
-					 */
+				
 					 $('tr[name=rflag]').mouseover(function(){
 						def = this;
 						console.log(this.change('<tr><td colspan="6">삭제된 게시글입니다.</td></tr>'));
-					 	/* this.append('<td colspan="6">삭제된 게시글입니다.</td>'); */ 
-						
-					 	/* this.html('<tr><td colspan="6">삭제된 게시글입니다.</td></tr>'); 
-						this.change('<tr><td colspan="6">삭제된 게시글입니다.</td></tr>'); */
-						console.log(def);
+					 
 					  });
 					  $("tr[name=rflag]").mouseout(function(){
-					   /* $(this).removeClass("hover"); */
+		
 					   console.log(def);
 					   	this.find('td').remove();
 						this.val(def);
-					   /* $(this).html(def); */ 
+				
 					  }); 
 				});
 			</script>

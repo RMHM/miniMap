@@ -75,7 +75,7 @@ JOIN BOARD_TYPE T ON(B.BCODE=T.BCODE)
 
 	</select>
 	<update id="updateAuthority" parameterType="Authority">
-		UPDATE AUTHORITY SET REQUEST_DATE = SYSDATE , ADDRESS=#{address},ACONTENT=#{aContent} , ACODE=#{aCode} WHERE AId=#{aId}
+		UPDATE AUTHORITY SET REQUEST_DATE = SYSDATE , ADDRESS=#{address},ACONTENT=#{aContent} , ACODE=#{aCode},IMG_FILE=#{img_file} , SITE_URL=#{site_url} WHERE AId=#{aId}
 	</update>
 	
 	<select id="selectOneMyAuthority" parameterType="string" resultType="Authority">
