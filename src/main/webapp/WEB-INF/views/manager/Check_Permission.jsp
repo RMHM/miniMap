@@ -169,7 +169,6 @@ button:hover {
 	
 	$(document).ready(function(){
 		$('#checkList').hide();
-		$('#aCode2Div').hide();
 	});
 	
 	function grant() {
@@ -196,12 +195,16 @@ button:hover {
 		var mNick = $('#mnick').val();
 		var aCode = $('input[name^=aCode]:checked').val();
 		
-		url = "refuseAuthority.do?mnick="+mNick + "&content="+content+"&acode="+aCode
+		if((content != null) && (content != "")){		
+			url = "refuseAuthority.do?mnick="+mNick + "&content="+content+"&acode="+aCode
 		
-		opener.window.location = url;
-		
-		close();
-
+			opener.window.location = url;
+			
+			close();
+		} else {
+			alert("거절 사유는 필수 사항입니다.");
+			refuse();
+		} 
 	}
 	
 	$('button[name=checkBtn]').click(function(){
@@ -226,7 +229,6 @@ button:hover {
 					$('#aCode1').attr('checked', 'true');
 					$('#aCode2').attr('disabled', 'true');
 				} else {
-					$('#aCode2Div').show();
 					$('#aCode1').attr('disabled', 'true');
 					$('#aCode2').attr('checked', 'true');
 					

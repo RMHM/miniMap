@@ -24,15 +24,15 @@
 		<div class="container">
 			<div class="col-md-10">
 
-				<div class="container-fluid">
+				<!-- <div class="container-fluid">
 					<div class="row">
-					<div class="col-lg-4 col-md-offset-4">
+					<div class="col-lg-4 col-md-offset-4"> -->
 						<div class="btn-group">
 							<input type="button" value="작성 게시글" id="boTab" class="btn btn-theme" >
 							<input type="button" value="작성 댓글" id="coTab" class="btn btn-theme" >
 							<input type="button" value="관리자 페이지로" id="mngTab" class="btn btn-theme" >
 						</div>
-					</div>
+					<!-- </div> -->
 						<div id = "boTable" class="list">
 
 							<table  class="table table-hover">
