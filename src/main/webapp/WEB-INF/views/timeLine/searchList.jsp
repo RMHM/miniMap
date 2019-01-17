@@ -64,6 +64,9 @@
 														<img class="singo" src="/resources/img/timeline/singo.png" />
 													</a>
 												</div>
+												<div class="comment-type">
+														<span>[<strong>${i.getTSort()}</strong>]</span>
+												</div>
 												<div class="comment-content">
 													<pre>${i.getTContent()}</pre>
 												</div>
@@ -94,6 +97,9 @@
 														onclick="report(($(this).parent().parent().parents().siblings('.lastTID').text()), ($(this).siblings('.comment-name').children('a').text()));">
 														<img class="singo" src="/resources/img/timeline/singo.png" />
 													</a>
+												</div>
+												<div class="comment-type">
+														<span>[<strong>${i.getTSort()}</strong>]</span>
 												</div>
 												<div class="comment-content">
 													<pre>${i.getTContent()}</pre>

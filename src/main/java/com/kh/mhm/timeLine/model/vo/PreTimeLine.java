@@ -7,6 +7,7 @@ import java.text.SimpleDateFormat;
 public class PreTimeLine implements Serializable {
 	
 	private int tId;
+	private String tSort;
 	private String profile_path;
 	private String mNick;
 	private String tDate;
@@ -17,9 +18,10 @@ public class PreTimeLine implements Serializable {
 		super();
 	}
 
-	public PreTimeLine(int tId,String profile_path, String mNick, Timestamp tDate, String tContent, String hashTag) {
+	public PreTimeLine(int tId, String tSort, String profile_path, String mNick, Timestamp tDate, String tContent, String hashTag) {
 		super();
 		this.tId=tId;
+		this.tSort=tSort;
 		this.profile_path = profile_path;
 		this.mNick = mNick;
 		this.tDate = new SimpleDateFormat("MM/dd/yyyy HH:mm:ss").format(tDate);
@@ -35,6 +37,16 @@ public class PreTimeLine implements Serializable {
 
 	public void setTId(int tId) {
 		this.tId = tId;
+	}
+	
+	
+
+	public String getTSort() {
+		return tSort;
+	}
+
+	public void setTSort(String tSort) {
+		this.tSort = tSort;
 	}
 
 	public String getProfile_path() {

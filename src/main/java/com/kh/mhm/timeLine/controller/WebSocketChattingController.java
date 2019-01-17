@@ -3,7 +3,9 @@ package com.kh.mhm.timeLine.controller;
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -62,12 +64,12 @@ public class WebSocketChattingController {
 		return tls.blockTimeLine(Integer.valueOf(tId),mNick);
 	}
 	
-	@RequestMapping("letus/see.timeline")
+	/*@RequestMapping("letus/see.timeline")
 	@ResponseBody
 	public List<PreTimeLine> mainTimeLine() {
 		List<PreTimeLine> list=tls.mainTimeLine();
 		return list;
-	}
+	}*/
 	
 	@RequestMapping("/timeline.search")
 	public String searchTimeLine(Model model,HttpServletRequest req) throws UnsupportedEncodingException {
@@ -76,5 +78,34 @@ public class WebSocketChattingController {
 		List<PreTimeLine> list=tls.searchTimeLine(text);
 		model.addAttribute("list",list);
 		return "timeLine/searchList";
+	}
+	
+	@RequestMapping("/timeline.classify")
+	@ResponseBody
+	public List<PreTimeLine> classifyTimeLine(String tType){
+		if(tType.length()>1) {
+			List<PreTimeLine> list = tls.selectPreTimeLine();
+			return list;
+		}else {
+			List<PreTimeLine> list=tls.classifyTimeLine(tType);
+			return list;
+		}
+		
+	}
+	
+	@RequestMapping("/load.classify")
+	@ResponseBody
+	public List<PreTimeLine> loadMoreClassify(int tId,String tType){
+		if(tType.length()>1) {
+			List<PreTimeLine> list=tls.loadMoreLine(Integer.valueOf(tId));
+			return list;
+		}else {
+			Map<String,Object> map=new HashMap<String,Object>();
+			map.put("tId", tId);
+			map.put("tType", tType);
+			List<PreTimeLine> list=tls.loadMoreClassify(map);
+			return list;
+		}
+		
 	}
 }

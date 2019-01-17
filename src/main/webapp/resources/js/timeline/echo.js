@@ -51,151 +51,6 @@ $(function() {
 var isScrollUp = false;
 var unreadCnt = 0;
 
-var sock = new SockJS("/echo");
-sock.onmessage = onMessage;
-sock.onclose = onClose;
-var today = null;
-
-sock.onopen = function() {
-	console.log("tsock open");
-	$('#div_chat').animate({
-		scrollTop : $('#div_chat').prop('scrollHeight') + 1
-	}, 500);
-}
-
-$(function() {
-	$("#sendBtn").click(function() {
-		if ($('#message').val() == '' || $('#message').val() == null) {
-			alert('타임라인에 등록할 메세지를 입력해주세요');
-
-		} else {
-			if ($("#tag").val() == '' || $('#tag').val() == null) {
-				$('#tag').val('제주도');
-			}
-			if (confirm("정말 게시하시겠습니까?") == false) {
-				return false;
-			} else {
-				console.log("send message.....");
-				sendMessage();
-				$("#message").val('');
-				$('#tag').val('');
-				$('.count').text('250');
-				$('.count2').text('50');
-
-				if (isScrollUp) {
-					unreadCnt++;
-					$('#btn_scroll_down').html('↓ ' + unreadCnt);
-				}
-
-				if (!isScrollUp) {
-					$('#div_chat').animate({
-						scrollTop : $('#div_chat').prop('scrollHeight') + 1
-					}, 500);
-				}
-			}
-
-		}
-
-	});
-});
-function sendMessage() {
-	if (sock.readyState === 1) {
-		$('#sendBtn').prop('disabled',true);
-		sock.send($("#message").val() + "|%%|&" + $("#tag").val());
-	} else {
-		console.log("메세지 전송 실패(일시적 문제)");
-	}
-
-};
-function onMessage(evt) {
-	var data = evt.data;
-	var host = null;
-	var strArray = data.split("|%%|&");
-	var userName = null;
-	var profPath = null;
-	var hashTag = null;
-	var tId = null;
-
-	if (strArray.length > 1) {
-		sessionId = strArray[0];
-		message = strArray[1];
-		host = strArray[2].substr(1, strArray[2].indexOf(":") - 1);
-		userName = strArray[3];
-		profPath = strArray[4];
-		hashTag = strArray[5];
-		tId = strArray[6];
-		today = new Date();
-		printDate = today.getFullYear() + "/" + today.getMonth() + "/"
-				+ today.getDate() + " " + today.getHours() + ":"
-				+ today.getMinutes() + ":" + today.getSeconds();
-
-		var ck_host = '${host}';
-
-		var urlProf = "/resources/img/profiles/";
-		if (host == ck_host || (host == 0 && ck_host.includes('0:0:'))
-				|| (host == 0 && ck_host.includes('127.0.0.1'))) {
-			var printHTML = "<li><div class='lastTID' style='display:none'>"
-					+ tId
-					+ "</div><div class='comment-main-level'><div class='comment-avatar'>";
-			printHTML += "<img src='" + urlProf + profPath + "' alt=''></div>";
-			printHTML += "<div class='comment-box-me'><div class='comment-head-me'><span class='comment-name '>";
-			printHTML += "<a href='#'>" + userName + "&nbsp;(나)"
-					+ "</a></span><span>" + printDate + "</span>";
-			printHTML += "<a href='#' class='jjokjeeTag'>"
-					+ "<img class='jjokjee' src='/resources/img/timeline/jjokjee.png'/>"
-					+ "</a><a href='#' class='singoTag'>"
-					+ "<img class='singo' src='/resources/img/timeline/singo.png'/></a>";
-			printHTML += "</div><div class='comment-content'><pre>" + message
-					+ "</pre></div>";
-			printHTML += "<div class='comment-bottom-me'><i class='fa fa-link'></i>";
-			printHTML += "<a href='https://www.google.com/search?q=" + hashTag
-					+ "' target='_BLANK'>" + hashTag + "</a>";
-			printHTML += "</div></div></div></li>";
-			$('.disqusin').append(printHTML);
-		} else {
-			var printHTML = "<li><div class='lastTID' style='display:none'>"
-					+ tId
-					+ "</div><div class='comment-main-level'><div class='comment-avatar'>";
-			printHTML += "<img src='" + urlProf + profPath + "' alt=''></div>";
-			printHTML += "<div class='comment-box'><div class='comment-head'><span class='comment-name '>";
-			printHTML += "<a href='#'>" + userName + "</a></span><span>"
-					+ printDate + "</span>";
-			printHTML += "<a href='#' class='jjokjeeTag'>"
-					+ "<img class='jjokjee' src='/resources/img/timeline/jjokjee.png'/>"
-					+ "</a><a href='#' class='singoTag'>"
-					+ "<img class='singo' src='/resources/img/timeline/singo.png'/></a>";
-			printHTML += "</div><div class='comment-content'><pre>" + message
-					+ "</pre></div>";
-			printHTML += "<div class='comment-bottom'><i class='fa fa-link'></i>";
-			printHTML += "<a href='https://www.google.com/search?q=" + hashTag
-					+ "' target='_BLANK'>" + hashTag + "</a>";
-			printHTML += "</div></div></div></li>";
-			$('.disqusin').append(printHTML);
-
-		}
-		
-		$(document).off('click','.jjokjeeTag');
-		$(document).off('click','.singoTag');
-
-		$(document).on('click','.jjokjeeTag',function(){
-			sendNote($(this).siblings('.comment-name').children('a').text());
-		});
-		
-		$(document).on('click','.singoTag',function(){
-			report(($(this).parent().parent().parents().siblings('.lastTID').text()), ($(this).siblings('.comment-name').children('a').text()));
-		});
-	} 
-	
-	
-	setTimeout(function() {
-		$('#sendBtn').prop('disabled',false);
-	}, 10000);
-};
-
-function onClose(evt) {
-
-}
-
 
 $('#btn_scroll_down').on('click', function() {
 	$('#div_chat').animate({
@@ -248,7 +103,6 @@ $("#div_chat")
 					if ($(this).scrollTop() == 0) {
 						var lt = $('.lastTID').eq(0).text() * 1;
 						var list = loadMore(lt);
-
 						var oldScrollHeight = $('#div_chat').prop(
 								'scrollHeight');
 
@@ -268,7 +122,8 @@ $("#div_chat")
 										+ "<img class='jjokjee' src='/resources/img/timeline/jjokjee.png'/>"
 										+ "</a><a href='#' class='singoTag'>"
 										+ "<img class='singo' src='/resources/img/timeline/singo.png'/></a>";
-								printHTML += "</div><div class='comment-content'><pre>"
+								printHTML += "</div><div class='comment-type'><span>[<strong>"+list[i].tsort+"</strong>]</span>"
+										+ "</div><div class='comment-content'><pre>"
 										+ list[i].tcontent + "</pre></div>";
 								printHTML += "<div class='comment-bottom-me'><i class='fa fa-link'></i>";
 								printHTML += "<a href='https://www.google.com/search?q="
@@ -292,7 +147,8 @@ $("#div_chat")
 										+ "<img class='jjokjeeImg' src='/resources/img/timeline/jjokjee.png'/>"
 										+ "</a><a href='#' class='singo'>"
 										+ "<img class='singoImg' src='/resources/img/timeline/singo.png'/></a>";
-								printHTML += "</div><div class='comment-content'><pre>"
+								printHTML += "</div><div class='comment-type'><span>[<strong>"+list[i].tsort+"</strong>]</span>"
+										+ "</div><div class='comment-content'><pre>"
 										+ list[i].tcontent + "</pre></div>";
 								printHTML += "<div class='comment-bottom'><i class='fa fa-link'></i>";
 								printHTML += "<a href='https://www.google.com/search?q="
@@ -352,7 +208,7 @@ function sendNote(nick) {
 }
 
 function report(tid,mnick) {
-	if (confirm("차단한 타임라인은 자신에게 다시는 보이지 않습니다. 그래도 차단하시겠습니까?") == false) {
+	if (confirm("차단한 타임라인은 자신에게 다시는 보이지 않습니다. 차단한 내역은 관리자에게 전송되어 관리됩니다. 계속 차단하시겠습니까?") == false) {
 		return false;
 	} else{
 		var myNick=$(".membernick").text();
