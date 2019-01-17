@@ -50,7 +50,7 @@
 
 	<select id="selectMyBoard" parameterType="_int"
 		resultType="Board">
-		select * from board join BOARD_TYPE using(bcode) where mno =#{mNo} ORDER BY BDATE
+		select B.*,T.BNAME from board B join BOARD_TYPE T ON (B.bcode = T.BCODE) where mno =#{mNo} ORDER BY BDATE
 		DESC,BNO DESC
 	</select>
 	<select id="selectMyComment" parameterType="_int"
