@@ -81,21 +81,19 @@
 			</div>
 		</section>
 		
-		<h3 align='center'>실시간 타임라인</h3>
-		<section class="callaction" style="height:270px !important;">
-			<div class='col-lg-6'>
-				<div class="box" id="siltaja" name="siltaja"></div>
-			</div>
-			<div class='col-lg-6'>
-				<div id="letustl" style='position:absolute !important; right:30% !important;'>
-				<h5 id='letTxt' style='line-height:1.7em;'>
-					타임라인에서 다른 여행객들과 실시간으로 정보를 공유해보세요!<br>
-					고기국수는 어디가 맛있을까요?<br>
-					길이 막히지는 않을까요?<br>
-					같이 올레길을 걸을 친구가 필요하지 않으세요?<br>
-					지금 타임라인을 이욯하세요!<br>
-				</h5>			
-				<button id="tlBtn" onclick="window.location.href='/echo.do'">타임라인 이용하기</button>
+		<section class="callaction" style="height:300px">
+			<div class="container">
+				<div class="row">
+					<div class='col-lg-6'>
+						<div class="box" id="boardDiv"></div>
+					</div>
+					<div class='col-lg-6'>
+						<div>
+							<h5>손쉬운 광고 등록</h5>
+							<p>여러분도 광고를 등록할 수 있습니다.</p>
+							<p><a href="/board/adBoard.go">보러가기</a></p>
+						</div>
+					</div>
 				</div>
 			</div>
 		</section>
