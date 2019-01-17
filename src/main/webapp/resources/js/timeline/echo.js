@@ -141,9 +141,9 @@ function onMessage(evt) {
 			printHTML += "<div class='comment-box-me'><div class='comment-head-me'><span class='comment-name '>";
 			printHTML += "<a href='#'>" + userName + "&nbsp;(나)"
 					+ "</a></span><span>" + printDate + "</span>";
-			printHTML += "<a href='#' onclick='sendNote($(this).siblings('.comment-name').children('a').text());'>"
+			printHTML += "<a href='#' class='jjokjeeTag'>"
 					+ "<img class='jjokjee' src='/resources/img/timeline/jjokjee.png'/>"
-					+ "</a><a href='#' onclick='report(($(this).parent().parent().parents().siblings('.lastTID').text()), ($(this).siblings('.comment-name').children('a').text()));'>"
+					+ "</a><a href='#' class='singoTag'>"
 					+ "<img class='singo' src='/resources/img/timeline/singo.png'/></a>";
 			printHTML += "</div><div class='comment-content'><pre>" + message
 					+ "</pre></div>";
@@ -160,9 +160,9 @@ function onMessage(evt) {
 			printHTML += "<div class='comment-box'><div class='comment-head'><span class='comment-name '>";
 			printHTML += "<a href='#'>" + userName + "</a></span><span>"
 					+ printDate + "</span>";
-			printHTML += "<a href='#' onclick='sendNote($(this).siblings('.comment-name').children('a').text());'>"
+			printHTML += "<a href='#' class='jjokjeeTag'>"
 					+ "<img class='jjokjee' src='/resources/img/timeline/jjokjee.png'/>"
-					+ "</a><a href='#' onclick='report(($(this).parent().parent().parents().siblings('.lastTID').text()), ($(this).siblings('.comment-name').children('a').text()));'>"
+					+ "</a><a href='#' class='singoTag'>"
 					+ "<img class='singo' src='/resources/img/timeline/singo.png'/></a>";
 			printHTML += "</div><div class='comment-content'><pre>" + message
 					+ "</pre></div>";
@@ -173,7 +173,19 @@ function onMessage(evt) {
 			$('.disqusin').append(printHTML);
 
 		}
+		
+		$(document).off('click','.jjokjeeTag');
+		$(document).off('click','.singoTag');
+
+		$(document).on('click','.jjokjeeTag',function(){
+			sendNote($(this).siblings('.comment-name').children('a').text());
+		});
+		
+		$(document).on('click','.singoTag',function(){
+			report(($(this).parent().parent().parents().siblings('.lastTID').text()), ($(this).siblings('.comment-name').children('a').text()));
+		});
 	} 
+	
 	
 	setTimeout(function() {
 		$('#sendBtn').prop('disabled',false);
@@ -250,11 +262,11 @@ $("#div_chat")
 										+ "' alt=''></div>";
 								printHTML += "<div class='comment-box-me'><div class='comment-head-me'><span class='comment-name '>";
 								printHTML += "<a href='#'>" + list[i].mnick
-										+ "&nbsp;(나)" + "</a></span><span>"
+										+ "</a>" + "&nbsp;(나)" + "</span><span>"
 										+ list[i].tdate + "</span>";
-								printHTML += "<a href='#' onclick='sendNote($(this).siblings('.comment-name').children('a').text());'>"
+								printHTML += "<a href='#' class='jjokjeeTag'>"
 										+ "<img class='jjokjee' src='/resources/img/timeline/jjokjee.png'/>"
-										+ "</a><a href='#' onclick='report(($(this).parent().parent().parents().siblings('.lastTID').text()), ($(this).siblings('.comment-name').children('a').text()));'>"
+										+ "</a><a href='#' class='singoTag'>"
 										+ "<img class='singo' src='/resources/img/timeline/singo.png'/></a>";
 								printHTML += "</div><div class='comment-content'><pre>"
 										+ list[i].tcontent + "</pre></div>";
@@ -276,10 +288,10 @@ $("#div_chat")
 								printHTML += "<a href='#'>" + list[i].mnick
 										+ "</a></span><span>" + list[i].tdate
 										+ "</span>";
-								printHTML += "<a href='#' onclick='sendNote($(this).siblings('.comment-name').children('a').text());'>"
-										+ "<img class='jjokjee' src='/resources/img/timeline/jjokjee.png'/>"
-										+ "</a><a href='#' onclick='report(($(this).parent().parent().parents().siblings('.lastTID').text()), ($(this).siblings('.comment-name').children('a').text()));'>"
-										+ "<img class='singo' src='/resources/img/timeline/singo.png'/></a>";
+								printHTML += "<a href='#' class='jjokjee'>"
+										+ "<img class='jjokjeeImg' src='/resources/img/timeline/jjokjee.png'/>"
+										+ "</a><a href='#' class='singo'>"
+										+ "<img class='singoImg' src='/resources/img/timeline/singo.png'/></a>";
 								printHTML += "</div><div class='comment-content'><pre>"
 										+ list[i].tcontent + "</pre></div>";
 								printHTML += "<div class='comment-bottom'><i class='fa fa-link'></i>";
@@ -297,6 +309,17 @@ $("#div_chat")
 								'scrollHeight');
 
 						$(this).scrollTop(newScrollHeight - oldScrollHeight);
+						
+						$(document).off('click','.jjokjeeTag');
+						$(document).off('click','.singoTag');
+
+						$(document).on('click','.jjokjeeTag',function(){
+							sendNote($(this).siblings('.comment-name').children('a').text());
+						});
+						
+						$(document).on('click','.singoTag',function(){
+							report(($(this).parent().parent().parents().siblings('.lastTID').text()), ($(this).siblings('.comment-name').children('a').text()));
+						});
 					}
 
 				});

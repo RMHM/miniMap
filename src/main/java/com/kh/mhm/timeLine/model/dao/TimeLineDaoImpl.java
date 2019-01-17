@@ -58,4 +58,9 @@ public class TimeLineDaoImpl implements TimeLineDao {
 		return sqlSession.selectList("TimeLine.mainTimeLine");
 	}
 
+	@Override
+	public List<PreTimeLine> searchTimeLine(String text) {
+		return sqlSession.selectList("TimeLine.searchTimeLine",text);
+	}
+
 }

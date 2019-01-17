@@ -21,4 +21,6 @@ public interface TimeLineDao {
 	int blockTimeLine(int tId, String mNick);
 	
 	List<PreTimeLine> mainTimeLine();
+	
+	List<PreTimeLine> searchTimeLine(String text);
 }
