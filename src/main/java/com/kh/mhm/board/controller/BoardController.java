@@ -143,7 +143,7 @@ public class BoardController {
 	public String infoSearchBoard(@RequestParam(required = false) String keyField,
 			@RequestParam(required = false) String keyWord, Model model, Board board) {
 
-		List<Board> list = boardService.selectSearchList1(keyField, keyWord);
+		List<Board> list = boardService.selectSearchList2(keyField, keyWord);
 		
 		List<Integer> cc = new ArrayList<Integer>();
 		for(int i=0; i<list.size(); i++) {			
@@ -203,7 +203,7 @@ public class BoardController {
 	public String reviewSearchBoard(@RequestParam(required = false) String keyField,
 			@RequestParam(required = false) String keyWord, Model model, Board board) {
 
-		List<Board> list = boardService.selectSearchList1(keyField, keyWord);
+		List<Board> list = boardService.selectSearchList3(keyField, keyWord);
 		
 		List<Integer> cc = new ArrayList<Integer>();
 		for(int i=0; i<list.size(); i++) {			
@@ -224,9 +224,9 @@ public class BoardController {
 		ArrayList<Board> list = new ArrayList<Board>(
 				boardService.selectBoardList4(cPage, numPerPage));
 
-		int totalContents = boardService.selectBoardTotalContents2();
+		int totalContents = boardService.selectBoardTotalContents4();
 
-		String pageBar = Utils.getPageBar(totalContents, cPage, numPerPage, "boardlist2.do");
+		String pageBar = Utils.getPageBar(totalContents, cPage, numPerPage, "boardlist4.do");
 		List<Board> list2 = boardService.selectNoticeList4(board);
 		List<Board> list3 = boardService.selectBestList4(board);
 
@@ -260,7 +260,7 @@ public class BoardController {
 	public String qaSearchBoard(@RequestParam(required = false) String keyField,
 			@RequestParam(required = false) String keyWord, Model model, Board board) {
 
-		List<Board> list = boardService.selectSearchList1(keyField, keyWord);
+		List<Board> list = boardService.selectSearchList4(keyField, keyWord);
 		
 		List<Integer> cc = new ArrayList<Integer>();
 		for(int i=0; i<list.size(); i++) {			
@@ -277,8 +277,9 @@ public class BoardController {
 
 	@RequestMapping("/board/boardwrite.do")
 	public ModelAndView boardwrite(Model model, HttpServletRequest request, HttpServletResponse response) {
-		 Member m = (Member)request.getSession().getAttribute("member");		
-	      ModelAndView mv = new ModelAndView();
+		 
+		Member m = (Member)request.getSession().getAttribute("member");		
+	     ModelAndView mv = new ModelAndView();
 	        if(m == null)   {
 				mv.addObject("msg", "로그인이 필요합니다.");
 				mv.addObject("url", "/member/loginPage.go"); 

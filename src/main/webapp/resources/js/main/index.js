@@ -71,6 +71,7 @@ $(function() {
 })
 
 /*$(document).ready(function() {
+
 	$.ajax({
 		url : "letus/see.timeline",
 		type : 'POST',
@@ -111,9 +112,11 @@ $(function() {
 			$("#siltaja").trigger("click");
 		}
 	});
+
 });*/
 
 /*$(document).ready(function(){
+
 	$(document).on('click','#siltaja',function(){
 		$('#siltaja').flipbox({
 			vertical : true,
@@ -124,7 +127,9 @@ $(function() {
 			animationEasing : 'ease'
 		});
 	})
+
 });*/
+
 
 $(document).ready(function() {
 	$.ajax({
@@ -135,43 +140,50 @@ $(document).ready(function() {
 		},
 		success : function(result){
 			console.log(result)
-			result.forEach(function(data){
-				var str = "/resources/img";
-				var start = 0;
-				var imgList = [];
+			if(result.length > 0){
+				result.forEach(function(data){
+					var str = "/resources/img";
+					var start = 0;
+					var imgList = [];
+					
+					var begin = data.bcontent.indexOf(str);
+					var end = data.bcontent.indexOf(String.fromCharCode(34), begin);
+					var imgName = data.bcontent.substring(begin, end);
+					var tmpTxt = data.bcontent.replace(/<\/p>/gim, '\n').replace(/<.*?>/gim, '').replace(/\n/gim, '<br>').replace(/^(<br>)*/, '');
+					var num = 100;
+					var content = tmpTxt.substr(0, ((tmpTxt.length>num)?num:tmpTxt.length)) + "<br>";
+					$link = $('<a>').attr({"href":"/board/adBoardView.do?bid="+data.bid}).text("상세보기")
+					
+					$allDiv = $('<div>').attr({'class':'col-lg-12'});
+					$div1 = $('<div>').attr({
+						'class':'col-lg-12'
+					}).append($('<strong>').html(data.btitle));
+					$rowDiv = $('<div>').attr({'class' : 'row'})	
+					$div2 = $('<div>').attr({
+						'class':'col-lg-6',
+						'style' : ''
+					}).append($('<img>').attr({'src' : imgName, 'style' : 'width:100%; height:180px;'}));
+					$div3 = $('<div>').attr({'style':'background:white; width:100%%; height:auto', 'class':'col-lg-6'})
+						.append($('<span>').attr({'style':''}).append(content).append($link));
+					
+					$rowDiv.append($div2).append($div3)
+					$allDiv.append($div1).append($rowDiv);
+					
+					$('#boardDiv').append($allDiv);
+				})
 				
-				var begin = data.bcontent.indexOf(str);
-				var end = data.bcontent.indexOf(String.fromCharCode(34), begin);
-				var imgName = data.bcontent.substring(begin, end);
-				var content = data.bcontent.replace(/<\/p>/gim, '\n').replace(/<.*?>/gim, '').replace(/\n/gim, '<br>').replace(/^(<br>)*/, '');
-				$link = $('<a>').attr({"href":"/board/adBoardView.do?bid="+data.bid}).text("상세보기")
-				
-				$allDiv = $('<div>').attr({'class':'col-lg-12'});
-				$div1 = $('<div>').attr({
-					'class':'col-lg-12'
-				}).append($('<strong>').html(data.btitle));
-				$rowDiv = $('<div>').attr({'class' : 'row'})	
-				$div2 = $('<div>').attr({
-					'class':'col-lg-6',
-					'style' : ''
-				}).append($('<img>').attr({'src' : imgName, 'style' : 'width:100%; height:180px;'}));
-				$div3 = $('<div>').attr({'style':'background:white; width:100%%; height:100px', 'class':'col-lg-6'})
-					.append($('<span>').attr({'style':''}).append(content).append($link));
-				
-				$rowDiv.append($div2).append($div3)
-				$allDiv.append($div1).append($rowDiv);
-				
-				$('#boardDiv').append($allDiv);
-			})
+				$('#boardDiv').flipbox({
+					vertical : true,
+					autoplay : true,
+					autoplayWaitDuration : 2000,
+					autoplayPauseOnHover : false,
+					animationDuration : 1000,
+					animationEasing : 'ease'
+				});
+			} else {
+				$('#boardDiv').append("현재 등록된 게시물이 없습니다.<br>손쉽고 편리한 광고 등록 어떠신가요?")
+			}
 			
-			$('#boardDiv').flipbox({
-				vertical : true,
-				autoplay : true,
-				autoplayWaitDuration : 2000,
-				autoplayPauseOnHover : false,
-				animationDuration : 1000,
-				animationEasing : 'ease'
-			});
 			
 		},
 		error : function(result){

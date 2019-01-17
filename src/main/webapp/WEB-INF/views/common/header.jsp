@@ -22,13 +22,13 @@
 				<ul class="nav navbar-nav" style="width:auto; position: relative;"  >
 					<li class="active"><a href="/">Home</a></li>
 					<li><a href="/echo.do">타임라인</a></li>
-					<li class="dropdown active">
+					<li class="dropdown">
 						<a href="#" class="dropdown-toggle " data-toggle="dropdown" data-hover="dropdown" data-delay="0" data-close-others="false">지도 <b class=" icon-angle-down"></b></a>
 						<ul class="dropdown-menu">
 							<li><a href="/test/testMap.do">제주도 지도</a></li>
 							<li><a href="/test/NewFile.do">지도테스트</a></li>
 						</ul></li>
-					<li class="dropdown active">
+					<li class="dropdown">
 						<a href="#" class="dropdown-toggle " data-toggle="dropdown" data-hover="dropdown" data-delay="0" data-close-others="false">게시판 <b class=" icon-angle-down"></b></a>
 						<ul class="dropdown-menu">
 							<li><a href="/board/boardlist1.do">자유게시판</a></li>
