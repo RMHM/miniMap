@@ -12,9 +12,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <meta name="description" content="" />
 <style>
-td{
-text-align:center;
-}
+
 
 </style>
 </head>
@@ -160,7 +158,7 @@ text-align:center;
 			</div>
 
 			<script>
-		
+		$('tbody').attr('align','center');
 			
 			$(function() {
 				 $('#boTap').click(function(){
@@ -178,7 +176,7 @@ text-align:center;
 					$("tr[id]").on("click", function() {
 						var bId = $(this).attr("id");
 				/* 		alert($(this).children('td:eq(1)').value); */
-					 	if($(this).children('td:eq(1)').text()=="광고") location.href = "${pageContext.request.contextPath}/board/adBoardView.do?bid="+bId; 
+					 	if($(this).children('td:eq(1)').text()=="기업게시판") location.href = "${pageContext.request.contextPath}/board/adBoardView.do?bid="+bId; 
 						else  location.href = "${pageContext.request.contextPath}/board/boardview.do?BId="+bId; 
 						
 						   
