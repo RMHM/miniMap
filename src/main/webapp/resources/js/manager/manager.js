@@ -204,7 +204,6 @@ $(document).ready(function() {
 						$tdReqBtn = $('<td>').text('권한 없음').css('color', 'red');
 					}
 						
-					console.log(data);
 					var reqDate = moment(data[i].reqDate).format('YYYY-MM-DD');
 
 					$trBoard.append($tdMno).append($tdMid).append($tdMname).append($tdEmail)
@@ -271,7 +270,8 @@ $(document).ready(function() {
 			
 	    $('#tab' + num + ' table tbody').children().mouseenter(function () {
 			$(this).children().css({'background':'rgba(221, 221, 221, 0.685)'});
-			$(this).children().not(':4th').click(function () {
+			var btn = $(this).children().find('button[id^="btn"]').parent();
+			$(this).children().not(btn).click(function () {
 				var mno = $(this).parent().children().eq(0).text();
 				location.href = 'selectUsersBoardList.do?mno='+mno;
 				console.log(mno);
