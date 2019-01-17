@@ -43,33 +43,33 @@
 						<div id="main-slider" class="flexslider">
 							<ul class="slides">
 								<li><img src="resources/img/index/jeju5.jpg" alt="" height="380" />
-								<div class="flex-caption"><h4>제주도 여행 준비하기</h4>
-								<p>사전 준비와 계획을 안내 해드립니다.</p>
-								<a href="board/boardlist3.do" class="btn btn-theme">더 자세한 정보를 알고 싶다면?</a>
+								<div class="flex-caption"><h4>제주도 여행에 대한 정보가 부족하신가요?</h4>
+								<p>정보 공유 게시판에서 관련 정보를 수집해보세요.</p>
+								<a href="board/boardlist2.do" class="btn btn-theme">정보 공유 게시판으로 이동</a>
 								</div>
 								</li>
 								<li><img src="resources/img/index/jeju3.gif" alt="" height="380" />
-								<div class="flex-caption"><h4>일별 여행 코스는?</h4>
-								<p>일별로 일정을 안내 해드립니다.</p>
-								<a href="board/boardlist2.do" class="btn btn-theme">더 자세한 정보를 알고 싶다면?</a>
+								<div class="flex-caption"><h4>일별 여행 코스를 아직 못정하셨나요?</h4>
+								<p>일별로 일정을 안내해주는 사용자들의 정보를 받아보세요.</p>
+								<a href="board/boardlist2.do" class="btn btn-theme">정보 공유 게시판으로 이동</a>
 								</div>
 								</li>
 								<li><img src="resources/img/index/jeju4.jpg" alt="" height="380" />
-								<div class="flex-caption"><h4>제주도에도 사파리가 있나?</h4>
-								<p>관련 여행지를 안내 해드립니다.</p>
-								<a href="board/boardlist2.do" class="btn btn-theme">더 자세한 정보를 알고 싶다면?</a>
-								</div>
-								</li>
-								<li><img src="resources/img/index/jeju.jpg" alt="" height="380" />
-								<div class="flex-caption"><h4>제주도엔 뭐가 있지?</h4>
-								<p>추천 여행지를 안내 해드립니다.</p>
-								<a href="board/boardlist2.do" class="btn btn-theme">더 자세한 정보를 알고 싶다면?</a>
+								<div class="flex-caption"><h4>제주도에서만 즐길 수 있는 테마파크는 어떠세요?</h4>
+								<p>테지움 사파리 및 각종 테마파크 후기를 살펴보세요.</p>
+								<a href="board/boardlist3.do" class="btn btn-theme">여행 후기 게시판으로 이동</a>
 								</div>
 								</li>
 								<li><img src="resources/img/index/jeju6.jpg" alt="" height="380" />
-								<div class="flex-caption"><h4>박물관은 살아있다</h4>
-								<p>살아 있을까요 죽었을까요?</p>
-								<a href="board/boardlist2.do" class="btn btn-theme">더 자세한 정보를 알고 싶다면?</a>
+								<div class="flex-caption"><h4>제주도 대표 박물관 관람은 어떠신가요?</h4>
+								<p>박물관은 살아있다 제주 중문점 집중 후기를 살펴보세요.</p>
+								<a href="board/boardlist3.do" class="btn btn-theme">여행 후기 게시판으로 이동</a>
+								</div>
+								</li>
+								<li><img src="resources/img/index/jeju.jpg" alt="" height="380" />
+								<div class="flex-caption"><h4>돌하르방이 집중적으로 있는 곳을 알고 싶으신가요?</h4>
+								<p>관련 후기 및 주변 위치정보를 살펴보세요.</p>
+								<a href="board/boardlist3.do" class="btn btn-theme">더 자세한 정보를 알고 싶다면?</a>
 								</div>
 								</li>
 								
