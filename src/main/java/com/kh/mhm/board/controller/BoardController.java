@@ -672,7 +672,7 @@ public class BoardController {
 			}
 
 			long fileSize = mfile.getSize();
-			long maxSize = 5 * 1024 * 1024; // 5mb
+			long maxSize = 30 * 1024 * 1024; // 30mb
 			if (fileSize > maxSize) {
 				// 파일 크기 제한
 				fileInfo.put("result", -2);
