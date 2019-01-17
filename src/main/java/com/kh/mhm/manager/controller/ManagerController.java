@@ -205,4 +205,10 @@ public class ManagerController {
 		
 	}
 	
+	// 개요 페이지 이동
+	@RequestMapping("/synopsis")
+	public String goInfo() {
+		return "common/synopsis";
+	}
+	
 }
