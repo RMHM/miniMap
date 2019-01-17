@@ -81,16 +81,19 @@
 			</div>
 		</section>
 		
-		<section class="callaction" style="height:300px">
+		<section class="callaction" style="height:300px; padding:0px; top-padding:10px;">
 			<div class="container">
+				<div class="col-lg-12"><h5>최근 등록된 여행상품</h5></div>
 				<div class="row">
 					<div class='col-lg-6'>
 						<div class="box" id="boardDiv"></div>
 					</div>
 					<div class='col-lg-6'>
 						<div>
-							<h5>손쉬운 광고 등록</h5>
-							<p>여러분도 광고를 등록할 수 있습니다.</p>
+							<h5>여행 상품 정보</h5>
+							<p>제주도의 여행상품을 확인하실 수 있습니다.</p>
+							<p>준비를 못 하셨거나 필요한 것이 생각나지 않으면</p>
+							<p>여행상품을 확인하러 가보세요</p>
 							<p><a href="/board/adBoard.go">보러가기</a></p>
 						</div>
 					</div>
