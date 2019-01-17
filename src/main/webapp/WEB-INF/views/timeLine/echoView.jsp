@@ -143,12 +143,10 @@
 					</div>
 					<div class="btnAlign">
 
-
-						<button class='toggleBtn' id='toggleBtn'>검색</button>
 						<div class="hidBtn">
               
-							<input type="text" class='textQ' placeholder="현재 분류 내에서 검색합니다"/>
-							<button class='searchBtn' id='searchBtn' onclick='searchTag();'>찾기</button>
+							<input type="text" class='textQ' placeholder="태그로 검색"/>
+							<button class='searchBtn' id='searchBtn' onclick='searchTag();'>검 색</button>
 
 						</div>
 						<button class='btn btn-primary' id='sendBtn'>타임라인 게시</button>
@@ -334,7 +332,7 @@
 	}
 
 	
-	$(document).ready(function(){
+	/* $(document).ready(function(){
 		$('.hidBtn').hide();
 	});
 	
@@ -349,7 +347,7 @@
 			$('.hidBtn').show();
 			shown=true;
 		}
-	});
+	}); */
 	
 	function searchTag(){
 		var text=$('.textQ').val();

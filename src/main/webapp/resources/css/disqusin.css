@@ -543,10 +543,10 @@
     font-family: Arial;
     color: #ffffff;
     font-size: 12px;
-    padding: 4px 6px 4px 6px;
+    padding: 4px 10px 4px 10px;
     text-decoration: none;
-    /* position:absolute;  */
-    right:0px;
+    position:absolute;
+    left:160px;
     top:10px;
     z-index:150;
     
@@ -555,4 +555,11 @@
 	background: #3cb0fd;
   	text-decoration: none;
   	border-style:none;
+}
+.textQ{
+	position:absolute;
+    left:0px;
+    top:10px;
+    z-index:150;
+    border-color:#74b4d4;
 }
