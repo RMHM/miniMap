@@ -124,6 +124,7 @@ $(function(){
     $.ajax({
         url : "<%=request.getContextPath()%>/daumeditor/editor_frame.html",
         success : function(data){
+        
             $("#daumeditor").html(data);
             // 에디터UI load
             var config = {

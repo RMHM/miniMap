@@ -1,4 +1,5 @@
-<!-- 에디터 컨테이너 시작 -->
+<!-- 에디터 컨테이너 시작 --> 
+<script src="js/editor_loader.js?environment=development" type="text/javascript" charset="utf-8"></script>
 <div id="tx_trex_container" class="tx-editor-container">
 	<!-- 사이드바 -->
 	<div id="tx_sidebar" class="tx-sidebar">
@@ -9,11 +10,30 @@
 				<li class="tx-list">
 					<div unselectable="on" id="tx_image" class="tx-image tx-btn-trans">
 						<a href="#" title="사진" class="tx-text">사진</a>
+						
 					</div>
-				</li>
+					
+				</li><li class="tx-list">
+							<div unselectable="on" id="tx_media2" class="tx-media tx-btn-trans">
+								<a href="javascript:;" title="외부컨텐츠" class="tx-text">외부컨텐츠</a>
+							</div>
+						</li>
 				<!-- 이미지 첨부 버튼 끝 -->
+			
+						<li class="tx-list tx-list-extra">
+							<div unselectable="on" class="tx-btn-nlrbg tx-extra">
+								<a href="javascript:;" class="tx-icon" title="버튼 더보기">버튼 더보기</a>
+							</div>
+							<ul class="tx-extra-menu tx-menu" style="left:-48px;" unselectable="on">
+								<!--
+								@decsription
+								일부 버튼들을 빼서 레이어로 숨기는 기능을 원할 경우 이 곳으로 이동시킬 수 있다.
+								-->
+							</ul>
+						</li>
 			</ul>
 			<!-- 사이드바 / 우측영역 -->
+			
 			<ul class="tx-bar tx-bar-right">
 				<li class="tx-list">
 					<div unselectable="on" class="tx-btn-lrbg tx-fullscreen" id="tx_fullscreen">
@@ -364,4 +384,95 @@
 </div>
 <!-- 편집영역 끝 -->
 </div>
+<div id="tx_attach_div3" class="tx-attach-div">
+				<div id="tx_attach_txt3" class="tx-attach-txt">
+					파일 첨부
+				</div>
+				<div id="tx_attach_box3" class="tx-attach-box">
+					<div class="tx-attach-box-inner">
+						<div id="tx_attach_preview3" class="tx-attach-preview">
+							<p>
+							</p>
+							<img src="images/icon/editor/pn_preview.gif" width="147" height="108" unselectable="on"/>
+						</div>
+						<div class="tx-attach-main">
+							<div id="tx_upload_progress3" class="tx-upload-progress">
+								<div>
+									0%
+								</div>
+								<p>
+									파일을 업로드하는 중입니다.
+								</p>
+							</div>
+							<ul class="tx-attach-top">
+								<li id="tx_attach_delete3" class="tx-attach-delete">
+									<a>전체삭제</a>
+								</li>
+								<li id="tx_attach_size3" class="tx-attach-size">
+									파일: <span id="tx_attach_up_size3" class="tx-attach-size-up"></span>/<span id="tx_attach_max_size3"></span>
+								</li>
+								<li id="tx_attach_tools3" class="tx-attach-tools">
+								</li>
+							</ul>
+							<ul id="tx_attach_list3" class="tx-attach-list">
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+<script type="text/javascript">
+	var config3 = {
+		txHost: '', /* 런타임 시 리소스들을 로딩할 때 필요한 부분으로, 경로가 변경되면 이 부분 수정이 필요. ex) http://xxx.xxx.com */
+		txPath: '', /* 런타임 시 리소스들을 로딩할 때 필요한 부분으로, 경로가 변경되면 이 부분 수정이 필요. ex) /xxx/xxx/ */
+		txService: 'sample', /* 수정필요없음. */
+		txProject: 'sample', /* 수정필요없음. 프로젝트가 여러개일 경우만 수정한다. */
+		initializedId: "3", /* 대부분의 경우에 빈문자열 */
+		wrapper: "tx_trex_container3", /* 에디터를 둘러싸고 있는 레이어 이름(에디터 컨테이너) */
+		form: "tx_editor_form3"+"", /* 등록하기 위한 Form 이름 */
+		txIconPath: "images/icon/editor/", /*에디터에 사용되는 이미지 디렉터리, 필요에 따라 수정한다. */
+		txDecoPath: "images/deco/contents/", /*본문에 사용되는 이미지 디렉터리, 서비스에서 사용할 때는 완성된 컨텐츠로 배포되기 위해 절대경로로 수정한다. */
+		canvas: {
+			styles: {
+				color: "#123456", /* 기본 글자색 */
+				fontFamily: "굴림", /* 기본 글자체 */
+				fontSize: "10pt", /* 기본 글자크기 */
+				backgroundColor: "#fff", /*기본 배경색 */
+				lineHeight: "1.5", /*기본 줄간격 */
+				padding: "8px" /* 위지윅 영역의 여백 */
+			},
+			showGuideArea: false
+		},
+		events: {
+			preventUnload: false
+		},
+		sidebar: {
+			attachbox: {
+				show: true
+			},
+			attacher: {
+				file: {
+					popPageUrl: "pages/trex/file.html?config=3"
+				}
+			}
+		},
+		size: {
+			contentWidth: 700 /* 지정된 본문영역의 넓이가 있을 경우에 설정 */
+		}
+	};
+</script><script type="text/javascript">
+	EditorJSLoader.ready(function (Editor) {
+		new Editor(config2);
+		Editor.getCanvas().observeJob(Trex.Ev.__IFRAME_LOAD_COMPLETE, function() {
+			Editor.modify({
+				content: 'Editor2'
+			});
+			new Editor(config3);
+			Editor.getCanvas().observeJob(Trex.Ev.__IFRAME_LOAD_COMPLETE, function(ev) {
+				Editor.modify({
+					content: 'Editor3'
+				});
+			});
+		});
+	});
+</script>
 <!-- 에디터 컨테이너 끝 -->

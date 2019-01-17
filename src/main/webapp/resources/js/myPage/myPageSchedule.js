@@ -89,19 +89,26 @@ function nextTemper(){
 } 
 
 function getFullcalendar(){
+	var date = new Date();
+	 var d = date.getDate();
+	 var m = date.getMonth();
+	 var y = date.getFullYear();
+	 console.log(y +" + " + m );
 	$('#calendar').fullCalendar({
 		header : {
 			left : 'prev,next today',
 			center : 'title',
-			right : 'month,agendaWeek,agendaDay,listMonth'
+			right : ''
 		},
 		  eventRender: function(event, element){
 	          element.popover({
 	              animation:true,
 	              delay: 300,
 	              content: event.content,
-	              trigger: 'hover'
+	              trigger: 'hover',
+	              
 	          });
+	       
 	        }, 
 	         eventAfterRender: function(event, element, view) { 
             var new_description ='<a href="/board/boardwrite.do?BCode=3">' 
@@ -149,8 +156,14 @@ function getFullcalendar(){
     		$('#insertC').dialog({}); 
 
 		},
-		defaultDate : new Date(),
 		
+
+		defaultDate : new Date(),
+		monthNames: ["1월","2월","3월","4월","5월","6월","7월","8월","9월","10월","11월","12월"],
+		monthNamesShort: ["1월","2월","3월","4월","5월","6월","7월","8월","9월","10월","11월","12월"],
+		dayNames: ["일요일","월요일","화요일","수요일","목요일","금요일","토요일"],
+		dayNamesShort: ["일","월","화","수","목","금","토"],
+		 displayEventTime: false,
 		navLinks : true, // can click day/week names to navigate views
 		businessHours : true, // display business hours
 		editable : false,
