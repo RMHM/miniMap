@@ -99,10 +99,20 @@
 		</section>
 		
 		<br>
+		<section class="timeline">
+			<div>
+				<div class='tlCnt'>
+					<h2 class='tlTtl'>실시간 타임라인</h2>
+					<span class='tlTxt'>타임라인에서 빠르고 쉽게 여행정보를 공유해보세요!</span>
+				</div>
+				<img src="/resources/img/index/timelinesample.png" class="tlSmpl" align='right'/>
+				<button class="tlBtn" onclick="window.location.href='/echo.do'">타임라인 이용하기</button>
+			</div>
+		</section>
 		
 		<!-- counter section -->
 		<section class="content">
-			<div class="container">
+			<div class="container" id="void">
 				<div class="row">
 					<div class="col-lg-12">
 						<div class="row">

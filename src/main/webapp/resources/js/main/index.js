@@ -70,7 +70,7 @@ $(function() {
 
 })
 
-$(document).ready(function() {
+/*$(document).ready(function() {
 	$.ajax({
 		url : "letus/see.timeline",
 		type : 'POST',
@@ -111,9 +111,9 @@ $(document).ready(function() {
 			$("#siltaja").trigger("click");
 		}
 	});
-});
+});*/
 
-$(document).ready(function(){
+/*$(document).ready(function(){
 	$(document).on('click','#siltaja',function(){
 		$('#siltaja').flipbox({
 			vertical : true,
@@ -124,7 +124,7 @@ $(document).ready(function(){
 			animationEasing : 'ease'
 		});
 	})
-});
+});*/
 
 $(document).ready(function() {
 	$.ajax({
@@ -190,3 +190,4 @@ $(document).ready(function() {
 		animationEasing : 'ease'
 	});
 });*/
+
