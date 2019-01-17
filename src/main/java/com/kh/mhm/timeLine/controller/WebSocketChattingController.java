@@ -64,12 +64,12 @@ public class WebSocketChattingController {
 		return tls.blockTimeLine(Integer.valueOf(tId),mNick);
 	}
 	
-	/*@RequestMapping("letus/see.timeline")
+	@RequestMapping("letus/see.timeline")
 	@ResponseBody
 	public List<PreTimeLine> mainTimeLine() {
 		List<PreTimeLine> list=tls.mainTimeLine();
 		return list;
-	}*/
+	}
 	
 	@RequestMapping("/timeline.search")
 	public String searchTimeLine(Model model,HttpServletRequest req) throws UnsupportedEncodingException {
