@@ -51,7 +51,7 @@ text-align:center;
 						</div>
 					</div>
 					<c:if test="${myType eq 'board' }">
-						<div id = "boTable" class="list">
+						<div id = "boTable" class="list" align ="center">
 
 							<table  class="table table-hover">
 								<thead>
