@@ -55,7 +55,7 @@
 								<th rowspan=2><div class="col-md-12"><img src="/resources/img/profiles/${profile}" style="width:75px;height:75px"></div></th>
 								<!-- 게시판 제목 -->
 								
-								<th align=left><div class="col-md-12"><label id="bTitle" style="font-size:2em; font-weight:bold;">${b.BTitle }</label></div></th>
+								<th align=left colspan=2><div class="col-md-12"><label id="bTitle" style="font-size:2em; font-weight:bold;">${b.BTitle }</label></div></th>
 							</tr>
 							<tr>
 								<!-- 게시판 작성자 -->
