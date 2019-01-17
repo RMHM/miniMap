@@ -1,5 +1,7 @@
 package com.kh.mhm.timeLine.controller;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -65,5 +67,14 @@ public class WebSocketChattingController {
 	public List<PreTimeLine> mainTimeLine() {
 		List<PreTimeLine> list=tls.mainTimeLine();
 		return list;
+	}
+	
+	@RequestMapping("/timeline.search")
+	public String searchTimeLine(Model model,HttpServletRequest req) throws UnsupportedEncodingException {
+		String text=URLDecoder.decode(req.getQueryString(), "UTF-8");
+		System.out.println(text);
+		List<PreTimeLine> list=tls.searchTimeLine(text);
+		model.addAttribute("list",list);
+		return "timeLine/searchList";
 	}
 }

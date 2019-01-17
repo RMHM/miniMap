@@ -10,6 +10,18 @@
 <meta charset="UTF-8">
 <title>MHM TIMELINE</title>
 <link href="/resources/css/disqusin.css" rel="stylesheet" />
+<style>
+	#div_chat{
+		height:100% !important;
+	}
+	#sendBtn{
+		position:relative;
+		margin-left:1070px;
+	}
+	.void{
+		height:50px;
+	}
+	</style>
 </head>
 <body>
 
@@ -20,7 +32,7 @@
 			<div class="container">
 				<div class="col-md-1"></div>
 				<div class="col-md-8">
-					<h3>실시간 타임라인</h3>
+					<h3>타임라인 검색결과</h3>
 				</div>
 				<div class="col-md-2"></div>
 				<div class="col-md-1"></div>
@@ -106,36 +118,123 @@
 					</div>
 				</div>
 
-				<div id="dialogue">
-					<textarea rows="6" cols="150" name='message' id='message'
-						placeholder="어떤 경험을 하고 계신가요?&#13;&#10;어디에 방문하셨나요?&#13;&#10;음식은 맛있게 드셨나요?&#13;&#10;자유롭게 정보를 공유해주세요!"></textarea>
-					<textarea rows="1" cols="150" name="tag" id="tag"
-						placeholder="어디에 계신가요?"></textarea>
-					<div class="remaining">
-						<span class="count">250</span>
-					</div>
-					<div class="remaining2">
-						<span class="count2">50</span>
-					</div>
-					<div class="btnAlign">
-
-
-						<button class='toggleBtn'>검색</button>
-						<div class="hidBtn">
-							<input type="text" class='textQ'/>
-							<button class='searchBtn' onclick='searchTag();'>찾기</button>
-						</div>
-						<button class='btn btn-primary' id='sendBtn'>타임라인 게시</button>
-					</div>
-
-				</div>
+				
 			</div>
-
+			<button class='btn btn-primary' id='sendBtn' onclick="window.location.href='/echo.do'">돌아가기</button>
 		</div>
+		<div class="void"></div>
 		<c:import url="/WEB-INF/views/common/footer.jsp" />
 	</div>
 
-	<script src="/resources/js/timeline/echo.js"></script>
+	<script>
+	
+
+	var isScrollUp = false;
+	var unreadCnt = 0;
+	
+	$('#div_chat').animate({
+		scrollTop : $('#div_chat').prop('scrollHeight') + 1
+	}, 500);
+
+	$('#btn_scroll_down').on('click', function() {
+		$('#div_chat').animate({
+			scrollTop : $('#div_chat').prop('scrollHeight') + 1
+		}, 500);
+
+		$('#btn_scroll_down').html('↓');
+		$("#menu_scroll_down").css("opacity", "0.0");
+		$("#btn_scroll_down").css("opacity", "0.0");
+		$("#btn_scroll_down").attr("disabled", true);
+		isScrollUp = false;
+		unreadCnt = 0;
+
+	});
+
+	$("#div_chat")
+			.bind(
+					'scroll touchmove mousewheel',
+					function(e) {
+
+						var delta = e.originalEvent.wheelDelta;
+						
+
+						if (delta > 0 && delta != undefined) {
+							$("#menu_scroll_down").css("opacity", "1.0");
+							$("#btn_scroll_down").css("opacity", "1.0");
+							$("#btn_scroll_down").attr("disabled", false);
+							isScrollUp = true;
+						} else if (delta < 0 && delta != undefined) {
+							var scrollHeight = $(this).height();
+							var scrollPosition = $(this).height()
+									+ $(this).scrollTop();
+
+							if ((scrollHeight - scrollPosition) / scrollHeight === 0) {
+								$('#btn_scroll_down').html('↓');
+								$("#menu_scroll_down").css("opacity", "0.0");
+								$("#btn_scroll_down").css("opacity", "0.0");
+								$("#btn_scroll_down").attr("disabled", true);
+								isScrollUp = false;
+								unreadCnt = 0;
+							} else {
+								$("#menu_scroll_down").css("opacity", "0.0");
+								$("#btn_scroll_down").css("opacity", "0.0");
+								$("#btn_scroll_down").attr("disabled", true);
+								isScrollUp = false;
+							}
+
+						}
+
+
+					});
+
+
+	function sendNote(nick) {
+		var popUrl = "/popUp.write?" + nick;
+
+		var popOption = "width=765, height=485, resizable=no, scrollbars=no, status=no;"; 
+
+		window.open(popUrl, "", popOption);
+	}
+
+	function report(tid,mnick) {
+		if (confirm("차단한 타임라인은 자신에게 다시는 보이지 않습니다. 그래도 차단하시겠습니까?") == false) {
+			return false;
+		} else{
+			var myNick=$(".membernick").text();
+			var tId=tid;
+			var mNick=mnick;
+			if(mNick=='사이트관리자'){
+				alert("사이트관리자는 차단할 수 없습니다.");
+				return false;
+			}else if(mNick==myNick){
+				alert("자기 자신의 글은 차단할 수 없습니다.");
+				return false;
+			}else{
+				$.ajax({
+					url : '/block.timeline',
+					type : 'post',
+					traditional:true,
+					async : false,
+					data : {
+						'tId' : tId,
+						'mNick':mNick
+					},
+					success : function(data) {
+						if(data>0){
+							alert("게시글을 차단했습니다.");
+							window.location.href ="/echo.do";
+						}
+					},
+					error : function(err) {
+						console.log("일시적인 문제가 발생했습니다. 잠시 후 다시 시도해주세요.");
+					}
+				});
+			}
+			
+		}
+	}
+
+	</script>
 	<script>
 	$(document).ready(function(){
 		$('.hidBtn').hide();
@@ -144,21 +243,36 @@
 	var shown=false;
 	$('.toggleBtn').click(function(){
 		if(shown===true){
-			console.log("hide");
-			$('.hidBtn').hide();
+			$('.hidBtn').slide({
+				$('.hidBtn').hide();
+			},500);
 			shown=false;
 		}else if(shown===false){
-			console.log("show");
-			$('.hidBtn').show();
+			$('.hidBtn').slide({
+				$('.hidBtn').show();
+			},500);
 			shown=true;
 		}
 	});
 	
-	function searchTag(){
+	$('.searchBtn').click(function(){
 		var text=$('.textQ').val();
-		window.location.href="/timeline.search?"+text
-	}
-	
+		$.ajax({
+			url : '/timeline.search',
+		    type : 'get',
+		    traditional:true,
+		    data : {
+		    	'text':text
+		    },
+		    success : function(data) {
+		    	alert('쪽지를 성공적으로 삭제했습니다!');
+		    	window.location.href ="/popUp.inbox";
+		    },
+		    error : function() {
+		    	alert("일시적인 문제입니다. 잠시 후 다시 시도해주세요.");
+		   	}
+		});
+	});
 	</script>
 	
 </body>

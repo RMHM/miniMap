@@ -54,4 +54,9 @@ public class TimeLineServiceImpl implements TimeLineService {
 		return tldi.mainTimeLine();
 	}
 
+	@Override
+	public List<PreTimeLine> searchTimeLine(String text) {
+		return tldi.searchTimeLine(text);
+	}
+
 }

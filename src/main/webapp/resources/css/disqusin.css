@@ -370,7 +370,7 @@
 }
 
 #div_chat {
-  height: 700px;
+  height: 1100px;
   overflow-y: auto;
 }
 
@@ -487,3 +487,31 @@
 	width:100%; 
 	margin-bottom:15px;
 }
+
+#toggleBtn{
+	background: #74b4d4;
+    background-image: -webkit-linear-gradient(top, #74b4d4, #3177a3);
+    background-image: -moz-linear-gradient(top, #74b4d4, #3177a3);
+    background-image: -ms-linear-gradient(top, #74b4d4, #3177a3);
+    background-image: -o-linear-gradient(top, #74b4d4, #3177a3);
+    background-image: linear-gradient(to bottom, #74b4d4, #3177a3);
+    -webkit-border-radius: 9;
+    -moz-border-radius: 9;
+    border-radius: 9px;
+    border-style:none;
+    font-family: Arial;
+    color: #ffffff;
+    font-size: 12px;
+    padding: 6px 10px 6px 10px;
+    text-decoration: none;
+    position:absolute;
+    right:0px;
+    top:10px;
+    z-index:150;
+}
+#toggleBtn:hover{
+	background: #3cb0fd;
+  	text-decoration: none;
+  	border-style:none;
+}
+

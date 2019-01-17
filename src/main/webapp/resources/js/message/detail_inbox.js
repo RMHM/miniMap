@@ -21,22 +21,25 @@ function deleteNote() {
 function storeNote() {
 	var ans = confirm("보관하시겠습니까?");
 	if (!ans) return;
-	var meId="${message.meId}";
-	$.ajax({
-		url : '/message.storeOne',
-	    type : 'post',
-	    traditional:true,
-	    data : {
-	    	'meId':meId
-	    },
-	    success : function(data) {
-	    	alert("보관함에 쪽지를 보관했습니다!");
-	    	window.location.href ="/popUp.inbox";
-	    },
-	    error : function() { 
-	    	alert("일시적인 문제입니다. 잠시 후 다시 시도해주세요.");
-	   	}
-	});
+	else{
+		var meId=$('#meid').text();
+		$.ajax({
+			url : '/message.storeOne',
+		    type : 'post',
+		    traditional:true,
+		    data : {
+		    	'meId':meId
+		    },
+		    success : function(data) {
+		    	alert("보관함에 쪽지를 보관했습니다!");
+		    	window.location.href ="/popUp.inbox";
+		    },
+		    error : function() { 
+		    	alert("일시적인 문제입니다. 잠시 후 다시 시도해주세요.");
+		   	}
+		});
+	}
+	
 }
 
 function sendReply(){
