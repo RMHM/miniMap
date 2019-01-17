@@ -53,18 +53,19 @@ $(function(){
 					var description = (result[i][j].intro == undefined)?"상세정보 없음":result[i][j].intro;
 					var hour = (result[i][j].hour == undefined)?"-":result[i][j].hour;
 					var pay = (result[i][j].pay == undefined)?"-":result[i][j].pay;
-					var coverThumb = (result[i][j].coverThumb == undefined)?"-":result[i][j].coverThumb;
+					var coverThumb = (result[i][j].coverThumb == undefined)?"-":'<img src=' + result[i][j].coverThumb + '></img>';
 					
+					var lc = '<br><br>'
 					var detail = "";
-					detail += "제목 : " + result[i][j].title + "\n\n";
-					detail += "내용 : " + description + "\n\n";
-					detail += "주최 : " + result[i][j].owner + "\n\n";
-					detail += "시작시간 : " + hour + "\n\n";
-					detail += "요금  : " + pay + "\n\n";
-					detail += "장소  : " + result[i][j].locNames + "\n\n";
-					detail += "분류  : " + result[i][j].categoryName + "\n\n";
-					detail += "연락처  : " + result[i][j].tel + "\n\n";
-					detail += "썸네일 URL  : " + coverThumb + "\n\n";
+					detail += "<b>제목</b> : " + result[i][j].title + lc;
+					detail += "<b>내용</b> : " + description + lc;
+					detail += "<b>주최</b> : " + result[i][j].owner + lc;
+					detail += "<b>시작시간</b> : " + hour + lc;
+					detail += "<b>요금</b>  : " + pay + lc;
+					detail += "<b>장소</b>  : " + result[i][j].locNames + lc;
+					detail += "<b>분류</b>  : " + result[i][j].categoryName + lc;
+					detail += "<b>연락처</b>  : " + result[i][j].tel + lc;
+					detail += "<b>행사 포스터</b>  : " + coverThumb + lc;
 					
 					content = {
 							title : result[i][j].title,
@@ -167,7 +168,8 @@ function getFullcalendar(evt){
 		},
 		// 이벤트 click
 		eventClick : function(evt){
-			alert(evt.constraint);
+			console.log(evt.constraint);
+			eventDetail(evt.constraint)
 		},
 		// 우상단 분류 버튼
 		customButtons : {
@@ -233,4 +235,62 @@ function getTemp(){
 			$('#calendar').show();
 		}
 	})
+}
+
+function eventDetail(txt){
+	$('#evtDetail').remove();
+	$('#evt-modal-a').remove();
+	$form = $('<form>').attr({"id":"evtDetail"});
+	$divFade = $('<div>').attr({
+		'class' : 'modal fade',
+		'id' : 'evt-modal',
+		'role' : 'dialog',
+		'aria-labelledby' : 'myModalLabel',
+		'aria-hidden' : 'true'
+	})
+	$divDialog = $('<div>').attr({'class' : 'modal-dialog', 'role' : 'document'});
+	$divContent = $('<div>').attr({'class' : 'modal-content'});
+	
+	$divHeader = $('<div>').attr({'class' : 'modal-header'});
+	$button = $('<button>').attr({
+		'type' : 'button',
+		'class' : 'close',
+		'data-dismiss' : 'modal'
+	}).html('<span aria-hidden="true">×</span>');
+	$hTitle = $('<h5>').attr({'class' : 'modal-title', 'id' : 'myModalLabel'}).text('전시공연 상세정보');
+	$divHeader.append($button).append($hTitle);
+	
+	$divBodyAll = $('<div>').attr({'class' : 'modal-body'});
+	
+	$divBody1 = $('<div>').attr({'class' : 'modal-body'});
+	$divContent11 = $('<div>').attr({'class' : 'modal-content'}).append($('<label>').text('상세내용'));
+	$divContent12 = $('<div>').attr({'class' : 'modal-content'}).append($('<p>').html(txt));
+	
+	$divBody1.append($divContent11).append($divContent12);
+	
+	$divBodyAll.append($divBody1);
+	
+	$divFooter = $('<div>').attr({'class' : 'modal-footer'});
+	$inputBtn1 = $('<input>').attr({
+		'type' : 'button',
+		'value' : '되돌아가기',
+		'class' : 'btn',
+		'id' : 'btnBack',
+		'data-dismiss' : 'modal'
+	})
+	
+	$divFooter.append($inputBtn1);
+	
+	$form.append($divFade.append($divDialog.append($divContent.append($divHeader).append($divBodyAll).append($divFooter))));
+	
+	$a = $('<a>').attr({
+		'id' : 'evt-modal-a',
+		'data-toggle' : 'modal',
+		'role' : 'button',
+		'href' : '#evt-modal'
+	})
+	
+	$('body').append($form).append($a.hide());
+	
+	$a.click();
 }

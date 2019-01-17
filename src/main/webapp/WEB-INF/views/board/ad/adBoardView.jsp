@@ -47,31 +47,45 @@
 				<input type="hidden" name="BNo" value="${b.BNo}" />
 				<input type="hidden" name="MNo" value="${b.MNo}" />
 				<input type="hidden" name="BId" value="${b.BId}" />
-				<!-- 게시판 제목 -->
-				<label id="bTitle" style="font-size:2em; font-weight:bold">${b.BTitle }</label><br>
-				<!-- 게시판 작성자 -->
-				<div class="col-md-6">
-					<strong>작성자 : ${b.mnick} &nbsp; 작성일 : ${b.BDate} &nbsp; 방문수 : ${b.BCount}</strong>
-				</div>
-				<div class="col-md-6" align="right">
-					<div class="btn-group">
-						<!-- 회원정보 확인 -->
-						<c:if test="${member.mno eq b.MNo}">
-							<input type="button" class="btn btn-warning btn-large" name="modify" value="수정"
-								onclick="location.href='${pageContext.request.contextPath}/board/adBoardUpdate.go?bid=${b.BId }'">
-						</c:if>
-						<!-- 회원번호와 작성자 번호가 일치하거나 회원이 관리자 일 경우 -->
-						<c:if test="${member.mno eq b.MNo or member.mtype eq 'A'}">
-							<input type="button" class="btn btn-danger btn-large" name="delete" value="삭제"
-								onclick="location.href='${pageContext.request.contextPath}/board/adBoardRemove.do?bid=${b.BId }'">
-						</c:if>
-						<c:if test="${not empty member and member.mno ne b.MNo}">
-							<c:if test="${mtype ne 'A'}">
-								<a id="report-modal" href="#report-modal-container" role="button" class="btn btn-danger btn-large" data-toggle="modal">신고하기</a>
-							</c:if>
-						</c:if>
-            <input type="button" class="btn btn-theme btn-large" onclick="history.back();" value="이전 항목으로" />
-					</div>
+				
+				<div class="col-md-12">
+					<table style='width:100%'>
+						<thead>
+							<tr>
+								<th rowspan=2><div class="col-md-12"><img src="/resources/img/profiles/${profile}" style="width:75px;height:75px"></div></th>
+								<!-- 게시판 제목 -->
+								
+								<th align=left><div class="col-md-12"><label id="bTitle" style="font-size:2em; font-weight:bold;">${b.BTitle }</label></div></th>
+							</tr>
+							<tr>
+								<!-- 게시판 작성자 -->
+								<td><div class="col-md-12"><strong>작성자 : ${b.mnick} &nbsp; 작성일 : ${b.BDate} &nbsp; 방문수 : ${b.BCount}</strong></div></td>
+								<td align=right>
+									<div class="col-md-12">
+										<div class="btn-group">
+											<!-- 회원정보 확인 -->
+											<c:if test="${member.mno eq b.MNo}">
+												<input type="button" class="btn btn-warning" name="modify" value="수정"
+													onclick="location.href='${pageContext.request.contextPath}/board/adBoardUpdate.go?bid=${b.BId }'">
+											</c:if>
+											<!-- 회원번호와 작성자 번호가 일치하거나 회원이 관리자 일 경우 -->
+											<c:if test="${member.mno eq b.MNo or member.mtype eq 'A'}">
+												<input type="button" class="btn btn-danger" name="delete" value="삭제"
+													onclick="location.href='${pageContext.request.contextPath}/board/adBoardRemove.do?bid=${b.BId }'">
+											</c:if>
+											<c:if test="${not empty member and member.mno ne b.MNo}">
+												<c:if test="${mtype ne 'A'}">
+													<a id="report-modal" href="#report-modal-container" role="button" class="btn btn-danger btn-large" data-toggle="modal">신고하기</a>
+												</c:if>
+											</c:if>
+					            			<input type="button" class="btn btn-theme" onclick="history.back();" value="이전 항목으로" />
+										</div>
+									</div>
+								</td>
+							</tr>
+						</thead>
+						
+					</table>
 				</div>
 				
 				<textarea id="content" style="display: none;">${b.BContent}</textarea>
