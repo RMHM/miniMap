@@ -8,7 +8,7 @@
 	</resultMap>
 	
 	<insert id="insertAuthority" parameterType="Authority">
-		INSERT INTO AUTHORITY SELECT SEQ_AID.NEXTVAL,#{mNo},#{mName},SYSDATE,#{address},#{aContent},#{aCode},'N',NULL,'N',NULL,NULL FROM DUAL WHERE NOT EXISTS(SELECT * FROM AUTHORITY WHERE ACODE=#{aCode} AND MNO=#{mNo})
+		INSERT INTO AUTHORITY SELECT SEQ_AID.NEXTVAL,#{mNo},#{mName},SYSDATE,#{address},#{aContent},#{aCode},'N',NULL,'N',#{img_file},#{site_url}FROM DUAL WHERE NOT EXISTS(SELECT * FROM AUTHORITY WHERE ACODE=#{aCode} AND MNO=#{mNo})
 		<!-- INSERT INTO AUTHORITY
 		VALUES(SEQ_AID.NEXTVAL,#{mNo},#{mName},SYSDATE,#{address},#{aContent},#{aCode},DEFAULT,DEFAULT,DEFAULT,#{img_file},#{site_url}) -->
 	</insert>

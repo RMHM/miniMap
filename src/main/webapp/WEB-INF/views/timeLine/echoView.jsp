@@ -144,10 +144,12 @@
 					<div class="btnAlign">
 
 
-						<button class='toggleBtn'>검색</button>
+						<button class='toggleBtn' id='toggleBtn'>검색</button>
 						<div class="hidBtn">
+              
 							<input type="text" class='textQ' placeholder="현재 분류 내에서 검색합니다"/>
-							<button class='searchBtn' onclick='searchTag();'>찾기</button>
+							<button class='searchBtn' id='searchBtn' onclick='searchTag();'>찾기</button>
+
 						</div>
 						<button class='btn btn-primary' id='sendBtn'>타임라인 게시</button>
 					</div>
@@ -155,7 +157,7 @@
 				</div>
 			</div>
 
-		</div>
+		</div><br>
 		<c:import url="/WEB-INF/views/common/footer.jsp" />
 	</div>
 

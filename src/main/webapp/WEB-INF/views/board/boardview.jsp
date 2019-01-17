@@ -110,8 +110,10 @@
 				<b>&nbsp; 추천수 : &nbsp;${b.likes }</b> <br>		
 				<!-- <a id="likes" href="" onclick="likesupdate()" 
 				role="button" class="btn btn-success"> 추천하기</a> -->
+				<c:if test="${b.MNo ne member.mno  }">
 				<input type="button" class="btn btn-theme" onclick="likesEvent();" name="likes" value="추천하기">
-				<c:if test="${b.isNotice eq 'N' }">				
+				</c:if>
+				<c:if test="${b.isNotice eq 'N' and b.MNo ne member.mno}">				
           <a id="report-modal" href="#report-modal-container" role="button" class="btn btn-danger" data-toggle="modal">신고하기</a>
 				</c:if>
 				<c:if test="${b.RFlag eq 'Y' }">
@@ -252,13 +254,13 @@
 				
 				<div style="text-align:right; width:100%; padding:0;">
    					<c:if test="${member.mno eq b.MNo}">
-						<input type="button" class="btn btn-theme btn-large"
+						<input type="button" class="btn btn-warning btn-large"
 							   onclick="location.href='${pageContext.request.contextPath}/board/boardUpdateView.do?BId=${b.BId }'"
 							   name="modify" value="수정">
 					</c:if>
 					&nbsp;
 					<c:if test="${member.mno eq b.MNo or member.mtype eq 'A'}">
-						<input type="button" class="btn btn-theme btn-large" onclick="deleteEvent();" 
+						<input type="button" class="btn btn-danger btn-large" onclick="deleteEvent();" 
 							   name="delete" value="삭제">
 					</c:if>
 					&nbsp;			

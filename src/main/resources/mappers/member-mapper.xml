@@ -38,7 +38,7 @@
 	<resultMap type="CompanyMember" id="compMemberMap">
 		<result column="JOIN_DATE" property="joinDate" javaType="java.sql.Date" jdbcType="DATE" />
 		<result column="DROP_DATE" property="dropDate" javaType="java.sql.Date" jdbcType="DATE" />
-		<result column="GRANT_COUNT" property="grantCount" />
+		<result column="REQUEST_COUNT" property="grantCount" />
 	</resultMap>
 
 	<insert id="insertMember" parameterType="Member">
@@ -114,12 +114,12 @@
 		where mtype = 'C'
 		order by mno -->
 		select m.mno, m.mid, m.mname, m.email, m.gender, m.age, m.join_date, m.drop_date, 
-        delflag, count(grant_date) grant_count
+        count(request_date) request_count
 		from member m
 		full outer join authority a on (m.mno = a.mno)
 		where mtype = 'C'
 		group by m.mno, m.mid, m.mname, m.email, m.gender, 
-		m.age, m.join_date, m.drop_date, delflag
+		m.age, m.join_date, m.drop_date
 		order by m.mno
 		
 	</select>

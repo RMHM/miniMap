@@ -33,7 +33,7 @@
 					<div class="ad">
 						<img class="" alt="" src="" />
 						<div class="ad caption">
-							<img src="/resources/img/boardlistad.png" style="width:100%" alt="" />
+							<a href="#"><img src="/resources/img/boardlistad.png" style="width:100%" alt=""  /></a>
 						</div>
 					</div>
 				</div>

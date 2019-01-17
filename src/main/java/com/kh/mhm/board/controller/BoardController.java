@@ -1,9 +1,9 @@
 package com.kh.mhm.board.controller;
 
 import java.io.File;
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -31,6 +31,7 @@ import com.kh.mhm.board.model.vo.Fileref;
 import com.kh.mhm.coment.model.service.ComentService;
 import com.kh.mhm.coment.model.vo.Coment;
 import com.kh.mhm.common.util.Utils;
+import com.kh.mhm.member.model.service.MemberService;
 import com.kh.mhm.member.model.vo.Member;
 
 @SessionAttributes(value = { "member" })
@@ -39,10 +40,12 @@ public class BoardController {
 
 	@Autowired
 	private BoardService boardService;
-
 	@Autowired
 	private ComentService comentService;
-
+	@Autowired
+	private MemberService ms;
+	
+	
 	@RequestMapping("/board/boardlist1.do")
 	public String freeboard(@RequestParam(value = "cPage", required = false, defaultValue = "1") int cPage, Model model,
 			Board board) {
@@ -60,24 +63,17 @@ public class BoardController {
 		List<Integer> cc2 = new ArrayList<Integer>();
 		List<Integer> cc3 = new ArrayList<Integer>();
 		
-		for(int i=0; i<list.size(); i++) {
-			System.out.println(list.get(i).getBId());
+		for(int i=0; i<list.size(); i++) {			
 			cc.add(boardService.selectCommentCnt(list.get(i).getBId()));			
 		}
 		
-		for(int i=0; i<list2.size(); i++) {
-			System.out.println(list2.get(i).getBId());
+		for(int i=0; i<list2.size(); i++) {			
 			cc2.add(boardService.selectCommentCnt(list2.get(i).getBId()));			
 		}
 		
-		for(int i=0; i<list3.size(); i++) {
-			System.out.println(list3.get(i).getBId());
+		for(int i=0; i<list3.size(); i++) {			
 			cc3.add(boardService.selectCommentCnt(list3.get(i).getBId()));			
-		}
-		
-		System.out.println(cc);
-		/*int cc = comentService.countTotalComent();
-		System.out.println("c갯수 : "+ cc);*/
+		}				
 
 		model.addAttribute("list", list).addAttribute("totalContents", totalContents)
 				.addAttribute("numPerPage", numPerPage).addAttribute("pageBar", pageBar)
@@ -94,8 +90,7 @@ public class BoardController {
 		List<Board> list = boardService.selectSearchList1(keyField, keyWord);
 		
 		List<Integer> cc = new ArrayList<Integer>();
-		for(int i=0; i<list.size(); i++) {
-			System.out.println(list.get(i).getBId());
+		for(int i=0; i<list.size(); i++) {		
 			cc.add(boardService.selectCommentCnt(list.get(i).getBId()));			
 		}
 
@@ -124,18 +119,15 @@ public class BoardController {
 		List<Integer> cc2 = new ArrayList<Integer>();
 		List<Integer> cc3 = new ArrayList<Integer>();
 		
-		for(int i=0; i<list.size(); i++) {
-			System.out.println(list.get(i).getBId());
+		for(int i=0; i<list.size(); i++) {			
 			cc.add(boardService.selectCommentCnt(list.get(i).getBId()));			
 		}
 		
-		for(int i=0; i<list2.size(); i++) {
-			System.out.println(list2.get(i).getBId());
+		for(int i=0; i<list2.size(); i++) {			
 			cc2.add(boardService.selectCommentCnt(list2.get(i).getBId()));			
 		}
 		
-		for(int i=0; i<list3.size(); i++) {
-			System.out.println(list3.get(i).getBId());
+		for(int i=0; i<list3.size(); i++) {			
 			cc3.add(boardService.selectCommentCnt(list3.get(i).getBId()));			
 		}
 
@@ -154,8 +146,7 @@ public class BoardController {
 		List<Board> list = boardService.selectSearchList1(keyField, keyWord);
 		
 		List<Integer> cc = new ArrayList<Integer>();
-		for(int i=0; i<list.size(); i++) {
-			System.out.println(list.get(i).getBId());
+		for(int i=0; i<list.size(); i++) {			
 			cc.add(boardService.selectCommentCnt(list.get(i).getBId()));			
 		}
 
@@ -184,18 +175,15 @@ public class BoardController {
 		List<Integer> cc2 = new ArrayList<Integer>();
 		List<Integer> cc3 = new ArrayList<Integer>();
 		
-		for(int i=0; i<list.size(); i++) {
-			System.out.println(list.get(i).getBId());
+		for(int i=0; i<list.size(); i++) {		
 			cc.add(boardService.selectCommentCnt(list.get(i).getBId()));			
 		}
 		
-		for(int i=0; i<list2.size(); i++) {
-			System.out.println(list2.get(i).getBId());
+		for(int i=0; i<list2.size(); i++) {			
 			cc2.add(boardService.selectCommentCnt(list2.get(i).getBId()));			
 		}
 		
-		for(int i=0; i<list3.size(); i++) {
-			System.out.println(list3.get(i).getBId());
+		for(int i=0; i<list3.size(); i++) {			
 			cc3.add(boardService.selectCommentCnt(list3.get(i).getBId()));			
 		}
 
@@ -218,8 +206,7 @@ public class BoardController {
 		List<Board> list = boardService.selectSearchList1(keyField, keyWord);
 		
 		List<Integer> cc = new ArrayList<Integer>();
-		for(int i=0; i<list.size(); i++) {
-			System.out.println(list.get(i).getBId());
+		for(int i=0; i<list.size(); i++) {			
 			cc.add(boardService.selectCommentCnt(list.get(i).getBId()));			
 		}
 
@@ -249,18 +236,15 @@ public class BoardController {
 		List<Integer> cc2 = new ArrayList<Integer>();
 		List<Integer> cc3 = new ArrayList<Integer>();
 		
-		for(int i=0; i<list.size(); i++) {
-			System.out.println(list.get(i).getBId());
+		for(int i=0; i<list.size(); i++) {			
 			cc.add(boardService.selectCommentCnt(list.get(i).getBId()));			
 		}
 		
-		for(int i=0; i<list2.size(); i++) {
-			System.out.println(list2.get(i).getBId());
+		for(int i=0; i<list2.size(); i++) {			
 			cc2.add(boardService.selectCommentCnt(list2.get(i).getBId()));			
 		}
 		
-		for(int i=0; i<list3.size(); i++) {
-			System.out.println(list3.get(i).getBId());
+		for(int i=0; i<list3.size(); i++) {			
 			cc3.add(boardService.selectCommentCnt(list3.get(i).getBId()));			
 		}
 
@@ -279,8 +263,7 @@ public class BoardController {
 		List<Board> list = boardService.selectSearchList1(keyField, keyWord);
 		
 		List<Integer> cc = new ArrayList<Integer>();
-		for(int i=0; i<list.size(); i++) {
-			System.out.println(list.get(i).getBId());
+		for(int i=0; i<list.size(); i++) {			
 			cc.add(boardService.selectCommentCnt(list.get(i).getBId()));			
 		}
 
@@ -293,9 +276,24 @@ public class BoardController {
 
 
 	@RequestMapping("/board/boardwrite.do")
-	public String boardwrite() {
-
-		return "/board/boardwrite";
+	public ModelAndView boardwrite(Model model, HttpServletRequest request, HttpServletResponse response) {
+		 Member m = (Member)request.getSession().getAttribute("member");		
+	      ModelAndView mv = new ModelAndView();
+	        if(m == null)   {
+				mv.addObject("msg", "로그인이 필요합니다.");
+				mv.addObject("url", "/member/loginPage.go"); 
+				mv.setViewName("common/redirect");
+						
+			}else if(m.getMtype().equals("C")){
+				mv.addObject("msg", "기업회원은 사용하실 수 없는 기능입니다.");
+				mv.addObject("url", "http://localhost/board/adBoard.go"); 
+				mv.setViewName("common/redirect");
+			} else {
+				mv.setViewName("board/boardwrite");
+			}
+		
+		 /*return "/board/boardwrite";*/
+		return mv;
 	}
 
 	@RequestMapping("board/boardinsert.do")
@@ -372,7 +370,7 @@ public class BoardController {
 
 	@RequestMapping("/board/boardview.do")
 	public ModelAndView boardview(@RequestParam int BId, Model model,
-			HttpServletRequest request, HttpServletResponse response) {
+			HttpServletRequest request) {
       Member m = (Member)request.getSession().getAttribute("member");		
       ModelAndView mv = new ModelAndView();
       // 게시물 볼대 비로그인시 로그인페이지로 이동.
@@ -382,8 +380,7 @@ public class BoardController {
 			mv.setViewName("common/redirect");
 			/*response.sendRedirect("/member/loginPage.go");*/			
 		}else {
-        Board b = boardService.selectOneBoard(BId);	
-        System.out.println("Board:" + b);
+        Board b = boardService.selectOneBoard(BId);	       
         if(b.getBCode() != 5 && b.getDelFlag().equals("N")) {
 				List<Coment> clist = comentService.selectCometList(BId);
 				boardService.updateOneCount(BId);
@@ -423,10 +420,34 @@ public class BoardController {
 	 */
 
 	@RequestMapping("/board/boardUpdateView.do")
-	public void boardUpdateView(@RequestParam("BId") int BId, Model model) {
+	public ModelAndView boardUpdateView(@RequestParam("BId") int BId, Model model
+			,HttpServletRequest request, Board board) {
+		
+		board = boardService.selectOneBoard(BId);		
+		 Member m = (Member)request.getSession().getAttribute("member");		
+	     ModelAndView mv = new ModelAndView();  
+	     
+	     if(m == null)   {
+				mv.addObject("msg", "로그인이 필요합니다.");
+				mv.addObject("url", "/member/loginPage.go"); 
+				mv.setViewName("common/redirect");
+						
+			}else if(m.getMno() != board.getMNo()){
+				mv.addObject("msg", "잘못된 접근입니다.");
+				mv.addObject("url", "/board/boardlist1.do"); 
+				mv.setViewName("common/redirect");
+			} else {
+				model.addAttribute("board", boardService.selectOneBoard(BId));
+				BId= board.getBId();
+				mv.addObject("url", "/board/boardUpdateView.do?BId="+BId); 
+				
+			}	     
+	    /*
+	    	 
+	     model.addAttribute("board", boardService.selectOneBoard(BId));
+	 	System.out.println(boardService.selectOneBoard(BId));*/
 
-		model.addAttribute("board", boardService.selectOneBoard(BId));
-		System.out.println(boardService.selectOneBoard(BId));
+		return mv;
 
 	}
 
@@ -484,23 +505,27 @@ public class BoardController {
 	}
 
 	@RequestMapping("/board/boardDelete.do")
-	public String boardDelete(@RequestParam("BId") int BId, HttpSession session, Model model) {
+	public String boardDelete(@RequestParam("BId") int BId, HttpSession session, Model model
+			,HttpServletRequest request) {
 		
 		Board originBoard = boardService.selectOneBoard(BId);
 		int bcode = originBoard.getBCode();
-		
-		int result = boardService.deleteBoard(BId);		
-		
-		String loc = "/board/boardlist"+bcode+".do";
-		
+		Member m = (Member)request.getSession().getAttribute("member");
+		 		
+		String loc = "/board/boardlist"+bcode+".do";		
 		String msg = "";
+		
+		if(originBoard.getMNo()==m.getMno()) {
+			int result = boardService.deleteBoard(BId);	
+			if (result > 0) {
+				msg = "게시글 삭제 성공!";
 
-		if (result > 0) {
-			msg = "게시글 삭제 성공!";
-
-		} else {
-			msg = "게시글 삭제 실패!";
-		}
+			} else {
+				msg = "게시글 삭제 실패!";
+			}
+		}else {
+			msg ="잘못된 접근입니다";
+		}	
 
 		model.addAttribute("loc", loc).addAttribute("msg", msg);
 
@@ -649,7 +674,7 @@ public class BoardController {
 			}
 
 			long fileSize = mfile.getSize();
-			long maxSize = 5 * 1024 * 1024; // 5mb
+			long maxSize = 30 * 1024 * 1024; // 30mb
 			if (fileSize > maxSize) {
 				// 파일 크기 제한
 				fileInfo.put("result", -2);
@@ -703,20 +728,25 @@ public class BoardController {
 				if(b.getRFlag().equals("N") && b.getBCode()==5) {
 					boardService.updateOneCount(bid);
 					List<Coment> clist = comentService.selectCometList(bid);
-					String mtype = boardService.selectBoardMemberType(b.getMNo());
 					
-					System.out.println(clist);
+					Member writer = ms.selectOne(b.getMNo());
+					
 					mv.addObject("b", b);
-					mv.addObject("mtype", mtype);
+					mv.addObject("mtype", writer.getMtype());
+					mv.addObject("profile", writer.getProfilePath());
 					mv.addObject("clist", clist);
 					mv.setViewName("board/ad/adBoardView");
 				} else if(b.getBCode()!=5) {
 					mv.addObject("loc", "/board/adBoard.go");
 					mv.addObject("msg", "잘못된 게시물 요청입니다.");
 					mv.setViewName("common/msg");
-				} else {
+				} else if(b.getRFlag().equals("Y")) {
 					mv.addObject("loc", "/board/adBoard.go");
 					mv.addObject("msg", "신고된 게시물은 열람하실수 없습니다.");
+					mv.setViewName("common/msg");
+				} else if(b.getDelFlag().equals("Y")) {
+					mv.addObject("loc", "/board/adBoard.go");
+					mv.addObject("msg", "삭제된 게시물은 열람하실수 없습니다.");
 					mv.setViewName("common/msg");
 				}
 			} catch (Exception e) {
@@ -834,15 +864,15 @@ public class BoardController {
 	// 최근 후기 게시물 가져오기
 	@RequestMapping("/board/recentBoard.do")
 	@ResponseBody
-	public List<Board> recentBaord(){
+	public List<Board> recentBaord(@RequestParam int bCode, @RequestParam int maxNum){
 		List<Board> result = null;
 		Map<String, Integer> param = null;
 		
 		try {
 			result = new ArrayList<Board>();
 			param = new HashMap<String, Integer>();
-			param.put("bCode", 3);
-			param.put("maxNum", 4);
+			param.put("bCode", bCode);
+			param.put("maxNum", maxNum);
 			
 			result = boardService.selectRecentBoard(param);
 			
@@ -852,4 +882,5 @@ public class BoardController {
 		
 		return result;
 	}
+	
 }
