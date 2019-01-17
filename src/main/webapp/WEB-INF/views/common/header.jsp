@@ -21,6 +21,7 @@
 				<input type="hidden" id="hdnSession" data-value="${member.mno}" />
 				<ul class="nav navbar-nav" style="width:auto; position: relative;"  >
 					<li class="active"><a href="/">Home</a></li>
+					<li class=""><a href="/synopsis">개요</a></li>
 					<li><a href="/echo.do">타임라인</a></li>
 					<li class="dropdown">
 						<a href="#" class="dropdown-toggle " data-toggle="dropdown" data-hover="dropdown" data-delay="0" data-close-others="false">지도 <b class=" icon-angle-down"></b></a>
@@ -37,12 +38,12 @@
 							<li><a href="/board/boardlist4.do">질문 게시판</a></li>
 						</ul></li>
 					<!-- <li><a href="/board/boardlist1.do">게시판 테스트</a><li> -->
-					<li><a href="/board/adBoard.go">업체 광고 게시판</a>
+					<li><a href="/board/adBoard.go">여행상품</a>
 					<li>
-					<li><a href="/event/eventCalendar.go">행사달력</a></li>
+					<li><a href="/event/eventCalendar.go">문화달력</a></li>
 					<!-- 로그인여부에 따른 분기점 -->
 					<c:if test="${not empty member}">
-            <li class="dropdown">
+            			<li class="dropdown">
 							<a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-delay="0" data-close-others="false">${member.mnick} 님 <b class=" icon-angle-down"></b></a>
 							<ul class="dropdown-menu">
 								<li><a href="/myPage/myPageMain.do">myPage</a></li>

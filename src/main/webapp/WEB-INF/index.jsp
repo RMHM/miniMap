@@ -153,8 +153,6 @@
 			</div>
 		</section>
 		<!-- end counter -->
-		<br>
-		
 		<section id="content">
 			<div class="container">
 				<!-- divider -->
