@@ -163,5 +163,6 @@
 		<c:import url="/WEB-INF/views/common/footer.jsp"/>
 	</div>
 </body>
+
 <script src="/resources/js/board/adBoardList.js"></script>
 </html>
