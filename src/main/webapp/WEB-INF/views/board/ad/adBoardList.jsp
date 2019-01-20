@@ -8,7 +8,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>여행 상품</title>
+<title>광고 게시판</title>
 <style>
 	img {
 		max-width : 100%;
@@ -23,7 +23,7 @@
 		<div class="navbar-header" style="background:#68A4C4; width:100%">
 			<div class="container">
 				<div class="col-md-10 col-md-offset-1">
-					<h3>여행 상품</h3>
+					<h3>게시물 목록</h3>
 				</div>
 			</div>
 		</div>
@@ -138,7 +138,7 @@
 				<c:if test="${blist.size() eq 0}">
 					<article>
 						<div class="col-md-12">
-              <h2>검색결과 또는 등록된 게시물이 없습니다.</h2>
+              				<h2>검색결과 또는 등록된 게시물이 없습니다.</h2>
 							<a href="/board/adBoard.go">처음으로</a>
 							<div align="right">
 								<select name="" id="selSearch">
@@ -158,7 +158,6 @@
 				</c:if>
 				<br>
 			</div>
-			
 		</div>
 		<br>
 		<c:import url="/WEB-INF/views/common/footer.jsp"/>
