@@ -138,7 +138,7 @@
 				<c:if test="${blist.size() eq 0}">
 					<article>
 						<div class="col-md-12">
-              <h2>검색결과 또는 등록된 게시물이 없습니다.</h2>
+              				<h2>검색결과 또는 등록된 게시물이 없습니다.</h2>
 							<a href="/board/adBoard.go">처음으로</a>
 							<div align="right">
 								<select name="" id="selSearch">

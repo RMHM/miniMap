@@ -23,6 +23,7 @@
 hs_err_pid*
 
 # add
+/bin/
 /.settings/
 /target/
 /.classpath
